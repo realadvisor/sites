@@ -54,9 +54,9 @@ build with no data access only fails where it reads data.
 | `agents({ team_id? })` | `Agent[]` | The whole organisation without `team_id`. |
 | `listings(query?)` | `Page<Listing>` | One page. See the filters below. |
 | `allListings(query?)` | `Listing[]` | Every page of `listings(query)`. |
-| `listing(slugOrId)` | `Listing \| null` | Live on any of the site's portals. `null` when not found. |
-| `developments({ team_id? })` | `Development[]` | New-build developments, without their units. |
-| `development(slugOrId)` | `DevelopmentWithUnits \| null` | One development with its units. `null` when not found. |
+| `listing(slugOrId, { locale? })` | `Listing \| null` | Live on any of the site's portals. `null` when not found. |
+| `developments({ team_id?, locale? })` | `Development[]` | New-build developments, without their units. |
+| `development(slugOrId, { locale? })` | `DevelopmentWithUnits \| null` | One development with its units. `null` when not found. |
 | `turnstileSiteKey()` | `string \| null` | The enquiry form's Turnstile key, kept 5 minutes. `null`: no widget. |
 
 Not found is never an error: `listing()` and `development()` answer `null`.
@@ -75,8 +75,20 @@ Every filter is optional.
 | `city` | `string` | Case- and accent-insensitive: `geneve` finds Genève. |
 | `min_price`, `max_price` | `number` | |
 | `min_rooms` | `number` | |
+| `locale` | `string` | The page language. See Languages. |
 | `limit` | `number` | 1 to 200. Default 24 (the API's own default is 50). |
 | `offset` | `number` | Up to 10 000. |
+
+### Languages
+
+`listings`, `allListings`, `listing`, `developments` and `development` take a
+`locale` (`de`, `fr-CH`, ...). With it, a listing's `title`, `description` and
+`description_text` (a live unit's `description`) come in that language when
+the agency wrote them in the CRM (the listing's custom texts, as its brochure
+shows them), else the original. `text_locale` is set when every text came in
+that language: mark it as the element's `lang`. A development's own texts
+have one language in the CRM. Without `locale`, the original texts. Both kits
+pass the page locale on a site with more than one locale.
 
 ### Pages
 
@@ -135,7 +147,37 @@ Four rules hold for every answer:
 4. **Coordinates are never exact.** `lat` and `lng` are rounded as the CRM's
    address display option asks (about 10 m, 100 m or 1 km).
 
-A hidden price is absent, and `price_on_request` is then `true`.
+A hidden price is absent, and `price_on_request` is then `true`; so are the
+prices that go with it (`rent_extra`, the parking prices).
+
+### Listing and unit facts
+
+Both carry these, each absent when the CRM has none. Money is in the record's
+`currency`, surfaces in m².
+
+| Field | Meaning |
+| --- | --- |
+| `balcony_surface`, `terrace_surface`, `garden_surface` | Outdoor surfaces. |
+| `floor` | 0 = ground floor. `building_floors`: floors of the building. |
+| `orientation` | `['south', 'west']`: the directions it faces. |
+| `construction_year`, `renovation_year` | |
+| `energy_class` | `A` to `G`. `energy_certificate_version`: the certificate it is from, as typed in the CRM. |
+| `minergie` | `minergie`, `minergie_p`, `minergie_eco` or `minergie_p_eco`. |
+| `heating` | CRM key: `heat_pump`, `gas`, `district`, ... Show it translated. |
+| `has_cellar`, `furnished`, `pets_allowed` | `true` or `false`. |
+| `indoor_parkings`, `outdoor_parkings` | Numbers of parkings. |
+| `charges` | Monthly charges of the property. |
+| `rent_extra` | Rentals: monthly extra costs on top of `price`. |
+| `parking_price` or `indoor_parking_price` / `outdoor_parking_price` | All parkings together, or per parking. `parking_included: true` when they are in `price`. |
+| `available_from` | Move-in date, `YYYY-MM-DD`. |
+| `video_url`, `virtual_visit_url` | Links. A unit has them, like its photos, when it is a live listing. |
+
+A unit also has `reference` (its number in the development, `A1.2`) and
+`site_plan_points`: its outline on the development's `site_plan`, as SVG
+polygon points in the image's own pixels
+(`<svg viewBox="0 0 {width} {height}"><polygon points={site_plan_points} /></svg>`
+over the image). A development has `developer`, `architect` and
+`general_contractor`: `{ name, website?, logo? }`.
 
 `Unit.name` ("4,5 pièces · Rez-de-jardin") is written by the API in French for
 now, whatever the site's language.
@@ -143,9 +185,10 @@ now, whatever the site's language.
 All types are exported from the package root and from
 `@realadvisor/sites-sdk/types`:
 `Organisation`, `Team`, `Agent`, `Listing`, `Unit`, `Development`,
-`DevelopmentWithUnits`, `Photo`, `Address`, `Socials`, `OfferType`,
-`ListingStatus`, `UnitStatus`, `Page`, `Pagination`, `ListingsQuery`,
-`Portals`, `ClientOptions`, `SitesClient`, `Fixture`, `ErrorCode`.
+`DevelopmentWithUnits`, `PropertyFacts`, `Company`, `Photo`, `Address`,
+`Socials`, `OfferType`, `ListingStatus`, `UnitStatus`, `Page`, `Pagination`,
+`ListingsQuery`, `TextQuery`, `Portals`, `ClientOptions`, `SitesClient`,
+`Fixture`, `FixtureTranslations`, `ErrorCode`.
 
 ## Enquiries
 
@@ -247,6 +290,16 @@ API, over a `Fixture` (`organisation`, `teams`, `agents`, `listings`,
 `FIXTURE_TURNSTILE_SITE_KEY` (a stand-in widget that never loads Turnstile)
 unless the fixture sets `turnstile_site_key`. It sends no enquiry:
 `handleEnquiry` refuses it, so answer a fixture-mode form yourself.
+
+A fixture listing or unit may carry its texts in other languages:
+
+```json
+{ "title": "Villa du lac", "translations": { "de": { "title": "Villa am See", "description": "<p>Seesicht</p>" } } }
+```
+
+With `locale`, the fixture client serves them as the API serves the CRM's
+(`text_locale` included; a unit's description only when it has one), and it
+never passes `translations` on.
 
 ## Tests
 

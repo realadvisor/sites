@@ -7,6 +7,7 @@
 import type {
   Agent,
   Fixture,
+  FixtureTranslations,
   ClientOptions,
   Development,
   DevelopmentWithUnits,
@@ -17,6 +18,8 @@ import type {
   Page,
   SitesClient,
   Team,
+  TextQuery,
+  Unit,
 } from './types.ts';
 
 export type * from './types.ts';
@@ -206,16 +209,16 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
     agents: (q = {}) => list<Agent>('/v3/public/agents', q),
     listings,
     allListings: (q = {}) => all((limit, offset) => listings({ ...q, limit, offset })),
-    listing: async slugOrId => {
+    listing: async (slugOrId, q = {}) => {
       const id = slugOrId.match(UUID_RE)?.[0].toLowerCase();
       if (!id) return null;
-      return call<Listing | null>('GET', `/v3/public/listings/${id}${query({ portal_ids: allPortals() })}`, { orNull: true });
+      return call<Listing | null>('GET', `/v3/public/listings/${id}${query({ portal_ids: allPortals(), locale: q.locale })}`, { orNull: true });
     },
     developments: (q = {}) => list<Development>('/v3/public/developments', { ...q, portal_ids: allPortals() }),
-    development: slugOrId =>
+    development: (slugOrId, q = {}) =>
       call<DevelopmentWithUnits | null>(
         'GET',
-        `/v3/public/developments/${encodeURIComponent(slugOrId)}${query({ portal_ids: allPortals() })}`,
+        `/v3/public/developments/${encodeURIComponent(slugOrId)}${query({ portal_ids: allPortals(), locale: q.locale })}`,
         { orNull: true },
       ),
     turnstileSiteKey,
@@ -301,6 +304,46 @@ export const handleEnquiry = async (request: Request, ra: SitesClient): Promise<
 /** turnstileSiteKey() of a fixture: the form renders a stand-in widget and never loads Turnstile. */
 export const FIXTURE_TURNSTILE_SITE_KEY = 'fixture';
 
+/** The language of a locale (`de-CH` → `de`), as rest-api reads it. */
+const languageOf = (locale?: string): string | undefined => locale?.trim().toLowerCase().split(/[-_]/)[0] || undefined;
+
+const plainText = (html: string): string =>
+  html
+    .replace(/<\/(p|li|h3|h4)>|<br\s*\/?>/gi, '$& ')
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+type Texts = { title?: string; description?: string; description_text?: string; text_locale?: string };
+
+/**
+ * A fixture record as the API serves it in `locale`: its `translations` in
+ * that language replace the title (listings) and the description (a unit's
+ * only when it has one: live units), `text_locale` set when every text
+ * served is translated. `translations` never leaves the client.
+ */
+const inLocale = <T extends Texts>(
+  { translations, ...rest }: T & FixtureTranslations,
+  locale: string | undefined,
+  kind: 'listing' | 'unit',
+): T => {
+  const record = rest as unknown as T;
+  const lang = languageOf(locale);
+  const t = lang ? translations?.[lang] : undefined;
+  if (!lang || !t) return record;
+  const out: T = { ...record };
+  const title = kind === 'listing' && !!t.title;
+  const description = !!t.description && (kind === 'listing' || record.description !== undefined);
+  if (title) out.title = t.title;
+  if (description) {
+    out.description = t.description;
+    out.description_text = t.description_text ?? plainText(t.description!);
+  }
+  const translated = (kind === 'unit' || title) && (description || out.description === undefined);
+  if (translated && (title || description)) out.text_locale = lang;
+  return out;
+};
+
 const fold = (s = ''): string => s.normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toLowerCase();
 
 /**
@@ -321,7 +364,10 @@ export const createFixtureClient = (fx: Fixture): SitesClient => {
     (q.min_rooms == null || (l.rooms != null && l.rooms >= q.min_rooms));
   // Newest first, as rest-api lists them.
   const found = (q: ListingsQuery) =>
-    [...fx.listings].sort((a, b) => b.published_at.localeCompare(a.published_at)).filter(l => match(l, q));
+    [...fx.listings]
+      .sort((a, b) => b.published_at.localeCompare(a.published_at))
+      .filter(l => match(l, q))
+      .map(l => inLocale<Listing>(l, q.locale, 'listing'));
   const listings = async (q: ListingsQuery = {}): Promise<Page<Listing>> => {
     const all = found(q);
     const limit = Math.min(Math.max(Math.trunc(q.limit ?? 24), 1), 200);
@@ -329,7 +375,8 @@ export const createFixtureClient = (fx: Fixture): SitesClient => {
     const data = all.slice(offset, offset + limit);
     return { data, pagination: { limit, offset, total: all.length, total_is_capped: false, has_more: offset + data.length < all.length } };
   };
-  const developments = () => fx.developments ?? [];
+  const developments = (q: TextQuery = {}): DevelopmentWithUnits[] =>
+    (fx.developments ?? []).map(d => ({ ...d, units: d.units.map(u => inLocale<Unit>(u, q.locale, 'unit')) }));
   const strip = ({ units: _units, ...d }: DevelopmentWithUnits): Development => d;
   const byKey = <T extends { id: string; slug: string }>(arr: T[], s: string) => {
     const id = s.match(UUID_RE)?.[0].toLowerCase();
@@ -341,9 +388,12 @@ export const createFixtureClient = (fx: Fixture): SitesClient => {
     agents: async (q = {}) => (q.team_id ? fx.agents.filter(a => a.team_ids.includes(q.team_id!)) : fx.agents),
     listings,
     allListings: async (q = {}) => found(q),
-    listing: async s => byKey(fx.listings, s),
-    developments: async (q = {}) => developments().filter(d => !q.team_id || d.team_ids.includes(q.team_id)).map(strip),
-    development: async s => byKey(developments(), s),
+    listing: async (s, q = {}) => {
+      const l = byKey(fx.listings, s);
+      return l && inLocale<Listing>(l, q.locale, 'listing');
+    },
+    developments: async (q = {}) => developments(q).filter(d => !q.team_id || d.team_ids.includes(q.team_id)).map(strip),
+    development: async (s, q = {}) => byKey(developments(q), s),
     turnstileSiteKey: async () => (fx.turnstile_site_key === undefined ? FIXTURE_TURNSTILE_SITE_KEY : fx.turnstile_site_key),
   };
 };
