@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@realadvisor/sites-sdk": ["../sdk/src/index.ts"],
+      "@realadvisor/sites-sdk/types": ["../sdk/src/types.ts"],
+      "@realadvisor/sites-kit": ["../kit/index.ts"],
+      "@realadvisor/sites-kit/site-config": ["../kit/site-config.d.mts"],
+      "@realadvisor/sites-kit/client/*": ["../kit/client/*.ts"],
+      "@realadvisor/sites-kit/*": ["../kit/lib/*.ts"],
+      "@realadvisor/sites-kit-react/worker": ["./server/worker.ts"],
+      "@realadvisor/sites-kit-react/entry.server": ["./server/entry.server.tsx"],
+      "@realadvisor/sites-kit-react/client": ["./client/index.ts"],
+      "@realadvisor/sites-kit-react/server/*": ["./server/*.ts"]
+    }
+  },
+  "include": ["env.d.ts", "server", "components", "lib", "client"]
+}

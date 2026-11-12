@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": ["node", "astro/client"],
+    "strict": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@realadvisor/sites-sdk": ["../sdk/src/index.ts"],
+      "@realadvisor/sites-sdk/types": ["../sdk/src/types.ts"],
+      "@realadvisor/sites-kit": ["./index.ts"],
+      "@realadvisor/sites-kit/site-config": ["./site-config.d.mts"],
+      "@realadvisor/sites-kit/astro": ["./astro.d.mts"],
+      "@realadvisor/sites-kit/*": ["./lib/*.ts"]
+    }
+  },
+  "include": ["env.d.ts", "index.ts", "types.ts", "middleware.ts", "lib", "client", "contract", "test/*.ts"]
+}
