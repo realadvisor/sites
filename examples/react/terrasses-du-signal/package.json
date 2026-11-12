@@ -18,7 +18,7 @@
   "dependencies": {
     "@fontsource-variable/manrope": "5.2.8",
     "@fontsource/cormorant-garamond": "5.2.11",
-    "@realadvisor/sites-kit": "file:../../../kit",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
     "@realadvisor/sites-kit-react": "file:../../../kit-react",
     "@realadvisor/sites-sdk": "file:../../../sdk",
     "react": "19.3.1",

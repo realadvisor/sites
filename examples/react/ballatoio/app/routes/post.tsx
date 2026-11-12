@@ -2,7 +2,7 @@
 import type { Route } from './+types/post';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { Photo } from '../components/Photo';
 import { Prose } from '../components/Prose';

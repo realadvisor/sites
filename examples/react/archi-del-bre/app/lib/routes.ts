@@ -3,7 +3,7 @@
  * kit's i18n expects), German lives under /de with German paths. Links, the
  * language switcher, hreflang alternates and the sitemap use this one table.
  */
-import type { Lang } from '@realadvisor/sites-kit/i18n';
+import type { Lang } from '@realadvisor/sites-kit-core/i18n';
 
 export type L = 'it' | 'de';
 export const LANGS: readonly L[] = ['it', 'de'];

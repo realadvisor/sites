@@ -1,9 +1,9 @@
 // Privacy policy: text from the kit's legal builder and the organisation's data only.
 import type { Route } from './+types/privacy';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { analyticsId } from '@realadvisor/sites-kit/env';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { legalIdentity } from '../lib/data.server';

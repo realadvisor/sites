@@ -1,5 +1,5 @@
 import type { Route } from './+types/journal';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { JournalCard } from '../components/JournalCard';

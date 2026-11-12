@@ -8,10 +8,10 @@ import Site from '../../../../layouts/Site.astro';
 import FloorPlan from '../../../../components/FloorPlan.astro';
 import StackingPlan from '../../../../components/StackingPlan.astro';
 import EnquiryBlock from '../../../../components/EnquiryBlock.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
-import { LOCALE } from '@realadvisor/sites-kit/format';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
 import { orientationCode, sites } from '../../../../lib/data';
 import { documentsFor, formatBytes } from '../../../../content/documents';
 import {

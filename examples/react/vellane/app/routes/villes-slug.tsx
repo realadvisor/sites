@@ -6,7 +6,7 @@
 import { Fragment } from 'react';
 import type { Route } from './+types/villes-slug';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { RaImage } from '../components/RaImage';
 import { Layout } from '../components/Layout';
 import { ListingCard } from '../components/ListingCard';

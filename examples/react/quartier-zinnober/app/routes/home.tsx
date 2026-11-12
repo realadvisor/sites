@@ -2,8 +2,8 @@
 // move-in dates, facts, unit types, photos, location, construction, enquiry.
 import type { CSSProperties } from 'react';
 import type { Route } from './+types/home';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Layout } from '../components/Layout';

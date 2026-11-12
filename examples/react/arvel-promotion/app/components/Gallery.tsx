@@ -3,7 +3,7 @@
  * lightbox. Each photo is a link to the large image, so it works without JS;
  * lightbox() in app/client.ts opens it in a <dialog> (Escape, arrows, focus return).
  */
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { PHOTOS } from '../content/photos';
 import { Photo } from './Photo';
 import { BucketPhoto, type PhotoName } from './BucketPhoto';

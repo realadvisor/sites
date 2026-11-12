@@ -1,7 +1,7 @@
 /** One journal article: cover, title, date and author (an agent of the site, when one matches), body, the destination link. */
 import { Fragment } from 'react';
 import type { Route } from './+types/post';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Site } from '../components/Site';
 import { Crumbs } from '../components/Crumbs';

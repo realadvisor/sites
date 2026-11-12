@@ -5,11 +5,11 @@ import { ListingsMap } from '@realadvisor/sites-kit-react/components/ListingsMap
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { canonical } from '@realadvisor/sites-kit-react/server/kit';
 import { listingRef } from '@realadvisor/sites-kit-react/lib/records';
-import { sanitizeHtml, listingIdFromSlug } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
-import { listingJsonLd, listingTitle } from '@realadvisor/sites-kit/seo';
+import { sanitizeHtml, listingIdFromSlug } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
+import { listingJsonLd, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import { Layout } from '../components/Layout';
 import { Gallery } from '../components/Gallery';
 import { EnergyScale } from '../components/EnergyScale';

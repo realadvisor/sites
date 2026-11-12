@@ -3,7 +3,7 @@
  * this page (the same `alternates` the page gives <Seo>), the current one
  * aria-current. Single-language sites render nothing.
  */
-import { lang } from '@realadvisor/sites-kit/i18n';
+import { lang } from '@realadvisor/sites-kit-core/i18n';
 
 export function LanguageSwitch({ alternates, locale, className }: { alternates: { lang: string; href: string }[]; locale: string; className?: string }) {
   if (alternates.length < 2) return null;
@@ -21,4 +21,4 @@ export function LanguageSwitch({ alternates, locale, className }: { alternates: 
 }
 
 /** Alternates of one page in every locale: `localePath(path, locale)` per language. */
-export { localePath } from '@realadvisor/sites-kit/i18n';
+export { localePath } from '@realadvisor/sites-kit-core/i18n';

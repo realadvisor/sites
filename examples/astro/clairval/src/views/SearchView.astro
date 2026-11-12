@@ -6,10 +6,10 @@
  * active filter. No price filter: the listings are in CHF and EUR, and the
  * kit's filter compares raw amounts and labels them in CHF (kit gap).
  */
-import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
-import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
-import { img } from '@realadvisor/sites-kit/image';
-import { count as kcount, t as kt, lang as klang } from '@realadvisor/sites-kit/i18n';
+import ListingsSearch from '@realadvisor/sites-kit-astro/components/ListingsSearch.astro';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit-core/search';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count as kcount, t as kt, lang as klang } from '@realadvisor/sites-kit-core/i18n';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
 import ListingCard from '../components/ListingCard.astro';

@@ -2,9 +2,9 @@
 // photos and text when the unit is a live listing, and the enquiry with the
 // unit preselected. Unknown unit: 404. Sold: noindex.
 import type { Route } from './+types/unit';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { Layout } from '../components/Layout';

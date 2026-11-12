@@ -4,7 +4,7 @@
  * Language from the URL.
  */
 import { useLocation, useRouteLoaderData } from 'react-router';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import type { RootData } from '../root';
 import { Layout } from '../components/Layout';

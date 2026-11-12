@@ -7,9 +7,9 @@
 import type { Route } from './+types/unit';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
-import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { Img } from '../components/Img';
 import { Crumbs } from '../components/Crumbs';

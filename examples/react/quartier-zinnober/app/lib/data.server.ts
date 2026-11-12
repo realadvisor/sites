@@ -9,7 +9,7 @@
  * companies are API fields of the records.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
-import type { Agency } from '@realadvisor/sites-kit';
+import type { Agency } from '@realadvisor/sites-kit-core';
 import { siteClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit-react/server/data';
 import fixture from '../../../../astro/quartier-zinnober/src/data/fixture.json';
 import type { Row, UnitExtra } from './units';

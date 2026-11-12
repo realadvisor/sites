@@ -3,7 +3,7 @@
 // without JS, shareable); a small script (units() in app/client.ts) applies them in place.
 import type { Route } from './+types/appartements';
 import type { Unit } from '@realadvisor/sites-sdk/types';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { StackingPlan } from '../components/StackingPlan';
 import { ContactBand } from '../components/ContactBand';

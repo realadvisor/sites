@@ -1,5 +1,5 @@
 /** Footer: a strip of the tile motif, address, sales office, pages, legal links. */
-import { t as kt, lang as kitLang } from '@realadvisor/sites-kit/i18n';
+import { t as kt, lang as kitLang } from '@realadvisor/sites-kit-core/i18n';
 import { LANGS, LOCALE_OF, href, tr, type Lang, type Route } from '../lib/i18n';
 import { tel } from '../lib/docs';
 import type { LayoutData } from '../root';

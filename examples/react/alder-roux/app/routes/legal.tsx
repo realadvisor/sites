@@ -1,9 +1,9 @@
 /** Legal notice and privacy policy: the kit's text from the organisation data, in the site frame. Never edited here. */
 import type { Route } from './+types/legal';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
-import { analyticsId } from '@realadvisor/sites-kit/env';
+import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
 import { Layout } from '../components/Layout';
 import { siteData } from '../lib/data.server';
 import { langOf, LOCALE } from '../lib/routes';

@@ -7,11 +7,11 @@ import '@fontsource-variable/newsreader/wght.css';
 import '@fontsource-variable/instrument-sans/wght.css';
 import serifFont from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 import '../styles/global.css';
-import { LOCALE } from '@realadvisor/sites-kit/format';
-import { analyticsId } from '@realadvisor/sites-kit/env';
-import { img } from '@realadvisor/sites-kit/image';
-import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit/seo';
-import ConsentBanner from '@realadvisor/sites-kit/components/ConsentBanner.astro';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit-core/seo';
+import ConsentBanner from '@realadvisor/sites-kit-astro/components/ConsentBanner.astro';
 import { sites } from '../lib/data';
 
 interface Props {

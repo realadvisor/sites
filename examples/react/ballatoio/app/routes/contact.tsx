@@ -1,10 +1,10 @@
 /** Contatti / Contact: the office on a street photo, phone, e-mail, the form. */
 import type { Route } from './+types/contact';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { Site } from '../components/Site';
 import { AgentBlock } from '../components/AgentBlock';
 import { Photo } from '../components/Photo';

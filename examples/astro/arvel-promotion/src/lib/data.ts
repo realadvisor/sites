@@ -6,7 +6,7 @@
  */
 import type { DevelopmentWithUnits, Team, Unit } from '@realadvisor/sites-sdk/types';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit-core/fixture';
 
 const fx = fixture as unknown as Fixture;
 export const sites = createFixtureClient(fx);
@@ -56,7 +56,7 @@ export const unitsInOrder = (d: DevelopmentWithUnits) =>
 
 /**
  * The organisation in the shape the kit's legal text builder takes
- * (`@realadvisor/sites-kit/legal`): name and the primary team's contacts.
+ * (`@realadvisor/sites-kit-core/legal`): name and the primary team's contacts.
  * No legal ids in the data yet: those lines stay out (never invented).
  */
 export async function legalIdentity() {

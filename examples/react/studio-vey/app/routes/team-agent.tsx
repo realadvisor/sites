@@ -2,7 +2,7 @@ import type { Route } from './+types/team-agent';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { SoldList } from '../components/SoldList';
 import { ListingCard } from '../components/ListingCard';

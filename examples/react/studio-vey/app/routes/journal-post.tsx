@@ -3,7 +3,7 @@ import type { Route } from './+types/journal-post';
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { canonical } from '@realadvisor/sites-kit-react/server/kit';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { JournalCard } from '../components/JournalCard';
 import { AgentCard } from '../components/AgentCard';

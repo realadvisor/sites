@@ -6,4 +6,4 @@
  *   import { sites } from '../lib/data.server';
  *   export const action = ({ request }: Route.ActionArgs) => enquiryAction(request, sites);
  */
-export { enquiryAction, type EnquiryClient } from '@realadvisor/sites-kit/enquiry';
+export { enquiryAction, type EnquiryClient } from '@realadvisor/sites-kit-core/enquiry';

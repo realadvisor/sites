@@ -9,7 +9,7 @@ import { SITES_API_KEY } from 'astro:env/server';
 import { createClient } from '@realadvisor/sites-sdk';
 import type { Agent, Listing, SitesClient, Team } from '@realadvisor/sites-sdk/types';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit-core/fixture';
 
 const fx = fixture as unknown as Fixture;
 

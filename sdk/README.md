@@ -13,9 +13,9 @@ ready-made enquiry endpoint.
   runs unchanged in Astro, React Router, a Cloudflare Worker and Node 22.
 - Server-side only. The key must never reach the browser.
 - On npm as `@realadvisor-sites/sdk`, installed as `@realadvisor/sites-sdk`
-  (`"npm:@realadvisor-sites/sdk@^0.3.0"`), or by path (`file:../sdk`).
-- Both kits (`kit`, `kit-react`) take it as a peer and re-export
-  it; a site depends on it next to the kit, same version.
+  (`"npm:@realadvisor-sites/sdk@^0.4.0"`), or by path (`file:../sdk`).
+- The kit core (`kit-core`) and both kits (`kit-astro`, `kit-react`) take it
+  as a peer; a site depends on it next to its kit, same version.
 
 ## Quick start
 

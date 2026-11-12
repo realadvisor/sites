@@ -13,12 +13,12 @@ import sans from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.w
 import './styles/global.css';
 // After global.css, as in the Astro build (its form.css comes last): the kit's control tokens win (--control-h 48px).
 // The kit's form controls and the consent banner only: no listings search, pager or map on this site (kit.css minus those).
-import '@realadvisor/sites-kit/styles/form.css';
+import '@realadvisor/sites-kit-core/styles/form.css';
 import '@realadvisor/sites-kit-react/styles/consent.css';
 import { KitProvider, KitScripts } from '@realadvisor/sites-kit-react/components/Document';
 import { ConsentBanner } from '@realadvisor/sites-kit-react/components/ConsentBanner';
 import { kitData } from '@realadvisor/sites-kit-react/server/kit';
-import { LOCALE } from '@realadvisor/sites-kit/format';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
 import { loadSite } from './lib/data.server';
 import NotFound, { ServerError } from './routes/404';
 

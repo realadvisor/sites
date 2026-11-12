@@ -1,7 +1,7 @@
 /** One district: a photo, the agency's text on it, its homes for sale, to rent and sold. */
 import type { Route } from './+types/area';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { ListingCard } from '../components/ListingCard';
 import { Photo } from '../components/Photo';

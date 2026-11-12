@@ -6,9 +6,9 @@
 import type { OfferType } from '@realadvisor/sites-sdk/types';
 import { ListingsSearch } from '@realadvisor/sites-kit-react/components/ListingsSearch';
 import { parseSearch, searchListings } from '@realadvisor/sites-kit-react/lib/search';
-import { formatAmount } from '@realadvisor/sites-kit/format';
-import { img } from '@realadvisor/sites-kit/image';
-import { count, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import { formatAmount } from '@realadvisor/sites-kit-core/format';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
 import { Layout } from './Layout';
 import { ListingCard } from './ListingCard';
 import { listingUrl } from '../lib/urls';

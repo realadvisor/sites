@@ -1,7 +1,7 @@
 /** One region: photo band, towns with counts and prices, the listings available, recent sales and the office in charge. */
 import type { Route } from './+types/region';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { Img } from '../components/Img';
 import { Crumbs } from '../components/Crumbs';

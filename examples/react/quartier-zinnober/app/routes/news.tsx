@@ -2,7 +2,7 @@
 // the development's construction photos (fixture only) and the planned move-in dates.
 import type { CSSProperties } from 'react';
 import type { Route } from './+types/news';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { Photo } from '../components/Photo';

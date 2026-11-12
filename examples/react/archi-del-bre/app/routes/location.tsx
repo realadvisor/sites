@@ -1,6 +1,6 @@
 /** Location: the lake and the hill, a static map with distances computed from the coordinates, then the quarter, the lake and the city. */
 import type { Route } from './+types/location';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { StaticMap } from '../components/StaticMap';

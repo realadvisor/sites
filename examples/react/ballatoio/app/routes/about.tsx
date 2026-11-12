@@ -1,6 +1,6 @@
 /** Chi siamo / About: where the name comes from, what the agency sells now (counted from the data), how a sale works, the team. */
 import type { Route } from './+types/about';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { AgentBlock } from '../components/AgentBlock';
 import { Photo } from '../components/Photo';

@@ -7,8 +7,8 @@
 import type { ReactNode } from 'react';
 import { useLocation, useRouteLoaderData } from 'react-router';
 import { Seo, useKit } from '@realadvisor/sites-kit-react/components/Document';
-import { canonicalUrl } from '@realadvisor/sites-kit/seo';
-import { t as kt } from '@realadvisor/sites-kit/i18n';
+import { canonicalUrl } from '@realadvisor/sites-kit-core/seo';
+import { t as kt } from '@realadvisor/sites-kit-core/i18n';
 import type { RootData } from '../root';
 import { Icon } from './Icon';
 import { R, searchUrl, teamHref, teamShortName, tel } from '../lib/site';

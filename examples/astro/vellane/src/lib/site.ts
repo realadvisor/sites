@@ -3,8 +3,8 @@
  * so every label is written here once; amounts and surfaces come from the
  * kit's `format` (1 250 000 €, 145 m²).
  */
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import type { Agent, Listing, Team } from './data';
 
 export { formatAmount, formatSurface };

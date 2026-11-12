@@ -2,7 +2,7 @@
 import type { Route } from './+types/contact';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { Site } from '../components/Site';
 import { PageBand } from '../components/PageBand';
 import { siteData } from '../lib/data.server';

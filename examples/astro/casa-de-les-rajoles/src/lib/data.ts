@@ -7,10 +7,10 @@
  * `developmentExtra()` (fixture only) and are never merged into SDK objects.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
-import type { Agency } from '@realadvisor/sites-kit';
+import type { Agency } from '@realadvisor/sites-kit-core';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
-import { inPageLocale } from '@realadvisor/sites-kit/page-locale';
+import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit-core/fixture';
+import { inPageLocale } from '@realadvisor/sites-kit-core/page-locale';
 
 const fx = fixture as unknown as Fixture;
 // The page's language: unit texts in it when the data has them.

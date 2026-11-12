@@ -6,11 +6,11 @@
  */
 import type { OfferType } from '@realadvisor/sites-sdk/types';
 import Layout from '../layouts/Layout.astro';
-import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
-import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
-import { formatAmount, LOCALE } from '@realadvisor/sites-kit/format';
-import { img } from '@realadvisor/sites-kit/image';
-import { count, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import ListingsSearch from '@realadvisor/sites-kit-astro/components/ListingsSearch.astro';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit-core/search';
+import { formatAmount, LOCALE } from '@realadvisor/sites-kit-core/format';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
 import ListingCard from './ListingCard.astro';
 import { brandName, listingUrl, site, sites } from '../lib/data';
 import { price } from '../lib/kit';

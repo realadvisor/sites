@@ -3,7 +3,7 @@
  * split at its legal suffix ("Immobilier SA") into a serif name and a small
  * caps line. A logo in the data replaces it.
  */
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import type { Organisation } from '@realadvisor/sites-sdk/types';
 import './Wordmark.css';
 

@@ -8,7 +8,7 @@
  */
 import type { Route } from './+types/units';
 import type { Unit } from '@realadvisor/sites-sdk/types';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { IsoDrawing } from '../components/IsoDrawing';
 import { loadSite } from '../lib/data.server';

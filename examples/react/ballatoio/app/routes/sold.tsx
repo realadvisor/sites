@@ -1,6 +1,6 @@
 /** Venduti / Sold: every sold listing, no prices, a way to ask for something similar. */
 import type { Route } from './+types/sold';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { ListingCard } from '../components/ListingCard';
 import { agency, cardOf, sites } from '../lib/data.server';

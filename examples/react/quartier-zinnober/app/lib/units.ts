@@ -5,8 +5,8 @@
  * Browser-safe (no data access): rows come from data.server.ts rowsOf().
  */
 import type { Unit } from '@realadvisor/sites-sdk/types';
-import { formatFloor, formatRooms } from '@realadvisor/sites-kit/developments';
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
+import { formatFloor, formatRooms } from '@realadvisor/sites-kit-core/developments';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
 
 /** Fixture-only facts of one unit. */
 export type UnitExtra = {

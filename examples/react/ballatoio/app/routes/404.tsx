@@ -4,7 +4,7 @@
  * site: "no longer available"), keeping the status. Also the splat route.
  */
 import { useLocation } from 'react-router';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useGone } from '@realadvisor/sites-kit-react/components/Document';
 import { Site } from '../components/Site';

@@ -9,7 +9,7 @@
  * Every path on the public origin (SITE_URL). Legal pages of every
  * language: `legalPaths()`.
  */
-import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 import { siteUrl } from './kit';
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

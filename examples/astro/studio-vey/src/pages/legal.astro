@@ -3,11 +3,11 @@
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import LegalPage from '../components/LegalPage.astro';
-import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { lang, t } from '@realadvisor/sites-kit/i18n';
+import LegalContent from '@realadvisor/sites-kit-astro/components/LegalContent.astro';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { lang, t } from '@realadvisor/sites-kit-core/i18n';
 import { site } from '../lib/data';
 
 const s = await site();

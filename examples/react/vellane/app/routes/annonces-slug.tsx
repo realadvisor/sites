@@ -7,10 +7,10 @@
  * Behaviour: tabs(), gallery(), payment() and saved() in app/client.ts.
  */
 import type { Route } from './+types/annonces-slug';
-import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { ListingsMap } from '@realadvisor/sites-kit-react/components/ListingsMap';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';

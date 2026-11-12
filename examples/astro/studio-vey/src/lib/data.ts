@@ -6,7 +6,7 @@
  */
 import type { Agent, Listing, Organisation, Team } from '@realadvisor/sites-sdk/types';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit-core/fixture';
 
 const fx = fixture as unknown as Fixture;
 export const sites = createFixtureClient(fx);

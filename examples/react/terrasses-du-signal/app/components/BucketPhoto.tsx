@@ -5,7 +5,7 @@
  * width/height give the ratio, `priority` for the page's one LCP image.
  * Same URLs as the Astro version's BucketPhoto.astro.
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 
 type Props = { src: string; alt: string; width: number; height: number; sizes?: string; priority?: boolean; className?: string; position?: string; widths?: number[]; fallbackWidth?: number };
 

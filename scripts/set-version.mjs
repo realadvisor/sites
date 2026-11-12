@@ -1,4 +1,4 @@
-// Sets one version on the three published packages (sdk, kit, kit-react) and
+// Sets one version on the four published packages (sdk, kit-core, kit-astro, kit-react) and
 // the peer ranges between them. They are released together, from one tag.
 //
 //   node scripts/set-version.mjs 0.3.0   # then commit, tag v0.3.0, push the tag
@@ -7,8 +7,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const PACKAGES = ['sdk', 'kit', 'kit-react'];
-const OURS = ['@realadvisor/sites-sdk', '@realadvisor/sites-kit'];
+const PACKAGES = ['sdk', 'kit-core', 'kit-astro', 'kit-react'];
+const OURS = ['@realadvisor/sites-sdk', '@realadvisor/sites-kit-core'];
 const SEMVER = /^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/;
 
 const file = (dir) => path.join(root, dir, 'package.json');

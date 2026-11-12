@@ -13,7 +13,7 @@
  * `dangerouslySetInnerHTML` in app/). It is a plain object, so it passes
  * through loader data (JSON) unchanged.
  */
-import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
 
 /** HTML that went through sanitizeHtml: make it with `sanitized()` only (a string brand: it survives loader serialization). */
 export type SanitizedHtml = { readonly kind: 'sanitized-html'; readonly sanitizedHtml: string };

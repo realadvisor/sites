@@ -3,7 +3,7 @@
  * path, unknown unit) and 410, keeping the status. Also the splat route (`*`).
  */
 import { useRouteLoaderData } from 'react-router';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useGone } from '@realadvisor/sites-kit-react/components/Document';
 import type { RootData } from '../root';

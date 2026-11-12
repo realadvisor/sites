@@ -1,6 +1,6 @@
 /** sitemap.xml: the static pages and every unit that is not let. */
 import type { APIRoute } from 'astro';
-import { legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 import { site as load } from '../lib/data';
 import { rowsOf, unitUrl } from '../lib/units';
 

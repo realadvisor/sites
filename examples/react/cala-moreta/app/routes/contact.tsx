@@ -1,6 +1,6 @@
 import type { Route } from './+types/contact';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { canonical } from '@realadvisor/sites-kit-react/server/kit';
 import { Site } from '../components/Site';

@@ -1,6 +1,6 @@
 /** Developments list: one programme card per development (render, status, place, from price, availability). */
 import type { Route } from './+types/developments';
-import { developmentStatus } from '@realadvisor/sites-kit/developments';
+import { developmentStatus } from '@realadvisor/sites-kit-core/developments';
 import { Layout } from '../components/Layout';
 import { Crumbs } from '../components/Crumbs';
 import { Img } from '../components/Img';

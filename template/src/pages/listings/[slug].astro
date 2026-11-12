@@ -3,14 +3,14 @@
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
-import { ra } from '@realadvisor/sites-kit/ra';
-import { img } from '@realadvisor/sites-kit/image';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import { formatPrice, formatSurface } from '@realadvisor/sites-kit/format';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
-import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit';
+import { ra } from '@realadvisor/sites-kit-astro/ra';
+import { img } from '@realadvisor/sites-kit-core/image';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import { formatPrice, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
+import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit-core';
 
 const listing = await ra.listing(Astro.params.slug!);
 if (!listing) {

@@ -7,9 +7,9 @@
  * passed in explicitly, never merged into the SDK units.
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
-import { formatAmount, formatSurface, LOCALE } from '@realadvisor/sites-kit/format';
-import { formatRooms } from '@realadvisor/sites-kit/developments';
-import { t, type StringKey } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface, LOCALE } from '@realadvisor/sites-kit-core/format';
+import { formatRooms } from '@realadvisor/sites-kit-core/developments';
+import { t, type StringKey } from '@realadvisor/sites-kit-core/i18n';
 
 export type UnitExtra = {
   position?: number;

@@ -6,7 +6,7 @@
  * `size="card"` fills its container (team page); `size="thumb"` is the small
  * fixed portrait beside the adviser's details.
  */
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
 import type { Agent } from '@realadvisor/sites-sdk/types';
 
 interface Props { agent: Pick<Agent, 'first_name' | 'last_name' | 'photo'>; size?: 'card' | 'thumb' }

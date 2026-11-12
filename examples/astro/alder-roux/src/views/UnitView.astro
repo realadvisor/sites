@@ -4,11 +4,11 @@
  * available), enquiry form filed on this unit (developmentId + lotId),
  * other units of the same type. Sold units are noindex.
  */
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
 import { siteData, type DevelopmentWithUnits } from '../lib/data';

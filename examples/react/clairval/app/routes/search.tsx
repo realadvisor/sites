@@ -8,8 +8,8 @@
 import type { Route } from './+types/search';
 import { ListingsSearch } from '@realadvisor/sites-kit-react/components/ListingsSearch';
 import { parseSearch, searchListings } from '@realadvisor/sites-kit-react/lib/search';
-import { img } from '@realadvisor/sites-kit/image';
-import { count as kcount, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count as kcount, lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import { Site } from '../components/Site';
 import { Crumbs } from '../components/Crumbs';
 import { ListingCard } from '../components/ListingCard';

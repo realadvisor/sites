@@ -6,9 +6,9 @@ export const prerender = false;
 
 import Site from '../layouts/Site.astro';
 import PageHead from '../components/PageHead.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
 import Icon from '../components/Icon.astro';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { site as load } from '../lib/data';
 
 const site = await load();

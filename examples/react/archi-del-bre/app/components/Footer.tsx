@@ -3,7 +3,7 @@
  * the people behind it, nav, languages and the legal links
  * in the page's language (kit legalPath / privacyPath).
  */
-import { legalPath, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath, t } from '@realadvisor/sites-kit-core/i18n';
 import type { Site } from '../lib/data.server';
 import { href, LOCALE, tel, type L } from '../lib/routes';
 import { c } from '../lib/copy';

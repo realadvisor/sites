@@ -7,9 +7,9 @@
  *
  * and `canonical(request)` for every page's <Seo>.
  */
-import { analyticsId, siteMode } from '@realadvisor/sites-kit/env';
-import { canonicalUrl } from '@realadvisor/sites-kit/seo';
-import { localeOfPath } from '@realadvisor/sites-kit/i18n';
+import { analyticsId, siteMode } from '@realadvisor/sites-kit-core/env';
+import { canonicalUrl } from '@realadvisor/sites-kit-core/seo';
+import { localeOfPath } from '@realadvisor/sites-kit-core/i18n';
 import { FIXTURE_TURNSTILE_SITE_KEY } from '@realadvisor/sites-sdk';
 import { liveClient } from './data';
 import type { KitData } from '../components/Document';

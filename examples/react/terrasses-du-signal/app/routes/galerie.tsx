@@ -3,7 +3,7 @@
 // whole (lightbox() in app/client.ts). Without JS every tile links to the large photo.
 import type { CSSProperties } from 'react';
 import type { Route } from './+types/galerie';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { ContactBand } from '../components/ContactBand';

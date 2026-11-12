@@ -4,7 +4,7 @@
  * Every photo opens whole in the lightbox; without JS the link opens it.
  */
 import type { Route } from './+types/gallery';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { Lightbox } from '../components/Lightbox';

@@ -22,9 +22,9 @@
  */
 import { createContext, useContext, type ReactNode } from 'react';
 import { isRouteErrorResponse, Scripts, ScrollRestoration, useLocation, useMatches, useRouteError } from 'react-router';
-import { localeOfPath } from '@realadvisor/sites-kit/i18n';
+import { localeOfPath } from '@realadvisor/sites-kit-core/i18n';
 import client from 'virtual:sites-kit-react/client';
-import { safeJsonLd } from '@realadvisor/sites-kit/seo';
+import { safeJsonLd } from '@realadvisor/sites-kit-core/seo';
 
 /** The request's CSP nonce (server only; the browser hides it). */
 export const NonceContext = createContext<string | undefined>(undefined);

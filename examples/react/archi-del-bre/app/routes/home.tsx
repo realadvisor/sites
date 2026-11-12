@@ -1,7 +1,7 @@
 /** Home: framed hero, the figures a buyer needs, the project, availability by type beside the drawing, the place, the sales office. */
 import type { Route } from './+types/home';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { IsoDrawing } from '../components/IsoDrawing';

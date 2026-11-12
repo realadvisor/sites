@@ -6,7 +6,7 @@
  *
  * Per request it:
  * - hands the Worker env (SITE_MODE, SITES_API_URL, SITES_API_KEY,
- *   ANALYTICS_ID) to the kit (`@realadvisor/sites-kit/env`);
+ *   ANALYTICS_ID) to the kit (`@realadvisor/sites-kit-core/env`);
  * - answers the 301s of site.json `redirects`, refuses cross-site form
  *   posts (Astro's checkOrigin);
  * - makes a fresh CSP nonce (128 random bits) and passes it to React Router
@@ -23,10 +23,10 @@
 import { createRequestHandler, type ServerBuild } from 'react-router';
 import site from 'virtual:sites-kit/site';
 import inlineStyles from 'virtual:sites-kit-react/css';
-import { setRuntimeEnv, siteMode, type SiteEnv } from '@realadvisor/sites-kit/env';
-import { notFoundPage, renderFailed } from '@realadvisor/sites-kit/render-error';
-import { localeOfPath } from '@realadvisor/sites-kit/i18n';
-import { withPageLocale } from '@realadvisor/sites-kit/page-locale';
+import { setRuntimeEnv, siteMode, type SiteEnv } from '@realadvisor/sites-kit-core/env';
+import { notFoundPage, renderFailed } from '@realadvisor/sites-kit-core/render-error';
+import { localeOfPath } from '@realadvisor/sites-kit-core/i18n';
+import { withPageLocale } from '@realadvisor/sites-kit-core/page-locale';
 import { createNonce, siteHeaders } from './security';
 
 /** The parts of the Workers runtime types the kit uses (no @cloudflare/workers-types: it clashes with the DOM lib). */

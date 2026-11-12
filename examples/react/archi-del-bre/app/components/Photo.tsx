@@ -5,7 +5,7 @@
  * one LCP image. Kit gap: RaImage serves AVIF only to its priority image and
  * has no art-directed phone crop with AVIF, hence this wrapper.
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 
 type Props = {
   src: string;

@@ -1,7 +1,7 @@
 // One programme: hero, the programme in words and facts, unit mix, the
 // building floor by floor, photos, location, documents and the enquiry.
 import type { Route } from './+types/programme';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Layout } from '../components/Layout';

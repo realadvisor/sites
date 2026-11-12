@@ -1,7 +1,7 @@
-/** Small formatting helpers this site adds to `@realadvisor/sites-kit/format`. */
+/** Small formatting helpers this site adds to `@realadvisor/sites-kit-core/format`. */
 import type { Agent, Listing } from '@realadvisor/sites-sdk/types';
-import { formatSurface, LOCALE } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatSurface, LOCALE } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 
 export { price } from '@realadvisor/sites-kit-react/lib/records';
 

@@ -7,8 +7,8 @@
  * computes them (searchPillForms). Clean URLs: searchPill() in app/client.ts.
  */
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { priceSteps, typeGroup } from '@realadvisor/sites-kit/search';
-import { formatAmount } from '@realadvisor/sites-kit/format';
+import { priceSteps, typeGroup } from '@realadvisor/sites-kit-core/search';
+import { formatAmount } from '@realadvisor/sites-kit-core/format';
 import { R, typeLabel } from '../lib/site';
 import { Icon } from './Icon';
 import './SearchPill.css';

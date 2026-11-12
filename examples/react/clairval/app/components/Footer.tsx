@@ -3,7 +3,7 @@
  * sections, then the legal line with the legal notice and privacy policy in
  * the page language.
  */
-import { legalPath, privacyPath, t as kt, lang as klang } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath, t as kt, lang as klang } from '@realadvisor/sites-kit-core/i18n';
 import { href, LOCALE, teamSlug, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { tel } from '../lib/format';

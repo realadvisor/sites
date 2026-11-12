@@ -7,7 +7,7 @@
 import type { Route } from './+types/compare';
 import type { CSSProperties } from 'react';
 import type { Unit } from '@realadvisor/sites-sdk/types';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { loadSite } from '../lib/data.server';
 import { href, langOf } from '../lib/routes';

@@ -1,6 +1,6 @@
 /**
  * Searchable select for long lists (port of form/Combobox.astro): a native
- * select (works without JS), upgraded by @realadvisor/sites-kit/client/combobox.
+ * select (works without JS), upgraded by @realadvisor/sites-kit-core/client/combobox.
  */
 import type { Option } from './Select';
 

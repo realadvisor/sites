@@ -8,7 +8,7 @@
  * 2:3 crop of a landscape one (phone heroes) add a focus point to the imgproxy
  * URL here (`g:fp:x:y`, else smart crop `g:sm`).
  */
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import type { Lang } from './i18n';
 
 export interface PlacePhoto {

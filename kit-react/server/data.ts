@@ -19,8 +19,8 @@
  */
 import { createClient, createFixtureClient } from '@realadvisor/sites-sdk';
 import type { Portals, SitesClient } from '@realadvisor/sites-sdk/types';
-import { previewApi } from '@realadvisor/sites-kit/env';
-import { withTextLocale } from '@realadvisor/sites-kit/page-locale';
+import { previewApi } from '@realadvisor/sites-kit-core/env';
+import { withTextLocale } from '@realadvisor/sites-kit-core/page-locale';
 import type { Fixture } from './fixture-client';
 
 export { createFixtureClient, fixtureOnly, type Fixture } from './fixture-client';

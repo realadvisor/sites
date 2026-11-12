@@ -2,7 +2,7 @@
 // opened in a lightbox (native <dialog>, whole photo: app/client.ts lightbox()).
 // Without JS each tile links to the large photo.
 import type { Route } from './+types/galerie';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { Photo } from '../components/Photo';

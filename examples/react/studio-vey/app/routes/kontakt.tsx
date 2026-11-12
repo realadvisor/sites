@@ -1,10 +1,10 @@
 import type { Route } from './+types/kontakt';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { Layout } from '../components/Layout';
 import { AgentCard } from '../components/AgentCard';
 import { brandName, site } from '../lib/data.server';

@@ -3,7 +3,7 @@
  * map, then the legal line with the kit's legal paths and labels in the page
  * language and the language switch.
  */
-import { lang, legalPath, privacyPath, t as kt } from '@realadvisor/sites-kit/i18n';
+import { lang, legalPath, privacyPath, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import { Wordmark } from './Wordmark';
 import { href, LANGS, LOCALE, teamSlug, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';

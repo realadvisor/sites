@@ -17,9 +17,9 @@
 // RealAdvisor image bucket, so the template's image pipeline and host
 // checks see the same URLs as on a live site.
 import { writeFileSync } from 'node:fs';
-import { htmlToText, richText, sanitizeHtml } from '../kit/lib/html.ts';
+import { htmlToText, richText, sanitizeHtml } from '../kit-core/lib/html.ts';
 
-const OUT = new URL('../kit/fixtures/', import.meta.url);
+const OUT = new URL('../kit-core/fixtures/', import.meta.url);
 const BUCKET = 'https://storage.googleapis.com/img.realadvisor.ch/';
 
 // Seeded PRNG: the same UUIDs on every run, so the files only change when

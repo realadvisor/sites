@@ -1,14 +1,14 @@
 /**
  * Listings map (port of ListingsMap.astro: same markup and data-* contract;
- * the browser side is @realadvisor/sites-kit/client/listings-map, no map
+ * the browser side is @realadvisor/sites-kit-core/client/listings-map, no map
  * library, OSM tiles only). Height: `--map-h` on a parent. Keep the attribution.
  *
  *   <ListingsMap listings={located} href={listingUrl} price={price} />
  */
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { formatPrice, listingUrl } from '@realadvisor/sites-kit/format';
-import { img } from '@realadvisor/sites-kit/image';
-import { lang, localePath, pluralForms, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import { formatPrice, listingUrl } from '@realadvisor/sites-kit-core/format';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { lang, localePath, pluralForms, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
 import { usePageLocale } from './Document';
 
 type MapProps<L> = {

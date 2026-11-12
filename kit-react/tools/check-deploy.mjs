@@ -46,9 +46,9 @@ import {
   offHosts,
   pageAssets,
   parseTags,
-} from '@realadvisor/sites-kit/tools/check-deploy.mjs';
-import { buildLeaks } from '@realadvisor/sites-kit/tools/secret-leaks.mjs';
-import { csp as kitCsp } from '@realadvisor/sites-kit/security';
+} from '@realadvisor/sites-kit-core/tools/check-deploy.mjs';
+import { buildLeaks } from '@realadvisor/sites-kit-core/tools/secret-leaks.mjs';
+import { csp as kitCsp } from '@realadvisor/sites-kit-core/security';
 
 const JS_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript']);
 const LISTING_PATH = /^\/[^/]+\/[^/]+-[0-9a-f]{8}-[0-9a-f]{4}-/i;
@@ -100,7 +100,7 @@ export function unsafeHtml(root) {
     for (const m of readFileSync(file, 'utf8').matchAll(/dangerouslySetInnerHTML=\{\{\s*__html:\s*([^}]*)\}\}/g)) {
       const expr = m[1].trim();
       if (/^(sanitizeHtml|safeJsonLd)\([^()]*(\([^()]*\))?[^()]*\)$/.test(expr)) continue;
-      out.push({ page: relative(root, file), message: `dangerouslySetInnerHTML={{ __html: ${expr.slice(0, 40)} }} renders unescaped HTML: use sanitizeHtml(…) from @realadvisor/sites-kit, or sanitized() in the loader + <SafeHtml> from @realadvisor/sites-kit-react (or <JsonLd>)` });
+      out.push({ page: relative(root, file), message: `dangerouslySetInnerHTML={{ __html: ${expr.slice(0, 40)} }} renders unescaped HTML: use sanitizeHtml(…) from @realadvisor/sites-kit-core, or sanitized() in the loader + <SafeHtml> from @realadvisor/sites-kit-react (or <JsonLd>)` });
     }
     // Any other form (a variable, a spread object) cannot be read here: <SafeHtml> is the typed way.
     for (const m of readFileSync(file, 'utf8').matchAll(/dangerouslySetInnerHTML=\{(?!\{)\s*([^}]{0,60})/g)) {

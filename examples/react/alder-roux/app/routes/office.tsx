@@ -2,7 +2,7 @@
 import type { Route } from './+types/office';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
 import { Layout } from '../components/Layout';
 import { Crumbs } from '../components/Crumbs';
 import { AgentCard } from '../components/AgentCard';

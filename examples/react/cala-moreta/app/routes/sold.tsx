@@ -1,5 +1,5 @@
 import type { Route } from './+types/sold';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { ListingCard } from '../components/ListingCard';
 import { agency, brandName, sites } from '../lib/data.server';

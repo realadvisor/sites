@@ -1,5 +1,5 @@
 import type { Route } from './+types/verkauft';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { ListingCard } from '../components/ListingCard';

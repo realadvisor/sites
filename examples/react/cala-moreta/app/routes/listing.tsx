@@ -1,8 +1,8 @@
 import type { Route } from './+types/listing';
-import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { featureLabel, offerTypeLabel, t } from '@realadvisor/sites-kit/i18n';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { featureLabel, offerTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { canonical } from '@realadvisor/sites-kit-react/server/kit';

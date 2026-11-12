@@ -1,8 +1,8 @@
 // Legal notice (Impressum): the kit's text from the organisation's data, restyled, never rewritten.
 import type { Route } from './+types/legal';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { legalAgency, site as load } from '../lib/data.server';

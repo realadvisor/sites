@@ -20,7 +20,8 @@
     "@astrojs/cloudflare": "12.6.13",
     "@fontsource-variable/literata": "^5.2.8",
     "@fontsource-variable/public-sans": "^5.2.7",
-    "@realadvisor/sites-kit": "file:../../../kit",
+    "@realadvisor/sites-kit-astro": "file:../../../kit-astro",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
     "@realadvisor/sites-sdk": "file:../../../sdk",
     "astro": "5.18.2"
   },

@@ -6,7 +6,7 @@
  * without JavaScript; app/client.ts only swaps the floor in place.
  */
 import type { Route } from './+types/units';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { FloorPlate } from '../components/FloorPlate';
 import { loadSite } from '../lib/data.server';

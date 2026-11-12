@@ -3,10 +3,10 @@
  * Add each new static page to STATIC_PATHS.
  */
 import type { APIRoute } from 'astro';
-import { allListings, ra } from '@realadvisor/sites-kit/ra';
-import { DEVELOPMENTS_PATH, developmentUrl } from '@realadvisor/sites-kit/developments';
-import { listingUrl } from '@realadvisor/sites-kit/format';
-import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { allListings, ra } from '@realadvisor/sites-kit-astro/ra';
+import { DEVELOPMENTS_PATH, developmentUrl } from '@realadvisor/sites-kit-core/developments';
+import { listingUrl } from '@realadvisor/sites-kit-core/format';
+import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 
 export const prerender = false;
 

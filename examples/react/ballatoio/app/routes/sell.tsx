@@ -1,7 +1,7 @@
 /** Vendere / Sell: how a sale works with the agency, the valuation form, recent sales. */
 import type { Route } from './+types/sell';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { ListingCard } from '../components/ListingCard';
 import { Photo } from '../components/Photo';

@@ -1,8 +1,8 @@
 // Privacy policy (Política de privacidad): the kit's text from the organisation's data. /privacy (es), /en/privacy; any other prefix: 404.
 import type { Route } from './+types/privacy';
-import { privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { lang as kitLang, t } from '@realadvisor/sites-kit/i18n';
-import { analyticsId } from '@realadvisor/sites-kit/env';
+import { privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { lang as kitLang, t } from '@realadvisor/sites-kit-core/i18n';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { LegalPage } from '../components/LegalPage';
 import { legalAgency, loadSite } from '../lib/data.server';

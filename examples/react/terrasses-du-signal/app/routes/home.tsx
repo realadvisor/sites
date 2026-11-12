@@ -1,9 +1,9 @@
 // Home: hero with the key facts, key figures from the units, the project,
 // the unit types, the building, a gallery collage, the place.
 import type { Route } from './+types/home';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';

@@ -5,9 +5,9 @@
  * valuation split and the journal as a list.
  */
 import type { Route } from './+types/home';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Site } from '../components/Site';
 import { ListingCard } from '../components/ListingCard';

@@ -1,6 +1,6 @@
 import type { Route } from './+types/verkaufen';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { PlacePhoto } from '../components/PlacePhoto';
 import { Steps } from '../components/Steps';

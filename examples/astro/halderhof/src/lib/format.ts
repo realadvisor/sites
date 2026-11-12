@@ -8,8 +8,8 @@
  * whole site: "4,5 Zimmer" and "4,5 pièces" as the data writes its titles,
  * "4.5 rooms" in English. Never rounded.
  */
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import { LOCALE, type L } from './routes';
 
 export { formatAmount, formatSurface };

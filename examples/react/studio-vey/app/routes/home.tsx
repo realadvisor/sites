@@ -1,9 +1,9 @@
 import type { Route } from './+types/home';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Layout } from '../components/Layout';
 import { OfferTabs } from '../components/OfferTabs';

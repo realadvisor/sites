@@ -4,7 +4,7 @@
  * status. Also the splat route (`*`).
  */
 import { isRouteErrorResponse, useRouteError } from 'react-router';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Layout } from '../components/Layout';
 import './404.css';

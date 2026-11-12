@@ -1,10 +1,10 @@
 /** Legal notice and privacy policy (/legal, /privacy, /de/legal, /de/privacy): the kit's text from the organisation data, in the site frame. Never edited here. */
 import type { Route } from './+types/legal';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { t } from '@realadvisor/sites-kit/i18n';
-import { analyticsId } from '@realadvisor/sites-kit/env';
-import { img } from '@realadvisor/sites-kit/image';
+import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { t } from '@realadvisor/sites-kit-core/i18n';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { legalAgency, loadSite } from '../lib/data.server';
 import { langOf } from '../lib/routes';

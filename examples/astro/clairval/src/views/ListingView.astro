@@ -6,11 +6,11 @@
  * phones a sticky "Message / Call" bar. Sold listings show no price and are
  * noindex.
  */
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
-import { img } from '@realadvisor/sites-kit/image';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
