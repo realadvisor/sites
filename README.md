@@ -53,13 +53,19 @@ node scripts/check-pack.mjs          # every export and bin is in the tarball, n
 
 Merge that change, then tag the merge commit `v0.4.0` and push the tag. The
 Publish workflow checks the tag against the versions, runs the tests and the
-template check, and publishes the SDK, the core, the Astro kit and the React kit, in that order, with
-npm provenance. A version already on npm is skipped.
+template check, and **stages** the SDK, the core, the Astro kit and the React
+kit, in that order, with npm provenance. A version already on npm is skipped.
 
-The workflow publishes with npm trusted publishing: on npmjs.com each package
-trusts `realadvisor/sites` and `.github/workflows/publish.yaml`, so no npm
-token is stored. A package must exist before it can trust a workflow, so the
-first version of a new package is published by hand (`npm publish
+A staged version is not live yet: a maintainer of `@realadvisor-sites` approves
+each one on npmjs.com, or with `npm stage list` and `npm stage approve <id>`,
+which asks for 2FA. Only then can sites install it. Approve the SDK and the
+core before the kits, which name them as peers.
+
+The workflow uses npm trusted publishing: on npmjs.com each package trusts
+`realadvisor/sites` and `.github/workflows/publish.yaml`, allowed to stage
+only, so no npm token is stored and no version reaches sites without a human
+approval. A package must exist before it can trust a workflow, so the first
+version of a new package is published by hand (`npm publish
 --provenance=false` in its folder, logged in as `realadvisor-sites`).
 
 Live data needs a site key from RealAdvisor (`SITES_API_URL`, `SITES_API_KEY`).
