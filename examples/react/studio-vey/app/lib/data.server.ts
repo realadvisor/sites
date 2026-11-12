@@ -4,24 +4,12 @@
  * Worker has SITES_API_URL + SITES_API_KEY, else the fixture. Server only.
  */
 import type { Agent, Organisation, Team } from '@realadvisor/sites-sdk/types';
-import { siteClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit-react/server/data';
+import { siteClient, type Fixture } from '@realadvisor/sites-kit-react/server/data';
 import fixture from '../../../../astro/studio-vey/src/data/fixture.json';
 import { slugify } from './urls';
 
 const fx = fixture as unknown as Fixture;
 export const sites = siteClient({ fixture: fx });
-
-/** Fields the API does not have yet (fixture only). Never present them as API data. */
-export type ListingExtras = {
-  energy_class?: string;
-  year_built?: number;
-  floor?: number;
-  terrace_surface?: number;
-  balcony_surface?: number;
-  charges?: number;
-};
-// fixture only: every read of these extras goes through this one function.
-export const listingExtras = (id: string): ListingExtras => fixtureOnly(fx, 'listings', id) as ListingExtras;
 
 export type Site = { org: Organisation; team: Team; agents: Agent[] };
 

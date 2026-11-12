@@ -6,19 +6,19 @@
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 
 export type UnitExtra = {
-  unit_number?: string;
   /** 1-based position on the floor, left to right on the stacking plan. */
   position?: number;
-  /** Main facade: N, NE, E, SE, S, SW, W, NW. */
-  orientation?: string;
-  terrace_surface?: number;
 };
 export type UnitExtras = Record<string, UnitExtra>;
 export type DevelopmentExtra = {
-  developer?: string;
-  architect?: string;
-  general_contractor?: string;
   construction_photos?: string[];
+};
+
+/** The unit's main facade as a code (N, NE, E, SE, S, SW, W, NW), from its `orientation`. */
+export const orientationCode = (u: Pick<Unit, 'orientation'>): string | undefined => {
+  const o = u.orientation ?? [];
+  const code = (o.includes('north') ? 'N' : o.includes('south') ? 'S' : '') + (o.includes('east') ? 'E' : o.includes('west') ? 'W' : '');
+  return code || undefined;
 };
 
 export const extraOf = (extras: UnitExtras, u: Pick<Unit, 'id'>): UnitExtra => extras[u.id] ?? {};

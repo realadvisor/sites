@@ -45,6 +45,8 @@ const pent = isPenthouse(u, all);
 const photos = u.photos ?? [];
 const same = list.filter((x) => x !== u && x.rooms === u.rooms && isPenthouse(x, all) === pent && x.status !== 'sold');
 const roomsTxt = formatRooms(u.rooms, l);
+// The API's description in the page language (Italian, or German through `locale`); else a German text from the unit's fields.
+const fromApi = !!u.description && (l === 'it' || u.text_locale === 'de');
 const descDe = unitTextDe({
   rooms: String(u.rooms ?? ''),
   surface: u.living_surface ? `${u.living_surface} m²` : '',
@@ -94,7 +96,7 @@ const facts: [string, string][] = [
   [c('bedrooms', l), u.bedrooms != null ? String(u.bedrooms) : ''],
   [c('bathrooms', l), u.bathrooms != null ? String(u.bathrooms) : ''],
   ...outs.slice(1).map((o) => [outdoorLabel(o, l), `${o.m2} m²`] as [string, string]),
-  [c('orientation', l), ori], // fixture only: orientation
+  [c('orientation', l), ori],
   [c('delivery', l), delivery],
 ].filter((x): x is [string, string] => !!x[1]);
 const alternates = LANGS.map((x) => ({ lang: LOCALE[x], href: unitPath(u, x) }));
@@ -179,7 +181,7 @@ void shortId;
 
   <section class="wrap about">
     <h2 class="h3">{T.about}</h2>
-    {l === 'it' && u.description ? <div class="prose" set:html={sanitizeHtml(u.description)} /> : <div class="prose">{descDe.map((p) => <p>{p}</p>)}</div>}
+    {fromApi ? <div class="prose" lang={u.text_locale} set:html={sanitizeHtml(u.description!)} /> : <div class="prose">{descDe.map((p) => <p>{p}</p>)}</div>}
   </section>
 
   <section class="enquiry-band" id="richiesta">

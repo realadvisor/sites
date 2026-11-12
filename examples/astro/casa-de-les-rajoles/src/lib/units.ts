@@ -44,8 +44,8 @@ export function planKey(u: Unit): string {
 }
 export const planSrc = (key: string, l: Lang, fit = false) => `/plans/${l}/${key}${fit ? '-fit' : ''}.svg`;
 
-/** "3.2" (fixture only: unit number), else ''. */
-export const unitNumber = (u: Pick<Unit, 'id'>) => unitExtra(u).unit_number ?? ''; // fixture only: unit number
+/** "3.2" (the unit's number), else ''. */
+export const unitNumber = (u: Pick<Unit, 'reference'>) => u.reference ?? '';
 
 /** Floor name: the CRM label in Spanish, else from the number. */
 export function floorName(u: Pick<Unit, 'floor' | 'floor_label'>, l: Lang): string {
@@ -68,7 +68,7 @@ export function unitTitle(u: Unit, l: Lang): string {
   return [what, floorName(u, l).toLowerCase(), wingOf(u) === 'nueva' ? t.wings.nueva.toLowerCase() : ''].filter(Boolean).join(', ');
 }
 
-/** "Vivienda 3.2" / "Home 3.2" (fixture only: number), else the title. */
+/** "Vivienda 3.2" / "Home 3.2", else the title. */
 export const unitShort = (u: Unit, l: Lang) => (unitNumber(u) ? `${tr(l).unit} ${unitNumber(u)}` : unitTitle(u, l));
 
 export const statusLabel = (u: Pick<Unit, 'status'>, l: Lang) => tr(l).status[u.status];
@@ -82,18 +82,23 @@ export function unitPrice(u: Pick<Unit, 'status' | 'price' | 'price_on_request'>
 
 export type Outdoor = { kind: 'patio' | 'terrace' | 'balcony'; m2: number };
 
-/** Outdoor space: the fixture's terrace or patio (fixture only), else the API's balcony surface. */
+/** Outdoor space: the terrace or patio, else the balcony surface. */
 export function outdoor(u: Unit): Outdoor | null {
-  const x = unitExtra(u);
-  if (x.terrace_surface) return { kind: u.floor === 0 ? 'patio' : 'terrace', m2: x.terrace_surface }; // fixture only: terrace surface
+  if (u.terrace_surface) return { kind: u.floor === 0 ? 'patio' : 'terrace', m2: u.terrace_surface };
   if (u.balcony_surface) return { kind: 'balcony', m2: u.balcony_surface };
   return null;
 }
 export const outdoorLabel = (o: Outdoor | null, l: Lang) => (o ? tr(l).outdoor[o.kind] : tr(l).outdoor.none);
 
-/** fixture only: orientation, in words. */
-export const orientation = (u: Pick<Unit, 'id'>, l: Lang) => {
-  const o = unitExtra(u).orientation; // fixture only: orientation
+/** The unit's main facade as a code (N, NE, E, SE, S, SW, W, NW), from its `orientation`. */
+const orientationCode = (u: Pick<Unit, 'orientation'>) => {
+  const o = u.orientation ?? [];
+  return (o.includes('north') ? 'N' : o.includes('south') ? 'S' : '') + (o.includes('east') ? 'E' : o.includes('west') ? 'W' : '');
+};
+
+/** Orientation, in words. */
+export const orientation = (u: Pick<Unit, 'orientation'>, l: Lang) => {
+  const o = orientationCode(u);
   return o ? (tr(l).orient[o as keyof ReturnType<typeof tr>['orient']] ?? o) : '';
 };
 

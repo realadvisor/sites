@@ -13,7 +13,7 @@ import { img } from '@realadvisor/sites-kit/image';
 import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
 import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
 import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
-import { agentUrl, areas, areaUrl, listingExtras, listingUrl, site, sites } from '../../lib/data';
+import { agentUrl, areas, areaUrl, listingUrl, site, sites } from '../../lib/data';
 import { price, rooms } from '../../lib/kit';
 import { fullName, languages, telHref } from '../../lib/format';
 
@@ -44,8 +44,6 @@ const similarLocal = sameCity.filter((x) => x.id !== l.id && x.status === 'avail
 const similar = (similarLocal.length >= 3 ? similarLocal : [...similarLocal, ...sameOffer.data.filter((x) => x.id !== l.id && !similarLocal.includes(x))]).slice(0, 3);
 const similarTitle = similarLocal.length >= 3 && city ? `Weitere Objekte in ${city}` : isRent ? 'Weitere Objekte zur Miete' : 'Weitere Objekte zum Kauf';
 
-// fixture only: energy class, year built, floor, outdoor surfaces and charges are not in the API yet.
-const x = listingExtras(l.id);
 const agent = l.agent;
 const ref = listingRef(kit);
 const type = propertyTypeLabel(l.property_type);
@@ -57,18 +55,16 @@ const rows: [string, string][] = [
   [t('offer'), sold ? 'Verkauft' : offerTypeLabel(l.offer_type)],
   [t('propertyType'), type],
   ...(!sold ? [[isRent ? 'Miete' : 'Preis', price(l)] as [string, string]] : []),
-  // fixture only: charges
-  ...(isRent && x.charges ? [['Nebenkosten', `${formatAmount(x.charges)} / Monat`] as [string, string]] : []),
+  ...(isRent && l.charges ? [['Nebenkosten', `${formatAmount(l.charges)} / Monat`] as [string, string]] : []),
   ...(l.rooms != null ? [['Zimmer', String(l.rooms)] as [string, string]] : []),
   ...(l.bedrooms != null ? [['Schlafzimmer', String(l.bedrooms)] as [string, string]] : []),
   ...(l.bathrooms != null ? [['Badezimmer', String(l.bathrooms)] as [string, string]] : []),
   ...(l.living_surface != null ? [[t('livingArea'), formatSurface(l.living_surface)] as [string, string]] : []),
   ...(l.land_surface != null ? [['Grundstück', formatSurface(l.land_surface)] as [string, string]] : []),
-  // fixture only: terrace, balcony, floor, year built
-  ...(x.terrace_surface ? [['Terrasse', formatSurface(x.terrace_surface)] as [string, string]] : []),
-  ...(x.balcony_surface ? [['Balkon', formatSurface(x.balcony_surface)] as [string, string]] : []),
-  ...(x.floor != null ? [['Etage', x.floor === 0 ? 'Erdgeschoss' : `${x.floor}. Obergeschoss`] as [string, string]] : []),
-  ...(x.year_built ? [['Baujahr', String(x.year_built)] as [string, string]] : []),
+  ...(l.terrace_surface ? [['Terrasse', formatSurface(l.terrace_surface)] as [string, string]] : []),
+  ...(l.balcony_surface ? [['Balkon', formatSurface(l.balcony_surface)] as [string, string]] : []),
+  ...(l.floor != null ? [['Etage', l.floor === 0 ? 'Erdgeschoss' : `${l.floor}. Obergeschoss`] as [string, string]] : []),
+  ...(l.construction_year ? [['Baujahr', String(l.construction_year)] as [string, string]] : []),
   [t('reference'), ref],
 ];
 const headline = [rooms(l.rooms), l.living_surface != null ? formatSurface(l.living_surface) : '', l.bedrooms != null ? `${l.bedrooms} Schlafzimmer` : ''].filter(Boolean);
@@ -81,7 +77,7 @@ const mapsHref = located ? `https://www.openstreetmap.org/?mlat=${l.address.lat}
 const sections = [
   l.description && ['beschreibung', 'Beschreibung'],
   ['eckdaten', 'Eckdaten'],
-  x.energy_class && ['energie', 'Energie'],
+  l.energy_class && ['energie', 'Energie'],
   located && ['lage', 'Lage'],
 ].filter(Boolean) as [string, string][];
 ---
@@ -130,11 +126,10 @@ const sections = [
         )}
       </section>
 
-      {x.energy_class && (
+      {l.energy_class && (
         <section id="energie" class="lp-sec" aria-labelledby="h-energie">
           <h2 class="lp-h caps" id="h-energie">Energie</h2>
-          {/* fixture only: energy_class */}
-          <EnergyScale value={x.energy_class} />
+          <EnergyScale value={l.energy_class} />
         </section>
       )}
 

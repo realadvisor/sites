@@ -62,7 +62,10 @@ const ORIENT: Record<string, { fr: string; de: string }> = {
   W: { fr: 'Ouest', de: 'West' },
   NW: { fr: 'Nord-ouest', de: 'Nordwest' },
 };
-export const orientation = (code: string | undefined, l: L) => (code ? (ORIENT[code.toUpperCase()]?.[l] ?? '') : '');
+/** "SW" for ['south', 'west']: north or south first, then east or west. */
+const orientationCode = (dirs: readonly string[] | undefined) =>
+  dirs ? `${dirs.includes('north') ? 'N' : dirs.includes('south') ? 'S' : ''}${dirs.includes('east') ? 'E' : dirs.includes('west') ? 'W' : ''}` : '';
+export const orientation = (dirs: readonly string[] | undefined, l: L) => ORIENT[orientationCode(dirs)]?.[l] ?? '';
 
 export const typeLabel = (code: string, l: L) => propertyTypeLabel(code, LOCALE[l]);
 

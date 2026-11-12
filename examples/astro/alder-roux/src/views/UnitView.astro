@@ -11,7 +11,7 @@ import { img } from '@realadvisor/sites-kit/image';
 import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
-import { extraStr, siteData, type DevelopmentWithUnits } from '../lib/data';
+import { siteData, type DevelopmentWithUnits } from '../lib/data';
 import type { Unit } from '@realadvisor/sites-sdk/types';
 import { agentSlug, href, LOCALE, unitSlug, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
@@ -29,8 +29,7 @@ const type = typeOf(types, u);
 const title = unitTitle(u, l);
 const city = cityName(dev.address.city, l);
 const agent = dev.agents[0] ? (agents.find((a) => a.id === dev.agents[0]!.id) ?? dev.agents[0]) : undefined;
-// fixture only: orientation
-const ori = orientation(extraStr('units', u.id, 'orientation'), l);
+const ori = orientation(u.orientation, l);
 const out = outdoor(u);
 const facts = [
   u.rooms != null && { k: t('rooms'), v: String(u.rooms) },

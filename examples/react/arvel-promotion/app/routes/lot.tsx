@@ -13,7 +13,7 @@ import { StackingPlan } from '../components/StackingPlan';
 import { EnquiryBlock } from '../components/EnquiryBlock';
 import { Photo } from '../components/Photo';
 import { sites, unitExtras } from '../lib/data.server';
-import { extraOf } from '../lib/units';
+import { orientationCode } from '../lib/units';
 import { documentsFor, formatBytes } from '../content/documents';
 import {
   bedroomsText, deliveryText, floorName, formatSurface, orientationLabel, plural, programmeUrl, roomsText, statusLabel, typeCode, typeName,
@@ -31,9 +31,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 export default function Lot({ loaderData: { d, u, extras } }: Route.ComponentProps) {
-  const x = extraOf(extras, u);
-  // fixture only: terrace_surface (ground floor), unit_number, orientation
-  const terrace = x.terrace_surface;
+  const terrace = u.terrace_surface;
   const outdoor = terrace ?? u.balcony_surface;
   const facts = [
     { label: 'Type', value: `${typeCode(u)} · ${typeName(u)}` },
@@ -43,7 +41,7 @@ export default function Lot({ loaderData: { d, u, extras } }: Route.ComponentPro
     { label: 'Pièces', value: roomsText(u) },
     { label: 'Chambres', value: bedroomsText(u) },
     { label: 'Salles de bains', value: u.bathrooms ? String(u.bathrooms) : '' },
-    { label: 'Orientation', value: orientationLabel(x.orientation) },
+    { label: 'Orientation', value: orientationLabel(orientationCode(u)) },
     { label: d.status === 'delivered' ? 'Livraison' : 'Livraison prévue', value: deliveryText(d).replace(/^Livraison |^Livré en /, '') },
   ].filter((f) => f.value);
   const photos = u.photos ?? [];
@@ -69,7 +67,7 @@ export default function Lot({ loaderData: { d, u, extras } }: Route.ComponentPro
           </nav>
           <div className="lt-grid">
             <figure className="lt-plan paper">
-              <FloorPlan unit={u} orientation={x.orientation} terrace={terrace} />
+              <FloorPlan unit={u} orientation={orientationCode(u)} terrace={terrace} />
               <figcaption>Plan indicatif, non contractuel. Surfaces des pièces indicatives, calculées sur la surface habitable du logement.</figcaption>
             </figure>
             <div className="lt-info">
@@ -78,7 +76,7 @@ export default function Lot({ loaderData: { d, u, extras } }: Route.ComponentPro
                 <span className="lt-code">{typeCode(u)}</span>
                 <span className="lt-where">{typeName(u)}, {floorName(u).toLowerCase()}</span>
               </h1>
-              {x.unit_number && <p className="lt-ref num">Lot {x.unit_number}</p>}
+              {u.reference && <p className="lt-ref num">Lot {u.reference}</p>}
               <div className="lt-big">
                 {u.living_surface && <div><span className="lt-v num">{u.living_surface}</span><span className="lt-u">m² habitables</span></div>}
                 {outdoor && <div><span className="lt-v num">{outdoor}</span><span className="lt-u">m² de {terrace ? 'terrasse' : 'balcon'}</span></div>}

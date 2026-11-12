@@ -18,7 +18,7 @@ import './home.css';
 
 export async function loader() {
   const site = await loadSite();
-  const { dev, devExtra: extra } = site;
+  const { dev } = site;
   return {
     site,
     k: keyFigures(dev),
@@ -26,9 +26,9 @@ export async function loader() {
     jsonLd: agencyJsonLd(legalAgency(site), new URL('/', siteUrl()).href),
     credits: (
       [
-        ['Maître d’ouvrage', extra.developer],
-        ['Architecte', extra.architect],
-        ['Entreprise générale', extra.general_contractor],
+        ['Maître d’ouvrage', dev.developer?.name],
+        ['Architecte', dev.architect?.name],
+        ['Entreprise générale', dev.general_contractor?.name],
       ] as [string, string | undefined][]
     ).filter((c): c is [string, string] => !!c[1]),
   };

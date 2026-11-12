@@ -33,13 +33,13 @@ const city = cityName(d.address.city, l);
 const where = [d.address.street, [d.address.postcode, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
 const s = d.stats;
 const delivery = monthYear(d.delivery_date, l);
-// fixture only: developer, architect, general contractor, construction photos
-const x = extra('developments', d.id);
 const credits = [
-  typeof x.developer === 'string' && { k: t('developer'), v: x.developer },
-  typeof x.architect === 'string' && { k: t('architect'), v: x.architect },
-  typeof x.general_contractor === 'string' && { k: t('contractor'), v: x.general_contractor },
+  d.developer && { k: t('developer'), v: d.developer.name },
+  d.architect && { k: t('architect'), v: d.architect.name },
+  d.general_contractor && { k: t('contractor'), v: d.general_contractor.name },
 ].filter(Boolean) as { k: string; v: string }[];
+// fixture only: construction photos
+const x = extra('developments', d.id);
 const site = Array.isArray(x.construction_photos) ? (x.construction_photos as unknown[]).filter((u): u is string => typeof u === 'string') : [];
 const docs = documentsFor(d.slug, l);
 // One plan per type, garden-level variants only on the unit pages.

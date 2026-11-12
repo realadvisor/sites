@@ -20,7 +20,7 @@ import { AgentCard } from '../components/AgentCard';
 import { ListingCard } from '../components/ListingCard';
 import { StaticMap } from '../components/StaticMap';
 import { EnergyScale } from '../components/EnergyScale';
-import { agentOf, cardOf, extraNum, extraStr, siteData, sites } from '../lib/data.server';
+import { agentOf, cardOf, siteData, sites } from '../lib/data.server';
 import { href, langOfPath, LOCALE, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { bathrooms, bedrooms, formatSurface, money, price, tel, typeLabel } from '../lib/format';
@@ -54,13 +54,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     similar: sameTeam.filter((o) => o.id !== x.id && o.offer_type === x.offer_type).slice(0, 3).map(cardOf),
     titleBase: listingTitle(kitX, sameCity),
     jsonLd: listingJsonLd(kitX, pageUrl),
-    // fixture only: energy class, year built, terrace, floor and extra costs (not in the API yet)
     ex: {
-      energy: extraStr('listings', x.id, 'energy_class'),
-      yearBuilt: extraNum('listings', x.id, 'year_built'),
-      terrace: extraNum('listings', x.id, 'terrace_surface'),
-      floor: extraNum('listings', x.id, 'floor'),
-      charges: x.offer_type === 'rent' ? extraNum('listings', x.id, 'charges') : undefined,
+      energy: x.energy_class,
+      yearBuilt: x.construction_year,
+      terrace: x.terrace_surface,
+      floor: x.floor,
+      charges: x.offer_type === 'rent' ? x.charges : undefined,
     },
   };
 }
@@ -160,7 +159,6 @@ export default function ListingPage({ loaderData: d }: Route.ComponentProps) {
 
           {energy && (
             <section className="block">
-              {/* fixture only: energy class */}
               <h2 className="block__h">{C.energy}</h2>
               <EnergyScale value={energy} label={C.energy} classLabel={C.klass(energy)} />
             </section>

@@ -14,7 +14,6 @@ const fx = JSON.parse(readFileSync('src/data/fixture.json', 'utf8'));
 const dev = fx.developments[0];
 const org = fx.organisation;
 const team = fx.teams.find((t) => t.primary) ?? fx.teams[0];
-const extra = fx.fixture_only.developments[dev.id] ?? {}; // fixture only
 const ux = (u) => fx.fixture_only.units[u.id] ?? {}; // fixture only
 const agent = dev.agents[0];
 
@@ -38,7 +37,7 @@ const L = {
     loc: 'it-CH', rooms: (r) => `${r} locali`, house: (b) => `Casa ${b}`, pent: 'Attico',
     floor: (u) => (pent(u) ? 'Attico' : u.floor === 0 ? 'Piano terra' : `${u.floor}° piano`),
     status: { available: 'Disponibile', reserved: 'Riservato', sold: 'Venduto' },
-    out: (u) => (ux(u).garden_surface ? `Giardino ${ux(u).garden_surface} m²` : ux(u).terrace_surface ? `Terrazza ${ux(u).terrace_surface} m²` : u.balcony_surface ? `Loggia ${u.balcony_surface} m²` : '–'),
+    out: (u) => (u.garden_surface ? `Giardino ${u.garden_surface} m²` : u.terrace_surface ? `Terrazza ${u.terrace_surface} m²` : u.balcony_surface ? `Loggia ${u.balcony_surface} m²` : '–'),
     desc: dev.description_text.split('\n\n'),
     sub: (d) => `Appartamenti nuovi a Castagnola, Lugano · Consegna prevista ${d}`,
     projectEy: 'Il progetto', projectH: 'Due case sul pendio, davanti al lago.',
@@ -66,7 +65,7 @@ const L = {
     loc: 'de-CH', rooms: (r) => `${r} Zimmer`, house: (b) => `Haus ${b}`, pent: 'Attika',
     floor: (u) => (pent(u) ? 'Attika' : u.floor === 0 ? 'Erdgeschoss' : `${u.floor}. Obergeschoss`),
     status: { available: 'Verfügbar', reserved: 'Reserviert', sold: 'Verkauft' },
-    out: (u) => (ux(u).garden_surface ? `Garten ${ux(u).garden_surface} m²` : ux(u).terrace_surface ? `Terrasse ${ux(u).terrace_surface} m²` : u.balcony_surface ? `Loggia ${u.balcony_surface} m²` : '–'),
+    out: (u) => (u.garden_surface ? `Garten ${u.garden_surface} m²` : u.terrace_surface ? `Terrasse ${u.terrace_surface} m²` : u.balcony_surface ? `Loggia ${u.balcony_surface} m²` : '–'),
     desc: JSON.parse(readFileSync('src/content/description-de.json', 'utf8')),
     sub: (d) => `Neubauwohnungen in Castagnola, Lugano · Bezug geplant ${d}`,
     projectEy: 'Das Projekt', projectH: 'Zwei Häuser am Hang, vor dem See.',
@@ -136,7 +135,7 @@ function build(l) {
       const name = `${k.endsWith('p') ? `${t.pent} ` : ''}${t.rooms(us[0].rooms)}`;
       return { k, rooms: us[0].rooms, p: k.endsWith('p'), row: `<tr><td>${name}</td><td class="r">${Math.min(...s) === Math.max(...s) ? m2(s[0]) : `${Math.min(...s)}–${m2(Math.max(...s))}`}</td><td class="r">${us.length}</td><td class="r">${av.length}</td><td class="r">${av.length ? `${t.fromP} ${chf(Math.min(...av.map((u) => u.price)))}` : '–'}</td></tr>` };
     }).sort((a, b) => Number(a.p) - Number(b.p) || a.rooms - b.rooms).map((x) => x.row).join('');
-    const credits = t.credits.map((k, i) => [k, [extra.developer, extra.architect, extra.general_contractor][i]]).filter((c) => c[1]);
+    const credits = t.credits.map((k, i) => [k, [dev.developer?.name, dev.architect?.name, dev.general_contractor?.name][i]]).filter((c) => c[1]);
     return `
 <section class="page" style="padding:0;background:#f6f1e8">
   <div style="padding:12mm 12mm 0"><img class="ph" src="${photo(p0.url, 1300, 1150)}" style="height:196mm;border-radius:6mm"></div>
@@ -194,7 +193,7 @@ function build(l) {
       const b = ux(u).building;
       const head = b !== last ? `<tr class="group"><td colspan="8">${t.house(b)}</td></tr>` : '';
       last = b;
-      return `${head}<tr class="${u.status}"><td>${ux(u).unit_number ?? '–'}</td><td>${b}</td><td>${t.floor(u)}</td><td>${t.rooms(u.rooms)}</td><td class="r">${m2(u.living_surface)}</td><td>${t.out(u)}</td><td class="r">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${t.status[u.status]}</td></tr>`;
+      return `${head}<tr class="${u.status}"><td>${u.reference ?? '–'}</td><td>${b}</td><td>${t.floor(u)}</td><td>${t.rooms(u.rooms)}</td><td class="r">${m2(u.living_surface)}</td><td>${t.out(u)}</td><td class="r">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${t.status[u.status]}</td></tr>`;
     }).join('');
     return `<section class="page">
   <p class="eyebrow">${t.priceEy(todayL)}</p>
@@ -211,7 +210,7 @@ function build(l) {
     for (const u of units) if (!seen.has(planKey(u))) seen.set(planKey(u), u);
     const list = [...seen.entries()].sort((a, b) => Number(pent(a[1])) - Number(pent(b[1])) || a[1].rooms - b[1].rooms || a[1].floor - b[1].floor);
     return list.map(([k, u], i) => {
-      const lots = units.filter((x) => planKey(x) === k).map((x) => ux(x).unit_number).filter(Boolean);
+      const lots = units.filter((x) => planKey(x) === k).map((x) => x.reference).filter(Boolean);
       return `<section class="page">
   <p class="eyebrow">${t.plansEy} · ${i + 1} / ${list.length}</p>
   <h2>${pent(u) ? `${t.pent} ` : ''}${t.rooms(u.rooms)}${u.floor === 0 ? `, ${t.withGarden}` : ''}</h2>

@@ -31,13 +31,13 @@ export type Shell = {
   office: string[];
   phone?: string;
   email?: string;
-  /** fixture only: developer, architect, general contractor. */
+  /** Developer, architect, general contractor. */
   credits: [string, string][];
 };
 
 export async function loader() {
   const [kit, s] = await Promise.all([kitData(), loadSite()]);
-  const { dev, org, team, devExtra } = s;
+  const { dev, org, team } = s;
   const shell: Shell = {
     title: dev.title,
     city: dev.address.city,
@@ -48,9 +48,9 @@ export async function loader() {
     email: team?.email ?? undefined,
     credits: (
       [
-        ['Maître d’ouvrage', devExtra.developer],
-        ['Architecte', devExtra.architect],
-        ['Entreprise générale', devExtra.general_contractor],
+        ['Maître d’ouvrage', dev.developer?.name],
+        ['Architecte', dev.architect?.name],
+        ['Entreprise générale', dev.general_contractor?.name],
       ] as [string, string | undefined][]
     ).filter((c): c is [string, string] => !!c[1]),
   };

@@ -24,7 +24,7 @@ import { SaveButton } from '../components/SaveButton';
 import { AgentBlock } from '../components/AgentBlock';
 import { EnergyScale } from '../components/EnergyScale';
 import { PaymentEstimate } from '../components/PaymentEstimate';
-import { extraNum, extraStr, siteData, sites } from '../lib/data.server';
+import { siteData, sites } from '../lib/data.server';
 import {
   agentName, bathrooms, bedrooms, cityHref, cityLine, citySlug, floor, hasPrice, listingHref, price, R, rooms,
   searchUrl, surface, teamHref, teamShortName, tel, typeLabel, date,
@@ -50,14 +50,13 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     agent,
     team,
     ref: listingRef(kit),
-    // fixture only: energy class, year built, floor, outdoor surfaces and monthly charges are not in the API yet.
     x: {
-      energy: extraStr(l.id, 'energy_class'), // fixture only:
-      yearBuilt: extraNum(l.id, 'year_built'), // fixture only:
-      level: extraNum(l.id, 'floor'), // fixture only:
-      balcony: extraNum(l.id, 'balcony_surface'), // fixture only:
-      terrace: extraNum(l.id, 'terrace_surface'), // fixture only:
-      charges: extraNum(l.id, 'charges'), // fixture only:
+      energy: l.energy_class,
+      yearBuilt: l.construction_year,
+      level: l.floor,
+      balcony: l.balcony_surface,
+      terrace: l.terrace_surface,
+      charges: l.charges,
     },
     nearby: sameCity
       .filter((x) => x.id !== l.id && x.status === 'available')

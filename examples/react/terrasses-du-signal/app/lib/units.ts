@@ -12,13 +12,9 @@ import { formatRooms } from '@realadvisor/sites-kit/developments';
 import { t, type StringKey } from '@realadvisor/sites-kit/i18n';
 
 export type UnitExtra = {
-  unit_number?: string;
   position?: number;
-  orientation?: string;
-  garden_surface?: number;
-  terrace_surface?: number;
 };
-/** fixture only: unit number, position on the floor, orientation, garden or terrace surface, by unit id. */
+/** fixture only: position on the floor, by unit id. */
 export type Extras = Record<string, UnitExtra>;
 export const unitExtra = (ex: Extras, u: Pick<Unit, 'id'>): UnitExtra => ex[u.id] ?? {};
 
@@ -44,9 +40,9 @@ export function unitPrice(u: Pick<Unit, 'status' | 'price' | 'price_on_request'>
 /** "4.5 pièces · 2e étage" */
 export const unitLabel = (u: Unit) => [formatRooms(u.rooms) || t('unit'), floorName(u)].filter(Boolean).join(' · ');
 
-/** "Lot 2.3" when the fixture has a number (fixture only), else ''. */
-export const unitNumber = (u: Unit, ex: Extras) => {
-  const n = unitExtra(ex, u).unit_number; // fixture only: unit number
+/** "Lot 2.3" when the unit has a number, else ''. */
+export const unitNumber = (u: Unit) => {
+  const n = u.reference;
   return n ? `Lot ${n}` : '';
 };
 
@@ -73,21 +69,23 @@ export const sortUnits = (units: Unit[], ex: Extras) =>
 
 export type Outdoor = { kind: 'garden' | 'terrace' | 'balcony'; label: string; m2: number };
 
-/** Outdoor space: the API's balcony surface, else the fixture's garden or terrace. */
-export function outdoor(u: Unit, ex: Extras): Outdoor | null {
-  const x = unitExtra(ex, u);
-  if (x.garden_surface) return { kind: 'garden', label: 'Jardin privatif', m2: x.garden_surface }; // fixture only: garden surface
+/** Outdoor space: the garden, else the balcony, else the terrace. */
+export function outdoor(u: Unit): Outdoor | null {
+  if (u.garden_surface) return { kind: 'garden', label: 'Jardin privatif', m2: u.garden_surface };
   if (u.balcony_surface) return { kind: 'terrace', label: 'Terrasse', m2: u.balcony_surface };
-  if (x.terrace_surface) return { kind: 'terrace', label: 'Terrasse', m2: x.terrace_surface }; // fixture only: terrace surface
+  if (u.terrace_surface) return { kind: 'terrace', label: 'Terrasse', m2: u.terrace_surface };
   return null;
 }
 
 const ORIENT: Record<string, string> = {
   N: 'Nord', S: 'Sud', E: 'Est', W: 'Ouest', NE: 'Nord-est', NW: 'Nord-ouest', SE: 'Sud-est', SW: 'Sud-ouest',
 };
-/** fixture only: orientation, in words. */
-export const orientation = (u: Unit, ex: Extras) => {
-  const o = unitExtra(ex, u).orientation; // fixture only: orientation
+/** ['south', 'west'] -> 'SW', the key of ORIENT. */
+const orientationCode = (o: Unit['orientation']) =>
+  [o?.includes('north') ? 'N' : o?.includes('south') ? 'S' : '', o?.includes('east') ? 'E' : o?.includes('west') ? 'W' : ''].join('');
+/** The orientation, in words. */
+export const orientation = (u: Unit) => {
+  const o = orientationCode(u.orientation);
   return o ? (ORIENT[o] ?? o) : '';
 };
 
@@ -97,7 +95,7 @@ export const unitOptions = (units: Unit[], ex: Extras) =>
     .filter((u) => u.status !== 'sold')
     .map((u) => ({
       value: u.id,
-      label: [unitNumber(u, ex), unitLabel(u)].filter(Boolean).join(' — ') + (u.status === 'reserved' ? ` (${statusLabel(u)})` : ''),
+      label: [unitNumber(u), unitLabel(u)].filter(Boolean).join(' — ') + (u.status === 'reserved' ? ` (${statusLabel(u)})` : ''),
     }));
 
 const range = (xs: number[]) => (xs.length ? { min: Math.min(...xs), max: Math.max(...xs) } : null);

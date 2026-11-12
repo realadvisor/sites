@@ -154,7 +154,13 @@
    "reference": "HVPJ-FZBS",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 30,
+   "floor": 0,
+   "charges": 230,
+   "available_from": "2027-04-01"
   },
   {
    "id": "4a57bb52-e28a-4bd9-a0e1-2a693377a2fd",
@@ -228,7 +234,13 @@
    "reference": "X52L-2KMD",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-04-01"
   },
   {
    "id": "a66aadda-516d-4797-8821-68140a368a28",
@@ -302,7 +314,13 @@
    "reference": "QT46-APDM",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-04-01"
   },
   {
    "id": "01d47a9d-3b74-4cb6-9ad6-2e0b39fc1b54",
@@ -376,7 +394,13 @@
    "reference": "BXVW-YKKG",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-04-01"
   },
   {
    "id": "9abb5b0c-9aa7-48cf-8154-ff632cb5b20d",
@@ -450,7 +474,13 @@
    "reference": "466S-W7JE",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-04-01"
   },
   {
    "id": "eb290af4-f7d0-4c24-9b9b-93fce2afc9ea",
@@ -524,7 +554,13 @@
    "reference": "KQJQ-PE9E",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-04-01"
   },
   {
    "id": "cbcb54bb-5f3b-4835-a21a-f2be6abc3466",
@@ -598,7 +634,13 @@
    "reference": "VJBN-KSXA",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-04-01"
   },
   {
    "id": "204f319f-bcfb-423b-8473-53b0ed7ca21a",
@@ -672,7 +714,13 @@
    "reference": "YLEM-P7NK",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-04-01"
   },
   {
    "id": "389a77d7-2743-4e71-a676-1ae1d212a783",
@@ -746,7 +794,13 @@
    "reference": "5E7E-PM9T",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-04-01"
   },
   {
    "id": "af569086-bfd1-4219-97bd-86a7297fa993",
@@ -820,7 +874,13 @@
    "reference": "NPVP-PNUM",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "terrace_surface": 20,
+   "floor": 0,
+   "charges": 160,
+   "available_from": "2027-07-01"
   },
   {
    "id": "a3f84c4c-ee5f-4667-9318-f6544f418718",
@@ -894,7 +954,13 @@
    "reference": "HXDB-PJ4K",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "terrace_surface": 25,
+   "floor": 0,
+   "charges": 190,
+   "available_from": "2027-07-01"
   },
   {
    "id": "f5229b43-c594-487e-a01d-f2d4b5e08e85",
@@ -968,7 +1034,13 @@
    "reference": "R4PL-WY5P",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 30,
+   "floor": 0,
+   "charges": 230,
+   "available_from": "2027-07-01"
   },
   {
    "id": "4a3501ec-5f0c-4154-bad9-1457d554759f",
@@ -1042,7 +1114,13 @@
    "reference": "EM8L-SSJK",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "terrace_surface": 35,
+   "floor": 0,
+   "charges": 270,
+   "available_from": "2027-07-01"
   },
   {
    "id": "f484910a-d63c-4d3c-92f4-c10326833000",
@@ -1116,7 +1194,13 @@
    "reference": "JSVB-E6KL",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-07-01"
   },
   {
    "id": "438c2611-ceff-4fee-9a67-ce3dd8925e95",
@@ -1190,7 +1274,13 @@
    "reference": "DARP-CMT6",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-07-01"
   },
   {
    "id": "a3bdc4b7-1de5-420c-8554-b968dba6c247",
@@ -1264,7 +1354,13 @@
    "reference": "MV35-T4BS",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-07-01"
   },
   {
    "id": "d9051c8a-1d09-4ded-ba90-876a4a16f65a",
@@ -1338,7 +1434,13 @@
    "reference": "KN9S-SAGF",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-07-01"
   },
   {
    "id": "cb553d66-8c4b-46a1-91fd-e27c2d0469da",
@@ -1412,7 +1514,13 @@
    "reference": "EKWJ-4593",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-07-01"
   },
   {
    "id": "967ab8b5-e2f4-4e05-8093-35de645a797a",
@@ -1486,7 +1594,13 @@
    "reference": "VAN9-4CRM",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-07-01"
   },
   {
    "id": "1ed1916e-a7de-4ec2-9d7f-bc3f8741b975",
@@ -1560,7 +1674,13 @@
    "reference": "M7UW-UHVE",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-07-01"
   },
   {
    "id": "5e197de0-d5ee-4afa-a067-97e6adedde3e",
@@ -1634,7 +1754,13 @@
    "reference": "SZRD-QSQN",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-07-01"
   },
   {
    "id": "6c1c3d9d-736f-43e4-97d4-21dfd087a6b2",
@@ -1708,7 +1834,13 @@
    "reference": "E7HW-DLCM",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-07-01"
   },
   {
    "id": "03d02106-9b58-4b4c-bbeb-e98b8bf23717",
@@ -1782,7 +1914,13 @@
    "reference": "TN8Q-Z9ED",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-07-01"
   },
   {
    "id": "3f888eeb-5005-47f9-8dc2-f179390e8cf4",
@@ -1856,7 +1994,13 @@
    "reference": "36PQ-KM32",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-07-01"
   },
   {
    "id": "f43403d7-4d15-416a-876e-8886b2850a4b",
@@ -1930,7 +2074,13 @@
    "reference": "7KD5-7DLU",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-07-01"
   },
   {
    "id": "179b8f3e-f665-434b-b71e-87dfc217ccbe",
@@ -2004,7 +2154,13 @@
    "reference": "YNYE-NBYD",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-07-01"
   },
   {
    "id": "1b83d1ab-4ee2-4e93-9019-ee576a174eb9",
@@ -2078,7 +2234,13 @@
    "reference": "T327-WZ44",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-07-01"
   },
   {
    "id": "29ce3bdb-e4d0-4af2-975e-4813272f7e1f",
@@ -2152,7 +2314,13 @@
    "reference": "3P86-T27N",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "terrace_surface": 20,
+   "floor": 0,
+   "charges": 160,
+   "available_from": "2027-10-01"
   },
   {
    "id": "fe930ccc-9819-496f-a9fc-14e82bbe7f34",
@@ -2226,7 +2394,13 @@
    "reference": "LRT9-RD56",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 25,
+   "floor": 0,
+   "charges": 190,
+   "available_from": "2027-10-01"
   },
   {
    "id": "415b411b-c4bf-4e3b-b9aa-9aab9eeb2a26",
@@ -2300,7 +2474,13 @@
    "reference": "ETN6-AJCV",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 30,
+   "floor": 0,
+   "charges": 230,
+   "available_from": "2027-10-01"
   },
   {
    "id": "fbd2a22a-e4d3-485e-a99e-7272ea5aa27c",
@@ -2374,7 +2554,13 @@
    "reference": "YCT6-T2VS",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "terrace_surface": 35,
+   "floor": 0,
+   "charges": 270,
+   "available_from": "2027-10-01"
   },
   {
    "id": "e3694932-6b16-42e3-932f-baba8e55af91",
@@ -2448,7 +2634,13 @@
    "reference": "83SG-FDX5",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-10-01"
   },
   {
    "id": "41feec87-83b5-4c39-8a5d-d6b49dd80e80",
@@ -2522,7 +2714,13 @@
    "reference": "KKCK-V79Z",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-10-01"
   },
   {
    "id": "d1a82bfc-a61f-48e7-add5-30f9b1867308",
@@ -2596,7 +2794,13 @@
    "reference": "JR7J-ZT3F",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-10-01"
   },
   {
    "id": "575b205c-5b18-44f1-9be0-8b3fe6336ef7",
@@ -2670,7 +2874,13 @@
    "reference": "XUSV-NL5A",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-10-01"
   },
   {
    "id": "b9139b17-36f3-4483-93ad-20ba159c81fe",
@@ -2744,7 +2954,13 @@
    "reference": "ZURU-9JX5",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-10-01"
   },
   {
    "id": "f444a7fd-ce26-4522-a1c1-91ee1195d331",
@@ -2818,7 +3034,13 @@
    "reference": "S95T-LJNX",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-10-01"
   },
   {
    "id": "6598e03a-581a-4590-9834-d1e3b4fbd0a3",
@@ -2892,7 +3114,13 @@
    "reference": "NWRH-A358",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-10-01"
   },
   {
    "id": "12ac7889-d393-48d2-ad13-7297fd428e77",
@@ -2966,7 +3194,13 @@
    "reference": "QWWG-2V7U",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-10-01"
   },
   {
    "id": "754d16fb-a1c4-449f-be7c-dc96d79ae349",
@@ -3040,7 +3274,13 @@
    "reference": "PYR2-FTHE",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-10-01"
   },
   {
    "id": "cca3e5f3-6f47-4498-8fda-6cfa98cd3a83",
@@ -3114,7 +3354,13 @@
    "reference": "PTMJ-A7G4",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-10-01"
   },
   {
    "id": "95dd578e-c062-428d-b770-5a1928fefa36",
@@ -3188,7 +3434,13 @@
    "reference": "PD6T-44JS",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-10-01"
   },
   {
    "id": "1171b609-4b33-485b-8746-b0c738b0bad5",
@@ -3262,7 +3514,13 @@
    "reference": "9RLF-7C3S",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-10-01"
   },
   {
    "id": "f48a135b-1342-4f1c-8fbf-497bbf63ca1b",
@@ -3336,7 +3594,13 @@
    "reference": "XSBP-BM2H",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 8,
+   "charges": 160,
+   "available_from": "2027-10-01"
   },
   {
    "id": "27a6b95b-fc23-4e06-9fc9-761c16359709",
@@ -3410,7 +3674,13 @@
    "reference": "6KS6-E65S",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 10,
+   "charges": 190,
+   "available_from": "2027-10-01"
   },
   {
    "id": "ffe2d721-4be1-46df-872d-33d5f05d43f2",
@@ -3484,7 +3754,13 @@
    "reference": "4NAF-U7QM",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 12,
+   "charges": 230,
+   "available_from": "2027-10-01"
   },
   {
    "id": "d5965e9a-59c9-428d-b042-60386d2f29cb",
@@ -3558,7 +3834,13 @@
    "reference": "FMJ3-GGP2",
    "team_ids": [
     "b02f89f5-6af2-4e46-947c-17993fbb6fd8"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 14,
+   "charges": 270,
+   "available_from": "2027-10-01"
   }
  ],
  "developments": [
@@ -3705,7 +3987,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A0.1",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 20,
+     "available_from": "2027-04-01",
+     "charges": 160
     },
     {
      "id": "ea281064-1d61-4551-bc54-2fadc300ccc9",
@@ -3726,7 +4015,15 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A0.2",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "terrace_surface": 25,
+     "available_from": "2027-04-01",
+     "charges": 190
     },
     {
      "id": "c6521444-e86d-417d-b2dc-ee2f0db0b423",
@@ -3772,7 +4069,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A0.3",
+     "orientation": [
+      "west"
+     ],
+     "terrace_surface": 30,
+     "available_from": "2027-04-01",
+     "charges": 230
     },
     {
      "id": "cec42fe4-7aac-40a4-bf3a-6c181bda07b0",
@@ -3792,7 +4096,15 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A0.4",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 35,
+     "available_from": "2027-04-01",
+     "charges": 270
     },
     {
      "id": "407e539b-270a-413b-92f0-0046e62a467b",
@@ -3813,7 +4125,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A1.1",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 160
     },
     {
      "id": "b15fcd49-add2-47da-9e07-17dabf17f9c6",
@@ -3859,7 +4178,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A1.2",
+     "orientation": [
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 190
     },
     {
      "id": "e82e5685-aaf6-4797-adcd-7014e00c37e4",
@@ -3879,7 +4204,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A1.3",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 230
     },
     {
      "id": "f5c7695e-282d-4d7e-aa18-135b9121445d",
@@ -3925,7 +4257,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A1.4",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 270
     },
     {
      "id": "ddba7af7-0993-4344-9cd1-716c62564a00",
@@ -3971,7 +4309,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A2.1",
+     "orientation": [
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 160
     },
     {
      "id": "c8ef921a-c721-4221-8a95-2815587ad88f",
@@ -3991,7 +4335,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A2.2",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 190
     },
     {
      "id": "a3c0527d-0df3-4cc8-80d5-d58633d86807",
@@ -4037,7 +4388,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A2.3",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 230
     },
     {
      "id": "ad9eb99f-3ec5-484e-bbe7-3f78106cded4",
@@ -4057,7 +4414,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A2.4",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 270
     },
     {
      "id": "3218a640-c06e-425a-9600-34942c3dbe08",
@@ -4077,7 +4441,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A3.1",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 160
     },
     {
      "id": "0b388af9-a945-4fc0-97d4-1b2fde952455",
@@ -4123,7 +4494,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A3.2",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 190
     },
     {
      "id": "1f0951d6-2569-40bd-8941-1414e0b1d82a",
@@ -4143,7 +4520,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A3.3",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 230
     },
     {
      "id": "f97a87ec-e005-45b8-9a53-c59a1d129fcb",
@@ -4189,7 +4573,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A3.4",
+     "orientation": [
+      "south"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 270
     },
     {
      "id": "4c4fd4c6-9e94-4293-ac34-815586de8c88",
@@ -4235,7 +4625,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A4.1",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 160
     },
     {
      "id": "01d36af2-bec3-4359-88fe-ac5670f177ef",
@@ -4255,7 +4651,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A4.2",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 190
     },
     {
      "id": "e3a3d06c-a7b8-4b19-933c-e0560202d4ee",
@@ -4301,7 +4704,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A4.3",
+     "orientation": [
+      "south"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 230
     },
     {
      "id": "76f8880f-5a71-40f4-a0e4-741aeb7755b6",
@@ -4321,7 +4730,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A4.4",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "available_from": "2027-04-01",
+     "charges": 270
     },
     {
      "id": "6c4a6aef-f061-4f6b-a236-138c72aaa56e",
@@ -4367,7 +4783,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B0.1",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 20,
+     "available_from": "2027-07-01",
+     "charges": 160
     },
     {
      "id": "c470b697-7fe6-4b93-af98-7c190268c6ec",
@@ -4413,7 +4836,15 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B0.2",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "terrace_surface": 25,
+     "available_from": "2027-07-01",
+     "charges": 190
     },
     {
      "id": "92814ea0-26d1-4593-8293-0a685df2ca1c",
@@ -4459,7 +4890,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B0.3",
+     "orientation": [
+      "west"
+     ],
+     "terrace_surface": 30,
+     "available_from": "2027-07-01",
+     "charges": 230
     },
     {
      "id": "90ab0b0a-9d54-482b-a6f8-cb45beb2c8c5",
@@ -4505,7 +4943,15 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B0.4",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 35,
+     "available_from": "2027-07-01",
+     "charges": 270
     },
     {
      "id": "e76f9c87-5a52-4f87-a552-e204d5ac26c0",
@@ -4551,7 +4997,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B1.1",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 160
     },
     {
      "id": "0ec5d1dd-a9df-41e7-82d2-a9010d7575ac",
@@ -4597,7 +5050,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B1.2",
+     "orientation": [
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 190
     },
     {
      "id": "b941253f-857c-4a9e-a56b-606e6f14631b",
@@ -4643,7 +5102,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B1.3",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 230
     },
     {
      "id": "8fd01184-b4a2-4588-a668-bc34e0730e73",
@@ -4689,7 +5155,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B1.4",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 270
     },
     {
      "id": "6a9b9a3d-96a2-4611-8c5d-89d13e93b13c",
@@ -4735,7 +5207,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.1",
+     "orientation": [
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 160
     },
     {
      "id": "d066e2b5-250c-47ba-9895-a3a1ee100d8b",
@@ -4781,7 +5259,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.2",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 190
     },
     {
      "id": "a675c9af-ef69-405f-ad72-4608af65ef2e",
@@ -4827,7 +5312,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.3",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 230
     },
     {
      "id": "310c1249-5229-4d00-a862-d0cb18afc6af",
@@ -4873,7 +5364,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.4",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 270
     },
     {
      "id": "6b1a0d82-bead-4024-bf12-10a4c86d0f5d",
@@ -4919,7 +5417,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B3.1",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 160
     },
     {
      "id": "e39e45f4-1e0d-436d-a7e2-22aa90de03d5",
@@ -4965,7 +5470,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B3.2",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 190
     },
     {
      "id": "9422f501-20a5-455c-a299-2c96b006c225",
@@ -5011,7 +5522,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B3.3",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 230
     },
     {
      "id": "e0378960-5d79-4800-9115-f76b7fefa68f",
@@ -5032,7 +5550,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B3.4",
+     "orientation": [
+      "south"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 270
     },
     {
      "id": "13a9e497-658f-4530-a7c8-7192c9f1a347",
@@ -5078,7 +5602,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B4.1",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 160
     },
     {
      "id": "57ab305b-f603-4e8b-8e27-eae1112d9f77",
@@ -5124,7 +5654,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B4.2",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 190
     },
     {
      "id": "a1bd326b-693f-40c6-a8b1-79233a0cf07f",
@@ -5145,7 +5682,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B4.3",
+     "orientation": [
+      "south"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 230
     },
     {
      "id": "9fa54657-21f7-49ef-a693-12a72afff788",
@@ -5191,7 +5734,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B4.4",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "available_from": "2027-07-01",
+     "charges": 270
     },
     {
      "id": "716b6078-ca74-467f-b62c-0194fae0fb9c",
@@ -5237,7 +5787,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C0.1",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 20,
+     "available_from": "2027-10-01",
+     "charges": 160
     },
     {
      "id": "80868f77-8791-4ecc-bf05-e3cb273f6b7c",
@@ -5283,7 +5840,15 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C0.2",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "terrace_surface": 25,
+     "available_from": "2027-10-01",
+     "charges": 190
     },
     {
      "id": "200ab43d-48d8-4884-bdf7-94ccafaa5e81",
@@ -5329,7 +5894,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C0.3",
+     "orientation": [
+      "west"
+     ],
+     "terrace_surface": 30,
+     "available_from": "2027-10-01",
+     "charges": 230
     },
     {
      "id": "1b3856d8-7016-40b2-9797-3dac27b84725",
@@ -5375,7 +5947,15 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C0.4",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 35,
+     "available_from": "2027-10-01",
+     "charges": 270
     },
     {
      "id": "2f3e09ba-5ceb-4ca6-a32d-3215a645e33c",
@@ -5421,7 +6001,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C1.1",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 160
     },
     {
      "id": "23a3ff16-9783-4107-bc93-9444e8c58846",
@@ -5467,7 +6054,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C1.2",
+     "orientation": [
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 190
     },
     {
      "id": "0e19035f-69a3-44bc-9ebb-7916539379f8",
@@ -5513,7 +6106,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C1.3",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 230
     },
     {
      "id": "5ef45f47-1fff-4704-914a-0cd8a0e2fb58",
@@ -5559,7 +6159,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C1.4",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 270
     },
     {
      "id": "abe9123a-6071-4b19-be94-95e50839c88d",
@@ -5605,7 +6211,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C2.1",
+     "orientation": [
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 160
     },
     {
      "id": "c8a7359c-0066-4010-801d-c4a34ed85905",
@@ -5651,7 +6263,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C2.2",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 190
     },
     {
      "id": "21aeec49-7f26-4a7c-851b-90d481ae0562",
@@ -5697,7 +6316,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C2.3",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 230
     },
     {
      "id": "ee8efcb3-9e7b-4c1e-b6f5-eec8275fef7e",
@@ -5743,7 +6368,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C2.4",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 270
     },
     {
      "id": "318e4ef6-11dc-4c8f-994b-30347639188f",
@@ -5789,7 +6421,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C3.1",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 160
     },
     {
      "id": "8d8dee55-69a6-42ec-90c2-396341a69dfe",
@@ -5835,7 +6474,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C3.2",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 190
     },
     {
      "id": "b938e030-be13-4a71-9b08-90f805117ab8",
@@ -5881,7 +6526,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C3.3",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 230
     },
     {
      "id": "87f8c83b-f234-49bb-a73e-fabc327f438d",
@@ -5927,7 +6579,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C3.4",
+     "orientation": [
+      "south"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 270
     },
     {
      "id": "c58ca542-2052-4ddf-9f66-46f49d7e878c",
@@ -5973,7 +6631,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C4.1",
+     "orientation": [
+      "east"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 160
     },
     {
      "id": "bba1aa0a-a431-4e5a-89d9-dcb4a0e99e00",
@@ -6019,7 +6683,14 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C4.2",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 190
     },
     {
      "id": "056fe9f5-2d56-417c-8e72-7329cc2145b9",
@@ -6065,7 +6736,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C4.3",
+     "orientation": [
+      "south"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 230
     },
     {
      "id": "fc692aeb-ceca-4f18-9fe9-0d4ea8468eb7",
@@ -6111,889 +6788,273 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "C4.4",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "available_from": "2027-10-01",
+     "charges": 270
     }
-   ]
+   ],
+   "developer": {
+    "name": "Zinnober Wohnbau AG"
+   },
+   "architect": {
+    "name": "Huber Lenz Architekten"
+   },
+   "general_contractor": {
+    "name": "Totalunternehmung Töss AG"
+   }
   }
  ],
  "fixture_only": {
-  "listings": {
-   "3b60fe4c-8108-4392-9505-058fc08d459d": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 30,
-    "charges": 230,
-    "available_from": "2027-04-01"
-   },
-   "4a57bb52-e28a-4bd9-a0e1-2a693377a2fd": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-04-01"
-   },
-   "a66aadda-516d-4797-8821-68140a368a28": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-04-01"
-   },
-   "01d47a9d-3b74-4cb6-9ad6-2e0b39fc1b54": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-04-01"
-   },
-   "9abb5b0c-9aa7-48cf-8154-ff632cb5b20d": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-04-01"
-   },
-   "eb290af4-f7d0-4c24-9b9b-93fce2afc9ea": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-04-01"
-   },
-   "cbcb54bb-5f3b-4835-a21a-f2be6abc3466": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-04-01"
-   },
-   "204f319f-bcfb-423b-8473-53b0ed7ca21a": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-04-01"
-   },
-   "389a77d7-2743-4e71-a676-1ae1d212a783": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-04-01"
-   },
-   "af569086-bfd1-4219-97bd-86a7297fa993": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 20,
-    "charges": 160,
-    "available_from": "2027-07-01"
-   },
-   "a3f84c4c-ee5f-4667-9318-f6544f418718": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 25,
-    "charges": 190,
-    "available_from": "2027-07-01"
-   },
-   "f5229b43-c594-487e-a01d-f2d4b5e08e85": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 30,
-    "charges": 230,
-    "available_from": "2027-07-01"
-   },
-   "4a3501ec-5f0c-4154-bad9-1457d554759f": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 35,
-    "charges": 270,
-    "available_from": "2027-07-01"
-   },
-   "f484910a-d63c-4d3c-92f4-c10326833000": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-07-01"
-   },
-   "438c2611-ceff-4fee-9a67-ce3dd8925e95": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-07-01"
-   },
-   "a3bdc4b7-1de5-420c-8554-b968dba6c247": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-07-01"
-   },
-   "d9051c8a-1d09-4ded-ba90-876a4a16f65a": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-07-01"
-   },
-   "cb553d66-8c4b-46a1-91fd-e27c2d0469da": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-07-01"
-   },
-   "967ab8b5-e2f4-4e05-8093-35de645a797a": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-07-01"
-   },
-   "1ed1916e-a7de-4ec2-9d7f-bc3f8741b975": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-07-01"
-   },
-   "5e197de0-d5ee-4afa-a067-97e6adedde3e": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-07-01"
-   },
-   "6c1c3d9d-736f-43e4-97d4-21dfd087a6b2": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-07-01"
-   },
-   "03d02106-9b58-4b4c-bbeb-e98b8bf23717": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-07-01"
-   },
-   "3f888eeb-5005-47f9-8dc2-f179390e8cf4": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-07-01"
-   },
-   "f43403d7-4d15-416a-876e-8886b2850a4b": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-07-01"
-   },
-   "179b8f3e-f665-434b-b71e-87dfc217ccbe": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-07-01"
-   },
-   "1b83d1ab-4ee2-4e93-9019-ee576a174eb9": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-07-01"
-   },
-   "29ce3bdb-e4d0-4af2-975e-4813272f7e1f": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 20,
-    "charges": 160,
-    "available_from": "2027-10-01"
-   },
-   "fe930ccc-9819-496f-a9fc-14e82bbe7f34": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 25,
-    "charges": 190,
-    "available_from": "2027-10-01"
-   },
-   "415b411b-c4bf-4e3b-b9aa-9aab9eeb2a26": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 30,
-    "charges": 230,
-    "available_from": "2027-10-01"
-   },
-   "fbd2a22a-e4d3-485e-a99e-7272ea5aa27c": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 0,
-    "terrace_surface": 35,
-    "charges": 270,
-    "available_from": "2027-10-01"
-   },
-   "e3694932-6b16-42e3-932f-baba8e55af91": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-10-01"
-   },
-   "41feec87-83b5-4c39-8a5d-d6b49dd80e80": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-10-01"
-   },
-   "d1a82bfc-a61f-48e7-add5-30f9b1867308": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-10-01"
-   },
-   "575b205c-5b18-44f1-9be0-8b3fe6336ef7": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-10-01"
-   },
-   "b9139b17-36f3-4483-93ad-20ba159c81fe": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-10-01"
-   },
-   "f444a7fd-ce26-4522-a1c1-91ee1195d331": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-10-01"
-   },
-   "6598e03a-581a-4590-9834-d1e3b4fbd0a3": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-10-01"
-   },
-   "12ac7889-d393-48d2-ad13-7297fd428e77": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-10-01"
-   },
-   "754d16fb-a1c4-449f-be7c-dc96d79ae349": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-10-01"
-   },
-   "cca3e5f3-6f47-4498-8fda-6cfa98cd3a83": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-10-01"
-   },
-   "95dd578e-c062-428d-b770-5a1928fefa36": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-10-01"
-   },
-   "1171b609-4b33-485b-8746-b0c738b0bad5": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-10-01"
-   },
-   "f48a135b-1342-4f1c-8fbf-497bbf63ca1b": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 8,
-    "charges": 160,
-    "available_from": "2027-10-01"
-   },
-   "27a6b95b-fc23-4e06-9fc9-761c16359709": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 10,
-    "charges": 190,
-    "available_from": "2027-10-01"
-   },
-   "ffe2d721-4be1-46df-872d-33d5f05d43f2": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 12,
-    "charges": 230,
-    "available_from": "2027-10-01"
-   },
-   "d5965e9a-59c9-428d-b042-60386d2f29cb": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 14,
-    "charges": 270,
-    "available_from": "2027-10-01"
-   }
-  },
+  "listings": {},
   "units": {
    "9797b851-3212-4593-ade1-b8a3c5526f88": {
-    "unit_number": "A0.1",
     "building": "A",
-    "position": 1,
-    "orientation": "S",
-    "terrace_surface": 20,
-    "move_in_date": "2027-04-01",
-    "charges": 160
+    "position": 1
    },
    "ea281064-1d61-4551-bc54-2fadc300ccc9": {
-    "unit_number": "A0.2",
     "building": "A",
-    "position": 2,
-    "orientation": "SW",
-    "terrace_surface": 25,
-    "move_in_date": "2027-04-01",
-    "charges": 190
+    "position": 2
    },
    "c6521444-e86d-417d-b2dc-ee2f0db0b423": {
-    "unit_number": "A0.3",
     "building": "A",
-    "position": 3,
-    "orientation": "W",
-    "terrace_surface": 30,
-    "move_in_date": "2027-04-01",
-    "charges": 230
+    "position": 3
    },
    "cec42fe4-7aac-40a4-bf3a-6c181bda07b0": {
-    "unit_number": "A0.4",
     "building": "A",
-    "position": 4,
-    "orientation": "SE",
-    "terrace_surface": 35,
-    "move_in_date": "2027-04-01",
-    "charges": 270
+    "position": 4
    },
    "407e539b-270a-413b-92f0-0046e62a467b": {
-    "unit_number": "A1.1",
     "building": "A",
-    "position": 1,
-    "orientation": "SW",
-    "move_in_date": "2027-04-01",
-    "charges": 160
+    "position": 1
    },
    "b15fcd49-add2-47da-9e07-17dabf17f9c6": {
-    "unit_number": "A1.2",
     "building": "A",
-    "position": 2,
-    "orientation": "W",
-    "move_in_date": "2027-04-01",
-    "charges": 190
+    "position": 2
    },
    "e82e5685-aaf6-4797-adcd-7014e00c37e4": {
-    "unit_number": "A1.3",
     "building": "A",
-    "position": 3,
-    "orientation": "SE",
-    "move_in_date": "2027-04-01",
-    "charges": 230
+    "position": 3
    },
    "f5c7695e-282d-4d7e-aa18-135b9121445d": {
-    "unit_number": "A1.4",
     "building": "A",
-    "position": 4,
-    "orientation": "E",
-    "move_in_date": "2027-04-01",
-    "charges": 270
+    "position": 4
    },
    "ddba7af7-0993-4344-9cd1-716c62564a00": {
-    "unit_number": "A2.1",
     "building": "A",
-    "position": 1,
-    "orientation": "W",
-    "move_in_date": "2027-04-01",
-    "charges": 160
+    "position": 1
    },
    "c8ef921a-c721-4221-8a95-2815587ad88f": {
-    "unit_number": "A2.2",
     "building": "A",
-    "position": 2,
-    "orientation": "SE",
-    "move_in_date": "2027-04-01",
-    "charges": 190
+    "position": 2
    },
    "a3c0527d-0df3-4cc8-80d5-d58633d86807": {
-    "unit_number": "A2.3",
     "building": "A",
-    "position": 3,
-    "orientation": "E",
-    "move_in_date": "2027-04-01",
-    "charges": 230
+    "position": 3
    },
    "ad9eb99f-3ec5-484e-bbe7-3f78106cded4": {
-    "unit_number": "A2.4",
     "building": "A",
-    "position": 4,
-    "orientation": "NW",
-    "move_in_date": "2027-04-01",
-    "charges": 270
+    "position": 4
    },
    "3218a640-c06e-425a-9600-34942c3dbe08": {
-    "unit_number": "A3.1",
     "building": "A",
-    "position": 1,
-    "orientation": "SE",
-    "move_in_date": "2027-04-01",
-    "charges": 160
+    "position": 1
    },
    "0b388af9-a945-4fc0-97d4-1b2fde952455": {
-    "unit_number": "A3.2",
     "building": "A",
-    "position": 2,
-    "orientation": "E",
-    "move_in_date": "2027-04-01",
-    "charges": 190
+    "position": 2
    },
    "1f0951d6-2569-40bd-8941-1414e0b1d82a": {
-    "unit_number": "A3.3",
     "building": "A",
-    "position": 3,
-    "orientation": "NW",
-    "move_in_date": "2027-04-01",
-    "charges": 230
+    "position": 3
    },
    "f97a87ec-e005-45b8-9a53-c59a1d129fcb": {
-    "unit_number": "A3.4",
     "building": "A",
-    "position": 4,
-    "orientation": "S",
-    "move_in_date": "2027-04-01",
-    "charges": 270
+    "position": 4
    },
    "4c4fd4c6-9e94-4293-ac34-815586de8c88": {
-    "unit_number": "A4.1",
     "building": "A",
-    "position": 1,
-    "orientation": "E",
-    "move_in_date": "2027-04-01",
-    "charges": 160
+    "position": 1
    },
    "01d36af2-bec3-4359-88fe-ac5670f177ef": {
-    "unit_number": "A4.2",
     "building": "A",
-    "position": 2,
-    "orientation": "NW",
-    "move_in_date": "2027-04-01",
-    "charges": 190
+    "position": 2
    },
    "e3a3d06c-a7b8-4b19-933c-e0560202d4ee": {
-    "unit_number": "A4.3",
     "building": "A",
-    "position": 3,
-    "orientation": "S",
-    "move_in_date": "2027-04-01",
-    "charges": 230
+    "position": 3
    },
    "76f8880f-5a71-40f4-a0e4-741aeb7755b6": {
-    "unit_number": "A4.4",
     "building": "A",
-    "position": 4,
-    "orientation": "SW",
-    "move_in_date": "2027-04-01",
-    "charges": 270
+    "position": 4
    },
    "6c4a6aef-f061-4f6b-a236-138c72aaa56e": {
-    "unit_number": "B0.1",
     "building": "B",
-    "position": 1,
-    "orientation": "S",
-    "terrace_surface": 20,
-    "move_in_date": "2027-07-01",
-    "charges": 160
+    "position": 1
    },
    "c470b697-7fe6-4b93-af98-7c190268c6ec": {
-    "unit_number": "B0.2",
     "building": "B",
-    "position": 2,
-    "orientation": "SW",
-    "terrace_surface": 25,
-    "move_in_date": "2027-07-01",
-    "charges": 190
+    "position": 2
    },
    "92814ea0-26d1-4593-8293-0a685df2ca1c": {
-    "unit_number": "B0.3",
     "building": "B",
-    "position": 3,
-    "orientation": "W",
-    "terrace_surface": 30,
-    "move_in_date": "2027-07-01",
-    "charges": 230
+    "position": 3
    },
    "90ab0b0a-9d54-482b-a6f8-cb45beb2c8c5": {
-    "unit_number": "B0.4",
     "building": "B",
-    "position": 4,
-    "orientation": "SE",
-    "terrace_surface": 35,
-    "move_in_date": "2027-07-01",
-    "charges": 270
+    "position": 4
    },
    "e76f9c87-5a52-4f87-a552-e204d5ac26c0": {
-    "unit_number": "B1.1",
     "building": "B",
-    "position": 1,
-    "orientation": "SW",
-    "move_in_date": "2027-07-01",
-    "charges": 160
+    "position": 1
    },
    "0ec5d1dd-a9df-41e7-82d2-a9010d7575ac": {
-    "unit_number": "B1.2",
     "building": "B",
-    "position": 2,
-    "orientation": "W",
-    "move_in_date": "2027-07-01",
-    "charges": 190
+    "position": 2
    },
    "b941253f-857c-4a9e-a56b-606e6f14631b": {
-    "unit_number": "B1.3",
     "building": "B",
-    "position": 3,
-    "orientation": "SE",
-    "move_in_date": "2027-07-01",
-    "charges": 230
+    "position": 3
    },
    "8fd01184-b4a2-4588-a668-bc34e0730e73": {
-    "unit_number": "B1.4",
     "building": "B",
-    "position": 4,
-    "orientation": "E",
-    "move_in_date": "2027-07-01",
-    "charges": 270
+    "position": 4
    },
    "6a9b9a3d-96a2-4611-8c5d-89d13e93b13c": {
-    "unit_number": "B2.1",
     "building": "B",
-    "position": 1,
-    "orientation": "W",
-    "move_in_date": "2027-07-01",
-    "charges": 160
+    "position": 1
    },
    "d066e2b5-250c-47ba-9895-a3a1ee100d8b": {
-    "unit_number": "B2.2",
     "building": "B",
-    "position": 2,
-    "orientation": "SE",
-    "move_in_date": "2027-07-01",
-    "charges": 190
+    "position": 2
    },
    "a675c9af-ef69-405f-ad72-4608af65ef2e": {
-    "unit_number": "B2.3",
     "building": "B",
-    "position": 3,
-    "orientation": "E",
-    "move_in_date": "2027-07-01",
-    "charges": 230
+    "position": 3
    },
    "310c1249-5229-4d00-a862-d0cb18afc6af": {
-    "unit_number": "B2.4",
     "building": "B",
-    "position": 4,
-    "orientation": "NW",
-    "move_in_date": "2027-07-01",
-    "charges": 270
+    "position": 4
    },
    "6b1a0d82-bead-4024-bf12-10a4c86d0f5d": {
-    "unit_number": "B3.1",
     "building": "B",
-    "position": 1,
-    "orientation": "SE",
-    "move_in_date": "2027-07-01",
-    "charges": 160
+    "position": 1
    },
    "e39e45f4-1e0d-436d-a7e2-22aa90de03d5": {
-    "unit_number": "B3.2",
     "building": "B",
-    "position": 2,
-    "orientation": "E",
-    "move_in_date": "2027-07-01",
-    "charges": 190
+    "position": 2
    },
    "9422f501-20a5-455c-a299-2c96b006c225": {
-    "unit_number": "B3.3",
     "building": "B",
-    "position": 3,
-    "orientation": "NW",
-    "move_in_date": "2027-07-01",
-    "charges": 230
+    "position": 3
    },
    "e0378960-5d79-4800-9115-f76b7fefa68f": {
-    "unit_number": "B3.4",
     "building": "B",
-    "position": 4,
-    "orientation": "S",
-    "move_in_date": "2027-07-01",
-    "charges": 270
+    "position": 4
    },
    "13a9e497-658f-4530-a7c8-7192c9f1a347": {
-    "unit_number": "B4.1",
     "building": "B",
-    "position": 1,
-    "orientation": "E",
-    "move_in_date": "2027-07-01",
-    "charges": 160
+    "position": 1
    },
    "57ab305b-f603-4e8b-8e27-eae1112d9f77": {
-    "unit_number": "B4.2",
     "building": "B",
-    "position": 2,
-    "orientation": "NW",
-    "move_in_date": "2027-07-01",
-    "charges": 190
+    "position": 2
    },
    "a1bd326b-693f-40c6-a8b1-79233a0cf07f": {
-    "unit_number": "B4.3",
     "building": "B",
-    "position": 3,
-    "orientation": "S",
-    "move_in_date": "2027-07-01",
-    "charges": 230
+    "position": 3
    },
    "9fa54657-21f7-49ef-a693-12a72afff788": {
-    "unit_number": "B4.4",
     "building": "B",
-    "position": 4,
-    "orientation": "SW",
-    "move_in_date": "2027-07-01",
-    "charges": 270
+    "position": 4
    },
    "716b6078-ca74-467f-b62c-0194fae0fb9c": {
-    "unit_number": "C0.1",
     "building": "C",
-    "position": 1,
-    "orientation": "S",
-    "terrace_surface": 20,
-    "move_in_date": "2027-10-01",
-    "charges": 160
+    "position": 1
    },
    "80868f77-8791-4ecc-bf05-e3cb273f6b7c": {
-    "unit_number": "C0.2",
     "building": "C",
-    "position": 2,
-    "orientation": "SW",
-    "terrace_surface": 25,
-    "move_in_date": "2027-10-01",
-    "charges": 190
+    "position": 2
    },
    "200ab43d-48d8-4884-bdf7-94ccafaa5e81": {
-    "unit_number": "C0.3",
     "building": "C",
-    "position": 3,
-    "orientation": "W",
-    "terrace_surface": 30,
-    "move_in_date": "2027-10-01",
-    "charges": 230
+    "position": 3
    },
    "1b3856d8-7016-40b2-9797-3dac27b84725": {
-    "unit_number": "C0.4",
     "building": "C",
-    "position": 4,
-    "orientation": "SE",
-    "terrace_surface": 35,
-    "move_in_date": "2027-10-01",
-    "charges": 270
+    "position": 4
    },
    "2f3e09ba-5ceb-4ca6-a32d-3215a645e33c": {
-    "unit_number": "C1.1",
     "building": "C",
-    "position": 1,
-    "orientation": "SW",
-    "move_in_date": "2027-10-01",
-    "charges": 160
+    "position": 1
    },
    "23a3ff16-9783-4107-bc93-9444e8c58846": {
-    "unit_number": "C1.2",
     "building": "C",
-    "position": 2,
-    "orientation": "W",
-    "move_in_date": "2027-10-01",
-    "charges": 190
+    "position": 2
    },
    "0e19035f-69a3-44bc-9ebb-7916539379f8": {
-    "unit_number": "C1.3",
     "building": "C",
-    "position": 3,
-    "orientation": "SE",
-    "move_in_date": "2027-10-01",
-    "charges": 230
+    "position": 3
    },
    "5ef45f47-1fff-4704-914a-0cd8a0e2fb58": {
-    "unit_number": "C1.4",
     "building": "C",
-    "position": 4,
-    "orientation": "E",
-    "move_in_date": "2027-10-01",
-    "charges": 270
+    "position": 4
    },
    "abe9123a-6071-4b19-be94-95e50839c88d": {
-    "unit_number": "C2.1",
     "building": "C",
-    "position": 1,
-    "orientation": "W",
-    "move_in_date": "2027-10-01",
-    "charges": 160
+    "position": 1
    },
    "c8a7359c-0066-4010-801d-c4a34ed85905": {
-    "unit_number": "C2.2",
     "building": "C",
-    "position": 2,
-    "orientation": "SE",
-    "move_in_date": "2027-10-01",
-    "charges": 190
+    "position": 2
    },
    "21aeec49-7f26-4a7c-851b-90d481ae0562": {
-    "unit_number": "C2.3",
     "building": "C",
-    "position": 3,
-    "orientation": "E",
-    "move_in_date": "2027-10-01",
-    "charges": 230
+    "position": 3
    },
    "ee8efcb3-9e7b-4c1e-b6f5-eec8275fef7e": {
-    "unit_number": "C2.4",
     "building": "C",
-    "position": 4,
-    "orientation": "NW",
-    "move_in_date": "2027-10-01",
-    "charges": 270
+    "position": 4
    },
    "318e4ef6-11dc-4c8f-994b-30347639188f": {
-    "unit_number": "C3.1",
     "building": "C",
-    "position": 1,
-    "orientation": "SE",
-    "move_in_date": "2027-10-01",
-    "charges": 160
+    "position": 1
    },
    "8d8dee55-69a6-42ec-90c2-396341a69dfe": {
-    "unit_number": "C3.2",
     "building": "C",
-    "position": 2,
-    "orientation": "E",
-    "move_in_date": "2027-10-01",
-    "charges": 190
+    "position": 2
    },
    "b938e030-be13-4a71-9b08-90f805117ab8": {
-    "unit_number": "C3.3",
     "building": "C",
-    "position": 3,
-    "orientation": "NW",
-    "move_in_date": "2027-10-01",
-    "charges": 230
+    "position": 3
    },
    "87f8c83b-f234-49bb-a73e-fabc327f438d": {
-    "unit_number": "C3.4",
     "building": "C",
-    "position": 4,
-    "orientation": "S",
-    "move_in_date": "2027-10-01",
-    "charges": 270
+    "position": 4
    },
    "c58ca542-2052-4ddf-9f66-46f49d7e878c": {
-    "unit_number": "C4.1",
     "building": "C",
-    "position": 1,
-    "orientation": "E",
-    "move_in_date": "2027-10-01",
-    "charges": 160
+    "position": 1
    },
    "bba1aa0a-a431-4e5a-89d9-dcb4a0e99e00": {
-    "unit_number": "C4.2",
     "building": "C",
-    "position": 2,
-    "orientation": "NW",
-    "move_in_date": "2027-10-01",
-    "charges": 190
+    "position": 2
    },
    "056fe9f5-2d56-417c-8e72-7329cc2145b9": {
-    "unit_number": "C4.3",
     "building": "C",
-    "position": 3,
-    "orientation": "S",
-    "move_in_date": "2027-10-01",
-    "charges": 230
+    "position": 3
    },
    "fc692aeb-ceca-4f18-9fe9-0d4ea8468eb7": {
-    "unit_number": "C4.4",
     "building": "C",
-    "position": 4,
-    "orientation": "SW",
-    "move_in_date": "2027-10-01",
-    "charges": 270
+    "position": 4
    }
   },
   "developments": {
    "04495a59-33bc-4f21-8dfb-1efc3f7ca206": {
-    "developer": "Zinnober Wohnbau AG",
-    "architect": "Huber Lenz Architekten",
-    "general_contractor": "Totalunternehmung Töss AG",
     "buildings": [
      "A",
      "B",

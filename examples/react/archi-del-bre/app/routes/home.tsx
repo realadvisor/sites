@@ -30,8 +30,8 @@ export default function Home({ loaderData: { l, site } }: Route.ComponentProps) 
   const prices = available.flatMap((u) => (u.price && !u.price_on_request ? [u.price] : []));
   const delivery = deliveryLabel(dev, l);
   const types = unitTypes(units);
-  const extra = developmentExtra(dev); // fixture only: developer, architect
-  const houses = (extra.buildings ?? []).length; // fixture only: buildings
+  const extra = developmentExtra(dev); // fixture only: buildings
+  const houses = (extra.buildings ?? []).length;
   const photos = dev.photos;
   const hero = photos[0];
   const pdf = brochure(l);
@@ -126,10 +126,10 @@ export default function Home({ loaderData: { l, site } }: Route.ComponentProps) 
           ) : (
             dev.description && <div className="prose" dangerouslySetInnerHTML={{ __html: sanitizeHtml(dev.description) }} />
           )}
-          {(extra.architect || extra.developer) && (
+          {(dev.architect?.name || dev.developer?.name) && (
             <dl className="credits">
-              {extra.architect && <div><dt>{c('architect', l)}</dt><dd>{extra.architect}</dd></div>}
-              {extra.developer && <div><dt>{c('developer', l)}</dt><dd>{extra.developer}</dd></div>}
+              {dev.architect?.name && <div><dt>{c('architect', l)}</dt><dd>{dev.architect?.name}</dd></div>}
+              {dev.developer?.name && <div><dt>{c('developer', l)}</dt><dd>{dev.developer?.name}</dd></div>}
             </dl>
           )}
         </div>

@@ -25,7 +25,7 @@ const { lang } = Astro.props;
 const t = tr(lang);
 const site = await loadSite();
 const { dev } = site;
-const extra = developmentExtra(dev); // fixture only: developer, architect, contractor, construction photos
+const extra = developmentExtra(dev); // fixture only: construction photos
 const units = dev.units;
 const [cover, ...rest] = dev.photos;
 const delivery = deliveryLabel(dev, lang);
@@ -57,7 +57,7 @@ const roofs = units.filter((u) => kindOf(u) === 'atico').map(outdoor).filter((o)
 const roof = range(roofs);
 const roofPhoto = dev.photos.find((p) => p.url.includes('9584741')) ?? rest[rest.length - 1];
 const tilePhoto = dev.photos.find((p) => p.url.includes('5505437')) ?? rest[0];
-const credits = (['developer', 'architect', 'general_contractor'] as const).filter((k) => extra[k]);
+const credits = (['developer', 'architect', 'general_contractor'] as const).filter((k) => dev[k]);
 const works = extra.construction_photos ?? [];
 const market = PLACES[0]!;
 const title = lang === 'es'
@@ -96,7 +96,7 @@ const jsonLd = agencyJsonLd(legalAgency(site), Astro.site?.href ?? Astro.url.ori
       {dev.description && <div class="prose" lang={CONTENT_LANG} set:html={sanitizeHtml(dev.description)} />}
       {credits.length > 0 && (
         <dl class="credits">
-          {credits.map((k) => <div><dt>{t.credits[k]}</dt><dd>{extra[k]}</dd></div>)}
+          {credits.map((k) => <div><dt>{t.credits[k]}</dt><dd>{dev[k]?.name}</dd></div>)}
         </dl>
       )}
     </div>

@@ -14,7 +14,6 @@ const fx = JSON.parse(readFileSync('src/data/fixture.json', 'utf8'));
 const dev = fx.developments[0];
 const org = fx.organisation;
 const team = fx.teams.find((t) => t.primary) ?? fx.teams[0];
-const extra = fx.fixture_only.developments[dev.id] ?? {}; // fixture only
 const ux = (u) => fx.fixture_only.units[u.id] ?? {}; // fixture only
 const agent = dev.agents[0];
 const b64 = (s) => Buffer.from(s).toString('base64url');
@@ -24,7 +23,7 @@ const m2 = (n) => (n ? `${n} m²` : '–');
 const wingOf = (u) => (/ala nueva\s*$/i.test(u.name.trim()) ? 'nueva' : '1908');
 const kindOf = (u) => (u.property_type.startsWith('apartment_penthouse') ? 'atico' : u.property_type === 'apartment_studio' || u.bedrooms === 0 ? 'estudio' : `${Math.min(4, u.bedrooms)}d`);
 const planKey = (u) => (kindOf(u) === 'atico' ? `${wingOf(u)}-atico-${u.bedrooms}d` : kindOf(u) === 'estudio' && u.floor === 0 ? `${wingOf(u)}-estudio-patio` : `${wingOf(u)}-${kindOf(u)}`);
-const outdoor = (u) => ux(u).terrace_surface ?? u.balcony_surface;
+const outdoor = (u) => u.terrace_surface ?? u.balcony_surface;
 const units = [...dev.units].sort((a, b) => (wingOf(a) === wingOf(b) ? 0 : wingOf(a) === '1908' ? -1 : 1) || a.floor - b.floor || (ux(a).position ?? 0) - (ux(b).position ?? 0));
 const today = new Date().toISOString().slice(0, 10);
 
@@ -114,7 +113,7 @@ function build(lang) {
       const fs = us.map((u) => u.floor);
       return `<div><p class="k">${t.wings[w]}</p><p style="font-size:14pt;margin:2mm 0">${w === '1908' ? 'Carrer de Sueca 38' : 'Carrer de Sueca 40'}</p><p class="sans" style="font-size:8.5pt;color:#675c53">${floor({ floor: Math.min(...fs) })} – ${floor({ floor: Math.max(...fs) })} · ${us.length} ${t.units}, ${us.filter((u) => u.status === 'available').length} ${t.available}</p></div>`;
     }).join('');
-    const credits = [[t.developer, extra.developer], [t.architect, extra.architect], [t.contractor, extra.general_contractor]].filter((c) => c[1]);
+    const credits = [[t.developer, dev.developer?.name], [t.architect, dev.architect?.name], [t.contractor, dev.general_contractor?.name]].filter((c) => c[1]);
     return `
 <section class="page" style="padding:0;background:#f7f2e9">
   <img src="${photo(p0.url, 1240, 1300)}" style="width:100%;height:205mm;object-fit:cover;display:block">
@@ -170,7 +169,7 @@ function build(lang) {
   };
 
   const priceList = () => {
-    const rows = units.map((u) => `<tr class="${u.status}"><td>${ux(u).unit_number ?? '–'}</td><td>${t.wings[wingOf(u)]}</td><td>${floor(u)}</td><td>${kindOf(u) === 'atico' ? `${t.kinds.atico}, ${u.bedrooms} ${lang === 'es' ? 'dorm.' : 'bed'}` : t.kinds[kindOf(u)]}</td><td class="r">${m2(u.living_surface)}</td><td class="r">${m2(outdoor(u))}</td><td class="r p">${u.status === 'available' && u.price ? eur(u.price) : '–'}</td><td>${t.status[u.status]}</td></tr>`).join('');
+    const rows = units.map((u) => `<tr class="${u.status}"><td>${u.reference ?? '–'}</td><td>${t.wings[wingOf(u)]}</td><td>${floor(u)}</td><td>${kindOf(u) === 'atico' ? `${t.kinds.atico}, ${u.bedrooms} ${lang === 'es' ? 'dorm.' : 'bed'}` : t.kinds[kindOf(u)]}</td><td class="r">${m2(u.living_surface)}</td><td class="r">${m2(outdoor(u))}</td><td class="r p">${u.status === 'available' && u.price ? eur(u.price) : '–'}</td><td>${t.status[u.status]}</td></tr>`).join('');
     return `<section class="page">
   <p class="k">${t.priceList} · ${fill(t.at, { d: date })}</p>
   <h1 style="font-size:30pt">${dev.title}</h1>
@@ -194,7 +193,7 @@ function build(lang) {
       return `<section class="page">
   <p class="k">${t.plans} · ${i + 1} / ${keys.length}</p>
   <h2>${name} · ${t.wings[wingOf(u)]}</h2>
-  <p class="sans" style="font-size:9pt;color:#675c53">${fill(t.unitsOf, { u: us.map((x) => ux(x).unit_number).filter(Boolean).join(', ') })}</p>
+  <p class="sans" style="font-size:9pt;color:#675c53">${fill(t.unitsOf, { u: us.map((x) => x.reference).filter(Boolean).join(', ') })}</p>
   <div style="margin-top:8mm;border:0.3mm solid #e2d7c6">${svg(key, false)}</div>
   <p class="sans" style="font-size:7.5pt;color:#675c53;margin-top:3mm">${t.plan}</p>
   ${footer(i + 1)}

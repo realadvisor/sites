@@ -29,10 +29,10 @@ export async function loader({ params }: Route.LoaderArgs) {
 export default function UnitPage({ loaderData }: Route.ComponentProps) {
   const { site, unit } = loaderData;
   const { dev, agent, team, extras } = site;
-  const no = unitNumber(unit, extras);
-  const o = outdoor(unit, extras);
+  const no = unitNumber(unit);
+  const o = outdoor(unit);
   const plan = planFor(unit, dev.units);
-  const ori = orientation(unit, extras);
+  const ori = orientation(unit);
   const delivery = deliveryLabel(dev);
   const photos = unit.photos ?? [];
   const sold = unit.status === 'sold';
@@ -164,12 +164,12 @@ export default function UnitPage({ loaderData }: Route.ComponentProps) {
             <ul className="s-list">
               {similar.map((u) => {
                 const p = planFor(u, dev.units);
-                const so = outdoor(u, extras);
+                const so = outdoor(u);
                 return (
                   <li key={u.id}>
                     <a href={unitPath(u)}>
                       {p && <span className="s-plan"><img src={p.replace(/\.svg$/, '-fit.svg')} alt="" width="1000" height="750" loading="lazy" decoding="async" /></span>}
-                      <span className="s-t">{[unitNumber(u, extras), floorName(u)].filter(Boolean).join(' · ')}</span>
+                      <span className="s-t">{[unitNumber(u), floorName(u)].filter(Boolean).join(' · ')}</span>
                       <span className="s-m num">{formatSurface(u.living_surface)}{so && ` · ${so.label.toLowerCase()} ${formatSurface(so.m2)}`}</span>
                       <span className="s-p num">{unitPrice(u)}</span>
                     </a>

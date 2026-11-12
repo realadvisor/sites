@@ -5,10 +5,12 @@
  */
 import type { Agent, Listing, Organisation, Team } from '@realadvisor/sites-sdk/types';
 import raw from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { inPageLocale } from '@realadvisor/sites-kit/page-locale';
 
 const fixture = raw as unknown as Fixture;
-export const sites = createFixtureClient(fixture);
+// Texts in the page's language when the data has them.
+export const sites = inPageLocale(createFixtureClient(fixture));
 
 export type { Agent, Listing, Organisation, Team };
 
@@ -22,31 +24,6 @@ export type AgencyData = Awaited<ReturnType<typeof agency>>;
 /** The name visitors know: the team's ("Ballatoio"), not the company's legal name. */
 export const brandName = (a: AgencyData) => a.team?.name ?? a.org.name;
 
-/**
- * Facts the API does not carry yet, per listing. Every one is optional: a
- * listing without it shows nothing.
- */
-export type Extras = {
-  energy?: string;
-  year?: number;
-  floor?: number;
-  terrace?: number;
-  balcony?: number;
-  charges?: number;
-};
-export function extras(listingId: string): Extras {
-  const f = fixtureOnly(fixture, 'listings', listingId);
-  const num = (v: unknown, min = 0) => (typeof v === 'number' && Number.isFinite(v) && v >= min ? v : undefined);
-  const energy = f.energy_class; // fixture only: energy_class
-  return {
-    energy: typeof energy === 'string' && /^[A-G]\d?$/.test(energy) ? energy : undefined,
-    year: num(f.year_built, 1000), // fixture only: year_built
-    floor: num(f.floor), // fixture only: floor
-    terrace: num(f.terrace_surface, 1), // fixture only: terrace_surface
-    balcony: num(f.balcony_surface, 1), // fixture only: balcony_surface
-    charges: num(f.charges, 1), // fixture only: charges (monthly service charges)
-  };
-}
 
 const fold = (s = '') => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 export const slugify = (s: string) => fold(s).replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

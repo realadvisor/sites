@@ -13,7 +13,6 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const fx = JSON.parse(readFileSync('src/data/fixture.json', 'utf8'));
 const dev = fx.developments[0];
-const ux = (u) => fx.fixture_only.units[u.id] ?? {}; // fixture only: terrace surface
 
 // Same rules as src/lib/units.ts.
 const wingOf = (u) => (/ala nueva\s*$/i.test(u.name.trim()) ? 'nueva' : '1908');
@@ -25,7 +24,7 @@ const planKey = (u) => {
   if (k === 'estudio' && u.floor === 0) return `${w}-estudio-patio`;
   return `${w}-${k}`;
 };
-const outdoorOf = (u) => (ux(u).terrace_surface ? { kind: u.floor === 0 ? 'patio' : 'terrace', m2: ux(u).terrace_surface } : u.balcony_surface ? { kind: 'balcony', m2: u.balcony_surface } : null);
+const outdoorOf = (u) => (u.terrace_surface ? { kind: u.floor === 0 ? 'patio' : 'terrace', m2: u.terrace_surface } : u.balcony_surface ? { kind: 'balcony', m2: u.balcony_surface } : null);
 
 const variants = new Map();
 for (const u of dev.units) {

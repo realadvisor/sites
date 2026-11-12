@@ -1,8 +1,8 @@
 /**
  * Unit helpers in this site's own words. Same rules as the kit's: sold and
  * reserved units never show a price, rooms with a dot ("2.5 locali").
- * Building, unit number, position, orientation, garden and terrace are
- * fixture only (read through unitExtra()).
+ * Building and position on the floor are fixture only (read through
+ * unitExtra()).
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
@@ -20,8 +20,8 @@ export const statusLabel = (u: Pick<Unit, 'status'>, l: L) => t(u.status as Stri
 export const building = (u: Pick<Unit, 'id'>) => unitExtra(u).building ?? ''; // fixture only: building
 export const buildingName = (b: string, l: L) => (b ? (l === 'de' ? `Haus ${b}` : `Casa ${b}`) : '');
 
-/** fixture only: "A1.2" */
-export const unitNumber = (u: Pick<Unit, 'id'>) => unitExtra(u).unit_number ?? ''; // fixture only: unit number
+/** "A1.2" */
+export const unitNumber = (u: Pick<Unit, 'reference'>) => u.reference ?? '';
 
 /** The top floor of the unit's building (its penthouses). */
 const topFloor = (u: Unit, all: Unit[]) =>
@@ -94,13 +94,12 @@ const OUT_LABEL: Record<L, Record<Outdoor['kind'], string>> = {
 };
 export const outdoorLabel = (o: Outdoor, l: L) => OUT_LABEL[l][o.kind];
 
-/** Outdoor spaces: garden (fixture only), the roof terrace (fixture only) or the API's balcony surface as loggia / covered terrace. */
+/** Outdoor spaces: garden, the roof terrace or the balcony surface as loggia / covered terrace. */
 export function outdoors(u: Unit): Outdoor[] {
-  const x = unitExtra(u);
   const out: Outdoor[] = [];
-  if (x.garden_surface) out.push({ kind: 'garden', m2: x.garden_surface }); // fixture only: garden surface
-  if (x.terrace_surface && !x.garden_surface) out.push({ kind: 'terrace', m2: x.terrace_surface }); // fixture only: terrace surface
-  else if (u.balcony_surface) out.push({ kind: x.garden_surface ? 'terrace' : 'loggia', m2: u.balcony_surface });
+  if (u.garden_surface) out.push({ kind: 'garden', m2: u.garden_surface });
+  if (u.terrace_surface && !u.garden_surface) out.push({ kind: 'terrace', m2: u.terrace_surface });
+  else if (u.balcony_surface) out.push({ kind: u.garden_surface ? 'terrace' : 'loggia', m2: u.balcony_surface });
   return out;
 }
 /** The main outdoor space for a table cell. */
@@ -110,9 +109,11 @@ const ORIENT: Record<L, Record<string, string>> = {
   it: { N: 'Nord', S: 'Sud', E: 'Est', W: 'Ovest', NE: 'Nord-est', NW: 'Nord-ovest', SE: 'Sud-est', SW: 'Sud-ovest' },
   de: { N: 'Nord', S: 'Süd', E: 'Ost', W: 'West', NE: 'Nordost', NW: 'Nordwest', SE: 'Südost', SW: 'Südwest' },
 };
-/** fixture only: orientation, in words. */
+/** The orientation as a compass code: ['south', 'west'] -> "SW". */
+const orientationCode = (u: Pick<Unit, 'orientation'>) => (u.orientation ?? []).map((d) => d[0]!.toUpperCase()).join('');
+/** The orientation, in words. */
 export const orientation = (u: Unit, l: L) => {
-  const o = unitExtra(u).orientation; // fixture only: orientation
+  const o = orientationCode(u);
   return o ? (ORIENT[l][o] ?? o) : '';
 };
 

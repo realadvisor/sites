@@ -14,7 +14,6 @@ const fx = JSON.parse(readFileSync('src/data/fixture.json', 'utf8'));
 const dev = fx.developments[0];
 const org = fx.organisation;
 const team = fx.teams.find((t) => t.primary) ?? fx.teams[0];
-const extra = fx.fixture_only.developments[dev.id] ?? {}; // fixture only
 const ux = (u) => fx.fixture_only.units[u.id] ?? {}; // fixture only
 const agent = dev.agents[0];
 
@@ -25,7 +24,7 @@ const m2 = (n) => (n ? `${n} m²` : '–');
 const floor = (u) => u.floor_label ?? (u.floor === 0 ? 'Rez-de-chaussée' : `${u.floor}e étage`);
 const status = { available: 'Disponible', reserved: 'Réservé', sold: 'Vendu' };
 const units = [...dev.units].sort((a, b) => a.floor - b.floor || (ux(a).position ?? 0) - (ux(b).position ?? 0));
-const outdoor = (u) => ux(u).garden_surface ?? u.balcony_surface ?? ux(u).terrace_surface;
+const outdoor = (u) => u.garden_surface ?? u.balcony_surface ?? u.terrace_surface;
 const top = Math.max(...units.map((u) => u.floor));
 const planFile = (u) => {
   const k = String(u.rooms).replace('.', '');
@@ -74,7 +73,7 @@ function brochure() {
     const s = us.map((u) => u.living_surface);
     return `<tr><td>${String(r)} pièces</td><td class="r">${Math.min(...s) === Math.max(...s) ? m2(s[0]) : `${Math.min(...s)}–${m2(Math.max(...s))}`}</td><td class="r">${us.length}</td><td class="r">${av.length}</td><td class="r">${av.length ? `dès ${chf(Math.min(...av.map((u) => u.price)))}` : '–'}</td></tr>`;
   }).join('');
-  const credits = [['Maître d’ouvrage', extra.developer], ['Architecte', extra.architect], ['Entreprise générale', extra.general_contractor]].filter((c) => c[1]);
+  const credits = [['Maître d’ouvrage', dev.developer?.name], ['Architecte', dev.architect?.name], ['Entreprise générale', dev.general_contractor?.name]].filter((c) => c[1]);
   return `
 <section class="page" style="padding:0;background:#2b261f;color:#f3eee6">
   <img src="${photo(p0.url, 1100, 1000)}" style="width:100%;height:210mm;object-fit:cover;display:block">
@@ -127,7 +126,7 @@ function brochure() {
 }
 
 function priceList() {
-  const rows = units.map((u) => `<tr class="${u.status}"><td>${ux(u).unit_number ?? '–'}</td><td>${String(u.rooms)} pièces</td><td>${floor(u)}</td><td class="r">${m2(u.living_surface)}</td><td class="r">${m2(outdoor(u))}</td><td class="r p">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${status[u.status]}</td></tr>`).join('');
+  const rows = units.map((u) => `<tr class="${u.status}"><td>${u.reference ?? '–'}</td><td>${String(u.rooms)} pièces</td><td>${floor(u)}</td><td class="r">${m2(u.living_surface)}</td><td class="r">${m2(outdoor(u))}</td><td class="r p">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${status[u.status]}</td></tr>`).join('');
   return `<section class="page">
   <p class="eyebrow">Liste de prix · au ${todayFr}</p>
   <h1 style="font-size:30pt">${dev.title}</h1>
@@ -142,7 +141,7 @@ function plans() {
   const seen = new Map();
   for (const u of units) if (!seen.has(planFile(u))) seen.set(planFile(u), u);
   return [...seen.entries()].sort((a, b) => a[1].rooms - b[1].rooms).map(([f, u], i) => {
-    const lots = units.filter((x) => planFile(x) === f).map((x) => ux(x).unit_number).filter(Boolean);
+    const lots = units.filter((x) => planFile(x) === f).map((x) => x.reference).filter(Boolean);
     return `<section class="page">
   <p class="eyebrow">Plans · ${i + 1} / ${seen.size}</p>
   <h2>${String(u.rooms)} pièces${f.includes('attique') ? ', attique' : f.includes('jardin') ? ', rez-de-jardin' : ''}</h2>

@@ -14,7 +14,7 @@ import { TypeStrip } from '../components/TypeStrip';
 import { StaticMap } from '../components/StaticMap';
 import { ContactCard } from '../components/ContactCard';
 import { Icon } from '../components/Icon';
-import { devExtra, rowsOf, site as load } from '../lib/data.server';
+import { rowsOf, site as load } from '../lib/data.server';
 import { news } from '../content/news.server';
 import { newsMonth } from '../lib/dates';
 import { buildings, chf, monthYear, types, unitOptions } from '../lib/units';
@@ -27,8 +27,7 @@ export async function loader() {
   const rows = rowsOf(dev);
   const houses = buildings(rows);
   const typeList = types(rows);
-  const x = devExtra(dev.id);
-  const entries = news(dev.id);
+    const entries = news(dev.id);
   const done = entries.filter((e) => !e.planned);
   const latest = done.slice(-2).reverse();
   const rents = typeList.map((t) => t.from).filter((n): n is number => n != null);
@@ -69,7 +68,7 @@ export async function loader() {
     dev: { id: dev.id, title: dev.title, stats: dev.stats, address: dev.address },
     houses,
     typeList,
-    x,
+    companies: { developer: dev.developer?.name, architect: dev.architect?.name, contractor: dev.general_contractor?.name },
     entries,
     latest,
     rents,
@@ -131,10 +130,9 @@ export default function Home({ loaderData: d }: Route.ComponentProps) {
             <div><dt>Wohnungen</dt><dd className="num">{dev.stats.units}, davon {dev.stats.available} frei</dd></div>
             {houses.length > 0 && <div><dt>Häuser</dt><dd>{houses.map((h) => h.name).join(', ')}</dd></div>}
             {d.moveIns.length > 0 && <div><dt>Bezug</dt><dd>{[...new Set(d.moveIns.map(monthYear))].join(', ')}</dd></div>}
-            {/* fixture only: developer, architect, general contractor */}
-            {d.x.developer && <div><dt>Bauherrschaft</dt><dd>{d.x.developer}</dd></div>}
-            {d.x.architect && <div><dt>Architektur</dt><dd>{d.x.architect}</dd></div>}
-            {d.x.contractor && <div><dt>Totalunternehmung</dt><dd>{d.x.contractor}</dd></div>}
+                        {d.companies.developer && <div><dt>Bauherrschaft</dt><dd>{d.companies.developer}</dd></div>}
+            {d.companies.architect && <div><dt>Architektur</dt><dd>{d.companies.architect}</dd></div>}
+            {d.companies.contractor && <div><dt>Totalunternehmung</dt><dd>{d.companies.contractor}</dd></div>}
             {d.place && <div><dt>Adresse</dt><dd>{d.place}</dd></div>}
           </dl>
         </div>

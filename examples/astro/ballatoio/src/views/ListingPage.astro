@@ -13,7 +13,7 @@ import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/
 import Site from '../layouts/Site.astro';
 import ListingCard from '../components/ListingCard.astro';
 import AgentBlock from '../components/AgentBlock.astro';
-import { agency, extras, sites, type Listing } from '../lib/data';
+import { agency, sites, type Listing } from '../lib/data';
 import { districtOf, placeOf } from '../lib/districts';
 import { CONTENT_LANG, LOCALE_OF, UI, alternates, fill, href, type Lang } from '../lib/i18n';
 import { baths, blocks, factRows, price, rooms, surface, telHref } from '../lib/format';
@@ -31,14 +31,13 @@ const [ag, sameCity, all] = await Promise.all([
 const sold = l.status === 'sold';
 const agent = l.agent;
 const ref = listingRef(l);
-const x = extras(l.id); // fixture only: energy class, year, floor, terrace, balcony, charges
 const district = districtOf(l);
 const place = placeOf(l);
 const back = sold ? 'sold' : l.offer_type === 'buy' ? 'buy' : 'rent';
 const backLabel = ui.nav[back];
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 const title = `${listingTitle(l, sameCity)} | ${price(l, lang)}`;
-const facts = factRows(l, x, lang, place);
+const facts = factRows(l, lang, place);
 const keyFacts = [rooms(l.rooms, lang), baths(l.bathrooms, lang), surface(l.living_surface)].filter(Boolean);
 
 // The story: text blocks with photo groups between them (one wide, a pair, one inset), the rest after.

@@ -10,13 +10,8 @@ import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
 
 /** Fixture-only facts of one unit. */
 export type UnitExtra = {
-  number?: string;
   building?: string;
   position?: number;
-  orientation?: string;
-  moveIn?: string;
-  charges?: number;
-  terrace?: number;
 };
 
 export type Row = { u: Unit; x: UnitExtra };
@@ -52,6 +47,9 @@ export const freeRent = (u: Unit) => (u.status === 'available' ? netRent(u) : un
 export const rentShort = (n: number) => formatAmount(n).replace(/^CHF\s*/, '');
 
 const ORIENT: Record<string, string> = { N: 'Nord', NE: 'Nordost', E: 'Ost', SE: 'Südost', S: 'Süd', SW: 'Südwest', W: 'West', NW: 'Nordwest' };
+/** ['south', 'west'] -> 'SW', the key of ORIENT (and of the plan files). */
+export const orientationCode = (u: Pick<Unit, 'orientation'>) =>
+  [u.orientation?.includes('north') ? 'N' : u.orientation?.includes('south') ? 'S' : '', u.orientation?.includes('east') ? 'E' : u.orientation?.includes('west') ? 'W' : ''].join('') || undefined;
 export const orientationLabel = (o?: string) => (o ? ORIENT[o] ?? o : '');
 
 const MONTH = new Intl.DateTimeFormat('de-CH', { month: 'long', year: 'numeric' });
@@ -77,7 +75,7 @@ export function buildings(rows: Row[]): BuildingInfo[] {
   const keys = [...new Set(rows.map((r) => r.x.building).filter((b): b is string => !!b))].sort();
   return keys.map((key) => {
     const rs = rows.filter((r) => r.x.building === key);
-    const dates = rs.map((r) => r.x.moveIn).filter((d): d is string => !!d).sort();
+    const dates = rs.map((r) => r.u.available_from).filter((d): d is string => !!d).sort();
     return {
       key,
       name: `Haus ${key}`,
@@ -132,7 +130,7 @@ export const matches = (r: Row, f: Filters) =>
   (f.zimmer == null || r.u.rooms === f.zimmer) &&
   (f.maxMiete == null || ((netRent(r.u) ?? Infinity) <= f.maxMiete)) &&
   (f.geschoss == null || r.u.floor === f.geschoss) &&
-  (!f.bezug || r.x.moveIn?.slice(0, 7) === f.bezug) &&
+  (!f.bezug || r.u.available_from?.slice(0, 7) === f.bezug) &&
   (!f.frei || r.u.status === 'available');
 
 /**
@@ -151,5 +149,5 @@ export const unitOptions = (rows: Row[]) =>
     .filter((r) => r.u.status !== 'sold')
     .map((r) => ({
       value: r.u.id,
-      label: [unitTitle(r), r.x.number, r.u.status === 'reserved' ? STATUS.reserved : ''].filter(Boolean).join(' · '),
+      label: [unitTitle(r), r.u.reference, r.u.status === 'reserved' ? STATUS.reserved : ''].filter(Boolean).join(' · '),
     }));

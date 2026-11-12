@@ -4,7 +4,7 @@
  * gets its own types; a type without a drawn plan shows no plan.
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
-import { extraNum, extraStr } from './data';
+import { extraNum } from './data';
 import { href, unitSlug, type L } from './routes';
 import { floor, rooms } from './format';
 import { tx } from './copy';
@@ -43,18 +43,16 @@ export function sortUnits(units: Unit[]) {
   return [...units].sort((a, b) => (a.floor ?? 0) - (b.floor ?? 0) || pos(a) - pos(b) || (a.living_surface ?? 0) - (b.living_surface ?? 0));
 }
 
-/** Unit name for headings: "Lot 2.1" when the fixture has a number, else rooms and floor. */
+/** Unit name for headings: "Lot 2.1" when the unit has a number, else rooms and floor. */
 export function unitTitle(u: Unit, l: L) {
   const t = tx(l);
-  // fixture only: unit number
-  const no = extraStr('units', u.id, 'unit_number');
+  const no = u.reference;
   return no ? `${t('unit')} ${no}` : [rooms(u.rooms, l), floor(u.floor, l)].filter(Boolean).join(' · ');
 }
 
 /** Unit as named in a sentence: "0.1 (4 pièces · Rez-de-chaussée)", or rooms and floor. */
 export function unitInSentence(u: Unit, l: L) {
-  // fixture only: unit number
-  const no = extraStr('units', u.id, 'unit_number');
+  const no = u.reference;
   return no ? `${no} (${unitLine(u, l)})` : unitLine(u, l);
 }
 
@@ -75,5 +73,5 @@ export const unitSelect = (units: Unit[], l: L) =>
       return { value: u.id, label: `${name === line ? line : `${name} · ${line}`}${u.status === 'reserved' ? ` (${statusLabel('reserved', l)})` : ''}` };
     });
 
-/** Outdoor surface: terrace (fixture only) else the balcony from the data. */
-export const outdoor = (u: Unit) => extraNum('units', u.id, 'terrace_surface') ?? u.balcony_surface;
+/** Outdoor surface: terrace, else the balcony. */
+export const outdoor = (u: Unit) => u.terrace_surface ?? u.balcony_surface;

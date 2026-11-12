@@ -42,7 +42,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     office,
     people: dev.agents.length ? dev.agents : site.agents,
     message: chosen
-      ? `Guten Tag, ich interessiere mich für die Wohnung ${chosen.x.number ? `${chosen.x.number} (${unitTitle(chosen)})` : unitTitle(chosen)} im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`
+      ? `Guten Tag, ich interessiere mich für die Wohnung ${chosen.u.reference ? `${chosen.u.reference} (${unitTitle(chosen)})` : unitTitle(chosen)} im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`
       : `Guten Tag, ich interessiere mich für eine Wohnung im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`,
   };
 }

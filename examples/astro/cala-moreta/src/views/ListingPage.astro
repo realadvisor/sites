@@ -9,7 +9,7 @@ import Gallery from '../components/Gallery.astro';
 import ListingCard from '../components/ListingCard.astro';
 import EnergyScale from '../components/EnergyScale.astro';
 import AgentPortrait from '../components/AgentPortrait.astro';
-import { agentSlug, energyClass, extraFacts, sites, slugify, towns, type Listing } from '../lib/data';
+import { agentSlug, sites, slugify, towns, type Listing } from '../lib/data';
 import { CONTENT_LANG, LOCALE_OF, UI, alternates, fill, href, type Lang } from '../lib/i18n';
 import { price, surface, typeLabel } from '../lib/format';
 
@@ -27,8 +27,7 @@ const kind = typeLabel(l, lang);
 const sold = l.status === 'sold';
 const agent = l.agent;
 const ref = listingRef(l);
-const energy = energyClass(l.id); // fixture only: energy class
-const extra = extraFacts(l.id); // fixture only: terrace surface, year built
+const energy = l.energy_class;
 const back = sold ? 'sold' : l.offer_type === 'buy' ? 'buy' : 'rent';
 const backLabel = sold ? ui.nav.sold : l.offer_type === 'buy' ? ui.nav.buy : ui.nav.rent;
 const similar = sameCity.filter((x) => x.id !== l.id && x.status === 'available').slice(0, 3);
@@ -44,9 +43,9 @@ const facts: [string, string][] = [
   ...(l.rooms ? [[ui.rooms, String(l.rooms)] as [string, string]] : []),
   ...(l.living_surface ? [[ui.living, surface(l.living_surface)] as [string, string]] : []),
   ...(l.land_surface ? [[ui.land, surface(l.land_surface)] as [string, string]] : []),
-  ...(extra.terrace ? [[ui.terrace, surface(extra.terrace)] as [string, string]] : []), // fixture only: terrace_surface
-  ...(extra.yearBuilt ? [[ui.yearBuilt, String(extra.yearBuilt)] as [string, string]] : []), // fixture only: year_built
-  ...(energy ? [[ui.energy, energy] as [string, string]] : []), // fixture only: energy class
+  ...(l.terrace_surface ? [[ui.terrace, surface(l.terrace_surface)] as [string, string]] : []),
+  ...(l.construction_year ? [[ui.yearBuilt, String(l.construction_year)] as [string, string]] : []),
+  ...(energy ? [[ui.energy, energy] as [string, string]] : []),
 ];
 const keyFacts = [
   l.bedrooms ? [String(l.bedrooms), ui.bedrooms] : null,

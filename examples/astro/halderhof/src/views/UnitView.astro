@@ -13,11 +13,11 @@ import { img } from '@realadvisor/sites-kit/image';
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
-import { extraStr, siteData } from '../lib/data';
+import { siteData } from '../lib/data';
 import { groups, isAttic, outdoor, planUrl, statusLabel, unitHref, unitLine, unitPrice, unitTitle } from '../lib/dev';
 import { href, listingHref, LOCALE, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
-import { dec, floor, formatSurface, orientation, tel } from '../lib/format';
+import { dec, floor, formatSurface, orientation, orientationCode, tel } from '../lib/format';
 
 interface Props { l: L; dev: DevelopmentWithUnits; unit: Unit }
 const { l, dev: d, unit: u } = Astro.props;
@@ -27,8 +27,7 @@ const title = unitTitle(u, l);
 const line = unitLine(u, l);
 const plan = planUrl(u, l);
 const out = outdoor(u, l);
-// fixture only: orientation
-const aspect = orientation(extraStr('units', u.id, 'orientation'), l);
+const aspect = orientation(orientationCode(u.orientation), l);
 const g = groups(d.units, l).find((x) => x.units.some((y) => y.id === u.id));
 const others = (g?.units ?? []).filter((y) => y.id !== u.id && y.status !== 'sold');
 const agent = d.agents[0];

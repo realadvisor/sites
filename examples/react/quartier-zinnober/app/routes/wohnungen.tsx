@@ -26,7 +26,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     rows,
     f,
     floors: [...new Set(rows.map((r) => r.u.floor ?? 0))].sort((a, b) => a - b),
-    moves: [...new Set(rows.map((r) => r.x.moveIn?.slice(0, 7)).filter((m): m is string => !!m))].sort(),
+    moves: [...new Set(rows.map((r) => r.u.available_from?.slice(0, 7)).filter((m): m is string => !!m))].sort(),
     steps: rents.length ? [1600, 2000, 2400, 2800, 3200].filter((s) => s >= Math.min(...rents)) : [],
     updated: new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()),
   };
@@ -150,22 +150,22 @@ export default function Wohnungen({ loaderData: d }: Route.ComponentProps) {
                   data-rooms={r.u.rooms}
                   data-rent={rent ?? ''}
                   data-floor={r.u.floor ?? 0}
-                  data-movein={r.x.moveIn?.slice(0, 7) ?? ''}
+                  data-movein={r.u.available_from?.slice(0, 7) ?? ''}
                   data-haus={r.x.building}
                 >
-                  {/* fixture only: unit number, building, move-in date, charges */}
+                  {/* fixture only: building */}
                   <td className="c-name">
-                    <a className="row-link" href={unitUrl(r.u)} aria-label={r.u.name}><b className="num">{r.x.number}</b></a>{' '}
+                    <a className="row-link" href={unitUrl(r.u)} aria-label={r.u.name}><b className="num">{r.u.reference}</b></a>{' '}
                     <span className="c-house">Haus {r.x.building}</span>{' '}
-                    <span className="m-meta">{[floorShort(r.u), surface(r.u.living_surface), r.x.moveIn ? `Bezug ${monthYear(r.x.moveIn)}` : ''].filter(Boolean).join(' · ')}</span>
+                    <span className="m-meta">{[floorShort(r.u), surface(r.u.living_surface), r.u.available_from ? `Bezug ${monthYear(r.u.available_from)}` : ''].filter(Boolean).join(' · ')}</span>
                   </td>
                   <td className="c-rooms num">{rooms(r.u)}</td>
                   <td className="num c-area">{surface(r.u.living_surface)}</td>
                   <td className="num c-out">{r.u.balcony_surface ? surface(r.u.balcony_surface) : ''}</td>
                   <td className="c-floor">{floorShort(r.u)}</td>
-                  <td className="c-move">{monthYear(r.x.moveIn)}</td>
+                  <td className="c-move">{monthYear(r.u.available_from)}</td>
                   <td className="r num c-rent">{rent ? chf(rent) : ''}</td>
-                  <td className="r num c-nk">{rent && r.x.charges ? chf(r.x.charges) : ''}</td>
+                  <td className="r num c-nk">{rent && r.u.charges ? chf(r.u.charges) : ''}</td>
                   <td className="c-st"><span className={`pill pill--${r.u.status}`}>{statusLabel(r.u)}</span><Icon name="arrow" className="go" /></td>
                 </tr>
               );

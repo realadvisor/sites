@@ -5,6 +5,8 @@
  *
  * Fields the API does not have yet live in `fixture_only` and are read only
  * through `extra()` / `devExtra()` below: they never enter an SDK object.
+ * Unit numbers, orientations, move-in dates, charges and the development's
+ * companies are API fields of the records.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
 import type { Agency } from '@realadvisor/sites-kit';
@@ -39,39 +41,28 @@ export async function site(): Promise<Site> {
   return { org, team, agents, dev, contact: dev.agents[0] ?? agents[0] };
 }
 
-// fixture only: unit number, building, position, orientation, move-in date, charges, terrace.
+// fixture only: building, position.
 export function extra(u: Pick<Unit, 'id'>): UnitExtra {
   const x = fixtureOnly(fx, 'units', u.id) as Record<string, unknown>;
   const s = (k: string) => (typeof x[k] === 'string' ? (x[k] as string) : undefined);
   const n = (k: string) => (typeof x[k] === 'number' ? (x[k] as number) : undefined);
   return {
-    number: s('unit_number'),
     building: s('building'),
     position: n('position'),
-    orientation: s('orientation'),
-    moveIn: s('move_in_date'),
-    charges: n('charges'),
-    terrace: n('terrace_surface'),
   };
 }
 
 /** Fixture-only facts of the development. */
 export type DevExtra = {
-  developer?: string;
-  architect?: string;
-  contractor?: string;
   buildings: string[];
   constructionPhotos: string[];
 };
 
-// fixture only: developer, architect, general contractor, buildings, construction photos.
+// fixture only: buildings, construction photos.
 export function devExtra(id: string): DevExtra {
   const x = fixtureOnly(fx, 'developments', id) as Record<string, unknown>;
   const list = (k: string) => (Array.isArray(x[k]) ? (x[k] as unknown[]).filter((v): v is string => typeof v === 'string') : []);
   return {
-    developer: typeof x.developer === 'string' ? x.developer : undefined,
-    architect: typeof x.architect === 'string' ? x.architect : undefined,
-    contractor: typeof x.general_contractor === 'string' ? x.general_contractor : undefined,
     buildings: list('buildings'),
     constructionPhotos: list('construction_photos'),
   };

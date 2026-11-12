@@ -14,7 +14,7 @@ import { Layout } from '../components/Layout';
 import { Gallery } from '../components/Gallery';
 import { EnergyScale } from '../components/EnergyScale';
 import { Collection } from '../components/Collection';
-import { areas, listingExtras, site, sites } from '../lib/data.server';
+import { areas, site, sites } from '../lib/data.server';
 import { agentUrl, areaUrl, listingUrl } from '../lib/urls';
 import { fullName, languages, price, rooms, telHref } from '../lib/format';
 import './objekte-slug.css';
@@ -43,15 +43,13 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     hasArea: !!area,
     similar,
     similarTitle,
-    // fixture only: energy class, year built, floor, outdoor surfaces and charges are not in the API yet.
-    x: listingExtras(l.id),
     title: listingTitle(kit, sameCity),
     jsonLd: listingJsonLd(kit, canonical(new URL(new URL(request.url).pathname, request.url))),
   };
 }
 
 export default function ListingPage({ loaderData: d }: Route.ComponentProps) {
-  const { l, x, team } = d;
+  const { l, team } = d;
   const city = l.address.city;
   const sold = l.status === 'sold';
   const isRent = l.offer_type === 'rent';
@@ -65,18 +63,16 @@ export default function ListingPage({ loaderData: d }: Route.ComponentProps) {
     [t('offer'), sold ? 'Verkauft' : offerTypeLabel(l.offer_type)],
     [t('propertyType'), type],
     ...(!sold ? [[isRent ? 'Miete' : 'Preis', price(l)] as [string, string]] : []),
-    // fixture only: charges
-    ...(isRent && x.charges ? [['Nebenkosten', `${formatAmount(x.charges)} / Monat`] as [string, string]] : []),
+    ...(isRent && l.charges ? [['Nebenkosten', `${formatAmount(l.charges)} / Monat`] as [string, string]] : []),
     ...(l.rooms != null ? [['Zimmer', String(l.rooms)] as [string, string]] : []),
     ...(l.bedrooms != null ? [['Schlafzimmer', String(l.bedrooms)] as [string, string]] : []),
     ...(l.bathrooms != null ? [['Badezimmer', String(l.bathrooms)] as [string, string]] : []),
     ...(l.living_surface != null ? [[t('livingArea'), formatSurface(l.living_surface)] as [string, string]] : []),
     ...(l.land_surface != null ? [['Grundstück', formatSurface(l.land_surface)] as [string, string]] : []),
-    // fixture only: terrace, balcony, floor, year built
-    ...(x.terrace_surface ? [['Terrasse', formatSurface(x.terrace_surface)] as [string, string]] : []),
-    ...(x.balcony_surface ? [['Balkon', formatSurface(x.balcony_surface)] as [string, string]] : []),
-    ...(x.floor != null ? [['Etage', x.floor === 0 ? 'Erdgeschoss' : `${x.floor}. Obergeschoss`] as [string, string]] : []),
-    ...(x.year_built ? [['Baujahr', String(x.year_built)] as [string, string]] : []),
+    ...(l.terrace_surface ? [['Terrasse', formatSurface(l.terrace_surface)] as [string, string]] : []),
+    ...(l.balcony_surface ? [['Balkon', formatSurface(l.balcony_surface)] as [string, string]] : []),
+    ...(l.floor != null ? [['Etage', l.floor === 0 ? 'Erdgeschoss' : `${l.floor}. Obergeschoss`] as [string, string]] : []),
+    ...(l.construction_year ? [['Baujahr', String(l.construction_year)] as [string, string]] : []),
     [t('reference'), ref],
   ];
   const headline = [rooms(l.rooms), l.living_surface != null ? formatSurface(l.living_surface) : '', l.bedrooms != null ? `${l.bedrooms} Schlafzimmer` : ''].filter(Boolean);
@@ -86,7 +82,7 @@ export default function ListingPage({ loaderData: d }: Route.ComponentProps) {
   const sections = [
     l.description && ['beschreibung', 'Beschreibung'],
     ['eckdaten', 'Eckdaten'],
-    x.energy_class && ['energie', 'Energie'],
+    l.energy_class && ['energie', 'Energie'],
     located && ['lage', 'Lage'],
   ].filter(Boolean) as [string, string][];
   const phone = agent?.phone ?? team.phone;
@@ -134,11 +130,10 @@ export default function ListingPage({ loaderData: d }: Route.ComponentProps) {
             {l.features.length > 0 && <ul className="feats">{l.features.map((f) => <li key={f}>{featureLabel(f)}</li>)}</ul>}
           </section>
 
-          {x.energy_class && (
+          {l.energy_class && (
             <section id="energie" className="lp-sec" aria-labelledby="h-energie">
               <h2 className="lp-h caps" id="h-energie">Energie</h2>
-              {/* fixture only: energy_class */}
-              <EnergyScale value={x.energy_class} />
+              <EnergyScale value={l.energy_class} />
             </section>
           )}
 

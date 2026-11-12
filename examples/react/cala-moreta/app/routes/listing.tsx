@@ -12,7 +12,7 @@ import { Gallery } from '../components/Gallery';
 import { ListingCard } from '../components/ListingCard';
 import { EnergyScale } from '../components/EnergyScale';
 import { AgentPortrait } from '../components/AgentPortrait';
-import { energyClass, extraFacts, sites } from '../lib/data.server';
+import { sites } from '../lib/data.server';
 import { agentSlug, slugify, towns } from '../lib/data';
 import { CONTENT_LANG, LOCALE_OF, UI, alternates, fill, href, langOfPath } from '../lib/i18n';
 import { price, surface, telHref, typeLabel } from '../lib/format';
@@ -28,8 +28,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const city = l.address.city;
   const [sameCity, all] = await Promise.all([city ? sites.allListings({ city }) : Promise.resolve([] as Listing[]), sites.allListings()]);
   const kind = typeLabel(l, lang);
-  const energy = energyClass(l.id); // fixture only: energy class
-  const extra = extraFacts(l.id); // fixture only: terrace surface, year built
+  const energy = l.energy_class;
   const facts: [string, string][] = [
     [ui.type, kind],
     [t('offer', {}, lang), offerTypeLabel(l.offer_type, LOCALE_OF[lang])],
@@ -39,9 +38,9 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     ...(l.rooms ? [[ui.rooms, String(l.rooms)] as [string, string]] : []),
     ...(l.living_surface ? [[ui.living, surface(l.living_surface)] as [string, string]] : []),
     ...(l.land_surface ? [[ui.land, surface(l.land_surface)] as [string, string]] : []),
-    ...(extra.terrace ? [[ui.terrace, surface(extra.terrace)] as [string, string]] : []), // fixture only: terrace_surface
-    ...(extra.yearBuilt ? [[ui.yearBuilt, String(extra.yearBuilt)] as [string, string]] : []), // fixture only: year_built
-    ...(energy ? [[ui.energy, energy] as [string, string]] : []), // fixture only: energy class
+    ...(l.terrace_surface ? [[ui.terrace, surface(l.terrace_surface)] as [string, string]] : []),
+    ...(l.construction_year ? [[ui.yearBuilt, String(l.construction_year)] as [string, string]] : []),
+    ...(energy ? [[ui.energy, energy] as [string, string]] : []),
   ];
   return {
     lang,

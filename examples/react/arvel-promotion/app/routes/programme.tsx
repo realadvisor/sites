@@ -11,7 +11,7 @@ import { StackingPlan } from '../components/StackingPlan';
 import { Collage } from '../components/Collage';
 import { EnquiryBlock } from '../components/EnquiryBlock';
 import { Photo } from '../components/Photo';
-import { developmentExtra, sites, unitExtras } from '../lib/data.server';
+import { sites, unitExtras } from '../lib/data.server';
 import { contentFor, placePhotos } from '../content/programmes';
 import { documentsFor, formatBytes } from '../content/documents';
 import { addressLine, deliveryShort, deliveryText, plural, priceFrom, programmeStatus, programmeUrl, surfaceRange, typeRange } from '../lib/fr';
@@ -23,15 +23,14 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   if (!d) throw notFound();
   return {
     d,
-    // fixture only: developer, architect, general contractor; unit numbers and order on the floor
-    x: developmentExtra(d),
+    // fixture only: order on the floor
     extras: unitExtras(d),
     lot: new URL(request.url).searchParams.get('lot') ?? undefined,
     url: new URL(programmeUrl(d), siteUrl()).href,
   };
 }
 
-export default function Programme({ loaderData: { d, x, extras, lot, url } }: Route.ComponentProps) {
+export default function Programme({ loaderData: { d, extras, lot, url } }: Route.ComponentProps) {
   const c = contentFor(d.slug);
   const hero = d.photos[c.hero ?? 0] ?? d.photos[0];
   const status = programmeStatus(d);
@@ -44,10 +43,9 @@ export default function Programme({ loaderData: { d, x, extras, lot, url } }: Ro
     ...(from ? [{ label: 'Prix', value: from }] : []),
   ].filter((f) => f.value);
   const credits = [
-    // fixture only: developer, architect, general contractor
-    { label: 'Promoteur', value: x.developer },
-    { label: 'Architecte', value: x.architect },
-    { label: 'Entreprise générale', value: x.general_contractor },
+    { label: 'Promoteur', value: d.developer?.name },
+    { label: 'Architecte', value: d.architect?.name },
+    { label: 'Entreprise générale', value: d.general_contractor?.name },
   ].filter((r): r is { label: string; value: string } => !!r.value);
   const rows = [
     { label: 'Adresse', value: addressLine(d.address) },

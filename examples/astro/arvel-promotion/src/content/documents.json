@@ -23,7 +23,7 @@
    "title": "Grille des prix",
    "description": "Tous les logements avec leur surface, leur étage, leur statut et le prix des logements disponibles.",
    "kind": "prices",
-   "bytes": 80837,
+   "bytes": 78714,
    "pages": 3,
    "date": "2026-11-12"
   }
@@ -52,7 +52,7 @@
    "title": "Grille des prix",
    "description": "Tous les logements avec leur surface, leur étage, leur statut et le prix des logements disponibles.",
    "kind": "prices",
-   "bytes": 74183,
+   "bytes": 72254,
    "pages": 2,
    "date": "2026-11-12"
   }
@@ -81,7 +81,7 @@
    "title": "Grille des prix",
    "description": "Tous les logements avec leur surface, leur étage, leur statut et le prix des logements disponibles.",
    "kind": "prices",
-   "bytes": 70748,
+   "bytes": 69063,
    "pages": 1,
    "date": "2026-11-12"
   }

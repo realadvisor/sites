@@ -14,7 +14,7 @@ import TypeStrip from '../components/TypeStrip.astro';
 import StaticMap from '../components/StaticMap.astro';
 import ContactCard from '../components/ContactCard.astro';
 import Icon from '../components/Icon.astro';
-import { devExtra, site as load } from '../lib/data';
+import { site as load } from '../lib/data';
 import { news, newsMonth } from '../lib/news';
 import { buildings, chf, monthYear, rowsOf, types, unitOptions } from '../lib/units';
 import { distances } from '../lib/place';
@@ -24,7 +24,6 @@ const { dev } = site;
 const rows = rowsOf(dev);
 const houses = buildings(rows);
 const typeList = types(rows);
-const x = devExtra(dev.id);
 const entries = await news(dev.id);
 const done = entries.filter((e) => !e.data.planned);
 const latest = done.slice(-2).reverse();
@@ -102,10 +101,9 @@ const jsonLd = {
         <div><dt>Wohnungen</dt><dd class="num">{dev.stats.units}, davon {dev.stats.available} frei</dd></div>
         {houses.length > 0 && <div><dt>Häuser</dt><dd>{houses.map((h) => h.name).join(', ')}</dd></div>}
         {moveIns.length > 0 && <div><dt>Bezug</dt><dd>{[...new Set(moveIns.map(monthYear))].join(', ')}</dd></div>}
-        {/* fixture only: developer, architect, general contractor */}
-        {x.developer && <div><dt>Bauherrschaft</dt><dd>{x.developer}</dd></div>}
-        {x.architect && <div><dt>Architektur</dt><dd>{x.architect}</dd></div>}
-        {x.contractor && <div><dt>Totalunternehmung</dt><dd>{x.contractor}</dd></div>}
+                {dev.developer && <div><dt>Bauherrschaft</dt><dd>{dev.developer.name}</dd></div>}
+        {dev.architect && <div><dt>Architektur</dt><dd>{dev.architect.name}</dd></div>}
+        {dev.general_contractor && <div><dt>Totalunternehmung</dt><dd>{dev.general_contractor.name}</dd></div>}
         {place && <div><dt>Adresse</dt><dd>{place}</dd></div>}
       </dl>
     </div>

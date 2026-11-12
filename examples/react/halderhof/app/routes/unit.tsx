@@ -17,7 +17,7 @@ import { findUnit, siteData, unitExtras } from '../lib/data.server';
 import { groups, isAttic, outdoor, planUrl, statusLabel, unitHref, unitLine, unitPrice, unitTitle } from '../lib/dev';
 import { href, langOfPath, listingHref, LOCALE } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
-import { dec, floor, formatSurface, orientation, tel } from '../lib/format';
+import { dec, floor, formatSurface, orientation, orientationCode, tel } from '../lib/format';
 import './unit.css';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
@@ -30,17 +30,16 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const g = groups(d.units, l, ux).find((x) => x.units.some((y) => y.id === u.id));
   const others = (g?.units ?? []).filter((y) => y.id !== u.id && y.status !== 'sold');
   const { units: _units, description: _d, description_text: _dt, ...dev } = d;
-  return { l, unitSlug: params.unit, dev: { ...dev, photos: d.photos.slice(0, 1) }, u, others, ux, orgName: org.name };
+  return { l, unitSlug: params.unit, dev: { ...dev, photos: d.photos.slice(0, 1) }, u, others, orgName: org.name };
 }
 
-export default function UnitPage({ loaderData: { l, unitSlug, dev: d, u, others, ux, orgName } }: Route.ComponentProps) {
+export default function UnitPage({ loaderData: { l, unitSlug, dev: d, u, others, orgName } }: Route.ComponentProps) {
   const t = tx(l);
-  const title = unitTitle(u, l, ux);
+  const title = unitTitle(u, l);
   const line = unitLine(u, l);
   const plan = planUrl(u, l);
-  const out = outdoor(u, l, ux);
-  // fixture only: orientation
-  const aspect = orientation(ux[u.id]?.orientation, l);
+  const out = outdoor(u, l);
+  const aspect = orientation(orientationCode(u.orientation), l);
   const agent = d.agents[0];
   const city = cityName(d.address.city, l);
   const facts = [
@@ -122,7 +121,7 @@ export default function UnitPage({ loaderData: { l, unitSlug, dev: d, u, others,
           <h2 id="h-others" className="h3 sec-h">{t('otherUnits')}</h2>
           <ul className="plain-list others">
             {others.map((y) => (
-              <li key={y.id}><a href={unitHref(d, y, l)}><span className="o__name">{unitTitle(y, l, ux)}</span><span>{unitLine(y, l)}</span><span className="num">{y.living_surface ? formatSurface(y.living_surface) : ''}</span><span className="num o__price">{unitPrice(y, l) || statusLabel(y.status, l)}</span></a></li>
+              <li key={y.id}><a href={unitHref(d, y, l)}><span className="o__name">{unitTitle(y, l)}</span><span>{unitLine(y, l)}</span><span className="num">{y.living_surface ? formatSurface(y.living_surface) : ''}</span><span className="num o__price">{unitPrice(y, l) || statusLabel(y.status, l)}</span></a></li>
             ))}
           </ul>
         </section>

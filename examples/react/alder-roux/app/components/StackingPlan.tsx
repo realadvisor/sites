@@ -10,7 +10,7 @@ import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 import { tx } from '../lib/copy';
 import { floor, floorShort, formatSurface, orientation, price, rooms } from '../lib/format';
 import type { L } from '../lib/routes';
-import { extraStr, type Extras } from '../lib/extras';
+import type { Extras } from '../lib/extras';
 import { outdoor, sortUnits, statusLabel, typeOf, unitHref, unitTitle, unitTypes } from '../lib/dev';
 import './StackingPlan.css';
 
@@ -42,7 +42,7 @@ export function StackingPlan({ dev, l, ex }: { dev: DevelopmentWithUnits; l: L; 
               <div className="sp__row">
                 {row.map((u) => (
                   <a key={u.id} className={`u u--${u.status}`} href={unitHref(dev, u, l)} tabIndex={-1} style={{ flexGrow: u.living_surface ?? 100 }}>
-                    <b>{extraStr(ex, u.id, 'unit_number') /* fixture only: unit number */ ?? typeOf(types, u)?.letter}</b>
+                    <b>{u.reference ?? typeOf(types, u)?.letter}</b>
                     <span className="u__r">{rooms(u.rooms, l)} · {formatSurface(u.living_surface)}</span>
                     <span className="u__p num">{unitPrice(u)}</span>
                   </a>
@@ -71,13 +71,12 @@ export function StackingPlan({ dev, l, ex }: { dev: DevelopmentWithUnits; l: L; 
           </thead>
           <tbody>
             {units.map((u) => {
-              const out = outdoor(u, ex);
-              // fixture only: orientation
-              const ori = orientation(extraStr(ex, u.id, 'orientation'), l);
+              const out = outdoor(u);
+              const ori = orientation(u.orientation, l);
               const ty = typeOf(types, u);
               return (
                 <tr key={u.id} className={`st-${u.status}`}>
-                  <th scope="row"><a href={unitHref(dev, u, l)}>{unitTitle(u, l, ex)}</a><span className="t-type">{ty && t('typeName', { k: ty.letter })}</span></th>
+                  <th scope="row"><a href={unitHref(dev, u, l)}>{unitTitle(u, l)}</a><span className="t-type">{ty && t('typeName', { k: ty.letter })}</span></th>
                   <td data-l={t('floorRow')}>{floor(u.floor, l)}</td>
                   <td data-l={t('rooms')}>{rooms(u.rooms, l)}</td>
                   <td className="r num" data-l={t('livingArea')}>{formatSurface(u.living_surface)}</td>

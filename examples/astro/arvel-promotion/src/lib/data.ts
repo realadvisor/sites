@@ -28,22 +28,22 @@ export async function programmes() {
 // Fields the API does not have yet. Never put them into an SDK-shaped object.
 
 export type UnitExtra = {
-  unit_number?: string;
   /** 1-based position on the floor, left to right on the stacking plan. */
   position?: number;
-  /** Main facade: N, NE, E, SE, S, SW, W, NW. */
-  orientation?: string;
-  terrace_surface?: number;
 };
 export type DevelopmentExtra = {
-  developer?: string;
-  architect?: string;
-  general_contractor?: string;
   construction_photos?: string[];
 };
 
 export const unitExtra = (u: Pick<Unit, 'id'>): UnitExtra => fixtureOnly(fx, 'units', u.id) as UnitExtra;
 export const developmentExtra = (d: { id: string }): DevelopmentExtra => fixtureOnly(fx, 'developments', d.id) as DevelopmentExtra;
+
+/** The unit's main facade as a code (N, NE, E, SE, S, SW, W, NW), from its `orientation`. */
+export const orientationCode = (u: Pick<Unit, 'orientation'>): string | undefined => {
+  const o = u.orientation ?? [];
+  const code = (o.includes('north') ? 'N' : o.includes('south') ? 'S' : '') + (o.includes('east') ? 'E' : o.includes('west') ? 'W' : '');
+  return code || undefined;
+};
 
 /** Units in stacking-plan order: floor, then position on the floor (fixture only), then surface. */
 export const unitsInOrder = (d: DevelopmentWithUnits) =>

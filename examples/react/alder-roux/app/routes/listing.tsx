@@ -18,8 +18,7 @@ import { ListingCard } from '../components/ListingCard';
 import { StaticMap } from '../components/StaticMap';
 import { EnergyScale } from '../components/EnergyScale';
 import { Img } from '../components/Img';
-import { extras, siteData, sites } from '../lib/data.server';
-import { extraNum, extraStr } from '../lib/extras';
+import { siteData, sites } from '../lib/data.server';
 import { agentSlug, href, langOf, listingHref, LOCALE, teamSlug } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { floor, formatAmount, formatSurface, price, tel, typeLabel } from '../lib/format';
@@ -36,7 +35,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return {
     l,
     x,
-    ex: extras('listings', [x.id]),
     title: listingTitle(x, sameCity),
     similar: sameCity.filter((y) => y.id !== x.id && y.status === 'available').slice(0, 3),
     agent: agent && { ...agent, slug: agentSlug(agent, agents) },
@@ -44,20 +42,19 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export default function Page({ loaderData: { l, x, ex, title, similar, agent, team } }: Route.ComponentProps) {
+export default function Page({ loaderData: { l, x, title, similar, agent, team } }: Route.ComponentProps) {
   const t = tx(l);
   const locale = LOCALE[l];
   const kit = useKit();
   const isRent = x.offer_type === 'rent';
   const sold = x.status === 'sold';
   const city = cityName(x.address.city, l);
-  // fixture only: energy class, year built, floor, terrace / balcony surface, monthly charges
-  const energy = extraStr(ex, x.id, 'energy_class');
-  const year = extraNum(ex, x.id, 'year_built');
-  const fl = extraNum(ex, x.id, 'floor');
-  const terrace = extraNum(ex, x.id, 'terrace_surface');
-  const balcony = extraNum(ex, x.id, 'balcony_surface');
-  const charges = extraNum(ex, x.id, 'charges');
+  const energy = x.energy_class;
+  const year = x.construction_year;
+  const fl = x.floor;
+  const terrace = x.terrace_surface;
+  const balcony = x.balcony_surface;
+  const charges = x.charges;
   const facts = [
     x.rooms != null && { k: t('rooms'), v: String(x.rooms) },
     x.bedrooms != null && { k: t('bedrooms'), v: String(x.bedrooms) },

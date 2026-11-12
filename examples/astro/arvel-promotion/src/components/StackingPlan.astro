@@ -4,10 +4,10 @@
  * width follows its living surface, status as fill and text. Every block
  * links to its lot page. Server-rendered (works without JS); the filters on
  * the Logements page dim blocks with `data-dim` (scripts/units.ts).
- * Order on the floor and lot numbers are fixture only.
+ * Order on the floor is fixture only.
  */
 import type { DevelopmentWithUnits } from '@realadvisor/sites-sdk/types';
-import { unitExtra, unitsInOrder } from '../lib/data';
+import { unitsInOrder } from '../lib/data';
 import { floorName, floorShort, formatSurface, statusLabel, typeCode, unitPrice, unitUrl } from '../lib/fr';
 
 interface Props {
@@ -35,14 +35,12 @@ const dim = (u: (typeof units)[number]) => (!!type && typeCode(u) !== type) || (
         <p class="fl"><span class="fl-long">{label}</span><span class="fl-short" aria-hidden="true">{floorShort(f)}</span></p>
         <ul class="row" aria-label={label}>
           {row.map((u) => {
-            const x = unitExtra(u);
             const m2 = u.living_surface ? formatSurface(u.living_surface) : '';
             const desc = [typeCode(u), m2, label, unitPrice(u)].filter(Boolean).join(', ');
             return (
               <li style={`flex-grow:${u.living_surface ?? 50}`} data-unit data-type={typeCode(u)} data-st={u.status} data-dim={dim(u) ? '' : undefined}>
-                <a class="u" href={unitUrl(d, u)} aria-current={current === u.id ? 'page' : undefined} aria-label={x.unit_number ? `Lot ${x.unit_number} : ${desc}` : desc}>
-                  {/* fixture only: unit_number */}
-                  {x.unit_number && <span class="n num">{x.unit_number}</span>}
+                <a class="u" href={unitUrl(d, u)} aria-current={current === u.id ? 'page' : undefined} aria-label={u.reference ? `Lot ${u.reference} : ${desc}` : desc}>
+                  {u.reference && <span class="n num">{u.reference}</span>}
                   <span class="ty">{typeCode(u)}</span>
                   {!compact && m2 && <span class="m2 num">{m2}</span>}
                   <span class="pr num">{u.status === 'available' ? unitPrice(u) : statusLabel(u)}</span>

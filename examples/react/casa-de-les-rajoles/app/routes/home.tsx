@@ -27,7 +27,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const t = tr(lang);
   const site = await loadSite();
   const { dev } = site;
-  const extra = developmentExtra(dev); // fixture only: developer, architect, contractor, construction photos
+  const extra = developmentExtra(dev); // fixture only: construction photos
   const units = dev.units;
   const [cover, ...rest] = dev.photos;
   const delivery = deliveryLabel(dev, lang);
@@ -57,7 +57,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const roof = range(units.filter((u) => kindOf(u) === 'atico').map(outdoor).filter((o) => o?.kind === 'terrace').map((o) => o!.m2));
   const roofPhoto = dev.photos.find((p) => p.url.includes('9584741')) ?? rest[rest.length - 1];
   const tilePhoto = dev.photos.find((p) => p.url.includes('5505437')) ?? rest[0];
-  const credits = (['developer', 'architect', 'general_contractor'] as const).filter((k) => extra[k]).map((k) => ({ k, v: extra[k]! }));
+  const credits = (['developer', 'architect', 'general_contractor'] as const).flatMap((k) => { const v = dev[k]?.name; return v ? [{ k, v }] : []; });
   const title = lang === 'es' ? `${dev.title} | Obra nueva en Russafa, València` : `${dev.title} | New homes in Russafa, València`;
   const desc = `${fill(t.heroLead, { n: dev.stats.units })} ${t.figDelivery[0]!.toUpperCase()}${t.figDelivery.slice(1)}: ${delivery}.`;
   return {

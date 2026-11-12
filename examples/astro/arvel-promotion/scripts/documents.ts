@@ -120,8 +120,8 @@ function brochure(d: any) {
       <div><dt>Logements</dt><dd>${d.stats.units}, du T${d.stats.rooms.min} au T${d.stats.rooms.max}</dd></div>
       <div><dt>Surfaces</dt><dd>${d.stats.living_surface.min} à ${m2(d.stats.living_surface.max)}</dd></div>
       <div><dt>Livraison</dt><dd>${esc(delivery(d))}</dd></div>
-      ${x.architect ? `<div><dt>Architecte</dt><dd>${esc(x.architect)}</dd></div>` : ''}
-      ${x.general_contractor ? `<div><dt>Entreprise générale</dt><dd>${esc(x.general_contractor)}</dd></div>` : ''}
+      ${d.architect ? `<div><dt>Architecte</dt><dd>${esc(d.architect.name)}</dd></div>` : ''}
+      ${d.general_contractor ? `<div><dt>Entreprise générale</dt><dd>${esc(d.general_contractor.name)}</dd></div>` : ''}
     </dl></div><div><img class="photo" src="${img(p2.url, 1000, 1180)}"></div></div>${footer(d, 'Brochure', ++n + 1)}</section>
   <section class="page ink"><p class="eyebrow">Typologies</p><h2>Du ${types[0] === 'T1' ? 'studio' : types[0]} au ${types[types.length - 1]}</h2>
     <div class="types">${types.map((t) => {
@@ -161,9 +161,9 @@ function prices(d: any) {
   const units = [...d.units].sort((a: any, b: any) => (a.floor - b.floor) || ((fx.fixture_only.units[a.id]?.position ?? 0) - (fx.fixture_only.units[b.id]?.position ?? 0)));
   const rows = units.map((u: any) => {
     const x = fx.fixture_only.units[u.id] ?? {};
-    const out = x.terrace_surface ?? u.balcony_surface;
+    const out = u.terrace_surface ?? u.balcony_surface;
     const price = u.status === 'available' ? (u.price && !u.price_on_request ? eur(u.price) : 'Prix sur demande') : '';
-    return `<tr class="${u.status}"><td>${esc(x.unit_number ?? '')}</td><td>T${u.rooms}</td><td>${esc(floor(u))}</td><td class="r">${m2(u.living_surface)}</td><td class="r">${out ? `${m2(out)} ${x.terrace_surface ? 'terrasse' : 'balcon'}` : ''}</td><td>${ORIENT[x.orientation] ?? ''}</td><td>${STATUS[u.status]}</td><td class="r">${price}</td></tr>`;
+    return `<tr class="${u.status}"><td>${esc(u.reference ?? '')}</td><td>T${u.rooms}</td><td>${esc(floor(u))}</td><td class="r">${m2(u.living_surface)}</td><td class="r">${out ? `${m2(out)} ${x.terrace_surface ? 'terrasse' : 'balcon'}` : ''}</td><td>${ORIENT[x.orientation] ?? ''}</td><td>${STATUS[u.status]}</td><td class="r">${price}</td></tr>`;
   });
   const per = 13;
   const pages = [];

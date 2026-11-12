@@ -16,7 +16,7 @@ import ContactCard from '../../components/ContactCard.astro';
 import Icon from '../../components/Icon.astro';
 import { site as load } from '../../lib/data';
 import {
-  buildings, chf, floorShort, longDate, freeRent, netRent, orientationLabel, planUrl, rooms, rowsOf, statusLabel, surface, unitIdFromSlug, unitTitle, unitOptions, unitUrl,
+  buildings, chf, floorShort, longDate, freeRent, netRent, orientationCode, orientationLabel, planUrl, rooms, rowsOf, statusLabel, surface, unitIdFromSlug, unitTitle, unitOptions, unitUrl,
 } from '../../lib/units';
 
 const site = await load();
@@ -31,10 +31,9 @@ if (unitUrl(u) !== Astro.url.pathname) return Astro.redirect(unitUrl(u), 301);
 
 const house = buildings(rows).find((b) => b.key === x.building);
 const rent = netRent(u);
-// fixture only: charges (Nebenkosten) and the gross sum computed from them
-const charges = rent ? x.charges : undefined;
+const charges = rent ? u.charges : undefined;
 const gross = rent && charges ? rent + charges : undefined;
-const plan = planUrl(u, x.orientation);
+const plan = planUrl(u, orientationCode(u));
 const isLet = u.status === 'sold';
 const similar = rows
   .filter((r) => r.u.id !== u.id && r.u.rooms === u.rooms && r.u.status === 'available')
@@ -46,25 +45,25 @@ const facts: [string, string][] = [
   ['Wohnfläche', surface(u.living_surface)],
   [outdoor, u.balcony_surface ? surface(u.balcony_surface) : ''],
   ['Geschoss', u.floor_label ?? floorShort(u)],
-  // fixture only: building, unit number, orientation, move-in date
+  // fixture only: building
   ['Haus', x.building ? `Haus ${x.building}` : ''],
-  ['Wohnungsnummer', x.number ?? ''],
-  ['Ausrichtung', orientationLabel(x.orientation)],
+  ['Wohnungsnummer', u.reference ?? ''],
+  ['Ausrichtung', orientationLabel(orientationCode(u))],
   ['Bad / Dusche', u.bathrooms ? String(u.bathrooms) : ''],
-  ['Bezug ab', longDate(x.moveIn)],
+  ['Bezug ab', longDate(u.available_from)],
 ].filter((f): f is [string, string] => !!f[1]);
 // Ground-floor units have a garden seat, not a balcony: drop that CRM feature there.
 const features = (u.features ?? []).filter((k) => !(u.floor === 0 && k === 'balcony')).map((k) => featureLabel(k, 'de-CH')).filter(Boolean);
 const photos = u.photos ?? [];
 const name = unitTitle(row);
-const desc = [name, x.number, statusLabel(u), rent ? `${chf(rent)} netto pro Monat` : '', x.moveIn ? `Bezug ab ${longDate(x.moveIn)}` : ''].filter(Boolean).join(' · ');
+const desc = [name, u.reference, statusLabel(u), rent ? `${chf(rent)} netto pro Monat` : '', u.available_from ? `Bezug ab ${longDate(u.available_from)}` : ''].filter(Boolean).join(' · ');
 const message = isLet
-  ? `Guten Tag, die Wohnung ${x.number ?? name} ist vermietet. Bitte informieren Sie mich über ähnliche Wohnungen im ${dev.title}.`
-  : `Guten Tag, ich interessiere mich für die Wohnung ${x.number ? `${x.number} (${name})` : name} im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`;
+  ? `Guten Tag, die Wohnung ${u.reference ?? name} ist vermietet. Bitte informieren Sie mich über ähnliche Wohnungen im ${dev.title}.`
+  : `Guten Tag, ich interessiere mich für die Wohnung ${u.reference ? `${u.reference} (${name})` : name} im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`;
 ---
 <Site
   site={site}
-  title={`${name}${x.number ? ` (${x.number})` : ''} | ${rent ? `${chf(rent)} netto` : statusLabel(u)} | ${dev.title}`}
+  title={`${name}${u.reference ? ` (${u.reference})` : ''} | ${rent ? `${chf(rent)} netto` : statusLabel(u)} | ${dev.title}`}
   description={desc}
   image={photos[0] ? img(photos[0].url, { w: 1200, h: 630 }) : dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
   noindex={isLet}
@@ -78,7 +77,7 @@ const message = isLet
     <header class="u-head">
       <div class="u-title">
         <p class="badges">
-          {x.number && <span class={`no tone-${(x.building ?? 'a').toLowerCase()} num`}>{x.number}</span>}
+          {u.reference && <span class={`no tone-${(x.building ?? 'a').toLowerCase()} num`}>{u.reference}</span>}
           <span class={`pill pill--${u.status}`}>{statusLabel(u)}</span>
         </p>
         <h1>{name}</h1>
@@ -94,7 +93,7 @@ const message = isLet
       <div class="left">
       <figure class="plan">
         {plan ? (
-          <img src={plan} width="600" height="470" alt={`Grundriss indikativ ${name}${x.orientation ? `, Loggia nach ${orientationLabel(x.orientation)}` : ''}`} fetchpriority="high" decoding="async" />
+          <img src={plan} width="600" height="470" alt={`Grundriss indikativ ${name}${orientationCode(u) ? `, Loggia nach ${orientationLabel(orientationCode(u))}` : ''}`} fetchpriority="high" decoding="async" />
         ) : (
           <p class="plan-none">Grundriss auf Anfrage</p>
         )}
@@ -103,7 +102,7 @@ const message = isLet
         {house && (
           <div class="where">
             <h2 class="where-title">Lage im Haus</h2>
-            <p class="muted">{name}{x.orientation ? `, Ausrichtung ${orientationLabel(x.orientation)}` : ''}. Markiert im Stockwerkplan von {house.name}.</p>
+            <p class="muted">{name}{orientationCode(u) ? `, Ausrichtung ${orientationLabel(orientationCode(u))}` : ''}. Markiert im Stockwerkplan von {house.name}.</p>
             <StackingPlan building={house} current={u.id} compact headingLevel={3} />
           </div>
         )}
@@ -125,8 +124,8 @@ const message = isLet
         {u.status === 'reserved' && (
           <p class="rent-note">Diese Wohnung ist reserviert. Setzen Sie sich auf die Warteliste: Springt die Reservation ab, melden wir uns bei Ihnen.</p>
         )}
-        {x.moveIn && (
-          <p class="move"><Icon name="calendar" size={22} /><span>Bezug ab <strong>{longDate(x.moveIn)}</strong></span></p>
+        {u.available_from && (
+          <p class="move"><Icon name="calendar" size={22} /><span>Bezug ab <strong>{longDate(u.available_from)}</strong></span></p>
         )}
         <div class="panel-cta">
           <a class="cta cta--zinnober" href="#bewerben">{isLet ? 'Ähnliche Wohnung anfragen' : u.status === 'reserved' ? 'Auf die Warteliste' : 'Jetzt bewerben'} <Icon name="arrow" /></a>
@@ -162,10 +161,10 @@ const message = isLet
           {similar.map((r) => (
             <li>
               <a href={unitUrl(r.u)}>
-                <span class="no num">{r.x.number}</span>
+                <span class="no num">{r.u.reference}</span>
                 <span class="nm">{unitTitle(r)}</span>
                 <span class="num">{surface(r.u.living_surface)} · {chf(freeRent(r.u)!)} netto</span>
-                <span class="mv">Bezug ab {longDate(r.x.moveIn)}</span>
+                <span class="mv">Bezug ab {longDate(r.u.available_from)}</span>
                 <Icon name="arrow" class="go" />
               </a>
             </li>
@@ -187,7 +186,7 @@ const message = isLet
           <EnquiryForm id="bewerben-form" developmentId={dev.id} units={unitOptions(rows)} selectedUnit={similar[0]?.u.id} agentId={site.contact?.id} agentName={site.contact?.first_name} message={message} submitLabel="Interesse senden" />
         ) : (
           <>
-            <p class="chosen"><span>Ihre Wohnung</span><strong>{name}{x.number ? ` · ${x.number}` : ''}</strong></p>
+            <p class="chosen"><span>Ihre Wohnung</span><strong>{name}{u.reference ? ` · ${u.reference}` : ''}</strong></p>
             <EnquiryForm id="bewerben-form" developmentId={dev.id} lotId={u.id} agentId={site.contact?.id} agentName={site.contact?.first_name} message={message} submitLabel={u.status === 'reserved' ? 'Auf die Warteliste' : 'Bewerbung anfragen'} />
           </>
         )}

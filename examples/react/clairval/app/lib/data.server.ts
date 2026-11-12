@@ -3,29 +3,14 @@
  * agents and listings through `sites` (a SitesClient, the
  * @realadvisor/sites-sdk interface): live data when the Worker has
  * SITES_API_URL + SITES_API_KEY, else the example fixture. Server only.
- *
- * Fields the API does not have yet live in `fixture_only` and are read only
- * through `extra()` ({} on live data): every use is marked `// fixture only:`.
  */
 import type { Agent, Listing, Team } from '@realadvisor/sites-sdk/types';
-import { fixtureOnly, hasLiveData, siteClient, type Fixture } from '@realadvisor/sites-kit-react/server/data';
+import { siteClient, type Fixture } from '@realadvisor/sites-kit-react/server/data';
 import fixture from '../../../../astro/clairval/src/data/fixture.json';
 import { agentSlug, teamSlug } from './routes';
 
 const fx = fixture as unknown as Fixture;
 export const sites = siteClient({ fixture: fx });
-
-type Kind = 'listings' | 'units' | 'developments';
-/** Fixture-only extras of one record ({} on live data, where they do not exist yet). */
-export const extra = (kind: Kind, id: string): Record<string, unknown> => (hasLiveData() ? {} : fixtureOnly(fx, kind, id));
-export const extraStr = (kind: Kind, id: string, key: string) => {
-  const v = extra(kind, id)[key];
-  return typeof v === 'string' && v.trim() ? v : undefined;
-};
-export const extraNum = (kind: Kind, id: string, key: string) => {
-  const v = extra(kind, id)[key];
-  return typeof v === 'number' && Number.isFinite(v) ? v : undefined;
-};
 
 /** Everything most pages need, in one round of parallel calls. */
 export async function siteData() {

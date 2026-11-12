@@ -8,7 +8,6 @@
  */
 import type { Unit } from '@realadvisor/sites-sdk/types';
 import { floorName, formatSurface, sortUnits, statusLabel, unitLabel, unitPath, unitPrice } from '../lib/units';
-import { unitExtra } from '../lib/data';
 
 interface Props {
   units: Unit[];
@@ -38,7 +37,7 @@ const short = (f: number, name: string) => (f === 0 ? 'Rez' : name.replace(' ét
         <span class="fl"><span class="fl-long">{r.name}</span><span class="fl-short" aria-hidden="true">{short(r.floor, r.name)}</span></span>
         <div class="row" style={`--w:${((r.area / maxArea) * 100).toFixed(2)}%`}>
           {r.units.map((u) => {
-            const no = unitExtra(u).unit_number; // fixture only: unit number
+            const no = u.reference;
             const isCurrent = current === u.id;
             return (
               <a

@@ -61,20 +61,18 @@ for (const [lang, t] of Object.entries(L)) {
     const att = /attika/.test(k) ? `${L[lang].fl(us[0])}, ` : '';
     return `<figure><img src="data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}"><figcaption>${att}${dec(us[0].rooms, lang)} ${t.rooms} · ${us[0].living_surface} m²</figcaption></figure>`;
   }).join('');
-  const x = extra.developments[dev.id];
   const brochure = `<!doctype html><html lang="${lang}"><meta charset="utf-8"><style>${css}</style><body>
     <div class="band"><p class="k">${t.kicker}</p><h1>${dev.title}</h1><p style="font:13px Arial,sans-serif;margin:0">${dev.address.street}, ${dev.address.postcode} ${dev.address.city}</p></div>
     <img src="${imgSrc(dev.photos[0].url, 1400)}" style="width:100%;margin-bottom:12px">
     <div class="lead">${dev.description}</div>
     <div class="figs"><div><b>${dev.stats.units}</b>${t.units}</div><div><b>${dev.stats.available}</b>${t.available}</div><div><b>${t.from} ${chf(dev.stats.price.min)}</b>${t.price}</div><div><b>${new Intl.DateTimeFormat(t.locale, { month: 'long', year: 'numeric' }).format(new Date(dev.delivery_date))}</b>${t.delivery}</div></div>
-    <p class="foot">${t.developer}: ${x.developer} · ${t.architect}: ${x.architect} · ${t.contractor}: ${x.general_contractor}</p>
+    <p class="foot">${t.developer}: ${dev.developer?.name ?? ''} · ${t.architect}: ${dev.architect?.name ?? ''} · ${t.contractor}: ${dev.general_contractor?.name ?? ''}</p>
     <h2 style="break-before:page">${t.types}</h2><div class="plans">${plans}</div><p class="foot">${t.plan}</p>
     <h2>${t.contact}</h2><p class="lead">${fx.organisation.name}, ${team.name}<br>${team.address.street}, ${team.address.postcode} ${team.address.city}<br>${agent.first_name} ${agent.last_name} · ${agent.phone} · ${agent.email}</p>
   </body></html>`;
   const rows = units.map((u) => {
-    const e = extra.units[u.id] ?? {};
-    const out = e.garden_surface ?? e.terrace_surface ?? u.balcony_surface;
-    return `<tr><td>${e.unit_number ?? ''}</td><td>${t.fl(u)}</td><td class="r">${dec(u.rooms, lang)}</td><td class="r">${u.living_surface} m²</td><td class="r">${out != null ? `${out} m²` : ''}</td><td class="r">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${t.st[u.status]}</td></tr>`;
+    const out = u.garden_surface ?? u.terrace_surface ?? u.balcony_surface;
+    return `<tr><td>${u.reference ?? ''}</td><td>${t.fl(u)}</td><td class="r">${dec(u.rooms, lang)}</td><td class="r">${u.living_surface} m²</td><td class="r">${out != null ? `${out} m²` : ''}</td><td class="r">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${t.st[u.status]}</td></tr>`;
   }).join('');
   const prices = `<!doctype html><html lang="${lang}"><meta charset="utf-8"><style>${css}</style><body>
     <div class="band"><p class="k">${t.kicker}</p><h1>${t.priceList} · ${dev.title}</h1></div>

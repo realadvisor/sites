@@ -3,7 +3,6 @@ import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
 import { featureLabel, propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { LOCALE_OF, UI, fill, type Lang } from './i18n';
-import type { Extras } from './data';
 
 export function price(l: Pick<Listing, 'price' | 'price_on_request' | 'offer_type' | 'status'>, lang: Lang): string {
   if (l.status === 'sold') return l.offer_type === 'rent' ? UI[lang].rented : UI[lang].sold;
@@ -21,7 +20,7 @@ export const baths = (n: number | undefined, lang: Lang) => (!n ? '' : n === 1 ?
 export const factLine = (l: Listing, lang: Lang) => [rooms(l.rooms, lang), surface(l.living_surface)].filter(Boolean).join(' · ');
 
 /** Every fact the listing has, as key / value rows; rows without data are left out. */
-export function factRows(l: Listing, x: Extras, lang: Lang, place: string): [string, string][] {
+export function factRows(l: Listing, lang: Lang, place: string): [string, string][] {
   const t = UI[lang];
   const rows: [string, string | undefined][] = [
     [l.offer_type === 'rent' ? t.rentL : t.price, price(l, lang)],
@@ -31,13 +30,13 @@ export function factRows(l: Listing, x: Extras, lang: Lang, place: string): [str
     [t.rooms, l.rooms ? String(l.rooms) : undefined],
     [t.bedrooms, l.bedrooms ? String(l.bedrooms) : undefined],
     [t.bathrooms, l.bathrooms ? String(l.bathrooms) : undefined],
-    [t.floor, x.floor == null ? undefined : x.floor === 0 ? t.groundFloor : String(x.floor)], // fixture only: floor
-    [t.terrace, x.terrace ? surface(x.terrace) : undefined], // fixture only: terrace_surface
-    [t.balcony, x.balcony ? surface(x.balcony) : undefined], // fixture only: balcony_surface
+    [t.floor, l.floor == null ? undefined : l.floor === 0 ? t.groundFloor : String(l.floor)],
+    [t.terrace, l.terrace_surface ? surface(l.terrace_surface) : undefined],
+    [t.balcony, l.balcony_surface ? surface(l.balcony_surface) : undefined],
     [t.land, surface(l.land_surface) || undefined],
-    [t.year, x.year ? String(x.year) : undefined], // fixture only: year_built
-    [t.charges, x.charges ? fill(t.chargesValue, { amount: formatAmount(x.charges) }) : undefined], // fixture only: charges
-    [t.energy, x.energy], // fixture only: energy_class
+    [t.year, l.construction_year ? String(l.construction_year) : undefined],
+    [t.charges, l.charges ? fill(t.chargesValue, { amount: formatAmount(l.charges) }) : undefined],
+    [t.energy, l.energy_class],
     [t.features, l.features.length ? l.features.map((f) => featureLabel(f, LOCALE_OF[lang])).join(', ') : undefined],
   ];
   return rows.filter((r): r is [string, string] => !!r[1]);

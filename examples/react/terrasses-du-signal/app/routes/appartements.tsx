@@ -124,8 +124,8 @@ export default function Units({ loaderData }: Route.ComponentProps) {
             </thead>
             <tbody>
               {rows.map((u) => {
-                const x = unitExtra(extras, u); // fixture only: unit number, position
-                const o = outdoor(u, extras);
+                const x = unitExtra(extras, u); // fixture only: position
+                const o = outdoor(u);
                 const plan = planFor(u, dev.units);
                 return (
                   <tr
@@ -139,12 +139,12 @@ export default function Units({ loaderData }: Route.ComponentProps) {
                     data-k-surface={u.living_surface ?? 0}
                     data-k-prix={u.status === 'available' && u.price ? u.price : ''}
                   >
-                    <td className="no" data-l="Lot">{x.unit_number ?? '–'}</td>
+                    <td className="no" data-l="Lot">{u.reference ?? '–'}</td>
                     <td className="rooms"><a href={unitPath(u)}>{u.rooms != null ? `${u.rooms} pièces` : 'Lot'}<span className="sr-only">, {floorName(u)}</span></a></td>
                     <td className="floor" data-l="Étage">{floorName(u)}</td>
                     <td className="r num surf" data-l="Surface">{formatSurface(u.living_surface)}</td>
                     <td className="r num out" data-l={o?.kind === 'garden' ? 'Jardin' : 'Terrasse'}>{o ? formatSurface(o.m2) : '–'}</td>
-                    <td className="ori" data-l="Orientation">{orientation(u, extras) || '–'}</td>
+                    <td className="ori" data-l="Orientation">{orientation(u) || '–'}</td>
                     <td className="r num price">{u.status === 'available' ? unitPrice(u) : '–'}</td>
                     <td className="st"><span className={`status ${u.status}`}>{statusLabel(u)}</span></td>
                     <td className="plan">{plan && <a href={unitPath(u)} className="plan-link" aria-label={`Plan et détails, ${u.rooms} pièces, ${floorName(u)}`}>Plan <Arrow /></a>}</td>

@@ -2,10 +2,10 @@
 /**
  * Availability table: the accessible companion of the stacking plan, and
  * the phone layout (one card per unit). Rows hidden by the filters get
- * `hidden`. Lot number and orientation are fixture only.
+ * `hidden`.
  */
 import type { DevelopmentWithUnits } from '@realadvisor/sites-sdk/types';
-import { unitExtra, unitsInOrder } from '../lib/data';
+import { orientationCode, unitsInOrder } from '../lib/data';
 import { floorName, formatSurface, orientationLabel, statusLabel, typeCode, typeName, unitPrice, unitUrl, programmeUrl } from '../lib/fr';
 
 interface Props { programme: DevelopmentWithUnits; type?: string; onlyAvailable?: boolean; enquiryPath?: string }
@@ -32,22 +32,18 @@ const ask = (id: string) => `${enquiryPath ?? programmeUrl(d)}?lot=${encodeURICo
     </thead>
     <tbody>
       {units.map((u) => {
-        const x = unitExtra(u);
-        // fixture only: terrace_surface for ground floor units
-        const outdoor = x.terrace_surface ?? u.balcony_surface;
+        const outdoor = u.terrace_surface ?? u.balcony_surface;
         return (
           <tr data-unit data-type={typeCode(u)} data-st={u.status} hidden={hide(u) || undefined}>
-            {/* fixture only: unit_number */}
-            <td class="c-lot num" data-l="Lot">{x.unit_number ?? '—'}</td>
+            <td class="c-lot num" data-l="Lot">{u.reference ?? '—'}</td>
             <th scope="row" class="c-type"><a href={unitUrl(d, u)}><span class="code">{typeCode(u)}</span> <span class="tname">{typeName(u)}</span></a></th>
             <td class="c-floor">{floorName(u)}</td>
             <td class="r num c-m2">{u.living_surface ? formatSurface(u.living_surface) : ''}</td>
-            <td class="r num c-out">{outdoor ? <>{formatSurface(outdoor)}<span class="out-l"> {x.terrace_surface ? 'terrasse' : 'balcon'}</span></> : ''}</td>
-            {/* fixture only: orientation */}
-            <td class="c-or">{orientationLabel(x.orientation)}</td>
+            <td class="r num c-out">{outdoor ? <>{formatSurface(outdoor)}<span class="out-l"> {u.terrace_surface ? 'terrasse' : 'balcon'}</span></> : ''}</td>
+            <td class="c-or">{orientationLabel(orientationCode(u))}</td>
             <td class="r num c-price">{u.status === 'available' ? unitPrice(u) : ''}</td>
             <td class="c-st"><span class="pill" data-st={u.status}>{statusLabel(u)}</span></td>
-            <td class="c-sum" aria-hidden="true">{[floorName(u), u.living_surface && formatSurface(u.living_surface), outdoor && `${x.terrace_surface ? 'terrasse' : 'balcon'} ${formatSurface(outdoor)}`, orientationLabel(x.orientation)].filter(Boolean).join(' · ')}</td>
+            <td class="c-sum" aria-hidden="true">{[floorName(u), u.living_surface && formatSurface(u.living_surface), outdoor && `${u.terrace_surface ? 'terrasse' : 'balcon'} ${formatSurface(outdoor)}`, orientationLabel(orientationCode(u))].filter(Boolean).join(' · ')}</td>
             <td class="c-act">
               <a class="act" href={unitUrl(d, u)}>Plan<span class="sr-only"> du {typeCode(u)}, {floorName(u)}</span></a>
               {u.status !== 'sold' && <a class="act act--ask" href={ask(u.id)}>Se renseigner<span class="sr-only"> sur le {typeCode(u)}, {floorName(u)}</span></a>}

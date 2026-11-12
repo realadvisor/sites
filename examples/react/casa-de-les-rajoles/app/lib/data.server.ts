@@ -3,9 +3,8 @@
  * SitesClient (the @realadvisor/sites-sdk interface): live data when the
  * Worker has SITES_API_URL + SITES_API_KEY, else the fixture. Server only.
  *
- * Fields the API does not carry yet are read through `unitExtra()`,
- * `developmentExtra()` and `listingExtra()` (fixture only) and are never
- * merged into SDK objects.
+ * Fields the API does not carry yet are read through `unitExtra()` and
+ * `developmentExtra()` (fixture only) and are never merged into SDK objects.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
 import type { Agency } from '@realadvisor/sites-kit';
@@ -56,25 +55,16 @@ export const legalAgency = ({ org, team }: Pick<Site, 'org' | 'team'>): Agency =
 });
 
 export type UnitExtra = {
-  unit_number?: string;
   position?: number;
-  orientation?: string;
-  terrace_surface?: number;
 };
 
-/** fixture only: unit number, position on the floor, orientation, terrace or patio surface. */
+/** fixture only: position on the floor. */
 export const unitExtra = (u: Pick<Unit, 'id'>): UnitExtra => fixtureOnly(fx, 'units', u.id) as UnitExtra;
 
 export type DevelopmentExtra = {
-  developer?: string;
-  architect?: string;
-  general_contractor?: string;
   construction_photos?: string[];
 };
 
-/** fixture only: developer, architect, general contractor, construction photos. */
+/** fixture only: construction photos. */
 export const developmentExtra = (d: Pick<DevelopmentWithUnits, 'id'>): DevelopmentExtra =>
   fixtureOnly(fx, 'developments', d.id) as DevelopmentExtra;
-
-/** fixture only: energy class of the listing a unit is published as. */
-export const listingExtra = (listingId: string) => fixtureOnly(fx, 'listings', listingId) as { energy_class?: string };

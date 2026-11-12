@@ -22,7 +22,7 @@ import SaveButton from '../../components/SaveButton.astro';
 import AgentBlock from '../../components/AgentBlock.astro';
 import EnergyScale from '../../components/EnergyScale.astro';
 import PaymentEstimate from '../../components/PaymentEstimate.astro';
-import { extraNum, extraStr, siteData, sites } from '../../lib/data';
+import { siteData, sites } from '../../lib/data';
 import {
   agentName, bathrooms, bedrooms, cityHref, cityLine, citySlug, floor, hasPrice, listingHref, price, R, rooms,
   searchUrl, surface, teamHref, teamShortName, tel, typeLabel, date,
@@ -52,13 +52,12 @@ const ref = listingRef(kit);
 const typ = typeLabel(l.property_type);
 const place = cityLine(l);
 
-// fixture only: energy class, year built, floor, outdoor surfaces and monthly charges are not in the API yet.
-const energy = extraStr(l.id, 'energy_class'); // fixture only:
-const yearBuilt = extraNum(l.id, 'year_built'); // fixture only:
-const level = extraNum(l.id, 'floor'); // fixture only:
-const balcony = extraNum(l.id, 'balcony_surface'); // fixture only:
-const terrace = extraNum(l.id, 'terrace_surface'); // fixture only:
-const charges = extraNum(l.id, 'charges'); // fixture only:
+const energy = l.energy_class;
+const yearBuilt = l.construction_year;
+const level = l.floor;
+const balcony = l.balcony_surface;
+const terrace = l.terrace_surface;
+const charges = l.charges;
 
 const tiles = [
   { icon: 'home', label: 'Type', value: typ },
