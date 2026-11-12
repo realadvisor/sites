@@ -26,8 +26,24 @@ pnpm check:template       # template: install, astro check and build, deploy che
 pnpm check:examples       # all 24 example sites (slow)
 ```
 
-Sites depend on the packages by path (`file:../kit`, `file:../sdk`), so a
-change to a package shows in a site at its next `pnpm install`.
+In this repo the template and examples depend on the packages by path
+(`file:../kit`, `file:../sdk`), so a change to a package shows in a site at its
+next `pnpm install`. A site outside this repo installs a published version
+from npm and pins it in its lockfile.
+
+## Release
+
+The three packages are published to npm together, one version for all three.
+
+```bash
+node scripts/set-version.mjs 0.4.0   # versions and the peer ranges between the packages
+node scripts/check-pack.mjs          # every export and bin is in the tarball, no tests
+```
+
+Merge that change, then tag the merge commit `v0.4.0` and push the tag. The
+Publish workflow checks the tag against the versions, runs the tests and the
+template check, and publishes the SDK, then the kit, then the React kit, with
+npm provenance. A version already on npm is skipped.
 
 Live data needs a site key from RealAdvisor (`SITES_API_URL`, `SITES_API_KEY`).
 Without one, every site runs on its fixture.
