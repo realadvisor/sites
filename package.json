@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "pnpm --dir sdk test && pnpm --dir kit-core test",
-    "check:template": "pnpm --dir template install && pnpm --dir template check && pnpm --dir template check:deploy",
-    "check:examples": "pnpm --dir examples install && pnpm --dir examples check && pnpm --dir examples check:deploy"
+    "check:template": "pnpm check:template:react && pnpm check:template:astro",
+    "check:examples": "pnpm --dir examples install && pnpm --dir examples check && pnpm --dir examples check:deploy",
+    "check:template:react": "pnpm --dir template install && pnpm --dir template check && pnpm --dir template check:deploy",
+    "check:template:astro": "pnpm --dir template-astro install && pnpm --dir template-astro check && pnpm --dir template-astro check:deploy"
   }
 }

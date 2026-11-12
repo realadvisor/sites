@@ -32,7 +32,8 @@ No current website or BRAND.md says "CRM data only": use `agency.logo` and
 
 ## 2. Tokens
 
-Put colours, fonts, radii and spacing in `src/styles/tokens.css` and use
+Put colours, fonts, radii and spacing in one tokens file
+(`app/styles/tokens.css` on React Router, `src/styles/tokens.css` on Astro) and use
 only tokens in components. The kit parts read these (all have fallbacks):
 
 ```css
@@ -50,14 +51,24 @@ only tokens in components. The kit parts read these (all have fallbacks):
 
 ## 3. Fonts
 
-Self-hosted only, with `@fontsource/<family>` imported in the layout
-frontmatter (the CSP blocks Google Fonts links and font CDNs). At most 2
-families and 2 weights per family (a variable font counts as one), latin
-subset, `font-display: swap`, and the above-the-fold font preloaded:
+Self-hosted only, with `@fontsource/<family>` imported where the document
+shell is (React Router: `app/root.tsx`; Astro: the layout frontmatter; the
+CSP blocks Google Fonts links and font CDNs). At most 2 families and 2
+weights per family (a variable font counts as one), latin subset,
+`font-display: swap`, and the above-the-fold font preloaded:
 
-```astro
+```tsx
+// app/root.tsx
 import '@fontsource/lato/latin-400.css';
 import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
+<link rel="preload" as="font" type="font/woff2" crossOrigin="" href={lato900} />  {/* in <head> */}
+```
+
+```astro
+---
+import '@fontsource/lato/latin-400.css';
+import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
+---
 <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={lato900} />
 ```
 

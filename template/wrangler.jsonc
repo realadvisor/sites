@@ -1,14 +1,10 @@
 {
-  // Cloudflare Worker for this site. `pnpm build` writes dist/_worker.js and dist/ static assets.
+  // Cloudflare Worker for this site. `pnpm build` writes build/server (the Worker) and build/client (static files).
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "realadvisor-site",
-  "main": "./dist/_worker.js/index.js",
+  "main": "./workers/app.ts",
   "compatibility_date": "2025-09-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
-  "assets": {
-    "binding": "ASSETS",
-    "directory": "./dist"
-  },
   "observability": { "enabled": true },
   // Non-secret config. SITES_API_KEY is a secret: `wrangler secret put SITES_API_KEY`, never here.
   "vars": {}

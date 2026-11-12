@@ -11,7 +11,8 @@ work the same for a developer building a site by hand.
 | `kit-core/` | `@realadvisor/sites-kit-core` (`@realadvisor-sites/kit-core`) | What both kits share: data helpers, i18n, formatting, legal texts, SEO, search, images, security headers, the browser scripts, the `sites-kit` tools (fixture, screenshot, deploy check) and the rules a site follows (`AGENTS.md`, `DESIGN.md`). |
 | `kit-astro/` | `@realadvisor/sites-kit-astro` (`@realadvisor-sites/kit-astro`) | The Astro 5 kit for Cloudflare Workers: integration, middleware, the `ra` data client, components (images, legal, consent, enquiry form, listings search and map). |
 | `kit-react/` | `@realadvisor/sites-kit-react` (`@realadvisor-sites/kit-react`) | The React Router 7 kit: a Worker with a per-request CSP nonce, the same parts and the same deploy check. |
-| `template/` | | The starter a new Astro site is copied from. |
+| `template/` | | The starter a new site is copied from: React Router, the default. |
+| `template-astro/` | | The starter of an Astro site. |
 | `examples/` | | Twelve fictional sites, each in Astro and React Router. See `examples/README.md`. |
 
 Every name, person, address and text in the fixtures and examples is invented.
@@ -23,35 +24,39 @@ Node 22.18 or later and pnpm 10.
 
 ```bash
 pnpm test                 # SDK and kit-core tests
-pnpm check:template       # template: install, astro check and build, deploy check
+pnpm check:template       # both templates: install, typecheck and build, deploy check
 pnpm check:examples       # all 24 example sites (slow)
 ```
 
 In this repo the template and examples depend on the packages by path
-(`file:../kit-core`, `file:../kit-astro`, `file:../sdk`), so a change to a package shows in a site at its
+(`file:../kit-core`, `file:../kit-react`, `file:../sdk`), so a change to a package shows in a site at its
 next `pnpm install`. A site outside this repo installs a published version
 from npm and pins it in its lockfile. The packages are published under the
 `@realadvisor-sites` scope and installed under the names the code imports,
-with npm aliases. An Astro site:
+with npm aliases. A React Router site:
 
 ```json
-"@realadvisor/sites-kit-astro": "npm:@realadvisor-sites/kit-astro@^0.4.0",
-"@realadvisor/sites-kit-core": "npm:@realadvisor-sites/kit-core@^0.4.0",
-"@realadvisor/sites-sdk": "npm:@realadvisor-sites/sdk@^0.4.0"
+"@realadvisor/sites-kit-react": "npm:@realadvisor-sites/kit-react@^0.5.0",
+"@realadvisor/sites-kit-core": "npm:@realadvisor-sites/kit-core@^0.5.0",
+"@realadvisor/sites-sdk": "npm:@realadvisor-sites/sdk@^0.5.0"
 ```
 
-A React Router site takes `@realadvisor/sites-kit-react` instead of the Astro kit.
+An Astro site takes `@realadvisor/sites-kit-astro` instead of the React kit.
+
+The rules a site follows are in three files: `kit-core/AGENTS.md` (every
+site), `kit-react/AGENTS.md` or `kit-astro/AGENTS.md` (the framework) and
+`kit-core/DESIGN.md`. Each template's `CLAUDE.md` loads them.
 
 ## Release
 
 The four packages are published to npm together, one version for all four.
 
 ```bash
-node scripts/set-version.mjs 0.4.0   # versions and the peer ranges between the packages
+node scripts/set-version.mjs 0.5.0   # versions and the peer ranges between the packages
 node scripts/check-pack.mjs          # every export and bin is in the tarball, no tests
 ```
 
-Merge that change, then tag the merge commit `v0.4.0` and push the tag. The
+Merge that change, then tag the merge commit `v0.5.0` and push the tag. The
 Publish workflow checks the tag against the versions, runs the tests and the
 template check, and publishes the SDK, the core, the Astro kit and the React kit, in that order, with
 npm provenance. A version already on npm is skipped.

@@ -13,10 +13,10 @@
  *   pnpm kit test map                              # http://localhost:4321/listings
  *   pnpm kit test map --url http://localhost:4391 --path /proprietes
  *
- * `data` (the agency fixture in src/data/, loadData) checks the cards
+ * `data` (the agency fixture in src/data/ or app/data/, loadData) checks the cards
  * against the listings' coordinates; without it those checks are skipped.
  */
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 const W = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -170,8 +170,13 @@ export async function checkSearchMap({ browser, base, path = '/listings', data =
   return ran;
 }
 
-/** The agency fixture in `<siteDir>/src/data/` (SITES_FIXTURE picks one), or null. */
+/** The agency fixture in `<siteDir>/src/data/` (SITES_FIXTURE picks one) or `<siteDir>/app/data/fixture.json` (React Router), or null. */
 export function loadData(siteDir) {
+  const react = new URL('app/data/fixture.json', siteDir);
+  if (existsSync(react)) {
+    const d = JSON.parse(readFileSync(react, 'utf8'));
+    return d?.organisation && Array.isArray(d.listings) ? d : null;
+  }
   const dir = new URL('src/data/', siteDir);
   const wanted = process.env.SITES_FIXTURE;
   for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {

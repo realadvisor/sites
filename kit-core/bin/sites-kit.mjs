@@ -4,7 +4,7 @@
  * site's package scripts). Every tool lives in the package, never in the
  * site: a site always runs the kit's current version.
  *
- *   sites-kit fixture [name | file.json] [--if-empty]   sample data into src/data/
+ *   sites-kit fixture [name | file.json] [--if-empty]   sample data into src/data/ (React: app/data/fixture.json)
  *   sites-kit screenshot [paths...] [options]           screenshots (your eyes)
  *   sites-kit check deploy [--no-build]                 the deploy gate (pnpm check:deploy)
  *   sites-kit test map [--url ...] [--path ...]         browser test of the listings map

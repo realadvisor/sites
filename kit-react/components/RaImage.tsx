@@ -18,7 +18,6 @@
  * `data-*` attributes go on the <img> (as Astro's `...rest`).
  */
 import type { CSSProperties } from 'react';
-import { preload } from 'react-dom';
 import { imgUrl, srcsetUrl, type Crop } from '../lib/image';
 
 export type RaImageProps = {
@@ -86,14 +85,18 @@ export function RaImage(props: RaImageProps) {
     />
   );
   const usePicture = !!(mobileSet || avifSet);
-  // Preloads (React puts them in <head>): the format the browser will pick first (AVIF when there is one).
-  if (priority) {
-    if (mobileSet) preload(fallback, { as: 'image', type: mobileAvif ? 'image/avif' : undefined, media: MOBILE, imageSrcSet: mobileAvif || mobileSet, imageSizes: mobileSizes, fetchPriority: 'high' });
-    if (set) preload(fallback, { as: 'image', type: avifSet ? 'image/avif' : undefined, media: mobileSet ? DESKTOP : undefined, imageSrcSet: avifSet || set, imageSizes: sizes, fetchPriority: 'high' });
-  }
-  if (!usePicture) return image;
+  // Preloads (React 19 hoists a <link> into <head>): the format the browser will pick first (AVIF when there is one).
+  // A <link>, not react-dom's preload(): kit components import nothing CommonJS, which the dev Worker would load raw.
+  const preloads = priority ? (
+    <>
+      {mobileSet && <link rel="preload" as="image" href={fallback} type={mobileAvif ? 'image/avif' : undefined} media={MOBILE} imageSrcSet={mobileAvif || mobileSet} imageSizes={mobileSizes} fetchPriority="high" />}
+      {set && <link rel="preload" as="image" href={fallback} type={avifSet ? 'image/avif' : undefined} media={mobileSet ? DESKTOP : undefined} imageSrcSet={avifSet || set} imageSizes={sizes} fetchPriority="high" />}
+    </>
+  ) : null;
+  if (!usePicture) return <>{preloads}{image}</>;
   return (
     <>
+      {preloads}
       <picture>
         {mobileAvif && <source media={MOBILE} type="image/avif" srcSet={mobileAvif} sizes={mobileSizes} width={mobile!.width} height={mobile!.height} />}
         {mobileSet && <source media={MOBILE} srcSet={mobileSet} sizes={mobileSizes} width={mobile!.width} height={mobile!.height} />}
