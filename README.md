@@ -21,7 +21,10 @@ Photos are free Pexels photos.
 Node 22.18 or later and pnpm 10.
 
 ```bash
+pnpm install              # once: TypeScript and the type packages the checks need
+pnpm typecheck            # tsc on sdk, kit and kit-react
 pnpm test                 # SDK and kit tests
+pnpm check                # typecheck and test
 pnpm check:template       # template: install, astro check and build, deploy check
 pnpm check:examples       # all 24 example sites (slow)
 ```

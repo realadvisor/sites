@@ -213,7 +213,7 @@ describe('pageList', () => {
 });
 
 describe('runSearch', () => {
-  const many = (k: number, o: Fx = {}) => Array.from({ length: k }, (_, i) => L({ price: (i + 1) * 1000, publishedAt: `2026-01-${String((i % 28) + 1).padStart(2, '0')}`, ...o }));
+  const many = (k: number, o: Fx = {}) => Array.from({ length: k }, (_, i) => L({ price: (i + 1) * 1000, published_at: `2026-01-${String((i % 28) + 1).padStart(2, '0')}`, ...o }));
   it('pages and clamps the page', () => {
     const pool = many(30);
     const r = runSearch(pool, P('page=9&sort=price-asc'), { pageSize: 10 });
