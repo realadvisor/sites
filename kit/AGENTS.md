@@ -5,6 +5,8 @@ site deployed as a Cloudflare Worker. This file is the engineering half of
 the job; `DESIGN.md` is the design half. Read both before you write markup.
 The kit's files (`DESIGN.md`, `fixtures/`, the sources) are in
 `node_modules/@realadvisor/sites-kit/`.
+Twelve finished example sites are in `/vercel/sandbox/examples` (start
+with its `README.md`): adapt their code, never copy their data or text.
 
 The bar: the agency owner opens the site on desktop and phone and believes a
 good studio built it, with their real listings, real agents and a contact
