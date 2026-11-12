@@ -14,7 +14,7 @@ work the same for a developer building a site by hand.
 | `examples/` | | Twelve fictional sites, each in Astro and React Router. See `examples/README.md`. |
 
 Every name, person, address and text in the fixtures and examples is invented.
-Photos are free Pexels photos.
+Photos are free Pexels photos (see License).
 
 ## Work on it
 
@@ -47,3 +47,12 @@ npm provenance. A version already on npm is skipped.
 
 Live data needs a site key from RealAdvisor (`SITES_API_URL`, `SITES_API_KEY`).
 Without one, every site runs on its fixture.
+
+## License
+
+The code in this repo (the SDK, both kits, the template and the example
+sites) is MIT licensed, see [LICENSE](LICENSE). The photos the fixtures and
+examples link to are free photos from [Pexels](https://www.pexels.com) under
+the [Pexels license](https://www.pexels.com/license/), not MIT: use them only
+as that license allows. RealAdvisor names and logos are not covered by the
+MIT license.

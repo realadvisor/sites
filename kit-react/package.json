@@ -2,6 +2,7 @@
   "name": "@realadvisor/sites-kit-react",
   "version": "0.3.0",
   "description": "The React Router (framework mode, SSR on Cloudflare Workers) version of the RealAdvisor sites kit: Worker with a per-request CSP nonce, data through the SDK interface, images, legal, consent, enquiry, SEO, listings search and map, and the deploy check. Reuses @realadvisor/sites-kit for every rule, string and browser script it can.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/realadvisor/sites.git",
@@ -19,7 +20,8 @@
     "lib",
     "server",
     "styles",
-    "tools"
+    "tools",
+    "LICENSE"
   ],
   "publishConfig": {
     "access": "public",
