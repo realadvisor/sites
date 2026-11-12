@@ -155,7 +155,11 @@
    "reference": "3DTK-M5FB",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 1908,
+   "terrace_surface": 14,
+   "floor": 0
   },
   {
    "id": "98e8eeba-ada6-4483-ac98-e0a4577c338a",
@@ -229,7 +233,11 @@
    "reference": "GN27-5AH8",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 1908,
+   "floor": 1,
+   "balcony_surface": 4
   },
   {
    "id": "c8bd86e4-ec94-4843-b532-9693c78fce25",
@@ -303,7 +311,11 @@
    "reference": "MQ39-KVG2",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 1908,
+   "floor": 2,
+   "balcony_surface": 3
   },
   {
    "id": "f503b5fd-354c-4c35-a123-a039c3014d02",
@@ -377,7 +389,11 @@
    "reference": "8KWD-754R",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 1908,
+   "floor": 2,
+   "balcony_surface": 6
   },
   {
    "id": "7c849bfc-a8f5-4fa7-bf0a-1f3569f5bffc",
@@ -450,7 +466,10 @@
    "reference": "8HF3-ESKR",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 1908,
+   "floor": 3
   },
   {
    "id": "8427da08-251b-4792-9ab6-6663977b0da8",
@@ -524,7 +543,11 @@
    "reference": "7KA4-39TQ",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 1908,
+   "floor": 3,
+   "balcony_surface": 6
   },
   {
    "id": "a2fa2701-acbc-4224-8487-1b59dad15b78",
@@ -598,7 +621,11 @@
    "reference": "LXVW-59GT",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 1908,
+   "floor": 4,
+   "balcony_surface": 4
   },
   {
    "id": "be819251-c884-4238-913f-12fb5652dbd5",
@@ -672,7 +699,11 @@
    "reference": "L9PA-JB5J",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 1908,
+   "floor": 4,
+   "balcony_surface": 6
   },
   {
    "id": "01d78556-9127-45b3-80e7-57f9099e2dda",
@@ -746,7 +777,11 @@
    "reference": "JGK7-ATSL",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 1908,
+   "floor": 5,
+   "balcony_surface": 4
   },
   {
    "id": "3350475a-682c-4cd0-9f08-e8706803ec6b",
@@ -816,7 +851,11 @@
    "reference": "NW4H-W3UZ",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 1908,
+   "terrace_surface": 38,
+   "floor": 6
   },
   {
    "id": "0e04ef59-59a9-4768-9cc4-2f410a1aff96",
@@ -886,7 +925,11 @@
    "reference": "B92K-3SLW",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 7
   },
   {
    "id": "26aa55e4-be7c-4301-ae62-201224e07347",
@@ -956,7 +999,11 @@
    "reference": "RRBL-W6CC",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 1,
+   "balcony_surface": 9
   },
   {
    "id": "e000b8d3-dba7-439d-9871-7644158ae212",
@@ -1026,7 +1073,11 @@
    "reference": "MEG8-BTGB",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 2,
+   "balcony_surface": 6
   },
   {
    "id": "d8e00b1a-a71d-4487-9da3-b00c3e5a7152",
@@ -1096,7 +1147,11 @@
    "reference": "UCVS-ZCV4",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 7
   },
   {
    "id": "98479dd8-c6e6-49bf-8fb2-a4b210208f28",
@@ -1166,7 +1221,11 @@
    "reference": "2XFU-BU62",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "floor": 3,
+   "balcony_surface": 10
   },
   {
    "id": "12d6b92d-58c0-458c-bb30-1392cf76cb57",
@@ -1236,7 +1295,11 @@
    "reference": "Z644-JASN",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "floor": 4,
+   "balcony_surface": 6
   },
   {
    "id": "93229384-d58d-4f56-afc1-ac948f5b87e3",
@@ -1306,7 +1369,11 @@
    "reference": "A38D-3UT4",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 45,
+   "floor": 5
   },
   {
    "id": "772ea5fb-863c-4891-8c59-258c90374e45",
@@ -1376,7 +1443,11 @@
    "reference": "55GE-24K7",
    "team_ids": [
     "610c4dce-3ddf-4a66-95c8-0a764744a351"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "terrace_surface": 60,
+   "floor": 5
   }
  ],
  "developments": [
@@ -1525,7 +1596,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "0.1",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 14
     },
     {
      "id": "45e41ef7-92a9-42a3-99f2-cc36f021b610",
@@ -1543,6 +1619,11 @@
      "features": [
       "elevator",
       "parking"
+     ],
+     "reference": "1.1",
+     "orientation": [
+      "south",
+      "west"
      ]
     },
     {
@@ -1589,6 +1670,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "1.2",
+     "orientation": [
+      "west"
      ]
     },
     {
@@ -1610,6 +1695,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "1.3",
+     "orientation": [
+      "east",
+      "south"
      ]
     },
     {
@@ -1656,6 +1746,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "2.1",
+     "orientation": [
+      "west"
      ]
     },
     {
@@ -1676,6 +1770,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "2.2",
+     "orientation": [
+      "east",
+      "south"
      ]
     },
     {
@@ -1722,6 +1821,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "2.3",
+     "orientation": [
+      "east"
      ]
     },
     {
@@ -1766,6 +1869,11 @@
      "features": [
       "elevator",
       "parking"
+     ],
+     "reference": "3.1",
+     "orientation": [
+      "east",
+      "south"
      ]
     },
     {
@@ -1787,6 +1895,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "3.2",
+     "orientation": [
+      "east"
      ]
     },
     {
@@ -1833,6 +1945,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "3.3",
+     "orientation": [
+      "north",
+      "west"
      ]
     },
     {
@@ -1854,6 +1971,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "4.1",
+     "orientation": [
+      "east"
      ]
     },
     {
@@ -1900,6 +2021,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "4.2",
+     "orientation": [
+      "north",
+      "west"
      ]
     },
     {
@@ -1946,6 +2072,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "4.3",
+     "orientation": [
+      "south"
      ]
     },
     {
@@ -1964,6 +2094,11 @@
      "features": [
       "elevator",
       "parking"
+     ],
+     "reference": "5.1",
+     "orientation": [
+      "north",
+      "west"
      ]
     },
     {
@@ -2010,6 +2145,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "5.2",
+     "orientation": [
+      "south"
      ]
     },
     {
@@ -2031,6 +2170,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "5.3",
+     "orientation": [
+      "south",
+      "west"
      ]
     },
     {
@@ -2073,7 +2217,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "6.1",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 38
     },
     {
      "id": "7a2578ac-30b6-4c2c-831c-f372ec5d68a8",
@@ -2093,7 +2242,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "6.2",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "terrace_surface": 52
     },
     {
      "id": "3e57d7d5-8ff8-4dfd-9a98-714933afc8ec",
@@ -2135,6 +2290,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "1.4",
+     "orientation": [
+      "east"
      ]
     },
     {
@@ -2177,6 +2336,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "1.5",
+     "orientation": [
+      "north",
+      "west"
      ]
     },
     {
@@ -2219,6 +2383,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "2.4",
+     "orientation": [
+      "north",
+      "west"
      ]
     },
     {
@@ -2240,6 +2409,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "2.5",
+     "orientation": [
+      "south"
      ]
     },
     {
@@ -2282,6 +2455,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "3.4",
+     "orientation": [
+      "south"
      ]
     },
     {
@@ -2324,6 +2501,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "3.5",
+     "orientation": [
+      "south",
+      "west"
      ]
     },
     {
@@ -2366,6 +2548,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "4.4",
+     "orientation": [
+      "south",
+      "west"
      ]
     },
     {
@@ -2387,6 +2574,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "4.5",
+     "orientation": [
+      "west"
      ]
     },
     {
@@ -2429,7 +2620,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "5.4",
+     "orientation": [
+      "west"
+     ],
+     "terrace_surface": 45
     },
     {
      "id": "7ffc3b9e-fc39-4fcb-ae2f-7dc411c73116",
@@ -2471,273 +2667,116 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "5.5",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 60
     }
-   ]
+   ],
+   "developer": {
+    "name": "Mirall Promocions SL"
+   },
+   "architect": {
+    "name": "Taller Turia Arquitectura"
+   },
+   "general_contractor": {
+    "name": "Construccions Albufera SL"
+   }
   }
  ],
  "fixture_only": {
-  "listings": {
-   "12443161-3961-4f00-b876-9577e6afd71a": {
-    "energy_class": "C",
-    "year_built": 1908,
-    "floor": 0,
-    "terrace_surface": 14
-   },
-   "98e8eeba-ada6-4483-ac98-e0a4577c338a": {
-    "energy_class": "A",
-    "year_built": 1908,
-    "floor": 1,
-    "balcony_surface": 4
-   },
-   "c8bd86e4-ec94-4843-b532-9693c78fce25": {
-    "energy_class": "B",
-    "year_built": 1908,
-    "floor": 2,
-    "balcony_surface": 3
-   },
-   "f503b5fd-354c-4c35-a123-a039c3014d02": {
-    "energy_class": "B",
-    "year_built": 1908,
-    "floor": 2,
-    "balcony_surface": 6
-   },
-   "7c849bfc-a8f5-4fa7-bf0a-1f3569f5bffc": {
-    "energy_class": "A",
-    "year_built": 1908,
-    "floor": 3
-   },
-   "8427da08-251b-4792-9ab6-6663977b0da8": {
-    "energy_class": "E",
-    "year_built": 1908,
-    "floor": 3,
-    "balcony_surface": 6
-   },
-   "a2fa2701-acbc-4224-8487-1b59dad15b78": {
-    "energy_class": "A",
-    "year_built": 1908,
-    "floor": 4,
-    "balcony_surface": 4
-   },
-   "be819251-c884-4238-913f-12fb5652dbd5": {
-    "energy_class": "D",
-    "year_built": 1908,
-    "floor": 4,
-    "balcony_surface": 6
-   },
-   "01d78556-9127-45b3-80e7-57f9099e2dda": {
-    "energy_class": "C",
-    "year_built": 1908,
-    "floor": 5,
-    "balcony_surface": 4
-   },
-   "3350475a-682c-4cd0-9f08-e8706803ec6b": {
-    "energy_class": "C",
-    "year_built": 1908,
-    "floor": 6,
-    "terrace_surface": 38
-   },
-   "0e04ef59-59a9-4768-9cc4-2f410a1aff96": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 7
-   },
-   "26aa55e4-be7c-4301-ae62-201224e07347": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 1,
-    "balcony_surface": 9
-   },
-   "e000b8d3-dba7-439d-9871-7644158ae212": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 2,
-    "balcony_surface": 6
-   },
-   "d8e00b1a-a71d-4487-9da3-b00c3e5a7152": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 7
-   },
-   "98479dd8-c6e6-49bf-8fb2-a4b210208f28": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "balcony_surface": 10
-   },
-   "12d6b92d-58c0-458c-bb30-1392cf76cb57": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 4,
-    "balcony_surface": 6
-   },
-   "93229384-d58d-4f56-afc1-ac948f5b87e3": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 5,
-    "terrace_surface": 45
-   },
-   "772ea5fb-863c-4891-8c59-258c90374e45": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 5,
-    "terrace_surface": 60
-   }
-  },
+  "listings": {},
   "units": {
    "d5f6ed19-d806-4e85-92b1-32a3c985ce1f": {
-    "unit_number": "0.1",
-    "position": 1,
-    "orientation": "S",
-    "terrace_surface": 14
+    "position": 1
    },
    "45e41ef7-92a9-42a3-99f2-cc36f021b610": {
-    "unit_number": "1.1",
-    "position": 1,
-    "orientation": "SW"
+    "position": 1
    },
    "c55ecec5-afa5-4289-9ae4-aa73e43944d4": {
-    "unit_number": "1.2",
-    "position": 2,
-    "orientation": "W"
+    "position": 2
    },
    "66b8fa46-1231-4a70-bedf-f4ae5e2c70d8": {
-    "unit_number": "1.3",
-    "position": 3,
-    "orientation": "SE"
+    "position": 3
    },
    "be24a697-5dd7-4446-865f-13bb1e51414c": {
-    "unit_number": "2.1",
-    "position": 1,
-    "orientation": "W"
+    "position": 1
    },
    "c54c9b9d-e0e2-420d-836e-e351860fe474": {
-    "unit_number": "2.2",
-    "position": 2,
-    "orientation": "SE"
+    "position": 2
    },
    "64bf36b4-4c64-4396-a88b-57fb9bd2bf23": {
-    "unit_number": "2.3",
-    "position": 3,
-    "orientation": "E"
+    "position": 3
    },
    "aff76e21-0149-4f8e-9262-a8ed96a2a993": {
-    "unit_number": "3.1",
-    "position": 1,
-    "orientation": "SE"
+    "position": 1
    },
    "629b24b6-ada0-4fcd-8898-78c8431e51bd": {
-    "unit_number": "3.2",
-    "position": 2,
-    "orientation": "E"
+    "position": 2
    },
    "9ba6bec2-38c3-4650-abcb-a87866441572": {
-    "unit_number": "3.3",
-    "position": 3,
-    "orientation": "NW"
+    "position": 3
    },
    "74096b13-1fbe-47b7-af70-fdfe65a88d1b": {
-    "unit_number": "4.1",
-    "position": 1,
-    "orientation": "E"
+    "position": 1
    },
    "892ed2a5-b60c-452c-918e-12dd35da8250": {
-    "unit_number": "4.2",
-    "position": 2,
-    "orientation": "NW"
+    "position": 2
    },
    "89a899ab-9476-4278-965b-277d81d9ce41": {
-    "unit_number": "4.3",
-    "position": 3,
-    "orientation": "S"
+    "position": 3
    },
    "09a47599-86fe-4515-98e0-9817e1795cf5": {
-    "unit_number": "5.1",
-    "position": 1,
-    "orientation": "NW"
+    "position": 1
    },
    "ad4b1efd-def3-4467-a07c-691c7b3f8071": {
-    "unit_number": "5.2",
-    "position": 2,
-    "orientation": "S"
+    "position": 2
    },
    "aed37e6f-64e3-49d4-bad5-b2fdd6ff2ffa": {
-    "unit_number": "5.3",
-    "position": 3,
-    "orientation": "SW"
+    "position": 3
    },
    "a007b38c-71c8-4b0a-a475-d4d316d5b71f": {
-    "unit_number": "6.1",
-    "position": 1,
-    "orientation": "S",
-    "terrace_surface": 38
+    "position": 1
    },
    "7a2578ac-30b6-4c2c-831c-f372ec5d68a8": {
-    "unit_number": "6.2",
-    "position": 2,
-    "orientation": "SW",
-    "terrace_surface": 52
+    "position": 2
    },
    "3e57d7d5-8ff8-4dfd-9a98-714933afc8ec": {
-    "unit_number": "1.4",
-    "position": 4,
-    "orientation": "E"
+    "position": 4
    },
    "3146b2d0-4134-4344-92dd-b46659f7395c": {
-    "unit_number": "1.5",
-    "position": 5,
-    "orientation": "NW"
+    "position": 5
    },
    "d97802d3-1222-4ae8-b51f-c69599560645": {
-    "unit_number": "2.4",
-    "position": 4,
-    "orientation": "NW"
+    "position": 4
    },
    "627d6242-6ed2-4b83-8c7c-3d4b2fdf2e9f": {
-    "unit_number": "2.5",
-    "position": 5,
-    "orientation": "S"
+    "position": 5
    },
    "502fed2e-5390-4160-adf3-5dafb85ac73b": {
-    "unit_number": "3.4",
-    "position": 4,
-    "orientation": "S"
+    "position": 4
    },
    "f13b529b-433b-4bf7-88df-a468e5fe5425": {
-    "unit_number": "3.5",
-    "position": 5,
-    "orientation": "SW"
+    "position": 5
    },
    "1ad49396-46c9-4747-9687-b727c3819634": {
-    "unit_number": "4.4",
-    "position": 4,
-    "orientation": "SW"
+    "position": 4
    },
    "0c1f059c-8e95-45b4-baad-8a5950b6f97a": {
-    "unit_number": "4.5",
-    "position": 5,
-    "orientation": "W"
+    "position": 5
    },
    "16ebaed0-161f-45fe-9dcf-189f4f373cee": {
-    "unit_number": "5.4",
-    "position": 4,
-    "orientation": "W",
-    "terrace_surface": 45
+    "position": 4
    },
    "7ffc3b9e-fc39-4fcb-ae2f-7dc411c73116": {
-    "unit_number": "5.5",
-    "position": 5,
-    "orientation": "SE",
-    "terrace_surface": 60
+    "position": 5
    }
   },
   "developments": {
    "8a70316e-1d57-4953-b308-82d0bf03c044": {
-    "developer": "Mirall Promocions SL",
-    "architect": "Taller Turia Arquitectura",
-    "general_contractor": "Construccions Albufera SL",
     "buildings": [],
     "documents": [],
     "construction_photos": [

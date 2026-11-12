@@ -3,8 +3,11 @@
  * `@realadvisor/sites-sdk` createClient, answered here from the example
  * fixture. On live data only `client` changes (createClient({ portals })).
  *
- * Fields the API does not carry yet are read through `unitExtra()` and
- * `developmentExtra()` (fixture only) and never merged into SDK objects.
+ * Fields the API does not carry yet (position on the floor, construction
+ * photos) are read through `unitExtra()` and `developmentExtra()` (fixture
+ * only) and never merged into SDK objects.
+ * Unit numbers, orientations, outdoor surfaces and the development's
+ * companies are API fields of the records.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
 import type { Agency } from '@realadvisor/sites-kit';
@@ -54,23 +57,16 @@ export const legalAgency = ({ org, team }: Pick<Site, 'org' | 'team'>): Agency =
 });
 
 export type UnitExtra = {
-  unit_number?: string;
   position?: number;
-  orientation?: string;
-  garden_surface?: number;
-  terrace_surface?: number;
 };
 
-/** fixture only: unit number, position on the floor, orientation, garden or terrace surface. */
+/** fixture only: position on the floor. */
 export const unitExtra = (u: Pick<Unit, 'id'>): UnitExtra => fixtureOnly(fx, 'units', u.id) as UnitExtra;
 
 export type DevelopmentExtra = {
-  developer?: string;
-  architect?: string;
-  general_contractor?: string;
   construction_photos?: string[];
 };
 
-/** fixture only: developer, architect, general contractor, construction photos. */
+/** fixture only: construction photos. */
 export const developmentExtra = (d: Pick<DevelopmentWithUnits, 'id'>): DevelopmentExtra =>
   fixtureOnly(fx, 'developments', d.id) as DevelopmentExtra;

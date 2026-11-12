@@ -6,22 +6,10 @@
  */
 import type { Agent, Listing, Organisation, Team } from '@realadvisor/sites-sdk/types';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit/fixture';
 
 const fx = fixture as unknown as Fixture;
 export const sites = createFixtureClient(fx);
-
-/** Fields the API does not have yet (fixture only). Never present them as API data. */
-export type ListingExtras = {
-  energy_class?: string;
-  year_built?: number;
-  floor?: number;
-  terrace_surface?: number;
-  balcony_surface?: number;
-  charges?: number;
-};
-// fixture only: every read of these extras goes through this one function.
-export const listingExtras = (id: string): ListingExtras => fixtureOnly(fx, 'listings', id) as ListingExtras;
 
 export type Site = { org: Organisation; team: Team; agents: Agent[] };
 

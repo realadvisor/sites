@@ -15,7 +15,7 @@ import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { FloorPlate } from '../components/FloorPlate';
 import { People, person } from '../components/People';
-import { listingExtra, loadSite, sites } from '../lib/data.server';
+import { loadSite, sites } from '../lib/data.server';
 import { CONTENT_LANG, LANGS, LOCALE_OF, fill, href, langOfPath, tr } from '../lib/i18n';
 import {
   deliveryLabel, floorName, floorsOf, kindLabel, kindOf, orientation, outdoor, outdoorLabel, planKey, planSrc, sortUnits, statusLabel,
@@ -41,7 +41,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const key = planKey(u);
   const planDims = (PLAN_SIZES as Record<string, { full: number[]; fit: number[] }>)[key]?.fit ?? [960, 700];
   const listing = u.listing_slug ? await sites.listing(u.listing_slug) : null;
-  const energy = listing ? listingExtra(listing.id).energy_class : undefined; // fixture only: energy class
+  const energy = listing?.energy_class;
   const sameFloor = units.filter((x) => wingOf(x) === wing && x.floor === u.floor);
   const scale = Math.max(...floorsOf(units, wing).map((f) => units.filter((x) => wingOf(x) === wing && x.floor === f).reduce((s, x) => s + (x.living_surface ?? 0), 0)));
   const similar = units.filter((x) => x.id !== u.id && kindOf(x) === kindOf(u) && x.status !== 'sold').slice(0, 4);

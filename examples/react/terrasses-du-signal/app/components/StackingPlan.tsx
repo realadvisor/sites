@@ -40,7 +40,7 @@ export function StackingPlan({ units, extras, current, rooms = null, onlyAvailab
             <span className="fl"><span className="fl-long">{r.name}</span><span className="fl-short" aria-hidden="true">{short(r.floor, r.name)}</span></span>
             <div className="row" style={{ '--w': `${((r.area / maxArea) * 100).toFixed(2)}%` } as CSSProperties}>
               {r.units.map((u) => {
-                const no = unitExtra(extras, u).unit_number; // fixture only: unit number
+                const no = u.reference;
                 const isCurrent = current === u.id;
                 return (
                   <a

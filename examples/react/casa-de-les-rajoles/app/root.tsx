@@ -14,7 +14,7 @@ import './styles/global.css';
 import { KitProvider, KitScripts } from '@realadvisor/sites-kit-react/components/Document';
 import { ConsentBanner } from '@realadvisor/sites-kit-react/components/ConsentBanner';
 import { kitData } from '@realadvisor/sites-kit-react/server/kit';
-import { developmentExtra, loadSite } from './lib/data.server';
+import { loadSite } from './lib/data.server';
 import { LOCALE_OF, langOfPath } from './lib/i18n';
 import NotFound, { ServerError } from './routes/404';
 
@@ -27,7 +27,7 @@ export async function loader() {
       dev: { title: dev.title, address: dev.address },
       org: { name: org.name, address: org.address },
       team: team && { phone: team.phone, email: team.email },
-      developer: developmentExtra(dev).developer, // fixture only: developer name
+      developer: dev.developer?.name,
     },
   };
 }

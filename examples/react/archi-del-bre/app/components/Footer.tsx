@@ -1,22 +1,20 @@
 /**
  * Footer: the development and its address, the sales office (primary team),
- * the people behind it (fixture only), nav, languages and the legal links
+ * the people behind it, nav, languages and the legal links
  * in the page's language (kit legalPath / privacyPath).
  */
 import { legalPath, privacyPath, t } from '@realadvisor/sites-kit/i18n';
 import type { Site } from '../lib/data.server';
-import { developmentExtra } from '../lib/extras';
 import { href, LOCALE, tel, type L } from '../lib/routes';
 import { c } from '../lib/copy';
 import './Footer.css';
 
 export function Footer({ site, l, alternates }: { site: Site; l: L; alternates?: { lang: string; href: string }[] }) {
   const { dev, team, org } = site;
-  const extra = developmentExtra(dev); // fixture only: developer, architect, general contractor
   const credits = [
-    [c('developer', l), extra.developer],
-    [c('architect', l), extra.architect],
-    [c('contractor', l), extra.general_contractor],
+    [c('developer', l), dev.developer?.name],
+    [c('architect', l), dev.architect?.name],
+    [c('contractor', l), dev.general_contractor?.name],
   ].filter((x): x is [string, string] => !!x[1]);
   const a = dev.address;
   const office = team?.address ?? org.address;

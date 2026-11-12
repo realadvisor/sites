@@ -47,7 +47,7 @@ export function StackingPlan({ building: b, filters, current, compact = false, h
               {rowsOn(f).map((r) => {
                 const rent = netRent(r.u);
                 const dim = filters ? !matches(r, filters) : false;
-                const label = [unitTitle(r), r.x.number, statusLabel(r.u), rent ? `${chf(rent)} netto` : ''].filter(Boolean).join(', ');
+                const label = [unitTitle(r), r.u.reference, statusLabel(r.u), rent ? `${chf(rent)} netto` : ''].filter(Boolean).join(', ');
                 const isCurrent = current === r.u.id;
                 return (
                   <li style={{ flexGrow: (r.u.living_surface ?? 60) + 25 }} className="unit-cell" key={r.u.id}>
@@ -61,11 +61,10 @@ export function StackingPlan({ building: b, filters, current, compact = false, h
                       data-rooms={r.u.rooms}
                       data-rent={rent ?? ''}
                       data-floor={r.u.floor ?? 0}
-                      data-movein={r.x.moveIn?.slice(0, 7) ?? ''}
+                      data-movein={r.u.available_from?.slice(0, 7) ?? ''}
                       data-haus={r.x.building}
                     >
-                      {/* fixture only: unit number */}
-                      <span className="u-no">{r.x.number ?? floorShort(r.u)}</span>
+                      <span className="u-no">{r.u.reference ?? floorShort(r.u)}</span>
                       <span className="u-rooms">{String(r.u.rooms ?? '')}<span className="u-zi"> Zi.</span></span>
                       {!compact && (
                         <span className="u-rent num">

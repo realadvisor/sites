@@ -4,7 +4,8 @@
  * @realadvisor/sites-sdk interface): live data when the Worker has
  * SITES_API_URL + SITES_API_KEY, else the example fixture. Server only.
  *
- * Fields the API does not have yet live in `fixture_only` and are read only
+ * Fields the API does not have yet (position on the floor, buildings,
+ * documents, construction photos) live in `fixture_only` and are read only
  * through `extra()` ({} on live data): every use is marked `// fixture only:`.
  */
 import type { Agent, DevelopmentWithUnits, Listing, Team, Unit } from '@realadvisor/sites-sdk/types';
@@ -20,29 +21,14 @@ export const sites = siteClient({ fixture: fx });
 type Kind = 'listings' | 'units' | 'developments';
 /** Fixture-only extras of one record ({} on live data, where they do not exist yet). */
 export const extra = (kind: Kind, id: string): Record<string, unknown> => (hasLiveData() ? {} : fixtureOnly(fx, kind, id));
-export const extraStr = (kind: Kind, id: string, key: string) => {
-  const v = extra(kind, id)[key];
-  return typeof v === 'string' && v.trim() ? v : undefined;
-};
 export const extraNum = (kind: Kind, id: string, key: string) => {
   const v = extra(kind, id)[key];
   return typeof v === 'number' && Number.isFinite(v) ? v : undefined;
 };
 
-// fixture only: unit number, position on the floor, orientation, terrace and garden surfaces
+// fixture only: position on the floor
 export const unitExtras = (units: Pick<Unit, 'id'>[]): UnitExtras =>
-  Object.fromEntries(
-    units.map((u) => [
-      u.id,
-      {
-        unit_number: extraStr('units', u.id, 'unit_number'),
-        position: extraNum('units', u.id, 'position'),
-        orientation: extraStr('units', u.id, 'orientation'),
-        terrace_surface: extraNum('units', u.id, 'terrace_surface'),
-        garden_surface: extraNum('units', u.id, 'garden_surface'),
-      },
-    ]),
-  );
+  Object.fromEntries(units.map((u) => [u.id, { position: extraNum('units', u.id, 'position') }]));
 
 /** Everything most pages need, in one round of parallel calls. */
 export async function siteData() {

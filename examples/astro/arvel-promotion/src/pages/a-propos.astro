@@ -8,7 +8,7 @@ import Site from '../layouts/Site.astro';
 import Hero from '../components/Hero.astro';
 import ContactBand from '../components/ContactBand.astro';
 import AgentPhoto from '../components/AgentPhoto.astro';
-import { developmentExtra, primaryTeam, programmes as allProgrammes, sites } from '../lib/data';
+import { primaryTeam, programmes as allProgrammes, sites } from '../lib/data';
 import { contentFor } from '../content/programmes';
 import { ABOUT } from '../content/about';
 import { languageList, programmeStatus, programmeUrl, telHref } from '../lib/fr';
@@ -22,8 +22,7 @@ const photoOf = (i: number) => {
 };
 // Art direction: the delivered programme (last in the list) shows best what the developer builds.
 const hero = photoOf(Math.max(0, programmes.length - 1));
-// fixture only: developer, architect, general contractor
-const credits = programmes.map((d) => ({ d, x: developmentExtra(d) })).filter(({ x }) => x.architect || x.general_contractor);
+const credits = programmes.filter((d) => d.architect || d.general_contractor);
 ---
 <Site title={`À propos | ${name}, promoteur immobilier`} description={`${name}, promoteur immobilier à Annecy et Lyon : qui nous sommes, nos architectes, l’achat d’un logement neuf et vos conseillers.`} image={ogImage(hero?.url)} current="about">
   <Hero slot="hero" size="band" photo={hero?.url} alt={hero?.alt ?? name} kicker="À propos" title={name} line="Promoteur immobilier, bureau à Annecy, programmes en Haute-Savoie et dans le Rhône." />
@@ -57,8 +56,8 @@ const credits = programmes.map((d) => ({ d, x: developmentExtra(d) })).filter(({
           <table class="credits">
             <thead><tr><th scope="col">Programme</th><th scope="col">Architecte</th><th scope="col">Entreprise générale</th></tr></thead>
             <tbody>
-              {credits.map(({ d, x }) => (
-                <tr><th scope="row"><a href={programmeUrl(d)}>{d.title}</a><span class="muted"> · {d.address.city}</span></th><td>{x.architect ?? ''}</td><td>{x.general_contractor ?? ''}</td></tr>
+              {credits.map((d) => (
+                <tr><th scope="row"><a href={programmeUrl(d)}>{d.title}</a><span class="muted"> · {d.address.city}</span></th><td>{d.architect?.name ?? ''}</td><td>{d.general_contractor?.name ?? ''}</td></tr>
               ))}
             </tbody>
           </table>

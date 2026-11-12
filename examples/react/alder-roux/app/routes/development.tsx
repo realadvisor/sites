@@ -17,7 +17,6 @@ import { StackingPlan } from '../components/StackingPlan';
 import { StaticMap } from '../components/StaticMap';
 import { Img } from '../components/Img';
 import { extras, live, siteData, sites } from '../lib/data.server';
-import { extraStr } from '../lib/extras';
 import { agentSlug, href, langOf, LOCALE } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { formatAmount, formatSurface, monthYear, range, rooms, roomsRange, tel } from '../lib/format';
@@ -39,7 +38,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     phone: primary?.phone,
     agent: agent && { ...agent, slug: agentSlug(agent, agents) },
     lot: url.searchParams.get('lot'),
-    ex: { ...extras('units', dev.units.map((u) => u.id)), ...extras('developments', [dev.id]) },
+    ex: extras('units', dev.units.map((u) => u.id)),
     docs: devDocs(dev.slug, l, live()), // fixture only: documents
   };
 }
@@ -52,11 +51,10 @@ export default function Page({ loaderData: { l, dev, name, phone, agent, lot, ex
   const city = cityName(dev.address.city, l);
   const chosen = dev.units.find((u) => u.id === lot && u.status !== 'sold');
   const options = unitSelect(dev.units, l, ex);
-  // fixture only: developer, architect, general contractor
   const credits = [
-    { k: t('developer'), v: extraStr(ex, dev.id, 'developer') },
-    { k: t('architect'), v: extraStr(ex, dev.id, 'architect') },
-    { k: t('contractor'), v: extraStr(ex, dev.id, 'general_contractor') },
+    { k: t('developer'), v: dev.developer?.name },
+    { k: t('architect'), v: dev.architect?.name },
+    { k: t('contractor'), v: dev.general_contractor?.name },
   ].filter((c) => c.v);
   const figures = [
     dev.stats.units > 0 && { k: t('units'), v: t('unitsAvailable', { n: dev.stats.available, t: dev.stats.units }) },
@@ -67,7 +65,7 @@ export default function Page({ loaderData: { l, dev, name, phone, agent, lot, ex
   ].filter(Boolean) as { k: string; v: string }[];
   const place = [dev.address.street, [dev.address.postcode, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   const message = chosen
-    ? kt('unitInterested', { unit: unitInSentence(chosen, l, ex), title: dev.title }, klang(locale))
+    ? kt('unitInterested', { unit: unitInSentence(chosen, l), title: dev.title }, klang(locale))
     : kt('devInterested', { title: dev.title }, klang(locale));
   const tel1 = agent?.phone ?? phone;
   return (

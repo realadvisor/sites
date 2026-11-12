@@ -51,14 +51,13 @@ for (const [lang, t] of Object.entries(L)) {
     <img src="${imgSrc(dev.photos[0].url, 1400)}" style="width:100%;margin-bottom:14px">
     <div class="lead">${dev.description}</div>
     <div class="figs"><div><b>${dev.stats.units}</b>${t.units}</div><div><b>${t.from} ${chf(dev.stats.price.min)}</b>${t.price}</div><div><b>${dev.stats.living_surface.min}–${dev.stats.living_surface.max} m²</b>${t.area}</div><div><b>${new Intl.DateTimeFormat(t.locale, t.month).format(new Date(dev.delivery_date))}</b>${t.delivery}</div></div>
-    <p class="foot">${t.developer}: ${extra.developments[dev.id].developer} · ${t.architect}: ${extra.developments[dev.id].architect}</p>
+    <p class="foot">${t.developer}: ${dev.developer?.name ?? ''} · ${t.architect}: ${dev.architect?.name ?? ''}</p>
     <h2 style="break-before:page">${t.types}</h2><div class="plans">${plans}</div><p class="foot">${t.plan}</p>
     <h2>${t.contact}</h2><p class="lead">${fx.organisation.name}<br>${primary.address.street}, ${primary.address.postcode} ${primary.address.city}<br>${agent.first_name} ${agent.last_name} · ${agent.phone} · ${agent.email}</p>
   </body></html>`;
   const status = (s) => t[s];
   const rows = units.map((u) => {
-    const x = extra.units[u.id] ?? {};
-    return `<tr><td>${x.unit_number ?? ''}</td><td>${t.floors[u.floor] ?? u.floor}</td><td>${u.rooms}</td><td class="r">${u.living_surface} m²</td><td class="r">${x.terrace_surface ?? u.balcony_surface ?? ''} m²</td><td class="r">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${status(u.status)}</td></tr>`;
+    return `<tr><td>${u.reference ?? ''}</td><td>${t.floors[u.floor] ?? u.floor}</td><td>${u.rooms}</td><td class="r">${u.living_surface} m²</td><td class="r">${u.terrace_surface ?? u.balcony_surface ?? ''} m²</td><td class="r">${u.status === 'available' && u.price ? chf(u.price) : '–'}</td><td>${status(u.status)}</td></tr>`;
   }).join('');
   const prices = `<!doctype html><html lang="${lang}"><meta charset="utf-8"><style>${css}</style><body>
     <div class="band"><p class="k">${t.kicker}</p><h1>${t.priceList} · ${dev.title}</h1></div>

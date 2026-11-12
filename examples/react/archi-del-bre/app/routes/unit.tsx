@@ -57,6 +57,8 @@ export default function UnitPage({ loaderData: { l, site, id } }: Route.Componen
   const photos = u.photos ?? [];
   const same = list.filter((x) => x !== u && x.rooms === u.rooms && isPenthouse(x, all) === pent && x.status !== 'sold');
   const roomsTxt = formatRooms(u.rooms, l);
+  // The API's description in the page language (Italian, or German through `locale`); else a German text from the unit's fields.
+  const fromApi = !!u.description && (l === 'it' || u.text_locale === 'de');
   const descDe = unitTextDe({
     rooms: String(u.rooms ?? ''),
     surface: u.living_surface ? `${u.living_surface} m²` : '',
@@ -102,7 +104,7 @@ export default function UnitPage({ loaderData: { l, site, id } }: Route.Componen
     [c('bedrooms', l), u.bedrooms != null ? String(u.bedrooms) : ''],
     [c('bathrooms', l), u.bathrooms != null ? String(u.bathrooms) : ''],
     ...outs.slice(1).map((o) => [outdoorLabel(o, l), `${o.m2} m²`] as [string, string]),
-    [c('orientation', l), ori], // fixture only: orientation
+    [c('orientation', l), ori],
     [c('delivery', l), delivery],
   ].filter((x): x is [string, string] => !!x[1]);
   const alternates = LANGS.map((x) => ({ lang: LOCALE[x], href: unitPath(u, x) }));
@@ -187,7 +189,7 @@ export default function UnitPage({ loaderData: { l, site, id } }: Route.Componen
 
       <section className="wrap about">
         <h2 className="h3">{T.about}</h2>
-        {l === 'it' && u.description ? <div className="prose" dangerouslySetInnerHTML={{ __html: sanitizeHtml(u.description) }} /> : <div className="prose">{descDe.map((p) => <p key={p}>{p}</p>)}</div>}
+        {fromApi ? <div className="prose" lang={u.text_locale} dangerouslySetInnerHTML={{ __html: sanitizeHtml(u.description!) }} /> : <div className="prose">{descDe.map((p) => <p key={p}>{p}</p>)}</div>}
       </section>
 
       <section className="enquiry-band" id="richiesta">

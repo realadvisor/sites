@@ -5,10 +5,12 @@
  */
 import type { Agent, Listing, Organisation, Team } from '@realadvisor/sites-sdk/types';
 import raw from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { inPageLocale } from '@realadvisor/sites-kit/page-locale';
 
 const fixture = raw as unknown as Fixture;
-export const sites = createFixtureClient(fixture);
+// Texts in the page's language when the data has them.
+export const sites = inPageLocale(createFixtureClient(fixture));
 
 export type { Agent, Listing, Organisation, Team };
 
@@ -19,24 +21,6 @@ export async function agency() {
   return { org, team, teams };
 }
 export type AgencyData = Awaited<ReturnType<typeof agency>>;
-
-// fixture only: energy class (A–G) per listing. The API has no energy class
-// yet; a listing without one shows nothing.
-export function energyClass(listingId: string): string | undefined {
-  const v = fixtureOnly(fixture, 'listings', listingId).energy_class; // fixture only: energy_class
-  return typeof v === 'string' && /^[A-G]$/.test(v) ? v : undefined;
-}
-
-// fixture only: terrace surface (m²) and year built. The API has neither yet.
-export function extraFacts(listingId: string): { terrace?: number; yearBuilt?: number } {
-  const f = fixtureOnly(fixture, 'listings', listingId);
-  const terrace = f.terrace_surface; // fixture only: terrace_surface
-  const year = f.year_built; // fixture only: year_built
-  return {
-    terrace: typeof terrace === 'number' && terrace > 0 ? terrace : undefined,
-    yearBuilt: typeof year === 'number' && year > 1000 ? year : undefined,
-  };
-}
 
 const fold = (s = '') => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 export const slugify = (s: string) => fold(s).replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

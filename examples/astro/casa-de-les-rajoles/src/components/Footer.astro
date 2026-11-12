@@ -2,7 +2,6 @@
 /** Footer: a strip of the tile motif, address, sales office, pages, legal links. */
 import { t as kt, lang as kitLang } from '@realadvisor/sites-kit/i18n';
 import type { Site } from '../lib/data';
-import { developmentExtra } from '../lib/data';
 import { LANGS, LOCALE_OF, href, tr, type Lang, type Route } from '../lib/i18n';
 import { tel } from '../lib/docs';
 import Tiles from './Tiles.astro';
@@ -12,7 +11,6 @@ const { site, lang, alternates } = Astro.props;
 const { dev, org, team } = site;
 const t = tr(lang);
 const kl = kitLang(LOCALE_OF[lang]);
-const extra = developmentExtra(dev); // fixture only: developer name
 const PAGES: Route[] = ['units', 'plans', 'area', 'gallery', 'docs', 'contact'];
 const altOf = (l: Lang) => alternates.find((a) => a.lang === LOCALE_OF[l])?.href ?? href('home', l);
 const year = new Date().getFullYear();
@@ -39,7 +37,7 @@ const year = new Date().getFullYear();
     </nav>
   </div>
   <div class="wrap base">
-    <p>© {year} {extra.developer ?? org.name}</p>
+    <p>© {year} {dev.developer?.name ?? org.name}</p>
     <p class="links">
       <a href={href('legal', lang)}>{kt('legalNotice', {}, kl)}</a>
       <a href={href('privacy', lang)}>{kt('privacyPolicy', {}, kl)}</a>

@@ -21,7 +21,7 @@ import { StaticMap } from '../components/StaticMap';
 import { EnergyScale } from '../components/EnergyScale';
 import { Portrait } from '../components/Portrait';
 import { Affordability } from '../components/Affordability';
-import { cardOf, extraNum, extraStr, siteData, sites } from '../lib/data.server';
+import { cardOf, siteData, sites } from '../lib/data.server';
 import { agentSlug, href, langOfPath, LOCALE, teamSlug } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { dec, floor, formatAmount, formatSurface, price, tel, typeLabel } from '../lib/format';
@@ -54,14 +54,13 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     agent: agent && { id: agent.id, first_name: agent.first_name, last_name: agent.last_name, phone: agent.phone, photo: agent.photo, slug: agentSlug(agent, agents) },
     team: team && { city: team.address.city, name: team.name, phone: team.phone, slug: teamSlug(team, teams) },
     similar,
-    // fixture only: energy class, year built, floor, terrace / balcony surface, monthly charges
     ex: {
-      energy: extraStr('listings', x.id, 'energy_class'),
-      year: extraNum('listings', x.id, 'year_built'),
-      floor: extraNum('listings', x.id, 'floor'),
-      terrace: extraNum('listings', x.id, 'terrace_surface'),
-      balcony: extraNum('listings', x.id, 'balcony_surface'),
-      charges: extraNum('listings', x.id, 'charges'),
+      energy: x.energy_class,
+      year: x.construction_year,
+      floor: x.floor,
+      terrace: x.terrace_surface,
+      balcony: x.balcony_surface,
+      charges: x.charges,
     },
   };
 }

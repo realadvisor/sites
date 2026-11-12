@@ -3,6 +3,8 @@ import { setRuntimeEnv, siteMode, type SiteEnv } from './lib/env';
 import site from 'virtual:sites-kit/site';
 import { securityHeaders } from './lib/security.mjs';
 import { notFoundPage, renderFailed } from './lib/render-error';
+import { localeOfPath } from './lib/i18n';
+import { withPageLocale } from './lib/page-locale';
 
 /**
  * Hands the Worker env (SITE_MODE, SITES_API_URL, ...) to lib/env.ts,
@@ -47,7 +49,10 @@ function redirectFor(url: URL): string | null {
   return to.includes('?') || !url.search ? to : `${to}${url.search}`;
 }
 
-export const onRequest = defineMiddleware(async (context, next) => {
+// Every request renders with its page locale (lib/page-locale.ts): the data helpers read texts in it.
+export const onRequest = defineMiddleware((context, next) => withPageLocale(localeOfPath(context.url.pathname), () => handle(context, next)));
+
+const handle: Parameters<typeof defineMiddleware>[0] = async (context, next) => {
   const locals = context.locals as { runtime?: { env?: SiteEnv } };
   setRuntimeEnv(locals.runtime?.env);
   const moved = redirectFor(context.url);
@@ -85,4 +90,4 @@ export const onRequest = defineMiddleware(async (context, next) => {
     // immutable headers (Response.redirect): nothing to secure in a redirect
   }
   return res;
-});
+};

@@ -30,9 +30,9 @@ export function unitPrice(u: Pick<Unit, 'status' | 'price' | 'price_on_request'>
 /** "4.5 pièces · 2e étage" */
 export const unitLabel = (u: Unit) => [formatRooms(u.rooms) || t('unit'), floorName(u)].filter(Boolean).join(' · ');
 
-/** "Lot 2.3" when the fixture has a number (fixture only), else ''. */
+/** "Lot 2.3" when the unit has a number, else ''. */
 export const unitNumber = (u: Unit) => {
-  const n = unitExtra(u).unit_number; // fixture only: unit number
+  const n = u.reference;
   return n ? `Lot ${n}` : '';
 };
 
@@ -59,21 +59,23 @@ export const sortUnits = (units: Unit[]) =>
 
 export type Outdoor = { kind: 'garden' | 'terrace' | 'balcony'; label: string; m2: number };
 
-/** Outdoor space: the API's balcony surface, else the fixture's garden or terrace. */
+/** Outdoor space: the garden, else the balcony, else the terrace. */
 export function outdoor(u: Unit): Outdoor | null {
-  const x = unitExtra(u);
-  if (x.garden_surface) return { kind: 'garden', label: 'Jardin privatif', m2: x.garden_surface }; // fixture only: garden surface
+  if (u.garden_surface) return { kind: 'garden', label: 'Jardin privatif', m2: u.garden_surface };
   if (u.balcony_surface) return { kind: 'terrace', label: 'Terrasse', m2: u.balcony_surface };
-  if (x.terrace_surface) return { kind: 'terrace', label: 'Terrasse', m2: x.terrace_surface }; // fixture only: terrace surface
+  if (u.terrace_surface) return { kind: 'terrace', label: 'Terrasse', m2: u.terrace_surface };
   return null;
 }
 
 const ORIENT: Record<string, string> = {
   N: 'Nord', S: 'Sud', E: 'Est', W: 'Ouest', NE: 'Nord-est', NW: 'Nord-ouest', SE: 'Sud-est', SW: 'Sud-ouest',
 };
-/** fixture only: orientation, in words. */
+/** ['south', 'west'] -> 'SW', the key of ORIENT. */
+const orientationCode = (o: Unit['orientation']) =>
+  [o?.includes('north') ? 'N' : o?.includes('south') ? 'S' : '', o?.includes('east') ? 'E' : o?.includes('west') ? 'W' : ''].join('');
+/** The orientation, in words. */
 export const orientation = (u: Unit) => {
-  const o = unitExtra(u).orientation; // fixture only: orientation
+  const o = orientationCode(u.orientation);
   return o ? (ORIENT[o] ?? o) : '';
 };
 

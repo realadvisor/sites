@@ -30,7 +30,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const d = await sites.development(params.slug);
   if (!d) throw notFound();
   const { org, teams, agents } = await siteData();
-  // fixture only: developer, architect, general contractor, construction photos
+  // fixture only: construction photos
   const x = extra('developments', d.id);
   const agent = d.agents[0] ? (agents.find((a) => a.id === d.agents[0]!.id) ?? d.agents[0]) : undefined;
   return {
@@ -42,7 +42,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     agents: agents.map(({ id, first_name, last_name }) => ({ id, first_name, last_name })),
     agent,
     lot: url.searchParams.get('lot') ?? undefined,
-    credits: { developer: x.developer, architect: x.architect, contractor: x.general_contractor } as Record<string, unknown>,
+    credits: { developer: d.developer?.name, architect: d.architect?.name, contractor: d.general_contractor?.name },
     site: Array.isArray(x.construction_photos) ? (x.construction_photos as unknown[]).filter((u): u is string => typeof u === 'string') : [],
     asOf: new Date().toISOString(),
   };
@@ -144,17 +144,17 @@ export default function Development({ loaderData: { l, d, orgName, ux, teams, ag
               </thead>
               <tbody>
                 {units.map((u) => {
-                  const out = outdoor(u, l, ux);
+                  const out = outdoor(u, l);
                   return (
                     <tr key={u.id} className={`st-${u.status}`} data-status={u.status}>
-                      <th scope="row" className="num">{unitNo(u, ux) ?? '–'}</th>
+                      <th scope="row" className="num">{unitNo(u) ?? '–'}</th>
                       <td>{floorShort(u.floor, l, isAttic(u))}</td>
                       <td className="r num">{u.rooms != null && <><span className="d">{dec(u.rooms, l)}</span><span className="m">{rooms(u.rooms, l)}</span></>}</td>
                       <td className="r num">{u.living_surface != null ? formatSurface(u.living_surface) : ''}</td>
                       <td className="r num">{out ? `${formatSurface(out.m2)}` : ''}</td>
                       <td className="r num price">{unitPrice(u, l)}</td>
                       <td><span className={`pill pill--${u.status}`}>{statusLabel(u.status, l)}</span></td>
-                      <td className="go"><a href={unitHref(d, u, l)} aria-label={`${t('unitN', { n: unitNo(u, ux) ?? '' })}: ${statusLabel(u.status, l)}`}>{t('plan')} →</a></td>
+                      <td className="go"><a href={unitHref(d, u, l)} aria-label={`${t('unitN', { n: unitNo(u) ?? '' })}: ${statusLabel(u.status, l)}`}>{t('plan')} →</a></td>
                     </tr>
                   );
                 })}

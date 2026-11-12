@@ -19,7 +19,7 @@ import AgentCard from '../components/AgentCard.astro';
 import ListingCard from '../components/ListingCard.astro';
 import StaticMap from '../components/StaticMap.astro';
 import EnergyScale from '../components/EnergyScale.astro';
-import { extraNum, extraStr, siteData, sites } from '../lib/data';
+import { siteData, sites } from '../lib/data';
 import { href, LOCALE, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { bathrooms, bedrooms, formatSurface, money, price, tel, typeLabel } from '../lib/format';
@@ -43,12 +43,11 @@ const kitX = x;
 const all = await sites.allListings();
 const sameCity = all.filter((o) => o.address.city === x.address.city);
 
-// fixture only: energy class, year built, terrace, floor and extra costs (not in the API yet)
-const energy = extraStr('listings', x.id, 'energy_class');
-const yearBuilt = extraNum('listings', x.id, 'year_built');
-const terrace = extraNum('listings', x.id, 'terrace_surface');
-const floor = extraNum('listings', x.id, 'floor');
-const charges = x.offer_type === 'rent' ? extraNum('listings', x.id, 'charges') : undefined;
+const energy = x.energy_class;
+const yearBuilt = x.construction_year;
+const terrace = x.terrace_surface;
+const floor = x.floor;
+const charges = x.offer_type === 'rent' ? x.charges : undefined;
 
 const C = {
   en: {
@@ -135,7 +134,6 @@ const title = `${listingTitle(kitX, sameCity)} | ${price(x, l)}`;
 
       {energy && (
         <section class="block">
-          {/* fixture only: energy class */}
           <h2 class="block__h">{C.energy}</h2>
           <EnergyScale value={energy} label={C.energy} classLabel={C.klass(energy)} />
         </section>

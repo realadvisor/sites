@@ -16,6 +16,10 @@
  *   developments of every development-<slug>.json there. No network, and
  *   enquiries are never sent.
  *
+ * On a site with more than one locale, listings and developments come in the
+ * page's language (`locale`, from the URL: lib/page-locale.ts) when the CRM
+ * has their texts in it; `text_locale` then says so.
+ *
  * Pages that show listings, agents or agency data render on request
  * (`export const prerender = false`) so production gets live data.
  *
@@ -28,6 +32,7 @@ import { SITES_API_KEY, SITES_API_URL, SITES_FIXTURE } from 'astro:env/server';
 import fixtures from 'virtual:sites-kit/fixtures';
 import { previewApi } from './env';
 import { agencyOf, type Agency, type SiteFixture } from './agency';
+import { withTextLocale } from './page-locale';
 
 export type { Address, Agent, Development, DevelopmentWithUnits, Listing, Organisation, Photo, Team, Unit } from '@realadvisor/sites-sdk/types';
 export type { Agency, SiteFixture };
@@ -102,11 +107,11 @@ export const ra: SiteClient = {
   organisation: () => client().organisation(),
   teams: () => client().teams(),
   agents: (q) => client().agents(q),
-  listings: (q) => client().listings(q),
-  allListings: (q) => client().allListings(q),
-  listing: (slugOrId) => client().listing(slugOrId),
-  developments: (q) => client().developments(q),
-  development: (slugOrId) => client().development(slugOrId),
+  listings: (q) => client().listings(withTextLocale(q)),
+  allListings: (q) => client().allListings(withTextLocale(q)),
+  listing: (slugOrId, q) => client().listing(slugOrId, withTextLocale(q)),
+  developments: (q) => client().developments(withTextLocale(q)),
+  development: (slugOrId, q) => client().development(slugOrId, withTextLocale(q)),
   turnstileSiteKey: () => client().turnstileSiteKey(),
   live: liveClient,
   agency: async () => {

@@ -11,11 +11,16 @@
  * - Otherwise: the fixture (`pnpm dev`, the build, check:deploy), with the
  *   same filters as the API, so a page runs unchanged on both.
  *
+ * On a site with more than one locale, listings and developments come in the
+ * page's language (`pageLocale(request)`, set by the worker for each request)
+ * when the CRM has their texts in it; `text_locale` then says so.
+ *
  * Server only: never import it from app/client.ts or an island.
  */
 import { createClient, createFixtureClient } from '@realadvisor/sites-sdk';
 import type { Portals, SitesClient } from '@realadvisor/sites-sdk/types';
 import { previewApi } from '@realadvisor/sites-kit/env';
+import { withTextLocale } from '@realadvisor/sites-kit/page-locale';
 import type { Fixture } from './fixture-client';
 
 export { createFixtureClient, fixtureOnly, type Fixture } from './fixture-client';
@@ -67,11 +72,11 @@ export function siteClient({ fixture, portals = fixture.portals }: SiteClientOpt
     organisation: () => pick().organisation(),
     teams: () => pick().teams(),
     agents: (q) => pick().agents(q),
-    listings: (q) => pick().listings(q),
-    allListings: (q) => pick().allListings(q),
-    listing: (s) => pick().listing(s),
-    developments: (q) => pick().developments(q),
-    development: (s) => pick().development(s),
+    listings: (q) => pick().listings(withTextLocale(q)),
+    allListings: (q) => pick().allListings(withTextLocale(q)),
+    listing: (s, q) => pick().listing(s, withTextLocale(q)),
+    developments: (q) => pick().developments(withTextLocale(q)),
+    development: (s, q) => pick().development(s, withTextLocale(q)),
     turnstileSiteKey: () => pick().turnstileSiteKey(),
   };
 }

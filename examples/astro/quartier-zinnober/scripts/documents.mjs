@@ -12,9 +12,8 @@ const root = new URL('../', import.meta.url);
 const fx = JSON.parse(readFileSync(new URL('src/data/fixture.json', root), 'utf8'));
 const dev = fx.developments[0];
 const team = fx.teams.find((t) => t.primary) ?? fx.teams[0];
-// fixture only: unit number, building, move-in date, charges; developer, architect
+// fixture only: building, position; buildings, documents, construction photos
 const xu = (id) => fx.fixture_only.units[id] ?? {};
-const xd = fx.fixture_only.developments[dev.id] ?? {};
 const STAND = '11. November 2026';
 
 const chf = (n) => `CHF ${new Intl.NumberFormat('de-CH').format(n)}`;
@@ -61,7 +60,7 @@ const mark = `<span class="mark"><i></i><b>Quartier<br>Zinnober</b></span>`;
 
 // 1. Brochure
 const stats = dev.stats;
-const moves = houses.map((h) => [h, units.find((r) => r.x.building === h)?.x.move_in_date]).filter(([, d]) => d);
+const moves = houses.map((h) => [h, units.find((r) => r.x.building === h)?.u.available_from]).filter(([, d]) => d);
 const brochure = doc([
   `<section class="page z" style="display:flex;flex-direction:column;justify-content:space-between">
     ${mark}
@@ -79,9 +78,9 @@ const brochure = doc([
       ${moves.map(([h, d], i) => `<div class="${['z', 'lilac', 'butter'][i] ?? 'lilac'}" style="padding:6mm;border:0.6mm solid #140F3A;border-radius:4mm"><b style="font-size:22pt">Haus ${h}</b><p style="margin-top:3mm">Bezug ab<br><b>${month(d)}</b></p><p>${units.filter((r) => r.x.building === h && r.u.status === 'available').length} von ${units.filter((r) => r.x.building === h).length} frei</p></div>`).join('')}
     </div>
     <table style="margin-top:12mm;font-size:10pt"><tbody>
-      ${xd.developer ? `<tr><td>Bauherrschaft</td><td><b>${esc(xd.developer)}</b></td></tr>` : ''}
-      ${xd.architect ? `<tr><td>Architektur</td><td><b>${esc(xd.architect)}</b></td></tr>` : ''}
-      ${xd.general_contractor ? `<tr><td>Totalunternehmung</td><td><b>${esc(xd.general_contractor)}</b></td></tr>` : ''}
+      ${dev.developer ? `<tr><td>Bauherrschaft</td><td><b>${esc(dev.developer.name)}</b></td></tr>` : ''}
+      ${dev.architect ? `<tr><td>Architektur</td><td><b>${esc(dev.architect.name)}</b></td></tr>` : ''}
+      ${dev.general_contractor ? `<tr><td>Totalunternehmung</td><td><b>${esc(dev.general_contractor.name)}</b></td></tr>` : ''}
       <tr><td>Adresse</td><td><b>${esc(dev.address.street)}, ${esc(dev.address.postcode)} ${esc(dev.address.city)}</b></td></tr>
     </tbody></table>
     ${foot('Broschüre')}
@@ -106,7 +105,7 @@ const brochure = doc([
 ]);
 
 // 2. Rent list
-const rows = (rs) => rs.map(({ u, x }) => `<tr class="${u.status}"><td><b>${esc(x.unit_number)}</b></td><td>Haus ${esc(x.building)}</td><td>${u.floor === 0 ? 'EG' : `${u.floor}. OG`}</td><td>${String(u.rooms)}</td><td class="r">${u.living_surface} m²</td><td class="r">${u.balcony_surface ?? ''} m²</td><td>${x.move_in_date ? month(x.move_in_date) : ''}</td><td class="r">${rentOf(u) ? chf(u.price) : '–'}</td><td class="r">${rentOf(u) && x.charges ? chf(x.charges) : '–'}</td><td class="r"><b>${rentOf(u) && x.charges ? chf(u.price + x.charges) : '–'}</b></td><td>${STATUS[u.status]}</td></tr>`).join('');
+const rows = (rs) => rs.map(({ u, x }) => `<tr class="${u.status}"><td><b>${esc(u.reference)}</b></td><td>Haus ${esc(x.building)}</td><td>${u.floor === 0 ? 'EG' : `${u.floor}. OG`}</td><td>${String(u.rooms)}</td><td class="r">${u.living_surface} m²</td><td class="r">${u.balcony_surface ?? ''} m²</td><td>${u.available_from ? month(u.available_from) : ''}</td><td class="r">${rentOf(u) ? chf(u.price) : '–'}</td><td class="r">${rentOf(u) && u.charges ? chf(u.charges) : '–'}</td><td class="r"><b>${rentOf(u) && u.charges ? chf(u.price + u.charges) : '–'}</b></td><td>${STATUS[u.status]}</td></tr>`).join('');
 const head = `<thead><tr><th>Nr.</th><th>Haus</th><th>Geschoss</th><th>Zimmer</th><th class="r">Fläche</th><th class="r">Aussen</th><th>Bezug</th><th class="r">Netto</th><th class="r">NK</th><th class="r">Brutto</th><th>Status</th></tr></thead>`;
 const half = Math.ceil(units.length / 2);
 const rentlist = doc([0, 1].map((p) => `<section class="page">
@@ -123,7 +122,7 @@ const plans = doc(types.map((t) => {
     <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:10mm">${mark}<p class="eyebrow">Grundrisse</p></div>
     <h2>${String(t)} Zimmer · ${rs[0].u.living_surface} m²</h2>
     <div class="plan" style="border:0.5mm solid #140F3A;border-radius:3mm;overflow:hidden">${plan(t)}</div>
-    <p style="margin-top:6mm">Wohnungen dieses Typs: ${rs.map((r) => esc(r.x.unit_number)).join(', ')}.</p>
+    <p style="margin-top:6mm">Wohnungen dieses Typs: ${rs.map((r) => esc(r.u.reference)).join(', ')}.</p>
     <p style="font-size:8.5pt;color:#4A4566">Grundriss indikativ, gespiegelt oder gedreht je nach Lage im Haus. Massgebend sind die Ausführungspläne. Loggia beziehungsweise Gartensitzplatz je nach Geschoss.</p>
     ${foot('Grundrisse')}
   </section>`;

@@ -15,7 +15,7 @@ import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
 import StackingPlan from '../components/StackingPlan.astro';
 import StaticMap from '../components/StaticMap.astro';
-import { extraStr, live, siteData, type DevelopmentWithUnits } from '../lib/data';
+import { live, siteData, type DevelopmentWithUnits } from '../lib/data';
 import { agentSlug, href, LOCALE, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { formatAmount, formatSurface, monthYear, range, rooms, roomsRange, tel } from '../lib/format';
@@ -34,11 +34,10 @@ const agent = dev.agents[0] ? (agents.find((a) => a.id === dev.agents[0]!.id) ??
 const lot = Astro.url.searchParams.get('lot');
 const chosen = dev.units.find((u) => u.id === lot && u.status !== 'sold');
 const options = unitSelect(dev.units, l);
-// fixture only: developer, architect, general contractor
 const credits = [
-  { k: t('developer'), v: extraStr('developments', dev.id, 'developer') },
-  { k: t('architect'), v: extraStr('developments', dev.id, 'architect') },
-  { k: t('contractor'), v: extraStr('developments', dev.id, 'general_contractor') },
+  { k: t('developer'), v: dev.developer?.name },
+  { k: t('architect'), v: dev.architect?.name },
+  { k: t('contractor'), v: dev.general_contractor?.name },
 ].filter((c) => c.v);
 const docs = devDocs(dev.slug, l, live); // fixture only: documents
 const figures = [

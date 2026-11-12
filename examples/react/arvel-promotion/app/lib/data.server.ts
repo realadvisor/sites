@@ -30,7 +30,7 @@ export async function programmes() {
 // Fields the API does not have yet. Never put them into an SDK-shaped object:
 // loaders pass them next to the record, keyed by id.
 
-/** Extras of every unit of a development (unit_number, position, orientation, terrace_surface). */
+/** Extras of every unit of a development (position on the floor). */
 export const unitExtras = (d: Pick<DevelopmentWithUnits, 'units'>): UnitExtras =>
   Object.fromEntries(d.units.map((u) => [u.id, fixtureOnly(fx, 'units', u.id)])) as UnitExtras;
 export const developmentExtra = (d: { id: string }): DevelopmentExtra => fixtureOnly(fx, 'developments', d.id) as DevelopmentExtra;

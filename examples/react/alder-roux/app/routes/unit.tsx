@@ -13,7 +13,6 @@ import { Layout } from '../components/Layout';
 import { Crumbs } from '../components/Crumbs';
 import { Img } from '../components/Img';
 import { extras, findUnit, siteData } from '../lib/data.server';
-import { extraStr } from '../lib/extras';
 import { agentSlug, href, langOf, LOCALE, unitSlug } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { floor, formatSurface, orientation, price, rooms, tel } from '../lib/format';
@@ -35,11 +34,10 @@ export default function Page({ loaderData: { l, dev, unit: u, name, agent, ex } 
   const locale = LOCALE[l];
   const types = unitTypes(dev.units, ex);
   const type = typeOf(types, u);
-  const title = unitTitle(u, l, ex);
+  const title = unitTitle(u, l);
   const city = cityName(dev.address.city, l);
-  // fixture only: orientation
-  const ori = orientation(extraStr(ex, u.id, 'orientation'), l);
-  const out = outdoor(u, ex);
+  const ori = orientation(u.orientation, l);
+  const out = outdoor(u);
   const facts = [
     u.rooms != null && { k: t('rooms'), v: String(u.rooms) },
     u.bedrooms != null && { k: t('bedrooms'), v: String(u.bedrooms) },
@@ -96,7 +94,7 @@ export default function Page({ loaderData: { l, dev, unit: u, name, agent, ex } 
               {siblings.map((s) => (
                 <li key={s.id}>
                   <a href={unitHref(dev, s, l)}>
-                    <span className="sibs__t">{unitTitle(s, l, ex)}</span>
+                    <span className="sibs__t">{unitTitle(s, l)}</span>
                     <span>{unitLine(s, l)} · {formatSurface(s.living_surface)}</span>
                     <span className={`pill pill--${s.status}`}>{statusLabel(s.status, l)}</span>
                     {s.status === 'available' && <span className="num sibs__p">{price({ ...s, status: 'available' }, l)}</span>}
@@ -124,8 +122,8 @@ export default function Page({ loaderData: { l, dev, unit: u, name, agent, ex } 
           </div>
           <div className="contact__form">
             {canAsk
-              ? <EnquiryForm locale={locale} developmentId={dev.id} lotId={u.id} agentName={agent?.first_name} message={kt('unitInterested', { unit: unitInSentence(u, l, ex), title: dev.title }, klang(locale))} />
-              : <EnquiryForm locale={locale} developmentId={dev.id} units={dev.units.filter((x) => x.status !== 'sold').map((x) => ({ value: x.id, label: `${unitTitle(x, l, ex)} · ${unitLine(x, l)}` }))} agentName={agent?.first_name} message={kt('devInterested', { title: dev.title }, klang(locale))} />}
+              ? <EnquiryForm locale={locale} developmentId={dev.id} lotId={u.id} agentName={agent?.first_name} message={kt('unitInterested', { unit: unitInSentence(u, l), title: dev.title }, klang(locale))} />
+              : <EnquiryForm locale={locale} developmentId={dev.id} units={dev.units.filter((x) => x.status !== 'sold').map((x) => ({ value: x.id, label: `${unitTitle(x, l)} · ${unitLine(x, l)}` }))} agentName={agent?.first_name} message={kt('devInterested', { title: dev.title }, klang(locale))} />}
           </div>
         </div>
       </section>

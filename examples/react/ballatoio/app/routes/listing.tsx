@@ -16,7 +16,7 @@ import { Site } from '../components/Site';
 import { ListingCard } from '../components/ListingCard';
 import { AgentBlock } from '../components/AgentBlock';
 import { Photo } from '../components/Photo';
-import { agency, cardOf, extras, sites } from '../lib/data.server';
+import { agency, cardOf, sites } from '../lib/data.server';
 import type { Listing } from '../lib/data';
 import { districtOf, placeOf } from '../lib/districts';
 import { CONTENT_LANG, LOCALE_OF, UI, alternates, fill, href, langOfPath } from '../lib/i18n';
@@ -39,7 +39,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     city ? sites.allListings({ city }) : Promise.resolve([] as Listing[]),
     sites.allListings({ status: 'available', offer_type: l.offer_type }),
   ]);
-  const x = extras(l.id); // fixture only: energy class, year, floor, terrace, balcony, charges
   const district = districtOf(l);
   const place = placeOf(l);
 
@@ -77,7 +76,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     title: `${listingTitle(kl, sameCity)} | ${price(l, lang)}`,
     description: (desc || l.title).slice(0, 158),
     jsonLd: listingJsonLd(kl, new URL(url.pathname, siteUrl()).href),
-    facts: factRows(l, x, lang, place),
+    facts: factRows(l, lang, place),
     keyFacts: [rooms(l.rooms, lang), baths(l.bathrooms, lang), surface(l.living_surface)].filter(Boolean),
     place,
     district: district && { slug: district.slug, name: district.name },

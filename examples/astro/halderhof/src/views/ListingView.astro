@@ -20,7 +20,7 @@ import StaticMap from '../components/StaticMap.astro';
 import EnergyScale from '../components/EnergyScale.astro';
 import Portrait from '../components/Portrait.astro';
 import Affordability from '../components/Affordability.astro';
-import { extraNum, extraStr, siteData, sites } from '../lib/data';
+import { siteData, sites } from '../lib/data';
 import { agentSlug, href, LOCALE, teamSlug, type L } from '../lib/routes';
 import { cityName, tx } from '../lib/copy';
 import { dec, floor, formatAmount, formatSurface, price, tel, typeLabel } from '../lib/format';
@@ -43,13 +43,12 @@ const isRent = x.offer_type === 'rent';
 const sold = x.status === 'sold';
 const city = cityName(x.address.city, l);
 
-// fixture only: energy class, year built, floor, terrace / balcony surface, monthly charges
-const energy = extraStr('listings', x.id, 'energy_class');
-const year = extraNum('listings', x.id, 'year_built');
-const fl = extraNum('listings', x.id, 'floor');
-const terrace = extraNum('listings', x.id, 'terrace_surface');
-const balcony = extraNum('listings', x.id, 'balcony_surface');
-const charges = extraNum('listings', x.id, 'charges');
+const energy = x.energy_class;
+const year = x.construction_year;
+const fl = x.floor;
+const terrace = x.terrace_surface;
+const balcony = x.balcony_surface;
+const charges = x.charges;
 
 const facts = [
   x.rooms != null && { k: t('rooms'), v: dec(x.rooms, l) },

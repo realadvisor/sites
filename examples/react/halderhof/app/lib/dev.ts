@@ -4,14 +4,14 @@
  * attic or not, garden level), so a live development with other units gets
  * its own; a type without a drawn plan shows no plan.
  *
- * Fixture-only unit fields arrive as `ux` (data.server unitExtras(): {} on live data).
+ * The fixture-only position on the floor arrives as `ux` (data.server unitExtras(): {} on live data).
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 import { href, unitSlug, type L } from './routes';
 import { floor, floorShort, formatAmount, rooms } from './format';
 import { tx } from './copy';
 
-export type UnitExtra = { unit_number?: string; position?: number; orientation?: string; terrace_surface?: number; garden_surface?: number };
+export type UnitExtra = { position?: number };
 /** Fixture-only unit fields by unit id. */
 export type UnitExtras = Record<string, UnitExtra>;
 
@@ -73,16 +73,15 @@ export function sortUnits(units: Unit[], ux: UnitExtras) {
   return [...units].sort((a, b) => (a.floor ?? 0) - (b.floor ?? 0) || pos(a) - pos(b) || (a.living_surface ?? 0) - (b.living_surface ?? 0));
 }
 
-// fixture only: unit number
-export const unitNo = (u: Unit, ux: UnitExtras) => ux[u.id]?.unit_number;
+export const unitNo = (u: Unit) => u.reference;
 
 /** "3,5 Zimmer · 1. Obergeschoss". */
 export const unitLine = (u: Unit, l: L) => [rooms(u.rooms, l), floor(u.floor, l, isAttic(u))].filter(Boolean).join(' · ');
 export const unitLineShort = (u: Unit, l: L) => [rooms(u.rooms, l), floorShort(u.floor, l, isAttic(u))].filter(Boolean).join(' · ');
 
 /** Heading: "Wohnung 1.1" when the fixture has a number, else rooms and floor. */
-export function unitTitle(u: Unit, l: L, ux: UnitExtras) {
-  const no = unitNo(u, ux);
+export function unitTitle(u: Unit, l: L) {
+  const no = unitNo(u);
   return no ? tx(l)('unitN', { n: no }) : unitLine(u, l);
 }
 
@@ -95,17 +94,16 @@ export const unitSelect = (units: Unit[], l: L, ux: UnitExtras) =>
   sortUnits(units, ux)
     .filter((u) => u.status !== 'sold')
     .map((u) => {
-      const no = unitNo(u, ux);
+      const no = unitNo(u);
       const line = unitLineShort(u, l);
       return { value: u.id, label: `${no ? `${no} · ` : ''}${line}${u.status === 'reserved' ? ` (${statusLabel('reserved', l)})` : ''}` };
     });
 
-/** Outdoor space: terrace or garden (fixture only), else the balcony from the data. */
-export function outdoor(u: Unit, l: L, ux: UnitExtras): { label: string; m2: number } | undefined {
+/** Outdoor space: garden or terrace, else the balcony. */
+export function outdoor(u: Unit, l: L): { label: string; m2: number } | undefined {
   const t = tx(l);
-  // fixture only: terrace and garden surfaces
-  const terrace = ux[u.id]?.terrace_surface;
-  const garden = ux[u.id]?.garden_surface;
+  const terrace = u.terrace_surface;
+  const garden = u.garden_surface;
   if (garden != null) return { label: t('garden'), m2: garden };
   if (terrace != null) return { label: t('terrace'), m2: terrace };
   if (u.balcony_surface != null) return { label: t('loggia'), m2: u.balcony_surface };

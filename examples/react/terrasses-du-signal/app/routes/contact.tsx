@@ -28,7 +28,7 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
   const office = [org.address?.street, [org.address?.postcode, org.address?.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   const name = dev.title.replace(/^Les /, '');
   const message = chosen
-    ? `Bonjour, je suis intéressé(e) par le ${[unitNumber(chosen, extras), unitLabel(chosen)].filter(Boolean).join(', ')} aux ${name}. Merci de me recontacter.`
+    ? `Bonjour, je suis intéressé(e) par le ${[unitNumber(chosen), unitLabel(chosen)].filter(Boolean).join(', ')} aux ${name}. Merci de me recontacter.`
     : brochure
       ? `Bonjour, je souhaite recevoir la brochure, les plans et la liste de prix des ${name}.`
       : `Bonjour, je souhaite en savoir plus sur les ${name} et visiter l’espace de vente.`;

@@ -143,6 +143,11 @@ Rules:
   emails. The same code must work on live data with different listings.
 - `ra.listings()` returns at most 200 items; `allListings(q)` pages for
   you (search, sitemap, agent pages).
+- Listings and units carry the CRM's facts (energy class, year built,
+  outdoor surfaces, floor, orientation, charges, parkings, move-in date,
+  ...; sdk/README.md lists them) and developments their developer,
+  architect and general contractor: read them from the record. Show codes
+  (`heating`, `orientation`, `minergie`) in words.
 - **Every optional field can be missing**: render nothing (not "undefined",
   "NaN", "0" or an empty box). `photos` and `features` are arrays but may
   be empty: `l.photos[0]?.url`, and a neutral tile when there is no photo.
@@ -294,7 +299,10 @@ After changing the search or map, run `pnpm kit test map` against
 - Multi-language sites (only when asked): one URL per language
   (`/fr/...`, `/de/...`), `locales` in site.json (default first), every
   page passes `alternates` (all versions) and `locale` to `Base`, and the
-  legal pages exist per language (`src/pages/[lang]/`).
+  legal pages exist per language (`src/pages/[lang]/`). `ra` then reads
+  listing and unit texts in the page's language by itself (the CRM's
+  translations, else the original): put `lang={l.text_locale}` on the
+  element that shows them.
 
 ## 9. One-development site
 

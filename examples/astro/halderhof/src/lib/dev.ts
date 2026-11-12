@@ -5,7 +5,7 @@
  * its own; a type without a drawn plan shows no plan.
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
-import { extraNum, extraStr } from './data';
+import { extraNum } from './data';
 import { href, unitSlug, type L } from './routes';
 import { floor, floorShort, formatAmount, rooms } from './format';
 import { tx } from './copy';
@@ -68,8 +68,7 @@ export function sortUnits(units: Unit[]) {
   return [...units].sort((a, b) => (a.floor ?? 0) - (b.floor ?? 0) || pos(a) - pos(b) || (a.living_surface ?? 0) - (b.living_surface ?? 0));
 }
 
-// fixture only: unit number
-export const unitNo = (u: Unit) => extraStr('units', u.id, 'unit_number');
+export const unitNo = (u: Unit) => u.reference;
 
 /** "3,5 Zimmer · 1. Obergeschoss". */
 export const unitLine = (u: Unit, l: L) => [rooms(u.rooms, l), floor(u.floor, l, isAttic(u))].filter(Boolean).join(' · ');
@@ -95,12 +94,11 @@ export const unitSelect = (units: Unit[], l: L) =>
       return { value: u.id, label: `${no ? `${no} · ` : ''}${line}${u.status === 'reserved' ? ` (${statusLabel('reserved', l)})` : ''}` };
     });
 
-/** Outdoor space: terrace or garden (fixture only), else the balcony from the data. */
+/** Outdoor space: garden or terrace, else the balcony. */
 export function outdoor(u: Unit, l: L): { label: string; m2: number } | undefined {
   const t = tx(l);
-  // fixture only: terrace and garden surfaces
-  const terrace = extraNum('units', u.id, 'terrace_surface');
-  const garden = extraNum('units', u.id, 'garden_surface');
+  const terrace = u.terrace_surface;
+  const garden = u.garden_surface;
   if (garden != null) return { label: t('garden'), m2: garden };
   if (terrace != null) return { label: t('terrace'), m2: terrace };
   if (u.balcony_surface != null) return { label: t('loggia'), m2: u.balcony_surface };

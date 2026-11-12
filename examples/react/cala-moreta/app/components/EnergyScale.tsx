@@ -1,6 +1,6 @@
 /**
  * Spanish energy certificate: the A–G scale with the listing's class marked.
- * fixture only: the class comes from fixture_only (energyClass() in lib/data.server.ts).
+ * The class is the listing's `energy_class`.
  */
 import { UI, type Lang } from '../lib/i18n';
 import './EnergyScale.css';

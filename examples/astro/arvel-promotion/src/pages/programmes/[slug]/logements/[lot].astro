@@ -12,7 +12,7 @@ import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
 import { sanitizeHtml } from '@realadvisor/sites-kit';
 import { featureLabel } from '@realadvisor/sites-kit/i18n';
 import { LOCALE } from '@realadvisor/sites-kit/format';
-import { sites, unitExtra } from '../../../../lib/data';
+import { orientationCode, sites } from '../../../../lib/data';
 import { documentsFor, formatBytes } from '../../../../content/documents';
 import {
   bedroomsText, deliveryText, floorName, formatSurface, orientationLabel, plural, programmeUrl, roomsText, statusLabel, typeCode, typeName,
@@ -24,9 +24,7 @@ const d = await sites.development(Astro.params.slug!);
 const id = unitIdFromPath(Astro.params.lot ?? '');
 const u = d && id ? d.units.find((x) => x.id === id) : undefined;
 if (!d || !u) return Astro.rewrite('/404');
-const x = unitExtra(u);
-// fixture only: terrace_surface (ground floor), unit_number, orientation
-const terrace = x.terrace_surface;
+const terrace = u.terrace_surface;
 const outdoor = terrace ?? u.balcony_surface;
 const facts = [
   { label: 'Type', value: `${typeCode(u)} · ${typeName(u)}` },
@@ -36,7 +34,7 @@ const facts = [
   { label: 'Pièces', value: roomsText(u) },
   { label: 'Chambres', value: bedroomsText(u) },
   { label: 'Salles de bains', value: u.bathrooms ? String(u.bathrooms) : '' },
-  { label: 'Orientation', value: orientationLabel(x.orientation) },
+  { label: 'Orientation', value: orientationLabel(orientationCode(u)) },
   { label: d.status === 'delivered' ? 'Livraison' : 'Livraison prévue', value: deliveryText(d).replace(/^Livraison |^Livré en /, '') },
 ].filter((f) => f.value);
 const photos = u.photos ?? [];
@@ -62,7 +60,7 @@ const price = unitPrice(u);
       </nav>
       <div class="grid">
         <figure class="plan paper">
-          <FloorPlan unit={u} orientation={x.orientation} terrace={terrace} />
+          <FloorPlan unit={u} orientation={orientationCode(u)} terrace={terrace} />
           <figcaption>Plan indicatif, non contractuel. Surfaces des pièces indicatives, calculées sur la surface habitable du logement.</figcaption>
         </figure>
         <div class="info">
@@ -71,7 +69,7 @@ const price = unitPrice(u);
             <span class="code">{typeCode(u)}</span>
             <span class="where">{typeName(u)}, {floorName(u).toLowerCase()}</span>
           </h1>
-          {x.unit_number && <p class="ref num">Lot {x.unit_number}</p>}
+          {u.reference && <p class="ref num">Lot {u.reference}</p>}
           <div class="big">
             {u.living_surface && <div><span class="v num">{u.living_surface}</span><span class="u">m² habitables</span></div>}
             {outdoor && <div><span class="v num">{outdoor}</span><span class="u">m² de {terrace ? 'terrasse' : 'balcon'}</span></div>}

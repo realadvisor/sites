@@ -63,7 +63,7 @@ export default function Compare({ loaderData: { l, site, ids: picks } }: Route.C
     [c('outdoor', l), (u) => outdoors(u).map((o) => `${outdoorLabel(o, l)} ${o.m2} m²`).join(', ') || '–'],
     [c('bedrooms', l), (u) => (u.bedrooms != null ? String(u.bedrooms) : '–')],
     [c('bathrooms', l), (u) => (u.bathrooms != null ? String(u.bathrooms) : '–')],
-    [c('orientation', l), (u) => orientation(u, l) || '–'], // fixture only: orientation
+    [c('orientation', l), (u) => orientation(u, l) || '–'],
     [c('price', l), (u) => (hasPrice(u) ? unitPrice(u, l) : '–')],
     [c('status', l), (u) => statusLabel(u, l)],
   ];

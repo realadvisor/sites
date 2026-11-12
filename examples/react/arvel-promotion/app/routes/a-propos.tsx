@@ -7,7 +7,7 @@ import { Layout } from '../components/Layout';
 import { Hero } from '../components/Hero';
 import { ContactBand } from '../components/ContactBand';
 import { AgentPhoto } from '../components/AgentPhoto';
-import { developmentExtra, primaryTeam, programmes as allProgrammes, sites } from '../lib/data.server';
+import { primaryTeam, programmes as allProgrammes, sites } from '../lib/data.server';
 import { contentFor } from '../content/programmes';
 import { ABOUT } from '../content/about';
 import { languageList, programmeStatus, programmeUrl, telHref } from '../lib/fr';
@@ -26,11 +26,9 @@ export async function loader() {
     programmes: programmes.map((d) => ({ id: d.id, slug: d.slug, title: d.title, status: d.status, address: { city: d.address.city } })),
     // Art direction: the delivered programme (last in the list) shows best what the developer builds.
     hero: photoOf(Math.max(0, programmes.length - 1)),
-    // fixture only: developer, architect, general contractor
     credits: programmes
-      .map((d) => ({ d: { slug: d.slug, title: d.title, city: d.address.city }, x: developmentExtra(d) }))
-      .filter(({ x }) => x.architect || x.general_contractor)
-      .map(({ d, x }) => ({ d, architect: x.architect, contractor: x.general_contractor })),
+      .filter((d) => d.architect || d.general_contractor)
+      .map((d) => ({ d: { slug: d.slug, title: d.title, city: d.address.city }, architect: d.architect?.name, contractor: d.general_contractor?.name })),
     team_: agents.map((a) => ({ a, ps: programmes.filter((d) => d.agents.some((x) => x.id === a.id)).map((d) => d.title) })),
   };
 }

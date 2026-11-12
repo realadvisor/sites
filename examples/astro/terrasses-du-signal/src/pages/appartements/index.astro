@@ -126,7 +126,7 @@ const delivery = deliveryLabel(dev);
         </thead>
         <tbody>
           {rows.map((u) => {
-            const x = unitExtra(u); // fixture only: unit number, position
+            const x = unitExtra(u); // fixture only: position
             const o = outdoor(u);
             const plan = planFor(u, dev.units);
             return (
@@ -140,7 +140,7 @@ const delivery = deliveryLabel(dev);
                 data-k-surface={u.living_surface ?? 0}
                 data-k-prix={u.status === 'available' && u.price ? u.price : ''}
               >
-                <td class="no" data-l="Lot">{x.unit_number ?? '–'}</td>
+                <td class="no" data-l="Lot">{u.reference ?? '–'}</td>
                 <td class="rooms"><a href={unitPath(u)}>{u.rooms != null ? `${u.rooms} pièces` : 'Lot'}<span class="sr-only">, {floorName(u)}</span></a></td>
                 <td class="floor" data-l="Étage">{floorName(u)}</td>
                 <td class="r num surf" data-l="Surface">{formatSurface(u.living_surface)}</td>

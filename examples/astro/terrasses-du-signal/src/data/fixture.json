@@ -153,7 +153,10 @@
    "reference": "Q8J8-N94T",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "floor": 0
   },
   {
    "id": "b457c592-13a6-47dc-a200-e2ef70821feb",
@@ -230,7 +233,10 @@
    "reference": "JZLN-LKE5",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "floor": 0
   },
   {
    "id": "85c1c4b6-027d-4ae9-9632-52d31cc61540",
@@ -308,7 +314,11 @@
    "reference": "DJDS-9QZ5",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 26,
+   "floor": 1
   },
   {
    "id": "792b2cdc-58db-4b5a-8526-273b97b3da7c",
@@ -382,7 +392,11 @@
    "reference": "RF96-U4PX",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "terrace_surface": 18,
+   "floor": 1
   },
   {
    "id": "65a766c2-b109-42f1-92bc-75006f17a409",
@@ -460,7 +474,11 @@
    "reference": "3SZG-T6VM",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "terrace_surface": 26,
+   "floor": 2
   },
   {
    "id": "fa11fcba-7c3d-4179-a8a3-d487978f5479",
@@ -538,7 +556,11 @@
    "reference": "PA7Z-ZYT8",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2027,
+   "terrace_surface": 18,
+   "floor": 2
   },
   {
    "id": "32e7fe14-1ebd-4166-9f97-9dfe9024797d",
@@ -612,7 +634,11 @@
    "reference": "PDKQ-KV3N",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "terrace_surface": 26,
+   "floor": 3
   },
   {
    "id": "e4242efe-3564-4031-9173-ee2f1d0d2990",
@@ -690,7 +716,11 @@
    "reference": "5F5N-TJDT",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2027,
+   "terrace_surface": 18,
+   "floor": 3
   },
   {
    "id": "64eef6b7-28d8-46f7-9228-ddc5cf4d8243",
@@ -768,7 +798,11 @@
    "reference": "R2MP-XASC",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2027,
+   "terrace_surface": 22,
+   "floor": 4
   },
   {
    "id": "9dfc9c93-13e3-4f69-80f8-61f8717e55d4",
@@ -842,7 +876,11 @@
    "reference": "NKC3-2RMZ",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2027,
+   "terrace_surface": 18,
+   "floor": 4
   },
   {
    "id": "ba880863-9a92-46a5-932d-7d2bb3cda1d1",
@@ -916,7 +954,11 @@
    "reference": "XXWU-NK69",
    "team_ids": [
     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2027,
+   "terrace_surface": 85,
+   "floor": 5
   }
  ],
  "developments": [
@@ -1057,7 +1099,12 @@
      "features": [
       "elevator",
       "parking"
-     ]
+     ],
+     "reference": "0.1",
+     "orientation": [
+      "south"
+     ],
+     "garden_surface": 120
     },
     {
      "id": "4198742c-6626-47bb-8512-cedd362a0dbe",
@@ -1101,7 +1148,13 @@
      "features": [
       "elevator",
       "parking"
-     ]
+     ],
+     "reference": "0.2",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "garden_surface": 135
     },
     {
      "id": "40b06571-f10e-4749-8061-643095a6912e",
@@ -1120,7 +1173,12 @@
      "features": [
       "elevator",
       "parking"
-     ]
+     ],
+     "reference": "0.3",
+     "orientation": [
+      "west"
+     ],
+     "garden_surface": 150
     },
     {
      "id": "0574a55d-20ca-43a5-976b-9ca089515766",
@@ -1168,7 +1226,13 @@
      "features": [
       "elevator",
       "parking"
-     ]
+     ],
+     "reference": "0.4",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "garden_surface": 165
     },
     {
      "id": "62ba3763-3f24-4236-9f5a-c7ce58e09dab",
@@ -1188,7 +1252,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "1.1",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "terrace_surface": 22
     },
     {
      "id": "0ed67858-70eb-4c52-85ab-2f05a05a7d9d",
@@ -1238,7 +1308,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "1.2",
+     "orientation": [
+      "west"
+     ],
+     "terrace_surface": 26
     },
     {
      "id": "6e9c8938-09d5-4743-b96a-ecd02ac7ca4d",
@@ -1284,7 +1359,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "1.3",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 18
     },
     {
      "id": "6cd9a0cf-b271-4423-99a7-bdc644f47461",
@@ -1305,7 +1386,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "2.1",
+     "orientation": [
+      "west"
+     ],
+     "terrace_surface": 22
     },
     {
      "id": "bb97afe7-4cd5-4f2f-bafe-4113f0e11777",
@@ -1355,7 +1441,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "2.2",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 26
     },
     {
      "id": "b16cac5c-1fec-48c6-b625-37ae6e38311b",
@@ -1405,7 +1497,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "2.3",
+     "orientation": [
+      "east"
+     ],
+     "terrace_surface": 18
     },
     {
      "id": "95a4de09-e6a0-4dd4-bc59-68417ca4ded8",
@@ -1425,7 +1522,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "3.1",
+     "orientation": [
+      "east",
+      "south"
+     ],
+     "terrace_surface": 22
     },
     {
      "id": "b485d6af-ae55-4e57-96dc-51551015ab36",
@@ -1471,7 +1574,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "3.2",
+     "orientation": [
+      "east"
+     ],
+     "terrace_surface": 26
     },
     {
      "id": "c1612a16-d9cb-4455-b01c-3b400da8f0be",
@@ -1521,7 +1629,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "3.3",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "terrace_surface": 18
     },
     {
      "id": "4d5086a5-3f1b-4a33-88b1-a2d21413c0a3",
@@ -1571,7 +1685,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "4.1",
+     "orientation": [
+      "east"
+     ],
+     "terrace_surface": 22
     },
     {
      "id": "5b2e72ca-b0c3-43fc-ada9-fb3ca0d15f06",
@@ -1592,7 +1711,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "4.2",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "terrace_surface": 26
     },
     {
      "id": "bd403055-48ee-421e-a2ad-2babfe02d3e7",
@@ -1638,7 +1763,12 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "4.3",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 18
     },
     {
      "id": "5e5febff-ae0d-4dd2-9e88-a0368bc6fc62",
@@ -1684,7 +1814,13 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "5.1",
+     "orientation": [
+      "north",
+      "west"
+     ],
+     "terrace_surface": 85
     },
     {
      "id": "ecbf8ec5-328b-4549-a871-58bee6185391",
@@ -1704,193 +1840,85 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "5.2",
+     "orientation": [
+      "south"
+     ],
+     "terrace_surface": 85
     }
-   ]
+   ],
+   "developer": {
+    "name": "Atelier Belvédère SA"
+   },
+   "architect": {
+    "name": "Bureau Morand Architectes"
+   },
+   "general_contractor": {
+    "name": "Constructions Lavaux SA"
+   }
   }
  ],
  "fixture_only": {
-  "listings": {
-   "cbeb9fc7-0ee5-4b4f-a3b6-8bb3736090c7": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 0
-   },
-   "b457c592-13a6-47dc-a200-e2ef70821feb": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 0
-   },
-   "85c1c4b6-027d-4ae9-9632-52d31cc61540": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 1,
-    "terrace_surface": 26
-   },
-   "792b2cdc-58db-4b5a-8526-273b97b3da7c": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 1,
-    "terrace_surface": 18
-   },
-   "65a766c2-b109-42f1-92bc-75006f17a409": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 2,
-    "terrace_surface": 26
-   },
-   "fa11fcba-7c3d-4179-a8a3-d487978f5479": {
-    "energy_class": "B",
-    "year_built": 2027,
-    "floor": 2,
-    "terrace_surface": 18
-   },
-   "32e7fe14-1ebd-4166-9f97-9dfe9024797d": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 3,
-    "terrace_surface": 26
-   },
-   "e4242efe-3564-4031-9173-ee2f1d0d2990": {
-    "energy_class": "A",
-    "year_built": 2027,
-    "floor": 3,
-    "terrace_surface": 18
-   },
-   "64eef6b7-28d8-46f7-9228-ddc5cf4d8243": {
-    "energy_class": "D",
-    "year_built": 2027,
-    "floor": 4,
-    "terrace_surface": 22
-   },
-   "9dfc9c93-13e3-4f69-80f8-61f8717e55d4": {
-    "energy_class": "E",
-    "year_built": 2027,
-    "floor": 4,
-    "terrace_surface": 18
-   },
-   "ba880863-9a92-46a5-932d-7d2bb3cda1d1": {
-    "energy_class": "C",
-    "year_built": 2027,
-    "floor": 5,
-    "terrace_surface": 85
-   }
-  },
+  "listings": {},
   "units": {
    "e50c71f0-9ba0-4cc6-9750-e0d047463772": {
-    "unit_number": "0.1",
-    "position": 1,
-    "orientation": "S",
-    "garden_surface": 120
+    "position": 1
    },
    "4198742c-6626-47bb-8512-cedd362a0dbe": {
-    "unit_number": "0.2",
-    "position": 2,
-    "orientation": "SW",
-    "garden_surface": 135
+    "position": 2
    },
    "40b06571-f10e-4749-8061-643095a6912e": {
-    "unit_number": "0.3",
-    "position": 3,
-    "orientation": "W",
-    "garden_surface": 150
+    "position": 3
    },
    "0574a55d-20ca-43a5-976b-9ca089515766": {
-    "unit_number": "0.4",
-    "position": 4,
-    "orientation": "SE",
-    "garden_surface": 165
+    "position": 4
    },
    "62ba3763-3f24-4236-9f5a-c7ce58e09dab": {
-    "unit_number": "1.1",
-    "position": 1,
-    "orientation": "SW",
-    "terrace_surface": 22
+    "position": 1
    },
    "0ed67858-70eb-4c52-85ab-2f05a05a7d9d": {
-    "unit_number": "1.2",
-    "position": 2,
-    "orientation": "W",
-    "terrace_surface": 26
+    "position": 2
    },
    "6e9c8938-09d5-4743-b96a-ecd02ac7ca4d": {
-    "unit_number": "1.3",
-    "position": 3,
-    "orientation": "SE",
-    "terrace_surface": 18
+    "position": 3
    },
    "6cd9a0cf-b271-4423-99a7-bdc644f47461": {
-    "unit_number": "2.1",
-    "position": 1,
-    "orientation": "W",
-    "terrace_surface": 22
+    "position": 1
    },
    "bb97afe7-4cd5-4f2f-bafe-4113f0e11777": {
-    "unit_number": "2.2",
-    "position": 2,
-    "orientation": "SE",
-    "terrace_surface": 26
+    "position": 2
    },
    "b16cac5c-1fec-48c6-b625-37ae6e38311b": {
-    "unit_number": "2.3",
-    "position": 3,
-    "orientation": "E",
-    "terrace_surface": 18
+    "position": 3
    },
    "95a4de09-e6a0-4dd4-bc59-68417ca4ded8": {
-    "unit_number": "3.1",
-    "position": 1,
-    "orientation": "SE",
-    "terrace_surface": 22
+    "position": 1
    },
    "b485d6af-ae55-4e57-96dc-51551015ab36": {
-    "unit_number": "3.2",
-    "position": 2,
-    "orientation": "E",
-    "terrace_surface": 26
+    "position": 2
    },
    "c1612a16-d9cb-4455-b01c-3b400da8f0be": {
-    "unit_number": "3.3",
-    "position": 3,
-    "orientation": "NW",
-    "terrace_surface": 18
+    "position": 3
    },
    "4d5086a5-3f1b-4a33-88b1-a2d21413c0a3": {
-    "unit_number": "4.1",
-    "position": 1,
-    "orientation": "E",
-    "terrace_surface": 22
+    "position": 1
    },
    "5b2e72ca-b0c3-43fc-ada9-fb3ca0d15f06": {
-    "unit_number": "4.2",
-    "position": 2,
-    "orientation": "NW",
-    "terrace_surface": 26
+    "position": 2
    },
    "bd403055-48ee-421e-a2ad-2babfe02d3e7": {
-    "unit_number": "4.3",
-    "position": 3,
-    "orientation": "S",
-    "terrace_surface": 18
+    "position": 3
    },
    "5e5febff-ae0d-4dd2-9e88-a0368bc6fc62": {
-    "unit_number": "5.1",
-    "position": 1,
-    "orientation": "NW",
-    "terrace_surface": 85
+    "position": 1
    },
    "ecbf8ec5-328b-4549-a871-58bee6185391": {
-    "unit_number": "5.2",
-    "position": 2,
-    "orientation": "S",
-    "terrace_surface": 85
+    "position": 2
    }
   },
   "developments": {
    "5418826d-128c-452c-8479-605681362db5": {
-    "developer": "Atelier Belvédère SA",
-    "architect": "Bureau Morand Architectes",
-    "general_contractor": "Constructions Lavaux SA",
     "buildings": [],
     "documents": [],
     "construction_photos": [

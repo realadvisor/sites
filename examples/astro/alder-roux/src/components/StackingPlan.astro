@@ -11,7 +11,6 @@ import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 import { cityName, tx } from '../lib/copy';
 import { floor, floorShort, formatSurface, orientation, price, rooms } from '../lib/format';
 import type { L } from '../lib/routes';
-import { extraStr } from '../lib/data';
 import { outdoor, sortUnits, statusLabel, typeOf, unitHref, unitTitle, unitTypes } from '../lib/dev';
 
 interface Props {
@@ -47,7 +46,7 @@ void cityName;
           <div class="sp__row">
             {row.map((u) => (
               <a class:list={['u', `u--${u.status}`]} href={unitHref(dev, u, l)} tabindex="-1" style={`flex-grow:${u.living_surface ?? 100}`}>
-                <b>{extraStr('units', u.id, 'unit_number') /* fixture only: unit number */ ?? typeOf(types, u)?.letter}</b>
+                <b>{u.reference ?? typeOf(types, u)?.letter}</b>
                 <span class="u__r">{rooms(u.rooms, l)} · {formatSurface(u.living_surface)}</span>
                 <span class="u__p num">{unitPrice(u)}</span>
               </a>
@@ -77,8 +76,7 @@ void cityName;
       <tbody>
         {units.map((u) => {
           const out = outdoor(u);
-          // fixture only: orientation
-          const ori = orientation(extraStr('units', u.id, 'orientation'), l);
+          const ori = orientation(u.orientation, l);
           return (
             <tr class:list={[`st-${u.status}`]}>
               <th scope="row"><a href={unitHref(dev, u, l)}>{unitTitle(u, l)}</a><span class="t-type">{typeOf(types, u) && t('typeName', { k: typeOf(types, u)!.letter })}</span></th>

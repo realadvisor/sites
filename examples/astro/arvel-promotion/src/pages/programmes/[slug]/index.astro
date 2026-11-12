@@ -11,7 +11,7 @@ import Collage from '../../../components/Collage.astro';
 import EnquiryBlock from '../../../components/EnquiryBlock.astro';
 import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
 import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { developmentExtra, sites } from '../../../lib/data';
+import { sites } from '../../../lib/data';
 import { contentFor, placePhotos } from '../../../content/programmes';
 import { documentsFor, formatBytes } from '../../../content/documents';
 import {
@@ -22,7 +22,6 @@ import { ogImage } from '../../../lib/seo';
 const d = await sites.development(Astro.params.slug!);
 if (!d) return Astro.rewrite('/404');
 const c = contentFor(d.slug);
-const x = developmentExtra(d);
 const hero = d.photos[c.hero ?? 0] ?? d.photos[0];
 const status = programmeStatus(d);
 const from = d.stats.available ? priceFrom(d) : '';
@@ -34,10 +33,9 @@ const facts = [
   ...(from ? [{ label: 'Prix', value: from }] : []),
 ].filter((f) => f.value);
 const credits = [
-  // fixture only: developer, architect, general contractor
-  { label: 'Promoteur', value: x.developer },
-  { label: 'Architecte', value: x.architect },
-  { label: 'Entreprise générale', value: x.general_contractor },
+  { label: 'Promoteur', value: d.developer?.name },
+  { label: 'Architecte', value: d.architect?.name },
+  { label: 'Entreprise générale', value: d.general_contractor?.name },
 ].filter((r): r is { label: string; value: string } => !!r.value);
 const rows = [
   { label: 'Adresse', value: addressLine(d.address) },

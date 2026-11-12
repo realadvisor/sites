@@ -1,13 +1,15 @@
 /**
- * Project text in German. The development's description comes from the API
- * in Italian only; the German site shows this translation of the same facts
- * (nothing added). Italian pages render the API description itself.
+ * Project text in German. The CRM keeps a development's description in one
+ * language (here Italian), so the API serves it in Italian whatever the
+ * `locale`; the German site shows this translation of the same facts
+ * (nothing added). Italian pages render the API description itself. Units
+ * come translated through `locale` (their CRM texts per language).
  */
 import description from './description-de.json';
 
 export const DESCRIPTION_DE: string[] = description;
 
-/** German text for one unit, composed from its data fields only. */
+/** German text for a unit the API has no description for, composed from its data fields only. */
 export const unitTextDe = (p: { rooms: string; surface: string; floor: string; house: string; bedrooms?: number; bathrooms?: number; outdoor?: string }) =>
   [
     `${p.rooms}-Wohnung mit ${p.surface} Wohnfläche, ${p.floor}, ${p.house}${p.outdoor ? `, mit ${p.outdoor}` : ''}.`,

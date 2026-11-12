@@ -14,7 +14,7 @@ import Site from '../layouts/Site.astro';
 import Photo from '../components/Photo.astro';
 import FloorPlate from '../components/FloorPlate.astro';
 import People from '../components/People.astro';
-import { client, listingExtra, type Site as SiteData } from '../lib/data';
+import { client, type Site as SiteData } from '../lib/data';
 import { CONTENT_LANG, LANGS, LOCALE_OF, fill, href, tr, type Lang } from '../lib/i18n';
 import {
   deliveryLabel, floorName, floorsOf, kindLabel, kindOf, m2, orientation, outdoor, outdoorLabel, planKey, planSrc, sortUnits, statusLabel,
@@ -33,7 +33,7 @@ const o = outdoor(u);
 const key = planKey(u);
 const planDims = (PLAN_SIZES as Record<string, { full: number[]; fit: number[] }>)[key]?.fit ?? [960, 700];
 const listing = u.listing_slug ? await client.listing(u.listing_slug) : null;
-const energy = listing ? listingExtra(listing.id).energy_class : undefined; // fixture only: energy class
+const energy = listing?.energy_class;
 const sameFloor = units.filter((x) => wingOf(x) === wing && x.floor === u.floor);
 const scale = Math.max(...floorsOf(units, wing).map((f) => units.filter((x) => wingOf(x) === wing && x.floor === f).reduce((s, x) => s + (x.living_surface ?? 0), 0)));
 const similar = units.filter((x) => x.id !== u.id && kindOf(x) === kindOf(u) && x.status !== 'sold').slice(0, 4);

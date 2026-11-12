@@ -122,6 +122,10 @@ describe('methods', () => {
     await ra.listing(`villa-au-lac-${ID.toUpperCase()}`);
     await ra.developments({ team_id: 't1' });
     await ra.development('les jardins');
+    await ra.listings({ locale: 'de-CH' });
+    await ra.listing(ID, { locale: 'de' });
+    await ra.developments({ locale: 'it' });
+    await ra.development('les jardins', { locale: 'fr' });
     assert.deepEqual(
       seen.map(s => `${s.method} ${s.url.pathname}${s.url.search}`),
       [
@@ -134,6 +138,10 @@ describe('methods', () => {
         `GET /v3/public/listings/${ID}?portal_ids=${MAIN}%2C${FEATURED}`,
         `GET /v3/public/developments?team_id=t1&portal_ids=${MAIN}%2C${FEATURED}&limit=200&offset=0`,
         `GET /v3/public/developments/les%20jardins?portal_ids=${MAIN}%2C${FEATURED}`,
+        `GET /v3/public/listings?locale=de-CH&portal_ids=${MAIN}&limit=24`,
+        `GET /v3/public/listings/${ID}?portal_ids=${MAIN}%2C${FEATURED}&locale=de`,
+        `GET /v3/public/developments?locale=it&portal_ids=${MAIN}%2C${FEATURED}&limit=200&offset=0`,
+        `GET /v3/public/developments/les%20jardins?portal_ids=${MAIN}%2C${FEATURED}&locale=fr`,
       ],
     );
   });
@@ -461,5 +469,50 @@ describe('createFixtureClient', () => {
 
   it('never sends an enquiry', async () => {
     await assert.rejects(handleEnquiry(enquiryRequest({ json: FORM }), ra), TypeError);
+  });
+
+  it('passes a record through with its facts, and never its translations', async () => {
+    const id = 'dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+    const record = listing(id, { energy_class: 'B', terrace_surface: 20, orientation: ['south'], available_from: '2027-04-01' });
+    const tx = createFixtureClient({ ...fx, listings: [{ ...record, translations: { de: { title: 'Wohnung' } } }] });
+    assert.deepEqual(await tx.listing(id), record);
+    assert.deepEqual((await tx.allListings())[0], record);
+  });
+
+  it('serves the translations of a locale as the API serves the CRM texts', async () => {
+    const id = 'dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+    const record = listing(id, { description: '<p>Vue lac</p>', description_text: 'Vue lac' });
+    const tx = createFixtureClient({
+      ...fx,
+      listings: [{ ...record, translations: { de: { title: 'Wohnung', description: '<p>Seesicht</p>' }, it: { title: 'Appartamento' } } }],
+      developments: [
+        {
+          ...fx.developments![0]!,
+          units: [
+            { ...fx.developments![0]!.units[0]!, description: '<p>Rez</p>', translations: { de: { description: '<p>Erdgeschoss</p>' } } },
+            { ...fx.developments![0]!.units[0]!, id: 'u2', translations: { de: { description: '<p>Nicht live</p>' } } },
+          ],
+        },
+      ],
+    });
+    assert.deepEqual(await tx.listing(id, { locale: 'de-CH' }), {
+      ...record,
+      title: 'Wohnung',
+      description: '<p>Seesicht</p>',
+      description_text: 'Seesicht',
+      text_locale: 'de',
+    });
+    assert.equal((await tx.listings({ locale: 'de' })).data[0]!.text_locale, 'de');
+    // Title only: mixed languages, no text_locale. A language without translations: the original.
+    const it = await tx.listing(id, { locale: 'it' });
+    assert.equal(it?.title, 'Appartamento');
+    assert.equal(it?.text_locale, undefined);
+    assert.deepEqual(await tx.listing(id, { locale: 'en' }), record);
+    // A unit's description only where it has one (live units), as the API.
+    const [live, hidden] = (await tx.development('les-jardins', { locale: 'de' }))!.units;
+    assert.equal(live?.description, '<p>Erdgeschoss</p>');
+    assert.equal(live?.text_locale, 'de');
+    assert.equal(hidden?.description, undefined);
+    assert.equal('translations' in hidden!, false);
   });
 });

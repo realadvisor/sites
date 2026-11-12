@@ -72,7 +72,53 @@ export type Agent = {
 export type OfferType = 'buy' | 'rent';
 export type ListingStatus = 'available' | 'sold';
 
-export type Listing = {
+/** The facts a listing and a unit share. Money is in the record's `currency`, surfaces in m². */
+export type PropertyFacts = {
+  /** Set when title and description came in the `locale` asked for; absent: the original texts. Mark it as the element's `lang`. */
+  text_locale?: string;
+  balcony_surface?: number;
+  terrace_surface?: number;
+  garden_surface?: number;
+  /** 0 = ground floor. */
+  floor?: number;
+  /** Floors of the building. */
+  building_floors?: number;
+  /** Directions the property faces. */
+  orientation?: Array<'north' | 'east' | 'south' | 'west'>;
+  construction_year?: number;
+  renovation_year?: number;
+  /** Energy consumption class of the certificate. */
+  energy_class?: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+  /** The certificate the class is from, as typed in the CRM. */
+  energy_certificate_version?: string;
+  /** Minergie label (Switzerland). */
+  minergie?: 'minergie' | 'minergie_p' | 'minergie_eco' | 'minergie_p_eco';
+  /** CRM heating key: `central`, `district`, `electric`, `gas`, `heat_pump`, `none`, `oil`, `other`, `pellet`, `solar`, `wood`. */
+  heating?: string;
+  has_cellar?: boolean;
+  indoor_parkings?: number;
+  outdoor_parkings?: number;
+  /** Monthly charges of the property. */
+  charges?: number;
+  /** Rentals: monthly extra costs on top of `price`. Absent when the price is hidden. */
+  rent_extra?: number;
+  /** Price of all the parkings together. Absent when the price is hidden. */
+  parking_price?: number;
+  /** Price per indoor parking. Absent when the price is hidden. */
+  indoor_parking_price?: number;
+  /** Price per outdoor parking. Absent when the price is hidden. */
+  outdoor_parking_price?: number;
+  /** true when the parkings are included in `price`. */
+  parking_included?: boolean;
+  /** Move-in date, `YYYY-MM-DD`. */
+  available_from?: string;
+  furnished?: boolean;
+  pets_allowed?: boolean;
+  video_url?: string;
+  virtual_visit_url?: string;
+};
+
+export type Listing = PropertyFacts & {
   id: string;
   /** `<title-slug>-<id>`: `listing()` takes it or the id. */
   slug: string;
@@ -109,10 +155,12 @@ export type Listing = {
 export type UnitStatus = 'available' | 'reserved' | 'sold';
 
 /** One unit (lot) of a new-build development. */
-export type Unit = {
+export type Unit = PropertyFacts & {
   id: string;
   /** e.g. "4,5 pièces · Rez-de-jardin". */
   name: string;
+  /** The unit number in the development (`A1.2`). */
+  reference?: string;
   status: UnitStatus;
   offer_type: OfferType;
   property_type: string;
@@ -120,9 +168,6 @@ export type Unit = {
   bedrooms?: number;
   bathrooms?: number;
   living_surface?: number;
-  balcony_surface?: number;
-  /** 0 = ground floor. */
-  floor?: number;
   floor_label?: string;
   /** Only on units for sale whose price is public. */
   price?: number;
@@ -132,12 +177,17 @@ export type Unit = {
   description?: string;
   description_text?: string;
   photos?: Photo[];
+  /** The unit's outline on the development's `site_plan`: SVG polygon points in the image's own pixels. */
+  site_plan_points?: string;
   /** Set when the unit is also a listing live on one of the client's portals: `listing(listing_slug)`. */
   listing_slug?: string;
   features: string[];
 };
 
 type Range = { min: number; max: number };
+
+/** A company of a development: its developer, architect or general contractor. */
+export type Company = { name: string; website?: string; logo?: Photo };
 
 export type Development = {
   id: string;
@@ -151,6 +201,9 @@ export type Development = {
   address: Address;
   photos: Photo[];
   site_plan?: Photo;
+  developer?: Company;
+  architect?: Company;
+  general_contractor?: Company;
   stats: {
     units: number;
     available: number;
@@ -184,9 +237,17 @@ export type ListingsQuery = {
   min_price?: number;
   max_price?: number;
   min_rooms?: number;
+  /** The page language (`de`, `fr-CH`): texts in it when the CRM has them (`text_locale`), else the original. */
+  locale?: string;
   /** 1..200, default 24. */
   limit?: number;
   offset?: number;
+};
+
+/** Which language to read texts in. */
+export type TextQuery = {
+  /** The page language (`de`, `fr-CH`): texts in it when the CRM has them (`text_locale`), else the original. */
+  locale?: string;
 };
 
 export type Pagination = {
@@ -222,9 +283,10 @@ export type SitesClient = {
   /** Every page of `listings(q)`. */
   allListings(q?: Omit<ListingsQuery, 'limit' | 'offset'>): Promise<Listing[]>;
   /** Live on any of the site's portals; null when not found. */
-  listing(slugOrId: string): Promise<Listing | null>;
-  developments(q?: { team_id?: string }): Promise<Development[]>;
-  development(slugOrId: string): Promise<DevelopmentWithUnits | null>;
+  listing(slugOrId: string, q?: TextQuery): Promise<Listing | null>;
+  developments(q?: { team_id?: string } & TextQuery): Promise<Development[]>;
+  /** The units' texts follow `locale`; the CRM keeps a development's own texts in one language. */
+  development(slugOrId: string, q?: TextQuery): Promise<DevelopmentWithUnits | null>;
   /**
    * The public Turnstile key the enquiry form renders, kept 5 min. null: no
    * widget (verification off, or the lookup failed). Fixture:
@@ -233,17 +295,25 @@ export type SitesClient = {
   turnstileSiteKey(): Promise<string | null>;
 };
 
+/** A fixture record's texts in other languages, by language (`de`, `fr`, ...). */
+export type FixtureTranslations = {
+  translations?: Record<string, { title?: string; description?: string; description_text?: string }>;
+};
+
 /**
  * A site's data without the API (`createFixtureClient`): the same records,
- * as the API answers them. Sites may add their own keys.
+ * as the API answers them. Sites may add their own keys. A listing or unit
+ * may carry `translations`: with `locale`, the fixture client serves them as
+ * the API serves the CRM's (`text_locale` when every text is translated),
+ * and never passes `translations` on.
  */
 export type Fixture = {
   organisation: Organisation;
   /** Primary team first. */
   teams: Team[];
   agents: Agent[];
-  listings: Listing[];
-  developments?: DevelopmentWithUnits[];
+  listings: Array<Listing & FixtureTranslations>;
+  developments?: Array<Omit<DevelopmentWithUnits, 'units'> & { units: Array<Unit & FixtureTranslations> }>;
   /** The portals a live client of this site uses. */
   portals?: Portals;
   /** What turnstileSiteKey() answers. Default FIXTURE_TURNSTILE_SITE_KEY; null: no widget. */

@@ -16,13 +16,17 @@
  * - renders the whole page before answering (entry.server waits for
  *   allReady): a page that fails mid-render is a logged 500, never a 200
  *   with a cut body; a 404/410 keeps its status and the site's page;
- * - sets the kit's security headers (preview: the CRM may frame it).
+ * - sets the kit's security headers (preview: the CRM may frame it);
+ * - renders with the page locale (`withPageLocale`), which siteClient reads
+ *   texts in on a multilingual site.
  */
 import { createRequestHandler, type ServerBuild } from 'react-router';
 import site from 'virtual:sites-kit/site';
 import inlineStyles from 'virtual:sites-kit-react/css';
 import { setRuntimeEnv, siteMode, type SiteEnv } from '@realadvisor/sites-kit/env';
 import { notFoundPage, renderFailed } from '@realadvisor/sites-kit/render-error';
+import { localeOfPath } from '@realadvisor/sites-kit/i18n';
+import { withPageLocale } from '@realadvisor/sites-kit/page-locale';
 import { createNonce, siteHeaders } from './security';
 
 /** The parts of the Workers runtime types the kit uses (no @cloudflare/workers-types: it clashes with the DOM lib). */
@@ -108,7 +112,8 @@ export function createSiteWorker(build: () => Promise<ServerBuild>) {
       const path = url.pathname;
       let res: Response;
       try {
-        res = await handle(request, { cloudflare: { env, ctx }, nonce });
+        // The page locale (pageLocale(request)): siteClient reads texts in it.
+        res = await withPageLocale(localeOfPath(path), () => handle(request, { cloudflare: { env, ctx }, nonce }));
         if ((res.headers.get('content-type') ?? '').includes('text/html') && res.body) {
           const raw = await res.text(); // throws when rendering fails mid-stream
           if (res.status === 200 && !raw.replace(/<!doctype html>/i, '').trim()) throw new Error('page rendered an empty body');

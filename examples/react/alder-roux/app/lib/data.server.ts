@@ -5,8 +5,11 @@
  * has SITES_API_URL + SITES_API_KEY, else the example fixture with the same
  * filters. Server only.
  *
- * Fields the API does not have yet live in the fixture's `fixture_only` and
- * reach pages only through `extras()` (empty on live data).
+ * Texts come in the page's language (siteClient reads the page locale).
+ *
+ * Fields the API does not have yet (a unit's position on its floor) live in
+ * the fixture's `fixture_only` and reach pages only through `extras()`
+ * (empty on live data).
  */
 import { fixtureOnly, hasLiveData, siteClient, type Fixture } from '@realadvisor/sites-kit-react/server/data';
 import type { Agent, DevelopmentWithUnits, Listing, Team } from '@realadvisor/sites-sdk/types';

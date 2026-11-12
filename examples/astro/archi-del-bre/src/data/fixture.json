@@ -155,7 +155,11 @@
    "reference": "UR2Y-F872",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2028,
+   "terrace_surface": 25,
+   "floor": 0
   },
   {
    "id": "5f3fb794-d0c4-4a97-8009-205707023057",
@@ -229,7 +233,11 @@
    "reference": "BKT9-8QLS",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2028,
+   "terrace_surface": 25,
+   "floor": 0
   },
   {
    "id": "48dc267a-949f-4d0b-9a47-77cf6d67b6ed",
@@ -303,7 +311,11 @@
    "reference": "C9CM-7J4U",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2028,
+   "floor": 1,
+   "balcony_surface": 18
   },
   {
    "id": "ad6a8f7f-faee-4b7c-8a59-2b0023bb67bd",
@@ -377,7 +389,11 @@
    "reference": "B7N3-ZUS3",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2028,
+   "floor": 1,
+   "balcony_surface": 32
   },
   {
    "id": "4d949c41-baad-4ae3-8d94-2360a5f28446",
@@ -451,7 +467,11 @@
    "reference": "346Q-JTR6",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "D",
+   "construction_year": 2028,
+   "floor": 2,
+   "balcony_surface": 18
   },
   {
    "id": "e509cf07-c035-4802-a3e1-ca1221787e12",
@@ -525,7 +545,11 @@
    "reference": "4CCG-KUGZ",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2028,
+   "floor": 2,
+   "balcony_surface": 28
   },
   {
    "id": "b11d7f49-c38f-4cca-b8b0-53a010acdbdc",
@@ -599,7 +623,11 @@
    "reference": "P72W-8VYB",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2028,
+   "terrace_surface": 95,
+   "floor": 3
   },
   {
    "id": "f1dab33b-1b23-4271-ac49-5c8993cb6444",
@@ -673,7 +701,11 @@
    "reference": "HBEQ-8XHP",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2028,
+   "terrace_surface": 25,
+   "floor": 0
   },
   {
    "id": "f9eeb526-685e-401c-b666-ea73c9f2b34d",
@@ -747,7 +779,11 @@
    "reference": "TW47-N4HB",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "A",
+   "construction_year": 2028,
+   "terrace_surface": 25,
+   "floor": 0
   },
   {
    "id": "5bfe8b9d-1970-449d-bafd-8134afe62240",
@@ -821,7 +857,11 @@
    "reference": "HVPN-TU9F",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2028,
+   "floor": 1,
+   "balcony_surface": 28
   },
   {
    "id": "668202e2-7d54-4f0f-8e3c-b0b1a75139fe",
@@ -895,7 +935,11 @@
    "reference": "R6T9-RMN3",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2028,
+   "floor": 1,
+   "balcony_surface": 32
   },
   {
    "id": "ded4cd90-13c8-4f41-b87f-762700ffbde1",
@@ -969,7 +1013,11 @@
    "reference": "TZNT-TQN5",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2028,
+   "floor": 2,
+   "balcony_surface": 18
   },
   {
    "id": "2707a3e0-ba3d-4e39-acf7-23f44fedf9da",
@@ -1043,7 +1091,11 @@
    "reference": "QQLG-FGJX",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "E",
+   "construction_year": 2028,
+   "floor": 2,
+   "balcony_surface": 28
   },
   {
    "id": "4f53fb80-c131-47c7-807c-07109a971e1f",
@@ -1117,7 +1169,11 @@
    "reference": "EQZQ-5SWE",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "B",
+   "construction_year": 2028,
+   "floor": 2,
+   "balcony_surface": 32
   },
   {
    "id": "681fb002-f26c-402d-9b61-ea97d628446e",
@@ -1191,7 +1247,11 @@
    "reference": "KGXY-QX9N",
    "team_ids": [
     "06bc66be-9fe2-45af-848b-e66dec877929"
-   ]
+   ],
+   "energy_class": "C",
+   "construction_year": 2028,
+   "terrace_surface": 140,
+   "floor": 3
   }
  ],
  "developments": [
@@ -1340,7 +1400,19 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A0.1",
+     "terrace_surface": 25,
+     "garden_surface": 110,
+     "orientation": [
+      "south"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>2.5-Wohnung mit 72 m² Wohnfläche, Erdgeschoss, Haus A, mit Privatgarten von 110 m² und Terrasse von 25 m².</p><p>1 Schlafzimmer, 1 Bad.</p>",
+       "description_text": "2.5-Wohnung mit 72 m² Wohnfläche, Erdgeschoss, Haus A, mit Privatgarten von 110 m² und Terrasse von 25 m². 1 Schlafzimmer, 1 Bad."
+      }
+     }
     },
     {
      "id": "be561739-fa92-46e5-8b48-298d973b18c2",
@@ -1386,7 +1458,20 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A0.2",
+     "terrace_surface": 25,
+     "garden_surface": 160,
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>3.5-Wohnung mit 104 m² Wohnfläche, Erdgeschoss, Haus A, mit Privatgarten von 160 m² und Terrasse von 25 m².</p><p>2 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "3.5-Wohnung mit 104 m² Wohnfläche, Erdgeschoss, Haus A, mit Privatgarten von 160 m² und Terrasse von 25 m². 2 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "5030454a-b2cb-4ffc-89e3-c9ba7081f865",
@@ -1407,6 +1492,12 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "A0.3",
+     "terrace_surface": 25,
+     "garden_surface": 210,
+     "orientation": [
+      "west"
      ]
     },
     {
@@ -1453,7 +1544,18 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A1.1",
+     "orientation": [
+      "south",
+      "west"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>2.5-Wohnung mit 72 m² Wohnfläche, 1. Obergeschoss, Haus A, mit Loggia von 18 m².</p><p>1 Schlafzimmer, 1 Bad.</p>",
+       "description_text": "2.5-Wohnung mit 72 m² Wohnfläche, 1. Obergeschoss, Haus A, mit Loggia von 18 m². 1 Schlafzimmer, 1 Bad."
+      }
+     }
     },
     {
      "id": "84d09977-7264-45d2-a92d-188d5d958f1b",
@@ -1473,6 +1575,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "A1.2",
+     "orientation": [
+      "west"
      ]
     },
     {
@@ -1519,7 +1625,18 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A1.3",
+     "orientation": [
+      "south",
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>4.5-Wohnung mit 134 m² Wohnfläche, 1. Obergeschoss, Haus A, mit Loggia von 32 m².</p><p>3 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "4.5-Wohnung mit 134 m² Wohnfläche, 1. Obergeschoss, Haus A, mit Loggia von 32 m². 3 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "d98d5baf-808a-4d38-9f46-e4c69e93acbe",
@@ -1565,7 +1682,17 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A2.1",
+     "orientation": [
+      "west"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>2.5-Wohnung mit 73 m² Wohnfläche, 2. Obergeschoss, Haus A, mit Loggia von 18 m².</p><p>1 Schlafzimmer, 1 Bad.</p>",
+       "description_text": "2.5-Wohnung mit 73 m² Wohnfläche, 2. Obergeschoss, Haus A, mit Loggia von 18 m². 1 Schlafzimmer, 1 Bad."
+      }
+     }
     },
     {
      "id": "3efb0f28-da81-4849-b790-b548f7c5077c",
@@ -1611,7 +1738,18 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A2.2",
+     "orientation": [
+      "south",
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>3.5-Wohnung mit 106 m² Wohnfläche, 2. Obergeschoss, Haus A, mit Loggia von 28 m².</p><p>2 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "3.5-Wohnung mit 106 m² Wohnfläche, 2. Obergeschoss, Haus A, mit Loggia von 28 m². 2 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "d2c1fad8-06df-4252-be65-7989c7071f6b",
@@ -1632,6 +1770,10 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "A2.3",
+     "orientation": [
+      "east"
      ]
     },
     {
@@ -1678,7 +1820,19 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "A3.1",
+     "terrace_surface": 95,
+     "orientation": [
+      "south",
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>4.5-Wohnung mit 158 m² Wohnfläche, Attika, Haus A, mit Terrasse von 95 m².</p><p>3 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "4.5-Wohnung mit 158 m² Wohnfläche, Attika, Haus A, mit Terrasse von 95 m². 3 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "5782425e-1346-41f3-b817-7432698515c2",
@@ -1698,6 +1852,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "A3.2",
+     "terrace_surface": 140,
+     "orientation": [
+      "east"
      ]
     },
     {
@@ -1744,7 +1903,19 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B0.1",
+     "terrace_surface": 25,
+     "garden_surface": 110,
+     "orientation": [
+      "south"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>2.5-Wohnung mit 72 m² Wohnfläche, Erdgeschoss, Haus B, mit Privatgarten von 110 m² und Terrasse von 25 m².</p><p>1 Schlafzimmer, 1 Bad.</p>",
+       "description_text": "2.5-Wohnung mit 72 m² Wohnfläche, Erdgeschoss, Haus B, mit Privatgarten von 110 m² und Terrasse von 25 m². 1 Schlafzimmer, 1 Bad."
+      }
+     }
     },
     {
      "id": "1188ea4c-af90-4db6-a2bd-3db05299d9da",
@@ -1764,6 +1935,13 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "B0.2",
+     "terrace_surface": 25,
+     "garden_surface": 160,
+     "orientation": [
+      "south",
+      "west"
      ]
     },
     {
@@ -1810,7 +1988,19 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B0.3",
+     "terrace_surface": 25,
+     "garden_surface": 210,
+     "orientation": [
+      "west"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>4.5-Wohnung mit 132 m² Wohnfläche, Erdgeschoss, Haus B, mit Privatgarten von 210 m² und Terrasse von 25 m².</p><p>3 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "4.5-Wohnung mit 132 m² Wohnfläche, Erdgeschoss, Haus B, mit Privatgarten von 210 m² und Terrasse von 25 m². 3 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "a52f7850-ff6f-4bbe-b964-90987d045299",
@@ -1831,6 +2021,11 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "B1.1",
+     "orientation": [
+      "south",
+      "west"
      ]
     },
     {
@@ -1877,7 +2072,17 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B1.2",
+     "orientation": [
+      "west"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>3.5-Wohnung mit 105 m² Wohnfläche, 1. Obergeschoss, Haus B, mit Loggia von 28 m².</p><p>2 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "3.5-Wohnung mit 105 m² Wohnfläche, 1. Obergeschoss, Haus B, mit Loggia von 28 m². 2 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "4aee48c3-77f9-445e-b6d1-4b57a7746320",
@@ -1923,7 +2128,18 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B1.3",
+     "orientation": [
+      "south",
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>4.5-Wohnung mit 134 m² Wohnfläche, 1. Obergeschoss, Haus B, mit Loggia von 32 m².</p><p>3 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "4.5-Wohnung mit 134 m² Wohnfläche, 1. Obergeschoss, Haus B, mit Loggia von 32 m². 3 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "7a5d0997-4717-4fa5-9ff3-afe4e78650f9",
@@ -1969,7 +2185,17 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.1",
+     "orientation": [
+      "west"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>2.5-Wohnung mit 73 m² Wohnfläche, 2. Obergeschoss, Haus B, mit Loggia von 18 m².</p><p>1 Schlafzimmer, 1 Bad.</p>",
+       "description_text": "2.5-Wohnung mit 73 m² Wohnfläche, 2. Obergeschoss, Haus B, mit Loggia von 18 m². 1 Schlafzimmer, 1 Bad."
+      }
+     }
     },
     {
      "id": "0c76f47d-607d-4669-93bb-467aa8732186",
@@ -2015,7 +2241,18 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.2",
+     "orientation": [
+      "south",
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>3.5-Wohnung mit 106 m² Wohnfläche, 2. Obergeschoss, Haus B, mit Loggia von 28 m².</p><p>2 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "3.5-Wohnung mit 106 m² Wohnfläche, 2. Obergeschoss, Haus B, mit Loggia von 28 m². 2 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "ecd81cf4-3c35-4104-a52f-983ab1bd3247",
@@ -2061,7 +2298,17 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B2.3",
+     "orientation": [
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>4.5-Wohnung mit 135 m² Wohnfläche, 2. Obergeschoss, Haus B, mit Loggia von 32 m².</p><p>3 Schlafzimmer, 2 Bäder.</p>",
+       "description_text": "4.5-Wohnung mit 135 m² Wohnfläche, 2. Obergeschoss, Haus B, mit Loggia von 32 m². 3 Schlafzimmer, 2 Bäder."
+      }
+     }
     },
     {
      "id": "643f793c-4a2d-4c67-9d59-28191686b42d",
@@ -2082,6 +2329,12 @@
       "elevator",
       "balcony",
       "parking"
+     ],
+     "reference": "B3.1",
+     "terrace_surface": 95,
+     "orientation": [
+      "south",
+      "east"
      ]
     },
     {
@@ -2128,259 +2381,125 @@
       "elevator",
       "balcony",
       "parking"
-     ]
+     ],
+     "reference": "B3.2",
+     "terrace_surface": 140,
+     "orientation": [
+      "east"
+     ],
+     "translations": {
+      "de": {
+       "description": "<p>5.5-Wohnung mit 196 m² Wohnfläche, Attika, Haus B, mit Terrasse von 140 m².</p><p>4 Schlafzimmer, 3 Bäder.</p>",
+       "description_text": "5.5-Wohnung mit 196 m² Wohnfläche, Attika, Haus B, mit Terrasse von 140 m². 4 Schlafzimmer, 3 Bäder."
+      }
+     }
     }
-   ]
+   ],
+   "developer": {
+    "name": "Sasso Chiaro Sviluppi SA"
+   },
+   "architect": {
+    "name": "Studio Ceresio Architetti"
+   },
+   "general_contractor": {
+    "name": "Impresa Generale Brè SA"
+   }
   }
  ],
  "fixture_only": {
-  "listings": {
-   "3c2d6473-d1e4-4a76-aa7a-06edf3f02616": {
-    "energy_class": "C",
-    "year_built": 2028,
-    "floor": 0,
-    "terrace_surface": 25
-   },
-   "5f3fb794-d0c4-4a97-8009-205707023057": {
-    "energy_class": "B",
-    "year_built": 2028,
-    "floor": 0,
-    "terrace_surface": 25
-   },
-   "48dc267a-949f-4d0b-9a47-77cf6d67b6ed": {
-    "energy_class": "C",
-    "year_built": 2028,
-    "floor": 1,
-    "balcony_surface": 18
-   },
-   "ad6a8f7f-faee-4b7c-8a59-2b0023bb67bd": {
-    "energy_class": "B",
-    "year_built": 2028,
-    "floor": 1,
-    "balcony_surface": 32
-   },
-   "4d949c41-baad-4ae3-8d94-2360a5f28446": {
-    "energy_class": "D",
-    "year_built": 2028,
-    "floor": 2,
-    "balcony_surface": 18
-   },
-   "e509cf07-c035-4802-a3e1-ca1221787e12": {
-    "energy_class": "C",
-    "year_built": 2028,
-    "floor": 2,
-    "balcony_surface": 28
-   },
-   "b11d7f49-c38f-4cca-b8b0-53a010acdbdc": {
-    "energy_class": "C",
-    "year_built": 2028,
-    "floor": 3,
-    "terrace_surface": 95
-   },
-   "f1dab33b-1b23-4271-ac49-5c8993cb6444": {
-    "energy_class": "A",
-    "year_built": 2028,
-    "floor": 0,
-    "terrace_surface": 25
-   },
-   "f9eeb526-685e-401c-b666-ea73c9f2b34d": {
-    "energy_class": "A",
-    "year_built": 2028,
-    "floor": 0,
-    "terrace_surface": 25
-   },
-   "5bfe8b9d-1970-449d-bafd-8134afe62240": {
-    "energy_class": "E",
-    "year_built": 2028,
-    "floor": 1,
-    "balcony_surface": 28
-   },
-   "668202e2-7d54-4f0f-8e3c-b0b1a75139fe": {
-    "energy_class": "E",
-    "year_built": 2028,
-    "floor": 1,
-    "balcony_surface": 32
-   },
-   "ded4cd90-13c8-4f41-b87f-762700ffbde1": {
-    "energy_class": "C",
-    "year_built": 2028,
-    "floor": 2,
-    "balcony_surface": 18
-   },
-   "2707a3e0-ba3d-4e39-acf7-23f44fedf9da": {
-    "energy_class": "E",
-    "year_built": 2028,
-    "floor": 2,
-    "balcony_surface": 28
-   },
-   "4f53fb80-c131-47c7-807c-07109a971e1f": {
-    "energy_class": "B",
-    "year_built": 2028,
-    "floor": 2,
-    "balcony_surface": 32
-   },
-   "681fb002-f26c-402d-9b61-ea97d628446e": {
-    "energy_class": "C",
-    "year_built": 2028,
-    "floor": 3,
-    "terrace_surface": 140
-   }
-  },
+  "listings": {},
   "units": {
    "027573e3-1748-4462-8c4f-00deec8037a8": {
-    "unit_number": "A0.1",
     "building": "A",
-    "position": 1,
-    "orientation": "S",
-    "garden_surface": 110,
-    "terrace_surface": 25
+    "position": 1
    },
    "be561739-fa92-46e5-8b48-298d973b18c2": {
-    "unit_number": "A0.2",
     "building": "A",
-    "position": 2,
-    "orientation": "SW",
-    "garden_surface": 160,
-    "terrace_surface": 25
+    "position": 2
    },
    "5030454a-b2cb-4ffc-89e3-c9ba7081f865": {
-    "unit_number": "A0.3",
     "building": "A",
-    "position": 3,
-    "orientation": "W",
-    "garden_surface": 210,
-    "terrace_surface": 25
+    "position": 3
    },
    "d1100613-b92d-4a0e-975a-f4c3e79abe6c": {
-    "unit_number": "A1.1",
     "building": "A",
-    "position": 1,
-    "orientation": "SW"
+    "position": 1
    },
    "84d09977-7264-45d2-a92d-188d5d958f1b": {
-    "unit_number": "A1.2",
     "building": "A",
-    "position": 2,
-    "orientation": "W"
+    "position": 2
    },
    "192cfaf8-0c47-40a2-b0ca-c4b1e79f31de": {
-    "unit_number": "A1.3",
     "building": "A",
-    "position": 3,
-    "orientation": "SE"
+    "position": 3
    },
    "d98d5baf-808a-4d38-9f46-e4c69e93acbe": {
-    "unit_number": "A2.1",
     "building": "A",
-    "position": 1,
-    "orientation": "W"
+    "position": 1
    },
    "3efb0f28-da81-4849-b790-b548f7c5077c": {
-    "unit_number": "A2.2",
     "building": "A",
-    "position": 2,
-    "orientation": "SE"
+    "position": 2
    },
    "d2c1fad8-06df-4252-be65-7989c7071f6b": {
-    "unit_number": "A2.3",
     "building": "A",
-    "position": 3,
-    "orientation": "E"
+    "position": 3
    },
    "74310bf7-2b02-48cd-810a-52c036661375": {
-    "unit_number": "A3.1",
     "building": "A",
-    "position": 1,
-    "orientation": "SE",
-    "terrace_surface": 95
+    "position": 1
    },
    "5782425e-1346-41f3-b817-7432698515c2": {
-    "unit_number": "A3.2",
     "building": "A",
-    "position": 2,
-    "orientation": "E",
-    "terrace_surface": 140
+    "position": 2
    },
    "8c5f1fea-763e-4648-ae42-1dd5644ea385": {
-    "unit_number": "B0.1",
     "building": "B",
-    "position": 1,
-    "orientation": "S",
-    "garden_surface": 110,
-    "terrace_surface": 25
+    "position": 1
    },
    "1188ea4c-af90-4db6-a2bd-3db05299d9da": {
-    "unit_number": "B0.2",
     "building": "B",
-    "position": 2,
-    "orientation": "SW",
-    "garden_surface": 160,
-    "terrace_surface": 25
+    "position": 2
    },
    "de7ed1c4-528f-4c48-aad2-c0d0dcb3bb09": {
-    "unit_number": "B0.3",
     "building": "B",
-    "position": 3,
-    "orientation": "W",
-    "garden_surface": 210,
-    "terrace_surface": 25
+    "position": 3
    },
    "a52f7850-ff6f-4bbe-b964-90987d045299": {
-    "unit_number": "B1.1",
     "building": "B",
-    "position": 1,
-    "orientation": "SW"
+    "position": 1
    },
    "675d8409-5788-45fc-8294-e345ee4ca4f6": {
-    "unit_number": "B1.2",
     "building": "B",
-    "position": 2,
-    "orientation": "W"
+    "position": 2
    },
    "4aee48c3-77f9-445e-b6d1-4b57a7746320": {
-    "unit_number": "B1.3",
     "building": "B",
-    "position": 3,
-    "orientation": "SE"
+    "position": 3
    },
    "7a5d0997-4717-4fa5-9ff3-afe4e78650f9": {
-    "unit_number": "B2.1",
     "building": "B",
-    "position": 1,
-    "orientation": "W"
+    "position": 1
    },
    "0c76f47d-607d-4669-93bb-467aa8732186": {
-    "unit_number": "B2.2",
     "building": "B",
-    "position": 2,
-    "orientation": "SE"
+    "position": 2
    },
    "ecd81cf4-3c35-4104-a52f-983ab1bd3247": {
-    "unit_number": "B2.3",
     "building": "B",
-    "position": 3,
-    "orientation": "E"
+    "position": 3
    },
    "643f793c-4a2d-4c67-9d59-28191686b42d": {
-    "unit_number": "B3.1",
     "building": "B",
-    "position": 1,
-    "orientation": "SE",
-    "terrace_surface": 95
+    "position": 1
    },
    "18ec0412-f97c-4f62-9e62-91438bbd2def": {
-    "unit_number": "B3.2",
     "building": "B",
-    "position": 2,
-    "orientation": "E",
-    "terrace_surface": 140
+    "position": 2
    }
   },
   "developments": {
    "3894f0bf-4a44-49b0-b26b-d286b4bda70b": {
-    "developer": "Sasso Chiaro Sviluppi SA",
-    "architect": "Studio Ceresio Architetti",
-    "general_contractor": "Impresa Generale Brè SA",
     "buildings": [
      "A",
      "B"

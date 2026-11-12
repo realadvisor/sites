@@ -11,18 +11,6 @@ export type AgencyData = { org: Organisation; team: Team | undefined; teams: Tea
 /** The name visitors know: the team's ("Ballatoio"), not the company's legal name. */
 export const brandName = (a: Pick<AgencyData, 'org' | 'team'>) => a.team?.name ?? a.org.name;
 
-/**
- * Facts the API does not carry yet, per listing. Every one is optional: a
- * listing without it shows nothing.
- */
-export type Extras = {
-  energy?: string;
-  year?: number;
-  floor?: number;
-  terrace?: number;
-  balcony?: number;
-  charges?: number;
-};
 
 const fold = (s = '') => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 export const slugify = (s: string) => fold(s).replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

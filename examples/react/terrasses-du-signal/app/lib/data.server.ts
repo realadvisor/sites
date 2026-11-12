@@ -3,8 +3,10 @@
  * SitesClient (the @realadvisor/sites-sdk interface): live data when the
  * Worker has SITES_API_URL + SITES_API_KEY, else the fixture. Server only.
  *
- * Fields the API does not carry yet are read through `unitExtras()` and
- * `developmentExtra()` (fixture only) and never merged into SDK objects.
+ * The position on the floor, which the API does not carry yet, is read
+ * through `extras` (fixture only) and never merged into SDK objects.
+ * Unit numbers, orientations, outdoor surfaces and the development's
+ * companies are API fields of the records.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team } from '@realadvisor/sites-sdk/types';
 import type { Agency } from '@realadvisor/sites-kit';
@@ -19,12 +21,6 @@ export const sites = siteClient({ fixture: fx });
 /** The development this site is for (one-development site, AGENTS.md section 9). */
 export const DEVELOPMENT_ID = '5418826d-128c-452c-8479-605681362db5';
 
-export type DevelopmentExtra = {
-  developer?: string;
-  architect?: string;
-  general_contractor?: string;
-};
-
 export type Site = {
   org: Organisation;
   team?: Team;
@@ -32,10 +28,8 @@ export type Site = {
   dev: DevelopmentWithUnits;
   /** The broker of the development, else the first agent of the team. */
   agent?: Agent;
-  /** fixture only: unit number, position, orientation, garden / terrace surface, by unit id. */
+  /** fixture only: position on the floor, by unit id. */
   extras: Extras;
-  /** fixture only: developer, architect, general contractor. */
-  devExtra: DevelopmentExtra;
 };
 
 export async function loadSite(): Promise<Site> {
@@ -47,11 +41,9 @@ export async function loadSite(): Promise<Site> {
   ]);
   if (!dev) throw notFound();
   const team = teams.find((t) => t.primary) ?? teams[0];
-  // fixture only: every read of the unit and development extras goes through here.
+  // fixture only: every read of the unit extras goes through here.
   const extras: Extras = Object.fromEntries(dev.units.map((u) => [u.id, fixtureOnly(fx, 'units', u.id) as UnitExtra]));
-  const d = fixtureOnly(fx, 'developments', dev.id) as DevelopmentExtra;
-  const devExtra = { developer: d.developer, architect: d.architect, general_contractor: d.general_contractor };
-  return { org, team, agents, dev, agent: dev.agents[0] ?? agents[0], extras, devExtra };
+  return { org, team, agents, dev, agent: dev.agents[0] ?? agents[0], extras };
 }
 
 /**
