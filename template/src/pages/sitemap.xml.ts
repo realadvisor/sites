@@ -11,7 +11,7 @@ import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
 export const prerender = false;
 
 // Multi-language sites: add each language's pages too (localePath from src/lib/i18n.ts).
-const STATIC_PATHS = ['/', '/listings', ...LOCALES.flatMap((l) => [legalPath(l), privacyPath(l)])];
+const STATIC_PATHS = ['/', '/listings', '/team', '/contact', ...LOCALES.flatMap((l) => [legalPath(l), privacyPath(l)])];
 
 export const GET: APIRoute = async ({ site, url }) => {
   const base = site ?? url;

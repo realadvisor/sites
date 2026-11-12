@@ -1,0 +1,35 @@
+---
+// Wiring example only. Replace the markup with the real design.
+// Every agent with `tel:` and `mailto:` links, as kit/AGENTS.md asks.
+export const prerender = false;
+
+import Base from '../layouts/Base.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { img } from '@realadvisor/sites-kit/image';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { t } from '@realadvisor/sites-kit/i18n';
+
+const [agency, agents] = await Promise.all([ra.agency(), ra.agents()]);
+const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;
+---
+<Base
+  title={`Team | ${agency.name}`}
+  description={agents.map((p) => `${p.first_name} ${p.last_name}`).join(', ') || agency.name}
+  image={agents[0]?.photo && img(agents[0].photo.url, { w: 1200, h: 630 })}
+>
+  <main id="main">
+    <h1>Team</h1>
+    <ul>
+      {agents.map((p) => (
+        <li>
+          {p.photo && <RaImage src={p.photo} width={240} height={240} sizes="240px" alt={`${p.first_name} ${p.last_name}`} />}
+          <h2>{p.first_name} {p.last_name}</h2>
+          {p.title && <p>{p.title}</p>}
+          {p.phone && <p>{t('phone')}: <a href={telHref(p.phone)}>{p.phone}</a></p>}
+          {p.email && <p>{t('email')}: <a href={`mailto:${p.email}`}>{p.email}</a></p>}
+        </li>
+      ))}
+    </ul>
+    <p><a href="/contact">{t('contactUs')}</a></p>
+  </main>
+</Base>

@@ -20,7 +20,7 @@ const agency = await ra.agency();
 >
   <main>
     <h1>{agency.name}</h1>
-    <p><a href="/listings">Listings</a></p>
+    <p><a href="/listings">Listings</a> · <a href="/team">Team</a> · <a href="/contact">{t('contactUs')}</a></p>
     <h2>Contact</h2>
     <EnquiryForm contactReason="other" />
   </main>
