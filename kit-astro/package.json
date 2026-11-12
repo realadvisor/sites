@@ -1,6 +1,6 @@
 {
   "name": "@realadvisor-sites/kit-astro",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "The Astro 5 kit for RealAdvisor sites on Cloudflare Workers: the integration (middleware, security headers, data env, site.json), the ra data client, and the components (images, listings search and map, enquiry form, legal, consent). Built on @realadvisor/sites-kit-core.",
   "license": "MIT",
   "repository": {
@@ -39,8 +39,8 @@
     "./package.json": "./package.json"
   },
   "peerDependencies": {
-    "@realadvisor/sites-kit-core": "^0.4.0",
-    "@realadvisor/sites-sdk": "^0.4.0",
+    "@realadvisor/sites-kit-core": "^0.4.1",
+    "@realadvisor/sites-sdk": "^0.4.1",
     "astro": "^5.18.2"
   }
 }
