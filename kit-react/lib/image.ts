@@ -3,7 +3,7 @@
  * img.realadvisor.ch, Google profile photos, other hosts unchanged) plus a
  * crop of the original (imgproxy `c:` step), which sites had to add.
  */
-import { img, srcset, type ImgOptions } from '@realadvisor/sites-kit/image';
+import { img, srcset, type ImgOptions } from '@realadvisor/sites-kit-core/image';
 
 export { img, srcset, type ImgOptions };
 

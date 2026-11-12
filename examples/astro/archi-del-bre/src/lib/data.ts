@@ -10,8 +10,8 @@
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
-import { inPageLocale, textLocale } from '@realadvisor/sites-kit/page-locale';
+import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit-core/fixture';
+import { inPageLocale, textLocale } from '@realadvisor/sites-kit-core/page-locale';
 
 const fx = fixture as unknown as Fixture;
 export const client = inPageLocale(createFixtureClient(fx));

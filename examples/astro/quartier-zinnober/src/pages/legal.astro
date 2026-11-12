@@ -4,9 +4,9 @@ export const prerender = false;
 
 import Site from '../layouts/Site.astro';
 import PageHead from '../components/PageHead.astro';
-import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { t } from '@realadvisor/sites-kit/i18n';
+import LegalContent from '@realadvisor/sites-kit-astro/components/LegalContent.astro';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { legalAgency, site as load } from '../lib/data';
 
 const site = await load();

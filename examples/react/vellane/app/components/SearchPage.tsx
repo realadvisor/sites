@@ -8,8 +8,8 @@
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { ListingsSearch } from '@realadvisor/sites-kit-react/components/ListingsSearch';
 import { parseSearch, searchListings } from '@realadvisor/sites-kit-react/lib/search';
-import { img } from '@realadvisor/sites-kit/image';
-import { count as kcount, t as kt } from '@realadvisor/sites-kit/i18n';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count as kcount, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import { Layout } from './Layout';
 import { ListingCard } from './ListingCard';
 import { Icon } from './Icon';

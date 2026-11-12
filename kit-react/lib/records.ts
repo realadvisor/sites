@@ -4,10 +4,10 @@
  * reference as the Astro kit words them.
  */
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { formatPrice } from '@realadvisor/sites-kit/format';
+import { formatPrice } from '@realadvisor/sites-kit-core/format';
 
-export { agencyOf } from '@realadvisor/sites-kit/agency';
-export { listingRef } from '@realadvisor/sites-kit/seo';
+export { agencyOf } from '@realadvisor/sites-kit-core/agency';
+export { listingRef } from '@realadvisor/sites-kit-core/seo';
 
 /**
  * `CHF 2'850'000`, `CHF 4'200 / Monat`, "Preis auf Anfrage" (DESIGN.md 5), in

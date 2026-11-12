@@ -7,8 +7,8 @@
  */
 import type { Route } from './+types/unit';
 import { redirect } from 'react-router';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Layout } from '../components/Layout';

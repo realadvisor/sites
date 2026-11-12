@@ -1,6 +1,6 @@
 import type { Route } from './+types/ueber-uns';
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { AgentCard } from '../components/AgentCard';
 import { TalkBand } from '../components/TalkBand';

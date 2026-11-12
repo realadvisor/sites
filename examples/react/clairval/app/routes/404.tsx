@@ -5,7 +5,7 @@
  * Language from the path.
  */
 import { isRouteErrorResponse, useLocation, useRouteError, useRouteLoaderData } from 'react-router';
-import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Site } from '../components/Site';
 import { href, langOfPath, LOCALE } from '../lib/routes';

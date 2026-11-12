@@ -3,7 +3,7 @@
  * default (unprefixed URLs), English lives under /en. Kit parts (form, legal,
  * consent, search) bring their own strings: pass them `LOCALE_OF[lang]`.
  */
-import { legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 
 export type Lang = 'it' | 'en';
 export const LANGS: readonly Lang[] = ['it', 'en'];

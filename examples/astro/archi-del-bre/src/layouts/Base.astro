@@ -3,9 +3,9 @@
  * Document shell: <head> SEO tags only (title, description, canonical,
  * hreflang, OG, JSON-LD, favicons). Every page passes its own og:image.
  */
-import { analyticsId } from '@realadvisor/sites-kit/env';
-import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit/seo';
-import ConsentBanner from '@realadvisor/sites-kit/components/ConsentBanner.astro';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
+import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit-core/seo';
+import ConsentBanner from '@realadvisor/sites-kit-astro/components/ConsentBanner.astro';
 
 interface Props {
   title: string;

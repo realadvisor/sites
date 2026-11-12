@@ -1,7 +1,7 @@
 /** Numbered pages of ListingsSearch (port of ListingsPager.astro). */
-import { pageList, type SearchResult } from '@realadvisor/sites-kit/search';
+import { pageList, type SearchResult } from '@realadvisor/sites-kit-core/search';
 import { usePageLocale } from './Document';
-import { lang, t } from '@realadvisor/sites-kit/i18n';
+import { lang, t } from '@realadvisor/sites-kit-core/i18n';
 
 export function ListingsPager({ result, href, locale }: { result: SearchResult; href: (over: { page?: number }) => string; locale?: string }) {
   const l = lang(locale ?? usePageLocale());

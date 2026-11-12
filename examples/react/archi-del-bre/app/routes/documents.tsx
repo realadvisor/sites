@@ -1,6 +1,6 @@
 /** Documents: the PDFs we generate from our own HTML (fixture only: the API has no documents yet), per language. */
 import type { Route } from './+types/documents';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { loadSite } from '../lib/data.server';
 import { href, langOf } from '../lib/routes';

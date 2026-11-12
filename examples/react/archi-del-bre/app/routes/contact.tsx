@@ -4,7 +4,7 @@
  * sales office and the team's agents.
  */
 import type { Route } from './+types/contact';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { Layout } from '../components/Layout';
 import { AgentCard } from '../components/AgentCard';

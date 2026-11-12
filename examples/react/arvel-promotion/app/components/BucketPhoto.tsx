@@ -3,7 +3,7 @@
  * imgproxy at 480–2000w as AVIF + WebP at the photo's own ratio; CSS sets the
  * box (object-fit) and `position` the crop focus (object-position).
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 import { PHOTOS, type PhotoName } from '../content/photos';
 
 export type { PhotoName };

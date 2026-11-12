@@ -19,9 +19,12 @@ importers:
       '@fontsource-variable/source-serif-4':
         specifier: ^5.3.1
         version: 5.3.1
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -59,9 +62,12 @@ importers:
       '@fontsource/instrument-serif':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -99,9 +105,12 @@ importers:
       '@fontsource/cormorant-garamond':
         specifier: ^5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -136,9 +145,12 @@ importers:
       '@fontsource-variable/archivo':
         specifier: 5.2.8
         version: 5.2.8
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -176,9 +188,12 @@ importers:
       '@fontsource/jost':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -216,9 +231,12 @@ importers:
       '@fontsource/libre-caslon-text':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -256,9 +274,12 @@ importers:
       '@fontsource-variable/playfair-display':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -296,9 +317,12 @@ importers:
       '@fontsource-variable/public-sans':
         specifier: ^5.2.7
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -336,9 +360,12 @@ importers:
       '@fontsource-variable/inter':
         specifier: 5.2.8
         version: 5.2.8
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -376,9 +403,12 @@ importers:
       '@fontsource-variable/newsreader':
         specifier: ^5.2.8
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -416,9 +446,12 @@ importers:
       '@fontsource/cormorant-garamond':
         specifier: 5.2.11
         version: 5.2.11
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -453,9 +486,12 @@ importers:
       '@fontsource-variable/onest':
         specifier: ^5.2.5
         version: 5.3.1
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-astro':
+        specifier: file:../../../kit-astro
+        version: '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -490,12 +526,12 @@ importers:
       '@fontsource-variable/source-serif-4':
         specifier: ^5.3.1
         version: 5.3.1
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -548,12 +584,12 @@ importers:
       '@fontsource/instrument-serif':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -603,12 +639,12 @@ importers:
       '@fontsource-variable/jost':
         specifier: ^5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -658,12 +694,12 @@ importers:
       '@fontsource-variable/archivo':
         specifier: 5.2.8
         version: 5.2.8
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -716,12 +752,12 @@ importers:
       '@fontsource/jost':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -774,12 +810,12 @@ importers:
       '@fontsource/libre-caslon-text':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -832,12 +868,12 @@ importers:
       '@fontsource-variable/playfair-display':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -890,12 +926,12 @@ importers:
       '@fontsource-variable/public-sans':
         specifier: 5.3.0
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -948,12 +984,12 @@ importers:
       '@fontsource-variable/inter':
         specifier: 5.2.8
         version: 5.2.8
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -1006,12 +1042,12 @@ importers:
       '@fontsource-variable/newsreader':
         specifier: ^5.2.8
         version: 5.3.0
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -1064,12 +1100,12 @@ importers:
       '@fontsource/cormorant-garamond':
         specifier: 5.2.11
         version: 5.2.11
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -1119,12 +1155,12 @@ importers:
       '@fontsource-variable/onest':
         specifier: ^5.2.5
         version: 5.3.1
-      '@realadvisor/sites-kit':
-        specifier: file:../../../kit
-        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core':
+        specifier: file:../../../kit-core
+        version: '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-kit-react':
         specifier: file:../../../kit-react
-        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
+        version: '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../../../sdk
         version: '@realadvisor-sites/sdk@file:../sdk'
@@ -2647,30 +2683,34 @@ packages:
       typescript:
         optional: true
 
+  '@realadvisor-sites/kit-astro@file:../kit-astro':
+    resolution: {directory: ../kit-astro, type: directory}
+    peerDependencies:
+      '@realadvisor/sites-kit-core': ^0.4.0
+      '@realadvisor/sites-sdk': ^0.4.0
+      astro: ^5.18.2
+
+  '@realadvisor-sites/kit-core@file:../kit-core':
+    resolution: {directory: ../kit-core, type: directory}
+    hasBin: true
+    peerDependencies:
+      '@realadvisor/sites-sdk': ^0.4.0
+      playwright: ^1.64.1
+    peerDependenciesMeta:
+      playwright:
+        optional: true
+
   '@realadvisor-sites/kit-react@file:../kit-react':
     resolution: {directory: ../kit-react, type: directory}
     hasBin: true
     peerDependencies:
-      '@realadvisor/sites-kit': ^0.3.0
-      '@realadvisor/sites-sdk': ^0.3.0
+      '@realadvisor/sites-kit-core': ^0.4.0
+      '@realadvisor/sites-sdk': ^0.4.0
       playwright: ^1.64.1
       react: ^19.0.0
       react-dom: ^19.0.0
       react-router: ^7.18.0
     peerDependenciesMeta:
-      playwright:
-        optional: true
-
-  '@realadvisor-sites/kit@file:../kit':
-    resolution: {directory: ../kit, type: directory}
-    hasBin: true
-    peerDependencies:
-      '@realadvisor/sites-sdk': ^0.3.0
-      astro: ^5.18.2
-      playwright: ^1.64.1
-    peerDependenciesMeta:
-      astro:
-        optional: true
       playwright:
         optional: true
 
@@ -6127,21 +6167,26 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)':
+  '@realadvisor-sites/kit-astro@file:../kit-astro(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))':
     dependencies:
-      '@realadvisor/sites-kit': '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
+      '@realadvisor/sites-kit-core': '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
+      '@realadvisor/sites-sdk': '@realadvisor-sites/sdk@file:../sdk'
+      astro: 5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
+
+  '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)':
+    dependencies:
+      '@realadvisor/sites-sdk': '@realadvisor-sites/sdk@file:../sdk'
+    optionalDependencies:
+      playwright: 1.64.1
+
+  '@realadvisor-sites/kit-react@file:../kit-react(@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1))(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)(react-dom@19.3.1(react@19.3.1))(react-router@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)':
+    dependencies:
+      '@realadvisor/sites-kit-core': '@realadvisor-sites/kit-core@file:../kit-core(@realadvisor-sites/sdk@file:../sdk)(playwright@1.64.1)'
       '@realadvisor/sites-sdk': '@realadvisor-sites/sdk@file:../sdk'
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       react-router: 7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
     optionalDependencies:
-      playwright: 1.64.1
-
-  '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)':
-    dependencies:
-      '@realadvisor/sites-sdk': '@realadvisor-sites/sdk@file:../sdk'
-    optionalDependencies:
-      astro: 5.18.2(@types/node@22.20.5)(lightningcss@1.33.0)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
       playwright: 1.64.1
 
   '@realadvisor-sites/sdk@file:../sdk': {}

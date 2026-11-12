@@ -1,8 +1,8 @@
 // Privacy policy: the kit's text from the organisation's data.
 import type { Route } from './+types/privacy';
-import { privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { t } from '@realadvisor/sites-kit/i18n';
-import { analyticsId } from '@realadvisor/sites-kit/env';
+import { privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { t } from '@realadvisor/sites-kit-core/i18n';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
 import { LegalPage } from '../components/LegalPage';
 import { legalAgency, loadSite } from '../lib/data.server';
 

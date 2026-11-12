@@ -3,7 +3,7 @@
  * tsconfig includes it: "include": ["node_modules/@realadvisor/sites-kit-react/env.d.ts", ...].
  */
 declare module 'virtual:sites-kit/site' {
-  const site: import('@realadvisor/sites-kit/site-config').SiteConfig;
+  const site: import('@realadvisor/sites-kit-core/site-config').SiteConfig;
   export default site;
 }
 declare module 'virtual:sites-kit-react/client' {
@@ -26,10 +26,10 @@ declare module 'astro:env/server' {
   export const SITES_FIXTURE: string | undefined;
 }
 declare module 'virtual:sites-kit/fixtures' {
-  const fixtures: Record<string, { default: import('@realadvisor/sites-kit').SiteFixture }>;
+  const fixtures: Record<string, { default: import('@realadvisor/sites-kit-core').SiteFixture }>;
   export default fixtures;
 }
-declare module '@realadvisor/sites-kit/security' {
+declare module '@realadvisor/sites-kit-core/security' {
   export const ALLOWED_HOSTS: { img: string[]; script: string[]; connect: string[]; frame: string[] };
   export function csp(preview: boolean): string;
   export function securityHeaders(preview: boolean): Record<string, string>;

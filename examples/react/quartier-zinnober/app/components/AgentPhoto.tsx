@@ -4,7 +4,7 @@
  * keep the plain-text layout. The frame matches the site's cards.
  */
 import type { CSSProperties } from 'react';
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 import type { Agent } from '@realadvisor/sites-sdk/types';
 import './AgentPhoto.css';
 

@@ -1,0 +1,25 @@
+---
+/**
+ * Button or link styled as a button, same height as the form controls.
+ *   <Button type="submit">Suchen</Button>
+ *   <Button href="/listings" variant="secondary">Zurücksetzen</Button>
+ *   <Button href="/estimation" variant="on-photo">Faire estimer mon bien</Button>  (on a hero photo)
+ */
+import '@realadvisor/sites-kit-core/styles/form.css';
+
+interface Props {
+  href?: string;
+  type?: 'submit' | 'button' | 'reset';
+  /** `on-photo`: white text and border on a translucent dark fill, for buttons over a photo. */
+  variant?: 'primary' | 'secondary' | 'on-photo';
+  disabled?: boolean;
+  class?: string;
+  /** `data-*` hooks pass through (e.g. `data-rs-nav` in ListingsSearch). */
+  [data: `data-${string}`]: string | boolean | undefined;
+}
+const { href, type = 'submit', variant = 'primary', disabled, class: cls, ...data } = Astro.props;
+const classes = ['btn', { 'btn--secondary': variant === 'secondary', 'btn--on-photo': variant === 'on-photo' }, cls];
+---
+{href
+  ? <a href={href} class:list={classes} {...data}><slot /></a>
+  : <button type={type} class:list={classes} disabled={disabled} {...data}><slot /></button>}

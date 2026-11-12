@@ -18,9 +18,10 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "12.6.13",
-    "@fontsource/instrument-serif": "5.3.0",
     "@fontsource-variable/figtree": "5.3.0",
-    "@realadvisor/sites-kit": "file:../../../kit",
+    "@fontsource/instrument-serif": "5.3.0",
+    "@realadvisor/sites-kit-astro": "file:../../../kit-astro",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
     "@realadvisor/sites-sdk": "file:../../../sdk",
     "astro": "5.18.2"
   },

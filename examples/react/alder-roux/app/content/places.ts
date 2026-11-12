@@ -6,7 +6,7 @@
  */
 import type { L } from '../lib/routes';
 import { slugify } from '../lib/routes';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 
 const P = (id: string) => `https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-${id}.jpg`;
 

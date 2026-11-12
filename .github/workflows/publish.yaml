@@ -1,7 +1,7 @@
 name: Publish
 
-# Publishes @realadvisor-sites/sdk, @realadvisor-sites/kit and
-# @realadvisor-sites/kit-react to npm, one version for the three, when a
+# Publishes @realadvisor-sites/sdk, /kit-core, /kit-astro and
+# /kit-react to npm, one version for the four, when a
 # v<x.y.z> tag is pushed. Set the version first (scripts/set-version.mjs),
 # merge, then tag the merge commit.
 #
@@ -38,12 +38,12 @@ jobs:
       - run: pnpm test
       - run: node scripts/check-pack.mjs
       - run: pnpm check:template
-      # The SDK first: the kits name it as a peer.
+      # The SDK first, then the core: the kits name them as peers.
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          for dir in sdk kit kit-react; do
+          for dir in sdk kit-core kit-astro kit-react; do
             name=$(node -p "require('./$dir/package.json').name")
             version=$(node -p "require('./$dir/package.json').version")
             if npm view "$name@$version" version >/dev/null 2>&1; then

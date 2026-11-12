@@ -3,7 +3,7 @@
  * that is not sold (sold unit pages are noindex).
  */
 import type { APIRoute } from 'astro';
-import { legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 import { sites } from '../lib/data';
 import { programmeUrl, unitUrl, PROGRAMMES_PATH } from '../lib/fr';
 

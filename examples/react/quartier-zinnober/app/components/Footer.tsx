@@ -1,4 +1,4 @@
-import { legalPath, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath, t } from '@realadvisor/sites-kit-core/i18n';
 import type { LayoutData } from '../lib/data.server';
 import { Wordmark } from './Wordmark';
 import { Icon } from './Icon';

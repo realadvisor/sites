@@ -8,7 +8,7 @@
 import type { ReactNode } from 'react';
 import { useLocation, useRouteLoaderData } from 'react-router';
 import { Seo, useKit } from '@realadvisor/sites-kit-react/components/Document';
-import { canonicalUrl } from '@realadvisor/sites-kit/seo';
+import { canonicalUrl } from '@realadvisor/sites-kit-core/seo';
 import type { RootData } from '../root';
 import { Header } from './Header';
 import { Footer } from './Footer';

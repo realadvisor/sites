@@ -7,13 +7,13 @@
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
-import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import { allListings, ra } from '@realadvisor/sites-kit/ra';
-import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
-import { formatAmount, formatPrice, listingUrl, LOCALE } from '@realadvisor/sites-kit/format';
-import { img } from '@realadvisor/sites-kit/image';
-import { count, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import ListingsSearch from '@realadvisor/sites-kit-astro/components/ListingsSearch.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import { allListings, ra } from '@realadvisor/sites-kit-astro/ra';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit-core/search';
+import { formatAmount, formatPrice, listingUrl, LOCALE } from '@realadvisor/sites-kit-core/format';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
 
 const params = parseSearch(Astro.url.searchParams);
 const [agency, pool] = await Promise.all([ra.agency(), allListings()]);

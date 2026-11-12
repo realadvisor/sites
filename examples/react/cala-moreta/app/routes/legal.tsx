@@ -1,11 +1,11 @@
 // Legal notice and privacy policy: text only from the kit (built from the
 // agency data), in the site's layout. Never edit the words.
 import type { Route } from './+types/legal';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { analyticsId } from '@realadvisor/sites-kit/env';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { Site } from '../components/Site';
 import { agency } from '../lib/data.server';
 import { alternates, href, langOfPath } from '../lib/i18n';

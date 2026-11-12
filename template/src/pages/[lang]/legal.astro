@@ -6,10 +6,10 @@
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
-import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
-import { ra } from '@realadvisor/sites-kit/ra';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { LOCALES, lang, legalPath, t } from '@realadvisor/sites-kit/i18n';
+import LegalContent from '@realadvisor/sites-kit-astro/components/LegalContent.astro';
+import { ra } from '@realadvisor/sites-kit-astro/ra';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { LOCALES, lang, legalPath, t } from '@realadvisor/sites-kit-core/i18n';
 
 const locale = LOCALES.slice(1).find((l) => lang(l) === Astro.params.lang);
 if (!locale) return Astro.rewrite('/404');

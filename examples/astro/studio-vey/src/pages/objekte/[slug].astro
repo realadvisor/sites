@@ -1,18 +1,18 @@
 ---
 export const prerender = false;
 
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
 import Layout from '../../layouts/Layout.astro';
 import Gallery from '../../components/Gallery.astro';
 import EnergyScale from '../../components/EnergyScale.astro';
 import Collection from '../../components/Collection.astro';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import ListingsMap from '@realadvisor/sites-kit/components/ListingsMap.astro';
-import { sanitizeHtml, listingIdFromSlug } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import ListingsMap from '@realadvisor/sites-kit-astro/components/ListingsMap.astro';
+import { sanitizeHtml, listingIdFromSlug } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import { agentUrl, areas, areaUrl, listingUrl, site, sites } from '../../lib/data';
 import { price, rooms } from '../../lib/kit';
 import { fullName, languages, telHref } from '../../lib/format';

@@ -5,7 +5,7 @@
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 
 const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
 const title = gone ? t('listingGone') : t('notFound');

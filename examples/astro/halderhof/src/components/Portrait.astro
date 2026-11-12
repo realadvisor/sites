@@ -4,7 +4,7 @@
  * nothing when the agent has no photo: the name, role and contacts carry
  * the card then. No initials fallback.
  */
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
 import type { Agent } from '@realadvisor/sites-sdk/types';
 
 interface Props { agent: Pick<Agent, 'first_name' | 'last_name' | 'photo'>; w: number; ratio?: 'portrait' | 'square'; sizes: string; class?: string; priority?: boolean }

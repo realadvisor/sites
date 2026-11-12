@@ -8,7 +8,7 @@
  * street numbers of the two wings come from the brief too (src/content/site.ts).
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
 import { unitExtra } from './data';
 import { type Lang, tr } from './i18n';
 

@@ -37,7 +37,7 @@ export const developmentExtra = (d: { id: string }): DevelopmentExtra => fixture
 
 /**
  * The organisation in the shape the kit's legal text builder takes
- * (`@realadvisor/sites-kit/legal`): name and the primary team's contacts.
+ * (`@realadvisor/sites-kit-core/legal`): name and the primary team's contacts.
  * No legal ids in the data yet: those lines stay out (never invented).
  */
 export async function legalIdentity() {

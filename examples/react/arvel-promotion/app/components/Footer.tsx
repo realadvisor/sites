@@ -1,5 +1,5 @@
 import type { Team } from '@realadvisor/sites-sdk/types';
-import { t, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { t, legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 import type { ProgrammeLink } from '../root';
 import { addressLine, programmeStatus, programmeUrl, telHref, PROGRAMMES_PATH } from '../lib/fr';
 import { Wordmark } from './Wordmark';

@@ -3,9 +3,9 @@
 // unit preselected. Sold units stay reachable (noindex) and say so.
 import { Fragment } from 'react';
 import type { Route } from './+types/lot';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
-import { LOCALE } from '@realadvisor/sites-kit/format';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Layout } from '../components/Layout';
 import { FloorPlan } from '../components/FloorPlan';

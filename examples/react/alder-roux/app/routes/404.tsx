@@ -4,7 +4,7 @@
  * in the language of the path. Also the splat route (`*`).
  */
 import { useLocation, useRouteLoaderData } from 'react-router';
-import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useGone } from '@realadvisor/sites-kit-react/components/Document';
 import { Layout } from '../components/Layout';

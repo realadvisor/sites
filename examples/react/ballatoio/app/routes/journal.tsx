@@ -1,6 +1,6 @@
 /** Journal: the newest post large, the others as a plain list. */
 import type { Route } from './+types/journal';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { Photo } from '../components/Photo';
 import { agency, sites } from '../lib/data.server';

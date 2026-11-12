@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@fontsource-variable/onest": "^5.2.5",
-    "@realadvisor/sites-kit": "file:../../../kit",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
     "@realadvisor/sites-kit-react": "file:../../../kit-react",
     "@realadvisor/sites-sdk": "file:../../../sdk",
     "react": "19.3.1",

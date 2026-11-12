@@ -5,7 +5,7 @@
  * Unit titles and descriptions come from the CRM in Spanish only: English
  * pages build titles from the facts and mark descriptions `lang="es"`.
  */
-import { legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 
 export type Lang = 'es' | 'en';
 export const LANGS: readonly Lang[] = ['es', 'en'];

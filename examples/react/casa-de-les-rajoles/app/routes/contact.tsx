@@ -5,8 +5,8 @@
  * documents), the team, the sales office and its map.
  */
 import type { Route } from './+types/contact';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Layout } from '../components/Layout';

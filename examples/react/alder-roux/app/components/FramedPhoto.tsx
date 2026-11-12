@@ -6,7 +6,7 @@
  * 768px. Same URLs as the Astro version's FramedPhoto.astro.
  */
 import { preload } from 'react-dom';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import type { Framed } from '../content/places';
 
 export type FramedPhotoProps = {

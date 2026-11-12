@@ -3,7 +3,7 @@
  * imgproxy through the kit helper: <picture> with AVIF and WebP srcsets and a
  * JPEG fallback. The crop is done in CSS (object-fit / object-position).
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 import { BUCKET } from '../lib/bucket';
 
 type Props = { name: string; alt: string; sizes: string; ratio?: number; priority?: boolean; position?: string; className?: string };

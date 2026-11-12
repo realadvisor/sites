@@ -1,6 +1,6 @@
 /** Prices, surfaces and facts in the page language, through the kit's formatters (Italian conventions: 1.250.000 €, 145 m²). */
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { featureLabel, propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { featureLabel, propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { LOCALE_OF, UI, fill, type Lang } from './i18n';
 

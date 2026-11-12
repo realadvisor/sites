@@ -1,11 +1,11 @@
 ---
 export const prerender = false;
 /** One agency: address and contact, its own text, its agents (portraits when set) and its listings. */
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
-import { img } from '@realadvisor/sites-kit/image';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
 import Site from '../../layouts/Site.astro';
 import ListingCard from '../../components/ListingCard.astro';
 import AgentBlock from '../../components/AgentBlock.astro';

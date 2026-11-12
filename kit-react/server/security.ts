@@ -5,7 +5,7 @@
  * kit's lib/security.mjs as it is: same hosts, same directives, no hash, no
  * 'unsafe-inline' for scripts.
  */
-import { securityHeaders } from '@realadvisor/sites-kit/security';
+import { securityHeaders } from '@realadvisor/sites-kit-core/security';
 
 /** 128 random bits, base64: a new one for every HTML response. */
 export function createNonce(): string {

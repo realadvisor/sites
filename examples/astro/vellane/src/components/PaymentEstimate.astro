@@ -6,7 +6,7 @@
  * server renders the default result, the script recomputes on input.
  * Excludes insurance, notary fees and agency fees; says so.
  */
-import { formatAmount } from '@realadvisor/sites-kit/format';
+import { formatAmount } from '@realadvisor/sites-kit-core/format';
 
 interface Props { price: number; id?: string }
 const { price, id = 'pay' } = Astro.props;

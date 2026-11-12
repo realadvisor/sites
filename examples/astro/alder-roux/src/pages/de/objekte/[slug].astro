@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import View from '../../../views/ListingView.astro';
-import { listingIdFromSlug } from '@realadvisor/sites-kit';
+import { listingIdFromSlug } from '@realadvisor/sites-kit-core';
 import { sites } from '../../../lib/data';
 const slug = Astro.params.slug!;
 const listing = await sites.listing(slug);

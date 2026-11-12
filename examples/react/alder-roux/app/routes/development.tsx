@@ -7,10 +7,10 @@
 import type { Route } from './+types/development';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { developmentStatus } from '@realadvisor/sites-kit/developments';
-import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { developmentStatus } from '@realadvisor/sites-kit-core/developments';
+import { lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
 import { Layout } from '../components/Layout';
 import { Crumbs } from '../components/Crumbs';
 import { StackingPlan } from '../components/StackingPlan';

@@ -7,7 +7,7 @@
  * open the SVG.
  */
 import type { Route } from './+types/plans';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { loadSite } from '../lib/data.server';
 import { alternates, availCount, fill, href, langOfPath, tr } from '../lib/i18n';

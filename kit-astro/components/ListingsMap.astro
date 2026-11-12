@@ -1,0 +1,153 @@
+---
+/**
+ * Map search for /listings: every listing with coordinates on an OSM map,
+ * clustered markers, a popup card per marker, zoom buttons, drag / wheel /
+ * pinch / keyboard. Pass `list`: the id of the element that holds the
+ * result cards, each card with `data-listing-id={l.id}`; hovering a card
+ * highlights its marker and moving the map shows only the cards in view.
+ *
+ *   <ListingsMap listings={all} list="results" />
+ *   <ul id="results">{all.map((l) => <li data-listing-id={l.id}>…</li>)}</ul>
+ *
+ * Clicking a pin marks its cards `.is-selected` (style it) and scrolls the
+ * list to them. `view` ({ z, lat, lng }, e.g. from `?map=`) opens there
+ * instead of fitting the listings; `sync` writes the visitor's view back
+ * into the URL (`?map=z/lat/lng`, replaceState). Each list-filtering move
+ * dispatches a bubbling `ra:map-area` event ({ count, total, all? }).
+ * Maps swapped in later: `mountMaps(el)` from @realadvisor/sites-kit-core/client/listings-map.ts.
+ *
+ * No library, no iframe, no inline script (@realadvisor/sites-kit-core/client/listings-map.ts is
+ * bundled; data goes through data-* attributes). Tiles come from
+ * tile.openstreetmap.org, the only map host the CSP allows. Restyle with
+ * tokens (--accent, --text, --paper); height: `--map-h` on a parent
+ * (default 60vh). Keep the attribution.
+ */
+import type { Listing } from '../lib/ra';
+import { formatPrice, listingUrl } from '@realadvisor/sites-kit-core/format';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { localePath, lang, pluralForms, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
+
+interface Props {
+  listings: Listing[];
+  /** id of the list whose cards (`data-listing-id`) follow the map. */
+  list?: string;
+  /** Page locale on a multi-language site (e.g. 'en-CH'). */
+  locale?: string;
+  /** First view (zoom, centre) instead of fitting the listings. */
+  view?: { z: number; lat: number; lng: number };
+  /** Keep the visitor's view in the URL as `?map=z/lat/lng`. */
+  sync?: boolean;
+  /**
+   * `server`: the page filters its list by the map area (ListingsSearch does,
+   * with `?bbox=`); the map only reports its bounds in `ra:map-area`.
+   * Default: the map hides the cards outside its view.
+   */
+  listMode?: 'client' | 'server';
+  /** Listing URL (default: `/listings/<slug>` in the page language). */
+  href?: (l: Listing) => string;
+  /** Popup price (default: `formatPrice`), e.g. a replica's "CHF 1'250'000.–". */
+  price?: (l: Listing) => string;
+  class?: string;
+}
+const { listings, list, locale, view, sync, listMode, href, price, class: cls } = Astro.props;
+const l = lang(locale);
+const points = listings
+  .filter((x) => x.address.lat != null && x.address.lng != null)
+  .map((x) => ({
+    id: x.id,
+    lat: x.address.lat,
+    lng: x.address.lng,
+    url: href ? href(x) : localePath(listingUrl(x), locale),
+    title: x.title,
+    // The popup's eyebrow: the property type in the page language ("Attique"), never a generic "Bien".
+    type: propertyTypeLabel(x.property_type, locale),
+    price: price ? price(x) : formatPrice(x),
+    photo: x.photos[0]?.url ? img(x.photos[0].url, { w: 320, h: 213 }) : undefined,
+  }));
+const labels = {
+  lang: l,
+  inArea: pluralForms('inArea', l),
+  listings: pluralForms('listings', l),
+  showAll: t('showAll', {}, l),
+  close: t('close', {}, l),
+};
+---
+<div class:list={['ra-map', cls]} data-ra-map data-points={JSON.stringify(points)} data-labels={JSON.stringify(labels)} data-list={list} data-view={view ? JSON.stringify(view) : undefined} data-sync={sync || undefined} data-list-mode={listMode === 'server' ? 'server' : undefined}>
+  <div class="ra-map-viewport" data-map-viewport tabindex="0" role="application" aria-label={t('mapLabel', {}, l)} aria-roledescription="map">
+    <div class="ra-map-tiles" data-map-tiles aria-hidden="true"></div>
+    <div class="ra-map-markers" data-map-markers></div>
+    <div class="ra-map-popup" data-map-popup></div>
+  </div>
+  <div class="ra-map-status" data-map-status role="status">
+    <span data-map-count></span>
+    <button type="button">{t('showAll', {}, l)}</button>
+  </div>
+  <div class="ra-map-zoom">
+    <button type="button" data-map-zoom="1" aria-label={t('zoomIn', {}, l)}>+</button>
+    <button type="button" data-map-zoom="-1" aria-label={t('zoomOut', {}, l)}>−</button>
+  </div>
+  <p class="ra-map-attr">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">{t('osmContributors', {}, l)}</a></p>
+</div>
+
+<script>
+  import '@realadvisor/sites-kit-core/client/listings-map';
+</script>
+
+<style>
+  /* overflow-anchor: tiles and markers come and go; the browser must not anchor the page scroll on them (the page jumped on zoom). */
+  .ra-map { position: relative; overflow: hidden; height: var(--map-h, 60vh); min-height: 320px; background: #f2f0ec; touch-action: none; overflow-anchor: none; }
+  .ra-map-viewport { position: absolute; inset: 0; cursor: grab; outline-offset: -3px; }
+  .ra-map-viewport:active { cursor: grabbing; }
+  .ra-map-tiles { position: absolute; inset: 0; filter: grayscale(1) sepia(.18) contrast(.92) brightness(1.06); }
+  .ra-map-tiles :global(img) { position: absolute; left: 0; top: 0; width: 256px; height: 256px; max-width: none; user-select: none; -webkit-user-drag: none; opacity: 0; transition: opacity .2s; }
+  .ra-map-tiles :global(img.is-loaded) { opacity: 1; }
+  .ra-map-markers { position: absolute; inset: 0; pointer-events: none; }
+  .ra-map-markers :global(button) {
+    position: absolute; left: 0; top: 0; pointer-events: auto; cursor: pointer; border: 2px solid var(--paper, #fff);
+    background: var(--accent, #134266); color: var(--paper, #fff); font: 600 14px/1 system-ui, sans-serif;
+    box-shadow: 0 2px 6px rgb(0 0 0 / .3); transition: background .15s, scale .15s; will-change: translate;
+  }
+  /* A 22px dot inside a 44px (invisible) touch target. */
+  .ra-map-markers :global(.ra-map-pin) { width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: 0; border-radius: 50%; background: none; box-shadow: none; }
+  .ra-map-markers :global(.ra-map-pin)::after { content: ''; position: absolute; inset: 11px; border: 2px solid var(--paper, #fff); border-radius: 50%; background: var(--accent, #134266); box-shadow: 0 2px 6px rgb(0 0 0 / .3); transition: background .15s; }
+  /* Clusters grow with their count and carry a soft halo (as on most portals). */
+  .ra-map-markers :global(.ra-map-cluster) {
+    --d: 36px; min-width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); border-radius: 999px; padding: 0 8px;
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent, #134266) 22%, transparent), 0 2px 6px rgb(0 0 0 / .3);
+  }
+  .ra-map-markers :global(.ra-map-cluster.is-m) { --d: 44px; }
+  .ra-map-markers :global(.ra-map-cluster.is-l) { --d: 52px; font-size: 15px; }
+  .ra-map-markers :global(button:hover), .ra-map-markers :global(button.is-active), .ra-map-markers :global(button.is-selected), .ra-map-markers :global(button:focus-visible) { scale: 1.15; z-index: 1; }
+  .ra-map-markers :global(.ra-map-cluster:hover), .ra-map-markers :global(.ra-map-cluster.is-active), .ra-map-markers :global(.ra-map-cluster:focus-visible),
+  .ra-map-markers :global(.ra-map-pin:hover)::after, .ra-map-markers :global(.ra-map-pin.is-active)::after, .ra-map-markers :global(.ra-map-pin.is-selected)::after, .ra-map-markers :global(.ra-map-pin:focus-visible)::after { background: var(--text, #1c1b19); }
+  /* Placed by the script: above or below its marker, clear of the edges and the zoom buttons. */
+  .ra-map-popup {
+    position: absolute; left: 0; top: 0; z-index: 4; width: min(260px, calc(100% - 16px)); max-height: min(340px, calc(100% - 16px)); overflow: auto;
+    background: var(--paper, #fff); color: var(--text, #1c1b19); box-shadow: 0 6px 20px rgb(0 0 0 / .25); cursor: auto;
+    visibility: hidden; pointer-events: none; opacity: 0;
+  }
+  .ra-map-popup:global(.is-open) { visibility: visible; pointer-events: auto; opacity: 1; }
+  .ra-map-popup :global(.ra-map-card) { display: grid; gap: 4px; padding: 0 0 12px; color: inherit; text-decoration: none; }
+  .ra-map-popup :global(.ra-map-card + .ra-map-card) { border-top: 1px solid var(--line, #d6d3cf); padding-top: 12px; }
+  .ra-map-popup :global(.ra-map-card img) { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+  .ra-map-popup :global(.ra-map-card-type), .ra-map-popup :global(.ra-map-card-title), .ra-map-popup :global(.ra-map-card-price) { padding: 0 12px; }
+  .ra-map-popup :global(.ra-map-card-type) { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; opacity: .75; }
+  .ra-map-popup :global(.ra-map-card-price) { font-weight: 600; }
+  .ra-map-popup :global(.ra-map-close) { position: sticky; top: 4px; float: right; margin: 4px 4px -48px 0; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgb(255 255 255 / .9); color: #1c1b19; font-size: 22px; cursor: pointer; z-index: 1; }
+  .ra-map-status {
+    position: absolute; left: 12px; top: 12px; z-index: 3; display: flex; gap: 12px; align-items: center; padding: 6px 6px 6px 14px;
+    background: var(--paper, #fff); box-shadow: 0 2px 8px rgb(0 0 0 / .2); visibility: hidden; pointer-events: none; opacity: 0;
+  }
+  /* Only its button takes clicks: the markers under the pill stay reachable. */
+  .ra-map-status:global(.is-open) { visibility: visible; opacity: 1; }
+  .ra-map-status:global(.is-open) button { pointer-events: auto; }
+  .ra-map-status button, .ra-map-zoom button { min-height: 44px; min-width: 44px; border: 0; background: var(--paper, #fff); color: var(--text, #1c1b19); font: inherit; cursor: pointer; }
+  .ra-map-status button { text-decoration: underline; }
+  .ra-map-zoom { position: absolute; right: 12px; top: 12px; z-index: 3; display: grid; box-shadow: 0 2px 8px rgb(0 0 0 / .2); }
+  .ra-map-zoom button { font-size: 22px; }
+  .ra-map-zoom button:disabled { color: #999; cursor: default; }
+  .ra-map-zoom button + button { border-top: 1px solid var(--line, #d6d3cf); }
+  .ra-map-attr { position: absolute; right: 0; bottom: 0; z-index: 3; margin: 0; padding: 2px 6px; font-size: 11px; color: #444; background: rgb(255 255 255 / .8); }
+  .ra-map-attr a { color: inherit; }
+  @media (prefers-reduced-motion: reduce) { .ra-map-markers :global(button), .ra-map-markers :global(.ra-map-pin)::after, .ra-map-tiles :global(img) { transition: none; } }
+</style>

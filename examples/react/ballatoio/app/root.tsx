@@ -12,7 +12,7 @@ import './styles/global.css';
 import { KitProvider, KitScripts } from '@realadvisor/sites-kit-react/components/Document';
 import { ConsentBanner } from '@realadvisor/sites-kit-react/components/ConsentBanner';
 import { kitData } from '@realadvisor/sites-kit-react/server/kit';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { agency, sites } from './lib/data.server';
 import { brandName } from './lib/data';
 import { LOCALE_OF, langOfPath } from './lib/i18n';

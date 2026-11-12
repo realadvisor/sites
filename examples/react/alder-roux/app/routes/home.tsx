@@ -6,8 +6,8 @@
  */
 import type { Route } from './+types/home';
 import { useKit } from '@realadvisor/sites-kit-react/components/Document';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { Layout } from '../components/Layout';
 import { SearchBand } from '../components/SearchBand';
 import { ListingCard } from '../components/ListingCard';

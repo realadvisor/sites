@@ -1,7 +1,7 @@
 ---
 /** Staggered three-photo collage (centre tall, sides offset). Photos keep their crop within ~10%. */
 import type { Photo } from '@realadvisor/sites-sdk/types';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
 interface Props { photos: Photo[]; fallbackAlt: string }
 const { photos, fallbackAlt } = Astro.props;
 const [a, b, c] = photos;

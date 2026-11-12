@@ -4,7 +4,7 @@
  * the full map. Tiles are lazy and come from tile.openstreetmap.org (allowed
  * by the kit's CSP).
  */
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import './StaticMap.css';
 
 type Props = {

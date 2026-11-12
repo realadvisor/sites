@@ -5,7 +5,7 @@
  */
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { RaImage } from './RaImage';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { cityLine, factsLine, listingHref, price, typeLabel } from '../lib/site';
 import { SaveButton } from './SaveButton';
 import './ListingCard.css';

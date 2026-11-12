@@ -1,7 +1,7 @@
 ---
 /** Journal post card: photo, topic, title, date. */
 import type { CollectionEntry } from 'astro:content';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
 import { formatDate } from '../lib/format';
 
 interface Props { post: CollectionEntry<'journal'>; as?: 'h2' | 'h3'; large?: boolean; priority?: boolean }

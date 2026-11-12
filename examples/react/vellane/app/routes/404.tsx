@@ -3,7 +3,7 @@
  * path, unknown listing, agency, agent or city) and 410 (a listing that left
  * the site: "no longer available"), keeping the status. Also the splat route.
  */
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';

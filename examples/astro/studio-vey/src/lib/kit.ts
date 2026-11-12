@@ -1,6 +1,6 @@
 /** Price and rooms as this site words them, over SDK records. */
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { formatPrice } from '@realadvisor/sites-kit/format';
+import { formatPrice } from '@realadvisor/sites-kit-core/format';
 
 /** `CHF 2'850'000`, `CHF 4'200 / Monat`, "Preis auf Anfrage". */
 export const price = (l: Pick<Listing, 'price' | 'price_on_request' | 'offer_type'>) =>

@@ -19,7 +19,8 @@
     "@astrojs/cloudflare": "12.6.13",
     "@fontsource-variable/bricolage-grotesque": "5.2.10",
     "@fontsource-variable/inter": "5.2.8",
-    "@realadvisor/sites-kit": "file:../../../kit",
+    "@realadvisor/sites-kit-astro": "file:../../../kit-astro",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
     "@realadvisor/sites-sdk": "file:../../../sdk",
     "astro": "5.18.2"
   },

@@ -3,7 +3,7 @@
  * kit's `img()`. Kit gap: `img()` only resizes; no crop/gravity option.
  * `crop` = fractions of the original: [left, top, width, height] (0 = full).
  */
-import { img, type ImgOptions } from '@realadvisor/sites-kit/image';
+import { img, type ImgOptions } from '@realadvisor/sites-kit-core/image';
 
 export type Crop = { left: number; top: number; width: number; height: number };
 

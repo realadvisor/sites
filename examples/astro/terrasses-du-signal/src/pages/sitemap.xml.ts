@@ -1,6 +1,6 @@
 /** sitemap.xml: the static pages and every unit that is not sold. */
 import type { APIRoute } from 'astro';
-import { legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 import { loadSite } from '../lib/data';
 import { sortUnits, unitPath } from '../lib/units';
 

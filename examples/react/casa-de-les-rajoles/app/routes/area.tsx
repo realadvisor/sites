@@ -1,6 +1,6 @@
 /** The neighbourhood (/barrio, /en/neighbourhood): one aerial, a lead, places with straight-line distances, the map. */
 import type { Route } from './+types/area';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { StaticMap } from '../components/StaticMap';

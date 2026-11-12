@@ -7,7 +7,7 @@
  * Kit gap: RaImage serves AVIF only to its priority image and has no object
  * position, hence this small wrapper (AvifImage does the same for the gallery).
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 
 interface Props { src: string; alt: string; width: number; height: number; sizes?: string; priority?: boolean; class?: string; position?: string; widths?: number[]; fallbackWidth?: number }
 const { src, alt, width, height, sizes = '100vw', priority = false, class: cls, position, widths = [480, 640, 960, 1280, 1600], fallbackWidth = 960 } = Astro.props;

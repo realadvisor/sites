@@ -1,6 +1,6 @@
 /** Quartieri / Neighbourhoods: every Milan district with listings, as large alternating photo rows. */
 import type { Route } from './+types/areas';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Site } from '../components/Site';
 import { Photo } from '../components/Photo';
 import { agency, sites } from '../lib/data.server';

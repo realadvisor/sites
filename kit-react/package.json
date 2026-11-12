@@ -1,7 +1,7 @@
 {
   "name": "@realadvisor-sites/kit-react",
-  "version": "0.3.0",
-  "description": "The React Router (framework mode, SSR on Cloudflare Workers) version of the RealAdvisor sites kit: Worker with a per-request CSP nonce, data through the SDK interface, images, legal, consent, enquiry, SEO, listings search and map, and the deploy check. Reuses @realadvisor/sites-kit for every rule, string and browser script it can.",
+  "version": "0.4.0",
+  "description": "The React Router (framework mode, SSR on Cloudflare Workers) version of the RealAdvisor sites kit: Worker with a per-request CSP nonce, data through the SDK interface, images, legal, consent, enquiry, SEO, listings search and map, and the deploy check. Reuses @realadvisor/sites-kit-core for every rule, string and browser script it can.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -50,8 +50,8 @@
     "sites-kit-react": "./bin/sites-kit-react.mjs"
   },
   "peerDependencies": {
-    "@realadvisor/sites-kit": "^0.3.0",
-    "@realadvisor/sites-sdk": "^0.3.0",
+    "@realadvisor/sites-kit-core": "^0.4.0",
+    "@realadvisor/sites-sdk": "^0.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.18.0",

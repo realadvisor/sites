@@ -1,6 +1,6 @@
 /** Shell of the legal pages: the kit's text (LegalContent), our layout. */
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import type { LegalSection } from '@realadvisor/sites-kit/legal';
+import type { LegalSection } from '@realadvisor/sites-kit-core/legal';
 import { Layout } from './Layout';
 import './LegalPage.css';
 

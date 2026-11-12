@@ -5,9 +5,9 @@
  * unitExtra()).
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { formatRooms as kitRooms } from '@realadvisor/sites-kit/developments';
-import { t, type StringKey } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { formatRooms as kitRooms } from '@realadvisor/sites-kit-core/developments';
+import { t, type StringKey } from '@realadvisor/sites-kit-core/i18n';
 import { unitExtra } from './data';
 import { href, slugify, type L } from './routes';
 

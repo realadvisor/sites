@@ -1,4 +1,4 @@
-import { legalPath, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import { legalPath, privacyPath, t } from '@realadvisor/sites-kit-core/i18n';
 import { NAV, CONTACT, BROCHURE, tel } from '../lib/nav';
 import type { Shell } from '../root';
 import './Footer.css';

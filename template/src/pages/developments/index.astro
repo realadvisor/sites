@@ -7,11 +7,11 @@
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import { ra } from '@realadvisor/sites-kit/ra';
-import { img } from '@realadvisor/sites-kit/image';
-import { count, t } from '@realadvisor/sites-kit/i18n';
-import { developmentStatus, developmentUrl, priceFrom } from '@realadvisor/sites-kit/developments';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import { ra } from '@realadvisor/sites-kit-astro/ra';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { count, t } from '@realadvisor/sites-kit-core/i18n';
+import { developmentStatus, developmentUrl, priceFrom } from '@realadvisor/sites-kit-core/developments';
 
 const [agency, developments] = await Promise.all([ra.agency(), ra.developments()]);
 if (!developments.length) return Astro.rewrite('/404');

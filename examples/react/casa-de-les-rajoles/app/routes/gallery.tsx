@@ -5,7 +5,7 @@
  * app/client.ts turns that into a lightbox with arrows, Escape and a counter.
  */
 import type { Route } from './+types/gallery';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { developmentExtra, loadSite } from '../lib/data.server';

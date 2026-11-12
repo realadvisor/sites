@@ -4,11 +4,11 @@
  * list / map, pagination, empty states) over one offer's pool, with the
  * overlaid photo card in its slot.
  */
-import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
-import { img } from '@realadvisor/sites-kit/image';
-import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
-import { formatAmount } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import ListingsSearch from '@realadvisor/sites-kit-astro/components/ListingsSearch.astro';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit-core/search';
+import { formatAmount } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
 import Site from '../layouts/Site.astro';
 import ListingCard from '../components/ListingCard.astro';
 import { agency, sites, type Listing } from '../lib/data';

@@ -10,9 +10,9 @@
  * companies are API fields of the records.
  */
 import type { Agent, DevelopmentWithUnits, Organisation, Team, Unit } from '@realadvisor/sites-sdk/types';
-import type { Agency } from '@realadvisor/sites-kit';
+import type { Agency } from '@realadvisor/sites-kit-core';
 import fixture from '../data/fixture.json';
-import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit/fixture';
+import { createFixtureClient, fixtureOnly, type Fixture } from '@realadvisor/sites-kit-core/fixture';
 
 const fx = fixture as unknown as Fixture;
 export const client = createFixtureClient(fx);

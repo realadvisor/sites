@@ -1,9 +1,10 @@
 # @realadvisor/sites-kit-react
 
-The React Router version of the RealAdvisor sites kit: React Router 7
-(framework mode, SSR) on a Cloudflare Worker, with the same guarantees as the
-Astro kit (`@realadvisor/sites-kit`). It reuses the Astro kit for every rule,
-string and browser script it can (`lib/` format, i18n, legal, search, seo,
+The React Router kit for RealAdvisor sites: React Router 7 (framework mode,
+SSR) on a Cloudflare Worker, with the same guarantees as the Astro kit
+(`@realadvisor/sites-kit-astro`). Both are built on the shared core
+(`@realadvisor/sites-kit-core`), which a site installs next to this kit. It
+reuses the core for every rule, string and browser script it can (`lib/` format, i18n, legal, search, seo,
 image, env, render-error; `client/` enquiry, consent, combobox, listings
 search and map; the check:deploy rules; `AGENTS.md` / `DESIGN.md` still
 apply) and adds only what React needs. Reference site:

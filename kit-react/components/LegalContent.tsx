@@ -4,7 +4,7 @@
  *
  *   <LegalContent sections={legalNotice(agencyOf(org, team))} />
  */
-import type { LegalSection } from '@realadvisor/sites-kit/legal';
+import type { LegalSection } from '@realadvisor/sites-kit-core/legal';
 
 export function LegalContent({ sections, className }: { sections: LegalSection[]; className?: string }) {
   return (

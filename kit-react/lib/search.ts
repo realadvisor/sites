@@ -13,11 +13,11 @@
  * a price filter (a CHF + EUR agency: filter in one, or hide the price filter).
  */
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { poolCurrency, runSearch, type SearchOptions, type SearchParams, type SearchResult } from '@realadvisor/sites-kit/search';
-import { LOCALE } from '@realadvisor/sites-kit/format';
-import { localeOfPath } from '@realadvisor/sites-kit/i18n';
+import { poolCurrency, runSearch, type SearchOptions, type SearchParams, type SearchResult } from '@realadvisor/sites-kit-core/search';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
+import { localeOfPath } from '@realadvisor/sites-kit-core/i18n';
 
-export { parseSearch, searchHref, mapView, type SearchParams } from '@realadvisor/sites-kit/search';
+export { parseSearch, searchHref, mapView, type SearchParams } from '@realadvisor/sites-kit-core/search';
 
 /** The kit's SearchResult and the price filter's currency. */
 export type ListingsResult = SearchResult & { currency?: string };

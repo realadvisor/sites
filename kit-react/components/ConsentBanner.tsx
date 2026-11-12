@@ -3,7 +3,7 @@
  * Astro kit's client/consent.ts). Renders only when ANALYTICS_ID is set;
  * GA4 loads only after "Accept". Keep both buttons equal in weight.
  */
-import { lang, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import { lang, privacyPath, t } from '@realadvisor/sites-kit-core/i18n';
 import { useKit, usePageLocale } from './Document';
 
 /** `locale`: default the page's (from its path), as the rest of the page. */

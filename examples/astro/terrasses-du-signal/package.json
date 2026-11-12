@@ -17,9 +17,10 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "12.6.13",
-    "@fontsource/cormorant-garamond": "5.2.11",
     "@fontsource-variable/manrope": "5.2.8",
-    "@realadvisor/sites-kit": "file:../../../kit",
+    "@fontsource/cormorant-garamond": "5.2.11",
+    "@realadvisor/sites-kit-astro": "file:../../../kit-astro",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
     "@realadvisor/sites-sdk": "file:../../../sdk",
     "astro": "5.18.2"
   },

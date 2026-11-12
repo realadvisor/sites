@@ -5,11 +5,11 @@
  * its photos when it is also a listing, and other units of the same type.
  * Sold units are noindex.
  */
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { featureLabel } from '@realadvisor/sites-kit/i18n';
-import { img } from '@realadvisor/sites-kit/image';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { featureLabel } from '@realadvisor/sites-kit-core/i18n';
+import { img } from '@realadvisor/sites-kit-core/image';
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';

@@ -1,5 +1,5 @@
 import type { Organisation, Team } from '@realadvisor/sites-sdk/types';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 
 /** Organization JSON-LD from the organisation and its primary team. */
 export function organisationJsonLd(org: Organisation, team: Team | undefined, siteUrl: string) {

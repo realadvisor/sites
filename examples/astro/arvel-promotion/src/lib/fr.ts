@@ -4,7 +4,7 @@
  * computed from the data passed in.
  */
 import type { Development, DevelopmentWithUnits, Unit, UnitStatus } from '@realadvisor/sites-sdk/types';
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
 
 export { formatAmount, formatSurface };
 

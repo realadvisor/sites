@@ -4,8 +4,8 @@
  * the page language. Amounts and surfaces still come from the kit
  * (`formatAmount`, `formatSurface`: CHF 1'250'000, 145 m²).
  */
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import type { L } from './routes';
 import { LOCALE } from './routes';
 

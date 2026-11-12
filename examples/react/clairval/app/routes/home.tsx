@@ -6,8 +6,8 @@
  */
 import type { CSSProperties } from 'react';
 import type { Route } from './+types/home';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';
 import { Site } from '../components/Site';
 import { Img } from '../components/Img';

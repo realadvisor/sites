@@ -1,8 +1,8 @@
 /** One agency: address and contact, its own text, its agents (portraits when set) and its listings. */
 import type { Route } from './+types/agences-slug';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
-import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { siteUrl } from '@realadvisor/sites-kit-react/server/kit';

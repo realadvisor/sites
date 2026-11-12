@@ -4,7 +4,7 @@
  * status. Also the splat route (`*`). Language from the path.
  */
 import { isRouteErrorResponse, useLocation, useRouteError } from 'react-router';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Site } from '../components/Site';
 import { UI, href, langOfPath } from '../lib/i18n';

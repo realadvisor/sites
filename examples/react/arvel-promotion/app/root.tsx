@@ -16,8 +16,8 @@ import '@realadvisor/sites-kit-react/styles/kit.css';
 import { KitProvider, KitScripts } from '@realadvisor/sites-kit-react/components/Document';
 import { ConsentBanner } from '@realadvisor/sites-kit-react/components/ConsentBanner';
 import { kitData } from '@realadvisor/sites-kit-react/server/kit';
-import { LOCALE } from '@realadvisor/sites-kit/format';
-import { img } from '@realadvisor/sites-kit/image';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { primaryTeam, programmes, sites } from './lib/data.server';
 import NotFound, { ServerError } from './routes/404';
 

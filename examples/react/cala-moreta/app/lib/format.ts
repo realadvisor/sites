@@ -1,6 +1,6 @@
 /** Prices, surfaces and facts in the page language, through the kit's formatters (Spanish conventions: 1.250.000 €, 145 m²). */
-import { formatAmount, formatSurface } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { LOCALE_OF, UI, type Lang } from './i18n';
 

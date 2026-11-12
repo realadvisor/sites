@@ -1,10 +1,10 @@
 // Privacy policy. Text from the kit (agency data only): restyled, never rewritten.
 import type { Route } from './+types/privacy';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { lang, t } from '@realadvisor/sites-kit/i18n';
-import { analyticsId } from '@realadvisor/sites-kit/env';
+import { privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { lang, t } from '@realadvisor/sites-kit-core/i18n';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
 import { Layout } from '../components/Layout';
 import { LegalPage } from '../components/LegalPage';
 import { site } from '../lib/data.server';

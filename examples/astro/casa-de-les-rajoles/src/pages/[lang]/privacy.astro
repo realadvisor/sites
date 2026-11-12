@@ -2,9 +2,9 @@
 // Privacy policy in the other languages (/en/privacy). Any other prefix: 404.
 export const prerender = false;
 import LegalPage from '../../components/LegalPage.astro';
-import { privacyPolicy } from '@realadvisor/sites-kit/legal';
-import { lang as kitLang, t } from '@realadvisor/sites-kit/i18n';
-import { analyticsId } from '@realadvisor/sites-kit/env';
+import { privacyPolicy } from '@realadvisor/sites-kit-core/legal';
+import { lang as kitLang, t } from '@realadvisor/sites-kit-core/i18n';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
 import { legalAgency, loadSite } from '../../lib/data';
 import { LANGS, LOCALE_OF, type Lang } from '../../lib/i18n';
 

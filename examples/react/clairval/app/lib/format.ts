@@ -6,8 +6,8 @@
  * language: CHF keeps the Swiss form (CHF 1'250'000) in both languages, EUR
  * reads €1,250,000 in English and 1 250 000 € in French.
  */
-import { formatSurface } from '@realadvisor/sites-kit/format';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { formatSurface } from '@realadvisor/sites-kit-core/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import type { L } from './routes';
 import { LOCALE } from './routes';
 

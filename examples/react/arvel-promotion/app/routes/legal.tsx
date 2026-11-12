@@ -1,8 +1,8 @@
 // Legal notice: text from the kit's legal builder and the organisation's data only.
 import type { Route } from './+types/legal';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
 import { legalIdentity } from '../lib/data.server';

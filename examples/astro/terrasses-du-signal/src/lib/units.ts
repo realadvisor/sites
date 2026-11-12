@@ -3,9 +3,9 @@
  * reserved units never show a price, rooms with a dot ("4.5 pièces").
  */
 import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
-import { formatAmount, formatSurface, LOCALE } from '@realadvisor/sites-kit/format';
-import { formatRooms } from '@realadvisor/sites-kit/developments';
-import { t, type StringKey } from '@realadvisor/sites-kit/i18n';
+import { formatAmount, formatSurface, LOCALE } from '@realadvisor/sites-kit-core/format';
+import { formatRooms } from '@realadvisor/sites-kit-core/developments';
+import { t, type StringKey } from '@realadvisor/sites-kit-core/i18n';
 import { unitExtra } from './data';
 
 export { formatRooms, formatSurface, formatAmount };

@@ -5,7 +5,7 @@
  * server renders the default result, payment() in app/client.ts recomputes
  * on input. Excludes insurance, notary fees and agency fees; says so.
  */
-import { formatAmount } from '@realadvisor/sites-kit/format';
+import { formatAmount } from '@realadvisor/sites-kit-core/format';
 import './PaymentEstimate.css';
 
 const D = { down: 20, rate: 3.5, years: 20 };

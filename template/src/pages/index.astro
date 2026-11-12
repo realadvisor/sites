@@ -4,11 +4,11 @@
 export const prerender = false;
 
 import Base from '../layouts/Base.astro';
-import { ra } from '@realadvisor/sites-kit/ra';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
-import { img } from '@realadvisor/sites-kit/image';
-import { t, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { ra } from '@realadvisor/sites-kit-astro/ra';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { t, legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
 
 const agency = await ra.agency();
 ---

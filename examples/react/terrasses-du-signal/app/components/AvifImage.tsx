@@ -2,7 +2,7 @@
  * A lazy RealAdvisor photo with an AVIF source first, for long galleries
  * where every byte counts; same imgproxy URLs as the Astro version's AvifImage.astro.
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 
 type Props = { src: string; alt: string; width: number; height: number; sizes: string; widths?: number[]; quality?: number };
 

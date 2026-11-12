@@ -2,7 +2,7 @@
 // filterable table. Filters are GET parameters (shareable, work without JS);
 // with JS they apply instantly and update the URL (app/client.ts: unitsFilter()).
 import type { Route } from './+types/wohnungen';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { StackingPlan } from '../components/StackingPlan';
 import { Icon } from '../components/Icon';

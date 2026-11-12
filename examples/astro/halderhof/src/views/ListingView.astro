@@ -6,13 +6,13 @@
  * the affordability calculator for a home for sale; the enquiry card with
  * the adviser sticks beside it. A unit of a development links back to it.
  */
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { img } from '@realadvisor/sites-kit/image';
-import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import Site from '../layouts/Site.astro';
 import Crumbs from '../components/Crumbs.astro';
 import ListingCard from '../components/ListingCard.astro';

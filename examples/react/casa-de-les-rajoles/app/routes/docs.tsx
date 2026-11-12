@@ -1,6 +1,6 @@
 /** Documents (/documentos, /en/documents): the generated PDFs (dossier, price list, plans) and every plan as SVG. */
 import type { Route } from './+types/docs';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Icon } from '../components/Icon';
 import { loadSite } from '../lib/data.server';

@@ -2,7 +2,7 @@
 // HTML by the Astro version's scripts/documents.mjs into public/documents/;
 // the API has no documents yet: fixture only), plus every plan as an image.
 import type { Route } from './+types/documents';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { ContactBand } from '../components/ContactBand';
 import { Arrow } from '../components/Arrow';

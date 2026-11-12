@@ -17,11 +17,12 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "12.6.13",
-    "@realadvisor/sites-kit": "file:../../../kit",
-    "astro": "5.18.2",
-    "@realadvisor/sites-sdk": "file:../../../sdk",
+    "@fontsource-variable/instrument-sans": "^5.2.8",
     "@fontsource-variable/newsreader": "^5.2.8",
-    "@fontsource-variable/instrument-sans": "^5.2.8"
+    "@realadvisor/sites-kit-astro": "file:../../../kit-astro",
+    "@realadvisor/sites-kit-core": "file:../../../kit-core",
+    "@realadvisor/sites-sdk": "file:../../../sdk",
+    "astro": "5.18.2"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",

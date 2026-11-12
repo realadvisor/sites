@@ -32,14 +32,14 @@
 import { existsSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readSiteConfig, SITE_CONFIG_FILE } from '@realadvisor/sites-kit/site-config';
-import { securityHeaders } from '@realadvisor/sites-kit/security';
+import { readSiteConfig, SITE_CONFIG_FILE } from '@realadvisor/sites-kit-core/site-config';
+import { securityHeaders } from '@realadvisor/sites-kit-core/security';
 
 const SITE_ID = 'virtual:sites-kit/site';
 const CLIENT_ID = 'virtual:sites-kit-react/client';
 const CSS_ID = 'virtual:sites-kit-react/css';
 const resolved = (id) => `\0${id}`;
-const KIT_PACKAGES = ['@realadvisor/sites-kit', '@realadvisor/sites-kit-react', '@realadvisor/sites-sdk'];
+const KIT_PACKAGES = ['@realadvisor/sites-kit-core', '@realadvisor/sites-kit-react', '@realadvisor/sites-sdk'];
 
 /**
  * PRELOAD: Vite wraps every dynamic `import()` of the browser build in its
@@ -140,8 +140,8 @@ export default function sitesKit(opts = {}) {
     },
     async load(id) {
       if (id === KIT_CSS_ID) {
-        const form = await this.resolve('@realadvisor/sites-kit/styles/form.css', join(KIT_DIR, 'components', 'EnquiryForm.tsx'));
-        return [form?.id ?? '@realadvisor/sites-kit/styles/form.css', ...KIT_PARTS].map((f) => `import ${JSON.stringify(f)};`).join('\n');
+        const form = await this.resolve('@realadvisor/sites-kit-core/styles/form.css', join(KIT_DIR, 'components', 'EnquiryForm.tsx'));
+        return [form?.id ?? '@realadvisor/sites-kit-core/styles/form.css', ...KIT_PARTS].map((f) => `import ${JSON.stringify(f)};`).join('\n');
       }
       // The browser build: the kit's small preload helper instead of Vite's (see PRELOAD).
       if (id === PRELOAD_ID && command === 'build' && this.environment?.config.consumer === 'client' && base.startsWith('/')) return preloadHelper(base);

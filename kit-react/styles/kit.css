@@ -10,11 +10,11 @@
  * Imported from JS, the kit's Vite plugin turns it into one import per part
  * (no @import for the bundler to hoist): the rules sit exactly where the
  * import is. A site that needs fewer parts imports them one by one:
- *   import '@realadvisor/sites-kit/styles/form.css';
+ *   import '@realadvisor/sites-kit-core/styles/form.css';
  *   import '@realadvisor/sites-kit-react/styles/consent.css';
  * From another stylesheet (`@import`) this file is plain CSS, below.
  */
-@import '@realadvisor/sites-kit/styles/form.css';
+@import '@realadvisor/sites-kit-core/styles/form.css';
 @import './search.css';
 @import './pager.css';
 @import './map.css';

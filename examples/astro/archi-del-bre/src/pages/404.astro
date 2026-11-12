@@ -1,7 +1,7 @@
 ---
 // Not-found page, rendered on request so routes can rewrite to it. Language from the URL.
 export const prerender = false;
-import { localeOfPath, t } from '@realadvisor/sites-kit/i18n';
+import { localeOfPath, t } from '@realadvisor/sites-kit-core/i18n';
 import Site from '../layouts/Site.astro';
 import { loadSite } from '../lib/data';
 import { href, type L } from '../lib/routes';

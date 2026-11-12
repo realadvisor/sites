@@ -2,11 +2,11 @@
 export const prerender = false;
 
 import { getCollection } from 'astro:content';
-import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyOf } from '@realadvisor/sites-kit-core/agency';
 import Layout from '../layouts/Layout.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import { img } from '@realadvisor/sites-kit/image';
-import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit-core/seo';
 import OfferTabs from '../components/OfferTabs.astro';
 import SoldList from '../components/SoldList.astro';
 import TalkBand from '../components/TalkBand.astro';

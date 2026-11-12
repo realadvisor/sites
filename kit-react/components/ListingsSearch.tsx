@@ -15,9 +15,9 @@
  */
 import type { ReactNode } from 'react';
 import type { Listing } from '@realadvisor/sites-sdk/types';
-import { mapView, searchHref, type FilterKey } from '@realadvisor/sites-kit/search';
-import { formatAmount, formatPrice, formatSurface, listingUrl } from '@realadvisor/sites-kit/format';
-import { count, lang, localePath, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import { mapView, searchHref, type FilterKey } from '@realadvisor/sites-kit-core/search';
+import { formatAmount, formatPrice, formatSurface, listingUrl } from '@realadvisor/sites-kit-core/format';
+import { count, lang, localePath, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit-core/i18n';
 import type { ListingsResult } from '../lib/search';
 import { ListingsMap } from './ListingsMap';
 import { ListingsPager } from './ListingsPager';

@@ -6,17 +6,17 @@
 export const prerender = false;
 
 import Base from '../../layouts/Base.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { ra } from '@realadvisor/sites-kit/ra';
-import { img } from '@realadvisor/sites-kit/image';
-import { LOCALE, formatSurface } from '@realadvisor/sites-kit/format';
-import { count, featureLabel, t } from '@realadvisor/sites-kit/i18n';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { ra } from '@realadvisor/sites-kit-astro/ra';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { LOCALE, formatSurface } from '@realadvisor/sites-kit-core/format';
+import { count, featureLabel, t } from '@realadvisor/sites-kit-core/i18n';
 import {
   DEVELOPMENTS_PATH, developmentStatus, formatFloor, formatRooms, priceFrom, sortUnits, unitEnquiryUrl, unitLabel, unitListingUrl, unitOptions, unitPrice,
   unitStatusLabel,
-} from '@realadvisor/sites-kit/developments';
+} from '@realadvisor/sites-kit-core/developments';
 
 const dev = await ra.development(Astro.params.slug!);
 if (!dev) return Astro.rewrite('/404');

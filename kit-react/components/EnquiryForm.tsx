@@ -1,6 +1,6 @@
 /**
  * THE enquiry form (port of EnquiryForm.astro: same markup, same fields, same
- * browser script @realadvisor/sites-kit/client/enquiry, same /api/enquiry
+ * browser script @realadvisor/sites-kit-core/client/enquiry, same /api/enquiry
  * contract). Every form that sends a message to the agency is this one.
  *
  *   <EnquiryForm listingId={l.id} agentId={l.agent?.id} agentName={l.agent?.first_name} message={…} />
@@ -11,7 +11,7 @@
  */
 import { useLocation } from 'react-router';
 import { FIXTURE_TURNSTILE_SITE_KEY } from '@realadvisor/sites-sdk';
-import { t as tr, lang, localeOfPath, privacyPath, type StringKey } from '@realadvisor/sites-kit/i18n';
+import { t as tr, lang, localeOfPath, privacyPath, type StringKey } from '@realadvisor/sites-kit-core/i18n';
 import { useKit } from './Document';
 import { Input } from './form/Input';
 import { Button } from './form/Button';

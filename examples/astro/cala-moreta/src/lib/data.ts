@@ -5,8 +5,8 @@
  */
 import type { Agent, Listing, Organisation, Team } from '@realadvisor/sites-sdk/types';
 import raw from '../data/fixture.json';
-import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit/fixture';
-import { inPageLocale } from '@realadvisor/sites-kit/page-locale';
+import { createFixtureClient, type Fixture } from '@realadvisor/sites-kit-core/fixture';
+import { inPageLocale } from '@realadvisor/sites-kit-core/page-locale';
 
 const fixture = raw as unknown as Fixture;
 // Texts in the page's language when the data has them.

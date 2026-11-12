@@ -3,12 +3,12 @@
  * Document shell: <head> SEO tags only. No design here on purpose.
  * Build the header, footer and visual system yourself (see DESIGN.md).
  */
-import { LOCALE } from '@realadvisor/sites-kit/format';
-import { analyticsId } from '@realadvisor/sites-kit/env';
-import { ra } from '@realadvisor/sites-kit/ra';
-import { img } from '@realadvisor/sites-kit/image';
-import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit/seo';
-import ConsentBanner from '@realadvisor/sites-kit/components/ConsentBanner.astro';
+import { LOCALE } from '@realadvisor/sites-kit-core/format';
+import { analyticsId } from '@realadvisor/sites-kit-core/env';
+import { ra } from '@realadvisor/sites-kit-astro/ra';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit-core/seo';
+import ConsentBanner from '@realadvisor/sites-kit-astro/components/ConsentBanner.astro';
 
 interface Props {
   title: string;

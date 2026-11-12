@@ -2,7 +2,7 @@
 
 Free photos from Pexels (pexels.com licence: free to use, no attribution
 required). The 2400 px originals are in the RealAdvisor image bucket; imgproxy
-(`@realadvisor/sites-kit/image`) makes the AVIF/WebP variants.
+(`@realadvisor/sites-kit-core/image`) makes the AVIF/WebP variants.
 
 | File (bucket) | Pexels id | URL | Shows | Used on |
 | --- | --- | --- | --- | --- |

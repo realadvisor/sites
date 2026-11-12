@@ -1,7 +1,7 @@
 // Location: Lavaux, the lake, transport, schools and daily life (written
 // site content, app/content/place.ts), photos of the region and a map.
 import type { Route } from './+types/situation';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import { Layout } from '../components/Layout';
 import { Photo } from '../components/Photo';
 import { StaticMap } from '../components/StaticMap';

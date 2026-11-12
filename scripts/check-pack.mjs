@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const PACKAGES = ['sdk', 'kit', 'kit-react'];
+const PACKAGES = ['sdk', 'kit-core', 'kit-astro', 'kit-react'];
 
 const targetsOf = (pkg) => {
   const out = [];

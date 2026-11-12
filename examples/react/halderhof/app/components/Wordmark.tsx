@@ -3,7 +3,7 @@
  * split at its legal part ("Immobilien AG") into a serif name and a small
  * second line. A logo in the data replaces it.
  */
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import './Wordmark.css';
 
 export function Wordmark({ org, href, label }: { org: { name: string; logo?: { url: string } | null }; href: string; label: string }) {

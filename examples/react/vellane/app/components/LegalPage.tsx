@@ -1,5 +1,5 @@
 /** Legal notice and privacy policy: the kit's text from the organisation data, in the site frame. Never edited here. */
-import type { LegalSection } from '@realadvisor/sites-kit/legal';
+import type { LegalSection } from '@realadvisor/sites-kit-core/legal';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
 import { Layout } from './Layout';
 import './LegalPage.css';

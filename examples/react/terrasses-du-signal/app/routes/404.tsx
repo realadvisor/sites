@@ -2,7 +2,7 @@
  * Not-found page: the root ErrorBoundary renders it for every 404 (unknown
  * path, unknown unit), keeping the status. Also the splat route (`*`).
  */
-import { t } from '@realadvisor/sites-kit/i18n';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useRouteLoaderData } from 'react-router';
 import { Layout } from '../components/Layout';

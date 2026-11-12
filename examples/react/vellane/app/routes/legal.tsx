@@ -1,7 +1,7 @@
 // Legal notice. Text from the kit (organisation data only): restyled, never rewritten.
 import type { Route } from './+types/legal';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { t } from '@realadvisor/sites-kit/i18n';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { t } from '@realadvisor/sites-kit-core/i18n';
 import { LegalPage } from '../components/LegalPage';
 import { agency } from '../lib/data.server';
 

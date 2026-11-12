@@ -4,12 +4,12 @@
  * title bar, then the description paragraph by paragraph with the photos
  * set between them, then the facts, the place, the agent and the form.
  */
-import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
-import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
-import { sanitizeHtml } from '@realadvisor/sites-kit';
-import { img } from '@realadvisor/sites-kit/image';
-import { t } from '@realadvisor/sites-kit/i18n';
-import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import EnquiryForm from '@realadvisor/sites-kit-astro/components/EnquiryForm.astro';
+import RaImage from '@realadvisor/sites-kit-astro/components/RaImage.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit-core';
+import { img } from '@realadvisor/sites-kit-core/image';
+import { t } from '@realadvisor/sites-kit-core/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-core/seo';
 import Site from '../layouts/Site.astro';
 import ListingCard from '../components/ListingCard.astro';
 import AgentBlock from '../components/AgentBlock.astro';

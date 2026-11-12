@@ -8,7 +8,7 @@
  * non-priority images, hence this wrapper.
  */
 import type { HTMLAttributes } from 'astro/types';
-import { img } from '@realadvisor/sites-kit/image';
+import { img } from '@realadvisor/sites-kit-core/image';
 import type { Framed } from '../content/places';
 
 type Props = Omit<HTMLAttributes<'img'>, 'src' | 'srcset' | 'width' | 'height' | 'loading' | 'alt'> & {

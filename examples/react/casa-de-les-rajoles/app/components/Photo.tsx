@@ -4,7 +4,7 @@
  * optional portrait crop under 768px. CSS sets the rendered size; `priority`
  * for the page's one LCP image. Same URLs as the Astro version's Photo.astro.
  */
-import { img, srcset } from '@realadvisor/sites-kit/image';
+import { img, srcset } from '@realadvisor/sites-kit-core/image';
 
 export type PhotoProps = {
   src: string;

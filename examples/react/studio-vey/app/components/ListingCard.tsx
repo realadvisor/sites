@@ -4,7 +4,7 @@
  */
 import type { Listing } from '@realadvisor/sites-sdk/types';
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
-import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import { propertyTypeLabel } from '@realadvisor/sites-kit-core/i18n';
 import { facts, kind, price } from '../lib/format';
 import { listingUrl } from '../lib/urls';
 import './ListingCard.css';

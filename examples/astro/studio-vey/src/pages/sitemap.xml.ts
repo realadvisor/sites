@@ -1,7 +1,7 @@
 /** sitemap.xml: static pages, area and agent pages, journal posts and every available listing. */
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { LOCALES, legalPath, privacyPath } from '@realadvisor/sites-kit-core/i18n';
 import { agentUrl, areas, listingUrl, sites } from '../lib/data';
 
 export const prerender = false;

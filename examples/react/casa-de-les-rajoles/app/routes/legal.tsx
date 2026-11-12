@@ -1,7 +1,7 @@
 // Legal notice (Aviso legal): the kit's text from the organisation's data. /legal (es), /en/legal; any other prefix: 404.
 import type { Route } from './+types/legal';
-import { legalNotice } from '@realadvisor/sites-kit/legal';
-import { lang as kitLang, t } from '@realadvisor/sites-kit/i18n';
+import { legalNotice } from '@realadvisor/sites-kit-core/legal';
+import { lang as kitLang, t } from '@realadvisor/sites-kit-core/i18n';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { LegalPage } from '../components/LegalPage';
 import { legalAgency, loadSite } from '../lib/data.server';
