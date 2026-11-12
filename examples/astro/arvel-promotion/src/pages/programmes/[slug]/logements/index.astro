@@ -1,0 +1,104 @@
+---
+// Units: stacking plan by floor and the availability table, filtered by
+// type (T1..T5) and "only available". The filter is a GET form (works and
+// shares without JS: ?type=T3&dispo=1); scripts/units.ts applies it live.
+export const prerender = false;
+
+import Site from '../../../../layouts/Site.astro';
+import Hero from '../../../../components/Hero.astro';
+import StackingPlan from '../../../../components/StackingPlan.astro';
+import UnitTable from '../../../../components/UnitTable.astro';
+import EnquiryBlock from '../../../../components/EnquiryBlock.astro';
+import { sites } from '../../../../lib/data';
+import { contentFor } from '../../../../content/programmes';
+import { plural, programmeUrl, typeCode, typeMix } from '../../../../lib/fr';
+import { ogImage } from '../../../../lib/seo';
+
+const d = await sites.development(Astro.params.slug!);
+if (!d) return Astro.rewrite('/404');
+const c = contentFor(d.slug);
+const mix = typeMix(d);
+const q = Astro.url.searchParams;
+const type = mix.some((t) => t.code === q.get('type')) ? q.get('type')! : undefined;
+const onlyAvailable = q.get('dispo') === '1';
+const shown = d.units.filter((u) => (!type || typeCode(u) === type) && (!onlyAvailable || u.status === 'available')).length;
+const photo = d.photos[(c.hero ?? 0) + 1] ?? d.photos[0];
+const lot = q.get('lot') ?? undefined;
+const filtered = [type, onlyAvailable && 'disponibles'].filter(Boolean).join(', ');
+const title = `Logements${filtered ? ` (${filtered})` : ''} · ${d.title} | Arvel Promotion`;
+const here = programmeUrl(d, 'logements');
+---
+<Site title={title} description={`${plural(d.stats.units, 'logement', 'logements')} de ${d.title}, dont ${d.stats.available} disponibles : plan de la résidence par étage, surfaces, orientations et prix.`} image={ogImage(photo?.url)} programme={d} section="units" current="programmes" noindex={!!(type || onlyAvailable || lot)}>
+  <Hero slot="hero" size="band" photo={photo?.url} alt={photo?.alt ?? d.title} kicker={d.title} title="Les logements" line={d.stats.available ? `${d.stats.available} disponibles sur ${d.stats.units}` : `${d.stats.units} logements`} />
+
+  <section class="section section--tight" aria-labelledby="h-plan">
+    <div class="wrap">
+      <form class="filters" method="get" action={here} data-unit-filters aria-label="Filtrer les logements">
+        <fieldset class="types">
+          <legend class="sr-only">Type de logement</legend>
+          <label class="chip"><input type="radio" name="type" value="" checked={!type} /><span><b>Tous</b><small class="num">{d.stats.units}</small></span></label>
+          {mix.map((t) => (
+            <label class="chip">
+              <input type="radio" name="type" value={t.code} checked={type === t.code} />
+              <span><b>{t.code}</b><small class="num">{t.available ? `${t.available} dispo.` : 'complet'}</small></span>
+            </label>
+          ))}
+        </fieldset>
+        <label class="only"><input type="checkbox" name="dispo" value="1" checked={onlyAvailable} /><span>Seulement les disponibles</span></label>
+        <button class="apply button" type="submit">Filtrer</button>
+      </form>
+
+      <div class="summary">
+        <h2 id="h-plan" class="h3"><span data-unit-count class="num">{shown}</span> <span data-unit-count-label>{shown > 1 ? 'logements' : 'logement'}</span> <span class="muted">sur {d.stats.units}</span></h2>
+        <ul class="legend" aria-label="Légende">
+          <li data-st="available">Disponible</li><li data-st="reserved">Réservé</li><li data-st="sold">Vendu</li>
+        </ul>
+      </div>
+      <p class="empty" data-unit-empty hidden={shown > 0 || undefined}>Aucun logement ne correspond. <a href={here}>Voir tous les logements</a></p>
+
+      <StackingPlan programme={d} type={type} onlyAvailable={onlyAvailable} labelledby="h-plan" />
+      <p class="hint muted">Chaque bloc est un logement, sa largeur suit sa surface. Les prix sont affichés pour les logements disponibles.</p>
+
+      <h2 class="h3 tbl-h" id="h-table">Tableau des logements</h2>
+      <UnitTable programme={d} type={type} onlyAvailable={onlyAvailable} enquiryPath={here} />
+    </div>
+  </section>
+
+  <EnquiryBlock programme={d} selectedUnit={lot} title="Un logement vous intéresse ?" />
+</Site>
+
+<script>
+  import '../../../../scripts/units';
+</script>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .types { display: flex; flex-wrap: wrap; gap: 8px; border: 0; margin: 0; padding: 0; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span { display: grid; gap: 4px; min-width: 92px; padding: 12px 16px; border: 1px solid var(--line-strong); transition: background 0.2s, border-color 0.2s; }
+  .chip b { font: 500 1.5rem / 1 var(--serif); }
+  .chip small { font-size: 0.75rem; color: var(--muted); }
+  .chip:hover span { border-color: var(--text); }
+  .chip input:checked + span { background: var(--text); color: var(--brand); border-color: var(--text); }
+  .chip input:checked + span small { color: var(--brand); }
+  .chip input:focus-visible + span { outline: 2px solid var(--brass); outline-offset: 3px; }
+  .only { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; font-size: var(--fs-small); }
+  .only input { width: 20px; height: 20px; accent-color: var(--brass); margin: 0; }
+  .apply { min-height: 48px; }
+  :global(.is-live) .apply { display: none; }
+  .summary { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 16px; margin: 36px 0 28px; }
+  .legend { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: 0.8125rem; color: var(--muted); }
+  .legend li { display: inline-flex; align-items: center; gap: 8px; }
+  .legend li::before { content: ''; width: 14px; height: 14px; }
+  .legend [data-st='available']::before { background: var(--st-available); }
+  .legend [data-st='reserved']::before { background: var(--st-reserved); }
+  .legend [data-st='sold']::before { background: var(--st-sold); box-shadow: inset 0 0 0 1px var(--line-strong); }
+  .empty { padding: 20px; border: 1px solid var(--line); margin: 0 0 20px; }
+  .hint { font-size: 0.875rem; margin: 20px 0 0; }
+  .tbl-h { margin: clamp(56px, 7vw, 96px) 0 20px; }
+  @media (max-width: 640px) {
+    .chip span { min-width: 0; padding: 10px 12px; }
+    .types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
+  }
+</style>

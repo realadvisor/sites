@@ -1,0 +1,7 @@
+.story { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
+.story__txt { display: grid; gap: 24px; font-size: 1.125rem; color: var(--muted); max-width: 60ch; }
+.story__txt .first { font: 400 var(--step-2)/1.4 var(--font-display); color: var(--text); }
+.story img { width: 100%; height: auto; aspect-ratio: 9 / 11; object-fit: cover; }
+@media (max-width: 860px) {
+  .story { grid-template-columns: minmax(0, 1fr); }
+}

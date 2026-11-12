@@ -1,0 +1,26 @@
+/* From pages/ueber-uns.astro (scoped there). */
+  .ab { padding-block: clamp(56px, 7vw, 112px) clamp(40px, 5vw, 72px); }
+  .ab-text { display: grid; gap: 26px; justify-items: start; max-width: 960px; }
+  .ab-text .lede { max-width: 48ch; color: var(--muted); }
+  .ab-media { aspect-ratio: 32 / 13; overflow: hidden; background: var(--surface); }
+  .ab-media picture { display: contents; }
+  .ab-media img { width: 100%; height: 100%; object-fit: cover; }
+  .ab-body { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 24px clamp(40px, 6vw, 112px); }
+  .ab-body h2 { padding-top: 8px; }
+  .ab-prose { font: 400 1.25rem/1.6 var(--serif); }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(32px, 4vw, 56px); }
+  .sec--row { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+  .people { background: var(--surface); }
+  .people-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px var(--gap); }
+  .cities { list-style: none; display: flex; flex-wrap: wrap; gap: 0 28px; font: 400 var(--fs-h3)/1.3 var(--serif); }
+  .cities li { padding: 8px 0; }
+  .cities a { text-decoration-thickness: 1px; }
+  @media (max-width: 1023px) {
+    .ab-body { grid-template-columns: minmax(0, 1fr); }
+    .ab-media { aspect-ratio: 4 / 3; }
+    .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 559px) {
+    .people-grid { grid-template-columns: minmax(0, 1fr); }
+          .sec--row { flex-direction: column; align-items: start; gap: 12px; }
+  }

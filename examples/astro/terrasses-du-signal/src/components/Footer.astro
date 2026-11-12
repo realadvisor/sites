@@ -1,0 +1,73 @@
+---
+import { legalPath, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import { NAV, CONTACT, BROCHURE, tel } from '../lib/nav';
+import { developmentExtra, type Site } from '../lib/data';
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const { dev, org, team } = site;
+const extra = developmentExtra(dev); // fixture only: developer, architect, general contractor
+const credits = [
+  ['Maître d’ouvrage', extra.developer],
+  ['Architecte', extra.architect],
+  ['Entreprise générale', extra.general_contractor],
+].filter((c): c is [string, string] => !!c[1]);
+const devPlace = [dev.address.street, [dev.address.postcode, dev.address.city].filter(Boolean).join(' ')].filter(Boolean);
+const office = [org.address?.street, [org.address?.postcode, org.address?.city].filter(Boolean).join(' ')].filter(Boolean);
+---
+<footer class="site-footer">
+  <div class="wrap top">
+    <div class="brand">
+      <p class="name">{dev.title}</p>
+      {devPlace.length > 0 && <p class="addr">{devPlace.join(', ')}</p>}
+      <a class="button light" href={BROCHURE} download>Brochure (PDF)</a>
+    </div>
+    <div class="col">
+      <h2>Commercialisation</h2>
+      <p>{org.name}</p>
+      {office.map((l) => <p>{l}</p>)}
+      {team?.phone && <p><a href={tel(team.phone)}>{team.phone}</a></p>}
+      {team?.email && <p><a href={`mailto:${team.email}`}>{team.email}</a></p>}
+    </div>
+    <nav class="col" aria-label="Pied de page">
+      <h2>Le projet</h2>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        {[...NAV, CONTACT].map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    {credits.length > 0 && (
+      <div class="col">
+        <h2>Intervenants</h2>
+        <dl>
+          {credits.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+      </div>
+    )}
+  </div>
+  <div class="wrap bottom">
+    <p>© {new Date().getFullYear()} {org.name}. Visuels et plans non contractuels.</p>
+    <p class="legal"><a href={legalPath()}>{t('legalNotice')}</a><a href={privacyPath()}>{t('privacyPolicy')}</a></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--dark); color: var(--on-dark); padding-top: clamp(64px, 8vw, 112px); }
+  .top { display: grid; grid-template-columns: 1.4fr 1fr 0.8fr 1fr; gap: 48px 40px; padding-bottom: 64px; }
+  .name { font: 500 clamp(2rem, 1.6rem + 1.4vw, 2.75rem)/1.05 var(--serif); }
+  .addr { color: var(--on-dark-muted); margin: 12px 0 28px; }
+  h2 { font: 600 0.6875rem/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-dark-muted); margin-bottom: 18px; }
+  .col p, .col li, .col dd { font-size: 0.9375rem; line-height: 1.8; }
+  .col a, .legal a { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease); }
+  .col a:hover, .legal a:hover { border-bottom-color: currentColor; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  dl { margin: 0; display: grid; gap: 12px; }
+  dt { font-size: 0.8125rem; color: var(--on-dark-muted); }
+  dd { margin: 0; }
+  .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-block: 24px 32px; border-top: 1px solid var(--line-dark); font-size: 0.8125rem; color: var(--on-dark-muted); }
+  .legal { display: flex; gap: 24px; }
+  .legal a { color: var(--on-dark); display: inline-block; padding-block: 10px; }
+  .site-footer :focus-visible { outline-color: var(--on-dark); }
+  @media (max-width: 1000px) { .top { grid-template-columns: 1fr 1fr; } .brand { grid-column: 1 / -1; } }
+  @media (max-width: 560px) { .top { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,51 @@
+---
+/**
+ * Unit mix: one column per type (T1..T5) with its indicative plan, surfaces,
+ * what is left and the lowest public price. Links to the filtered Logements page.
+ */
+import type { DevelopmentWithUnits } from '@realadvisor/sites-sdk/types';
+import { formatAmount, plural, programmeUrl, typeMix } from '../lib/fr';
+
+interface Props { programme: DevelopmentWithUnits }
+const { programme: d } = Astro.props;
+const mix = typeMix(d);
+const NAMES: Record<number, string> = { 1: 'Studio', 2: 'Deux pièces', 3: 'Trois pièces', 4: 'Quatre pièces', 5: 'Cinq pièces' };
+---
+{mix.length > 0 && (
+  <ul class="strip">
+    {mix.map((t) => (
+      <li class="reveal">
+        <a href={`${programmeUrl(d, 'logements')}?type=${t.code}`} aria-label={`${t.code}, ${NAMES[t.rooms] ?? ''} : voir les logements`}>
+          <span class="code">{t.code}</span>
+          <span class="name">{NAMES[t.rooms] ?? `${t.rooms} pièces`}</span>
+          {t.rooms <= 5 && <img src={`/plans/t${Math.min(5, t.rooms)}.svg`} alt="" width="400" height="340" loading="lazy" decoding="async" class="thumb" />}
+          <span class="m num">{t.minSurface === t.maxSurface ? `${t.minSurface} m²` : `${t.minSurface} à ${t.maxSurface} m²`}</span>
+          <span class="av">{t.available ? plural(t.available, 'disponible', 'disponibles') : 'Plus de disponibilité'}</span>
+          {t.minPrice && <span class="pr num">dès {formatAmount(t.minPrice)}</span>}
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+<style>
+  .strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  a { display: grid; gap: 8px; padding: 28px 24px 26px; text-decoration: none; height: 100%; position: relative; transition: background 0.3s var(--ease); }
+  a:hover { background: var(--surface); }
+  .code { font: 500 3rem / 1 var(--serif); }
+  .name { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .thumb { width: 100%; height: 150px; object-fit: contain; background: var(--paper); padding: 10px; margin: 14px 0 8px; }
+  .m { font-size: var(--fs-small); }
+  .av { font-size: var(--fs-small); color: var(--muted); }
+  .pr { font: 500 1.125rem / 1.3 var(--sans); }
+  .arrow { position: absolute; top: 28px; right: 24px; font-size: 1.25rem; transition: transform 0.3s var(--ease); }
+  a:hover .arrow { transform: translateX(6px); }
+  @media (max-width: 560px) {
+    .strip { grid-template-columns: 1fr 1fr; }
+    a { padding: 20px 16px; }
+    .code { font-size: 2.4rem; }
+    .thumb { height: 110px; }
+    .arrow { top: 20px; right: 16px; }
+  }
+</style>

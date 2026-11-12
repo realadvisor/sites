@@ -1,0 +1,72 @@
+---
+export const prerender = false;
+/** Sell: the valuation request (kit EnquiryForm, reason "valuation"), how it works, the agencies and recent sales. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { joinFr, R, teamHref, teamShortName, tel } from '../lib/site';
+
+const [{ org, teams }, sold] = await Promise.all([siteData(), sites.allListings({ status: 'sold' })]);
+const cities = [...new Set(teams.map((t) => t.address.city).filter(Boolean))] as string[];
+---
+<Site nav="sell" title={`Estimer mon bien à ${joinFr(cities)} | ${org.name.replace(/\s+SAS$/, '')}`}
+  description={`Demandez une estimation gratuite de votre appartement ou de votre maison à ${joinFr(cities)} : visite par un agent de l'agence la plus proche et avis de valeur écrit.`}>
+  <PageHead title="Estimer mon bien" lede={`Un agent de l'agence la plus proche visite votre bien à ${joinFr(cities)} ou alentour, puis vous remet un avis de valeur écrit. Gratuit et sans engagement.`} />
+
+  <div class="wrap sell">
+    <div class="sell__text">
+      <h2 class="h3">Comment ça se passe</h2>
+      <ol class="how">
+        <li><strong>Vous nous décrivez le bien</strong> dans le formulaire : adresse, type, surface, ce qui compte pour vous. L'agence du secteur vous rappelle pour fixer une visite.</li>
+        <li><strong>L'agent visite</strong> le bien avec vous, environ une heure. Il regarde l'état, l'exposition, l'immeuble ou le terrain, et note les diagnostics déjà faits.</li>
+        <li><strong>Vous recevez un avis de valeur écrit</strong> avec une fourchette de prix, les ventes comparables du quartier que nous avons réalisées ou relevées, et le prix de mise en vente que nous conseillons.</li>
+      </ol>
+      <p class="muted">Vous décidez ensuite, sans délai imposé. Si vous nous confiez la vente, le mandat précise nos honoraires avant toute signature.</p>
+      <h2 class="h3 sell__h">Nos agences</h2>
+      <ul class="offices">
+        {teams.map((t) => (
+          <li>
+            <a href={teamHref(t)} class="offices__name">{teamShortName(t)}</a>
+            <span class="muted">{[t.address.street, t.address.city].filter(Boolean).join(', ')}</span>
+            {t.phone && <a class="num" href={tel(t.phone)}>{t.phone}</a>}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="sell__form">
+      <h2 class="h3">Votre demande d'estimation</h2>
+      <EnquiryForm id="valuation" contactReason="valuation" message="Bonjour, je souhaite faire estimer mon bien. Adresse : … Type et surface : …" submitLabel="Demander mon estimation" />
+    </div>
+  </div>
+
+  {sold.length > 0 && (
+    <section class="wrap recent" aria-labelledby="sold-h">
+      <div class="section-head">
+        <h2 id="sold-h" class="h3">Vendus récemment par nos agences</h2>
+        <a class="link" href={R.sold}>Tous nos biens vendus</a>
+      </div>
+      <ul class="cards">{sold.slice(0, 3).map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+    </section>
+  )}
+</Site>
+
+<style>
+  .sell { display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+  @media (min-width: 1024px) { .sell { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 80px; } }
+  .sell__text { display: grid; gap: 20px; }
+  .sell__h { margin-top: 20px; }
+  .how { margin: 0; padding-left: 1.4em; display: grid; gap: 16px; max-width: 60ch; }
+  .how li::marker { font-weight: 650; color: var(--accent); }
+  .how strong { font-weight: 650; }
+  .offices { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .offices li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .offices__name { font-weight: 650; text-decoration: none; }
+  .offices__name:hover { text-decoration: underline; }
+  .offices .muted { grid-column: 1; }
+  .offices a.num { grid-column: 2; grid-row: 1 / 3; align-self: center; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  .sell__form { display: grid; gap: 20px; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-card); background: var(--surface); }
+  @media (min-width: 1024px) { .sell__form { position: sticky; top: calc(var(--header-h) + 24px); } }
+  .recent { margin-top: var(--section); }
+</style>

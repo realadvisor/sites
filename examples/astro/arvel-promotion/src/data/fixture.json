@@ -1,0 +1,4919 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "fr"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "8a4f9f29-f66e-4396-907e-956e54b05f8b",
+  "name": "Arvel Promotion SAS",
+  "website": "https://arvel-promotion.example.com",
+  "address": {
+   "street": "Avenue de Brogny 7",
+   "postcode": "74000",
+   "city": "Annecy",
+   "country": "France",
+   "lat": 45.909,
+   "lng": 6.128
+  },
+  "brand": {
+   "primary": "#0E1A24"
+  }
+ },
+ "teams": [
+  {
+   "id": "f43cad16-1209-4a56-b501-63fe460bdf87",
+   "name": "Arvel Promotion",
+   "primary": true,
+   "website": "https://arvel-promotion.example.com",
+   "phone": "+33 0 00 00 00 01",
+   "email": "contact@arvel-promotion.example.com",
+   "address": {
+    "street": "Avenue de Brogny 7",
+    "postcode": "74000",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.909,
+    "lng": 6.128
+   },
+   "socials": {},
+   "description": "<p>Promoteur immobilier à Annecy et Lyon : trois résidences neuves, de 10 à 32 logements.</p>",
+   "description_text": "Promoteur immobilier à Annecy et Lyon : trois résidences neuves, de 10 à 32 logements."
+  }
+ ],
+ "agents": [
+  {
+   "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+   "first_name": "Élodie",
+   "last_name": "Martin",
+   "phone": "+33 0 00 00 00 02",
+   "email": "elodie.martin@arvel-promotion.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+    "alt": "Élodie Martin"
+   }
+  },
+  {
+   "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+   "first_name": "Hugo",
+   "last_name": "Lefèvre",
+   "phone": "+33 0 00 00 00 03",
+   "email": "hugo.lefevre@arvel-promotion.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+    "alt": "Hugo Lefèvre"
+   }
+  },
+  {
+   "id": "12a5b324-2b97-4895-9422-620136c44b23",
+   "first_name": "Sarah",
+   "last_name": "Benali",
+   "phone": "+33 0 00 00 00 04",
+   "email": "sarah.benali@arvel-promotion.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+    "alt": "Sarah Benali"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "53ae1da7-84d4-4531-9721-6b632f41b977",
+   "slug": "studio-rez-de-chaussee-53ae1da7-84d4-4531-9721-6b632f41b977",
+   "title": "Studio, rez-de-chaussée",
+   "description": "<p>Un studio de 28 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un studio de 28 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 157000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 28,
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "Studio, rez-de-chaussée"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "Studio, rez-de-chaussée, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "Studio, rez-de-chaussée, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "Studio, rez-de-chaussée, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "BR5K-MDMX",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "29aeb273-7ead-440a-ae0e-1bfe8f43a504",
+   "slug": "t3-rez-de-chaussee-29aeb273-7ead-440a-ae0e-1bfe8f43a504",
+   "title": "T3, rez-de-chaussée",
+   "description": "<p>Un 3 pièces de 66 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 66 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 370000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 66,
+   "address": {
+    "street": "Chemin des Balcons 6",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T3, rez-de-chaussée"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T3, rez-de-chaussée, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T3, rez-de-chaussée, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "T3, rez-de-chaussée, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "T3, rez-de-chaussée, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "7V7H-XXSL",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "d8dffdfb-50b0-4b05-afe6-0b7b64ae6690",
+   "slug": "t5-rez-de-chaussee-d8dffdfb-50b0-4b05-afe6-0b7b64ae6690",
+   "title": "T5, rez-de-chaussée",
+   "description": "<p>Un 5 pièces de 104 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 5 pièces de 104 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 582000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 104,
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "T5, rez-de-chaussée"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "T5, rez-de-chaussée, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "T5, rez-de-chaussée, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "T5, rez-de-chaussée, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T5, rez-de-chaussée, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "6YNY-XC59",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "5a60afc6-3cde-4437-aaea-06a25d90608b",
+   "slug": "t2-1er-etage-5a60afc6-3cde-4437-aaea-06a25d90608b",
+   "title": "T2, 1er étage",
+   "description": "<p>Un 2 pièces de 46 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 2 pièces de 46 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 266000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 46,
+   "address": {
+    "street": "Chemin des Balcons 4",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "T2, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "T2, 1er étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T2, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T2, 1er étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T2, 1er étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "ZBQT-SMES",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "011ef1dc-d027-4dcd-8ff8-1ea60b0dd46d",
+   "slug": "t4-1er-etage-011ef1dc-d027-4dcd-8ff8-1ea60b0dd46d",
+   "title": "T4, 1er étage",
+   "description": "<p>Un 4 pièces de 85 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 4 pièces de 85 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 491000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 85,
+   "address": {
+    "street": "Chemin des Balcons 8",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T4, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T4, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T4, 1er étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T4, 1er étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "HS2R-J524",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "e3ea8e83-6786-4aa8-b17d-0f96a19ca386",
+   "slug": "t5-1er-etage-e3ea8e83-6786-4aa8-b17d-0f96a19ca386",
+   "title": "T5, 1er étage",
+   "description": "<p>Un 5 pièces de 108 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 5 pièces de 108 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 624000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 108,
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T5, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T5, 1er étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T5, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T5, 1er étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T5, 1er étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "S5L3-UNCB",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "f8a63efe-7ec1-4eba-84c6-da222d6b34a3",
+   "slug": "studio-1er-etage-f8a63efe-7ec1-4eba-84c6-da222d6b34a3",
+   "title": "Studio, 1er étage",
+   "description": "<p>Un studio de 29 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un studio de 29 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 168000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 29,
+   "address": {
+    "street": "Chemin des Balcons 4",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "Studio, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "Studio, 1er étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "Studio, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "Studio, 1er étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "Studio, 1er étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "8CY2-TN7Z",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "2171a64c-0bad-4f07-9109-48a40e1bc750",
+   "slug": "t5-2e-etage-2171a64c-0bad-4f07-9109-48a40e1bc750",
+   "title": "T5, 2e étage",
+   "description": "<p>Un 5 pièces de 106 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 5 pièces de 106 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 632000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 106,
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "T5, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "T5, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T5, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T5, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T5, 2e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "BMD2-TJ3U",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "aaf6e572-20b0-46d9-8d2e-e8f344e23045",
+   "slug": "studio-2e-etage-aaf6e572-20b0-46d9-8d2e-e8f344e23045",
+   "title": "Studio, 2e étage",
+   "description": "<p>Un studio de 33 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un studio de 33 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 197000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 33,
+   "address": {
+    "street": "Chemin des Balcons 4",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "Studio, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "Studio, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "Studio, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "Studio, 2e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "Y2V5-SL65",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "5417ab47-3dfb-436b-a736-63b800c78e4d",
+   "slug": "t2-2e-etage-5417ab47-3dfb-436b-a736-63b800c78e4d",
+   "title": "T2, 2e étage",
+   "description": "<p>Un 2 pièces de 47 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 2 pièces de 47 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 280000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 47,
+   "address": {
+    "street": "Chemin des Balcons 6",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T2, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T2, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T2, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T2, 2e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "KPNU-Q83M",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "6f2e1a1d-b0d5-498e-93bb-987629997ac1",
+   "slug": "t4-3e-etage-6f2e1a1d-b0d5-498e-93bb-987629997ac1",
+   "title": "T4, 3e étage",
+   "description": "<p>Un 4 pièces de 87 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 4 pièces de 87 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 534000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 87,
+   "address": {
+    "street": "Chemin des Balcons 8",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T4, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T4, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T4, 3e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T4, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T4, 3e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "UVSR-R7KX",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "0fe9636d-e732-4e81-96e2-c25576cbf333",
+   "slug": "t2-3e-etage-0fe9636d-e732-4e81-96e2-c25576cbf333",
+   "title": "T2, 3e étage",
+   "description": "<p>Un 2 pièces de 45 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 2 pièces de 45 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 276000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 45,
+   "address": {
+    "street": "Chemin des Balcons 6",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "T2, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "T2, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "T2, 3e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "T2, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T2, 3e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "53KA-ZXR9",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "78a95e8d-24c5-4e44-9b1e-64b8a9437be0",
+   "slug": "t3-3e-etage-78a95e8d-24c5-4e44-9b1e-64b8a9437be0",
+   "title": "T3, 3e étage",
+   "description": "<p>Un 3 pièces de 69 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 69 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 424000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 69,
+   "address": {
+    "street": "Chemin des Balcons 8",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "T3, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "T3, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T3, 3e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T3, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T3, 3e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "P3U6-5RM5",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "5aeb32be-8087-45e3-b3f5-5cdf2059e463",
+   "slug": "t5-4e-etage-5aeb32be-8087-45e3-b3f5-5cdf2059e463",
+   "title": "T5, 4e étage",
+   "description": "<p>Un 5 pièces de 108 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 5 pièces de 108 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 683000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 108,
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T5, 4e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T5, 4e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T5, 4e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T5, 4e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "QLFZ-X4V6",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "4fd66fa6-2e5c-40b2-9ba0-fc70f03b0e84",
+   "slug": "t2-4e-etage-4fd66fa6-2e5c-40b2-9ba0-fc70f03b0e84",
+   "title": "T2, 4e étage",
+   "description": "<p>Un 2 pièces de 49 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 2 pièces de 49 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 310000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 49,
+   "address": {
+    "street": "Chemin des Balcons 6",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T2, 4e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T2, 4e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T2, 4e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T2, 4e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T2, 4e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "3E5K-PEAD",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "21769d62-1ef0-466a-874d-6ed4025dd78e",
+   "slug": "t3-4e-etage-21769d62-1ef0-466a-874d-6ed4025dd78e",
+   "title": "T3, 4e étage",
+   "description": "<p>Un 3 pièces de 67 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 67 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 423000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 67,
+   "address": {
+    "street": "Chemin des Balcons 8",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T3, 4e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T3, 4e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T3, 4e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "T3, 4e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "T3, 4e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "MRJH-DMR7",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "b0c80e53-dc11-4a89-b77b-2405abf964b8",
+   "slug": "studio-5e-etage-b0c80e53-dc11-4a89-b77b-2405abf964b8",
+   "title": "Studio, 5e étage",
+   "description": "<p>Un studio de 33 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un studio de 33 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 215000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 33,
+   "address": {
+    "street": "Chemin des Balcons 4",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "Studio, 5e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "Studio, 5e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "Studio, 5e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "Studio, 5e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "Studio, 5e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "YX4A-39AW",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "3c4358e7-5973-4fd0-831e-b61f09adfc64",
+   "slug": "t3-5e-etage-3c4358e7-5973-4fd0-831e-b61f09adfc64",
+   "title": "T3, 5e étage",
+   "description": "<p>Un 3 pièces de 71 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 71 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 462000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 71,
+   "address": {
+    "street": "Chemin des Balcons 8",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T3, 5e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T3, 5e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T3, 5e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T3, 5e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "ZFWK-E3J4",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "5c16546d-7d06-42f9-b501-4ab10c23c2a7",
+   "slug": "t4-5e-etage-5c16546d-7d06-42f9-b501-4ab10c23c2a7",
+   "title": "T4, 5e étage",
+   "description": "<p>Un 4 pièces de 86 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 4 pièces de 86 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 559000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 86,
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "T4, 5e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T4, 5e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T4, 5e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T4, 5e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "GYN5-QGC5",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "b6a7e6ca-445a-4645-84d8-921d53778a78",
+   "slug": "t5-5e-etage-b6a7e6ca-445a-4645-84d8-921d53778a78",
+   "title": "T5, 5e étage",
+   "description": "<p>Un 5 pièces de 109 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 5 pièces de 109 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 709000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 109,
+   "address": {
+    "street": "Chemin des Balcons 4",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "T5, 5e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "T5, 5e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T5, 5e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T5, 5e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T5, 5e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "QZ6Y-DB3F",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "a6eeebb3-f8e9-4a18-a8ee-f635d263dd6e",
+   "slug": "t2-6e-etage-a6eeebb3-f8e9-4a18-a8ee-f635d263dd6e",
+   "title": "T2, 6e étage",
+   "description": "<p>Un 2 pièces de 45 m² avec balcon, au dernier étage.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 2 pièces de 45 m² avec balcon, au dernier étage.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 301000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 45,
+   "address": {
+    "street": "Chemin des Balcons 6",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "T2, 6e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "T2, 6e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "T2, 6e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "T2, 6e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "T2, 6e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+    "first_name": "Élodie",
+    "last_name": "Martin",
+    "phone": "+33 0 00 00 00 02",
+    "email": "elodie.martin@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+     "alt": "Élodie Martin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "PM6N-KWJX",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "f91cb6bb-c6b2-4d6f-88be-372c51b6e513",
+   "slug": "t3-rez-de-chaussee-f91cb6bb-c6b2-4d6f-88be-372c51b6e513",
+   "title": "T3, rez-de-chaussée",
+   "description": "<p>Un 3 pièces de 66 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 66 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 409000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 66,
+   "address": {
+    "street": "Rue des Tanneurs 6",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+     "alt": "T3, rez-de-chaussée"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+     "alt": "T3, rez-de-chaussée, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+     "alt": "T3, rez-de-chaussée, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061395.jpg",
+     "alt": "T3, rez-de-chaussée, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+     "alt": "T3, rez-de-chaussée, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+    "first_name": "Hugo",
+    "last_name": "Lefèvre",
+    "phone": "+33 0 00 00 00 03",
+    "email": "hugo.lefevre@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+     "alt": "Hugo Lefèvre"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "3RL8-X749",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "f0138f7d-46a0-4b32-a952-98af3185e9e0",
+   "slug": "t3-1er-etage-f0138f7d-46a0-4b32-a952-98af3185e9e0",
+   "title": "T3, 1er étage",
+   "description": "<p>Un 3 pièces de 70 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 70 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 447000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 70,
+   "address": {
+    "street": "Rue des Tanneurs 2",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+     "alt": "T3, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061420.jpg",
+     "alt": "T3, 1er étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+     "alt": "T3, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+     "alt": "T3, 1er étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+     "alt": "T3, 1er étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+    "first_name": "Hugo",
+    "last_name": "Lefèvre",
+    "phone": "+33 0 00 00 00 03",
+    "email": "hugo.lefevre@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+     "alt": "Hugo Lefèvre"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-08T09:00:00.000Z",
+   "reference": "6LL8-FGQN",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "1588089f-8a76-4f8f-bd7c-c1601fcd0765",
+   "slug": "t4-2e-etage-1588089f-8a76-4f8f-bd7c-c1601fcd0765",
+   "title": "T4, 2e étage",
+   "description": "<p>Un 4 pièces de 89 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 4 pièces de 89 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 584000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 89,
+   "address": {
+    "street": "Rue des Tanneurs 8",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782567.jpg",
+     "alt": "T4, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782578.jpg",
+     "alt": "T4, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+     "alt": "T4, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+     "alt": "T4, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+     "alt": "T4, 2e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+    "first_name": "Hugo",
+    "last_name": "Lefèvre",
+    "phone": "+33 0 00 00 00 03",
+    "email": "hugo.lefevre@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+     "alt": "Hugo Lefèvre"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-04T09:00:00.000Z",
+   "reference": "9KF9-JCAG",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "29f2ec69-c7b2-4913-9a0e-d81d242283bb",
+   "slug": "studio-2e-etage-29f2ec69-c7b2-4913-9a0e-d81d242283bb",
+   "title": "Studio, 2e étage",
+   "description": "<p>Un studio de 30 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un studio de 30 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 197000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 30,
+   "address": {
+    "street": "Rue des Tanneurs 2",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+     "alt": "Studio, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+     "alt": "Studio, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+     "alt": "Studio, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061395.jpg",
+     "alt": "Studio, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+     "alt": "Studio, 2e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+    "first_name": "Hugo",
+    "last_name": "Lefèvre",
+    "phone": "+33 0 00 00 00 03",
+    "email": "hugo.lefevre@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+     "alt": "Hugo Lefèvre"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-31T09:00:00.000Z",
+   "reference": "BDTC-6H3P",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "f6f9de03-0a35-4111-a904-2bbe30a5c5b9",
+   "slug": "studio-3e-etage-f6f9de03-0a35-4111-a904-2bbe30a5c5b9",
+   "title": "Studio, 3e étage",
+   "description": "<p>Un studio de 28 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un studio de 28 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 189000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 28,
+   "address": {
+    "street": "Rue des Tanneurs 6",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+     "alt": "Studio, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061420.jpg",
+     "alt": "Studio, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+     "alt": "Studio, 3e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+     "alt": "Studio, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+     "alt": "Studio, 3e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+    "first_name": "Hugo",
+    "last_name": "Lefèvre",
+    "phone": "+33 0 00 00 00 03",
+    "email": "hugo.lefevre@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+     "alt": "Hugo Lefèvre"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-27T09:00:00.000Z",
+   "reference": "BKU7-5RQQ",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "24faa6c0-ad8c-4055-a4ed-c94bf0f821e8",
+   "slug": "t2-3e-etage-24faa6c0-ad8c-4055-a4ed-c94bf0f821e8",
+   "title": "T2, 3e étage",
+   "description": "<p>Un 2 pièces de 48 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 2 pièces de 48 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 324000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 48,
+   "address": {
+    "street": "Rue des Tanneurs 8",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+     "alt": "T2, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+     "alt": "T2, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+     "alt": "T2, 3e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587906.jpg",
+     "alt": "T2, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782567.jpg",
+     "alt": "T2, 3e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+    "first_name": "Hugo",
+    "last_name": "Lefèvre",
+    "phone": "+33 0 00 00 00 03",
+    "email": "hugo.lefevre@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+     "alt": "Hugo Lefèvre"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-23T09:00:00.000Z",
+   "reference": "SKBW-42PS",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "3a9177ee-0908-49b9-9c63-6d51d90c7372",
+   "slug": "t3-rez-de-chaussee-3a9177ee-0908-49b9-9c63-6d51d90c7372",
+   "title": "T3, rez-de-chaussée",
+   "description": "<p>Un 3 pièces de 66 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 3 pièces de 66 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 449000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 66,
+   "address": {
+    "street": "Allée des Tilleuls 2",
+    "postcode": "69130",
+    "city": "Écully",
+    "country": "France",
+    "lat": 45.775,
+    "lng": 4.778
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T3, rez-de-chaussée"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T3, rez-de-chaussée, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527068.jpg",
+     "alt": "T3, rez-de-chaussée, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527069.jpg",
+     "alt": "T3, rez-de-chaussée, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580230.jpg",
+     "alt": "T3, rez-de-chaussée, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-19T09:00:00.000Z",
+   "reference": "A65N-LQFQ",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  },
+  {
+   "id": "bbb58c0f-2669-413d-a626-d20d3f9caa60",
+   "slug": "t4-2e-etage-bbb58c0f-2669-413d-a626-d20d3f9caa60",
+   "title": "T4, 2e étage",
+   "description": "<p>Un 4 pièces de 89 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+   "description_text": "Un 4 pièces de 89 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 637000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 89,
+   "address": {
+    "street": "Allée des Tilleuls 4",
+    "postcode": "69130",
+    "city": "Écully",
+    "country": "France",
+    "lat": 45.775,
+    "lng": 4.778
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "T4, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "T4, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "T4, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "T4, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "T4, 2e étage, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "12a5b324-2b97-4895-9422-620136c44b23",
+    "first_name": "Sarah",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 04",
+    "email": "sarah.benali@arvel-promotion.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "f43cad16-1209-4a56-b501-63fe460bdf87"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+     "alt": "Sarah Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-15T09:00:00.000Z",
+   "reference": "4VLU-ZM3V",
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ]
+  }
+ ],
+ "developments": [
+  {
+   "id": "f5671b1a-b394-412c-9fb9-54bdb49069a6",
+   "slug": "les-balcons-du-semnoz",
+   "title": "Les Balcons du Semnoz",
+   "description": "<p>Trente-deux appartements sur les hauteurs d’Annecy, entre le lac et la montagne du Semnoz.</p><p>Du studio au 5 pièces, chaque logement a son balcon ou sa terrasse plein sud. Bâtiment basse consommation, jardin partagé, parking en sous-sol.</p><p>Livraison prévue au premier trimestre 2028.</p>",
+   "description_text": "Trente-deux appartements sur les hauteurs d’Annecy, entre le lac et la montagne du Semnoz.\n\nDu studio au 5 pièces, chaque logement a son balcon ou sa terrasse plein sud. Bâtiment basse consommation, jardin partagé, parking en sous-sol.\n\nLivraison prévue au premier trimestre 2028.",
+   "status": "marketing",
+   "delivery_date": "2028-03-31",
+   "address": {
+    "street": "Chemin des Balcons 2",
+    "postcode": "74600",
+    "city": "Annecy",
+    "country": "France",
+    "lat": 45.889,
+    "lng": 6.115
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34188582.jpg",
+     "alt": "Les Balcons du Semnoz"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34188660.jpg",
+     "alt": "Les Balcons du Semnoz, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34188578.jpg",
+     "alt": "Les Balcons du Semnoz, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12266759.jpg",
+     "alt": "Les Balcons du Semnoz, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12266770.jpg",
+     "alt": "Les Balcons du Semnoz, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780891.jpg",
+     "alt": "Les Balcons du Semnoz, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780893.jpg",
+     "alt": "Les Balcons du Semnoz, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780951.jpg",
+     "alt": "Les Balcons du Semnoz, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "Les Balcons du Semnoz, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "Les Balcons du Semnoz, photo 11"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "Les Balcons du Semnoz, photo 12"
+    }
+   ],
+   "stats": {
+    "units": 32,
+    "available": 21,
+    "reserved": 6,
+    "sold": 5,
+    "price": {
+     "min": 157000,
+     "max": 709000
+    },
+    "rooms": {
+     "min": 1,
+     "max": 5
+    },
+    "living_surface": {
+     "min": 28,
+     "max": 109
+    }
+   },
+   "currency": "EUR",
+   "agents": [
+    {
+     "id": "ea623149-fb96-4c56-ae08-5d3f20f72bdc",
+     "first_name": "Élodie",
+     "last_name": "Martin",
+     "phone": "+33 0 00 00 00 02",
+     "email": "elodie.martin@arvel-promotion.example.com",
+     "languages": [
+      "fr",
+      "en"
+     ],
+     "team_ids": [
+      "f43cad16-1209-4a56-b501-63fe460bdf87"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712866-sq.jpg",
+      "alt": "Élodie Martin"
+     }
+    }
+   ],
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ],
+   "units": [
+    {
+     "id": "abd013f4-0de6-473b-8838-f760cb91f75f",
+     "name": "Studio, rez-de-chaussée",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 28,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 157000,
+     "currency": "EUR",
+     "description": "<p>Un studio de 28 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un studio de 28 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "Studio, rez-de-chaussée"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "Studio, rez-de-chaussée, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "Studio, rez-de-chaussée, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "Studio, rez-de-chaussée, photo 5"
+      }
+     ],
+     "listing_slug": "studio-rez-de-chaussee-53ae1da7-84d4-4531-9721-6b632f41b977",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "ebc9c18c-e812-40ef-8c65-3492ad5e80f8",
+     "name": "T2, rez-de-chaussée",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 48,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 269000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "b6348700-1e40-4584-ad55-b8f409bf3214",
+     "name": "T3, rez-de-chaussée",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 66,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 370000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 66 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 66 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T3, rez-de-chaussée"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T3, rez-de-chaussée, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T3, rez-de-chaussée, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "T3, rez-de-chaussée, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "T3, rez-de-chaussée, photo 5"
+      }
+     ],
+     "listing_slug": "t3-rez-de-chaussee-29aeb273-7ead-440a-ae0e-1bfe8f43a504",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "e22ea068-a172-40a4-bba6-dd925829140f",
+     "name": "T4, rez-de-chaussée",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 87,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "a79a6616-cff8-41cb-ad5f-381326d04c52",
+     "name": "T5, rez-de-chaussée",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 104,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 582000,
+     "currency": "EUR",
+     "description": "<p>Un 5 pièces de 104 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 5 pièces de 104 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "T5, rez-de-chaussée"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "T5, rez-de-chaussée, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "T5, rez-de-chaussée, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "T5, rez-de-chaussée, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T5, rez-de-chaussée, photo 5"
+      }
+     ],
+     "listing_slug": "t5-rez-de-chaussee-d8dffdfb-50b0-4b05-afe6-0b7b64ae6690",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "c58a5357-ead2-41f5-8cb9-84367b463243",
+     "name": "T2, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 46,
+     "balcony_surface": 7,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 266000,
+     "currency": "EUR",
+     "description": "<p>Un 2 pièces de 46 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 2 pièces de 46 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "T2, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "T2, 1er étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T2, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T2, 1er étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T2, 1er étage, photo 5"
+      }
+     ],
+     "listing_slug": "t2-1er-etage-5a60afc6-3cde-4437-aaea-06a25d90608b",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "382c5a30-cafe-412c-881a-07d833b90525",
+     "name": "T3, 1er étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 70,
+     "balcony_surface": 10,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 405000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "9bc44385-fb5a-40a2-9f36-6365047d4767",
+     "name": "T4, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 85,
+     "balcony_surface": 13,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 491000,
+     "currency": "EUR",
+     "description": "<p>Un 4 pièces de 85 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 4 pièces de 85 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T4, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T4, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T4, 1er étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T4, 1er étage, photo 5"
+      }
+     ],
+     "listing_slug": "t4-1er-etage-011ef1dc-d027-4dcd-8ff8-1ea60b0dd46d",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "4fd3d355-65ac-44fb-b3d8-2f87eb7d7165",
+     "name": "T5, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 7,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 624000,
+     "currency": "EUR",
+     "description": "<p>Un 5 pièces de 108 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 5 pièces de 108 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T5, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T5, 1er étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T5, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T5, 1er étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T5, 1er étage, photo 5"
+      }
+     ],
+     "listing_slug": "t5-1er-etage-e3ea8e83-6786-4aa8-b17d-0f96a19ca386",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "50cc1654-27f8-4615-b0a9-0390502e0fd6",
+     "name": "Studio, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 29,
+     "balcony_surface": 10,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 168000,
+     "currency": "EUR",
+     "description": "<p>Un studio de 29 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un studio de 29 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "Studio, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "Studio, 1er étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "Studio, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "Studio, 1er étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "Studio, 1er étage, photo 5"
+      }
+     ],
+     "listing_slug": "studio-1er-etage-f8a63efe-7ec1-4eba-84c6-da222d6b34a3",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "c0428c27-c71c-43fb-81fd-8fd7a1cf5f92",
+     "name": "T3, 2e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 68,
+     "balcony_surface": 7,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "f29614a9-7524-4562-b03b-41f156d5eb23",
+     "name": "T4, 2e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 89,
+     "balcony_surface": 10,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 530000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "ffe82b42-3f84-4219-8b66-5e744f6b701d",
+     "name": "T5, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 106,
+     "balcony_surface": 13,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 632000,
+     "currency": "EUR",
+     "description": "<p>Un 5 pièces de 106 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 5 pièces de 106 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "T5, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "T5, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T5, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T5, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T5, 2e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t5-2e-etage-2171a64c-0bad-4f07-9109-48a40e1bc750",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "aaf030d6-6211-4105-b0e3-09742efc333d",
+     "name": "Studio, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 33,
+     "balcony_surface": 7,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 197000,
+     "currency": "EUR",
+     "description": "<p>Un studio de 33 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un studio de 33 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "Studio, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "Studio, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "Studio, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "Studio, 2e étage, photo 5"
+      }
+     ],
+     "listing_slug": "studio-2e-etage-aaf6e572-20b0-46d9-8d2e-e8f344e23045",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "b0b5a458-caf9-4fc4-91c7-31781e7497dd",
+     "name": "T2, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 47,
+     "balcony_surface": 10,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 280000,
+     "currency": "EUR",
+     "description": "<p>Un 2 pièces de 47 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 2 pièces de 47 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T2, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T2, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T2, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T2, 2e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t2-2e-etage-5417ab47-3dfb-436b-a736-63b800c78e4d",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "696b6ef9-d457-4381-ab71-1cea7bd354da",
+     "name": "T4, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 87,
+     "balcony_surface": 7,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 534000,
+     "currency": "EUR",
+     "description": "<p>Un 4 pièces de 87 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 4 pièces de 87 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T4, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T4, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T4, 3e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T4, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T4, 3e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t4-3e-etage-6f2e1a1d-b0d5-498e-93bb-987629997ac1",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "3fc7eba1-e1ec-4c44-a2a8-d14da52cdaaf",
+     "name": "T5, 3e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 104,
+     "balcony_surface": 10,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 639000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "623847bd-4caf-4561-9f5e-91bf3981f266",
+     "name": "Studio, 3e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 31,
+     "balcony_surface": 13,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "591e7850-922b-4659-bda0-9b612dee0844",
+     "name": "T2, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 45,
+     "balcony_surface": 7,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 276000,
+     "currency": "EUR",
+     "description": "<p>Un 2 pièces de 45 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 2 pièces de 45 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "T2, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "T2, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "T2, 3e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "T2, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T2, 3e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t2-3e-etage-0fe9636d-e732-4e81-96e2-c25576cbf333",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "eee7e0c5-b0db-422f-b0c0-d36821ab67bc",
+     "name": "T3, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 69,
+     "balcony_surface": 10,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 424000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 69 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 69 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "T3, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "T3, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T3, 3e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T3, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T3, 3e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t3-3e-etage-78a95e8d-24c5-4e44-9b1e-64b8a9437be0",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "8342faeb-d2eb-4e4d-b6b3-5976f9546d01",
+     "name": "T5, 4e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 7,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 683000,
+     "currency": "EUR",
+     "description": "<p>Un 5 pièces de 108 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 5 pièces de 108 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T5, 4e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T5, 4e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T5, 4e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T5, 4e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t5-4e-etage-5aeb32be-8087-45e3-b3f5-5cdf2059e463",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "c4726e0b-0f68-46fa-b68d-be01a826198c",
+     "name": "Studio, 4e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 29,
+     "balcony_surface": 10,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 183000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "26780111-3102-4854-a6cd-f996c34b89e2",
+     "name": "T2, 4e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 49,
+     "balcony_surface": 13,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 310000,
+     "currency": "EUR",
+     "description": "<p>Un 2 pièces de 49 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 2 pièces de 49 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T2, 4e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T2, 4e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T2, 4e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T2, 4e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T2, 4e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t2-4e-etage-4fd66fa6-2e5c-40b2-9ba0-fc70f03b0e84",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "ad400a29-8aa0-42a8-8053-d7773ebfa8a1",
+     "name": "T3, 4e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 67,
+     "balcony_surface": 7,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 423000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 67 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 67 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T3, 4e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T3, 4e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T3, 4e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "T3, 4e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "T3, 4e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t3-4e-etage-21769d62-1ef0-466a-874d-6ed4025dd78e",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "628c4aec-ada4-4f14-a1f6-351aee05844f",
+     "name": "T4, 4e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 88,
+     "balcony_surface": 10,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "e11b5097-afde-4083-b6b8-d417de8e22f1",
+     "name": "Studio, 5e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 33,
+     "balcony_surface": 7,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "price": 215000,
+     "currency": "EUR",
+     "description": "<p>Un studio de 33 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un studio de 33 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "Studio, 5e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "Studio, 5e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "Studio, 5e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "Studio, 5e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "Studio, 5e étage, photo 5"
+      }
+     ],
+     "listing_slug": "studio-5e-etage-b0c80e53-dc11-4a89-b77b-2405abf964b8",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "1088dc31-32a3-4fac-8bce-19925f3ecaa9",
+     "name": "T2, 5e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 47,
+     "balcony_surface": 10,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "price": 306000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "76d3e684-27c3-463d-8e1c-a3dfd73c59f4",
+     "name": "T3, 5e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 71,
+     "balcony_surface": 13,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "price": 462000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 71 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 71 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T3, 5e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T3, 5e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T3, 5e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T3, 5e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t3-5e-etage-3c4358e7-5973-4fd0-831e-b61f09adfc64",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "978a1680-aecc-496c-ab44-df8569025771",
+     "name": "T4, 5e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 86,
+     "balcony_surface": 7,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "price": 559000,
+     "currency": "EUR",
+     "description": "<p>Un 4 pièces de 86 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 4 pièces de 86 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "T4, 5e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T4, 5e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T4, 5e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T4, 5e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t4-5e-etage-5c16546d-7d06-42f9-b501-4ab10c23c2a7",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "25fcfeb2-f4b7-4edc-a945-19512c7bcf41",
+     "name": "T5, 5e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 109,
+     "balcony_surface": 10,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "price": 709000,
+     "currency": "EUR",
+     "description": "<p>Un 5 pièces de 109 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 5 pièces de 109 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "T5, 5e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "T5, 5e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T5, 5e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T5, 5e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T5, 5e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t5-5e-etage-b6a7e6ca-445a-4645-84d8-921d53778a78",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "db7be57c-b6c0-4222-bb32-77f958d083bc",
+     "name": "T2, 6e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 45,
+     "balcony_surface": 7,
+     "floor": 6,
+     "floor_label": "6e étage",
+     "price": 301000,
+     "currency": "EUR",
+     "description": "<p>Un 2 pièces de 45 m² avec balcon, au dernier étage.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 2 pièces de 45 m² avec balcon, au dernier étage.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "T2, 6e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "T2, 6e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "T2, 6e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "T2, 6e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "T2, 6e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t2-6e-etage-a6eeebb3-f8e9-4a18-a8ee-f635d263dd6e",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "abba4149-1b57-47ce-81c9-5c6e6ce5ecfa",
+     "name": "T3, 6e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 69,
+     "balcony_surface": 10,
+     "floor": 6,
+     "floor_label": "6e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "957d9c23-75ea-4498-b0fa-3e382c1bbe1a",
+   "slug": "quai-des-tanneurs",
+   "title": "Quai des Tanneurs",
+   "description": "<p>Quatorze appartements face au Rhône, à Gerland, dans un immeuble aux balcons filants.</p><p>Des appartements traversants du 2 au 5 pièces, des loggias profondes et une toiture végétalisée. À deux pas du parc de Gerland et du métro.</p><p>Chantier en cours, livraison prévue en juin 2027.</p>",
+   "description_text": "Quatorze appartements face au Rhône, à Gerland, dans un immeuble aux balcons filants.\n\nDes appartements traversants du 2 au 5 pièces, des loggias profondes et une toiture végétalisée. À deux pas du parc de Gerland et du métro.\n\nChantier en cours, livraison prévue en juin 2027.",
+   "status": "construction",
+   "delivery_date": "2027-06-30",
+   "address": {
+    "street": "Rue des Tanneurs 2",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.731,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24259314.jpg",
+     "alt": "Quai des Tanneurs"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28466914.jpg",
+     "alt": "Quai des Tanneurs, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39535122.jpg",
+     "alt": "Quai des Tanneurs, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39978725.jpg",
+     "alt": "Quai des Tanneurs, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39978729.jpg",
+     "alt": "Quai des Tanneurs, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39352757.jpg",
+     "alt": "Quai des Tanneurs, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12823481.jpg",
+     "alt": "Quai des Tanneurs, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12823618.jpg",
+     "alt": "Quai des Tanneurs, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12823621.jpg",
+     "alt": "Quai des Tanneurs, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+     "alt": "Quai des Tanneurs, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587906.jpg",
+     "alt": "Quai des Tanneurs, photo 11"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782567.jpg",
+     "alt": "Quai des Tanneurs, photo 12"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782578.jpg",
+     "alt": "Quai des Tanneurs, photo 13"
+    }
+   ],
+   "stats": {
+    "units": 14,
+    "available": 6,
+    "reserved": 3,
+    "sold": 5,
+    "price": {
+     "min": 189000,
+     "max": 584000
+    },
+    "rooms": {
+     "min": 1,
+     "max": 4
+    },
+    "living_surface": {
+     "min": 28,
+     "max": 89
+    }
+   },
+   "currency": "EUR",
+   "agents": [
+    {
+     "id": "f6222f94-7390-450d-b844-5a5e7ebe2f24",
+     "first_name": "Hugo",
+     "last_name": "Lefèvre",
+     "phone": "+33 0 00 00 00 03",
+     "email": "hugo.lefevre@arvel-promotion.example.com",
+     "languages": [
+      "fr",
+      "en"
+     ],
+     "team_ids": [
+      "f43cad16-1209-4a56-b501-63fe460bdf87"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712860-sq.jpg",
+      "alt": "Hugo Lefèvre"
+     }
+    }
+   ],
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ],
+   "units": [
+    {
+     "id": "84103d37-2601-48e2-92e7-63ebef24524f",
+     "name": "Studio, rez-de-chaussée",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 28,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "92a2d17c-a28f-4394-a999-ad9b00632f82",
+     "name": "T2, rez-de-chaussée",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 48,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 298000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "ccda481c-a9cb-4495-9d7f-b304e04890aa",
+     "name": "T3, rez-de-chaussée",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 66,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 409000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 66 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 66 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+       "alt": "T3, rez-de-chaussée"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+       "alt": "T3, rez-de-chaussée, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+       "alt": "T3, rez-de-chaussée, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061395.jpg",
+       "alt": "T3, rez-de-chaussée, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+       "alt": "T3, rez-de-chaussée, photo 5"
+      }
+     ],
+     "listing_slug": "t3-rez-de-chaussee-f91cb6bb-c6b2-4d6f-88be-372c51b6e513",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "70f8f723-2b2e-4805-88d6-d039a0dd40d6",
+     "name": "T2, 1er étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 46,
+     "balcony_surface": 7,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "387881d7-c9bd-471e-afb2-b301ab478666",
+     "name": "T3, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 70,
+     "balcony_surface": 10,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 447000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 70 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 70 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+       "alt": "T3, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061420.jpg",
+       "alt": "T3, 1er étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+       "alt": "T3, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+       "alt": "T3, 1er étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+       "alt": "T3, 1er étage, photo 5"
+      }
+     ],
+     "listing_slug": "t3-1er-etage-f0138f7d-46a0-4b32-a952-98af3185e9e0",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "8e654898-ed3e-41d8-a530-2233c9c565db",
+     "name": "T4, 1er étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 85,
+     "balcony_surface": 13,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 542000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "81904c68-0191-4ed0-83ff-17a4fdb1c75e",
+     "name": "T3, 2e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 68,
+     "balcony_surface": 7,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "04ff5954-6dbb-413d-91be-a058537da220",
+     "name": "T4, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 89,
+     "balcony_surface": 10,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 584000,
+     "currency": "EUR",
+     "description": "<p>Un 4 pièces de 89 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 4 pièces de 89 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782567.jpg",
+       "alt": "T4, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782578.jpg",
+       "alt": "T4, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+       "alt": "T4, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+       "alt": "T4, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+       "alt": "T4, 2e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t4-2e-etage-1588089f-8a76-4f8f-bd7c-c1601fcd0765",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "b29da5e4-830b-45ca-ac1a-6a432e459fd1",
+     "name": "Studio, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 30,
+     "balcony_surface": 13,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 197000,
+     "currency": "EUR",
+     "description": "<p>Un studio de 30 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un studio de 30 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+       "alt": "Studio, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+       "alt": "Studio, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+       "alt": "Studio, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061395.jpg",
+       "alt": "Studio, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+       "alt": "Studio, 2e étage, photo 5"
+      }
+     ],
+     "listing_slug": "studio-2e-etage-29f2ec69-c7b2-4913-9a0e-d81d242283bb",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "e0273d48-d7fb-4a3e-aa6f-39d75ffe35ca",
+     "name": "T4, 3e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 87,
+     "balcony_surface": 7,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "eb99935b-9018-4a0b-b21b-2234e78a6595",
+     "name": "Studio, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 28,
+     "balcony_surface": 10,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 189000,
+     "currency": "EUR",
+     "description": "<p>Un studio de 28 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un studio de 28 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+       "alt": "Studio, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061420.jpg",
+       "alt": "Studio, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+       "alt": "Studio, 3e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+       "alt": "Studio, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+       "alt": "Studio, 3e étage, photo 5"
+      }
+     ],
+     "listing_slug": "studio-3e-etage-f6f9de03-0a35-4111-a904-2bbe30a5c5b9",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "4bbb4f73-e14c-4c4d-b1f3-f7a436d95961",
+     "name": "T2, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 48,
+     "balcony_surface": 13,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 324000,
+     "currency": "EUR",
+     "description": "<p>Un 2 pièces de 48 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 2 pièces de 48 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+       "alt": "T2, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+       "alt": "T2, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+       "alt": "T2, 3e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587906.jpg",
+       "alt": "T2, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782567.jpg",
+       "alt": "T2, 3e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t2-3e-etage-24faa6c0-ad8c-4055-a4ed-c94bf0f821e8",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0594c7ef-3b64-4d74-a3ed-ecfceb4eee0b",
+     "name": "Studio, 4e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 32,
+     "balcony_surface": 7,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0f86711d-2a03-4472-b9be-076c91400380",
+     "name": "T2, 4e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 46,
+     "balcony_surface": 10,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 318000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "495910c1-780f-4044-b432-5206c250ae5c",
+   "slug": "le-clos-des-tilleuls",
+   "title": "Le Clos des Tilleuls",
+   "description": "<p>Dix appartements dans un parc planté de tilleuls, à Écully, livrés en juin 2026.</p><p>Il reste quelques appartements disponibles à la vente, visitables sur rendez-vous.</p>",
+   "description_text": "Dix appartements dans un parc planté de tilleuls, à Écully, livrés en juin 2026.\n\nIl reste quelques appartements disponibles à la vente, visitables sur rendez-vous.",
+   "status": "delivered",
+   "delivery_date": "2026-06-30",
+   "address": {
+    "street": "Allée des Tilleuls 6",
+    "postcode": "69130",
+    "city": "Écully",
+    "country": "France",
+    "lat": 45.775,
+    "lng": 4.778
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37196531.jpg",
+     "alt": "Le Clos des Tilleuls"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31114873.jpg",
+     "alt": "Le Clos des Tilleuls, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31114878.jpg",
+     "alt": "Le Clos des Tilleuls, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "Le Clos des Tilleuls, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "Le Clos des Tilleuls, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "Le Clos des Tilleuls, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "Le Clos des Tilleuls, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16632264.jpg",
+     "alt": "Le Clos des Tilleuls, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16632275.jpg",
+     "alt": "Le Clos des Tilleuls, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16632276.jpg",
+     "alt": "Le Clos des Tilleuls, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34811176.jpg",
+     "alt": "Le Clos des Tilleuls, photo 11"
+    }
+   ],
+   "stats": {
+    "units": 10,
+    "available": 2,
+    "reserved": 0,
+    "sold": 8,
+    "price": {
+     "min": 449000,
+     "max": 637000
+    },
+    "rooms": {
+     "min": 1,
+     "max": 4
+    },
+    "living_surface": {
+     "min": 28,
+     "max": 89
+    }
+   },
+   "currency": "EUR",
+   "agents": [
+    {
+     "id": "12a5b324-2b97-4895-9422-620136c44b23",
+     "first_name": "Sarah",
+     "last_name": "Benali",
+     "phone": "+33 0 00 00 00 04",
+     "email": "sarah.benali@arvel-promotion.example.com",
+     "languages": [
+      "fr",
+      "en"
+     ],
+     "team_ids": [
+      "f43cad16-1209-4a56-b501-63fe460bdf87"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36712869-sq.jpg",
+      "alt": "Sarah Benali"
+     }
+    }
+   ],
+   "team_ids": [
+    "f43cad16-1209-4a56-b501-63fe460bdf87"
+   ],
+   "units": [
+    {
+     "id": "cf30b7a6-30e7-4bed-af01-eaa45fa4c4b2",
+     "name": "Studio, rez-de-chaussée",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 28,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0de9e790-cbef-4004-81a0-e5fd62937d19",
+     "name": "T2, rez-de-chaussée",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 48,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "5fb4956e-a5be-42fa-af19-c57b8f7c2feb",
+     "name": "T3, rez-de-chaussée",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 66,
+     "balcony_surface": 25,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 449000,
+     "currency": "EUR",
+     "description": "<p>Un 3 pièces de 66 m² avec jardin.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 3 pièces de 66 m² avec jardin.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T3, rez-de-chaussée"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T3, rez-de-chaussée, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527068.jpg",
+       "alt": "T3, rez-de-chaussée, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527069.jpg",
+       "alt": "T3, rez-de-chaussée, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580230.jpg",
+       "alt": "T3, rez-de-chaussée, photo 5"
+      }
+     ],
+     "listing_slug": "t3-rez-de-chaussee-3a9177ee-0908-49b9-9c63-6d51d90c7372",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "23aec919-a0e1-4896-ac55-aebd694b3d5f",
+     "name": "T2, 1er étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 46,
+     "balcony_surface": 7,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "cb6c9411-2a0a-4d34-acdd-3cd60519dcad",
+     "name": "T3, 1er étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 70,
+     "balcony_surface": 10,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "52999eee-9255-4849-9b20-5ee8cc2dd558",
+     "name": "T4, 1er étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 85,
+     "balcony_surface": 13,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "26910f03-3b54-4475-89f3-92a975189ade",
+     "name": "T3, 2e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 68,
+     "balcony_surface": 7,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "ec921f7e-82ca-4f2b-a6ef-310a3ea4f883",
+     "name": "T4, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 89,
+     "balcony_surface": 10,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 637000,
+     "currency": "EUR",
+     "description": "<p>Un 4 pièces de 89 m² avec balcon.</p><p>Cuisine aménagée, parquet, volets roulants électriques, cave et place de parking.</p>",
+     "description_text": "Un 4 pièces de 89 m² avec balcon.\n\nCuisine aménagée, parquet, volets roulants électriques, cave et place de parking.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "T4, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "T4, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "T4, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "T4, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "T4, 2e étage, photo 5"
+      }
+     ],
+     "listing_slug": "t4-2e-etage-bbb58c0f-2669-413d-a626-d20d3f9caa60",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "03139fe4-f28d-434b-bcd1-ad3462434dc0",
+     "name": "Studio, 2e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 30,
+     "balcony_surface": 13,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "222e9b72-a068-4154-b5a1-49c5b911aecc",
+     "name": "T4, 3e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment_attic",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 87,
+     "balcony_surface": 7,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  }
+ ],
+ "fixture_only": {
+  "listings": {
+   "53ae1da7-84d4-4531-9721-6b632f41b977": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 0,
+    "terrace_surface": 25
+   },
+   "29aeb273-7ead-440a-ae0e-1bfe8f43a504": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 0,
+    "terrace_surface": 25
+   },
+   "d8dffdfb-50b0-4b05-afe6-0b7b64ae6690": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 0,
+    "terrace_surface": 25
+   },
+   "5a60afc6-3cde-4437-aaea-06a25d90608b": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 7
+   },
+   "011ef1dc-d027-4dcd-8ff8-1ea60b0dd46d": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 13
+   },
+   "e3ea8e83-6786-4aa8-b17d-0f96a19ca386": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 7
+   },
+   "f8a63efe-7ec1-4eba-84c6-da222d6b34a3": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 10
+   },
+   "2171a64c-0bad-4f07-9109-48a40e1bc750": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 13
+   },
+   "aaf6e572-20b0-46d9-8d2e-e8f344e23045": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 7
+   },
+   "5417ab47-3dfb-436b-a736-63b800c78e4d": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 10
+   },
+   "6f2e1a1d-b0d5-498e-93bb-987629997ac1": {
+    "energy_class": "D",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 7
+   },
+   "0fe9636d-e732-4e81-96e2-c25576cbf333": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 7
+   },
+   "78a95e8d-24c5-4e44-9b1e-64b8a9437be0": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 10
+   },
+   "5aeb32be-8087-45e3-b3f5-5cdf2059e463": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 4,
+    "balcony_surface": 7
+   },
+   "4fd66fa6-2e5c-40b2-9ba0-fc70f03b0e84": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 4,
+    "balcony_surface": 13
+   },
+   "21769d62-1ef0-466a-874d-6ed4025dd78e": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 4,
+    "balcony_surface": 7
+   },
+   "b0c80e53-dc11-4a89-b77b-2405abf964b8": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 5,
+    "balcony_surface": 7
+   },
+   "3c4358e7-5973-4fd0-831e-b61f09adfc64": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 5,
+    "balcony_surface": 13
+   },
+   "5c16546d-7d06-42f9-b501-4ab10c23c2a7": {
+    "energy_class": "D",
+    "year_built": 2027,
+    "floor": 5,
+    "balcony_surface": 7
+   },
+   "b6a7e6ca-445a-4645-84d8-921d53778a78": {
+    "energy_class": "D",
+    "year_built": 2027,
+    "floor": 5,
+    "balcony_surface": 10
+   },
+   "a6eeebb3-f8e9-4a18-a8ee-f635d263dd6e": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 6,
+    "balcony_surface": 7
+   },
+   "f91cb6bb-c6b2-4d6f-88be-372c51b6e513": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 0,
+    "terrace_surface": 25
+   },
+   "f0138f7d-46a0-4b32-a952-98af3185e9e0": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 10
+   },
+   "1588089f-8a76-4f8f-bd7c-c1601fcd0765": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 10
+   },
+   "29f2ec69-c7b2-4913-9a0e-d81d242283bb": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 13
+   },
+   "f6f9de03-0a35-4111-a904-2bbe30a5c5b9": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 10
+   },
+   "24faa6c0-ad8c-4055-a4ed-c94bf0f821e8": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 13
+   },
+   "3a9177ee-0908-49b9-9c63-6d51d90c7372": {
+    "energy_class": "D",
+    "year_built": 2027,
+    "floor": 0,
+    "terrace_surface": 25
+   },
+   "bbb58c0f-2669-413d-a626-d20d3f9caa60": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 10
+   }
+  },
+  "units": {
+   "abd013f4-0de6-473b-8838-f760cb91f75f": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "terrace_surface": 25
+   },
+   "ebc9c18c-e812-40ef-8c65-3492ad5e80f8": {
+    "unit_number": "0.2",
+    "position": 2,
+    "orientation": "SW",
+    "terrace_surface": 25
+   },
+   "b6348700-1e40-4584-ad55-b8f409bf3214": {
+    "unit_number": "0.3",
+    "position": 3,
+    "orientation": "W",
+    "terrace_surface": 25
+   },
+   "e22ea068-a172-40a4-bba6-dd925829140f": {
+    "unit_number": "0.4",
+    "position": 4,
+    "orientation": "SE",
+    "terrace_surface": 25
+   },
+   "a79a6616-cff8-41cb-ad5f-381326d04c52": {
+    "unit_number": "0.5",
+    "position": 5,
+    "orientation": "E",
+    "terrace_surface": 25
+   },
+   "c58a5357-ead2-41f5-8cb9-84367b463243": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW"
+   },
+   "382c5a30-cafe-412c-881a-07d833b90525": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W"
+   },
+   "9bc44385-fb5a-40a2-9f36-6365047d4767": {
+    "unit_number": "1.3",
+    "position": 3,
+    "orientation": "SE"
+   },
+   "4fd3d355-65ac-44fb-b3d8-2f87eb7d7165": {
+    "unit_number": "1.4",
+    "position": 4,
+    "orientation": "E"
+   },
+   "50cc1654-27f8-4615-b0a9-0390502e0fd6": {
+    "unit_number": "1.5",
+    "position": 5,
+    "orientation": "NW"
+   },
+   "c0428c27-c71c-43fb-81fd-8fd7a1cf5f92": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W"
+   },
+   "f29614a9-7524-4562-b03b-41f156d5eb23": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE"
+   },
+   "ffe82b42-3f84-4219-8b66-5e744f6b701d": {
+    "unit_number": "2.3",
+    "position": 3,
+    "orientation": "E"
+   },
+   "aaf030d6-6211-4105-b0e3-09742efc333d": {
+    "unit_number": "2.4",
+    "position": 4,
+    "orientation": "NW"
+   },
+   "b0b5a458-caf9-4fc4-91c7-31781e7497dd": {
+    "unit_number": "2.5",
+    "position": 5,
+    "orientation": "S"
+   },
+   "696b6ef9-d457-4381-ab71-1cea7bd354da": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE"
+   },
+   "3fc7eba1-e1ec-4c44-a2a8-d14da52cdaaf": {
+    "unit_number": "3.2",
+    "position": 2,
+    "orientation": "E"
+   },
+   "623847bd-4caf-4561-9f5e-91bf3981f266": {
+    "unit_number": "3.3",
+    "position": 3,
+    "orientation": "NW"
+   },
+   "591e7850-922b-4659-bda0-9b612dee0844": {
+    "unit_number": "3.4",
+    "position": 4,
+    "orientation": "S"
+   },
+   "eee7e0c5-b0db-422f-b0c0-d36821ab67bc": {
+    "unit_number": "3.5",
+    "position": 5,
+    "orientation": "SW"
+   },
+   "8342faeb-d2eb-4e4d-b6b3-5976f9546d01": {
+    "unit_number": "4.1",
+    "position": 1,
+    "orientation": "E"
+   },
+   "c4726e0b-0f68-46fa-b68d-be01a826198c": {
+    "unit_number": "4.2",
+    "position": 2,
+    "orientation": "NW"
+   },
+   "26780111-3102-4854-a6cd-f996c34b89e2": {
+    "unit_number": "4.3",
+    "position": 3,
+    "orientation": "S"
+   },
+   "ad400a29-8aa0-42a8-8053-d7773ebfa8a1": {
+    "unit_number": "4.4",
+    "position": 4,
+    "orientation": "SW"
+   },
+   "628c4aec-ada4-4f14-a1f6-351aee05844f": {
+    "unit_number": "4.5",
+    "position": 5,
+    "orientation": "W"
+   },
+   "e11b5097-afde-4083-b6b8-d417de8e22f1": {
+    "unit_number": "5.1",
+    "position": 1,
+    "orientation": "NW"
+   },
+   "1088dc31-32a3-4fac-8bce-19925f3ecaa9": {
+    "unit_number": "5.2",
+    "position": 2,
+    "orientation": "S"
+   },
+   "76d3e684-27c3-463d-8e1c-a3dfd73c59f4": {
+    "unit_number": "5.3",
+    "position": 3,
+    "orientation": "SW"
+   },
+   "978a1680-aecc-496c-ab44-df8569025771": {
+    "unit_number": "5.4",
+    "position": 4,
+    "orientation": "W"
+   },
+   "25fcfeb2-f4b7-4edc-a945-19512c7bcf41": {
+    "unit_number": "5.5",
+    "position": 5,
+    "orientation": "SE"
+   },
+   "db7be57c-b6c0-4222-bb32-77f958d083bc": {
+    "unit_number": "6.1",
+    "position": 1,
+    "orientation": "S"
+   },
+   "abba4149-1b57-47ce-81c9-5c6e6ce5ecfa": {
+    "unit_number": "6.2",
+    "position": 2,
+    "orientation": "SW"
+   },
+   "84103d37-2601-48e2-92e7-63ebef24524f": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "terrace_surface": 25
+   },
+   "92a2d17c-a28f-4394-a999-ad9b00632f82": {
+    "unit_number": "0.2",
+    "position": 2,
+    "orientation": "SW",
+    "terrace_surface": 25
+   },
+   "ccda481c-a9cb-4495-9d7f-b304e04890aa": {
+    "unit_number": "0.3",
+    "position": 3,
+    "orientation": "W",
+    "terrace_surface": 25
+   },
+   "70f8f723-2b2e-4805-88d6-d039a0dd40d6": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW"
+   },
+   "387881d7-c9bd-471e-afb2-b301ab478666": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W"
+   },
+   "8e654898-ed3e-41d8-a530-2233c9c565db": {
+    "unit_number": "1.3",
+    "position": 3,
+    "orientation": "SE"
+   },
+   "81904c68-0191-4ed0-83ff-17a4fdb1c75e": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W"
+   },
+   "04ff5954-6dbb-413d-91be-a058537da220": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE"
+   },
+   "b29da5e4-830b-45ca-ac1a-6a432e459fd1": {
+    "unit_number": "2.3",
+    "position": 3,
+    "orientation": "E"
+   },
+   "e0273d48-d7fb-4a3e-aa6f-39d75ffe35ca": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE"
+   },
+   "eb99935b-9018-4a0b-b21b-2234e78a6595": {
+    "unit_number": "3.2",
+    "position": 2,
+    "orientation": "E"
+   },
+   "4bbb4f73-e14c-4c4d-b1f3-f7a436d95961": {
+    "unit_number": "3.3",
+    "position": 3,
+    "orientation": "NW"
+   },
+   "0594c7ef-3b64-4d74-a3ed-ecfceb4eee0b": {
+    "unit_number": "4.1",
+    "position": 1,
+    "orientation": "E"
+   },
+   "0f86711d-2a03-4472-b9be-076c91400380": {
+    "unit_number": "4.2",
+    "position": 2,
+    "orientation": "NW"
+   },
+   "cf30b7a6-30e7-4bed-af01-eaa45fa4c4b2": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "terrace_surface": 25
+   },
+   "0de9e790-cbef-4004-81a0-e5fd62937d19": {
+    "unit_number": "0.2",
+    "position": 2,
+    "orientation": "SW",
+    "terrace_surface": 25
+   },
+   "5fb4956e-a5be-42fa-af19-c57b8f7c2feb": {
+    "unit_number": "0.3",
+    "position": 3,
+    "orientation": "W",
+    "terrace_surface": 25
+   },
+   "23aec919-a0e1-4896-ac55-aebd694b3d5f": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW"
+   },
+   "cb6c9411-2a0a-4d34-acdd-3cd60519dcad": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W"
+   },
+   "52999eee-9255-4849-9b20-5ee8cc2dd558": {
+    "unit_number": "1.3",
+    "position": 3,
+    "orientation": "SE"
+   },
+   "26910f03-3b54-4475-89f3-92a975189ade": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W"
+   },
+   "ec921f7e-82ca-4f2b-a6ef-310a3ea4f883": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE"
+   },
+   "03139fe4-f28d-434b-bcd1-ad3462434dc0": {
+    "unit_number": "2.3",
+    "position": 3,
+    "orientation": "E"
+   },
+   "222e9b72-a068-4154-b5a1-49c5b911aecc": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE"
+   }
+  },
+  "developments": {
+   "f5671b1a-b394-412c-9fb9-54bdb49069a6": {
+    "developer": "Arvel Promotion SAS",
+    "architect": "Agence Revard Architectes",
+    "general_contractor": "Bâtir Savoie SAS",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": [
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34188582.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34188660.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34188578.jpg"
+    ]
+   },
+   "957d9c23-75ea-4498-b0fa-3e382c1bbe1a": {
+    "developer": "Arvel Promotion SAS",
+    "architect": "Atelier Saône Architecture",
+    "general_contractor": "Rhône Construction SAS",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": [
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24259314.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28466914.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39535122.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39978725.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39978729.jpg"
+    ]
+   },
+   "495910c1-780f-4044-b432-5206c250ae5c": {
+    "developer": "Arvel Promotion SAS",
+    "architect": "Atelier Saône Architecture",
+    "general_contractor": "Rhône Construction SAS",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": [
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-40619540.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28681441.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9170385.jpg"
+    ]
+   }
+  }
+ }
+}

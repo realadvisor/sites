@@ -1,0 +1,120 @@
+---
+// Kontakt / Interesse anmelden: the enquiry form with the unit select
+// (?wohnung=<id> preselects one), the rental office and the contact person.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import AgentPhoto from '../components/AgentPhoto.astro';
+import Icon from '../components/Icon.astro';
+import { site as load } from '../lib/data';
+import { rowsOf, unitOptions, unitTitle } from '../lib/units';
+
+const site = await load();
+const { dev, team, org } = site;
+const rows = rowsOf(dev);
+const options = unitOptions(rows);
+const wanted = Astro.url.searchParams.get('wohnung');
+const chosen = rows.find((r) => r.u.id === wanted && r.u.status !== 'sold');
+const tel = (p: string) => `tel:${p.replace(/[^\d+]/g, '')}`;
+const office = team?.address ?? org.address;
+const people = dev.agents.length ? dev.agents : site.agents;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: team?.name ?? org.name,
+  telephone: team?.phone,
+  email: team?.email,
+  address: office && { '@type': 'PostalAddress', streetAddress: office.street, postalCode: office.postcode, addressLocality: office.city, addressCountry: 'CH' },
+};
+---
+<Site
+  site={site}
+  title={`Interesse anmelden und Kontakt | ${dev.title}, ${dev.address.city ?? ''}`}
+  description={`Interesse an einer Wohnung im ${dev.title} anmelden: Bewerbungsunterlagen, Besichtigung der Musterwohnung, Kontakt zur Erstvermietung.`}
+  jsonLd={jsonLd}
+>
+  <PageHead title="Interesse anmelden" lead="Wählen Sie Ihre Wohnung und schreiben Sie uns. Wir senden Ihnen die Bewerbungsunterlagen und einen Termin für die Musterwohnung." tone="zinnober" />
+
+  <section class="wrap contact">
+    <div class="form-card" id="anfrage">
+      <h2 class="h">Ihre Anfrage</h2>
+      <EnquiryForm
+        id="kontakt-form"
+        developmentId={dev.id}
+        units={options}
+        selectedUnit={chosen?.u.id}
+        agentId={site.contact?.id}
+        agentName={site.contact?.first_name}
+        message={chosen ? `Guten Tag, ich interessiere mich für die Wohnung ${chosen.x.number ? `${chosen.x.number} (${unitTitle(chosen)})` : unitTitle(chosen)} im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.` : `Guten Tag, ich interessiere mich für eine Wohnung im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`}
+        submitLabel="Anfrage senden"
+      />
+    </div>
+
+    <aside class="side">
+      <div class="block block--ink">
+        <h2 class="h">Erstvermietung</h2>
+        <address>
+          <strong>{team?.name ?? org.name}</strong>
+          {office?.street && <span>{office.street}</span>}
+          {(office?.postcode || office?.city) && <span>{[office?.postcode, office?.city].filter(Boolean).join(' ')}</span>}
+        </address>
+        <ul class="links">
+          {team?.phone && <li><a href={tel(team.phone)}><Icon name="phone" /><span class="num">{team.phone}</span></a></li>}
+          {team?.email && <li><a href={`mailto:${team.email}`}><Icon name="mail" /><span>{team.email}</span></a></li>}
+        </ul>
+      </div>
+      {people.length > 0 && (
+        <div class="block">
+          <h2 class="h">Ihre Ansprechpersonen</h2>
+          <ul class="people">
+            {people.map((a) => (
+              <li>
+                <AgentPhoto agent={a} size={88} />
+                <div>
+                  <p class="nm">{a.first_name} {a.last_name}</p>
+                  {a.title && <p class="muted lang">{a.title}</p>}
+                  {a.languages && a.languages.length > 0 && <p class="muted lang">Spricht {a.languages.map((l) => ({ de: 'Deutsch', en: 'Englisch', fr: 'Französisch', it: 'Italienisch', es: 'Spanisch' })[l] ?? l.toUpperCase()).join(', ')}</p>}
+                  <ul class="links">
+                    {a.phone && <li><a href={tel(a.phone)}><Icon name="phone" size={18} /><span class="num">{a.phone}</span></a></li>}
+                    {a.email && <li><a href={`mailto:${a.email}`}><Icon name="mail" size={18} /><span>{a.email}</span></a></li>}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <div class="block block--butter">
+        <h2 class="h">So geht es weiter</h2>
+        <ol class="steps">
+          <li><strong>Anfrage senden.</strong> Mit der gewünschten Wohnung.</li>
+          <li><strong>Unterlagen erhalten.</strong> Bewerbungsformular per E-Mail.</li>
+          <li><strong>Musterwohnung besichtigen.</strong> Termin nach Vereinbarung.</li>
+          <li><strong>Mietvertrag.</strong> Nach Prüfung der Bewerbung.</li>
+        </ol>
+      </div>
+    </aside>
+  </section>
+</Site>
+<style>
+  .contact { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; padding-block: clamp(40px, 6vw, 88px); }
+  .form-card { background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-card); padding: clamp(20px, 3vw, 40px); box-shadow: 10px 10px 0 var(--zinnober); display: grid; gap: 20px; }
+  .h { font-size: var(--step-2); }
+  .side { display: grid; gap: 20px; }
+  .block { border: 2px solid var(--ink); border-radius: var(--radius-card); padding: clamp(20px, 2.4vw, 28px); display: grid; gap: 16px; background: var(--paper); }
+  .block--ink { background: var(--ink); color: #fff; }
+  .block--butter { background: var(--butter); }
+  address { font-style: normal; display: grid; gap: 2px; }
+  .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .links a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+  .links a:hover span { text-decoration: underline; }
+  .people { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .people > li { display: flex; gap: 16px; align-items: flex-start; }
+  .nm { font: 750 1.25rem/1.1 var(--display); }
+  .lang { font-size: 0.9375rem; margin-top: 2px; }
+  .steps { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; }
+  .steps li::marker { font-weight: 800; }
+  @media (max-width: 960px) { .contact { grid-template-columns: 1fr; } .form-card { box-shadow: 6px 6px 0 var(--zinnober); } }
+</style>

@@ -1,0 +1,89 @@
+---
+/**
+ * Black footer: one column per office (address, phone, e-mail), the site's
+ * sections, then the legal line with the legal notice and privacy policy in
+ * the page language.
+ */
+import type { Organisation, Team } from '@realadvisor/sites-sdk/types';
+import { legalPath, privacyPath, t as kt, lang as klang } from '@realadvisor/sites-kit/i18n';
+import { href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L; org: Organisation; teams: Team[] }
+const { l, org, teams } = Astro.props;
+const t = tx(l);
+const lg = klang(LOCALE[l]);
+const year = new Date().getFullYear();
+const props = [
+  { label: t('navBuy'), href: href('buy', l) },
+  { label: t('navRent'), href: href('rent', l) },
+  { label: t('navSold'), href: href('sold', l) },
+  { label: t('navDestinations'), href: href('destinations', l) },
+  { label: t('valuation'), href: href('sell', l) },
+];
+const company = [
+  { label: t('navOffices'), href: href('offices', l) },
+  { label: t('navTeam'), href: href('team', l) },
+  { label: t('navJournal'), href: href('journal', l) },
+  { label: t('navAbout'), href: href('about', l) },
+  { label: t('navContact'), href: href('contact', l) },
+];
+---
+<footer class="ft on-ink">
+  <div class="wrap ft__grid">
+    <section class="ft__offices" aria-labelledby="ft-offices">
+      <h2 id="ft-offices" class="sr-only">{t('footerOffices')}</h2>
+      <ul class="plain">
+        {teams.map((x) => (
+          <li>
+            <h3><a href={href('offices', l, teamSlug(x, teams))}>{cityName(x.address.city, l) || x.name}</a></h3>
+            <address>
+              {x.address.street && <span>{x.address.street}</span>}
+              {(x.address.postcode || x.address.city) && <span>{[x.address.postcode, x.address.city].filter(Boolean).join(' ')}</span>}
+              {x.phone && <a class="num" href={tel(x.phone)}>{x.phone}</a>}
+              {x.email && <a href={`mailto:${x.email}`}>{x.email}</a>}
+            </address>
+          </li>
+        ))}
+      </ul>
+    </section>
+    <nav class="ft__nav" aria-labelledby="ft-props">
+      <h2 id="ft-props" class="ft__h">{t('footerSite')}</h2>
+      <ul class="plain">{props.map((x) => <li><a href={x.href}>{x.label}</a></li>)}</ul>
+    </nav>
+    <nav class="ft__nav" aria-labelledby="ft-company">
+      <h2 id="ft-company" class="ft__h">{org.name}</h2>
+      <ul class="plain">{company.map((x) => <li><a href={x.href}>{x.label}</a></li>)}</ul>
+    </nav>
+  </div>
+  <div class="wrap ft__base">
+    <p>© {year} {org.name}</p>
+    <ul class="plain">
+      <li><a href={legalPath(LOCALE[l])}>{kt('legalNotice', {}, lg)}</a></li>
+      <li><a href={privacyPath(LOCALE[l])}>{kt('privacyPolicy', {}, lg)}</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .ft { padding-top: clamp(64px, 8vw, 112px); }
+  .ft a { text-decoration: none; }
+  .ft a:hover { text-decoration: underline; text-decoration-color: var(--accent-on-ink); }
+  .ft__grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 48px; padding-bottom: 64px; }
+  .ft__offices ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 40px 32px; }
+  .ft__offices h3 { font-size: 1.5rem; margin-bottom: 14px; }
+  .ft address { font-style: normal; display: grid; gap: 4px; color: var(--on-ink-muted); font-size: 0.9375rem; }
+  .ft address a { color: var(--on-ink); display: inline-flex; min-height: 32px; align-items: center; justify-self: start; overflow-wrap: anywhere; }
+  .ft__h { font: 600 0.75rem/1.2 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-ink-muted); margin-bottom: 14px; }
+  .ft__nav ul { display: grid; gap: 2px; }
+  .ft__nav a { display: inline-flex; align-items: center; min-height: 36px; }
+  .ft__base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-block: 24px 32px; border-top: 1px solid var(--line-on-ink); color: var(--on-ink-muted); font-size: 0.875rem; }
+  .ft__base ul { display: flex; gap: 24px; }
+  .ft__base a { color: var(--on-ink-muted); display: inline-flex; min-height: 32px; align-items: center; }
+  .ft__base a:hover { color: var(--on-ink); }
+  @media (max-width: 900px) {
+    .ft__grid { grid-template-columns: 1fr 1fr; }
+    .ft__offices { grid-column: 1 / -1; }
+  }
+</style>

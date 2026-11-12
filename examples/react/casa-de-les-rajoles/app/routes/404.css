@@ -1,0 +1,2 @@
+.pg-404 .nf { padding-block: clamp(72px, 10vw, 160px); display: grid; gap: 20px; justify-items: start; }
+.pg-404 .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px !important; }

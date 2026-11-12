@@ -1,0 +1,24 @@
+---
+// Legal notice (Impressum / Mentions légales / Note legali / Aviso legal).
+// Required on every site. Wrap it in your site layout (header, footer); keep
+// the content component as is. Other languages of a multi-language site
+// (LOCALES in src/lib/i18n.ts): src/pages/[lang]/legal.astro, same layout.
+export const prerender = false;
+
+import Base from '../layouts/Base.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { legalNotice } from '@realadvisor/sites-kit/legal';
+import { LOCALES, lang, legalPath, t } from '@realadvisor/sites-kit/i18n';
+
+const locale = LOCALES[0]!;
+const agency = await ra.agency();
+const title = t('legalNotice', {}, lang(locale));
+const alternates = LOCALES.length > 1 ? LOCALES.map((l) => ({ lang: l, href: legalPath(l) })) : undefined;
+---
+<Base title={`${title} | ${agency.name}`} description={`${title} ${agency.name}`} locale={locale} alternates={alternates}>
+  <main>
+    <h1>{title}</h1>
+    <LegalContent sections={legalNotice(agency, lang(locale))} />
+  </main>
+</Base>

@@ -1,0 +1,12 @@
+.dpe { margin: 0; display: grid; gap: 12px; }
+.dpe__cap { font-weight: 600; }
+.dpe__scale { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-width: 420px; }
+.dpe__step { display: flex; align-items: center; gap: 12px; }
+.dpe__bar {
+  width: var(--w); min-height: 26px; display: flex; align-items: center; padding-left: 10px; background: var(--c); color: var(--ink);
+  font-weight: 700; font-size: 0.875rem; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+}
+.dpe__step:not(.is-on) .dpe__bar { min-height: 22px; font-size: 0.75rem; }
+.is-on .dpe__bar { min-height: 36px; font-size: 1.0625rem; box-shadow: inset 0 0 0 2px rgb(0 0 0 / 0.25); }
+.dpe__mark { font-weight: 650; font-size: 0.875rem; }
+.dpe__note { color: var(--muted); font-size: 0.875rem; max-width: 60ch; }

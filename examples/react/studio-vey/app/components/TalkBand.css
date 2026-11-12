@@ -1,0 +1,18 @@
+/* From components/TalkBand.astro (scoped there). */
+  .talk { background: var(--accent); color: var(--on-accent); padding-block: clamp(64px, 8vw, 120px); }
+  /* Last band before the (same colour) footer: a hairline seam instead of a doubled empty gap. */
+  .talk:last-of-type { padding-bottom: clamp(56px, 6vw, 88px); border-bottom: 1px solid var(--line-on-accent); }
+  .talk-in { display: grid; gap: clamp(36px, 4vw, 56px); }
+  /* Title left, text right on wide screens; three actions below in one row so a long e-mail address never breaks. */
+  .talk-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 18px var(--gap); align-items: end; }
+  .talk-text { color: var(--on-accent-muted); max-width: 40ch; font-size: 1.0625rem; }
+  .talk-actions { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px var(--gap); }
+  .talk-actions li { display: grid; gap: 14px; min-width: 0; }
+  .talk-actions .caps { color: var(--on-accent-muted); }
+  .talk-actions a {
+    font: 400 clamp(1.25rem, 1.05rem + 0.5vw, 1.5rem)/1.25 var(--serif); color: inherit; text-decoration: none;
+    padding-bottom: 10px; border-bottom: 1px solid var(--on-accent); overflow-wrap: anywhere; width: fit-content; max-width: 100%;
+  }
+  .talk-actions a:hover { border-bottom-width: 2px; padding-bottom: 9px; }
+  @media (max-width: 1023px) { .talk-head { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 639px) { .talk-actions { grid-template-columns: minmax(0, 1fr); gap: 28px; } }

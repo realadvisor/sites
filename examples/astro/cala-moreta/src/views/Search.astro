@@ -1,0 +1,77 @@
+---
+/**
+ * Comprar / Buy and Alquilar / Rent: the kit's ListingsSearch (filters, chips,
+ * list / map, pagination, empty states) over one offer's pool, with the
+ * overlaid photo card in its slot.
+ */
+import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
+import { formatAmount } from '@realadvisor/sites-kit/format';
+import { propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, sites, type Listing } from '../lib/data';
+import { LOCALE_OF, UI, alternates, fill, href, type Lang } from '../lib/i18n';
+import { price } from '../lib/format';
+
+interface Props { lang: Lang; offer: 'buy' | 'rent' }
+const { lang, offer } = Astro.props;
+const ui = UI[lang];
+const locale = LOCALE_OF[lang];
+const route = offer === 'buy' ? 'buy' : 'rent';
+const [ag, pool] = await Promise.all([agency(), sites.allListings({ offer_type: offer })]);
+const byId = new Map<string, Listing>(pool.map((l) => [l.id, l]));
+// The page is the offer: an offerType in the URL is ignored (the buy page forwards ?offerType=rent).
+const params = { ...parseSearch(Astro.url.searchParams), offerType: undefined, status: 'available' as const };
+const result = runSearch(pool, params, { locale });
+
+const base = offer === 'buy' ? ui.buyTitle : ui.rentTitle2;
+const filters = [
+  params.propertyType && propertyTypeLabel(params.propertyType, locale),
+  params.city,
+  params.minRooms && t('roomsMin', { n: String(params.minRooms) }, lang),
+  params.minPrice && t('priceMin', { price: formatAmount(params.minPrice) }, lang),
+  params.maxPrice && t('priceMax', { price: formatAmount(params.maxPrice) }, lang),
+].filter(Boolean) as string[];
+const heading = [base, ...filters].join(' · ');
+const suffix = [params.view === 'map' ? ui.map : '', result.page > 1 ? fill(ui.pageN, { n: result.page }) : ''].filter(Boolean).join(', ');
+const title = `${heading}${suffix ? ` (${suffix})` : ''} | ${ag.team?.name ?? ag.org.name}`;
+const first = result.items.find((l) => l.photos[0])?.photos[0];
+const listingUrl = (x: { slug: string }) => href('listing', lang, x.slug);
+const popupPrice = (x: { id: string }) => {
+  const l = byId.get(x.id);
+  return l ? price(l, lang) : '';
+};
+---
+<Site lang={lang} current={route} title={title}
+  description={`${heading}. ${offer === 'buy' ? ui.buyLead : ui.rentLead}`.slice(0, 158)}
+  image={first ? img(first.url, { w: 1200, h: 630 }) : undefined}
+  alternates={alternates(route)}>
+  <header class="phead wrap">
+    <h1 class="display-l" data-rs-sync="h1">{heading}</h1>
+    <p class="lead">{offer === 'buy' ? ui.buyLead : ui.rentLead}</p>
+  </header>
+  <div class="wrap results">
+    <ListingsSearch result={result} base={href(route, lang)} locale={locale} sold={false}
+      filters={['propertyType', 'city', 'price', 'rooms']}
+      contactHref={href('contact', lang)} valuationHref={href('sell', lang)}
+      listingHref={listingUrl} price={popupPrice}>
+      {(x: { id: string }, i: number) => (
+        <ListingCard listing={byId.get(x.id)!} lang={lang} variant="overlay" heading="h2" priority={i === 0}
+          sizes={params.view === 'map' ? '(min-width: 1280px) 340px, (min-width: 960px) 40vw, 100vw' : undefined} />
+      )}
+    </ListingsSearch>
+  </div>
+</Site>
+
+<style>
+  .phead { padding-bottom: clamp(24px, 3vw, 36px); }
+  .phead h1 { max-width: 22ch; }
+  .results { padding-bottom: var(--section); }
+  .results :global(.rs-grid) { row-gap: var(--rs-gap); }
+  .results :global(.rs-bar) { border-bottom: 1px solid var(--line); }
+  .results :global(.rs-count) { font: 300 1.375rem/1.2 var(--font-display); }
+  .results :global(.rs-chip) { border-radius: 999px; }
+  .results :global(.rs.is-map .rs-list) { --rs-cols: 1; gap: 20px; }
+</style>

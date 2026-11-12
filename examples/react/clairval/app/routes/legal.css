@@ -1,0 +1,10 @@
+.legal-wrap { padding-bottom: var(--section); }
+.legal-wrap .legal { display: grid; gap: 48px; max-width: 860px; }
+.legal-wrap h2 { font-size: var(--step-2); margin-bottom: 16px; }
+.legal-wrap dl { display: grid; border-top: 1px solid var(--line); }
+.legal-wrap dl > div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.legal-wrap dt { color: var(--muted); }
+.legal-wrap dd a { overflow-wrap: anywhere; }
+.legal-wrap p { max-width: 68ch; }
+.legal-wrap p + p { margin-top: 12px; }
+@media (max-width: 600px) { .legal-wrap dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

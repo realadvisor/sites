@@ -1,0 +1,490 @@
+---
+/**
+ * THE listing search: filters, active-filter chips, count, sort, list / map
+ * views, pagination, empty states and the phone List/Map pill. Every agency
+ * site's /listings renders it; designs theme it, they never rewrite it.
+ *
+ *   const params = parseSearch(Astro.url.searchParams);
+ *   const result = runSearch(await allListings(), params, { locale: LOCALE });
+ *   <h1 data-rs-sync="h1">{heading}</h1>
+ *   <ListingsSearch result={result} contactHref="/contact" valuationHref="/contact#valuation">
+ *     {(l, i) => <ListingCard listing={l} />}
+ *   </ListingsSearch>
+ *
+ * The default slot is a callback rendering the design's own card (a plain
+ * card when there is none); the `empty` slot replaces the "no listings at
+ * all" block. Works without JS (GET form, links); with JS
+ * (@realadvisor/sites-kit/client/listings-search.ts) filters apply without a page load and the
+ * page's `data-rs-sync` elements and title follow.
+ *
+ * Theme with tokens (fallbacks included): --accent, --text, --paper,
+ * --surface, --line, --muted, --control-radius, --header-h (sticky offset),
+ * --rs-columns (max grid columns, 3), --rs-gap, --map-h; selected states
+ * --rs-active / --rs-on-active (default text / paper), --rs-pill-radius,
+ * --rs-sheet-radius, --rs-heading-weight, --rs-card-h (card height, map list).
+ * Class hooks: rs-*.
+ */
+import type { Listing } from '../lib/ra';
+import { mapView, searchHref, type FilterKey, type SearchResult } from '../lib/search';
+import { formatAmount, formatPrice, formatSurface, listingUrl, LOCALE } from '../lib/format';
+import { count, lang, localePath, offerTypeLabel, propertyTypeLabel, t } from '../lib/i18n';
+import ListingsMap from './ListingsMap.astro';
+import ListingsPager from './ListingsPager.astro';
+import RaImage from './RaImage.astro';
+import Select from './form/Select.astro';
+import Combobox from './form/Combobox.astro';
+import Button from './form/Button.astro';
+
+type FilterName = 'offerType' | 'propertyType' | 'city' | 'price' | 'rooms';
+interface Props {
+  result: SearchResult;
+  /** Path of the search page (renamed paths: `/proprietes`). */
+  base?: string;
+  /** Page locale on a multi-language site (e.g. 'en-CH'). */
+  locale?: string;
+  contactHref?: string;
+  valuationHref?: string;
+  /** "Tell us what you need" on no match (a search-profile page); default `contactHref`. */
+  tellUsHref?: string;
+  /** Listing URL for the plain card and the map (default `/listings/<slug>` in the page language). */
+  listingHref?: (l: Listing) => string;
+  /** Map popup price (default `formatPrice`), when the design's cards format prices their own way. */
+  price?: (l: Listing) => string;
+  /** Filters to show (default: all that the data supports). */
+  filters?: FilterName[];
+  /** Show the Available / Sold switch when the agency has sold listings. */
+  sold?: boolean;
+  class?: string;
+}
+
+const {
+  result,
+  locale = LOCALE,
+  base = localePath('/listings', locale),
+  contactHref,
+  valuationHref,
+  tellUsHref = contactHref,
+  listingHref = (x: Listing) => localePath(listingUrl(x), locale),
+  price,
+  filters = ['offerType', 'propertyType', 'city', 'price', 'rooms'],
+  sold = true,
+  class: cls,
+} = Astro.props;
+const l = lang(locale);
+const { params: p, facets, counts, total } = result;
+const href = (over: Parameters<typeof searchHref>[2] = {}) => searchHref(base, p, over);
+const show = (f: FilterName) => filters.includes(f);
+const isMap = p.view === 'map';
+const nothingAtAll = counts.available + counts.sold === 0;
+
+// Current values stay selectable even when the facets no longer list them.
+const withCurrent = <T extends { value: string }>(opts: T[], value: string | undefined, make: (v: string) => T) =>
+  value && !opts.some((o) => o.value === value) ? [make(value), ...opts] : opts;
+const amount = (n: number) => formatAmount(n);
+const typeOptions = withCurrent(
+  facets.propertyTypes.map((f) => ({ value: f.value, label: propertyTypeLabel(f.value, locale) })),
+  p.propertyType,
+  (v) => ({ value: v, label: propertyTypeLabel(v, locale) }),
+);
+const cityOptions = withCurrent(facets.cities.map((f) => ({ value: f.value, label: f.value })), p.city, (v) => ({ value: v, label: v }));
+const priceOptions = withCurrent(
+  facets.prices.map((n) => ({ value: String(n), label: t('priceMax', { price: amount(n) }, l) })),
+  p.maxPrice ? String(p.maxPrice) : undefined,
+  (v) => ({ value: v, label: t('priceMax', { price: amount(Number(v)) }, l) }),
+);
+const roomOptions = withCurrent(
+  facets.rooms.map((n) => ({ value: String(n), label: t('roomsMin', { n: String(n) }, l) })),
+  p.minRooms ? String(p.minRooms) : undefined,
+  (v) => ({ value: v, label: t('roomsMin', { n: v }, l) }),
+);
+const sortOptions = (['newest', 'price-asc', 'price-desc', 'surface-desc'] as const).map((s) => ({ value: s, label: t(`sort_${s}`, {}, l) }));
+const showOffer = show('offerType') && (facets.offerTypes.length > 1 || !!p.offerType);
+const nFilters = result.chips.length;
+
+const chipLabel = (k: FilterKey): string =>
+  k === 'offerType' ? offerTypeLabel(p.offerType!, locale)
+  : k === 'propertyType' ? propertyTypeLabel(p.propertyType, locale)
+  : k === 'city' ? p.city!
+  : k === 'minPrice' ? t('priceMin', { price: amount(p.minPrice!) }, l)
+  : k === 'maxPrice' ? t('priceMax', { price: amount(p.maxPrice!) }, l)
+  : k === 'bbox' ? t('mapArea', {}, l)
+  : t('roomsMin', { n: String(p.minRooms) }, l);
+const resetHref = searchHref(base, { ...p, offerType: undefined, propertyType: undefined, city: undefined, minPrice: undefined, maxPrice: undefined, minRooms: undefined, bbox: undefined }, { page: undefined, map: undefined });
+
+// Map view: the cards and the markers are the same listings.
+// Map view with markers: cards of the map area | map (the server filters by `bbox`).
+const mapMode = isMap && result.mapItems.length > 0;
+
+// The design's card, or a plain one.
+const hasCard = Astro.slots.has('default');
+const cards = hasCard ? await Promise.all(result.items.map((x, i) => Astro.slots.render('default', [x, i]))) : [];
+const facts = (x: Listing) =>
+  [x.rooms ? `${x.rooms} ${t('rooms', {}, l).toLowerCase()}` : '', x.living_surface ? formatSurface(x.living_surface) : ''].filter(Boolean).join(' · ');
+const cardSizes = isMap ? '(min-width: 1280px) 300px, (min-width: 960px) 40vw, 100vw' : '(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw';
+---
+<div class:list={['rs', { 'is-map': isMap }, cls]} data-rs-root data-rs-view={p.view}>
+  {!nothingAtAll && (
+    <form method="get" action={base} class="rs-form" data-rs-form role="search" aria-label={t('filters', {}, l)}>
+      {isMap && <input type="hidden" name="view" value="map" />}
+      {p.status === 'sold' && <input type="hidden" name="status" value="sold" />}
+      <div class="rs-top">
+        <button type="button" class="rs-filters-btn" popovertarget="rs-sheet">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" /><circle cx="16" cy="6" r="2" /><circle cx="10" cy="12" r="2" /><circle cx="18" cy="18" r="2" /></svg>
+          <span>{t('filters', {}, l)}</span>
+          <span class="rs-badge" data-rs-swap="badge" hidden={!nFilters}>{nFilters}</span>
+        </button>
+        <div id="rs-sheet" class="rs-sheet" popover>
+          <div class="rs-sheet-head">
+            <p class="rs-sheet-title">{t('filters', {}, l)}</p>
+            <button type="button" class="rs-sheet-close" popovertarget="rs-sheet" popovertargetaction="hide" aria-label={t('close', {}, l)}>
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+          </div>
+          {showOffer && (
+            <fieldset class="rs-offer field">
+              <legend class="field-label">{t('offer', {}, l)}</legend>
+              <div class="rs-seg">
+                <label><input type="radio" name="offerType" value="" checked={!p.offerType} /><span>{t('all', {}, l)}</span></label>
+                <label><input type="radio" name="offerType" value="buy" checked={p.offerType === 'buy'} /><span>{t('offerBuy', {}, l)}</span></label>
+                <label><input type="radio" name="offerType" value="rent" checked={p.offerType === 'rent'} /><span>{t('offerRent', {}, l)}</span></label>
+              </div>
+            </fieldset>
+          )}
+          {!showOffer && p.offerType && <input type="hidden" name="offerType" value={p.offerType} />}
+          {show('city') && cityOptions.length > 1 && (
+            <Combobox label={t('city', {}, l)} name="city" value={p.city} placeholder={t('allCities', {}, l)} options={cityOptions} class="rs-city" />
+          )}
+          {show('propertyType') && typeOptions.length > 1 && (
+            <Select label={t('propertyType', {}, l)} name="propertyType" value={p.propertyType} placeholder={t('all', {}, l)} options={typeOptions} class="rs-type" />
+          )}
+          {show('price') && priceOptions.length > 0 && (
+            <Select label={t('price', {}, l)} name="maxPrice" value={p.maxPrice ? String(p.maxPrice) : undefined} placeholder={t('any', {}, l)} options={priceOptions} class="rs-price" />
+          )}
+          {p.minPrice && <input type="hidden" name="minPrice" value={String(p.minPrice)} />}
+          {show('rooms') && roomOptions.length > 1 && (
+            <Select label={t('rooms', {}, l)} name="minRooms" value={p.minRooms ? String(p.minRooms) : undefined} placeholder={t('any', {}, l)} options={roomOptions} class="rs-rooms" />
+          )}
+          <Button type="submit" class="rs-apply"><span data-rs-swap="apply">{count('showListings', total, l)}</span></Button>
+        </div>
+      </div>
+
+      <div class="rs-bar">
+        <p class="rs-count" data-rs-count data-rs-swap="count" aria-live="polite" tabindex="-1">{count('listingsFound', total, l)}</p>
+        <div class="rs-tools">
+          {sold && counts.sold > 0 && (
+            <nav class="rs-status" aria-label={t('status', {}, l)} data-rs-swap="status">
+              <a href={href({ status: undefined })} aria-current={p.status === 'available' ? 'page' : undefined}>{t('currentListings', {}, l)}</a>
+              <a href={href({ status: 'sold' })} aria-current={p.status === 'sold' ? 'page' : undefined}>{t('soldListings', {}, l)} <span class="rs-n">{counts.sold}</span></a>
+            </nav>
+          )}
+          <Select label={t('sort', {}, l)} hideLabel name="sort" value={p.sort} options={sortOptions} class="rs-sort" />
+          <nav class="rs-views" aria-label={`${t('viewList', {}, l)} / ${t('viewMap', {}, l)}`} data-rs-swap="views">
+            <a href={href({ view: undefined })} data-rs-nav data-rs-view="list" aria-current={!isMap ? 'page' : undefined}>
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="4" width="7" height="7" /><rect x="13" y="4" width="7" height="7" /><rect x="4" y="13" width="7" height="7" /><rect x="13" y="13" width="7" height="7" /></svg>
+              {t('viewList', {}, l)}
+            </a>
+            <a href={href({ view: 'map' })} data-rs-nav data-rs-view="map" aria-current={isMap ? 'page' : undefined}>
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14" /></svg>
+              {t('viewMap', {}, l)}
+            </a>
+          </nav>
+        </div>
+      </div>
+    </form>
+  )}
+
+  <div class="rs-chips" data-rs-chips data-rs-swap="chips" hidden={!nFilters} aria-label={t('activeFilters', {}, l)} role="group">
+    {result.chips.map((k) => (
+      <a class="rs-chip" href={href({ [k]: undefined })} data-rs-nav aria-label={t('removeFilter', { filter: chipLabel(k) }, l)}>
+        {chipLabel(k)}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17" /></svg>
+      </a>
+    ))}
+    {nFilters > 1 && <a class="rs-reset" href={resetHref} data-rs-nav>{t('resetFilters', {}, l)}</a>}
+  </div>
+
+  <div class="rs-region" data-rs-swap="results">
+    {nothingAtAll ? (
+      Astro.slots.has('empty') ? <div data-rs-empty="none"><slot name="empty" /></div> : (
+        <div class="rs-empty" data-rs-empty="none">
+          <h2 class="rs-empty-title">{t('noListings', {}, l)}</h2>
+          <p class="rs-empty-text">{t('noListingsText', {}, l)}</p>
+          <p class="rs-empty-actions">
+            {valuationHref && <Button href={valuationHref}>{t('valuation', {}, l)}</Button>}
+            {contactHref && <Button href={contactHref} variant="secondary">{t('contactUs', {}, l)}</Button>}
+          </p>
+        </div>
+      )
+    ) : mapMode ? (
+      <Fragment>
+        {result.truncated && <p class="rs-note">{t('mapTruncated', { n: String(result.mapItems.length) }, l)}</p>}
+        <div class="rs-results rs-split">
+          <div class="rs-col">
+            {total > 0 ? (
+              <ul id="rs-results" class="rs-grid rs-list" data-rs-results>
+                {result.items.map((x, i) => (
+                  <li data-listing-id={x.id}>
+                    {hasCard ? <Fragment set:html={cards[i]} /> : (
+                      <a class="rs-card" href={listingHref(x)}>
+                        {x.photos[0] ? (
+                          <RaImage src={x.photos[0]} alt={x.photos[0].alt ?? `${propertyTypeLabel(x.property_type, locale)}, ${x.address.city ?? ''}`} width={600} height={400} sizes={cardSizes} />
+                        ) : (
+                          <span class="rs-card-nophoto" aria-hidden="true">{propertyTypeLabel(x.property_type, locale)}</span>
+                        )}
+                        <span class="rs-card-type">{propertyTypeLabel(x.property_type, locale)}{x.address.city && ` · ${x.address.city}`}</span>
+                        <span class="rs-card-title">{x.title}</span>
+                        <span class="rs-card-price">{x.status === 'sold' ? t('sold', {}, l) : formatPrice(x)}</span>
+                        {facts(x) && <span class="rs-card-facts">{facts(x)}</span>}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              // Nothing in the map area (the markers elsewhere stay): zoom out, or drop the area.
+              <div class="rs-empty rs-empty-area" data-rs-empty="area">
+                <h2 class="rs-empty-title">{t('noneInArea', {}, l)}</h2>
+                <p class="rs-empty-text">{t('noneInAreaText', {}, l)}</p>
+                {result.relax.length > 0 && (
+                  <ul class="rs-relax">
+                    {result.relax.map((r) => (
+                      <li><a href={href({ [r.key]: undefined })} data-rs-nav>{t('removeFilter', { filter: chipLabel(r.key) }, l)}</a> <span class="rs-n">{count('listings', r.count, l)}</span></li>
+                    ))}
+                  </ul>
+                )}
+                <p class="rs-empty-actions"><Button href={resetHref} data-rs-reset data-rs-nav>{t('resetFilters', {}, l)}</Button></p>
+              </div>
+            )}
+            <ListingsPager result={result} href={href} locale={locale} />
+          </div>
+          <div class="rs-map" data-rs-map>
+            <div class="rs-follow" data-rs-follow-bar>
+              <label class="rs-follow-toggle"><input type="checkbox" data-rs-follow checked /> <span>{t('searchAsMove', {}, l)}</span></label>
+              <button type="button" class="rs-search-area" data-rs-search-area hidden>{t('searchThisArea', {}, l)}</button>
+            </div>
+            <ListingsMap listings={result.mapItems} list="rs-results" locale={locale} view={mapView(p.map)} sync listMode="server" href={listingHref} price={price} />
+          </div>
+        </div>
+      </Fragment>
+    ) : total === 0 ? (
+      <div class="rs-empty" data-rs-empty="nomatch">
+        <h2 class="rs-empty-title">{t('noMatch', {}, l)}</h2>
+        <p class="rs-empty-text">{t('noMatchText', {}, l)}</p>
+        {result.relax.length > 0 && (
+          <ul class="rs-relax">
+            {result.relax.map((r) => (
+              <li><a href={href({ [r.key]: undefined })} data-rs-nav>{t('removeFilter', { filter: chipLabel(r.key) }, l)}</a> <span class="rs-n">{count('listings', r.count, l)}</span></li>
+            ))}
+          </ul>
+        )}
+        <p class="rs-empty-actions">
+          <Button href={resetHref} data-rs-reset data-rs-nav>{t('resetFilters', {}, l)}</Button>
+          {tellUsHref && <Button href={tellUsHref} variant="secondary">{t('tellUs', {}, l)}</Button>}
+        </p>
+      </div>
+    ) : (
+      <Fragment>
+        {isMap && <p class="rs-note">{t('noCoords', {}, l)}</p>}
+        <div class="rs-results">
+          <ul id="rs-results" class="rs-grid" data-rs-results>
+            {result.items.map((x, i) => (
+              <li data-listing-id={x.id}>
+                {hasCard ? <Fragment set:html={cards[i]} /> : (
+                  <a class="rs-card" href={listingHref(x)}>
+                    {x.photos[0] ? (
+                      <RaImage src={x.photos[0]} alt={x.photos[0].alt ?? `${propertyTypeLabel(x.property_type, locale)}, ${x.address.city ?? ''}`} width={600} height={400} sizes={cardSizes} />
+                    ) : (
+                      <span class="rs-card-nophoto" aria-hidden="true">{propertyTypeLabel(x.property_type, locale)}</span>
+                    )}
+                    <span class="rs-card-type">{propertyTypeLabel(x.property_type, locale)}{x.address.city && ` · ${x.address.city}`}</span>
+                    <span class="rs-card-title">{x.title}</span>
+                    <span class="rs-card-price">{x.status === 'sold' ? t('sold', {}, l) : formatPrice(x)}</span>
+                    {facts(x) && <span class="rs-card-facts">{facts(x)}</span>}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <ListingsPager result={result} href={href} locale={locale} />
+      </Fragment>
+    )}
+  </div>
+
+  {!nothingAtAll && total > 0 && (
+    <a class="rs-pill" data-rs-pill data-rs-nav data-rs-swap="pill" href={href({ view: isMap ? undefined : 'map' })}>
+      {isMap ? (
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="4" width="7" height="7" /><rect x="13" y="4" width="7" height="7" /><rect x="4" y="13" width="7" height="7" /><rect x="13" y="13" width="7" height="7" /></svg>
+      ) : (
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14" /></svg>
+      )}
+      {isMap ? t('viewList', {}, l) : t('viewMap', {}, l)}
+    </a>
+  )}
+</div>
+
+<script>
+  import '../client/listings-search';
+</script>
+
+<style>
+  .rs {
+    --rs-ink: var(--text, #1c1b19);
+    --rs-bg: var(--paper, var(--bg, #fff));
+    --rs-line: var(--line, #e2dfda);
+    --rs-muted: var(--muted, #6b6b6b);
+    --rs-accent: var(--accent, #134266);
+    --rs-gap-x: var(--rs-gap, 32px);
+    --rs-top: calc(var(--header-h, 0px) + 16px);
+    --rs-on: var(--rs-active, var(--rs-ink));
+    --rs-on-ink: var(--rs-on-active, var(--rs-bg));
+    position: relative;
+  }
+  .rs[aria-busy='true'] .rs-region { opacity: .55; transition: opacity .2s .1s; }
+
+  /* Filters: one inline row at >= 960px, a bottom sheet (popover) on phones. */
+  .rs-top { display: flex; gap: 12px; align-items: end; }
+  .rs-filters-btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: var(--control-h, 48px); padding: 0 18px;
+    border: 1px solid var(--rs-line); border-radius: var(--control-radius, 8px); background: var(--rs-bg); color: var(--rs-ink); font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .rs-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--rs-accent); color: #fff; font-size: 12px; }
+  .rs-badge[hidden] { display: none; }
+  .rs-sheet { color: var(--rs-ink); }
+  .rs-sheet-head { display: flex; justify-content: space-between; align-items: center; }
+  .rs-sheet-title { margin: 0; font-weight: 600; font-size: 1.125rem; }
+  .rs-sheet-close { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; }
+  .rs-sheet:popover-open {
+    position: fixed; inset: auto 0 0 0; width: 100%; max-width: none; max-height: 88svh; margin: 0; overflow: auto; box-sizing: border-box;
+    display: grid; gap: 20px; padding: 8px 20px max(20px, env(safe-area-inset-bottom)); border: 0; border-radius: var(--rs-sheet-radius, 16px) var(--rs-sheet-radius, 16px) 0 0;
+    background: var(--rs-bg); box-shadow: 0 -8px 32px rgb(0 0 0 / .18);
+  }
+  .rs-sheet::backdrop { background: rgb(0 0 0 / .4); }
+  .rs-sheet :global(.rs-apply) { width: 100%; position: sticky; bottom: 0; }
+  @supports not selector(:popover-open) {
+    .rs-filters-btn { display: none; }
+    .rs-sheet { display: grid; gap: 16px; }
+    .rs-sheet-head { display: none; }
+  }
+
+  .rs-offer { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .rs-offer legend { padding: 0; margin-bottom: 6px; }
+  .rs-seg { display: flex; border: 1px solid var(--rs-line); border-radius: var(--control-radius, 8px); overflow: hidden; height: var(--control-h, 48px); background: var(--rs-bg); }
+  .rs-seg label { position: relative; flex: 1; display: flex; }
+  .rs-seg label + label { border-left: 1px solid var(--rs-line); }
+  .rs-seg input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .rs-seg span { flex: 1; display: grid; place-items: center; padding: 0 16px; white-space: nowrap; font-size: .9375rem; transition: background .15s, color .15s; }
+  .rs-seg input:checked + span { background: var(--rs-on); color: var(--rs-on-ink); }
+  .rs-seg input:focus-visible + span { outline: 2px solid var(--rs-accent); outline-offset: -4px; }
+
+  @media (min-width: 960px) {
+    .rs-filters-btn, .rs-sheet-head { display: none; }
+    .rs-top { display: block; }
+    /* The popover, shown inline: author styles beat the UA's [popover] display:none. */
+    .rs-sheet, .rs-sheet:popover-open {
+      position: static; inset: auto; width: auto; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; overflow: visible; background: none;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: end;
+    }
+    .rs-sheet > :global(.field) { flex: 1 1 160px; min-width: 0; }
+    .rs-sheet > .rs-offer { flex: 0 0 auto; }
+    .rs-sheet > :global(.rs-city) { flex: 1.4 1 200px; }
+    .rs-sheet :global(.rs-apply) { width: auto; position: static; }
+    .rs.is-js .rs-sheet :global(.rs-apply) { display: none; }
+  }
+
+  .rs-bar { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; margin: 24px 0 16px; }
+  .rs-count { margin: 0; font-weight: 600; outline: none; }
+  .rs-tools { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+  .rs-tools :global(.rs-sort) { width: auto; }
+  .rs-status, .rs-views { display: flex; border: 1px solid var(--rs-line); border-radius: var(--control-radius, 8px); overflow: hidden; }
+  .rs-status a, .rs-views a {
+    display: inline-flex; gap: 8px; align-items: center; min-height: calc(var(--control-h, 48px) - 2px); padding: 0 16px;
+    color: var(--rs-ink); text-decoration: none; font-size: .9375rem; white-space: nowrap;
+  }
+  .rs-status a + a, .rs-views a + a { border-left: 1px solid var(--rs-line); }
+  .rs-status a[aria-current], .rs-views a[aria-current] { background: var(--rs-on); color: var(--rs-on-ink); }
+  .rs-n { opacity: .7; font-variant-numeric: tabular-nums; }
+
+  .rs-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 24px; }
+  .rs-chips[hidden] { display: none; }
+  .rs-chip {
+    display: inline-flex; gap: 6px; align-items: center; min-height: 36px; padding: 0 10px 0 14px; border-radius: 999px;
+    background: color-mix(in srgb, var(--rs-accent) 10%, var(--rs-bg)); color: var(--rs-ink); text-decoration: none; font-size: .875rem;
+  }
+  .rs-chip:hover { background: color-mix(in srgb, var(--rs-accent) 18%, var(--rs-bg)); }
+  .rs-reset { color: var(--rs-accent); font-size: .875rem; padding: 8px 4px; }
+
+  /* Results: list view grid; map view split (cards | sticky map) at >= 960px. */
+  .rs-grid { --rs-cols: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--rs-cols), minmax(0, 1fr)); gap: 40px var(--rs-gap-x); }
+  .rs-grid > li { min-width: 0; }
+  @media (min-width: 640px) { .rs-grid { --rs-cols: 2; } }
+  @media (min-width: 1024px) { .rs-grid { --rs-cols: var(--rs-columns, 3); } }
+  /* Map view renders up to 300 cards: skip the off-screen ones' layout. */
+  .rs-list > li { content-visibility: auto; contain-intrinsic-size: auto var(--rs-card-h, 420px); }
+  .rs-grid > :global(li.is-map-hover), .rs-grid > :global(li.is-selected) { outline: 2px solid var(--rs-accent); outline-offset: 6px; border-radius: 2px; }
+
+  .rs-map { --map-h: min(70svh, 560px); margin-bottom: 24px; }
+  .rs-split { display: flex; flex-direction: column; }
+  .rs-split .rs-map { order: -1; }
+  @media (min-width: 960px) {
+    .rs-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--rs-gap-x); align-items: start; }
+    .rs-split .rs-map { order: 2; position: sticky; top: var(--rs-top); margin: 0; --map-h: calc(100svh - var(--rs-top) - 16px); }
+    .rs-list { --rs-cols: 1; }
+  }
+  @media (min-width: 1280px) { .rs-list { --rs-cols: 2; gap: 32px 20px; } }
+  /* Map view: "search as I move the map" over the map; with it off, a "search this area" button. */
+  .rs-map { position: relative; }
+  .rs-follow { position: absolute; z-index: 5; top: 12px; left: 50%; translate: -50% 0; max-width: calc(100% - 136px); display: flex; justify-content: center; pointer-events: none; }
+  .rs-follow > * { pointer-events: auto; }
+  .rs:not(.is-js) .rs-follow { display: none; }
+  /* An open popup owns the top of the map (its close button sits there on a phone). */
+  .rs-map:has(.ra-map-popup.is-open) .rs-follow { visibility: hidden; }
+  .rs-follow-toggle, .rs-search-area {
+    display: inline-flex; gap: 8px; align-items: center; min-height: 40px; padding: 0 14px; border: 0; border-radius: var(--rs-pill-radius, 999px);
+    background: var(--rs-bg); color: var(--rs-ink); box-shadow: 0 2px 8px rgb(0 0 0 / .2); font: inherit; font-size: .875rem; white-space: nowrap; cursor: pointer;
+  }
+  .rs-follow-toggle input { width: 18px; height: 18px; margin: 0; accent-color: var(--rs-on); }
+  .rs-follow-toggle span { overflow: hidden; text-overflow: ellipsis; }
+  .rs-search-area { background: var(--rs-on); color: var(--rs-on-ink); font-weight: 600; }
+  .rs-follow:has(.rs-search-area:not([hidden])) .rs-follow-toggle { display: none; }
+  .rs-empty-area { padding: 24px 0; }
+  .rs-note { margin: 0 0 16px; color: var(--rs-muted); font-size: .9375rem; }
+
+  /* Plain card: only when the page passes none. */
+  .rs-card { display: grid; gap: 4px; color: inherit; text-decoration: none; }
+  .rs-card :global(img), .rs-card-nophoto { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 8px; border-radius: var(--radius-img, 0); }
+  .rs-card-nophoto { display: grid; place-items: center; background: var(--surface, #f2f0ec); color: var(--rs-muted); }
+  .rs-card-type { font-size: .8125rem; letter-spacing: .04em; text-transform: uppercase; color: var(--rs-muted); }
+  .rs-card-title { font-weight: 600; }
+  .rs-card-price { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rs-card-facts { color: var(--rs-muted); font-size: .9375rem; }
+  .rs-card:focus-visible { outline: 2px solid var(--rs-accent); outline-offset: 3px; }
+
+  .rs-empty { display: grid; gap: 12px; justify-items: start; max-width: 60ch; padding: 48px 0; }
+  .rs-empty-title { margin: 0; font-size: var(--rs-heading-size, clamp(1.25rem, 1rem + 1vw, 1.75rem)); font-weight: var(--rs-heading-weight, 600); line-height: 1.2; }
+  .rs-empty-text { margin: 0; color: var(--rs-muted); }
+  .rs-empty-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0 0; }
+  .rs-relax { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; }
+  .rs-relax a { display: inline-flex; align-items: center; min-height: 44px; color: var(--rs-accent); }
+
+
+  /* Phone: List / Map always in reach. */
+  .rs-pill {
+    position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); z-index: 20; translate: -50% 0;
+    display: inline-flex; gap: 8px; align-items: center; min-height: 48px; padding: 0 22px; border-radius: var(--rs-pill-radius, 999px);
+    background: var(--rs-on); color: var(--rs-on-ink); font-weight: 600; text-decoration: none; box-shadow: 0 6px 20px rgb(0 0 0 / .25);
+  }
+  @media (min-width: 960px) { .rs-pill { display: none; } }
+  /* Phone: [Filters (n)] [Sort] on one row, then the status switch and the count. */
+  @media (max-width: 959px) {
+    .rs-form { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'f s' 'st st' 'c c'; gap: 12px; margin-bottom: 16px; }
+    .rs-top, .rs-bar, .rs-tools { display: contents; }
+    .rs-filters-btn { grid-area: f; }
+    .rs-tools :global(.rs-sort) { grid-area: s; }
+    .rs-status { grid-area: st; }
+    .rs-status a { flex: 1; justify-content: center; }
+    .rs-count { grid-area: c; }
+    .rs-views { display: none; }
+    .rs:has(.rs-pill) .rs-region { padding-bottom: 72px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .rs * { transition: none !important; } }
+</style>

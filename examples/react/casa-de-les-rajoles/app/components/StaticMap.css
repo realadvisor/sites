@@ -1,0 +1,11 @@
+.smap:not(._) { margin: 0; }
+.smap-frame { position: relative; overflow: hidden; aspect-ratio: var(--ratio, 16 / 9); background: #ebe5dc; border: 1px solid var(--line); }
+.smap-grid { position: absolute; width: calc(var(--cols) * 256px); height: calc(var(--rows) * 256px); left: 50%; top: 50%; display: grid; grid-template-columns: repeat(var(--cols), 256px); transform: translate(calc(-1 * var(--mx)), calc(-1 * var(--my))); }
+.smap-grid img { width: 256px; height: 256px; max-width: none; filter: grayscale(0.8) sepia(0.2) contrast(0.95) brightness(1.04); }
+.smap-pin { position: absolute; left: var(--mx); top: var(--my); width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px rgb(217 101 75 / 0.28), 0 0 0 2px #fff inset; }
+.smap-mk { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: var(--ink); color: #fff; font: 600 0.75rem/26px var(--sans); text-align: center; }
+.smap figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; font-size: 0.875rem; color: var(--muted); }
+.smap:not(._) figcaption a { color: inherit; display: inline-block; padding-block: 8px; }
+@media (max-width: 640px) {
+  .smap .smap-frame { aspect-ratio: 1 / 1; }
+}

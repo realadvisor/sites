@@ -1,0 +1,43 @@
+---
+/**
+ * Text wordmark: the organisation has no logo file in the data. The name is
+ * split at its legal suffix ("Immobilier SA") into a serif name and a small
+ * caps line. A logo in the data replaces it.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import type { Organisation } from '@realadvisor/sites-sdk/types';
+
+interface Props {
+  org: Organisation;
+  href: string;
+  tone?: 'dark' | 'light';
+  label: string;
+}
+const { org, href, tone = 'dark', label } = Astro.props;
+const m = org.name.match(/^(.*?)\s+((?:Immobilier|Immobilien|Real Estate)\b.*)$/i);
+const name = m?.[1] ?? org.name;
+const sub = m?.[2];
+const [a, b] = name.includes('&') ? name.split(/\s*&\s*/, 2) : [name, undefined];
+---
+<a class:list={['wm', `wm--${tone}`]} href={href} aria-label={label}>
+  {org.logo?.url
+    ? <img data-logo src={img(org.logo.url, { w: 360, fit: 'fit', quality: 90 })} alt={org.name} height="40" />
+    : (
+      <span class="wm__text" aria-hidden="true">
+        <span class="wm__name">{a}{b && <><span class="wm__amp">&amp;</span>{b}</>}</span>
+        {sub && <span class="wm__sub">{sub}</span>}
+      </span>
+    )}
+</a>
+
+<style>
+  .wm { display: inline-flex; align-items: center; text-decoration: none; min-height: 44px; color: var(--navy); }
+  .wm--light { color: #fff; }
+  .wm img { height: 40px; width: auto; }
+  .wm__text { display: grid; gap: 3px; line-height: 1; }
+  .wm__name { font: 500 1.625rem/1 var(--font-display); letter-spacing: -0.01em; white-space: nowrap; font-variation-settings: 'opsz' 40; }
+  .wm__amp { font-style: italic; font-weight: 400; color: var(--brass-ink); margin: 0 0.16em; }
+  .wm--light .wm__amp { color: var(--brass-on-navy); }
+  .wm__sub { font: 600 0.5625rem/1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.8; padding-left: 1px; }
+  @media (max-width: 640px) { .wm__name { font-size: 1.375rem; } }
+</style>

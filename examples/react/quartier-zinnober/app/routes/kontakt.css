@@ -1,0 +1,22 @@
+/* From src/pages/kontakt.astro (scoped there: every selector under .p-kontakt). */
+.p-kontakt .contact { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; padding-block: clamp(40px, 6vw, 88px); }
+.p-kontakt .form-card { background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-card); padding: clamp(20px, 3vw, 40px); box-shadow: 10px 10px 0 var(--zinnober); display: grid; gap: 20px; }
+.p-kontakt .h { font-size: var(--step-2); }
+.p-kontakt .side { display: grid; gap: 20px; }
+.p-kontakt .block { border: 2px solid var(--ink); border-radius: var(--radius-card); padding: clamp(20px, 2.4vw, 28px); display: grid; gap: 16px; background: var(--paper); }
+.p-kontakt .block--ink { background: var(--ink); color: #fff; }
+.p-kontakt .block--butter { background: var(--butter); }
+.p-kontakt address { font-style: normal; display: grid; gap: 2px; }
+.p-kontakt .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.p-kontakt .links a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.p-kontakt .links a:hover span { text-decoration: underline; }
+.p-kontakt .people { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.p-kontakt .people > li { display: flex; gap: 16px; align-items: flex-start; }
+.p-kontakt .nm { font: 750 1.25rem/1.1 var(--display); }
+.p-kontakt .lang { font-size: 0.9375rem; margin-top: 2px; }
+.p-kontakt .steps { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; }
+.p-kontakt .steps li::marker { font-weight: 800; }
+@media (max-width: 960px) {
+  .p-kontakt .contact { grid-template-columns: 1fr; }
+  .p-kontakt .form-card { box-shadow: 6px 6px 0 var(--zinnober); }
+}

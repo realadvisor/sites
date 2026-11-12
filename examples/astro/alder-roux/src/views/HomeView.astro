@@ -1,0 +1,229 @@
+---
+/**
+ * Home: navy search band (Buy / Rent / New / Sell) beside the lead listing,
+ * a grid of six new listings, the development as a full-bleed photo with one
+ * line, the offices as a plain list, area tiles, the valuation band (with the
+ * link to the sales).
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import SearchBand from '../components/SearchBand.astro';
+import ListingCard from '../components/ListingCard.astro';
+import ValuationBand from '../components/ValuationBand.astro';
+import { siteData, sites } from '../lib/data';
+import { href, listingHref, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { formatAmount, formatSurface, monthYear, price, rooms, tel } from '../lib/format';
+import { areasOf } from '../lib/areas';
+import { areaPlace, placeAlt } from '../content/places';
+import PlacePhoto from '../components/PlacePhoto.astro';
+import { officeFor } from '../lib/areas';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents, primary }, all, developments] = await Promise.all([siteData(), sites.allListings(), sites.developments()]);
+const available = all.filter((x) => x.status === 'available');
+const buy = available.filter((x) => x.offer_type === 'buy');
+const rent = available.filter((x) => x.offer_type === 'rent');
+const sold = all.filter((x) => x.status === 'sold');
+const areas = areasOf(all);
+const cityList = teams.map((x) => cityName(x.address.city, l)).filter(Boolean);
+const cities = joinList(cityList, l);
+
+// Featured: the newest listings with a full photo set, sales first. The
+// lead one is in the hero, the next six in the grid.
+const featured = [...buy, ...rent].filter((x) => x.photos.length >= 4);
+const lead = featured[0] ?? available[0];
+const leadPhoto = lead?.photos[0];
+const others = [...featured.slice(1), ...available.filter((x) => !featured.includes(x))].slice(0, 6);
+
+const dev = developments[0];
+const devLine = dev && [
+  dev.stats.units > 0 ? t('unitsAvailable', { n: dev.stats.available, t: dev.stats.units }) : '',
+  dev.stats.price?.min ? t('priceFrom', { p: formatAmount(dev.stats.price.min) }) : '',
+  dev.delivery_date ? `${t('delivery')} ${monthYear(dev.delivery_date, l)}` : '',
+].filter(Boolean).join(' · ');
+const siteUrl = new URL(href('home', l), Astro.site ?? Astro.url).href;
+const jsonLd = agencyJsonLd({ id: org.id, name: org.name, phone: primary?.phone, email: primary?.email, address: org.address }, siteUrl);
+---
+<Site l={l} route="home"
+  title={`${org.name} · ${t('homeEyebrow')} · ${cityList.join(', ')}`}
+  description={t('homeLede', { cities })}
+  image={leadPhoto && img(leadPhoto.url, { w: 1200, h: 630 })}
+  jsonLd={jsonLd}>
+
+  <section class="hero on-navy">
+    <div class="hero__copy">
+      <span class="eyebrow">{t('homeEyebrow')}<span class="hero__cities"> · {cityList.join(' · ')}</span></span>
+      <h1 class="hero__title">{cityList.length > 1 ? t('homeTitle', { from: cityList[0]!, to: cityList.at(-1)! }) : t('homeTitle1', { city: cityList[0] ?? '' })}</h1>
+      <p class="lede">{t('homeLede', { cities })}</p>
+      <SearchBand l={l} buy={buy} rent={rent} developments={developments} />
+    </div>
+    {lead && (
+      <a class="hero__media" href={listingHref(lead, l)}>
+        {leadPhoto && <RaImage src={leadPhoto} alt={leadPhoto.alt || lead.title} width={1200} height={1100} priority sizes="(min-width: 1440px) 640px, (min-width: 1025px) 45vw, 100vw" mobile={{ width: 800, height: 600 }} data-hero />}
+        <span class="hero__cap">
+          <span class="hero__cap-place">{cityName(lead.address.city, l)}</span>
+          <span class="hero__cap-title">{lead.title}</span>
+          <span class="hero__cap-meta num">{[rooms(lead.rooms, l), formatSurface(lead.living_surface), price(lead, l)].filter(Boolean).join(' · ')}</span>
+        </span>
+      </a>
+    )}
+  </section>
+
+  {others.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <h2 class="h2 new__h">{t('featuredTitle')}</h2>
+        <ul class="plain-list grid grid--3">
+          {others.map((x) => <li><ListingCard listing={x} l={l} /></li>)}
+        </ul>
+        <p class="new__more">
+          {buy.length > 0 && <a class="button button--ghost" href={href('buy', l)}>{t('seeAllBuy')} <span class="num">({buy.length})</span></a>}
+          {rent.length > 0 && <a class="button button--ghost" href={href('rent', l)}>{t('seeAllRent')} <span class="num">({rent.length})</span></a>}
+        </p>
+      </div>
+    </section>
+  )}
+
+  {dev && (
+    <section class="dev on-navy">
+      {dev.photos[0] && <RaImage src={dev.photos[0]} alt="" width={1920} height={900} sizes="100vw" mobile={{ width: 800, height: 900 }} />}
+      <div class="dev__shade"></div>
+      <div class="wrap dev__copy">
+        <span class="eyebrow">{t('newBuild')} · {cityName(dev.address.city, l)}</span>
+        <h2 class="h2"><a href={href('developments', l, dev.slug)}>{dev.title}</a></h2>
+        {devLine && <p class="dev__line num">{devLine}</p>}
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap offices">
+      <div class="offices__intro">
+        <h2 class="h2">{t('officesTitleN', { cities })}</h2>
+        <p class="offices__note">{t('officesNote')}</p>
+      </div>
+      <ul class="plain-list offices__list">
+        {teams.map((x) => {
+          const nA = agents.filter((a) => a.team_ids.includes(x.id)).length;
+          const nL = available.filter((y) => y.team_ids.includes(x.id)).length;
+          const city = cityName(x.address.city, l) || x.name;
+          return (
+            <li>
+              <h3 class="offices__city"><a href={href('offices', l, teamSlug(x, teams))}>{city}</a></h3>
+              <address>
+                {x.address.street && <span>{x.address.street}</span>}
+                {(x.address.postcode || x.address.city) && <span>{[x.address.postcode, cityName(x.address.city, l)].filter(Boolean).join(' ')}</span>}
+              </address>
+              <p class="offices__meta num">
+                {x.phone && <a href={tel(x.phone)}>{x.phone}</a>}
+                <span>{[nA > 0 && (nA === 1 ? t('nAgent1') : t('nAgents', { n: nA })), nL > 0 && (nL === 1 ? t('nListing1') : t('nListings', { n: nL }))].filter(Boolean).join(' · ')}</span>
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  {areas.length > 0 && (
+    <section class="section section--paper">
+      <div class="wrap">
+        <h2 class="h2 areas__h">{t('areasTitle')}</h2>
+        <ul class="plain-list areas">
+          {areas.map((a) => {
+            const office = officeFor(a.city, all.filter((x) => x.address.city === a.city), teams);
+            const place = areaPlace(a.city, office?.address.city);
+            const n = available.filter((x) => x.address.city === a.city).length;
+            return (
+              <li>
+                <a class="area" href={href('areas', l, a.slug)}>
+                  {place && <PlacePhoto place={place} alt={placeAlt(place, l)} width={600} height={720} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 46vw, 100vw" />}
+                  <span class="area__txt">
+                    <span class="area__name">{cityName(a.city, l)}</span>
+                    <span class="area__n num">{n === 1 ? t('nListing1') : t('nListings', { n })}</span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <ValuationBand l={l} sold={sold.length} />
+</Site>
+
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); background: var(--navy); color: #fff; min-height: min(760px, calc(100vh - 112px)); }
+  .hero__copy { display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: clamp(48px, 6vw, 96px) clamp(32px, 5vw, 80px) clamp(48px, 5vw, 80px) max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); }
+  .hero__title { font-size: clamp(2.5rem, 1.5rem + 3.2vw, 4.5rem); line-height: 1.02; font-weight: 400; letter-spacing: -0.02em; color: #fff; max-width: 15ch; font-variation-settings: 'opsz' 60; }
+  .hero__copy :global(.sb) { margin-top: 16px; }
+  @media (max-width: 640px) { .hero__cities { display: none; } }
+  .hero__media { position: relative; display: block; overflow: hidden; color: #fff; text-decoration: none; min-height: 420px; }
+  .hero__media :global(img), .hero__media :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero__media::after { content: ''; position: absolute; inset: 40% 0 0; background: linear-gradient(to top, rgb(10 20 34 / 0.82), transparent); }
+  .hero__cap { position: absolute; z-index: 1; left: clamp(20px, 3vw, 40px); right: clamp(20px, 3vw, 40px); bottom: clamp(20px, 3vw, 36px); display: grid; gap: 6px; }
+  .hero__cap-place { font: 600 0.9375rem/1.2 var(--font-sans); color: var(--brass-on-navy); }
+  .hero__cap-title { font: 400 clamp(1.375rem, 1.1rem + 0.8vw, 1.875rem)/1.15 var(--font-display); }
+  .hero__cap-meta { font-size: 0.9375rem; color: #e6ebf2; }
+  .hero__media:hover .hero__cap-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+
+  .new__h { margin-bottom: clamp(28px, 3.5vw, 44px); }
+  .new__more { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: clamp(32px, 4vw, 48px); }
+
+  .dev { position: relative; display: grid; align-items: end; min-height: clamp(440px, 62vh, 680px); background: var(--navy); color: #fff; overflow: hidden; }
+  .dev > :global(img), .dev > :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dev__shade { position: absolute; inset: 0; background: linear-gradient(to top, rgb(10 20 34 / 0.88) 8%, rgb(10 20 34 / 0.35) 55%, transparent); }
+  .dev__copy { position: relative; display: grid; gap: 16px; justify-items: start; padding-block: clamp(40px, 5vw, 72px); }
+  .dev h2 { color: #fff; font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem); }
+  .dev h2 a { text-decoration: none; }
+  .dev h2 a::after { content: ''; position: absolute; inset: 0; }
+  .dev h2 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+  .dev__line { font-size: var(--step-1); color: #e6ebf2; }
+
+  .offices { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .offices__intro { display: grid; gap: 18px; }
+  .offices__note { color: var(--muted); font-size: 1.0625rem; max-width: 40ch; }
+  .offices__list { border-top: 1px solid var(--text); }
+  .offices__list li { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .offices__city { font-size: var(--step-2); }
+  .offices__city a { text-decoration: none; }
+  .offices__city a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+  .offices__list address { font-style: normal; display: grid; color: var(--muted); }
+  .offices__meta { display: grid; color: var(--muted); font-size: 0.9375rem; }
+  .offices__meta a { color: var(--navy); font-weight: 600; font-size: 1rem; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+  .offices__meta a:hover { text-decoration: underline; }
+
+  .areas__h { margin-bottom: clamp(28px, 3.5vw, 44px); }
+  .areas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .area { position: relative; display: block; aspect-ratio: 5 / 6; overflow: hidden; color: #fff; text-decoration: none; background: var(--navy); }
+  .area :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .area:hover :global(img) { transform: scale(1.04); }
+  .area::after { content: ''; position: absolute; inset: 35% 0 0; background: linear-gradient(to top, rgb(10 20 34 / 0.85), transparent); }
+  .area__txt { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 22px; display: grid; gap: 6px; }
+  .area__name { font: 400 1.875rem/1 var(--font-display); }
+  .area__n { font-size: 0.9375rem; color: #e6ebf2; }
+
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+    .hero__copy { padding: 48px var(--gutter) 40px; }
+    .hero__media { min-height: 0; aspect-ratio: 4 / 3; }
+    .offices { grid-template-columns: minmax(0, 1fr); }
+    .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .offices__list li { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .offices__city { grid-column: 1 / -1; }
+    .new__more .button { width: 100%; }
+  }
+  @media (max-width: 520px) {
+    .areas { grid-template-columns: minmax(0, 1fr); }
+    .area { aspect-ratio: 16 / 10; }
+  }
+</style>

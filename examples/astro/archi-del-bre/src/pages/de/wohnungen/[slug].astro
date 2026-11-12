@@ -1,0 +1,13 @@
+---
+export const prerender = false;
+import UnitPage from '../../../views/UnitPage.astro';
+import { loadSite } from '../../../lib/data';
+import { unitFromSlug, unitPath } from '../../../lib/units';
+
+const { dev } = await loadSite();
+const u = unitFromSlug(dev, Astro.params.slug ?? '');
+if (!u) return Astro.rewrite('/404');
+const canonical = unitPath(u, 'de');
+if (Astro.url.pathname !== canonical) return Astro.redirect(canonical, 301);
+---
+<UnitPage l="de" u={u} />

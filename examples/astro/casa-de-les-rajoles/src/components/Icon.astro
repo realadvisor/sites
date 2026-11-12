@@ -1,0 +1,16 @@
+---
+/** Small line icons drawn inline at build time (no icon font, no JS). */
+interface Props { name: 'units' | 'plan' | 'contact' | 'menu' | 'close' | 'download' | 'arrow' | 'phone' | 'mail'; size?: number }
+const { name, size = 22 } = Astro.props;
+---
+<svg class="icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {name === 'units' && <><rect x="4" y="3" width="16" height="18" rx="1" /><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M11 21v-3h2v3" /></>}
+  {name === 'plan' && <><path d="M3 4h18v16H3z" /><path d="M3 11h7V4M10 15v5M14 4v6h7M14 14h7" /></>}
+  {name === 'contact' && <><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9h8M8 12h5" /></>}
+  {name === 'menu' && <path d="M4 7h16M4 12h16M4 17h16" />}
+  {name === 'close' && <path d="M6 6l12 12M18 6L6 18" />}
+  {name === 'download' && <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />}
+  {name === 'arrow' && <path d="M5 12h14M13 6l6 6-6 6" />}
+  {name === 'phone' && <path d="M6 3h3l2 5-2 1a11 11 0 0 0 6 6l1-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z" />}
+  {name === 'mail' && <><path d="M3 6h18v12H3z" /><path d="M3 7l9 6 9-6" /></>}
+</svg>

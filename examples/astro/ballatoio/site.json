@@ -1,0 +1,7 @@
+{
+  "country": "IT",
+  "locale": "it-IT",
+  "locales": ["it-IT", "en-IT"],
+  "developmentsPath": "/developments",
+  "redirects": {}
+}

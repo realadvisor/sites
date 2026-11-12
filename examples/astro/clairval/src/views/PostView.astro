@@ -1,0 +1,80 @@
+---
+/** One journal article: cover, title, date and author (an agent of the site, when one matches), body, the destination link. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import AgentCard from '../components/AgentCard.astro';
+import { siteData } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+import { dateLong } from '../lib/format';
+import { POSTS, type Post } from '../content/journal';
+
+interface Props { l: L; post: Post }
+const { l, post: p } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const author = p.author ? agents.find((a) => a.email === p.author) : undefined;
+const others = POSTS.filter((x) => x.slug !== p.slug);
+const C = {
+  en: { by: 'Written by', more: 'More from the journal', dest: 'Properties in this area' },
+  fr: { by: 'Rédigé par', more: 'Autres articles', dest: 'Les biens de ce secteur' },
+}[l];
+---
+<Site l={l} route="journal" segs={[p.slug]} title={`${p.title[l]} | ${org.name}`} description={p.summary[l]} image={img(p.cover.url, { w: 1200, h: 630 })}>
+  <article>
+    <header class="wrap narrow head">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navJournal'), href: href('journal', l) }]} />
+      <h1 class="h1 head__title">{p.title[l]}</h1>
+      <p class="lede">{p.summary[l]}</p>
+      <p class="muted"><time datetime={p.date}>{dateLong(p.date, l)}</time>{author && ` · ${author.first_name} ${author.last_name}`}</p>
+    </header>
+    <div class="wrap cover">
+      <RaImage src={p.cover.url} alt={p.cover.alt[l]} width={1600} height={800} priority sizes="(min-width: 1440px) 1320px, 100vw" mobile={{ width: 800, height: 600 }} />
+    </div>
+    <div class="wrap narrow body">
+      <div class="prose">
+        {p.body[l].map((b) => (
+          <>
+            {b.h && <h2>{b.h}</h2>}
+            {b.p && <p>{b.p}</p>}
+            {b.list && <ul>{b.list.map((x) => <li>{x}</li>)}</ul>}
+          </>
+        ))}
+      </div>
+      <p class="dest"><a class="link" href={href('destinations', l, p.place)}>{C.dest}</a></p>
+      {author && (
+        <aside class="author">
+          <h2 class="label muted">{C.by}</h2>
+          <AgentCard agent={author} all={agents} teams={teams} l={l} compact />
+        </aside>
+      )}
+    </div>
+  </article>
+  {others.length > 0 && (
+    <section class="on-paper more">
+      <div class="wrap narrow">
+        <h2 class="h3">{C.more}</h2>
+        <ul class="plain">
+          {others.map((x) => <li><a href={href('journal', l, x.slug)}><span>{x.title[l]}</span><time class="muted small" datetime={x.date}>{dateLong(x.date, l)}</time></a></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+</Site>
+
+<style>
+  .head { padding-top: 16px; display: grid; gap: 18px; padding-bottom: 40px; }
+  .head__title { font-size: clamp(2.2rem, 1.5rem + 2.6vw, 3.6rem); margin-top: 16px; }
+  .cover :global(img) { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; }
+  .body { padding-block: 56px var(--section); }
+  .dest { margin-top: 40px; }
+  .author { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 16px; }
+  .more { padding-block: 64px; border-top: 1px solid var(--line); }
+  .more ul { margin-top: 20px; border-top: 1px solid var(--line); }
+  .more a { display: flex; justify-content: space-between; gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--line); text-decoration: none; font: 420 1.25rem/1.3 var(--font-display); }
+  .more a:hover span { text-decoration: underline; text-decoration-color: var(--accent); }
+  .more time { font-family: var(--font-sans); white-space: nowrap; }
+  @media (max-width: 639px) { .more a { flex-direction: column; gap: 4px; } .cover { padding-inline: 0; } }
+</style>

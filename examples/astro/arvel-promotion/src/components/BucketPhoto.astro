@@ -1,0 +1,26 @@
+---
+/**
+ * A site photo from the image bucket (src/content/photos.ts), served by
+ * imgproxy at 480–2000w as AVIF + WebP at the photo's own ratio; CSS sets the
+ * box (object-fit) and `position` the crop focus (object-position).
+ * Kit gap: RaImage only offers AVIF for `priority` images, so this wraps the
+ * kit's img()/srcset() to serve AVIF for every photo.
+ */
+import { img, srcset } from '@realadvisor/sites-kit/image';
+import { PHOTOS, type PhotoName } from '../content/photos';
+
+export type { PhotoName };
+interface Props { name: PhotoName; alt: string; sizes?: string; priority?: boolean; position?: string }
+const { name, alt, sizes = '100vw', priority = false, position } = Astro.props;
+const p = PHOTOS[name];
+const widths = [480, 800, 1200, 1600, 2000];
+const avif = srcset(p.url, widths, undefined, { format: 'avif', quality: 50 });
+const webp = srcset(p.url, widths, undefined, { format: 'webp', quality: 72 });
+const fallback = img(p.url, { w: 1200, fit: 'fit', format: 'webp', quality: 72 });
+---
+<picture>
+  <source type="image/avif" srcset={avif} sizes={sizes} />
+  <img src={fallback} srcset={webp} sizes={sizes} width={p.width} height={p.height} alt={alt}
+    loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async"
+    style={position ? `object-position: ${position}` : undefined} />
+</picture>

@@ -1,0 +1,269 @@
+---
+/**
+ * Home: the façade full-bleed with the name and two buttons, the figures a
+ * buyer needs, the building (CRM description + credits), the two wings, types
+ * and prices as a plain table, one roof-terrace photo with one line, the
+ * works, the neighbourhood, the sales team.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import People from '../components/People.astro';
+import { developmentExtra, legalAgency, loadSite } from '../lib/data';
+import { CONTENT_LANG, alternates, fill, href, tr, type Lang } from '../lib/i18n';
+import { docHref } from '../lib/docs';
+import {
+  KINDS, WINGS, deliveryLabel, floorsOf, formatAmount, fromPrice, kindLabel, kindOf, m2Range, outdoor, range, wingOf, type Wing,
+} from '../lib/units';
+import { WING_ADDRESS } from '../content/site';
+import { PLACES } from '../content/barrio';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = tr(lang);
+const site = await loadSite();
+const { dev } = site;
+const extra = developmentExtra(dev); // fixture only: developer, architect, contractor, construction photos
+const units = dev.units;
+const [cover, ...rest] = dev.photos;
+const delivery = deliveryLabel(dev, lang);
+const deliveryShort = dev.delivery_date ? new Intl.DateTimeFormat(lang === 'es' ? 'es-ES' : 'en-GB', { month: 'short', year: 'numeric' }).format(new Date(dev.delivery_date)).replace(/\.$/, '') : '';
+const priceMin = fromPrice(units);
+const sizes = range(units.flatMap((u) => (u.living_surface ? [u.living_surface] : [])));
+const avail = (us: typeof units) => us.filter((u) => u.status === 'available').length;
+
+const wings = WINGS.map((w: Wing) => {
+  const us = units.filter((u) => wingOf(u) === w);
+  const fs = floorsOf(units, w);
+  const lo = Math.min(...fs);
+  const hi = Math.max(...fs);
+  return {
+    w,
+    count: us.length,
+    available: avail(us),
+    floors: lo === 0 ? fill(t.wingFloorsGround, { b: hi }) : fill(t.wingFloors, { a: lo, b: hi }),
+    photo: us.flatMap((u) => u.photos ?? [])[0],
+  };
+});
+
+const types = KINDS.map((k) => {
+  const us = units.filter((u) => kindOf(u) === k);
+  return { k, n: us.length, available: avail(us), size: range(us.flatMap((u) => (u.living_surface ? [u.living_surface] : []))), from: fromPrice(us) };
+}).filter((x) => x.n > 0);
+
+const roofs = units.filter((u) => kindOf(u) === 'atico').map(outdoor).filter((o) => o?.kind === 'terrace').map((o) => o!.m2);
+const roof = range(roofs);
+const roofPhoto = dev.photos.find((p) => p.url.includes('9584741')) ?? rest[rest.length - 1];
+const tilePhoto = dev.photos.find((p) => p.url.includes('5505437')) ?? rest[0];
+const credits = (['developer', 'architect', 'general_contractor'] as const).filter((k) => extra[k]);
+const works = extra.construction_photos ?? [];
+const market = PLACES[0]!;
+const title = lang === 'es'
+  ? `${dev.title} | Obra nueva en Russafa, València`
+  : `${dev.title} | New homes in Russafa, València`;
+const desc = `${fill(t.heroLead, { n: dev.stats.units })} ${t.figDelivery[0]!.toUpperCase()}${t.figDelivery.slice(1)}: ${delivery}.`;
+const jsonLd = agencyJsonLd(legalAgency(site), Astro.site?.href ?? Astro.url.origin);
+---
+<Site site={site} lang={lang} route="home" title={title} description={desc} image={cover && img(cover.url, { w: 1200, h: 630 })} jsonLd={jsonLd} alternates={alternates('home')}>
+  <section class="hero" data-hero>
+    {cover && <Photo src={cover.url} alt={lang === 'es' ? 'Fachada de 1908 de Casa de les Rajoles, con balcones de forja y galerías de madera' : 'The 1908 façade of Casa de les Rajoles, with wrought-iron balconies and timber galleries'} width={1600} height={820} priority sizes="100vw" mobile={{ width: 800, height: 900 }} class="hero-img" position="50% 45%" />}
+    <div class="hero-panel">
+      <div class="wrap">
+        <h1>{dev.title}</h1>
+        <p class="lead">{fill(t.heroLead, { n: dev.stats.units })}</p>
+        <p class="actions">
+          <a class="cta coral" href={href('units', lang)}>{t.seeUnits}</a>
+          <a class="cta ghost" href={docHref('dossier', lang)}>{t.dossierPdf}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap figs" aria-label={lang === 'es' ? 'Datos clave' : 'Key figures'}>
+    <dl>
+      <div><dt>{fill(t.figAvailable, { n: dev.stats.units })}</dt><dd class="num">{dev.stats.available}</dd></div>
+      {priceMin && <div><dt>{t.figFrom}</dt><dd class="num">{formatAmount(priceMin)}</dd></div>}
+      {sizes && <div><dt>{t.figSizes}</dt><dd class="num">{m2Range(sizes)}</dd></div>}
+      {delivery && <div><dt>{t.figDelivery}</dt><dd class="cap">{deliveryShort}</dd></div>}
+    </dl>
+  </section>
+
+  <section class="wrap building" aria-labelledby="b-h">
+    <div class="b-text">
+      <h2 id="b-h">{t.buildingTitle}</h2>
+      {dev.description && <div class="prose" lang={CONTENT_LANG} set:html={sanitizeHtml(dev.description)} />}
+      {credits.length > 0 && (
+        <dl class="credits">
+          {credits.map((k) => <div><dt>{t.credits[k]}</dt><dd>{extra[k]}</dd></div>)}
+        </dl>
+      )}
+    </div>
+    {tilePhoto && <Photo src={tilePhoto.url} alt={lang === 'es' ? 'Suelo hidráulico original, estrellas verdes y grises' : 'Original encaustic tile floor, green and grey stars'} width={720} height={900} sizes="(min-width: 900px) 40vw, 100vw" class="b-img" />}
+  </section>
+
+  <section class="wrap wings" aria-labelledby="w-h">
+    <h2 id="w-h">{t.wingsTitle}</h2>
+    <div class="w-grid">
+      {wings.map((x) => (
+        <article class="wing">
+          {x.photo && <Photo src={x.photo.url} alt={x.photo.alt} lang={CONTENT_LANG} width={800} height={560} sizes="(min-width: 900px) 46vw, 100vw" />}
+          <div class="w-body">
+            <h3>{t.wings[x.w]}</h3>
+            <p class="w-meta">{WING_ADDRESS[x.w]} · {x.floors}</p>
+            <p>{t.wingText[x.w]}</p>
+            <p class="w-count"><b class="num">{fill(t.wingCount, { n: x.count, a: x.available })}</b></p>
+            <a class="link" href={`${href('units', lang)}?ala=${x.w}#planta`}>{t.seeWing}<span class="visually-hidden">: {t.wings[x.w]}</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap types" aria-labelledby="t-h">
+    <div class="t-intro">
+      <h2 id="t-h">{t.typesTitle}</h2>
+      <p class="muted">{t.typesNote}</p>
+      <a class="cta ghost" href={href('plans', lang)}>{t.allPlans}</a>
+    </div>
+    <table>
+      <thead><tr><th scope="col">{t.colType}</th><th scope="col" class="r">{t.colSize}</th><th scope="col" class="r">{t.colAvail}</th><th scope="col" class="r">{t.colFrom}</th></tr></thead>
+      <tbody>
+        {types.map((x) => (
+          <tr>
+            <th scope="row"><a href={`${href('plans', lang)}?tipo=${x.k}`}>{kindLabel(x.k, lang, 2)}</a></th>
+            <td class="r num">{m2Range(x.size)}</td>
+            <td class="r num">{x.available} / {x.n}</td>
+            <td class="r num">{x.from ? formatAmount(x.from) : <span class="muted">{x.available ? t.onRequest : t.soldOut}</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  {roofPhoto && roof && (
+    <section class="roof">
+      <Photo src={roofPhoto.url} alt={lang === 'es' ? 'Terraza de ático con pérgola sobre los tejados' : 'Penthouse terrace with a pergola over the rooftops'} width={1600} height={760} sizes="100vw" mobile={{ width: 800, height: 900 }} />
+      <p class="wrap"><span>{fill(t.roofLine, { a: roof.min, b: roof.max })}</span></p>
+    </section>
+  )}
+
+  {works.length > 0 && (
+    <section class="wrap works" aria-labelledby="o-h">
+      <div class="o-text">
+        <h2 id="o-h">{t.worksTitle}</h2>
+        <p>{fill(t.worksText, { d: delivery })}</p>
+        <a class="link" href={`${href('gallery', lang)}#obras`}>{t.galleryWorks}</a>
+      </div>
+      <div class="o-grid">
+        {works.slice(0, 4).map((src, i) => <Photo src={src} alt={lang === 'es' ? `Obras de Casa de les Rajoles, foto ${i + 1}` : `Casa de les Rajoles under construction, photo ${i + 1}`} width={600} height={i % 3 ? 440 : 600} sizes="(min-width: 900px) 22vw, 50vw" />)}
+      </div>
+    </section>
+  )}
+
+  <section class="wrap area" aria-labelledby="a-h">
+    {market.photo && <Photo src={market.photo} alt={market.alt?.[lang] ?? market.name[lang]} width={900} height={640} sizes="(min-width: 900px) 50vw, 100vw" />}
+    <div>
+      <h2 id="a-h">{t.areaTitle}</h2>
+      <p>{t.areaText}</p>
+      <a class="link" href={href('area', lang)}>{t.areaLink}</a>
+    </div>
+  </section>
+
+  <section class="wrap contact" aria-labelledby="c-h">
+    <div>
+      <h2 id="c-h">{t.contactTitle}</h2>
+      <p>{t.contactText}</p>
+      <a class="cta coral" href={href('contact', lang)}>{t.contactCta}</a>
+    </div>
+    <People site={site} lang={lang} />
+  </section>
+</Site>
+
+<style>
+  .hero { position: relative; }
+  .hero :global(.hero-img img) { width: 100%; height: min(72vh, 760px); min-height: 440px; object-fit: cover; }
+  .hero-panel { position: relative; margin-top: -120px; }
+  .hero-panel .wrap { max-width: calc(880px + 2 * var(--gutter)); }
+  .hero-panel .wrap > * { position: relative; }
+  .hero-panel .wrap::before { content: ''; position: absolute; inset: 0 var(--gutter); background: var(--bg); }
+  .hero-panel h1 { padding: clamp(28px, 4vw, 52px) clamp(20px, 4vw, 56px) 0; text-align: center; }
+  .lead { padding: 20px clamp(20px, 4vw, 56px) 0; text-align: center; font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem); line-height: 1.55; max-width: 44ch; margin-inline: auto; }
+  .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 28px clamp(20px, 4vw, 56px) 0; }
+
+  .figs dl { margin: clamp(48px, 6vw, 80px) 0 0; display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--line-strong); }
+  .figs div { padding: 26px 20px 24px; display: flex; flex-direction: column-reverse; gap: 8px; text-align: center; }
+  .figs div + div { border-left: 1px solid var(--line); }
+  .figs dt { font-size: 0.875rem; color: var(--muted); }
+  .figs dd.cap::first-letter { text-transform: uppercase; }
+  .figs dd { margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1.3vw, 2.25rem)/1.1 var(--serif); }
+
+  section.building, .wings, .types, .works, .area, .contact { margin-top: var(--space-section); }
+  .building { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .building h2 { margin-bottom: 24px; }
+  .building .prose { font-size: 1.0625rem; }
+  :global(.b-img img) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .credits { margin: 32px 0 0; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 8px 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .credits dt { font-size: 0.8125rem; color: var(--muted); }
+  .credits dd { margin: 4px 0 0; font-weight: 600; }
+
+  .wings h2 { text-align: center; margin-bottom: clamp(32px, 4vw, 56px); }
+  .w-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); }
+  .wing { background: var(--paper); border: 1px solid var(--line); }
+  .wing :global(img) { width: 100%; aspect-ratio: 10 / 7; object-fit: cover; }
+  .w-body { padding: clamp(24px, 3vw, 40px); display: grid; gap: 12px; justify-items: start; }
+  .w-body h3 { font-size: clamp(1.625rem, 1.3rem + 1vw, 2.25rem); }
+  .w-meta { font-size: 0.875rem; color: var(--muted); margin: 0 !important; }
+  .w-body p { margin: 0; }
+  .w-count { color: var(--st-av-ink); }
+
+  .types { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .t-intro { display: grid; gap: 16px; justify-items: start; }
+  .types table { width: 100%; border-collapse: collapse; }
+  .types th, .types td { padding: 16px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+  .types thead th { font: 600 0.75rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--line-strong); padding-block: 10px; }
+  .types tbody th { font: 400 1.25rem/1.2 var(--serif); }
+  .types tbody th a { text-decoration: none; }
+  .types tbody th a:hover { color: var(--accent-strong); text-decoration: underline; }
+  .types .r { text-align: right; }
+  .types td:last-child { font-weight: 600; }
+
+  .roof { margin-top: var(--space-section); position: relative; }
+  .roof :global(img) { width: 100%; height: min(70vh, 720px); min-height: 420px; object-fit: cover; }
+  .roof p { position: absolute; left: 0; right: 0; bottom: clamp(24px, 4vw, 56px); margin: 0 auto; }
+  .roof p span { display: inline-block; max-width: 30ch; background: var(--bg); padding: 20px 26px; font: 400 clamp(1.25rem, 1rem + 1vw, 1.875rem)/1.25 var(--serif); }
+
+  .works { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(32px, 5vw, 80px); align-items: end; }
+  .o-text { display: grid; gap: 16px; justify-items: start; align-self: center; }
+  .o-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: end; }
+  .o-grid :global(img) { width: 100%; height: auto; object-fit: cover; }
+
+  .area { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .area :global(img) { width: 100%; aspect-ratio: 9 / 6.4; object-fit: cover; }
+  .area h2 { margin-bottom: 16px; }
+  .area p { max-width: 46ch; margin-bottom: 8px; }
+
+  .contact { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); padding-top: clamp(40px, 5vw, 72px); border-top: 1px solid var(--line-strong); }
+  .contact > div:first-child { display: grid; gap: 16px; justify-items: start; align-content: start; }
+
+  @media (max-width: 900px) {
+    .building, .types, .works, .area, .contact, .w-grid { grid-template-columns: 1fr; }
+    .figs dl { grid-template-columns: 1fr 1fr; }
+    .figs div:nth-child(3) { border-left: 0; }
+    .figs div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .o-grid { grid-template-columns: 1fr 1fr; }
+    .credits { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .hero :global(.hero-img img) { height: 62vh; min-height: 360px; }
+    .hero-panel { margin-top: -56px; }
+    .hero-panel .wrap::before { inset: 0 12px; }
+    .hero-panel h1, .lead, .actions { padding-inline: 16px; }
+    .figs div { padding: 20px 8px; }
+    .types th, .types td { padding: 12px 4px; font-size: 0.875rem; }
+    .types tbody th { font-size: 1.0625rem; }
+    .types th:nth-child(2), .types td:nth-child(2) { display: none; }
+    .roof p span { margin-inline: 0; font-size: 1.1875rem; padding: 16px 18px; }
+  }
+</style>

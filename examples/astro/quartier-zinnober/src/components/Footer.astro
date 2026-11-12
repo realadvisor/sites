@@ -1,0 +1,81 @@
+---
+import type { Site } from '../lib/data';
+import { legalPath, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import Wordmark from './Wordmark.astro';
+import Icon from './Icon.astro';
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const team = site.team;
+const tel = (p: string) => `tel:${p.replace(/[^\d+]/g, '')}`;
+const addr = site.dev.address;
+const office = team?.address ?? site.org.address;
+---
+<footer class="site-footer on-ink">
+  <div class="wrap top">
+    <div class="intro">
+      <Wordmark tone="light" />
+      <p class="claim">{site.dev.stats.units} Mietwohnungen in drei Häusern{addr.city ? `, ${addr.city}` : ''}.</p>
+      <a class="cta cta--zinnober" href="/kontakt">Interesse anmelden <Icon name="arrow" /></a>
+    </div>
+    <div class="cols">
+      <div>
+        <h2 class="eyebrow">Quartier</h2>
+        <ul>
+          <li><a href="/wohnungen">Wohnungen</a></li>
+          <li><a href="/lage">Lage</a></li>
+          <li><a href="/galerie">Galerie</a></li>
+          <li><a href="/news">Baustelle</a></li>
+          <li><a href="/dokumente">Dokumente</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="eyebrow">Erstvermietung</h2>
+        <address>
+          <span>{team?.name ?? site.org.name}</span>
+          {office?.street && <span>{office.street}</span>}
+          {(office?.postcode || office?.city) && <span>{[office?.postcode, office?.city].filter(Boolean).join(' ')}</span>}
+        </address>
+        <ul>
+          {team?.phone && <li><a href={tel(team.phone)}><span class="num">{team.phone}</span></a></li>}
+          {team?.email && <li><a class="mail" href={`mailto:${team.email}`}>{team.email.split('@')[0]}<wbr />@{team.email.split('@')[1]}</a></li>}
+        </ul>
+      </div>
+      <div>
+        <h2 class="eyebrow">Adresse Quartier</h2>
+        <address>
+          {addr.street && <span>{addr.street}</span>}
+          {(addr.postcode || addr.city) && <span>{[addr.postcode, addr.city].filter(Boolean).join(' ')}</span>}
+        </address>
+      </div>
+    </div>
+  </div>
+  <div class="wrap bottom">
+    <p>Eine Vermietung der {site.org.name}</p>
+    <ul>
+      <li><a href="/kontakt">Kontakt</a></li>
+      <li><a href={legalPath()}>{t('legalNotice')}</a></li>
+      <li><a href={privacyPath()}>{t('privacyPolicy')}</a></li>
+    </ul>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--ink); color: #fff; padding-top: clamp(56px, 8vw, 104px); }
+  .top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr); gap: 48px; }
+  .intro { display: grid; gap: 24px; justify-items: start; align-content: start; }
+  .claim { font: 700 var(--step-2)/1.15 var(--display); max-width: 18ch; }
+  .cols { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr) minmax(0, 0.9fr); gap: 32px; }
+  .eyebrow { font: 650 0.8125rem/1.2 var(--body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--butter); margin-bottom: 14px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  li a, address span { display: inline-flex; min-height: 32px; align-items: center; }
+  address { font-style: normal; display: grid; margin-bottom: 8px; }
+  a { text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .bottom { margin-top: 64px; margin-bottom: 8px; padding-block: 20px; border-top: 1px solid rgb(255 255 255 / 0.25); display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; font-size: 0.9375rem; color: #e8e4f5; }
+  .bottom ul { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+  @media (max-width: 900px) { .top { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .cols { grid-template-columns: 1fr; gap: 28px; } }
+  .cols > div { min-width: 0; }
+  li a { overflow-wrap: anywhere; }
+  li a.mail { overflow-wrap: normal; word-break: normal; }
+</style>

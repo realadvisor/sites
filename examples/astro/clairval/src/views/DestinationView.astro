@@ -1,0 +1,114 @@
+---
+/** One destination: photo, a short factual introduction, practical facts, places with counts, listings, more photos, the office. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { moneyRange, tel } from '../lib/format';
+import { destinations, priceSpan } from '../lib/regions';
+import { placeOf } from '../content/places';
+import { POSTS } from '../content/journal';
+import type { Destination } from '../lib/regions';
+
+interface Props { l: L; slug: string }
+const { l, slug } = Astro.props;
+const t = tx(l);
+const [{ org, teams }, all] = await Promise.all([siteData(), sites.allListings()]);
+const d = destinations(teams, all).find((x) => x.slug === slug) as Destination;
+const p = placeOf(slug);
+const name = cityName(d.team.address.city, l) || d.team.name;
+const sale = d.available.filter((x) => x.offer_type === 'buy');
+const rent = d.available.filter((x) => x.offer_type === 'rent');
+const spans = priceSpan(sale);
+const photos = p?.photos.map((x) => ({ url: x.url, alt: x.alt[l] })) ?? [];
+const hero = photos[0] ?? d.available[0]?.photos[0];
+const post = POSTS.find((x) => x.place === slug);
+const C = {
+  en: { title: `Property in ${name}`, sale: (n: number) => `${n} for sale`, rent: (n: number) => `${n} to rent`, range: 'Prices for sale', places: 'Where', forSale: `For sale in ${name}`, toRent: `To rent in ${name}`, office: `The ${name} office`, read: 'Read in the journal', facts: 'In short' },
+  fr: { title: `Immobilier à ${name}`, sale: (n: number) => `${n} à vendre`, rent: (n: number) => `${n} à louer`, range: 'Prix de vente', places: 'Où', forSale: `À vendre à ${name}`, toRent: `À louer à ${name}`, office: `Le bureau de ${name}`, read: 'À lire dans le journal', facts: 'En bref' },
+}[l];
+const figures = [sale.length ? C.sale(sale.length) : '', rent.length ? C.rent(rent.length) : ''].filter(Boolean);
+---
+<Site l={l} route="destinations" segs={[slug]} title={`${C.title} | ${org.name}`} description={p?.line[l] ?? `${C.title}: ${figures.join(', ')}`}>
+  <section class="hero on-ink">
+    {hero && <RaImage src={hero} alt={hero.alt} width={1600} height={800} priority sizes="100vw" mobile={{ width: 800, height: 1000 }} />}
+    <span class="hero__scrim" aria-hidden="true"></span>
+    <div class="wrap hero__text">
+      <Crumbs tone="light" label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navDestinations'), href: href('destinations', l) }, { label: name }]} />
+      <h1 class="h1">{C.title}</h1>
+      {figures.length > 0 && <p class="label">{figures.join(' · ')}</p>}
+    </div>
+  </section>
+
+  <section class="wrap intro">
+    <div class="prose">{(p?.intro[l] ?? []).map((x) => <p>{x}</p>)}</div>
+    <aside>
+      <dl class="facts">
+        {(p?.facts[l] ?? []).map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        {spans.map((s) => <div><dt>{C.range}</dt><dd class="num">{moneyRange(s.min, s.max, s.currency, l)}</dd></div>)}
+        {d.places.length > 0 && <div><dt>{C.places}</dt><dd>{d.places.map((x) => `${cityName(x.city, l)} (${x.count})`).join(', ')}</dd></div>}
+      </dl>
+      {post && <a class="link post-link" href={href('journal', l, post.slug)}>{C.read}: {post.title[l]}</a>}
+    </aside>
+  </section>
+
+  {sale.length > 0 && (
+    <section class="wrap block">
+      <h2 class="h2 block__h">{C.forSale}</h2>
+      <ul class="plain grid3">{sale.map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+    </section>
+  )}
+
+  {photos.length > 2 && (
+    <section class="strip" aria-label={name}>
+      {photos.slice(1, 4).map((x) => <RaImage src={x} alt={x.alt} width={800} height={600} sizes="(min-width: 768px) 33vw, 100vw" />)}
+    </section>
+  )}
+
+  {rent.length > 0 && (
+    <section class="wrap block">
+      <h2 class="h2 block__h">{C.toRent}</h2>
+      <ul class="plain grid3">{rent.map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+    </section>
+  )}
+
+  <section class="on-ink office">
+    <div class="wrap office__in">
+      <h2 class="h2">{C.office}</h2>
+      <address>
+        {d.team.address.street && <span>{d.team.address.street}</span>}
+        <span>{[d.team.address.postcode, d.team.address.city].filter(Boolean).join(' ')}</span>
+        {d.team.phone && <a class="num" href={tel(d.team.phone)}>{d.team.phone}</a>}
+        {d.team.email && <a href={`mailto:${d.team.email}`}>{d.team.email}</a>}
+      </address>
+      <a class="cta cta--light" href={href('offices', l, teamSlug(d.team, teams))}>{t('navOffices')}: {name}</a>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .hero { position: relative; min-height: clamp(460px, 70vh, 720px); display: flex; align-items: flex-end; overflow: hidden; }
+  .hero :global(img), .hero :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero__scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(10 9 8 / 0.82), rgb(10 9 8 / 0.45) 45%, rgb(10 9 8 / 0.1) 80%); }
+  .hero__text { position: relative; display: grid; gap: 14px; padding-bottom: clamp(32px, 5vw, 64px); }
+  .hero .h1 { margin-top: 12px; }
+  .intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); padding-block: var(--section); }
+  .facts { border-top: 1px solid var(--line); }
+  .facts div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+  .facts dt { color: var(--muted); }
+  .post-link { display: inline-block; margin-top: 24px; line-height: 1.5; }
+  .block { padding-bottom: var(--section); }
+  .block__h { margin-bottom: 36px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+  .strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-bottom: var(--section); }
+  .strip :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .office { padding-block: clamp(56px, 7vw, 96px); }
+  .office__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+  .office address { font-style: normal; display: grid; color: var(--on-ink-muted); }
+  .office address a { color: var(--on-ink); display: inline-flex; min-height: 32px; align-items: center; }
+  @media (max-width: 1023px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .intro { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 639px) { .grid3, .strip { grid-template-columns: minmax(0, 1fr); } .facts div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+</style>

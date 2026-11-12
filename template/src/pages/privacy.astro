@@ -1,0 +1,24 @@
+---
+// Privacy policy. Required on every site. Wrap it in your site layout
+// (header, footer); keep the content component as is. Other languages of a
+// multi-language site: src/pages/[lang]/privacy.astro, same layout.
+export const prerender = false;
+
+import Base from '../layouts/Base.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { LOCALES, lang, privacyPath, t } from '@realadvisor/sites-kit/i18n';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+
+const locale = LOCALES[0]!;
+const agency = await ra.agency();
+const title = t('privacyPolicy', {}, lang(locale));
+const alternates = LOCALES.length > 1 ? LOCALES.map((l) => ({ lang: l, href: privacyPath(l) })) : undefined;
+---
+<Base title={`${title} | ${agency.name}`} description={`${title} ${agency.name}`} locale={locale} alternates={alternates}>
+  <main>
+    <h1>{title}</h1>
+    <LegalContent sections={privacyPolicy(agency, { analytics: !!analyticsId() }, lang(locale))} />
+  </main>
+</Base>

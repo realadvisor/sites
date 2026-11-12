@@ -1,0 +1,7 @@
+{
+  "country": "CH",
+  "locale": "de-CH",
+  "locales": ["de-CH", "fr-CH", "en-CH"],
+  "developmentsPath": "/neubau",
+  "redirects": {}
+}

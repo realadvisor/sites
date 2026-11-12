@@ -1,0 +1,60 @@
+---
+/** About: the agency's story (site content) beside a photo, then the offices. */
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import OfficeCard from '../components/OfficeCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { ABOUT } from '../content/pages';
+import { ABOUT_PHOTO, placeAlt } from '../content/places';
+import PlacePhoto from '../components/PlacePhoto.astro';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents }, all] = await Promise.all([siteData(), sites.allListings()]);
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const available = all.filter((x) => x.status === 'available');
+const a = ABOUT[l];
+const photo = ABOUT_PHOTO;
+---
+<Site l={l} route="about" title={`${t('navAbout')} | ${org.name}`} description={t('aboutLede', { name: org.name, cities })}>
+  <section class="band on-navy">
+    <div class="wrap band__inner">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navAbout') }]} />
+      <h1 class="h1">{a.title}</h1>
+      <p class="lede">{t('aboutLede', { name: org.name, cities })}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap story">
+      <div class="story__txt">
+        {a.paragraphs.map((p, i) => <p class:list={{ first: i === 0 }}>{p}</p>)}
+      </div>
+      <PlacePhoto place={photo} alt={placeAlt(photo, l)} width={900} height={1100} sizes="(min-width: 900px) 40vw, 100vw" priority />
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="head"><h2 class="h2">{t('officesTitleN', { cities })}</h2></div>
+      <ul class="plain-list grid grid--3">
+        {teams.map((x) => <li><OfficeCard team={x} slug={teamSlug(x, teams)} l={l}
+          agents={agents.filter((ag) => ag.team_ids.includes(x.id)).length}
+          listings={available.filter((y) => y.team_ids.includes(x.id)).length} /></li>)}
+      </ul>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .story { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
+  .story__txt { display: grid; gap: 24px; font-size: 1.125rem; color: var(--muted); max-width: 60ch; }
+  .story__txt .first { font: 400 var(--step-2)/1.4 var(--font-display); color: var(--text); }
+  .story :global(img) { width: 100%; height: auto; aspect-ratio: 9 / 11; object-fit: cover; }
+  @media (max-width: 860px) {
+    .story { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

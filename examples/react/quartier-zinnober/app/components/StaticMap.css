@@ -1,0 +1,9 @@
+/* From components/StaticMap.astro (scoped there: every selector under figure.map). */
+figure.map { margin: 0; display: grid; gap: 10px; }
+figure.map .viewport { position: relative; overflow: hidden; height: var(--map-h, 440px); border: 2px solid var(--ink); border-radius: var(--radius-card); background: #e8e3da; isolation: isolate; }
+figure.map .grid { position: absolute; }
+figure.map .grid img { position: absolute; width: 256px; height: 256px; max-width: none; filter: grayscale(0.85) contrast(1.05); mix-blend-mode: multiply; }
+figure.map .pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -100%); filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.25)); }
+figure.map .tag { position: absolute; left: 50%; top: calc(50% + 10px); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 6px 12px; border-radius: 999px; font: 650 0.875rem/1.2 var(--body); white-space: nowrap; }
+figure.map figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 0.875rem; }
+figure.map figcaption a { font-weight: 600; }

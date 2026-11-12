@@ -1,0 +1,300 @@
+---
+/**
+ * Units: filters (GET, state in the URL), the axonometric drawing next to the
+ * unit table, and the shortlist. The table is server-rendered and filtered on
+ * the server, so it works without JS and is the accessible path; the script
+ * (src/scripts/units-view.ts) filters in place, keeps the URL in sync, links
+ * table rows and drawing on hover / focus, and runs the star buttons.
+ * Phones: the table (as cards) first, the drawing after it.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import IsoDrawing from '../components/IsoDrawing.astro';
+import { loadSite, developmentExtra } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { c } from '../lib/copy';
+import { isActive, matches, parseFilters, type UnitFacts } from '../lib/filters';
+import {
+  building, buildingName, deliveryLabel, floorName, floorShort, formatAmount, formatRooms, hasPrice, isPenthouse,
+  mainOutdoor, outdoorLabel, shortId, sortUnits, statusLabel, unitNumber, unitPath, unitPrice, unitTitle,
+} from '../lib/units';
+import type { Unit } from '@realadvisor/sites-sdk/types';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const site = await loadSite();
+const { dev } = site;
+const all = dev.units;
+const f = parseFilters(Astro.url.searchParams);
+const facts = (u: Unit): UnitFacts => ({
+  rooms: u.rooms != null ? String(u.rooms) : '',
+  house: building(u),
+  floor: String(u.floor ?? ''),
+  top: isPenthouse(u, all),
+  price: hasPrice(u) ? u.price! : null,
+  status: u.status,
+});
+const units = sortUnits(all);
+const shown = units.filter((u) => matches(f, facts(u)));
+const houses = [...new Set(units.map(building).filter(Boolean))].sort();
+const groups = houses.length ? houses.map((h) => ({ h, units: units.filter((u) => building(u) === h) })) : [{ h: '', units }];
+const roomOpts = [...new Set(units.flatMap((u) => (u.rooms != null ? [u.rooms] : [])))].sort((a, b) => a - b);
+const floorOpts = [...new Set(units.filter((u) => !isPenthouse(u, all)).map((u) => u.floor ?? 0))].sort((a, b) => a - b);
+const hasTop = units.some((u) => isPenthouse(u, all));
+const priced = units.filter(hasPrice).map((u) => u.price!);
+const steps = [1250000, 1500000, 2000000, 2500000, 3000000].filter((p) => priced.some((x) => x <= p) && priced.some((x) => x > p));
+const extra = developmentExtra(dev); // fixture only: buildings
+const T = {
+  it: {
+    title: `Appartamenti in vendita, ${dev.title}`,
+    h1: 'Appartamenti',
+    intro: `${all.length} appartamenti in ${houses.length === 2 ? 'due case' : 'una casa'}, ${all.filter((u) => u.status === 'available').length} disponibili. Consegna prevista ${deliveryLabel(dev, 'it')}.`,
+    count: (n: number) => `${n} ${n === 1 ? 'appartamento' : 'appartamenti'}`,
+    ofAll: `su ${all.length}`,
+    filters: 'Filtri',
+    table: `Appartamenti della ${dev.title}`,
+    empty: 'Nessun appartamento corrisponde ai filtri.',
+    shortlist: 'Preferiti',
+    shortlistHint: 'Salva fino a 3 appartamenti con la stella per confrontarli.',
+    priceNote: 'Prezzi in CHF, posto auto e cantina compresi secondo la descrizione. Per gli appartamenti riservati e venduti il prezzo non è pubblicato.',
+    drawing: 'Le case',
+    open: 'Apri',
+  },
+  de: {
+    title: `Wohnungen zu verkaufen, ${dev.title}`,
+    h1: 'Wohnungen',
+    intro: `${all.length} Wohnungen in ${houses.length === 2 ? 'zwei Häusern' : 'einem Haus'}, ${all.filter((u) => u.status === 'available').length} verfügbar. Bezug geplant ${deliveryLabel(dev, 'de')}.`,
+    count: (n: number) => `${n} ${n === 1 ? 'Wohnung' : 'Wohnungen'}`,
+    ofAll: `von ${all.length}`,
+    filters: 'Filter',
+    table: `Wohnungen der ${dev.title}`,
+    empty: 'Keine Wohnung entspricht den Filtern.',
+    shortlist: 'Merkliste',
+    shortlistHint: 'Bis zu 3 Wohnungen mit dem Stern merken und vergleichen.',
+    priceNote: 'Preise in CHF, Parkplatz und Keller gemäss Beschrieb inbegriffen. Für reservierte und verkaufte Wohnungen wird kein Preis veröffentlicht.',
+    drawing: 'Die Häuser',
+    open: 'Öffnen',
+  },
+}[l];
+const cover = dev.photos[0];
+const sel = (a: string, b: string) => (a === b ? { selected: true } : {});
+void extra;
+---
+<Site site={site} l={l} route="units" title={T.title} description={T.intro} image={cover ? img(cover.url, { w: 1200, h: 630 }) : undefined}>
+  <div class="wrap head">
+    <h1 class="h1">{T.h1}</h1>
+    <p class="lede">{T.intro}</p>
+  </div>
+
+  <div class="wrap">
+    <form class="filters" method="get" action={href('units', l)} data-filters aria-label={T.filters}>
+      <label class="field">
+        <span>{c('rooms', l)}</span>
+        <select name="rooms">
+          <option value="">{c('all', l)}</option>
+          {roomOpts.map((r) => <option value={String(r)} {...sel(f.rooms, String(r))}>{formatRooms(r, l)}</option>)}
+        </select>
+      </label>
+      {houses.length > 1 && (
+        <label class="field">
+          <span>{c('house', l)}</span>
+          <select name="house">
+            <option value="">{c('allF', l)}</option>
+            {houses.map((h) => <option value={h} {...sel(f.house, h)}>{buildingName(h, l)}</option>)}
+          </select>
+        </label>
+      )}
+      <label class="field">
+        <span>{c('floor', l)}</span>
+        <select name="floor">
+          <option value="">{c('all', l)}</option>
+          {floorOpts.map((x) => <option value={String(x)} {...sel(f.floor, String(x))}>{floorName({ floor: x } as Unit, l)}</option>)}
+          {hasTop && <option value="top" {...sel(f.floor, 'top')}>{c('penthouse', l)}</option>}
+        </select>
+      </label>
+      {steps.length > 0 && (
+        <label class="field">
+          <span>{c('maxPrice', l)}</span>
+          <select name="max">
+            <option value="">{c('all', l)}</option>
+            {steps.map((p) => <option value={String(p)} {...sel(f.max, String(p))}>{formatAmount(p)}</option>)}
+          </select>
+        </label>
+      )}
+      <label class="check">
+        <input type="checkbox" name="avail" value="1" checked={f.avail} />
+        <span>{c('onlyAvailable', l)}</span>
+      </label>
+      <div class="f-actions">
+        <button class="btn" type="submit" data-submit>{c('filter', l)}</button>
+        <a class="link reset" href={href('units', l)} hidden={!isActive(f)} data-reset>{c('reset', l)}</a>
+      </div>
+    </form>
+
+    <div class="shortlist" data-shortlist hidden>
+      <p><strong>{T.shortlist}</strong> <span data-shortlist-names></span></p>
+      <p class="sl-actions">
+        <a class="btn" href={href('compare', l)} data-shortlist-compare>{c('compare', l)}</a>
+        <button type="button" class="link" data-shortlist-clear>{c('clear', l)}</button>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap layout">
+    <section class="drawing" aria-labelledby="drawing-h">
+      <h2 id="drawing-h" class="sr-only">{T.drawing}</h2>
+      <IsoDrawing units={all} l={l} />
+    </section>
+
+    <section class="list" aria-labelledby="list-h">
+      <h2 id="list-h" class="count" aria-live="polite" data-count data-of={T.ofAll} data-one={T.count(1)} data-many={T.count(2).replace(/^\d+ /, '')}>
+        {T.count(shown.length)} {shown.length !== all.length && <span class="muted">{T.ofAll}</span>}
+      </h2>
+      <p class="hint muted" data-fav-hint hidden>{T.shortlistHint}</p>
+      <table class="units" data-units>
+        <caption class="sr-only">{T.table}</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="c-fav"><span class="sr-only">{c('favourites', l)}</span></th>
+            <th scope="col">{c('unitNo', l)}</th>
+            <th scope="col">{c('floor', l)}</th>
+            <th scope="col">{c('rooms', l)}</th>
+            <th scope="col" class="r">{l === 'de' ? 'Fläche' : 'Superficie'}</th>
+            <th scope="col" class="r">{c('outdoor', l)}</th>
+            <th scope="col" class="r">{c('price', l)}</th>
+            <th scope="col">{c('status', l)}</th>
+          </tr>
+        </thead>
+        {groups.map((g) => (
+          <tbody data-group={g.h}>
+            {g.h && <tr class="group" hidden={!g.units.some((u) => shown.includes(u))}><th scope="rowgroup" colspan="8">{buildingName(g.h, l)}</th></tr>}
+            {g.units.map((u) => {
+              const x = facts(u);
+              const o = mainOutdoor(u);
+              const num = unitNumber(u);
+              return (
+                <tr
+                  class:list={['row', u.status]}
+                  hidden={!shown.includes(u)}
+                  data-unit={shortId(u)}
+                  data-rooms={x.rooms}
+                  data-house={x.house}
+                  data-floor={x.floor}
+                  data-top={x.top ? '1' : undefined}
+                  data-price={x.price ?? undefined}
+                  data-status={u.status}
+                >
+                  <td class="c-fav">
+                    <button type="button" class="star" data-fav={shortId(u)} data-unit={num || formatRooms(u.rooms, l)} data-label-on={c('addFav', l)} data-label-off={c('removeFav', l)} data-label-full={c('favFull', l)} aria-pressed="false" hidden>
+                      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .6-3.7 3.5.9 5-4.4-2.4-4.4 2.4.9-5L2.8 7.8l5-.6z" /></svg>
+                    </button>
+                  </td>
+                  <td class="c-no"><a href={unitPath(u, l)} aria-label={unitTitle(u, l, all)}>{num || '–'}</a></td>
+                  <td class="c-fl" data-l={c('floor', l)}><span class="full">{floorName(u, l, all)}</span><span class="short">{x.top ? c('penthouse', l) : floorShort(u, l)}</span></td>
+                  <td class="c-r">{formatRooms(u.rooms, l)}</td>
+                  <td class="r num c-s">{u.living_surface ? `${u.living_surface} m²` : '–'}</td>
+                  <td class="r num c-o">{o ? <><span class="o-kind">{outdoorLabel(o, l)}</span> {o.m2} m²</> : '–'}</td>
+                  <td class="r num c-p">{u.status === 'available' ? unitPrice(u, l) : ''}</td>
+                  <td class="c-st"><span class:list={['pill', u.status]}>{statusLabel(u, l)}</span></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        ))}
+      </table>
+      <p class="empty" data-empty hidden={shown.length > 0}>{T.empty} <a class="link" href={href('units', l)}>{c('reset', l)}</a></p>
+      <p class="note muted">{T.priceNote}</p>
+    </section>
+  </div>
+</Site>
+
+<script>
+  import { initUnitsView } from '../scripts/units-view';
+  initUnitsView();
+</script>
+
+<style>
+  .head { display: grid; gap: 18px; padding-block: clamp(40px, 6vw, 88px) 28px; }
+  .head .lede { max-width: 52ch; }
+
+  .filters { display: flex; flex-wrap: wrap; align-items: end; gap: 14px 18px; padding: 20px 0; border-block: 1px solid var(--line); }
+  .field { display: grid; gap: 6px; font-size: 0.875rem; color: var(--muted); }
+  .field select {
+    min-height: var(--control-h); min-width: 150px; padding: 0 40px 0 14px; border: 1px solid var(--line-strong); border-radius: var(--control-radius);
+    background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232a251f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center;
+    appearance: none; color: var(--text); font-size: 1rem; cursor: pointer;
+  }
+  .check { display: inline-flex; align-items: center; gap: 10px; min-height: var(--control-h); cursor: pointer; font-weight: 500; }
+  .check input { width: 20px; height: 20px; accent-color: var(--accent-strong); }
+  .f-actions { display: flex; align-items: center; gap: 18px; margin-left: auto; min-height: var(--control-h); }
+  .reset { background: none; border: 0; padding: 12px 0; }
+
+  .shortlist { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; margin-top: 16px; padding: 14px 18px; background: var(--sand); border-radius: var(--radius-card); }
+  .sl-actions { display: flex; align-items: center; gap: 18px; }
+  .sl-actions .btn { min-height: 44px; }
+  .sl-actions .link { background: none; border: 0; padding: 10px 0; cursor: pointer; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 4vw, 64px); align-items: start; padding-block: 32px var(--section); }
+  .drawing { position: sticky; top: calc(var(--header-h) + 24px); }
+  .count { font: 400 var(--step-2)/1.1 var(--serif); margin-bottom: 14px; }
+  .count .muted { font-size: 0.6em; font-family: var(--sans); }
+  .hint { font-size: 0.875rem; margin: -6px 0 12px; }
+
+  .units { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .units th { text-align: left; font-weight: 600; font-size: 0.8125rem; color: var(--muted); padding: 10px 8px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+  .units td { padding: 0 8px; height: 54px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .units .r { text-align: right; }
+  .units tr.group th { padding: 22px 8px 8px; font: 400 1.375rem/1 var(--serif); color: var(--text); border-bottom: 1px solid var(--line-strong); }
+  .row { position: relative; transition: background-color 0.15s var(--ease); }
+  .row.is-hot, .row:hover { background: var(--paper); }
+  .row.is-hot td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+  .c-no a { font-weight: 700; text-decoration: none; }
+  .c-no a::after { content: ''; position: absolute; inset: 0; }
+  .c-no a:focus-visible { outline: none; }
+  .row:has(.c-no a:focus-visible) { outline: 2px solid var(--accent-strong); outline-offset: -2px; }
+  .c-fav { width: 44px; padding: 0 !important; }
+  .star { position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; color: var(--muted); }
+  .star svg { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+  .star[aria-pressed='true'] { color: var(--accent); }
+  .star[aria-pressed='true'] svg { fill: currentColor; }
+  .star:disabled { opacity: 0.35; cursor: not-allowed; }
+  .short { display: none; }
+  .o-kind { color: var(--muted); font-size: 0.875rem; }
+  .c-p { font-weight: 600; }
+  .row.sold td:not(.c-st) { color: var(--muted); }
+  .empty { padding: 28px 0; }
+  .note { font-size: 0.875rem; margin-top: 20px; max-width: 70ch; }
+
+  @media (max-width: 1480px) { .o-kind { display: none; } }
+  @media (max-width: 1240px) { .full { display: none; } .short { display: inline; } }
+  @media (max-width: 1000px) {
+    .layout { grid-template-columns: 1fr; }
+    .drawing { position: static; order: 2; }
+    .list { order: 1; }
+  }
+  @media (max-width: 760px) {
+    .filters { gap: 12px; }
+    .field { flex: 1 1 calc(50% - 6px); }
+    .field select { min-width: 0; width: 100%; }
+    .f-actions { margin-left: 0; }
+    .units thead { display: none; }
+    .units, .units tbody, .units tr, .units td, .units th { display: block; }
+    .units tbody { display: grid; gap: 10px; margin-bottom: 8px; }
+    .units tr.group th { padding: 18px 0 2px; border: 0; }
+    .units tr.row { display: grid; grid-template-columns: 3.2em auto minmax(0, 1fr) auto; grid-template-areas: 'no r fl st' 'no s o fav' 'no p p fav'; gap: 4px 12px; align-items: center; padding: 14px 4px 10px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); }
+    .units tr.row[hidden] { display: none; }
+    .units td { height: auto; border: 0; padding: 0; }
+    .units td.c-no { grid-area: no; align-self: start; font: 400 1.5rem/1 var(--serif); }
+    .c-no a { font-weight: 400; }
+    .units td.c-r { grid-area: r; font-weight: 600; }
+    .units td.c-fl { grid-area: fl; color: var(--muted); }
+    .units td.c-st { grid-area: st; justify-self: end; padding-right: 8px; }
+    .units td.c-s { grid-area: s; text-align: left; color: var(--muted); }
+    .units td.c-o { grid-area: o; text-align: left; color: var(--muted); }
+    .units td.c-p { grid-area: p; text-align: left; }
+    .units td.c-o .o-kind { display: inline; }
+    .units td.c-p:empty { display: none; }
+    .units td.c-fav { grid-area: fav; justify-self: end; align-self: end; width: auto; }
+    .row.is-hot td:first-child { box-shadow: none; }
+  }
+</style>

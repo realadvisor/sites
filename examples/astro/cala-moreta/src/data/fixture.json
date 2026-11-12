@@ -1,0 +1,1673 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "es",
+  "en"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "7d67f09b-2b14-4567-95ab-59b08d8d98e3",
+  "name": "Cala Moreta Properties SL",
+  "website": "https://cala-moreta.example.com",
+  "address": {
+   "street": "Carrer de la Creu 14",
+   "postcode": "17255",
+   "city": "Begur",
+   "country": "Spain",
+   "lat": 41.954,
+   "lng": 3.208
+  },
+  "brand": {
+   "primary": "#B4532A"
+  }
+ },
+ "teams": [
+  {
+   "id": "acb1dc46-518b-4212-a8f5-a719da9e2efc",
+   "name": "Cala Moreta",
+   "primary": true,
+   "website": "https://cala-moreta.example.com",
+   "phone": "+34 000 000 001",
+   "email": "hola@cala-moreta.example.com",
+   "address": {
+    "street": "Carrer de la Creu 14",
+    "postcode": "17255",
+    "city": "Begur",
+    "country": "Spain",
+    "lat": 41.954,
+    "lng": 3.208
+   },
+   "socials": {},
+   "description": "<p>Agencia independiente en Begur. Casas con vistas al mar, masías del Empordà y pisos en los pueblos de la costa.</p>",
+   "description_text": "Agencia independiente en Begur. Casas con vistas al mar, masías del Empordà y pisos en los pueblos de la costa."
+  }
+ ],
+ "agents": [
+  {
+   "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+   "first_name": "Laia",
+   "last_name": "Vidal",
+   "phone": "+34 000 000 002",
+   "email": "laia.vidal@cala-moreta.example.com",
+   "languages": [
+    "es",
+    "en"
+   ],
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+    "alt": "Laia Vidal"
+   }
+  },
+  {
+   "id": "470ffedb-827d-4de5-b02e-b698fcbac480",
+   "first_name": "Marc",
+   "last_name": "Soler",
+   "phone": "+34 000 000 003",
+   "email": "marc.soler@cala-moreta.example.com",
+   "languages": [
+    "es",
+    "en"
+   ],
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39190579-sq.jpg",
+    "alt": "Marc Soler"
+   }
+  },
+  {
+   "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+   "first_name": "Hannah",
+   "last_name": "Lowe",
+   "phone": "+34 000 000 004",
+   "email": "hannah.lowe@cala-moreta.example.com",
+   "languages": [
+    "en"
+   ],
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+    "alt": "Hannah Lowe"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "374beb01-e63d-4818-b49a-3ce71b962dd0",
+   "slug": "villa-blanca-sobre-la-cala-374beb01-e63d-4818-b49a-3ce71b962dd0",
+   "title": "Villa blanca sobre la cala",
+   "description": "<p>Una villa contemporánea en lo alto de la cala, con piscina infinita y el mar delante de cada habitación.</p><p>Cinco suites con baño, un salón de doble altura que se abre a la terraza y una cocina con isla. Garaje para tres coches y jardín de plantas mediterráneas que pide poco riego.</p>",
+   "description_text": "Una villa contemporánea en lo alto de la cala, con piscina infinita y el mar delante de cada habitación.\n\nCinco suites con baño, un salón de doble altura que se abre a la terraza y una cocina con isla. Garaje para tres coches y jardín de plantas mediterráneas que pide poco riego.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 3950000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 420,
+   "land_surface": 1600,
+   "address": {
+    "street": "Passeig de la Riera 9",
+    "postcode": "17255",
+    "city": "Begur",
+    "country": "Spain",
+    "lat": 41.948,
+    "lng": 3.216
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24805054.jpg",
+     "alt": "Villa blanca sobre la cala"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24807127.jpg",
+     "alt": "Villa blanca sobre la cala, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27626177.jpg",
+     "alt": "Villa blanca sobre la cala, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27626183.jpg",
+     "alt": "Villa blanca sobre la cala, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27626185.jpg",
+     "alt": "Villa blanca sobre la cala, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27626186.jpg",
+     "alt": "Villa blanca sobre la cala, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28054868.jpg",
+     "alt": "Villa blanca sobre la cala, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817157.jpg",
+     "alt": "Villa blanca sobre la cala, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24807126.jpg",
+     "alt": "Villa blanca sobre la cala, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "N8AM-R2YH",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "b495dd6f-9a86-4c19-b34d-2a7353f6329c",
+   "slug": "casa-de-piedra-con-piscina-b495dd6f-9a86-4c19-b34d-2a7353f6329c",
+   "title": "Casa de piedra con piscina",
+   "description": "<p>Una casa de piedra rehabilitada a las afueras del pueblo medieval, con piscina entre olivos.</p><p>Muros de un metro, vigas de madera y suelos de barro cocido. Cuatro dormitorios, un porche con barbacoa y vistas a los campos del Empordà.</p>",
+   "description_text": "Una casa de piedra rehabilitada a las afueras del pueblo medieval, con piscina entre olivos.\n\nMuros de un metro, vigas de madera y suelos de barro cocido. Cuatro dormitorios, un porche con barbacoa y vistas a los campos del Empordà.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 1650000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 290,
+   "land_surface": 2400,
+   "address": {
+    "street": "Carrer de les Roses 16",
+    "postcode": "17113",
+    "city": "Peratallada",
+    "country": "Spain",
+    "lat": 41.974,
+    "lng": 3.095
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28054862.jpg",
+     "alt": "Casa de piedra con piscina"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28054849.jpg",
+     "alt": "Casa de piedra con piscina, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20975727.jpg",
+     "alt": "Casa de piedra con piscina, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20975734.jpg",
+     "alt": "Casa de piedra con piscina, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20975731.jpg",
+     "alt": "Casa de piedra con piscina, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20975732.jpg",
+     "alt": "Casa de piedra con piscina, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20200273.jpg",
+     "alt": "Casa de piedra con piscina, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "470ffedb-827d-4de5-b02e-b698fcbac480",
+    "first_name": "Marc",
+    "last_name": "Soler",
+    "phone": "+34 000 000 003",
+    "email": "marc.soler@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39190579-sq.jpg",
+     "alt": "Marc Soler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "EBHS-R5BE",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "d3bb7e32-b15d-4b61-97e3-6ae7d8b5a6fb",
+   "slug": "casa-con-terrazas-al-mar-d3bb7e32-b15d-4b61-97e3-6ae7d8b5a6fb",
+   "title": "Casa con terrazas al mar",
+   "description": "<p>Tres niveles de terrazas que bajan hacia el mar, con piscina y pérgola para comer fuera todo el verano.</p><p>El salón, la cocina y el comedor dan a la bahía. Cuatro dormitorios, uno de ellos en un apartamento independiente para invitados.</p>",
+   "description_text": "Tres niveles de terrazas que bajan hacia el mar, con piscina y pérgola para comer fuera todo el verano.\n\nEl salón, la cocina y el comedor dan a la bahía. Cuatro dormitorios, uno de ellos en un apartamento independiente para invitados.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 2450000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 4,
+   "living_surface": 310,
+   "land_surface": 900,
+   "address": {
+    "street": "Camí de Ronda 23",
+    "postcode": "17212",
+    "city": "Tamariu",
+    "country": "Spain",
+    "lat": 41.918,
+    "lng": 3.205
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18971223.jpg",
+     "alt": "Casa con terrazas al mar"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19075381.jpg",
+     "alt": "Casa con terrazas al mar, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19084160.jpg",
+     "alt": "Casa con terrazas al mar, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19084169.jpg",
+     "alt": "Casa con terrazas al mar, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24805041.jpg",
+     "alt": "Casa con terrazas al mar, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24805053.jpg",
+     "alt": "Casa con terrazas al mar, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24807137.jpg",
+     "alt": "Casa con terrazas al mar, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29702275.jpg",
+     "alt": "Casa con terrazas al mar, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "SYYN-S3ZS",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "31ef6129-2113-4393-bf8f-426f5bf7a04a",
+   "slug": "villa-entre-pinos-31ef6129-2113-4393-bf8f-426f5bf7a04a",
+   "title": "Villa entre pinos",
+   "description": "<p>Una villa de tejados de teja en una urbanización tranquila de S'Agaró, a cinco minutos a pie del camino de ronda.</p><p>Piscina con zona de solárium, cinco dormitorios y un jardín maduro con pinos y buganvillas.</p>",
+   "description_text": "Una villa de tejados de teja en una urbanización tranquila de S'Agaró, a cinco minutos a pie del camino de ronda.\n\nPiscina con zona de solárium, cinco dormitorios y un jardín maduro con pinos y buganvillas.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 2850000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 380,
+   "land_surface": 2100,
+   "address": {
+    "street": "Carrer del Pi 30",
+    "postcode": "17248",
+    "city": "S'Agaró",
+    "country": "Spain",
+    "lat": 41.796,
+    "lng": 3.052
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35069531.jpg",
+     "alt": "Villa entre pinos"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35069535.jpg",
+     "alt": "Villa entre pinos, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35069536.jpg",
+     "alt": "Villa entre pinos, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35069537.jpg",
+     "alt": "Villa entre pinos, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "J7JG-K6VA",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "f1a5ad20-4a58-4366-b604-82f7785dc8eb",
+   "slug": "villa-moderna-con-vistas-a-la-sierra-f1a5ad20-4a58-4366-b604-82f7785dc8eb",
+   "title": "Villa moderna con vistas a la sierra",
+   "description": "<p>Volúmenes limpios, grandes ventanales y una piscina orientada al oeste para ver la puesta de sol sobre la sierra.</p><p>Cinco dormitorios en suite, cocina abierta y un salón exterior bajo la pérgola. Domótica, aerotermia y paneles solares.</p>",
+   "description_text": "Volúmenes limpios, grandes ventanales y una piscina orientada al oeste para ver la puesta de sol sobre la sierra.\n\nCinco dormitorios en suite, cocina abierta y un salón exterior bajo la pérgola. Domótica, aerotermia y paneles solares.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 2290000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 350,
+   "land_surface": 1400,
+   "address": {
+    "street": "Avinguda de la Platja 37",
+    "postcode": "17256",
+    "city": "Pals",
+    "country": "Spain",
+    "lat": 41.978,
+    "lng": 3.141
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36676786.jpg",
+     "alt": "Villa moderna con vistas a la sierra"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36676879.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29764789.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36617191.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30808019.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30808021.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30816307.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30816312.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30816313.jpg",
+     "alt": "Villa moderna con vistas a la sierra, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "470ffedb-827d-4de5-b02e-b698fcbac480",
+    "first_name": "Marc",
+    "last_name": "Soler",
+    "phone": "+34 000 000 003",
+    "email": "marc.soler@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39190579-sq.jpg",
+     "alt": "Marc Soler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "N7L6-W6LM",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "9c73a067-8d85-484f-bd37-f1b5cb1c0ad3",
+   "slug": "casa-luminosa-con-jardin-9c73a067-8d85-484f-bd37-f1b5cb1c0ad3",
+   "title": "Casa luminosa con jardín",
+   "description": "<p>Una casa clara y fácil de vivir, con dormitorios que dan al jardín y una piscina de agua salada.</p><p>Cuatro dormitorios, despacho, lavadero y aparcamiento cubierto. A diez minutos de la playa de Pals.</p>",
+   "description_text": "Una casa clara y fácil de vivir, con dormitorios que dan al jardín y una piscina de agua salada.\n\nCuatro dormitorios, despacho, lavadero y aparcamiento cubierto. A diez minutos de la playa de Pals.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 1390000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 240,
+   "land_surface": 980,
+   "address": {
+    "street": "Carrer Major 44",
+    "postcode": "17256",
+    "city": "Pals",
+    "country": "Spain",
+    "lat": 41.965,
+    "lng": 3.157
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36634053.jpg",
+     "alt": "Casa luminosa con jardín"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36676787.jpg",
+     "alt": "Casa luminosa con jardín, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36749687.jpg",
+     "alt": "Casa luminosa con jardín, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36749692.jpg",
+     "alt": "Casa luminosa con jardín, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36676784.jpg",
+     "alt": "Casa luminosa con jardín, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "TTAM-K4D2",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "1c793998-2d68-4ad5-8b44-dce8b9bae90e",
+   "slug": "casa-familiar-cerca-de-la-playa-1c793998-2d68-4ad5-8b44-dce8b9bae90e",
+   "title": "Casa familiar cerca de la playa",
+   "description": "<p>Una casa amplia a pocos minutos a pie de las calas de Calella, pensada para familias que vienen todo el verano.</p><p>Salón con chimenea, cuatro dormitorios y una planta baja con salida directa a la piscina.</p>",
+   "description_text": "Una casa amplia a pocos minutos a pie de las calas de Calella, pensada para familias que vienen todo el verano.\n\nSalón con chimenea, cuatro dormitorios y una planta baja con salida directa a la piscina.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 1780000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 260,
+   "land_surface": 720,
+   "address": {
+    "street": "Carrer de la Font 3",
+    "postcode": "17210",
+    "city": "Calella de Palafrugell",
+    "country": "Spain",
+    "lat": 41.884,
+    "lng": 3.19
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31387263.jpg",
+     "alt": "Casa familiar cerca de la playa"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31387265.jpg",
+     "alt": "Casa familiar cerca de la playa, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31387268.jpg",
+     "alt": "Casa familiar cerca de la playa, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36710315.jpg",
+     "alt": "Casa familiar cerca de la playa, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36710317.jpg",
+     "alt": "Casa familiar cerca de la playa, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "4JQG-MGX4",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "8c744cde-6ed6-44ad-9cef-295f31d6e20c",
+   "slug": "villa-con-piscina-y-vistas-nocturnas-8c744cde-6ed6-44ad-9cef-295f31d6e20c",
+   "title": "Villa con piscina y vistas nocturnas",
+   "description": "<p>Al caer la tarde la villa se ilumina sobre la bahía: piscina, terrazas y un salón exterior con cocina.</p><p>Cuatro suites, una de ellas con terraza privada. Bodega, gimnasio y garaje.</p>",
+   "description_text": "Al caer la tarde la villa se ilumina sobre la bahía: piscina, terrazas y un salón exterior con cocina.\n\nCuatro suites, una de ellas con terraza privada. Bodega, gimnasio y garaje.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 3200000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 4,
+   "living_surface": 340,
+   "land_surface": 1300,
+   "address": {
+    "street": "Carrer del Mar 10",
+    "postcode": "17255",
+    "city": "Begur",
+    "country": "Spain",
+    "lat": 41.955,
+    "lng": 3.207
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19075395.jpg",
+     "alt": "Villa con piscina y vistas nocturnas"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19075397.jpg",
+     "alt": "Villa con piscina y vistas nocturnas, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19084143.jpg",
+     "alt": "Villa con piscina y vistas nocturnas, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "XGQ2-YZVG",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "37c9c5b8-e54f-4095-b92a-22a349e22e2c",
+   "slug": "villa-de-diseno-sobre-el-mar-37c9c5b8-e54f-4095-b92a-22a349e22e2c",
+   "title": "Villa de diseño sobre el mar",
+   "description": "<p>Arquitectura contemporánea con vistas abiertas sobre el Mediterráneo, en una de las zonas más tranquilas de la costa.</p><p>Cinco dormitorios con baño, bañera exenta en la suite principal y una piscina desbordante que se funde con el horizonte.</p>",
+   "description_text": "Arquitectura contemporánea con vistas abiertas sobre el Mediterráneo, en una de las zonas más tranquilas de la costa.\n\nCinco dormitorios con baño, bañera exenta en la suite principal y una piscina desbordante que se funde con el horizonte.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 4400000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 450,
+   "land_surface": 1800,
+   "address": {
+    "street": "Passeig de la Riera 17",
+    "postcode": "17212",
+    "city": "Tamariu",
+    "country": "Spain",
+    "lat": 41.921,
+    "lng": 3.201
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24807135.jpg",
+     "alt": "Villa de diseño sobre el mar"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26859037.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26859049.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26859070.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27626174.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27626180.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28054852.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28054888.jpg",
+     "alt": "Villa de diseño sobre el mar, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "DCFW-R3UV",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "0e8d04f0-ae43-4875-8416-4a3327fd5010",
+   "slug": "villa-de-cristal-frente-al-horizonte-0e8d04f0-ae43-4875-8416-4a3327fd5010",
+   "title": "Villa de cristal frente al horizonte",
+   "description": "<p>Un salón de cristal de doble altura, una piscina infinita y el mar en tres direcciones.</p><p>Seis suites, spa con sauna, cine y casa de invitados. Una propiedad única a pocos minutos del pueblo.</p>",
+   "description_text": "Un salón de cristal de doble altura, una piscina infinita y el mar en tres direcciones.\n\nSeis suites, spa con sauna, cine y casa de invitados. Una propiedad única a pocos minutos del pueblo.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 5200000,
+   "currency": "EUR",
+   "rooms": 8,
+   "bedrooms": 6,
+   "bathrooms": 6,
+   "living_surface": 520,
+   "land_surface": 2300,
+   "address": {
+    "street": "Carrer de les Roses 24",
+    "postcode": "17488",
+    "city": "Cadaqués",
+    "country": "Spain",
+    "lat": 42.295,
+    "lng": 3.269
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817155.jpg",
+     "alt": "Villa de cristal frente al horizonte"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817160.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817162.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817164.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-32226003.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19075379.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19075383.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19075385.jpg",
+     "alt": "Villa de cristal frente al horizonte, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "SR9C-56AC",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "b10372b6-3bdc-4565-a932-29eea677b0a9",
+   "slug": "casa-blanca-en-cadaques-b10372b6-3bdc-4565-a932-29eea677b0a9",
+   "title": "Casa blanca en Cadaqués",
+   "description": "<p>Una casa encalada con buganvillas, a un paseo del puerto de Cadaqués.</p><p>Tres dormitorios, terraza en la cubierta con vistas a la bahía y un patio sombreado para las tardes de agosto.</p>",
+   "description_text": "Una casa encalada con buganvillas, a un paseo del puerto de Cadaqués.\n\nTres dormitorios, terraza en la cubierta con vistas a la bahía y un patio sombreado para las tardes de agosto.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 1950000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 210,
+   "land_surface": 520,
+   "address": {
+    "street": "Camí de Ronda 31",
+    "postcode": "17488",
+    "city": "Cadaqués",
+    "country": "Spain",
+    "lat": 42.282,
+    "lng": 3.286
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-14475293.jpg",
+     "alt": "Casa blanca en Cadaqués"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-15173334.jpg",
+     "alt": "Casa blanca en Cadaqués, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-10611843.jpg",
+     "alt": "Casa blanca en Cadaqués, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "470ffedb-827d-4de5-b02e-b698fcbac480",
+    "first_name": "Marc",
+    "last_name": "Soler",
+    "phone": "+34 000 000 003",
+    "email": "marc.soler@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39190579-sq.jpg",
+     "alt": "Marc Soler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "N5LH-EJN8",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "1f9947f8-fdb7-43f9-8ae9-b6aa2cb4fea8",
+   "slug": "masia-del-emporda-1f9947f8-fdb7-43f9-8ae9-b6aa2cb4fea8",
+   "title": "Masía del Empordà",
+   "description": "<p>Una masía del siglo XVIII rodeada de campos y bosque, a pocos kilómetros del mar.</p><p>Seis dormitorios, salones con bóvedas catalanas, cocina de leña y una bodega. Tres hectáreas de terreno con olivos y un pozo propio.</p>",
+   "description_text": "Una masía del siglo XVIII rodeada de campos y bosque, a pocos kilómetros del mar.\n\nSeis dormitorios, salones con bóvedas catalanas, cocina de leña y una bodega. Tres hectáreas de terreno con olivos y un pozo propio.",
+   "offer_type": "buy",
+   "property_type": "house_farmhouse",
+   "status": "available",
+   "price": 2650000,
+   "currency": "EUR",
+   "rooms": 9,
+   "bedrooms": 6,
+   "bathrooms": 5,
+   "living_surface": 640,
+   "land_surface": 32000,
+   "address": {
+    "street": "Carrer del Pi 38",
+    "postcode": "17113",
+    "city": "Peratallada",
+    "country": "Spain",
+    "lat": 41.974,
+    "lng": 3.095
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713231.jpg",
+     "alt": "Masía del Empordà"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36676683.jpg",
+     "alt": "Masía del Empordà, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36992602.jpg",
+     "alt": "Masía del Empordà, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35512939.jpg",
+     "alt": "Masía del Empordà, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34094759.jpg",
+     "alt": "Masía del Empordà, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-32512229.jpg",
+     "alt": "Masía del Empordà, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-32512266.jpg",
+     "alt": "Masía del Empordà, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "470ffedb-827d-4de5-b02e-b698fcbac480",
+    "first_name": "Marc",
+    "last_name": "Soler",
+    "phone": "+34 000 000 003",
+    "email": "marc.soler@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39190579-sq.jpg",
+     "alt": "Marc Soler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "3X67-XCX2",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "aed9a1b0-d7b9-44df-8b5f-c040b5643d60",
+   "slug": "finca-entre-olivos-aed9a1b0-d7b9-44df-8b5f-c040b5643d60",
+   "title": "Finca entre olivos",
+   "description": "<p>Una finca histórica entre olivos y cipreses, con vistas sobre las Illes Medes.</p><p>Casa principal, casa del guarda y antiguas cuadras rehabilitadas. Siete dormitorios en total y mucho espacio para crecer.</p>",
+   "description_text": "Una finca histórica entre olivos y cipreses, con vistas sobre las Illes Medes.\n\nCasa principal, casa del guarda y antiguas cuadras rehabilitadas. Siete dormitorios en total y mucho espacio para crecer.",
+   "offer_type": "buy",
+   "property_type": "house_farmhouse",
+   "status": "available",
+   "price": 3450000,
+   "currency": "EUR",
+   "rooms": 10,
+   "bedrooms": 7,
+   "bathrooms": 6,
+   "living_surface": 780,
+   "land_surface": 54000,
+   "address": {
+    "street": "Avinguda de la Platja 45",
+    "postcode": "17256",
+    "city": "Pals",
+    "country": "Spain",
+    "lat": 41.971,
+    "lng": 3.149
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38120267.jpg",
+     "alt": "Finca entre olivos"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38120266.jpg",
+     "alt": "Finca entre olivos, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30735586.jpg",
+     "alt": "Finca entre olivos, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "XP62-46PJ",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "6484f48a-ad96-4e10-ab47-6a4d8f1170a4",
+   "slug": "casa-con-jardin-de-palmeras-6484f48a-ad96-4e10-ab47-6a4d8f1170a4",
+   "title": "Casa con jardín de palmeras",
+   "description": "<p>Una casa de estilo mediterráneo con jardín de palmeras, a pocos pasos del paseo marítimo.</p><p>Cuatro dormitorios, porche y piscina. Ideal como segunda residencia o para vivir todo el año.</p>",
+   "description_text": "Una casa de estilo mediterráneo con jardín de palmeras, a pocos pasos del paseo marítimo.\n\nCuatro dormitorios, porche y piscina. Ideal como segunda residencia o para vivir todo el año.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 1490000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 230,
+   "land_surface": 860,
+   "address": {
+    "street": "Carrer Major 4",
+    "postcode": "17248",
+    "city": "S'Agaró",
+    "country": "Spain",
+    "lat": 41.796,
+    "lng": 3.052
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20427345.jpg",
+     "alt": "Casa con jardín de palmeras"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "8EUD-D8MJ",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "2aa837fa-3024-43fb-8e1e-547536d69e0c",
+   "slug": "casa-con-piscina-en-llafranc-2aa837fa-3024-43fb-8e1e-547536d69e0c",
+   "title": "Casa con piscina en Llafranc",
+   "description": "<p>Casa de una planta con porche cubierto, piscina desbordante y vistas sobre la bahía de Llafranc.</p><p>Alquiler de larga duración, amueblada. Tres dormitorios, plaza de garaje y trastero.</p>",
+   "description_text": "Casa de una planta con porche cubierto, piscina desbordante y vistas sobre la bahía de Llafranc.\n\nAlquiler de larga duración, amueblada. Tres dormitorios, plaza de garaje y trastero.",
+   "offer_type": "rent",
+   "property_type": "house",
+   "status": "available",
+   "price": 3800,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 140,
+   "address": {
+    "street": "Carrer de la Font 11",
+    "postcode": "17211",
+    "city": "Llafranc",
+    "country": "Spain",
+    "lat": 41.901,
+    "lng": 3.185
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715498.jpg",
+     "alt": "Casa con piscina en Llafranc"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715508.jpg",
+     "alt": "Casa con piscina en Llafranc, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715584.jpg",
+     "alt": "Casa con piscina en Llafranc, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715585.jpg",
+     "alt": "Casa con piscina en Llafranc, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "HPED-ASGT",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "46712484-1608-4169-8226-eb36aee1ff84",
+   "slug": "casa-blanca-entre-palmeras-46712484-1608-4169-8226-eb36aee1ff84",
+   "title": "Casa blanca entre palmeras",
+   "description": "<p>Casa encalada entre palmeras en una calle tranquila de Begur, disponible para alquiler anual.</p><p>Cuatro dormitorios, terraza con pérgola, jardín con riego automático y aparcamiento.</p>",
+   "description_text": "Casa encalada entre palmeras en una calle tranquila de Begur, disponible para alquiler anual.\n\nCuatro dormitorios, terraza con pérgola, jardín con riego automático y aparcamiento.",
+   "offer_type": "rent",
+   "property_type": "house",
+   "status": "available",
+   "price": 5200,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 220,
+   "land_surface": 900,
+   "address": {
+    "street": "Carrer del Mar 18",
+    "postcode": "17255",
+    "city": "Begur",
+    "country": "Spain",
+    "lat": 41.948,
+    "lng": 3.216
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22034268.jpg",
+     "alt": "Casa blanca entre palmeras"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22034274.jpg",
+     "alt": "Casa blanca entre palmeras, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-271815.jpg",
+     "alt": "Casa blanca entre palmeras, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "QUEV-NR7B",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "f0cd2650-de51-4a2a-92ff-4dca218b57c1",
+   "slug": "villa-junto-al-mar-en-alquiler-f0cd2650-de51-4a2a-92ff-4dca218b57c1",
+   "title": "Villa junto al mar en alquiler",
+   "description": "<p>Una villa con piscina y jardín a pocos minutos de las calas, para alquiler de larga temporada.</p><p>Cinco dormitorios, cocina exterior y servicio de jardinería incluido.</p>",
+   "description_text": "Una villa con piscina y jardín a pocos minutos de las calas, para alquiler de larga temporada.\n\nCinco dormitorios, cocina exterior y servicio de jardinería incluido.",
+   "offer_type": "rent",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 7500,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 300,
+   "land_surface": 1100,
+   "address": {
+    "street": "Passeig de la Riera 25",
+    "postcode": "17210",
+    "city": "Calella de Palafrugell",
+    "country": "Spain",
+    "lat": 41.884,
+    "lng": 3.19
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13914276.jpg",
+     "alt": "Villa junto al mar en alquiler"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "SD4U-SRPF",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "af81f8a5-b20c-46b1-b484-be9fa34ef341",
+   "slug": "villa-en-tamariu-af81f8a5-b20c-46b1-b484-be9fa34ef341",
+   "title": "Villa en Tamariu",
+   "description": "<p>Vendida: una villa con terrazas sobre la bahía de Tamariu.</p>",
+   "description_text": "Vendida: una villa con terrazas sobre la bahía de Tamariu.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "sold",
+   "price": 2650000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 4,
+   "living_surface": 300,
+   "land_surface": 1000,
+   "address": {
+    "street": "Carrer de les Roses 32",
+    "postcode": "17212",
+    "city": "Tamariu",
+    "country": "Spain",
+    "lat": 41.918,
+    "lng": 3.205
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19084169.jpg",
+     "alt": "Villa en Tamariu"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24805041.jpg",
+     "alt": "Villa en Tamariu, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24805053.jpg",
+     "alt": "Villa en Tamariu, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24807137.jpg",
+     "alt": "Villa en Tamariu, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29702275.jpg",
+     "alt": "Villa en Tamariu, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "d89e4633-dadb-4e9f-b402-01cff4ea090d",
+    "first_name": "Laia",
+    "last_name": "Vidal",
+    "phone": "+34 000 000 002",
+    "email": "laia.vidal@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763521-sq.jpg",
+     "alt": "Laia Vidal"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "75QG-XMVY",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "2e2358d1-95ed-418f-9e14-6c4d01de948b",
+   "slug": "casa-en-pals-2e2358d1-95ed-418f-9e14-6c4d01de948b",
+   "title": "Casa en Pals",
+   "description": "<p>Vendida: una casa con jardín y piscina cerca del pueblo medieval.</p>",
+   "description_text": "Vendida: una casa con jardín y piscina cerca del pueblo medieval.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "sold",
+   "price": 1250000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 220,
+   "land_surface": 900,
+   "address": {
+    "street": "Camí de Ronda 39",
+    "postcode": "17256",
+    "city": "Pals",
+    "country": "Spain",
+    "lat": 41.974,
+    "lng": 3.145
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36749687.jpg",
+     "alt": "Casa en Pals"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36749692.jpg",
+     "alt": "Casa en Pals, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36676784.jpg",
+     "alt": "Casa en Pals, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "470ffedb-827d-4de5-b02e-b698fcbac480",
+    "first_name": "Marc",
+    "last_name": "Soler",
+    "phone": "+34 000 000 003",
+    "email": "marc.soler@cala-moreta.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39190579-sq.jpg",
+     "alt": "Marc Soler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "G49D-4KBW",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  },
+  {
+   "id": "3e53902e-a299-4fd5-b279-b46ce61c6518",
+   "slug": "villa-en-begur-3e53902e-a299-4fd5-b279-b46ce61c6518",
+   "title": "Villa en Begur",
+   "description": "<p>Vendida: una villa con vistas nocturnas sobre la costa.</p>",
+   "description_text": "Vendida: una villa con vistas nocturnas sobre la costa.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "sold",
+   "price": 2980000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 4,
+   "living_surface": 320,
+   "land_surface": 1200,
+   "address": {
+    "street": "Carrer del Pi 46",
+    "postcode": "17255",
+    "city": "Begur",
+    "country": "Spain",
+    "lat": 41.961,
+    "lng": 3.199
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24807128.jpg",
+     "alt": "Villa en Begur"
+    }
+   ],
+   "agent": {
+    "id": "bf8a5408-899e-4714-9d34-c65c77f711f4",
+    "first_name": "Hannah",
+    "last_name": "Lowe",
+    "phone": "+34 000 000 004",
+    "email": "hannah.lowe@cala-moreta.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36763573-sq.jpg",
+     "alt": "Hannah Lowe"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "TRBY-LZGS",
+   "team_ids": [
+    "acb1dc46-518b-4212-a8f5-a719da9e2efc"
+   ]
+  }
+ ],
+ "developments": [],
+ "fixture_only": {
+  "listings": {
+   "374beb01-e63d-4818-b49a-3ce71b962dd0": {
+    "energy_class": "A",
+    "year_built": 2021,
+    "terrace_surface": 180
+   },
+   "b495dd6f-9a86-4c19-b34d-2a7353f6329c": {
+    "energy_class": "E",
+    "year_built": 1890,
+    "terrace_surface": 90
+   },
+   "d3bb7e32-b15d-4b61-97e3-6ae7d8b5a6fb": {
+    "energy_class": "B",
+    "year_built": 2009,
+    "terrace_surface": 160
+   },
+   "31ef6129-2113-4393-bf8f-426f5bf7a04a": {
+    "energy_class": "C",
+    "year_built": 2004,
+    "terrace_surface": 120
+   },
+   "f1a5ad20-4a58-4366-b604-82f7785dc8eb": {
+    "energy_class": "C",
+    "year_built": 2019,
+    "terrace_surface": 140
+   },
+   "9c73a067-8d85-484f-bd37-f1b5cb1c0ad3": {
+    "energy_class": "C",
+    "year_built": 2016,
+    "terrace_surface": 60
+   },
+   "1c793998-2d68-4ad5-8b44-dce8b9bae90e": {
+    "energy_class": "B",
+    "year_built": 2012,
+    "terrace_surface": 70
+   },
+   "8c744cde-6ed6-44ad-9cef-295f31d6e20c": {
+    "energy_class": "D",
+    "year_built": 2017,
+    "terrace_surface": 150
+   },
+   "37c9c5b8-e54f-4095-b92a-22a349e22e2c": {
+    "energy_class": "C",
+    "year_built": 2022,
+    "terrace_surface": 200
+   },
+   "0e8d04f0-ae43-4875-8416-4a3327fd5010": {
+    "energy_class": "C",
+    "year_built": 2020,
+    "terrace_surface": 260
+   },
+   "b10372b6-3bdc-4565-a932-29eea677b0a9": {
+    "energy_class": "E",
+    "year_built": 1975,
+    "terrace_surface": 80
+   },
+   "1f9947f8-fdb7-43f9-8ae9-b6aa2cb4fea8": {
+    "energy_class": "A",
+    "year_built": 1760,
+    "terrace_surface": 200
+   },
+   "aed9a1b0-d7b9-44df-8b5f-c040b5643d60": {
+    "energy_class": "C",
+    "year_built": 1850,
+    "terrace_surface": 300
+   },
+   "6484f48a-ad96-4e10-ab47-6a4d8f1170a4": {
+    "energy_class": "B",
+    "year_built": 1998,
+    "terrace_surface": 50
+   },
+   "2aa837fa-3024-43fb-8e1e-547536d69e0c": {
+    "energy_class": "C",
+    "year_built": 2015,
+    "terrace_surface": 70,
+    "charges": 250
+   },
+   "46712484-1608-4169-8226-eb36aee1ff84": {
+    "energy_class": "B",
+    "year_built": 2005,
+    "terrace_surface": 60,
+    "charges": 300
+   },
+   "f0cd2650-de51-4a2a-92ff-4dca218b57c1": {
+    "energy_class": "B",
+    "year_built": 2010,
+    "terrace_surface": 120,
+    "charges": 500
+   },
+   "af81f8a5-b20c-46b1-b484-be9fa34ef341": {
+    "energy_class": "B",
+    "year_built": 2008,
+    "terrace_surface": 140
+   },
+   "2e2358d1-95ed-418f-9e14-6c4d01de948b": {
+    "energy_class": "A",
+    "year_built": 2014,
+    "terrace_surface": 50
+   },
+   "3e53902e-a299-4fd5-b279-b46ce61c6518": {
+    "energy_class": "C",
+    "year_built": 2016,
+    "terrace_surface": 140
+   }
+  },
+  "units": {},
+  "developments": {}
+ }
+}

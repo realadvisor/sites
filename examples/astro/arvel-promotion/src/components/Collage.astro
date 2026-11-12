@@ -1,0 +1,27 @@
+---
+/** Staggered three-photo collage (centre tall, sides offset). Photos keep their crop within ~10%. */
+import type { Photo } from '@realadvisor/sites-sdk/types';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+interface Props { photos: Photo[]; fallbackAlt: string }
+const { photos, fallbackAlt } = Astro.props;
+const [a, b, c] = photos;
+---
+{photos.length >= 3 && (
+  <div class="collage">
+    <figure class="f1 frame settle"><RaImage src={a} alt={a!.alt || fallbackAlt} width={720} height={540} sizes="(min-width: 900px) 30vw, 60vw" /></figure>
+    <figure class="f2 frame settle"><RaImage src={b} alt={b!.alt || fallbackAlt} width={720} height={960} sizes="(min-width: 900px) 34vw, 100vw" mobile={{ width: 800, height: 600 }} /></figure>
+    <figure class="f3 frame settle"><RaImage src={c} alt={c!.alt || fallbackAlt} width={720} height={540} sizes="(min-width: 900px) 30vw, 60vw" /></figure>
+  </div>
+)}
+<style>
+  .collage { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: clamp(12px, 2vw, 28px); align-items: start; }
+  figure { margin: 0; }
+  .f1 { aspect-ratio: 4 / 3; margin-top: 18%; }
+  .f2 { aspect-ratio: 3 / 4; }
+  .f3 { aspect-ratio: 4 / 3; margin-top: 44%; }
+  @media (max-width: 700px) {
+    .collage { grid-template-columns: 1fr 1fr; }
+    .f2 { grid-column: 1 / -1; grid-row: 1; aspect-ratio: 4 / 3; }
+    .f1, .f3 { margin-top: 0; }
+  }
+</style>

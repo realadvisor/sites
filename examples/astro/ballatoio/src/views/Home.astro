@@ -1,0 +1,274 @@
+---
+/**
+ * Home: a magazine cover (one listing, full bleed, the wordmark over it),
+ * an index of what is on offer, the sale collection as a spread, the
+ * districts as a photo and a typographic list, rentals as plain rows, the
+ * valuation split and the journal as a list.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, brandName, byNewest, sites } from '../lib/data';
+import { districtsWithListings, inMilan, placeOf } from '../lib/districts';
+import { placePhoto } from '../lib/places';
+import { postsOf } from '../lib/journal';
+import { CONTENT_LANG, UI, alternates, fill, href, listingHref, type Lang } from '../lib/i18n';
+import { factLine, formatDate, price } from '../lib/format';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const textLang = lang === CONTENT_LANG ? undefined : CONTENT_LANG;
+const [ag, all, posts] = await Promise.all([agency(), sites.allListings(), postsOf(lang)]);
+const name = brandName(ag);
+const live = all.filter((l) => l.status === 'available').sort(byNewest);
+const sale = live.filter((l) => l.offer_type === 'buy');
+const rent = live.filter((l) => l.offer_type === 'rent');
+const sold = all.filter((l) => l.status === 'sold').sort(byNewest);
+const districts = districtsWithListings(all);
+const outside = [...new Set(all.filter((l) => !inMilan(l) && l.address.city).map((l) => l.address.city!))];
+
+// The cover: the newest home for sale with at least three photos, else any with one.
+const cover = sale.find((l) => l.photos.length >= 3) ?? live.find((l) => l.photos[0]);
+const spread = sale.filter((l) => l.id !== cover?.id).slice(0, 5);
+const [lead, ...rest] = spread;
+const districtPhoto = placePhoto('navigli', lang, 0) ?? placePhoto('milano', lang, 0);
+const sellPhoto = sold.find((l) => l.photos[0])?.photos[0] ?? placePhoto('brera', lang, 1);
+const homes = (n: number) => (n === 1 ? ui.homeOne : fill(ui.homesN, { n }));
+const index = [
+  sale.length > 0 && { label: ui.nav.buy, n: homes(sale.length), href: href('buy', lang) },
+  rent.length > 0 && { label: ui.nav.rent, n: homes(rent.length), href: href('rent', lang) },
+  sold.length > 0 && { label: ui.nav.sold, n: homes(sold.length), href: href('sold', lang) },
+  { label: ui.nav.sell, n: '', href: href('sell', lang) },
+].filter(Boolean) as { label: string; n: string; href: string }[];
+const siteUrl = new URL('/', Astro.site ?? Astro.url).href;
+const description = ag.team?.description_text?.slice(0, 158) ?? ui.heroSub;
+---
+<Site lang={lang} title={`${name}, ${ui.heroSub}`} description={description}
+  image={cover?.photos[0] && img(cover.photos[0].url, { w: 1200, h: 630 })}
+  alternates={alternates('home')} jsonLd={agencyJsonLd(agencyOf(ag.org, ag.team), siteUrl)}>
+
+  <section class="cover" data-hero>
+    {cover?.photos[0] && (
+      <div class="cover-photo">
+        <RaImage src={cover.photos[0]} alt={cover.photos[0].alt || cover.title} width={1600} height={900} priority widths={[640, 960, 1280, 1600, 1920]}          sizes="100vw" mobile={{ width: 800, height: 1100 }} />
+      </div>
+    )}
+    <div class="cover-text on-dark">
+      <div class="wrap cover-in">
+        <h1>
+          <span class="cover-sub">{ui.heroSub}</span>
+          <span class="d-mega cover-mark">{name}</span>
+        </h1>
+        <div class="cover-actions">
+          {sale.length > 0 && <a class="cta cta-solid" href={href("buy", lang)}>{ui.heroBuy}</a>}
+          <a class="cta cta-light" href={href('sell', lang)}>{ui.heroSell}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {cover && (
+    <div class="wrap cover-caption">
+      <p class="label muted">{ui.coverLabel}</p>
+      <p><a href={listingHref(cover, lang)} lang={textLang}>{cover.title}</a></p>
+      <p class="muted">{placeOf(cover)}</p>
+      <p class="num">{price(cover, lang)}</p>
+    </div>
+  )}
+
+  <section class="wrap intro">
+    {ag.team?.description_text && <p class="intro-text">{ag.team.description_text}</p>}
+    <ul class="index">
+      {index.map((i) => (
+        <li><a href={i.href}><span class="d-l">{i.label}</span><span class="index-n">{i.n}</span><span aria-hidden="true" class="index-arrow">→</span></a></li>
+      ))}
+    </ul>
+  </section>
+
+  {lead && (
+    <section class="wrap sale" aria-labelledby="sale-h">
+      <h2 id="sale-h" class="d-xl">{ui.forSaleTitle}</h2>
+      <ListingCard listing={lead} lang={lang} shape="wide" />
+      {rest.length > 0 && (
+        <div class="spread">
+          {rest.map((l, i) => <ListingCard listing={l} lang={lang} shape={i % 3 === 0 ? 'tall' : 'land'} />)}
+        </div>
+      )}
+      <p class="more"><a class="arrow-link" href={href('buy', lang)}>{fill(ui.seeAllSale, { n: sale.length })} <span aria-hidden="true">→</span></a></p>
+    </section>
+  )}
+
+  {districts.length > 0 && (
+    <section class="areas" aria-labelledby="areas-h">
+      {districtPhoto && (
+        <div class="areas-photo frame">
+          <RaImage src={districtPhoto} alt={districtPhoto.alt} width={1800} height={760} sizes="100vw" mobile={{ width: 800, height: 900 }} />
+        </div>
+      )}
+      <div class="wrap areas-in">
+        <div class="areas-head">
+          <h2 id="areas-h" class="d-xl">{ui.areasTitle}</h2>
+          <p class="lead">{ui.areasLine}</p>
+        </div>
+        <ul class="areas-list">
+          {districts.map((d) => (
+            <li><a href={href('areas', lang, d.slug)}><span class="d-l">{d.name}</span> <span class="areas-n num">{homes(d.listings.length)}</span></a></li>
+          ))}
+        </ul>
+        {outside.length > 0 && <p class="areas-out"><span class="label">{ui.outside}</span> {outside.join(', ')}</p>}
+      </div>
+    </section>
+  )}
+
+  {rent.length > 0 && (
+    <section class="wrap rent" aria-labelledby="rent-h">
+      <div class="rent-head">
+        <h2 id="rent-h" class="d-xl">{ui.rentTitle}</h2>
+        <a class="arrow-link" href={href('rent', lang)}>{ui.seeAllRent} <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="rows">
+        {rent.slice(0, 4).map((l) => (
+          <li class="row">
+            <div class="frame row-photo">
+              {l.photos[0] && <RaImage src={l.photos[0]} alt={l.photos[0].alt || l.title} width={480} height={360} sizes="(min-width: 760px) 240px, 34vw" />}
+            </div>
+            <h3 class="row-title"><a href={listingHref(l, lang)} lang={textLang}>{l.title}</a></h3>
+            <p class="row-place muted">{placeOf(l)}</p>
+            <p class="row-facts num">{factLine(l, lang)}</p>
+            <p class="row-price num">{price(l, lang)}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="wrap sell" aria-labelledby="sell-h">
+    {sellPhoto && (
+      <div class="frame sell-photo">
+        <RaImage src={sellPhoto} alt={sellPhoto.alt} width={900} height={1100} sizes="(min-width: 900px) 46vw, 100vw" />
+      </div>
+    )}
+    <div class="sell-text">
+      <h2 id="sell-h" class="d-xl">{ui.sellTitle}</h2>
+      <p class="lead">{ui.sellLead}</p>
+      <p class="sell-actions">
+        <a class="cta cta-solid" href={href('sell', lang)}>{ui.sellCta}</a>
+        {sold.length > 0 && <a class="arrow-link" href={href('sold', lang)}>{ui.soldLink} <span aria-hidden="true">→</span></a>}
+      </p>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="wrap journal" aria-labelledby="journal-h">
+      <h2 id="journal-h" class="d-xl">{ui.journalTitle}</h2>
+      <ol class="posts">
+        {posts.slice(0, 4).map((p) => (
+          <li>
+            <p class="small muted"><time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date, lang)}</time></p>
+            <h3 class="d-m"><a href={href('journal', lang, p.data.path)}>{p.data.title}</a></h3>
+            <p>{p.data.excerpt}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="more"><a class="arrow-link" href={href('journal', lang)}>{ui.journalAll} <span aria-hidden="true">→</span></a></p>
+    </section>
+  )}
+</Site>
+
+<style>
+  .cover { position: relative; height: calc(100svh - var(--header-h)); min-height: 560px; max-height: 980px; background: var(--accent); overflow: hidden; }
+  .cover-photo, .cover-photo :global(picture), .cover-photo :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cover-text {
+    position: absolute; inset: 0; color: #fff; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.62), rgb(0 0 0 / 0.56) 400px, transparent 600px);
+  }
+  .cover-in { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 22px; padding-bottom: clamp(20px, 3vw, 40px); }
+  .cover h1 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .cover-sub { display: block; font-size: var(--fs-lead); line-height: 1.4; font-weight: 500; height: 1.4em; overflow: visible; }
+  @media (max-width: 760px) { .cover-sub { height: 2.8em; } }
+  .cover-mark { display: block; margin-left: -0.04em; font-size: min(23vw, 26rem); white-space: nowrap; }
+  .cover-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cover-caption {
+    display: grid; grid-template-columns: auto 1fr auto auto; gap: 6px 32px; align-items: baseline;
+    padding-top: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); font-size: 0.9375rem;
+  }
+  .cover-caption a { font-weight: 600; }
+  @media (max-width: 760px) {
+    .cover { height: 80svh; min-height: 540px; }
+    .cover-caption { grid-template-columns: 1fr auto; }
+    .cover-caption .label { grid-column: 1 / -1; }
+    .cover-caption p:nth-child(3) { grid-column: 1; grid-row: 3; }
+  }
+
+  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 120px); padding-top: var(--section); align-items: start; }
+  .intro-text { font-size: var(--fs-m); line-height: 1.22; font-weight: 450; max-width: 22em; letter-spacing: -0.01em; }
+  .index { border-top: 1px solid var(--text); }
+  .index a {
+    display: grid; grid-template-columns: 1fr auto auto; gap: 20px; align-items: baseline;
+    padding: 14px 0 12px; border-bottom: 1px solid var(--line); text-decoration: none;
+  }
+  .index a:hover .d-l { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.08em; }
+  .index-n { color: var(--muted); font-size: 0.9375rem; }
+  .index-arrow { font-size: 1.5rem; }
+  @media (max-width: 900px) { .intro { grid-template-columns: 1fr; } }
+
+  .sale { padding-top: var(--section); display: grid; gap: clamp(28px, 4vw, 56px); }
+  .spread { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(56px, 6vw, 96px) clamp(20px, 4vw, 72px); }
+  .spread > :global(:nth-child(even)) { margin-top: clamp(0px, 12vw, 200px); }
+  .more { display: flex; justify-content: flex-start; }
+  @media (max-width: 760px) {
+    .spread { grid-template-columns: 1fr; }
+    .spread > :global(:nth-child(even)) { margin-top: 0; }
+  }
+
+  .areas { margin-top: var(--section); }
+  .areas-photo { aspect-ratio: 1800 / 760; max-height: 760px; width: 100%; }
+  .areas-in { display: grid; grid-template-columns: 1fr 1.25fr; gap: 32px clamp(40px, 6vw, 120px); padding-top: clamp(40px, 5vw, 72px); }
+  .areas-head { display: grid; gap: 20px; align-content: start; }
+  .areas-list { display: flex; flex-wrap: wrap; gap: 0 28px; align-content: start; }
+  .areas-list a { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; padding-block: 2px; }
+  .areas-list a:hover .d-l { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.08em; }
+  .areas-n { color: var(--muted); font-size: 0.9375rem; }
+  .areas-out { grid-column: 2; border-top: 1px solid var(--line); padding-top: 14px; }
+  .areas-out .label { margin-right: 12px; color: var(--muted); }
+  @media (max-width: 900px) {
+    .areas-in { grid-template-columns: 1fr; }
+    .areas-out { grid-column: 1; }
+    .areas-photo { aspect-ratio: 8 / 9; max-height: 70svh; }
+  }
+
+  .rent { padding-top: var(--section); }
+  .rent-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: clamp(24px, 3vw, 40px); }
+  .rows { border-top: 1px solid var(--text); }
+  .row {
+    position: relative; display: grid; grid-template-columns: 240px 1.6fr 1fr 1fr auto; gap: 8px 32px; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+  }
+  .row-photo { aspect-ratio: 4 / 3; }
+  .row-title { font-stretch: 62%; font-weight: 800; text-transform: uppercase; font-size: var(--fs-s); line-height: 1; }
+  .row-title a { text-decoration: none; }
+  .row-title a::after { content: ''; position: absolute; inset: 0; }
+  .row:hover .row-title a { text-decoration: underline; }
+  .row-price { font-weight: 650; text-align: right; }
+  @media (max-width: 900px) {
+    .row { grid-template-columns: 34vw 1fr; gap: 4px 16px; align-items: start; }
+    .row-photo { grid-row: span 4; }
+    .row-price { text-align: left; }
+  }
+
+  .sell { padding-top: var(--section); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 120px); align-items: center; }
+  .sell-photo { aspect-ratio: 9 / 11; }
+  .sell-text { display: grid; gap: 28px; align-content: center; }
+  .sell-actions { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
+  @media (max-width: 900px) { .sell { grid-template-columns: 1fr; } .sell-photo { aspect-ratio: 4 / 5; } }
+
+  .journal { padding-top: var(--section); display: grid; gap: clamp(28px, 4vw, 48px); }
+  .posts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(32px, 5vw, 96px); border-top: 1px solid var(--text); }
+  .posts li { display: grid; gap: 12px; align-content: start; padding: 24px 0 32px; border-bottom: 1px solid var(--line); }
+  .posts h3 a { text-decoration: none; }
+  .posts h3 a:hover { text-decoration: underline; }
+  @media (max-width: 760px) { .posts { grid-template-columns: 1fr; } }
+</style>

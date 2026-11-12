@@ -1,0 +1,72 @@
+---
+/**
+ * Programme enquiry: the kit EnquiryForm on a paper panel, with the
+ * programme's adviser. Always `developmentId`, plus the unit select (every
+ * development enquiry is filed on a unit) with `selectedUnit` preselected.
+ */
+import type { DevelopmentWithUnits } from '@realadvisor/sites-sdk/types';
+import AgentPhoto from './AgentPhoto.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { enquiryMessage, languageList, telHref, unitOptions } from '../lib/fr';
+
+interface Props {
+  programme: DevelopmentWithUnits;
+  selectedUnit?: string;
+  id?: string;
+  title?: string;
+}
+const { programme: d, selectedUnit, id = 'contact', title = `Recevoir la brochure et les prix de ${d.title}` } = Astro.props;
+const units = unitOptions(d.units);
+const chosen = d.units.find((u) => u.id === selectedUnit && u.status !== 'sold');
+const agent = d.agents[0];
+---
+<section class="section enquiry-section" id={id} aria-labelledby={`${id}-h`}>
+  <div class="wrap grid">
+    <div class="side">
+      <h2 id={`${id}-h`} class="h2">{title}</h2>
+      <p class="muted">Votre conseiller vous rappelle, vous envoie le plan du logement et propose un rendez-vous au bureau ou sur place.</p>
+      {agent && (
+        <div class="agent">
+          <AgentPhoto agent={agent} />
+          <div>
+            <p class="an">{agent.first_name} {agent.last_name}</p>
+            <p class="ar">{agent.title ?? `Ventes, ${d.title}`}{agent.languages?.length ? ` · ${languageList(agent.languages)}` : ''}</p>
+            <p class="ac">
+              {agent.phone && <a href={telHref(agent.phone)} class="num">{agent.phone}</a>}
+              {agent.email && <a href={`mailto:${agent.email}`}>{agent.email}</a>}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+    <div class="paper card">
+      <EnquiryForm
+        id={`${id}-form`}
+        developmentId={d.id}
+        units={units}
+        selectedUnit={chosen?.id}
+        agentId={agent?.id}
+        agentName={agent?.first_name}
+        message={enquiryMessage(d, chosen)}
+        submitLabel="Envoyer ma demande"
+      />
+    </div>
+  </div>
+</section>
+<style>
+  .enquiry-section { background: var(--bg); border-top: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px clamp(32px, 6vw, 112px); align-items: start; }
+  .side { display: grid; gap: 24px; position: sticky; top: calc(var(--header-h) + var(--subnav-h) + 32px); }
+  .side p { margin: 0; }
+  .h2 { font: 500 clamp(1.9rem, 3.4vw, 3.1rem) / 1.08 var(--serif); }
+  .agent { display: flex; gap: 20px; align-items: flex-start; padding-top: 24px; border-top: 1px solid var(--line); }
+  .an { font: 500 1.5rem / 1.1 var(--serif); }
+  .ar { font-size: 0.8125rem; color: var(--muted); margin-top: 4px !important; }
+  .ac { display: flex; flex-wrap: wrap; gap: 0 18px; margin-top: 6px !important; font-size: var(--fs-small); }
+  .ac a { display: inline-flex; min-height: 40px; align-items: center; }
+  .card { padding: clamp(24px, 4vw, 52px); }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .side { position: static; }
+  }
+</style>

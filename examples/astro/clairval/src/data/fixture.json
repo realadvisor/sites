@@ -1,0 +1,2133 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "en",
+  "fr"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "d84fae1c-a0f0-4d0c-9d71-2017217a6b4d",
+  "name": "Clairval Estates SA",
+  "website": "https://clairval.example.com",
+  "address": {
+   "street": "Rue de la Corraterie 16",
+   "postcode": "1204",
+   "city": "Genève",
+   "country": "Switzerland",
+   "lat": 46.203,
+   "lng": 6.143
+  },
+  "brand": {
+   "primary": "#8A6D3B"
+  }
+ },
+ "teams": [
+  {
+   "id": "be1b167f-0444-4e1d-92f7-230372554c93",
+   "name": "Clairval Geneva",
+   "primary": true,
+   "website": "https://clairval.example.com",
+   "phone": "+41 00 000 00 01",
+   "email": "geneva@clairval.example.com",
+   "address": {
+    "street": "Rue de la Corraterie 16",
+    "postcode": "1204",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.203,
+    "lng": 6.143
+   },
+   "socials": {},
+   "description": "<p>Our head office on the Corraterie. Lakeside houses and villas on the left bank (Cologny, Vandœuvres, Collonge-Bellerive, Anières) and apartments in the city.</p>",
+   "description_text": "Our head office on the Corraterie. Lakeside houses and villas on the left bank (Cologny, Vandœuvres, Collonge-Bellerive, Anières) and apartments in the city."
+  },
+  {
+   "id": "1808df43-7a08-4fb6-affd-8916214de450",
+   "name": "Clairval Gstaad",
+   "website": "https://clairval.example.com",
+   "phone": "+41 00 000 00 02",
+   "email": "gstaad@clairval.example.com",
+   "address": {
+    "street": "Promenade 41",
+    "postcode": "3780",
+    "city": "Gstaad",
+    "country": "Switzerland",
+    "lat": 46.474,
+    "lng": 7.286
+   },
+   "socials": {},
+   "description": "<p>Our office on the Promenade. Chalets for sale and for the winter season in Gstaad, Saanen, Schönried and Lauenen.</p>",
+   "description_text": "Our office on the Promenade. Chalets for sale and for the winter season in Gstaad, Saanen, Schönried and Lauenen."
+  },
+  {
+   "id": "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5",
+   "name": "Clairval Saint-Tropez",
+   "website": "https://clairval.example.com",
+   "phone": "+41 00 000 00 03",
+   "email": "sainttropez@clairval.example.com",
+   "address": {
+    "street": "Rue Général Allard 8",
+    "postcode": "83990",
+    "city": "Saint-Tropez",
+    "country": "France",
+    "lat": 43.271,
+    "lng": 6.638
+   },
+   "socials": {},
+   "description": "<p>Our office in the old town. Villas and bastides in Saint-Tropez, Ramatuelle and Gassin, for sale and for summer rental.</p>",
+   "description_text": "Our office in the old town. Villas and bastides in Saint-Tropez, Ramatuelle and Gassin, for sale and for summer rental."
+  }
+ ],
+ "agents": [
+  {
+   "id": "d81fe45f-aa54-4988-81c6-3647f19f4256",
+   "first_name": "Julien",
+   "last_name": "Favre",
+   "phone": "+41 00 000 00 04",
+   "email": "julien.favre@clairval.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766706-sq.jpg",
+    "alt": "Julien Favre"
+   }
+  },
+  {
+   "id": "ccd2342b-d45d-4e57-98d4-973e477f6170",
+   "first_name": "Chloé",
+   "last_name": "Lambert",
+   "phone": "+41 00 000 00 05",
+   "email": "chloe.lambert@clairval.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766731-sq.jpg",
+    "alt": "Chloé Lambert"
+   }
+  },
+  {
+   "id": "066a9625-de45-485e-a27f-8e9c006652ba",
+   "first_name": "Daniel",
+   "last_name": "Mensah",
+   "phone": "+41 00 000 00 06",
+   "email": "daniel.mensah@clairval.example.com",
+   "languages": [
+    "en"
+   ],
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766699-sq.jpg",
+    "alt": "Daniel Mensah"
+   }
+  },
+  {
+   "id": "6e0f69d2-22e7-46c6-bbb4-54dd69f5a174",
+   "first_name": "Inès",
+   "last_name": "Kohler",
+   "phone": "+41 00 000 00 07",
+   "email": "ines.kohler@clairval.example.com",
+   "languages": [
+    "en"
+   ],
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4964999-sq.jpg",
+    "alt": "Inès Kohler"
+   }
+  },
+  {
+   "id": "a3f4761a-b548-42f6-8476-823d7aa5abeb",
+   "first_name": "Samir",
+   "last_name": "Haddad",
+   "phone": "+41 00 000 00 08",
+   "email": "samir.haddad@clairval.example.com",
+   "languages": [
+    "en"
+   ],
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4965012-sq.jpg",
+    "alt": "Samir Haddad"
+   }
+  },
+  {
+   "id": "1f8ed0fe-b229-4ca6-bdd5-0cbe965e760e",
+   "first_name": "Philippe",
+   "last_name": "Aubanel",
+   "phone": "+41 00 000 00 09",
+   "email": "philippe.aubanel@clairval.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782194-sq.jpg",
+    "alt": "Philippe Aubanel"
+   }
+  },
+  {
+   "id": "7c3e0451-da8f-4de2-816d-c97f2e8dda05",
+   "first_name": "Thomas",
+   "last_name": "Giraud",
+   "phone": "+41 00 000 00 10",
+   "email": "thomas.giraud@clairval.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782201-sq.jpg",
+    "alt": "Thomas Giraud"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "aaa18e60-c32f-4cb9-b79a-0bac1d85f34b",
+   "slug": "chalet-on-the-oberbort-with-views-of-the-wasserngrat-aaa18e60-c32f-4cb9-b79a-0bac1d85f34b",
+   "title": "Chalet on the Oberbort with views of the Wasserngrat",
+   "description": "<p>A large chalet on the sunny Oberbort slope, a few minutes above the Promenade, facing the Wasserngrat and the Eggli.</p><p>Living room with an open fireplace and a dining area for twelve, a separate kitchen, six bedrooms with their own bathrooms and a staff studio. The ground floor has a ski room, a wine cellar and a garage for four cars.</p><p>South-facing terrace of 140 m² and a garden of 1,450 m². Built in 2016 in larch and stone, heated by a heat pump.</p>",
+   "description_text": "A large chalet on the sunny Oberbort slope, a few minutes above the Promenade, facing the Wasserngrat and the Eggli.\n\nLiving room with an open fireplace and a dining area for twelve, a separate kitchen, six bedrooms with their own bathrooms and a staff studio. The ground floor has a ski room, a wine cellar and a garage for four cars.\n\nSouth-facing terrace of 140 m² and a garden of 1,450 m². Built in 2016 in larch and stone, heated by a heat pump.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 27500000,
+   "currency": "CHF",
+   "rooms": 9,
+   "bedrooms": 6,
+   "bathrooms": 6,
+   "living_surface": 520,
+   "land_surface": 1450,
+   "address": {
+    "street": "Oberbortstrasse 12",
+    "postcode": "3780",
+    "city": "Gstaad",
+    "country": "Switzerland",
+    "lat": 46.474,
+    "lng": 7.292
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746551.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746555.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746583.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746588.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746580.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746611.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746613.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746570.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746572.jpg",
+     "alt": "Chalet on the Oberbort with views of the Wasserngrat, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "6e0f69d2-22e7-46c6-bbb4-54dd69f5a174",
+    "first_name": "Inès",
+    "last_name": "Kohler",
+    "phone": "+41 00 000 00 07",
+    "email": "ines.kohler@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4964999-sq.jpg",
+     "alt": "Inès Kohler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "P49J-VUKE",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "b45f7015-149f-489a-b8f3-d0f5cb38dda7",
+   "slug": "family-chalet-close-to-the-promenade-b45f7015-149f-489a-b8f3-d0f5cb38dda7",
+   "title": "Family chalet close to the Promenade",
+   "description": "<p>A chalet in a quiet residential street, a five-minute walk from the Promenade and the Gstaad train station.</p><p>Open living room under exposed beams with a stone fireplace, a dining room and a fitted kitchen. Five bedrooms on the two upper floors, four bathrooms. Ski room and double garage.</p><p>Garden of 900 m² with a covered terrace. Built in 2012, maintained by the same owners since.</p>",
+   "description_text": "A chalet in a quiet residential street, a five-minute walk from the Promenade and the Gstaad train station.\n\nOpen living room under exposed beams with a stone fireplace, a dining room and a fitted kitchen. Five bedrooms on the two upper floors, four bathrooms. Ski room and double garage.\n\nGarden of 900 m² with a covered terrace. Built in 2012, maintained by the same owners since.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 12900000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 340,
+   "land_surface": 900,
+   "address": {
+    "street": "Alpinastrasse 25",
+    "postcode": "3780",
+    "city": "Gstaad",
+    "country": "Switzerland",
+    "lat": 46.476,
+    "lng": 7.289
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746467.jpg",
+     "alt": "Family chalet close to the Promenade"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746463.jpg",
+     "alt": "Family chalet close to the Promenade, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746470.jpg",
+     "alt": "Family chalet close to the Promenade, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746476.jpg",
+     "alt": "Family chalet close to the Promenade, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746461.jpg",
+     "alt": "Family chalet close to the Promenade, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746466.jpg",
+     "alt": "Family chalet close to the Promenade, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746468.jpg",
+     "alt": "Family chalet close to the Promenade, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746472.jpg",
+     "alt": "Family chalet close to the Promenade, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "a3f4761a-b548-42f6-8476-823d7aa5abeb",
+    "first_name": "Samir",
+    "last_name": "Haddad",
+    "phone": "+41 00 000 00 08",
+    "email": "samir.haddad@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4965012-sq.jpg",
+     "alt": "Samir Haddad"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "F5MG-CF63",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "748acd70-ed67-4cb1-9603-f3a9b3a16047",
+   "slug": "chalet-with-garden-in-schonried-748acd70-ed67-4cb1-9603-f3a9b3a16047",
+   "title": "Chalet with garden in Schönried",
+   "description": "<p>A chalet on the road up to Saanenmöser, a short walk from the Schönried gondola and the village shops.</p><p>Living room with fireplace, kitchen with dining area, four bedrooms in the roof with sloping white-panelled ceilings, four bathrooms. Ski room and garage for two cars.</p><p>Garden of 1,100 m² with a sunny terrace. Built in 2009.</p>",
+   "description_text": "A chalet on the road up to Saanenmöser, a short walk from the Schönried gondola and the village shops.\n\nLiving room with fireplace, kitchen with dining area, four bedrooms in the roof with sloping white-panelled ceilings, four bathrooms. Ski room and garage for two cars.\n\nGarden of 1,100 m² with a sunny terrace. Built in 2009.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 6950000,
+   "currency": "CHF",
+   "rooms": 7,
+   "bedrooms": 4,
+   "bathrooms": 4,
+   "living_surface": 260,
+   "land_surface": 1100,
+   "address": {
+    "street": "Saanenmöserstrasse 18",
+    "postcode": "3778",
+    "city": "Schönried",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 7.295
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746561.jpg",
+     "alt": "Chalet with garden in Schönried"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746548.jpg",
+     "alt": "Chalet with garden in Schönried, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746554.jpg",
+     "alt": "Chalet with garden in Schönried, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746557.jpg",
+     "alt": "Chalet with garden in Schönried, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746573.jpg",
+     "alt": "Chalet with garden in Schönried, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746578.jpg",
+     "alt": "Chalet with garden in Schönried, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746556.jpg",
+     "alt": "Chalet with garden in Schönried, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746562.jpg",
+     "alt": "Chalet with garden in Schönried, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "6e0f69d2-22e7-46c6-bbb4-54dd69f5a174",
+    "first_name": "Inès",
+    "last_name": "Kohler",
+    "phone": "+41 00 000 00 07",
+    "email": "ines.kohler@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4964999-sq.jpg",
+     "alt": "Inès Kohler"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "F7DR-LSLG",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "8e5c861f-403e-4cf7-a206-a0f4ad64f730",
+   "slug": "furnished-chalet-apartment-for-the-winter-season-8e5c861f-403e-4cf7-a206-a0f4ad64f730",
+   "title": "Furnished chalet apartment for the winter season",
+   "description": "<p>A furnished apartment on the first floor of a chalet on the Lauenenstrasse, a ten-minute walk from the Promenade.</p><p>Living room with a brick fireplace and wood panelling, open kitchen, three bedrooms and two bathrooms. Linen, weekly cleaning and a parking space included.</p><p>Available from 15 December 2026 to 15 April 2027, minimum four months. Rent per month, charges and heating included in the extra costs.</p>",
+   "description_text": "A furnished apartment on the first floor of a chalet on the Lauenenstrasse, a ten-minute walk from the Promenade.\n\nLiving room with a brick fireplace and wood panelling, open kitchen, three bedrooms and two bathrooms. Linen, weekly cleaning and a parking space included.\n\nAvailable from 15 December 2026 to 15 April 2027, minimum four months. Rent per month, charges and heating included in the extra costs.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 28000,
+   "currency": "CHF",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 160,
+   "address": {
+    "street": "Lauenenstrasse 30",
+    "postcode": "3780",
+    "city": "Gstaad",
+    "country": "Switzerland",
+    "lat": 46.472,
+    "lng": 7.287
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746106.jpg",
+     "alt": "Furnished chalet apartment for the winter season"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746099.jpg",
+     "alt": "Furnished chalet apartment for the winter season, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746101.jpg",
+     "alt": "Furnished chalet apartment for the winter season, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746103.jpg",
+     "alt": "Furnished chalet apartment for the winter season, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746092.jpg",
+     "alt": "Furnished chalet apartment for the winter season, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746094.jpg",
+     "alt": "Furnished chalet apartment for the winter season, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746105.jpg",
+     "alt": "Furnished chalet apartment for the winter season, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "a3f4761a-b548-42f6-8476-823d7aa5abeb",
+    "first_name": "Samir",
+    "last_name": "Haddad",
+    "phone": "+41 00 000 00 08",
+    "email": "samir.haddad@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4965012-sq.jpg",
+     "alt": "Samir Haddad"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "WTBA-9MAB",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "50a5f04b-d0e7-4889-bf6f-f761092afa37",
+   "slug": "wooden-chalet-in-lauenen-50a5f04b-d0e7-4889-bf6f-f761092afa37",
+   "title": "Wooden chalet in Lauenen",
+   "description": "<p>A wooden chalet at the edge of Lauenen village, at the end of the valley, fifteen minutes by car from Gstaad.</p><p>Double-height living room with a fireplace and a gallery, kitchen with dining table, four bedrooms and three bathrooms. Renovated in 2019 with new windows and heating.</p><p>Garden of 800 m². Sold in September 2026.</p>",
+   "description_text": "A wooden chalet at the edge of Lauenen village, at the end of the valley, fifteen minutes by car from Gstaad.\n\nDouble-height living room with a fireplace and a gallery, kitchen with dining table, four bedrooms and three bathrooms. Renovated in 2019 with new windows and heating.\n\nGarden of 800 m². Sold in September 2026.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "sold",
+   "price": 4200000,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 210,
+   "land_surface": 800,
+   "address": {
+    "street": "Dorfstrasse 41",
+    "postcode": "3782",
+    "city": "Lauenen",
+    "country": "Switzerland",
+    "lat": 46.419,
+    "lng": 7.324
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9899840.jpg",
+     "alt": "Wooden chalet in Lauenen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9890644.jpg",
+     "alt": "Wooden chalet in Lauenen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9890739.jpg",
+     "alt": "Wooden chalet in Lauenen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9890656.jpg",
+     "alt": "Wooden chalet in Lauenen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9890643.jpg",
+     "alt": "Wooden chalet in Lauenen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9890738.jpg",
+     "alt": "Wooden chalet in Lauenen, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "6e0f69d2-22e7-46c6-bbb4-54dd69f5a174",
+    "first_name": "Inès",
+    "last_name": "Kohler",
+    "phone": "+41 00 000 00 07",
+    "email": "ines.kohler@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4964999-sq.jpg",
+     "alt": "Inès Kohler"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "NJBF-LZVG",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "d25ce4cf-c5a9-4088-817a-a28042342057",
+   "slug": "contemporary-chalet-with-indoor-pool-saanen-d25ce4cf-c5a9-4088-817a-a28042342057",
+   "title": "Contemporary chalet with indoor pool, Saanen",
+   "description": "<p>A recent chalet in the upper part of Saanen, in a quiet lane above the old village centre.</p><p>Living room with a floor-to-ceiling stone fireplace and large windows, kitchen, five bedrooms with bathrooms. The lower floor has an indoor pool, a sauna and a fitness room.</p><p>Plot of 1,300 m², garage for three cars. Built in 2021 to Minergie standard.</p>",
+   "description_text": "A recent chalet in the upper part of Saanen, in a quiet lane above the old village centre.\n\nLiving room with a floor-to-ceiling stone fireplace and large windows, kitchen, five bedrooms with bathrooms. The lower floor has an indoor pool, a sauna and a fitness room.\n\nPlot of 1,300 m², garage for three cars. Built in 2021 to Minergie standard.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 9800000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 410,
+   "land_surface": 1300,
+   "address": {
+    "street": "Mittelgässli 7",
+    "postcode": "3792",
+    "city": "Saanen",
+    "country": "Switzerland",
+    "lat": 46.49,
+    "lng": 7.26
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598361.jpg",
+     "alt": "Contemporary chalet with indoor pool, Saanen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598360.jpg",
+     "alt": "Contemporary chalet with indoor pool, Saanen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598366.jpg",
+     "alt": "Contemporary chalet with indoor pool, Saanen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598359.jpg",
+     "alt": "Contemporary chalet with indoor pool, Saanen, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "a3f4761a-b548-42f6-8476-823d7aa5abeb",
+    "first_name": "Samir",
+    "last_name": "Haddad",
+    "phone": "+41 00 000 00 08",
+    "email": "samir.haddad@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4965012-sq.jpg",
+     "alt": "Samir Haddad"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "B6EL-2V8K",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "d86b8301-7ad8-4870-84be-00cba9581b8e",
+   "slug": "chalet-with-a-glazed-living-room-wispile-d86b8301-7ad8-4870-84be-00cba9581b8e",
+   "title": "Chalet with a glazed living room, Wispile",
+   "description": "<p>A chalet at the foot of the Wispile, on the road to Gsteig, five minutes from the centre of Gstaad.</p><p>The living room is a glazed room of 120 m² under a timber roof, with a central suspended fireplace and old brick walls. Five bedrooms with bathrooms, separate kitchen and a staff apartment.</p><p>Garden of 1,600 m² with a view of the Wispile slopes. Built in 2019.</p>",
+   "description_text": "A chalet at the foot of the Wispile, on the road to Gsteig, five minutes from the centre of Gstaad.\n\nThe living room is a glazed room of 120 m² under a timber roof, with a central suspended fireplace and old brick walls. Five bedrooms with bathrooms, separate kitchen and a staff apartment.\n\nGarden of 1,600 m² with a view of the Wispile slopes. Built in 2019.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 15200000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 450,
+   "land_surface": 1600,
+   "address": {
+    "street": "Wispilenstrasse 40",
+    "postcode": "3780",
+    "city": "Gstaad",
+    "country": "Switzerland",
+    "lat": 46.469,
+    "lng": 7.289
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827065.jpg",
+     "alt": "Chalet with a glazed living room, Wispile"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827067.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827070.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827073.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827075.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827077.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827068.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24827069.jpg",
+     "alt": "Chalet with a glazed living room, Wispile, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "6e0f69d2-22e7-46c6-bbb4-54dd69f5a174",
+    "first_name": "Inès",
+    "last_name": "Kohler",
+    "phone": "+41 00 000 00 07",
+    "email": "ines.kohler@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4964999-sq.jpg",
+     "alt": "Inès Kohler"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "4RPP-ERAH",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "74485fc9-36a1-4238-b59e-777d53e7de19",
+   "slug": "chalet-near-the-village-saanen-74485fc9-36a1-4238-b59e-777d53e7de19",
+   "title": "Chalet near the village, Saanen",
+   "description": "<p>A smaller chalet between Saanen and Gstaad, on the Gstaadstrasse, with the bus stop and the cycle path in front.</p><p>Living room with fireplace, kitchen, three bedrooms in the roof and three bathrooms. Bright interior with white wood panelling.</p><p>Garden of 600 m² and a carport for two cars. Built in 2005.</p>",
+   "description_text": "A smaller chalet between Saanen and Gstaad, on the Gstaadstrasse, with the bus stop and the cycle path in front.\n\nLiving room with fireplace, kitchen, three bedrooms in the roof and three bathrooms. Bright interior with white wood panelling.\n\nGarden of 600 m² and a carport for two cars. Built in 2005.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 3950000,
+   "currency": "CHF",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 175,
+   "land_surface": 600,
+   "address": {
+    "street": "Gstaadstrasse 10",
+    "postcode": "3792",
+    "city": "Saanen",
+    "country": "Switzerland",
+    "lat": 46.488,
+    "lng": 7.265
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746945.jpg",
+     "alt": "Chalet near the village, Saanen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746943.jpg",
+     "alt": "Chalet near the village, Saanen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746937.jpg",
+     "alt": "Chalet near the village, Saanen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746946.jpg",
+     "alt": "Chalet near the village, Saanen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746949.jpg",
+     "alt": "Chalet near the village, Saanen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746951.jpg",
+     "alt": "Chalet near the village, Saanen, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746954.jpg",
+     "alt": "Chalet near the village, Saanen, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "a3f4761a-b548-42f6-8476-823d7aa5abeb",
+    "first_name": "Samir",
+    "last_name": "Haddad",
+    "phone": "+41 00 000 00 08",
+    "email": "samir.haddad@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "1808df43-7a08-4fb6-affd-8916214de450"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4965012-sq.jpg",
+     "alt": "Samir Haddad"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "GLXH-G2VA",
+   "team_ids": [
+    "1808df43-7a08-4fb6-affd-8916214de450"
+   ]
+  },
+  {
+   "id": "a43e345d-fde1-486b-9bd1-88a99563a4c0",
+   "slug": "lakefront-house-with-private-jetty-collonge-bellerive-a43e345d-fde1-486b-9bd1-88a99563a4c0",
+   "title": "Lakefront house with private jetty, Collonge-Bellerive",
+   "description": "<p>A contemporary house directly on the lake in Collonge-Bellerive, with its own jetty and a view across to the Jura.</p><p>The living room, dining room and kitchen are glazed on three sides and open onto the lake. Five bedrooms with bathrooms, a study and a roof terrace.</p><p>Garden of 2,600 m² with a pool and a boathouse. Built in 2018. Fifteen minutes from the centre of Geneva.</p>",
+   "description_text": "A contemporary house directly on the lake in Collonge-Bellerive, with its own jetty and a view across to the Jura.\n\nThe living room, dining room and kitchen are glazed on three sides and open onto the lake. Five bedrooms with bathrooms, a study and a roof terrace.\n\nGarden of 2,600 m² with a pool and a boathouse. Built in 2018. Fifteen minutes from the centre of Geneva.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 24500000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 480,
+   "land_surface": 2600,
+   "address": {
+    "street": "Chemin de la Gabiule 9",
+    "postcode": "1245",
+    "city": "Collonge-Bellerive",
+    "country": "Switzerland",
+    "lat": 46.262,
+    "lng": 6.209
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546595.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546599.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546600.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546597.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546598.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546593.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546592.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546601.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546606.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546610.jpg",
+     "alt": "Lakefront house with private jetty, Collonge-Bellerive, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "d81fe45f-aa54-4988-81c6-3647f19f4256",
+    "first_name": "Julien",
+    "last_name": "Favre",
+    "phone": "+41 00 000 00 04",
+    "email": "julien.favre@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766706-sq.jpg",
+     "alt": "Julien Favre"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "A3YT-N7F6",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "1a7a965e-330b-4151-b2ab-a1c2c0ae7661",
+   "slug": "mansion-with-indoor-pool-vand-uvres-1a7a965e-330b-4151-b2ab-a1c2c0ae7661",
+   "title": "Mansion with indoor pool, Vandœuvres",
+   "description": "<p>A large family house in a private lane in Vandœuvres, set back from the road in a walled park.</p><p>Double-height reception hall with a spiral staircase, living room, dining room, kitchen with breakfast room, six bedrooms and seven bathrooms. Indoor pool with a separate entrance, billiard room and wine cellar.</p><p>Park of 4,200 m². Built in 2008. Garage for four cars and a caretaker's apartment.</p>",
+   "description_text": "A large family house in a private lane in Vandœuvres, set back from the road in a walled park.\n\nDouble-height reception hall with a spiral staircase, living room, dining room, kitchen with breakfast room, six bedrooms and seven bathrooms. Indoor pool with a separate entrance, billiard room and wine cellar.\n\nPark of 4,200 m². Built in 2008. Garage for four cars and a caretaker's apartment.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 21000000,
+   "currency": "CHF",
+   "rooms": 12,
+   "bedrooms": 6,
+   "bathrooms": 7,
+   "living_surface": 820,
+   "land_surface": 4200,
+   "address": {
+    "street": "Chemin des Hauts-Crêts 14",
+    "postcode": "1253",
+    "city": "Vandœuvres",
+    "country": "Switzerland",
+    "lat": 46.221,
+    "lng": 6.194
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957089.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957083.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957094.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957079.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957106.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957086.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957090.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957084.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957104.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6957092.jpg",
+     "alt": "Mansion with indoor pool, Vandœuvres, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "066a9625-de45-485e-a27f-8e9c006652ba",
+    "first_name": "Daniel",
+    "last_name": "Mensah",
+    "phone": "+41 00 000 00 06",
+    "email": "daniel.mensah@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766699-sq.jpg",
+     "alt": "Daniel Mensah"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "QVNV-62AL",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "a786dcb2-b09b-4220-8721-1d05beb74a59",
+   "slug": "family-villa-with-pool-anieres-a786dcb2-b09b-4220-8721-1d05beb74a59",
+   "title": "Family villa with pool, Anières",
+   "description": "<p>A villa with a tiled roof in a residential area of Anières, ten minutes from the lake shore and the village school.</p><p>Living room with fireplace, kitchen, five bedrooms and four bathrooms over two floors. Gravel courtyard and double garage.</p><p>Garden of 2,300 m² with a pool. Sold in June 2026.</p>",
+   "description_text": "A villa with a tiled roof in a residential area of Anières, ten minutes from the lake shore and the village school.\n\nLiving room with fireplace, kitchen, five bedrooms and four bathrooms over two floors. Gravel courtyard and double garage.\n\nGarden of 2,300 m² with a pool. Sold in June 2026.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "sold",
+   "price": 9400000,
+   "currency": "CHF",
+   "rooms": 9,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 380,
+   "land_surface": 2300,
+   "address": {
+    "street": "Chemin des Avallons 6",
+    "postcode": "1247",
+    "city": "Anières",
+    "country": "Switzerland",
+    "lat": 46.273,
+    "lng": 6.222
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19119703.jpg",
+     "alt": "Family villa with pool, Anières"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19119702.jpg",
+     "alt": "Family villa with pool, Anières, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19119704.jpg",
+     "alt": "Family villa with pool, Anières, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19119706.jpg",
+     "alt": "Family villa with pool, Anières, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19119707.jpg",
+     "alt": "Family villa with pool, Anières, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19119701.jpg",
+     "alt": "Family villa with pool, Anières, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "ccd2342b-d45d-4e57-98d4-973e477f6170",
+    "first_name": "Chloé",
+    "last_name": "Lambert",
+    "phone": "+41 00 000 00 05",
+    "email": "chloe.lambert@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766731-sq.jpg",
+     "alt": "Chloé Lambert"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "S528-TT4Y",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "ae63b677-671a-4f67-a645-14716d4469de",
+   "slug": "renovated-apartment-in-champel-ae63b677-671a-4f67-a645-14716d4469de",
+   "title": "Renovated apartment in Champel",
+   "description": "<p>A six-room apartment on the third floor of a 1912 building on the Avenue de Champel, close to the Florissant shops and the Léman Express station.</p><p>Living room and dining room with mouldings and parquet, white open kitchen, three bedrooms and two bathrooms. Renovated in 2025.</p><p>Lift and cellar. Available from 1 January 2027. Rent per month, charges in the extra costs.</p>",
+   "description_text": "A six-room apartment on the third floor of a 1912 building on the Avenue de Champel, close to the Florissant shops and the Léman Express station.\n\nLiving room and dining room with mouldings and parquet, white open kitchen, three bedrooms and two bathrooms. Renovated in 2025.\n\nLift and cellar. Available from 1 January 2027. Rent per month, charges in the extra costs.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 9800,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 175,
+   "address": {
+    "street": "Avenue de Champel 40",
+    "postcode": "1206",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.19,
+    "lng": 6.152
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748006.jpg",
+     "alt": "Renovated apartment in Champel"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748008.jpg",
+     "alt": "Renovated apartment in Champel, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748012.jpg",
+     "alt": "Renovated apartment in Champel, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748011.jpg",
+     "alt": "Renovated apartment in Champel, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748007.jpg",
+     "alt": "Renovated apartment in Champel, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748009.jpg",
+     "alt": "Renovated apartment in Champel, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26748010.jpg",
+     "alt": "Renovated apartment in Champel, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "ccd2342b-d45d-4e57-98d4-973e477f6170",
+    "first_name": "Chloé",
+    "last_name": "Lambert",
+    "phone": "+41 00 000 00 05",
+    "email": "chloe.lambert@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766731-sq.jpg",
+     "alt": "Chloé Lambert"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "V3HE-HU5J",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "7cbc39e6-0a8f-4ef8-a84f-354fa1fc322a",
+   "slug": "duplex-penthouse-florissant-7cbc39e6-0a8f-4ef8-a84f-354fa1fc322a",
+   "title": "Duplex penthouse, Florissant",
+   "description": "<p>A duplex on the top two floors of a recent building on the Route de Florissant.</p><p>Double-height living room with a stone-clad fireplace, kitchen with island, three bedrooms and three bathrooms. Terrace of 110 m² with a view of the Salève.</p><p>Lift directly to the apartment, two parking spaces and a cellar. Built in 2017.</p>",
+   "description_text": "A duplex on the top two floors of a recent building on the Route de Florissant.\n\nDouble-height living room with a stone-clad fireplace, kitchen with island, three bedrooms and three bathrooms. Terrace of 110 m² with a view of the Salève.\n\nLift directly to the apartment, two parking spaces and a cellar. Built in 2017.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 7900000,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 240,
+   "address": {
+    "street": "Route de Florissant 50",
+    "postcode": "1206",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.194,
+    "lng": 6.16
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283961.jpg",
+     "alt": "Duplex penthouse, Florissant"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283962.jpg",
+     "alt": "Duplex penthouse, Florissant, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283965.jpg",
+     "alt": "Duplex penthouse, Florissant, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283968.jpg",
+     "alt": "Duplex penthouse, Florissant, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "066a9625-de45-485e-a27f-8e9c006652ba",
+    "first_name": "Daniel",
+    "last_name": "Mensah",
+    "phone": "+41 00 000 00 06",
+    "email": "daniel.mensah@clairval.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766699-sq.jpg",
+     "alt": "Daniel Mensah"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "38TJ-JP52",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "ada02b64-ef29-4584-9ea2-15f09655a9c5",
+   "slug": "maison-de-maitre-chene-bougeries-ada02b64-ef29-4584-9ea2-15f09655a9c5",
+   "title": "Maison de maître, Chêne-Bougeries",
+   "description": "<p>A 1931 maison de maître in Chêne-Bougeries, a short walk from the tram and the Chêne-Bourg Léman Express station.</p><p>Classic interior with mouldings, chandeliers and parquet: living room, dining room, library, kitchen and five bedrooms with bathrooms. Renovated in 2019.</p><p>Garden of 2,100 m² with old trees. Garage for two cars.</p>",
+   "description_text": "A 1931 maison de maître in Chêne-Bougeries, a short walk from the tram and the Chêne-Bourg Léman Express station.\n\nClassic interior with mouldings, chandeliers and parquet: living room, dining room, library, kitchen and five bedrooms with bathrooms. Renovated in 2019.\n\nGarden of 2,100 m² with old trees. Garage for two cars.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 11800000,
+   "currency": "CHF",
+   "rooms": 10,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 520,
+   "land_surface": 2100,
+   "address": {
+    "street": "Chemin de la Montagne 12",
+    "postcode": "1224",
+    "city": "Chêne-Bougeries",
+    "country": "Switzerland",
+    "lat": 46.198,
+    "lng": 6.191
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285939.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285933.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285936.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285940.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285945.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285934.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18285942.jpg",
+     "alt": "Maison de maître, Chêne-Bougeries, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "ccd2342b-d45d-4e57-98d4-973e477f6170",
+    "first_name": "Chloé",
+    "last_name": "Lambert",
+    "phone": "+41 00 000 00 05",
+    "email": "chloe.lambert@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766731-sq.jpg",
+     "alt": "Chloé Lambert"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "USB3-24ZZ",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "a8b4c346-2c52-41b7-99c4-1859901aa998",
+   "slug": "apartment-with-winter-garden-cologny-a8b4c346-2c52-41b7-99c4-1859901aa998",
+   "title": "Apartment with winter garden, Cologny",
+   "description": "<p>A five-room apartment on the second floor of a small building in Cologny, near the village and the Route de La-Capite.</p><p>Living room in a glazed winter garden with stone walls and a fireplace, kitchen, three bedrooms and two bathrooms.</p><p>Lift, two parking spaces and a cellar. Built in 1965, renovated in 2021.</p>",
+   "description_text": "A five-room apartment on the second floor of a small building in Cologny, near the village and the Route de La-Capite.\n\nLiving room in a glazed winter garden with stone walls and a fireplace, kitchen, three bedrooms and two bathrooms.\n\nLift, two parking spaces and a cellar. Built in 1965, renovated in 2021.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 4650000,
+   "currency": "CHF",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 165,
+   "address": {
+    "street": "Route de La-Capite 3",
+    "postcode": "1223",
+    "city": "Cologny",
+    "country": "Switzerland",
+    "lat": 46.22,
+    "lng": 6.187
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28862438.jpg",
+     "alt": "Apartment with winter garden, Cologny"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28862441.jpg",
+     "alt": "Apartment with winter garden, Cologny, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28862442.jpg",
+     "alt": "Apartment with winter garden, Cologny, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "d81fe45f-aa54-4988-81c6-3647f19f4256",
+    "first_name": "Julien",
+    "last_name": "Favre",
+    "phone": "+41 00 000 00 04",
+    "email": "julien.favre@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "be1b167f-0444-4e1d-92f7-230372554c93"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36766706-sq.jpg",
+     "alt": "Julien Favre"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "U75R-F933",
+   "team_ids": [
+    "be1b167f-0444-4e1d-92f7-230372554c93"
+   ]
+  },
+  {
+   "id": "6a3ad145-48eb-4d53-b93e-9743c7b35cf4",
+   "slug": "provencal-bastide-with-pool-ramatuelle-6a3ad145-48eb-4d53-b93e-9743c7b35cf4",
+   "title": "Provençal bastide with pool, Ramatuelle",
+   "description": "<p>A stone bastide in the countryside of Ramatuelle, between vineyards and umbrella pines, five minutes from the Pampelonne beaches.</p><p>Living room with beams and terracotta floors, country kitchen, six bedrooms in Provençal style and five bathrooms. Covered terrace and summer kitchen next to the pool.</p><p>Grounds of 9,500 m² with olive trees. House dating from the late 19th century, restored in 2017.</p>",
+   "description_text": "A stone bastide in the countryside of Ramatuelle, between vineyards and umbrella pines, five minutes from the Pampelonne beaches.\n\nLiving room with beams and terracotta floors, country kitchen, six bedrooms in Provençal style and five bathrooms. Covered terrace and summer kitchen next to the pool.\n\nGrounds of 9,500 m² with olive trees. House dating from the late 19th century, restored in 2017.",
+   "offer_type": "buy",
+   "property_type": "house_farmhouse",
+   "status": "available",
+   "price": 7800000,
+   "currency": "EUR",
+   "rooms": 8,
+   "bedrooms": 6,
+   "bathrooms": 5,
+   "living_surface": 340,
+   "land_surface": 9500,
+   "address": {
+    "street": "Chemin de l'Oumède 1450",
+    "postcode": "83350",
+    "city": "Ramatuelle",
+    "country": "France",
+    "lat": 43.217,
+    "lng": 6.638
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369019.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369018.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369021.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369020.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369023.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369024.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369025.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369026.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369027.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37369028.jpg",
+     "alt": "Provençal bastide with pool, Ramatuelle, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "1f8ed0fe-b229-4ca6-bdd5-0cbe965e760e",
+    "first_name": "Philippe",
+    "last_name": "Aubanel",
+    "phone": "+41 00 000 00 09",
+    "email": "philippe.aubanel@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782194-sq.jpg",
+     "alt": "Philippe Aubanel"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "9WZG-RN24",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "eca4361b-58bf-485d-9c32-d2b3fd666433",
+   "slug": "contemporary-villa-above-tahiti-beach-eca4361b-58bf-485d-9c32-d2b3fd666433",
+   "title": "Contemporary villa above Tahiti beach",
+   "description": "<p>A contemporary villa on the hill above Tahiti beach, at the northern end of Pampelonne, with a view over the bay.</p><p>Glazed living room opening onto the pool terrace, kitchen, five bedrooms with bathrooms, all facing the sea. Infinity pool, spa and pool house.</p><p>Grounds of 4,200 m² with pines. Built in 2020. Saint-Tropez harbour is ten minutes away.</p>",
+   "description_text": "A contemporary villa on the hill above Tahiti beach, at the northern end of Pampelonne, with a view over the bay.\n\nGlazed living room opening onto the pool terrace, kitchen, five bedrooms with bathrooms, all facing the sea. Infinity pool, spa and pool house.\n\nGrounds of 4,200 m² with pines. Built in 2020. Saint-Tropez harbour is ten minutes away.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 19500000,
+   "currency": "EUR",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 6,
+   "living_surface": 450,
+   "land_surface": 4200,
+   "address": {
+    "street": "Route de Tahiti 380",
+    "postcode": "83350",
+    "city": "Ramatuelle",
+    "country": "France",
+    "lat": 43.246,
+    "lng": 6.663
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817156.jpg",
+     "alt": "Contemporary villa above Tahiti beach"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817150.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817158.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817153.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817154.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817159.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817152.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31817151.jpg",
+     "alt": "Contemporary villa above Tahiti beach, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "7c3e0451-da8f-4de2-816d-c97f2e8dda05",
+    "first_name": "Thomas",
+    "last_name": "Giraud",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.giraud@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782201-sq.jpg",
+     "alt": "Thomas Giraud"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "CU7M-CJYD",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "6c3f66dd-23d3-4cd3-9c5d-21922ff9e7a6",
+   "slug": "villa-for-summer-rental-gassin-6c3f66dd-23d3-4cd3-9c5d-21922ff9e7a6",
+   "title": "Villa for summer rental, Gassin",
+   "description": "<p>A single-storey villa on the hills of Gassin, near the golf course, with a 25-metre pool along the terrace.</p><p>Large living room and dining room opening onto the terrace, kitchen, five bedrooms with bathrooms. Daily housekeeping and a concierge are included.</p><p>Available in June, July and August 2027. Rent per month; cleaning and concierge in the extra costs.</p>",
+   "description_text": "A single-storey villa on the hills of Gassin, near the golf course, with a 25-metre pool along the terrace.\n\nLarge living room and dining room opening onto the terrace, kitchen, five bedrooms with bathrooms. Daily housekeeping and a concierge are included.\n\nAvailable in June, July and August 2027. Rent per month; cleaning and concierge in the extra costs.",
+   "offer_type": "rent",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 120000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 380,
+   "land_surface": 5000,
+   "address": {
+    "street": "Chemin du Bourrian 520",
+    "postcode": "83580",
+    "city": "Gassin",
+    "country": "France",
+    "lat": 43.253,
+    "lng": 6.585
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715456.jpg",
+     "alt": "Villa for summer rental, Gassin"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715451.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715449.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715454.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715460.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715457.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715459.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12715462.jpg",
+     "alt": "Villa for summer rental, Gassin, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "7c3e0451-da8f-4de2-816d-c97f2e8dda05",
+    "first_name": "Thomas",
+    "last_name": "Giraud",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.giraud@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782201-sq.jpg",
+     "alt": "Thomas Giraud"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "YYMB-XS79",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "c43cf696-593c-4939-8fc4-0706df661bec",
+   "slug": "villa-with-infinity-pool-over-the-gulf-of-saint-tropez-c43cf696-593c-4939-8fc4-0706df661bec",
+   "title": "Villa with infinity pool over the Gulf of Saint-Tropez",
+   "description": "<p>A modern villa on the hills of Gassin with an infinity pool facing the Gulf of Saint-Tropez and the hills of Sainte-Maxime.</p><p>Glazed living room opening onto a stone terrace of 200 m², kitchen, six bedrooms with bathrooms and a spa floor with hammam.</p><p>Grounds of 3,800 m². Built in 2015. Saint-Tropez is fifteen minutes away by car.</p>",
+   "description_text": "A modern villa on the hills of Gassin with an infinity pool facing the Gulf of Saint-Tropez and the hills of Sainte-Maxime.\n\nGlazed living room opening onto a stone terrace of 200 m², kitchen, six bedrooms with bathrooms and a spa floor with hammam.\n\nGrounds of 3,800 m². Built in 2015. Saint-Tropez is fifteen minutes away by car.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 14500000,
+   "currency": "EUR",
+   "rooms": 10,
+   "bedrooms": 6,
+   "bathrooms": 6,
+   "living_surface": 650,
+   "land_surface": 3800,
+   "address": {
+    "street": "Route de Saint-Tropez 640",
+    "postcode": "83580",
+    "city": "Gassin",
+    "country": "France",
+    "lat": 43.261,
+    "lng": 6.594
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025722.jpg",
+     "alt": "Villa with infinity pool over the Gulf of Saint-Tropez"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025720.jpg",
+     "alt": "Villa with infinity pool over the Gulf of Saint-Tropez, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025719.jpg",
+     "alt": "Villa with infinity pool over the Gulf of Saint-Tropez, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "1f8ed0fe-b229-4ca6-bdd5-0cbe965e760e",
+    "first_name": "Philippe",
+    "last_name": "Aubanel",
+    "phone": "+41 00 000 00 09",
+    "email": "philippe.aubanel@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782194-sq.jpg",
+     "alt": "Philippe Aubanel"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "TN5R-6W4W",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "5639f51e-4983-46bc-bd7d-51aa34bc6237",
+   "slug": "bastide-with-arcades-gassin-5639f51e-4983-46bc-bd7d-51aa34bc6237",
+   "title": "Bastide with arcades, Gassin",
+   "description": "<p>A bastide below the village of Gassin, with a stone arcade along the south front and a pool in the garden.</p><p>Nine rooms over two floors, six bedrooms and five bathrooms, a vaulted cellar and outbuildings.</p><p>Grounds of 1.2 hectares. Sold in July 2026.</p>",
+   "description_text": "A bastide below the village of Gassin, with a stone arcade along the south front and a pool in the garden.\n\nNine rooms over two floors, six bedrooms and five bathrooms, a vaulted cellar and outbuildings.\n\nGrounds of 1.2 hectares. Sold in July 2026.",
+   "offer_type": "buy",
+   "property_type": "house_farmhouse",
+   "status": "sold",
+   "price": 6200000,
+   "currency": "EUR",
+   "rooms": 9,
+   "bedrooms": 6,
+   "bathrooms": 5,
+   "living_surface": 420,
+   "land_surface": 12000,
+   "address": {
+    "street": "Chemin du Bourrian 1150",
+    "postcode": "83580",
+    "city": "Gassin",
+    "country": "France",
+    "lat": 43.255,
+    "lng": 6.587
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13260073.jpg",
+     "alt": "Bastide with arcades, Gassin"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13260074.jpg",
+     "alt": "Bastide with arcades, Gassin, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13260075.jpg",
+     "alt": "Bastide with arcades, Gassin, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "1f8ed0fe-b229-4ca6-bdd5-0cbe965e760e",
+    "first_name": "Philippe",
+    "last_name": "Aubanel",
+    "phone": "+41 00 000 00 09",
+    "email": "philippe.aubanel@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782194-sq.jpg",
+     "alt": "Philippe Aubanel"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "95WU-S6VK",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "e0bc9f4f-0f17-4be6-b61a-fa1648876166",
+   "slug": "village-house-in-saint-tropez-e0bc9f4f-0f17-4be6-b61a-fa1648876166",
+   "title": "Village house in Saint-Tropez",
+   "description": "<p>A village house on the Rue des Remparts, in the old town between the harbour and the Citadelle.</p><p>White living room with kitchen and dining table, three bedrooms and three bathrooms over three floors, and a small roof terrace.</p><p>Renovated in 2022. No parking; the Parc des Lices car park is a five-minute walk.</p>",
+   "description_text": "A village house on the Rue des Remparts, in the old town between the harbour and the Citadelle.\n\nWhite living room with kitchen and dining table, three bedrooms and three bathrooms over three floors, and a small roof terrace.\n\nRenovated in 2022. No parking; the Parc des Lices car park is a five-minute walk.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 3400000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 140,
+   "address": {
+    "street": "Rue des Remparts 14",
+    "postcode": "83990",
+    "city": "Saint-Tropez",
+    "country": "France",
+    "lat": 43.273,
+    "lng": 6.641
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18556917.jpg",
+     "alt": "Village house in Saint-Tropez"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18556922.jpg",
+     "alt": "Village house in Saint-Tropez, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18556918.jpg",
+     "alt": "Village house in Saint-Tropez, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18556920.jpg",
+     "alt": "Village house in Saint-Tropez, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18556925.jpg",
+     "alt": "Village house in Saint-Tropez, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "7c3e0451-da8f-4de2-816d-c97f2e8dda05",
+    "first_name": "Thomas",
+    "last_name": "Giraud",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.giraud@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782201-sq.jpg",
+     "alt": "Thomas Giraud"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "E3L6-Q85X",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "733323e9-ac62-4603-b7d6-e860dafb1d9c",
+   "slug": "stone-house-among-the-pines-les-salins-733323e9-ac62-4603-b7d6-e860dafb1d9c",
+   "title": "Stone house among the pines, Les Salins",
+   "description": "<p>A stone house in the Salins area, a few minutes' walk from the Salins beach, in a garden of pines, cypresses and box hedges.</p><p>Living room with fireplace, kitchen, five bedrooms and four bathrooms. Terraces on two sides and a glimpse of the sea through the pines.</p><p>Grounds of 3,500 m². Built in the 1960s, renovated in 2018.</p>",
+   "description_text": "A stone house in the Salins area, a few minutes' walk from the Salins beach, in a garden of pines, cypresses and box hedges.\n\nLiving room with fireplace, kitchen, five bedrooms and four bathrooms. Terraces on two sides and a glimpse of the sea through the pines.\n\nGrounds of 3,500 m². Built in the 1960s, renovated in 2018.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 8900000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 300,
+   "land_surface": 3500,
+   "address": {
+    "street": "Route des Salins 760",
+    "postcode": "83990",
+    "city": "Saint-Tropez",
+    "country": "France",
+    "lat": 43.259,
+    "lng": 6.687
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13935477.jpg",
+     "alt": "Stone house among the pines, Les Salins"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13935475.jpg",
+     "alt": "Stone house among the pines, Les Salins, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13935476.jpg",
+     "alt": "Stone house among the pines, Les Salins, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13935474.jpg",
+     "alt": "Stone house among the pines, Les Salins, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-13935488.jpg",
+     "alt": "Stone house among the pines, Les Salins, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "1f8ed0fe-b229-4ca6-bdd5-0cbe965e760e",
+    "first_name": "Philippe",
+    "last_name": "Aubanel",
+    "phone": "+41 00 000 00 09",
+    "email": "philippe.aubanel@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782194-sq.jpg",
+     "alt": "Philippe Aubanel"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "BGTP-NQHM",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  },
+  {
+   "id": "2d13cda1-62aa-4823-8e32-93c2e09b57cc",
+   "slug": "stone-villa-with-pool-bonne-terrasse-2d13cda1-62aa-4823-8e32-93c2e09b57cc",
+   "title": "Stone villa with pool, Bonne Terrasse",
+   "description": "<p>A recent villa in stone and wood near the Bonne Terrasse cove, at the southern end of Pampelonne.</p><p>Living room opening onto the garden, kitchen, four bedrooms with bathrooms. Pool surrounded by a planted garden.</p><p>Grounds of 2,500 m². Built in 2018.</p>",
+   "description_text": "A recent villa in stone and wood near the Bonne Terrasse cove, at the southern end of Pampelonne.\n\nLiving room opening onto the garden, kitchen, four bedrooms with bathrooms. Pool surrounded by a planted garden.\n\nGrounds of 2,500 m². Built in 2018.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 5600000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 4,
+   "living_surface": 260,
+   "land_surface": 2500,
+   "address": {
+    "street": "Route de Bonne Terrasse 290",
+    "postcode": "83350",
+    "city": "Ramatuelle",
+    "country": "France",
+    "lat": 43.209,
+    "lng": 6.666
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16959786.jpg",
+     "alt": "Stone villa with pool, Bonne Terrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16959792.jpg",
+     "alt": "Stone villa with pool, Bonne Terrasse, photo 2"
+    }
+   ],
+   "agent": {
+    "id": "7c3e0451-da8f-4de2-816d-c97f2e8dda05",
+    "first_name": "Thomas",
+    "last_name": "Giraud",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.giraud@clairval.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-3782201-sq.jpg",
+     "alt": "Thomas Giraud"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-08T09:00:00.000Z",
+   "reference": "3RZA-FDTJ",
+   "team_ids": [
+    "8d116591-0ebf-4e32-b5a0-dd61d1d6a9e5"
+   ]
+  }
+ ],
+ "developments": [],
+ "fixture_only": {
+  "listings": {
+   "aaa18e60-c32f-4cb9-b79a-0bac1d85f34b": {
+    "energy_class": "A",
+    "year_built": 2016,
+    "terrace_surface": 140
+   },
+   "b45f7015-149f-489a-b8f3-d0f5cb38dda7": {
+    "energy_class": "C",
+    "year_built": 2012,
+    "terrace_surface": 80
+   },
+   "748acd70-ed67-4cb1-9603-f3a9b3a16047": {
+    "energy_class": "C",
+    "year_built": 2009,
+    "terrace_surface": 60
+   },
+   "8e5c861f-403e-4cf7-a206-a0f4ad64f730": {
+    "energy_class": "E",
+    "year_built": 2014,
+    "floor": 1,
+    "charges": 1500
+   },
+   "50a5f04b-d0e7-4889-bf6f-f761092afa37": {
+    "energy_class": "A",
+    "year_built": 1978
+   },
+   "d25ce4cf-c5a9-4088-817a-a28042342057": {
+    "energy_class": "E",
+    "year_built": 2021
+   },
+   "d86b8301-7ad8-4870-84be-00cba9581b8e": {
+    "energy_class": "A",
+    "year_built": 2019
+   },
+   "74485fc9-36a1-4238-b59e-777d53e7de19": {
+    "energy_class": "A",
+    "year_built": 2005
+   },
+   "a43e345d-fde1-486b-9bd1-88a99563a4c0": {
+    "energy_class": "B",
+    "year_built": 2018,
+    "terrace_surface": 160
+   },
+   "1a7a965e-330b-4151-b2ab-a1c2c0ae7661": {
+    "energy_class": "A",
+    "year_built": 2008
+   },
+   "a786dcb2-b09b-4220-8721-1d05beb74a59": {
+    "energy_class": "A",
+    "year_built": 1995
+   },
+   "ae63b677-671a-4f67-a645-14716d4469de": {
+    "energy_class": "E",
+    "year_built": 1912,
+    "floor": 3,
+    "charges": 450
+   },
+   "7cbc39e6-0a8f-4ef8-a84f-354fa1fc322a": {
+    "energy_class": "E",
+    "year_built": 2017,
+    "floor": 6,
+    "terrace_surface": 110
+   },
+   "ada02b64-ef29-4584-9ea2-15f09655a9c5": {
+    "energy_class": "B",
+    "year_built": 1931
+   },
+   "a8b4c346-2c52-41b7-99c4-1859901aa998": {
+    "energy_class": "A",
+    "year_built": 1965,
+    "floor": 2
+   },
+   "6a3ad145-48eb-4d53-b93e-9743c7b35cf4": {
+    "energy_class": "C",
+    "year_built": 1890,
+    "terrace_surface": 120
+   },
+   "eca4361b-58bf-485d-9c32-d2b3fd666433": {
+    "energy_class": "C",
+    "year_built": 2020,
+    "terrace_surface": 300
+   },
+   "6c3f66dd-23d3-4cd3-9c5d-21922ff9e7a6": {
+    "energy_class": "C",
+    "year_built": 2019,
+    "charges": 6000
+   },
+   "c43cf696-593c-4939-8fc4-0706df661bec": {
+    "energy_class": "C",
+    "year_built": 2015,
+    "terrace_surface": 200
+   },
+   "5639f51e-4983-46bc-bd7d-51aa34bc6237": {
+    "energy_class": "C",
+    "year_built": 1850
+   },
+   "e0bc9f4f-0f17-4be6-b61a-fa1648876166": {
+    "energy_class": "C",
+    "year_built": 1850,
+    "terrace_surface": 25
+   },
+   "733323e9-ac62-4603-b7d6-e860dafb1d9c": {
+    "energy_class": "D",
+    "year_built": 1962
+   },
+   "2d13cda1-62aa-4823-8e32-93c2e09b57cc": {
+    "energy_class": "B",
+    "year_built": 2018
+   }
+  },
+  "units": {},
+  "developments": {}
+ }
+}

@@ -1,0 +1,79 @@
+---
+/**
+ * THE way to show a listing, agent, agency or development photo.
+ * Always served by img.realadvisor.ch (imgproxy) at the size you need, with
+ * a srcset (480/768/1200/1920), sizes, width and height. Lazy by default;
+ * `priority` for the one LCP image of the page (hero, first gallery photo):
+ * AVIF first, quality 70, at most 1600w, sizes capped at 1440px.
+ *
+ *   <RaImage src={listing.photos[0]} alt="…" width={800} height={600}
+ *     sizes="(min-width: 1024px) 33vw, 100vw" />
+ *   <RaImage src={hero} alt="…" width={1600} height={900} priority
+ *     mobile={{ width: 800, height: 1000 }} />
+ *
+ * `mobile`: a different crop under 768px (art direction, `<picture>`), e.g.
+ * 4:5 for a hero. Required whenever the mobile box is portrait and the photo
+ * landscape; `mobileSizes` defaults to 100vw.
+ *
+ * `width`/`height` are the box ratio and intrinsic size attributes; CSS sets
+ * the rendered size. The crop follows width/height (fit: fill). Pass
+ * `fit="fit"` to keep the photo's own ratio (logos, plans).
+ */
+import type { HTMLAttributes } from 'astro/types';
+import type { Photo } from '../lib/ra';
+import { img, srcset } from '../lib/image';
+
+type Props = Omit<HTMLAttributes<'img'>, 'src' | 'srcset' | 'width' | 'height' | 'loading' | 'alt'> & {
+  src: Photo | string | null | undefined;
+  alt: string;
+  width: number;
+  height: number;
+  /** Browser layout width per breakpoint. Default 100vw. */
+  sizes?: string;
+  /** LCP image: eager, fetchpriority high, and a preload hint. One per page. */
+  priority?: boolean;
+  fit?: 'fill' | 'fit';
+  widths?: number[];
+  quality?: number;
+  /** Crop for screens under 768px: box ratio width/height and sizes. */
+  mobile?: { width: number; height: number; sizes?: string };
+};
+const { src, alt, width, height, priority = false, fit = 'fill', mobile, sizes: sizesProp, widths: widthsProp, quality: qualityProp, ...rest } = Astro.props;
+// LCP image: at most 1600w on desktop, quality 70, AVIF first (WebP fallback).
+const widths = widthsProp ?? (priority ? [640, 960, 1280, 1600] : [480, 768, 1200, 1920]);
+const quality = qualityProp ?? (priority ? 70 : undefined);
+const sizes = sizesProp ?? (priority ? '(min-width: 1440px) 1440px, 100vw' : '100vw');
+const url = typeof src === 'string' ? src : src?.url;
+const ratio = fit === 'fill' ? width / height : undefined;
+const set = url ? srcset(url, widths, ratio, { quality }) : '';
+const avifSet = url && priority && set ? srcset(url, widths, ratio, { quality, format: 'avif' }) : '';
+const fallbackW = Math.min(1200, Math.max(...widths.filter((w) => w <= 1200), widths[0] ?? 768));
+const fallback = url ? img(url, { w: fallbackW, h: ratio ? Math.round(fallbackW / ratio) : 0, fit, quality }) : '';
+const MOBILE = '(max-width: 767px)';
+const DESKTOP = '(min-width: 768px)';
+const mobileW = [480, 600, 800, 1200];
+const mRatio = mobile ? mobile.width / mobile.height : 0;
+const mobileSet = url && mobile ? srcset(url, mobileW, mRatio, { quality }) : '';
+const mobileAvif = mobileSet && priority ? srcset(url, mobileW, mRatio, { quality, format: 'avif' }) : '';
+const mobileSizes = mobile?.sizes ?? '100vw';
+const imgTag = { width, height, alt, loading: priority ? 'eager' : 'lazy', fetchpriority: priority ? 'high' : undefined, decoding: 'async' } as const;
+const usePicture = !!(mobileSet || avifSet);
+---
+{url && !usePicture && (
+  <>
+    {priority && set && <link rel="preload" as="image" imagesrcset={set} imagesizes={sizes} fetchpriority="high" />}
+    <img src={fallback} srcset={set || undefined} sizes={set ? sizes : undefined} {...imgTag} {...rest} />
+  </>
+)}
+{url && usePicture && (
+  <>
+    {priority && mobileSet && <link rel="preload" as="image" type="image/avif" media={MOBILE} imagesrcset={mobileAvif} imagesizes={mobileSizes} fetchpriority="high" />}
+    {priority && <link rel="preload" as="image" type="image/avif" media={mobileSet ? DESKTOP : undefined} imagesrcset={avifSet} imagesizes={sizes} fetchpriority="high" />}
+    <picture>
+      {mobileAvif && <source media={MOBILE} type="image/avif" srcset={mobileAvif} sizes={mobileSizes} width={mobile!.width} height={mobile!.height} />}
+      {mobileSet && <source media={MOBILE} srcset={mobileSet} sizes={mobileSizes} width={mobile!.width} height={mobile!.height} />}
+      {avifSet && <source type="image/avif" srcset={avifSet} sizes={sizes} />}
+      <img src={fallback} srcset={set || undefined} sizes={sizes} {...imgTag} {...rest} />
+    </picture>
+  </>
+)}

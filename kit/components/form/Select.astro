@@ -1,0 +1,35 @@
+---
+/**
+ * Styled native select (up to ~12 options). Works without JS, inside GET filter forms.
+ *   <Select label="Angebot" name="offerType" value={offerType}
+ *           placeholder="Alle" options={[{ value: 'buy', label: 'Kaufen' }, { value: 'rent', label: 'Mieten' }]} />
+ * `placeholder` adds a first option with value "" (= no filter).
+ */
+import '../../styles/form.css';
+
+export type Option = { value: string; label: string };
+interface Props {
+  label: string;
+  name: string;
+  options: Option[];
+  value?: string | null;
+  placeholder?: string;
+  hideLabel?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  'aria-describedby'?: string;
+  id?: string;
+  class?: string;
+}
+const { label, name, options, value, placeholder, hideLabel, disabled, required, id, class: cls, 'aria-describedby': describedBy } = Astro.props;
+const fieldId = id ?? `f-${name}`;
+---
+<div class:list={['field', cls]}>
+  <label for={fieldId} class:list={['field-label', { 'sr-only': hideLabel }]}>{label}</label>
+  <span class="select">
+    <select id={fieldId} name={name} class="control" disabled={disabled} required={required} aria-describedby={describedBy}>
+      {placeholder !== undefined && <option value="" selected={!value}>{placeholder}</option>}
+      {options.map((o) => <option value={o.value} selected={o.value === value}>{o.label}</option>)}
+    </select>
+  </span>
+</div>

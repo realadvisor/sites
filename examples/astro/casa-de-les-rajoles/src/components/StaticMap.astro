@@ -1,0 +1,49 @@
+---
+/**
+ * A static map from OpenStreetMap tiles (no library, no iframe, no JS): a
+ * grid of 256 px tiles centred on the point, numbered markers for places,
+ * the attribution and a link to the full map. API coordinates are rounded.
+ */
+import { tr, type Lang } from '../lib/i18n';
+
+interface Props { lat: number; lng: number; zoom?: number; label: string; lang: Lang; cols?: number; rows?: number; marks?: { lat: number; lng: number; n: number; name: string }[] }
+const { lat, lng, zoom = 15, label, lang, cols = 7, rows = 5, marks = [] } = Astro.props;
+const t = tr(lang);
+const n = 2 ** zoom;
+const proj = (la: number, ln: number) => {
+  const rad = (la * Math.PI) / 180;
+  return { x: ((ln + 180) / 360) * n, y: ((1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2) * n };
+};
+const c = proj(lat, lng);
+const x0 = Math.floor(c.x - cols / 2);
+const y0 = Math.floor(c.y - rows / 2);
+const pct = (p: { x: number; y: number }) => ({ x: ((p.x - x0) / cols) * 100, y: ((p.y - y0) / rows) * 100 });
+const me = pct(c);
+const pins = marks.map((m) => ({ ...m, ...pct(proj(m.lat, m.lng)) })).filter((m) => m.x > 1 && m.x < 99 && m.y > 1 && m.y < 99);
+const tiles = Array.from({ length: rows }, (_, j) => Array.from({ length: cols }, (_, i) => ({ x: x0 + i, y: y0 + j }))).flat();
+const osm = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=${zoom}/${lat}/${lng}`;
+---
+<figure class="map" style={`--cols:${cols};--rows:${rows};--mx:${me.x}%;--my:${me.y}%`}>
+  <div class="frame">
+    <div class="grid" role="img" aria-label={`${t.mapOf}: ${label}`}>
+      {tiles.map((tl) => <img src={`https://tile.openstreetmap.org/${zoom}/${tl.x}/${tl.y}.png`} alt="" width="256" height="256" loading="lazy" decoding="async" />)}
+      {pins.map((p) => <span class="mk" style={`left:${p.x}%;top:${p.y}%`} title={p.name}>{p.n}</span>)}
+      <span class="pin" aria-hidden="true"></span>
+    </div>
+  </div>
+  <figcaption>
+    <span>{label}</span>
+    <span><a href={osm} rel="noopener" target="_blank">{t.openMap}</a> · © <a href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">{t.osm}</a></span>
+  </figcaption>
+</figure>
+<style>
+  .map { margin: 0; }
+  .frame { position: relative; overflow: hidden; aspect-ratio: var(--ratio, 16 / 9); background: #ebe5dc; border: 1px solid var(--line); }
+  .grid { position: absolute; width: calc(var(--cols) * 256px); height: calc(var(--rows) * 256px); left: 50%; top: 50%; display: grid; grid-template-columns: repeat(var(--cols), 256px); transform: translate(calc(-1 * var(--mx)), calc(-1 * var(--my))); }
+  .grid img { width: 256px; height: 256px; max-width: none; filter: grayscale(0.8) sepia(0.2) contrast(0.95) brightness(1.04); }
+  .pin { position: absolute; left: var(--mx); top: var(--my); width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px rgb(217 101 75 / 0.28), 0 0 0 2px #fff inset; }
+  .mk { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: var(--ink); color: #fff; font: 600 0.75rem/26px var(--sans); text-align: center; }
+  figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; font-size: 0.875rem; color: var(--muted); }
+  figcaption a { color: inherit; display: inline-block; padding-block: 8px; }
+  @media (max-width: 640px) { .frame { aspect-ratio: 1 / 1; } }
+</style>

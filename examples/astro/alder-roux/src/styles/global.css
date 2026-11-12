@@ -1,0 +1,195 @@
+/*
+ * Alder & Roux: corporate network. Navy (#1F3A5F, the brand colour) in its
+ * structural roles (search band, valuation band, footer), cool neutrals, a
+ * brass hairline as the second accent. Serif display (Source Serif 4, optical
+ * sizes) over a quiet grotesk (Hanken Grotesk). Every component reads these
+ * tokens only.
+ */
+:root {
+  --navy: #1f3a5f;
+  --navy-deep: #12233a;
+  --navy-ink: #0c1828;
+  --brass: #b8925a;
+  --brass-ink: #82632f;
+  --brass-on-navy: #dcc193;
+
+  --bg: #ffffff;
+  --paper: #f3f4f6;
+  --paper-2: #e9ecf0;
+  --surface: #ffffff;
+  --text: #17202c;
+  --muted: #586373;
+  --line: #d9dee5;
+  --line-strong: #b9c1cc;
+  --on-navy: #ffffff;
+  --on-navy-muted: #b7c3d3;
+  --line-on-navy: rgb(255 255 255 / 0.18);
+
+  --accent: var(--navy);
+  --accent-strong: var(--navy-deep);
+  --danger: #b42318;
+  --ok: #2d6a4f;
+  --ok-bg: #dcefe4;
+  --warn: #7a5410;
+  --warn-bg: #f6e7c6;
+
+  --radius-card: 2px;
+  --radius-btn: 2px;
+  --control-radius: 2px;
+  --control-h: 50px;
+  --header-h: 76px;
+}
+@media (max-width: 1024px) { :root { --header-h: 64px; } }
+:root {
+
+  --font-display: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --step-2: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.4rem + 1.5vw, 2.625rem);
+  --step-4: clamp(2.25rem, 1.6rem + 2.9vw, 4rem);
+
+  --max: 1360px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --section: clamp(56px, 7vw, 112px);
+
+  /* ListingsSearch tokens */
+  --rs-columns: 3;
+  --rs-gap: 28px;
+  --rs-active: var(--navy);
+  --rs-on-active: #fff;
+  --rs-pill-radius: 999px;
+  --rs-sheet-radius: 4px;
+  --rs-heading-weight: 500;
+  --map-h: calc(100vh - var(--header-h) - 24px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-feature-settings: 'kern', 'liga';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, picture { display: block; max-width: 100%; }
+/* RaImage wraps priority photos in <picture>: it fills its box like the img would. */
+picture { width: 100%; height: 100%; }
+img { height: auto; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 450; line-height: 1.1; letter-spacing: -0.01em; margin: 0; text-wrap: balance; font-optical-sizing: auto; overflow-wrap: break-word; }
+@media (max-width: 480px) { h1, h2 { hyphens: auto; } }
+p { margin: 0; text-wrap: pretty; }
+ul, ol { margin: 0; padding: 0; }
+button { font: inherit; color: inherit; }
+dl, dd { margin: 0; }
+:focus-visible { outline: 2px solid var(--brass-ink); outline-offset: 3px; }
+.on-navy :focus-visible { outline-color: var(--brass-on-navy); }
+/* Form controls (kit form.css and the kit search filters): a clear navy ring on keyboard focus, 3:1 on white. */
+body .control:focus-visible, body select:focus-visible, body input:focus-visible, body textarea:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+body .on-navy .control:focus-visible, body .on-navy select:focus-visible, body .on-navy input:focus-visible { outline-color: var(--brass-on-navy); }
+
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section); }
+.section--paper { background: var(--paper); }
+.num, .tabular { font-variant-numeric: tabular-nums lining-nums; }
+.nowrap { white-space: nowrap; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font: 600 0.75rem/1.2 var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--brass-ink);
+}
+.eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+.on-navy .eyebrow { color: var(--brass-on-navy); }
+.h1 { font-size: var(--step-4); }
+.h2 { font-size: var(--step-3); }
+.h3 { font-size: var(--step-2); }
+.lede { font-size: var(--step-1); color: var(--muted); max-width: 62ch; line-height: 1.55; }
+.on-navy .lede { color: var(--on-navy-muted); }
+
+/* Section head: eyebrow, title, optional link on the right. */
+.head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; margin-bottom: clamp(28px, 3.5vw, 48px); }
+.head > div { display: grid; gap: 14px; max-width: 760px; }
+
+/* Text link with an arrow. */
+.link {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+  font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; color: var(--navy);
+}
+.link::after { content: '→'; font-size: 1rem; letter-spacing: 0; transition: transform .2s; }
+.link:hover::after { transform: translateX(4px); }
+.link:hover { text-decoration: underline; }
+.on-navy .link { color: #fff; }
+
+/* Buttons (own look; the kit's form buttons are themed through tokens). */
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--control-h); padding: 0 26px; border: 1px solid var(--navy); border-radius: var(--radius-btn);
+  background: var(--navy); color: #fff; text-decoration: none; cursor: pointer;
+  font: 600 0.875rem/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.button:hover { background: var(--navy-deep); border-color: var(--navy-deep); }
+.button--ghost { background: transparent; color: var(--navy); }
+.button--ghost:hover { background: var(--navy); color: #fff; }
+.button--light { background: #fff; color: var(--navy); border-color: #fff; }
+.button--light:hover { background: transparent; color: #fff; }
+.button--outline-light { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.55); }
+.button--outline-light:hover { background: #fff; color: var(--navy); border-color: #fff; }
+
+/* Kit form controls on the site's tokens. */
+.btn { border-radius: var(--radius-btn) !important; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.875rem !important; }
+.field-label { font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.02em; }
+
+/* Rich text from the data. */
+.prose { font-size: 1.0625rem; line-height: 1.7; color: var(--text); max-width: 68ch; }
+.prose > * + * { margin-top: 1em; }
+.prose p { margin: 0; }
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose h3, .prose h4 { font-size: var(--step-1); margin-top: 1.6em; }
+
+/* Breadcrumbs */
+.crumbs { font-size: 0.8125rem; color: var(--muted); }
+.crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 0; }
+.crumbs li + li::before { content: '/'; margin: 0 10px; color: var(--line-strong); }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.on-navy .crumbs { color: var(--on-navy-muted); }
+
+/* Page hero (inner pages): navy band. */
+.band { background: var(--navy); color: var(--on-navy); }
+.band__inner { padding-block: clamp(40px, 5vw, 72px) clamp(40px, 5vw, 64px); display: grid; gap: 20px; }
+.band h1 { color: #fff; }
+
+/* Card grid */
+.grid { display: grid; gap: clamp(20px, 2.2vw, 32px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1080px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .grid--3, .grid--4 { grid-template-columns: minmax(0, 1fr); } }
+.plain-list { list-style: none; }
+
+/* Key / value rows */
+.kv { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+.kv > div { display: contents; }
+.kv dt, .kv dd { padding: 13px 0; border-bottom: 1px solid var(--line); }
+.kv dt { color: var(--muted); }
+.kv dd { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

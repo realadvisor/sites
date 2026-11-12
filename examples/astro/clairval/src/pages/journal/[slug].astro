@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import View from '../../views/PostView.astro';
+import { findPost } from '../../content/journal';
+const post = findPost(Astro.params.slug!);
+if (!post) return Astro.rewrite('/404');
+---
+<View l="en" post={post} />

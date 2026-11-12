@@ -1,0 +1,28 @@
+---
+// Legal notice: text from the kit's legal builder and the organisation's data only.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { legalNotice } from '@realadvisor/sites-kit/legal';
+import { t } from '@realadvisor/sites-kit/i18n';
+import { legalIdentity } from '../lib/data';
+
+const agency = await legalIdentity();
+const title = t('legalNotice');
+---
+<Site title={`${title} | ${agency.name}`} description={`${title} du site de ${agency.name}.`}>
+  <PageHead title={title} />
+  <section class="section section--tight"><div class="wrap"><LegalContent sections={legalNotice(agency)} class="legal-body" /></div></section>
+</Site>
+<style is:global>
+  .legal-body { max-width: 760px; display: grid; gap: 48px; }
+  .legal-body h2 { font: 500 var(--fs-h3) / 1.1 var(--serif); margin: 0 0 18px; }
+  .legal-body dl { margin: 0; display: grid; border-top: 1px solid var(--line); }
+  .legal-body dl > div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .legal-body dt { color: var(--muted); font-size: var(--fs-small); }
+  .legal-body dd { margin: 0; overflow-wrap: anywhere; }
+  .legal-body p { color: var(--muted); max-width: 64ch; }
+  @media (max-width: 560px) { .legal-body dl > div { grid-template-columns: 1fr; gap: 2px; } }
+</style>

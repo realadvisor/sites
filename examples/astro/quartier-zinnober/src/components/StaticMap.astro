@@ -1,0 +1,61 @@
+---
+/**
+ * A static map for one address: OpenStreetMap tiles laid out around the
+ * point (no library, no iframe, no JS), a pin, the attribution and a link to
+ * the full map. Tiles are lazy and come from tile.openstreetmap.org (allowed
+ * by the kit's CSP).
+ */
+import { t } from '@realadvisor/sites-kit/i18n';
+
+interface Props {
+  lat: number;
+  lng: number;
+  label: string;
+  zoom?: number;
+  cols?: number;
+  rows?: number;
+  class?: string;
+  /** The map is the page's first image: load the tiles around the pin first. */
+  eager?: boolean;
+}
+const { lat, lng, label, zoom = 16, cols = 6, rows = 4, class: cls, eager = false } = Astro.props;
+const n = 2 ** zoom;
+const fx = ((lng + 180) / 360) * n;
+const rad = (lat * Math.PI) / 180;
+const fy = ((1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2) * n;
+const x0 = Math.floor(fx) - Math.floor(cols / 2);
+const y0 = Math.floor(fy) - Math.floor(rows / 2);
+// Pixel position of the point inside the tile grid.
+const px = Math.round((fx - x0) * 256);
+const py = Math.round((fy - y0) * 256);
+const tiles = Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, (_, c) => ({ x: x0 + c, y: y0 + r, c, r }))).flat();
+const osm = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=${zoom}/${lat}/${lng}`;
+---
+{eager && <link rel="preconnect" href="https://tile.openstreetmap.org" />}
+<figure class:list={['map', cls]}>
+  <div class="viewport" role="img" aria-label={`Karte: ${label}`}>
+    <div class="grid" style={`width:${cols * 256}px;height:${rows * 256}px;left:calc(50% - ${px}px);top:calc(50% - ${py}px)`}>
+      {tiles.map((tl) => (
+        <img src={`https://tile.openstreetmap.org/${zoom}/${tl.x}/${tl.y}.png`} width="256" height="256" alt="" loading={eager && Math.abs(tl.x + 0.5 - fx) < 1.6 && Math.abs(tl.y + 0.5 - fy) < 1.6 ? 'eager' : 'lazy'} fetchpriority={eager && Math.floor(fx) === tl.x && Math.floor(fy) === tl.y ? 'high' : undefined} decoding="async" style={`left:${tl.c * 256}px;top:${tl.r * 256}px`} />
+      ))}
+    </div>
+    <span class="pin" aria-hidden="true">
+      <svg viewBox="0 0 40 52" width="40" height="52"><path d="M20 50S4 32 4 19a16 16 0 0 1 32 0c0 13-16 31-16 31Z" fill="#E4572E" stroke="#140F3A" stroke-width="3" /><circle cx="20" cy="19" r="6" fill="#140F3A" /></svg>
+    </span>
+    <span class="tag">{label}</span>
+  </div>
+  <figcaption>
+    <a href={osm} rel="noopener" target="_blank">Auf OpenStreetMap öffnen</a>
+    <span>© <a href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">{t('osmContributors')}</a></span>
+  </figcaption>
+</figure>
+<style>
+  .map { margin: 0; display: grid; gap: 10px; }
+  .viewport { position: relative; overflow: hidden; height: var(--map-h, 440px); border: 2px solid var(--ink); border-radius: var(--radius-card); background: #e8e3da; isolation: isolate; }
+  .grid { position: absolute; }
+  .grid img { position: absolute; width: 256px; height: 256px; max-width: none; filter: grayscale(0.85) contrast(1.05); mix-blend-mode: multiply; }
+  .pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -100%); filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.25)); }
+  .tag { position: absolute; left: 50%; top: calc(50% + 10px); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 6px 12px; border-radius: 999px; font: 650 0.875rem/1.2 var(--body); white-space: nowrap; }
+  figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 0.875rem; }
+  figcaption a { font-weight: 600; }
+</style>

@@ -1,0 +1,31 @@
+---
+// Wiring example only. Replace the markup with the real home page design.
+// Renders on request: it shows live data (agency, listings) and the enquiry form.
+export const prerender = false;
+
+import Base from '../layouts/Base.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit/image';
+import { t, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+
+const agency = await ra.agency();
+---
+<Base
+  title={agency.name}
+  description={agency.description_text?.slice(0, 155) ?? agency.name}
+  image={agency.logo && img(agency.logo.url, { w: 1200, h: 630, fit: 'fit' })}
+  jsonLd={agencyJsonLd(agency, Astro.site?.href ?? '/')}
+>
+  <main>
+    <h1>{agency.name}</h1>
+    <p><a href="/listings">Listings</a></p>
+    <h2>Contact</h2>
+    <EnquiryForm contactReason="other" />
+  </main>
+  <footer>
+    {/* On every language: legalPath(locale) / privacyPath(locale) and t(key, {}, lang(locale)). */}
+    <a href={legalPath()}>{t('legalNotice')}</a> · <a href={privacyPath()}>{t('privacyPolicy')}</a>
+  </footer>
+</Base>

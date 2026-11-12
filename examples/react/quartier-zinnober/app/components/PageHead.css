@@ -1,0 +1,12 @@
+/* From components/PageHead.astro (scoped there: section.ph, never the pages' own .ph). */
+section.ph { border-bottom: 2px solid var(--ink); }
+section.ph--zinnober { background: var(--zinnober); }
+section.ph--lilac { background: var(--lilac); }
+section.ph--butter { background: var(--butter); }
+section.ph--sand { background: var(--sand); }
+section.ph--ink { background: var(--ink); color: #fff; }
+section.ph--ink .ph-text .eyebrow { color: var(--butter); }
+.ph-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 48px; padding-block: clamp(40px, 6vw, 88px) clamp(28px, 4vw, 52px); }
+.ph-text { display: grid; gap: 14px; max-width: 62rem; }
+.ph-text h1 { font-size: var(--step-5); letter-spacing: -0.045em; line-height: 0.92; overflow-wrap: anywhere; hyphens: auto; }
+.ph-text .lead { max-width: 50ch; }

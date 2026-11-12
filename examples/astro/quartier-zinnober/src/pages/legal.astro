@@ -1,0 +1,29 @@
+---
+// Legal notice (Impressum): the kit's text from the organisation's data, restyled.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { legalNotice } from '@realadvisor/sites-kit/legal';
+import { t } from '@realadvisor/sites-kit/i18n';
+import { legalAgency, site as load } from '../lib/data';
+
+const site = await load();
+const title = t('legalNotice', {}, 'de');
+---
+<Site site={site} title={`${title} | ${site.dev.title}`} description={`${title}: ${site.org.name}`}>
+  <PageHead title={title} tone="sand" />
+  <div class="wrap legal-wrap"><LegalContent sections={legalNotice(legalAgency(site), 'de')} class="legal-body" /></div>
+</Site>
+<style>
+  .legal-wrap { padding-block: clamp(40px, 6vw, 88px); }
+  .legal-wrap :global(.legal-body) { max-width: 760px; display: grid; gap: 40px; }
+  .legal-wrap :global(h2) { font-size: var(--step-2); margin-bottom: 14px; }
+  .legal-wrap :global(dl) { margin: 0; border-top: 2px solid var(--ink); }
+  .legal-wrap :global(dl > div) { display: grid; grid-template-columns: 10rem 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .legal-wrap :global(dt) { color: var(--muted); }
+  .legal-wrap :global(dd) { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .legal-wrap :global(p + p) { margin-top: 0.8em; }
+  @media (max-width: 560px) { .legal-wrap :global(dl > div) { grid-template-columns: 1fr; gap: 2px; } }
+</style>

@@ -1,0 +1,53 @@
+---
+/** Offices: a branch map with every office, then one card per office with its figures. */
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import OfficeCard from '../components/OfficeCard.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { siteData, sites } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents }, available] = await Promise.all([siteData(), sites.allListings({ status: 'available' })]);
+const located = teams.filter((x) => x.address.lat != null && x.address.lng != null);
+const mid = (k: 'lat' | 'lng') => {
+  const v = located.map((x) => x.address[k]!);
+  return (Math.min(...v) + Math.max(...v)) / 2;
+};
+// Zoom that keeps every office in view on a phone (about 300 px wide).
+const spread = located.length > 1 ? Math.max(...located.map((x) => x.address.lng!)) - Math.min(...located.map((x) => x.address.lng!)) : 0;
+const zoom = spread > 0 ? Math.max(5, Math.min(12, Math.floor(Math.log2((300 / 256) * (360 / spread))))) : 12;
+---
+<Site l={l} route="offices" title={`${t('officesPageTitle')} | ${org.name}`} description={t('officesLede')}>
+  <section class="band on-navy">
+    <div class="wrap band__inner">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navOffices') }]} />
+      <h1 class="h1">{t('officesPageTitle')}</h1>
+      <p class="lede">{t('officesLede')}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <ul class="plain-list grid grid--3">
+        {teams.map((x) => (
+          <li><OfficeCard team={x} slug={teamSlug(x, teams)} l={l} as="h2" priority={teams[0] === x}
+            agents={agents.filter((a) => a.team_ids.includes(x.id)).length}
+            listings={available.filter((y) => y.team_ids.includes(x.id)).length} /></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  {located.length > 0 && (
+    <div class="wrap mapwrap">
+      <StaticMap lat={mid('lat')} lng={mid('lng')} zoom={zoom} height={440} label={t('officesPageTitle')} linkLabel={t('openMap')}
+        points={located.map((x) => ({ lat: x.address.lat!, lng: x.address.lng!, label: cityName(x.address.city, l) || x.name, href: href('offices', l, teamSlug(x, teams)) }))} />
+    </div>
+  )}
+</Site>
+
+<style>
+  .mapwrap { padding-bottom: var(--section); }
+</style>

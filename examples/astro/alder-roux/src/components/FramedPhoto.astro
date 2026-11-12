@@ -1,0 +1,43 @@
+---
+/**
+ * A pool photo with its own framing, served by imgproxy (img.realadvisor.ch)
+ * like RaImage: AVIF, WebP and JPEG per width at the photo's own ratio, the
+ * box crop from CSS (object-fit: cover + the focal point), and optionally a
+ * separate phone crop (imgproxy `crop` with fractions of the original) under
+ * 768px. Same props as RaImage. RaImage lacks gravity/focal point and AVIF for
+ * non-priority images, hence this wrapper.
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { img } from '@realadvisor/sites-kit/image';
+import type { Framed } from '../content/places';
+
+type Props = Omit<HTMLAttributes<'img'>, 'src' | 'srcset' | 'width' | 'height' | 'loading' | 'alt'> & {
+  photo: Framed; alt: string; width: number; height: number; sizes?: string; priority?: boolean;
+  /** Use the photo's phone crop under 768px (heroes with a portrait box). */
+  mobile?: boolean; widths?: number[];
+};
+const { photo, alt, width, height, sizes: sizesProp, priority = false, mobile = false, widths: widthsProp, style, ...rest } = Astro.props;
+const widths = widthsProp ?? [480, 800, 1200, 1600, 2000];
+const sizes = sizesProp ?? (priority ? '(min-width: 1440px) 1440px, 100vw' : '100vw');
+const IMGPROXY = 'https://img.realadvisor.ch';
+const b64 = (s: string) => btoa(s).replace(/=+$/, '').replace(/\+/g, '-').replace(/\//g, '_');
+const [l, t, cw, ch] = photo.mobile;
+const cropped = (w: number, fmt: string) =>
+  `${IMGPROXY}/_/crop:${cw}:${ch}:nowe:${l}:${t}/rs:fit:${w}:0:1:0/q:75/${b64(photo.url)}.${fmt}`;
+const set = (fmt: 'avif' | 'webp' | 'jpg') => widths.map((w) => `${img(photo.url, { w, fit: 'fit', format: fmt, quality: 75 })} ${w}w`).join(', ');
+const mset = (fmt: string) => [480, 800, 1200].map((w) => `${cropped(w, fmt)} ${w}w`).join(', ');
+const fallback = img(photo.url, { w: 1200, fit: 'fit', format: 'jpg', quality: 75 });
+const MOBILE = '(max-width: 767px)';
+const pos = `object-position:${photo.position}`;
+---
+{priority && mobile && <link rel="preload" as="image" type="image/avif" media={MOBILE} imagesrcset={mset('avif')} imagesizes="100vw" fetchpriority="high" />}
+{priority && <link rel="preload" as="image" type="image/avif" media={mobile ? '(min-width: 768px)' : undefined} imagesrcset={set('avif')} imagesizes={sizes} fetchpriority="high" />}
+<picture>
+  {mobile && <source media={MOBILE} type="image/avif" srcset={mset('avif')} sizes="100vw" />}
+  {mobile && <source media={MOBILE} type="image/webp" srcset={mset('webp')} sizes="100vw" />}
+  <source type="image/avif" srcset={set('avif')} sizes={sizes} />
+  <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+  <img src={fallback} srcset={set('jpg')} sizes={sizes} width={width} height={height} alt={alt}
+    loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async"
+    style={[pos, style].filter(Boolean).join(';')} {...rest} />
+</picture>

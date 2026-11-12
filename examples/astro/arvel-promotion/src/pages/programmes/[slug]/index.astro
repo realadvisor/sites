@@ -1,0 +1,200 @@
+---
+// One programme: hero, the programme in words and facts, unit mix, the
+// building floor by floor, photos, location, documents and the enquiry.
+export const prerender = false;
+
+import Site from '../../../layouts/Site.astro';
+import Hero from '../../../components/Hero.astro';
+import TypeStrip from '../../../components/TypeStrip.astro';
+import StackingPlan from '../../../components/StackingPlan.astro';
+import Collage from '../../../components/Collage.astro';
+import EnquiryBlock from '../../../components/EnquiryBlock.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { developmentExtra, sites } from '../../../lib/data';
+import { contentFor, placePhotos } from '../../../content/programmes';
+import { documentsFor, formatBytes } from '../../../content/documents';
+import {
+  addressLine, deliveryShort, deliveryText, plural, priceFrom, programmeStatus, programmeUrl, surfaceRange, typeRange,
+} from '../../../lib/fr';
+import { ogImage } from '../../../lib/seo';
+
+const d = await sites.development(Astro.params.slug!);
+if (!d) return Astro.rewrite('/404');
+const c = contentFor(d.slug);
+const x = developmentExtra(d);
+const hero = d.photos[c.hero ?? 0] ?? d.photos[0];
+const status = programmeStatus(d);
+const from = d.stats.available ? priceFrom(d) : '';
+const facts = [
+  { label: 'Logements', value: String(d.stats.units) },
+  { label: 'Typologies', value: typeRange(d.stats.rooms) },
+  { label: 'Surfaces', value: surfaceRange(d.stats.living_surface) },
+  { label: d.status === 'delivered' ? 'Livré' : 'Livraison', value: deliveryShort(d) },
+  ...(from ? [{ label: 'Prix', value: from }] : []),
+].filter((f) => f.value);
+const credits = [
+  // fixture only: developer, architect, general contractor
+  { label: 'Promoteur', value: x.developer },
+  { label: 'Architecte', value: x.architect },
+  { label: 'Entreprise générale', value: x.general_contractor },
+].filter((r): r is { label: string; value: string } => !!r.value);
+const rows = [
+  { label: 'Adresse', value: addressLine(d.address) },
+  { label: 'Statut', value: status },
+  { label: d.status === 'delivered' ? 'Livraison' : 'Livraison prévue', value: deliveryText(d).replace(/^Livraison |^Livré en /, '') },
+  { label: 'Disponibles', value: d.stats.units ? `${d.stats.available} sur ${d.stats.units}` : '' },
+  ...credits,
+].filter((r) => r.value);
+const others = d.photos.filter((p) => p !== hero);
+const place = placePhotos(c)[0];
+const docs = documentsFor(d.slug);
+const lot = Astro.url.searchParams.get('lot') ?? undefined;
+const city = d.address.city && !d.title.includes(d.address.city) ? ` à ${d.address.city}` : '';
+const description = `${d.title}${city} : ${[plural(d.stats.units, 'logement neuf', 'logements neufs'), typeRange(d.stats.rooms), deliveryText(d), from].filter(Boolean).join(', ')}.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ApartmentComplex',
+  name: d.title,
+  description: d.description_text,
+  address: { '@type': 'PostalAddress', streetAddress: d.address.street, postalCode: d.address.postcode, addressLocality: d.address.city, addressCountry: d.address.country },
+  numberOfAccommodationUnits: d.stats.units,
+  url: new URL(programmeUrl(d), Astro.site ?? Astro.url).href,
+};
+---
+<Site title={`${d.title}${city} · Logements neufs | Arvel Promotion`} description={description} image={ogImage(hero?.url)} jsonLd={jsonLd} programme={d} section="home" current="programmes">
+  <Hero slot="hero" photo={hero?.url} alt={hero?.alt ?? d.title} tag={{ label: status, status: d.status }} title={d.title} line={addressLine(d.address)} facts={facts} />
+
+  <section class="section about-p" aria-labelledby="h-about">
+    <div class="wrap grid">
+      <div class="reveal">
+        <h2 id="h-about" class="sr-only">Le programme</h2>
+        {d.description && <div class="prose desc" set:html={sanitizeHtml(d.description)} />}
+        <div class="cta-row">
+          <a class="button button--solid" href={programmeUrl(d, 'logements')}>Voir les logements</a>
+          <a class="link" href="#contact">Être rappelé</a>
+        </div>
+      </div>
+      <dl class="sheet reveal">
+        {rows.map((r) => <div><dt>{r.label}</dt><dd>{r.value}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  {d.units.length > 0 && d.stats.rooms && (
+    <section class="section section--deep" aria-labelledby="h-types">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <h2 id="h-types" class="display">{d.stats.rooms?.min === 1 ? 'Du studio' : `Du T${d.stats.rooms?.min}`} au T{d.stats.rooms?.max}</h2>
+          </div>
+          <p class="muted note">Plans indicatifs par type de logement. Chaque logement a son propre plan sur sa page.</p>
+        </div>
+        <TypeStrip programme={d} />
+      </div>
+    </section>
+  )}
+
+  {d.units.length > 0 && (
+    <section class="section building" aria-labelledby="h-building">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <h2 id="h-building" class="display">{plural(d.stats.available, 'logement disponible', 'logements disponibles')}, étage par étage</h2>
+          </div>
+          <ul class="legend" aria-label="Légende">
+            <li data-st="available">Disponible</li><li data-st="reserved">Réservé</li><li data-st="sold">Vendu</li>
+          </ul>
+        </div>
+        <StackingPlan programme={d} compact labelledby="h-building" />
+        <p class="more"><a class="link" href={programmeUrl(d, 'logements')}>Filtrer par type et voir le tableau</a></p>
+      </div>
+    </section>
+  )}
+
+  {others.length >= 3 && (
+    <section class="section section--deep" aria-labelledby="h-gal">
+      <div class="wrap">
+        <h2 id="h-gal" class="sr-only">Photos</h2>
+        <Collage photos={others.slice(0, 3)} fallbackAlt={d.title} />
+        <p class="more"><a class="link" href={programmeUrl(d, 'galerie')}>Les {plural(d.photos.length, 'photo', 'photos')}</a></p>
+      </div>
+    </section>
+  )}
+
+  {place && (
+    <section class="situ" aria-labelledby="h-situ">
+      <div class="situ-media parallax">
+        <RaImage src={place} alt={c.placePhotosOf ?? c.placeName ?? d.address.city ?? ''} width={1600} height={900} mobile={{ width: 800, height: 800 }} sizes="100vw" />
+      </div>
+      <div class="wrap situ-body">
+        <div class="situ-card reveal">
+          <h2 id="h-situ" class="display">{c.placeName ?? d.address.city}</h2>
+          {c.situation?.[0] && <p class="lead">{c.situation[0]}</p>}
+          <a class="link" href={programmeUrl(d, 'situation')}>Le quartier et les distances</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {docs.length > 0 && (
+    <section class="section section--tight docs" aria-labelledby="h-docs">
+      <div class="wrap docs-grid">
+        <h2 id="h-docs" class="h3">Documents à télécharger</h2>
+        <ul>
+          {docs.map((doc) => (
+            <li><a href={doc.href} download><span class="dt">{doc.title}</span><span class="dm num">PDF · {formatBytes(doc.bytes)}</span><span aria-hidden="true" class="dl">↓</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <EnquiryBlock programme={d} selectedUnit={lot} />
+</Site>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px clamp(40px, 7vw, 128px); align-items: start; }
+  .desc :global(p:first-child) { font: 500 clamp(1.7rem, 3vw, 2.6rem) / 1.18 var(--serif); margin-bottom: 0.8em; max-width: 24ch; }
+  .desc :global(p) { color: var(--muted); }
+  .desc :global(p:first-child) { color: var(--text); }
+  .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; margin-top: 40px; }
+  .sheet { margin: 0; border-top: 1px solid var(--line-strong); }
+  .sheet div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .sheet dt { font-size: var(--fs-small); color: var(--muted); }
+  .sheet dd { margin: 0; font-size: var(--fs-small); }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 48px; margin-bottom: clamp(36px, 5vw, 64px); }
+  .note { max-width: 36ch; margin: 0; font-size: var(--fs-small); }
+  .legend { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: 0.8125rem; color: var(--muted); }
+  .legend li { display: inline-flex; align-items: center; gap: 8px; }
+  .legend li::before { content: ''; width: 14px; height: 14px; }
+  .legend [data-st='available']::before { background: var(--st-available); }
+  .legend [data-st='reserved']::before { background: var(--st-reserved); }
+  .legend [data-st='sold']::before { background: var(--st-sold); box-shadow: inset 0 0 0 1px var(--line-strong); }
+  .more { margin: 28px 0 0; }
+  .situ { position: relative; isolation: isolate; min-height: 92svh; display: grid; align-items: end; overflow: hidden; }
+  .situ-media { position: absolute; inset: 0; z-index: -2; }
+  .situ-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .situ::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(7 14 20 / 0.96) 0%, rgb(7 14 20 / 0.82) 32%, rgb(7 14 20 / 0.2) 72%), linear-gradient(to right, rgb(7 14 20 / 0.55), rgb(7 14 20 / 0) 60%); }
+  .situ-body { padding-block: 120px clamp(56px, 8vw, 112px); }
+  .situ-card { max-width: 640px; display: grid; gap: 22px; justify-items: start; }
+  .situ-card p { margin: 0; }
+  .docs { border-top: 1px solid var(--line); }
+  .docs-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px 64px; align-items: start; }
+  .docs ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .docs a { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 24px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .docs a:hover .dt { text-decoration: underline; }
+  .dt { font: 500 1.5rem / 1.1 var(--serif); }
+  .dm { font-size: 0.8125rem; color: var(--muted); }
+  .dl { font-size: 1.25rem; }
+  @media (max-width: 900px) {
+    .grid, .docs-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .situ { min-height: 0; display: block; background: var(--bg); }
+    .situ-media { position: relative; aspect-ratio: 1; }
+    .situ::after { inset: 0 0 auto; aspect-ratio: 1; height: auto; background: linear-gradient(to top, var(--bg), rgb(14 26 36 / 0) 50%); }
+    .situ-body { padding-top: 0; margin-top: -64px; position: relative; }
+    .legend { width: 100%; }
+  }
+</style>

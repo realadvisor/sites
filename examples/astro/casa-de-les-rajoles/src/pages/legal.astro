@@ -1,0 +1,13 @@
+---
+// Legal notice (Aviso legal): the kit's text from the organisation's data.
+export const prerender = false;
+import LegalPage from '../components/LegalPage.astro';
+import { legalNotice } from '@realadvisor/sites-kit/legal';
+import { lang as kitLang, t } from '@realadvisor/sites-kit/i18n';
+import { legalAgency, loadSite } from '../lib/data';
+import { LOCALE_OF } from '../lib/i18n';
+
+const site = await loadSite();
+const l = kitLang(LOCALE_OF.es);
+---
+<LegalPage site={site} lang="es" route="legal" title={t('legalNotice', {}, l)} sections={legalNotice(legalAgency(site), l)} />

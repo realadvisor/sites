@@ -1,0 +1,9 @@
+.sh { padding-block: clamp(24px, 3vw, 40px) 8px; }
+.sh__row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-top: clamp(16px, 2.5vw, 32px); }
+.sh__title { font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem); }
+.sh .lede { margin-top: 12px; font-size: 1.0625rem; }
+.switch { display: inline-flex; padding: 4px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--paper); }
+.switch a { display: inline-flex; align-items: center; min-height: 42px; padding: 0 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.9375rem; }
+.switch a[aria-current] { background: var(--ink); color: var(--on-ink); }
+.search { padding-top: 24px; padding-bottom: var(--section); }
+.search .rs-grid { row-gap: 48px; }

@@ -1,0 +1,60 @@
+---
+export const prerender = false;
+/** Agencies: one card per team with its street photo, address, phone, people and listing count. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/PageHead.astro';
+import { siteData, sites } from '../../lib/data';
+import { joinFr, teamHref, teamShortName, teamSlug, tel } from '../../lib/site';
+import { placeFor } from '../../content/places';
+
+const [{ org, teams, agents }, live] = await Promise.all([siteData(), sites.allListings({ status: 'available' })]);
+const cities = [...new Set(teams.map((t) => t.address.city).filter(Boolean))] as string[];
+const brand = org.name.replace(/\s+SAS$/, '');
+const n = (x: number, one: string, many: string) => `${x} ${x > 1 ? many : one}`;
+---
+<Site nav="agencies" title={`Nos agences à ${joinFr(cities)} | ${brand}`} description={`Les ${teams.length} agences ${brand} : adresses, téléphones, équipes et annonces à ${joinFr(cities)}.`}>
+  <PageHead title="Nos agences" lede={`${teams.length} agences, ${n(agents.length, 'agent', 'agents')}, à ${joinFr(cities)}. Chaque agence vend et loue dans son secteur.`} />
+  <ul class="wrap ags">
+    {teams.map((t, i) => {
+      const photo = placeFor(teamSlug(t))[i % 2] ?? placeFor(teamSlug(t))[0];
+      const people = agents.filter((a) => a.team_ids.includes(t.id)).length;
+      const count = live.filter((l) => l.team_ids.includes(t.id)).length;
+      return (
+        <li class="ag">
+          {photo && <RaImage class="ag__img" src={photo} alt={photo.alt} width={800} height={500} sizes="(min-width: 960px) 620px, 100vw" priority={i === 0} />}
+          <div class="ag__body">
+            <h2 class="ag__name"><a href={teamHref(t)}>{teamShortName(t)}</a></h2>
+            <address>
+              {t.address.street && <span>{t.address.street}</span>}
+              <span>{[t.address.postcode, t.address.city].filter(Boolean).join(' ')}</span>
+            </address>
+            <p class="ag__meta">{n(people, 'agent', 'agents')} · {n(count, 'annonce', 'annonces')}</p>
+            <p class="ag__contact">
+              {t.phone && <a class="num" href={tel(t.phone)}>{t.phone}</a>}
+              {t.email && <a href={`mailto:${t.email}`}>{t.email}</a>}
+            </p>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+</Site>
+
+<style>
+  .ags { list-style: none; margin-block: 0; display: grid; gap: 40px 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); }
+  .ag { position: relative; display: grid; gap: 16px; align-content: start; }
+  :global(.ag__img) { width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border-radius: var(--radius-card); }
+  .ag__body { display: grid; gap: 6px; }
+  .ag__name { font-size: var(--step-2); }
+  .ag__name a { text-decoration: none; }
+  .ag__name a::after { content: ''; position: absolute; inset: 0; }
+  .ag__name a:hover { color: var(--accent-strong); }
+  .ag__name a:focus-visible { outline: none; }
+  .ag__name a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: var(--radius-card); }
+  address { font-style: normal; display: grid; color: var(--muted); }
+  .ag__meta { font-weight: 550; }
+  .ag__contact { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 0 20px; }
+  .ag__contact a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; }
+  .ag__contact a:hover { text-decoration: underline; }
+</style>

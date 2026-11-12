@@ -1,0 +1,36 @@
+---
+import { PHOTOS, photoOg } from '../lib/photos';
+import Site from '../layouts/Site.astro';
+import PostCard from '../components/PostCard.astro';
+import { agency } from '../lib/data';
+import { postsOf } from '../lib/blog';
+import { UI, alternates, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, posts] = await Promise.all([agency(), postsOf(lang)]);
+const name = ag.team?.name ?? ag.org.name;
+const [first, ...rest] = posts;
+---
+<Site lang={lang} current="blog" title={`${ui.blogH1} | ${name}`} description={ui.blogLead}
+  image={first && photoOg(PHOTOS[first.data.cover], Astro.url)} alternates={alternates('blog')}>
+  <header class="phead wrap">
+    <h1 class="display-xl">{ui.blogH1}</h1>
+    <p class="lead">{ui.blogLead}</p>
+  </header>
+  <section class="wrap blog">
+    {first && <div class="feature"><PostCard post={first} lang={lang} heading="h2" priority sizes="(min-width: 1360px) 720px, (min-width: 860px) 55vw, 100vw" /></div>}
+    {rest.length > 0 && <ul class:list={['grid3', { pair: rest.length % 3 === 1 }]}>{rest.map((p) => <li><PostCard post={p} lang={lang} heading="h2" sizes={rest.length % 3 === 1 ? '(min-width: 1360px) 620px, (min-width: 640px) 45vw, 100vw' : undefined} /></li>)}</ul>}
+  </section>
+</Site>
+<style>
+  .blog { padding-bottom: var(--section); display: grid; gap: clamp(56px, 7vw, 96px); }
+  .feature :global(.post) { grid-template-columns: 7fr 5fr; column-gap: clamp(32px, 5vw, 80px); align-items: center; }
+  .feature :global(.post-photo) { grid-row: 1 / span 4; margin: 0; }
+  .feature :global(.post-title) { font-size: clamp(2rem, 3.4vw, 3rem); }
+  /* 3n+1 posts below the feature: two per row, so no row is left with one card. */
+  .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .feature :global(.post) { grid-template-columns: 1fr; } .feature :global(.post-photo) { grid-row: auto; margin-bottom: 20px; } }
+</style>

@@ -1,0 +1,105 @@
+---
+// Programmes list: every programme with its status tag (from the CRM
+// status), filtered by status with a GET link (?statut=construction).
+export const prerender = false;
+
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/PageHead.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { primaryTeam, programmes as allProgrammes } from '../../lib/data';
+import { contentFor } from '../../content/programmes';
+import { addressLine, deliveryText, plural, priceFrom, programmeStatus, programmeUrl, surfaceRange, typeRange, PROGRAMMES_PATH } from '../../lib/fr';
+import { ogImage } from '../../lib/seo';
+
+const [all, team] = await Promise.all([allProgrammes(), primaryTeam()]);
+const statuses = [...new Set(all.map((d) => d.status).filter((s): s is string => !!s && !!programmeStatus({ status: s })))];
+const wanted = Astro.url.searchParams.get('statut');
+const status = wanted && statuses.includes(wanted) ? wanted : undefined;
+const list = status ? all.filter((d) => d.status === status) : all;
+const label = status ? programmeStatus({ status }).toLowerCase() : '';
+const title = `Nos programmes immobiliers neufs${label ? ` ${label}` : ''} | Arvel Promotion`;
+const cities = [...new Set(all.map((d) => d.address.city).filter(Boolean))];
+const first = list[0];
+---
+<Site title={title} description={`${plural(all.length, 'programme', 'programmes')} de logements neufs à ${cities.join(', ')} : statut, typologies, surfaces, livraison et prix.`} image={ogImage(first?.photos[contentFor(first.slug).hero ?? 0]?.url)} current="programmes" noindex={!!status}>
+  <PageHead title="Nos programmes">
+    <p class="lead intro">{all.map((d) => `${d.title} à ${d.address.city} (${programmeStatus(d).toLowerCase()})`).join(', ')}.</p>
+    {statuses.length > 1 && (
+      <nav class="filter" aria-label="Filtrer par statut">
+        <a href={PROGRAMMES_PATH} aria-current={!status ? 'page' : undefined}>Tous <span class="num">{all.length}</span></a>
+        {statuses.map((s) => (
+          <a href={`${PROGRAMMES_PATH}?statut=${s}`} aria-current={status === s ? 'page' : undefined}>{programmeStatus({ status: s })} <span class="num">{all.filter((d) => d.status === s).length}</span></a>
+        ))}
+      </nav>
+    )}
+  </PageHead>
+
+  <section class="section section--tight">
+    <ol class="wrap list">
+      {list.map((d, i) => {
+        const c = contentFor(d.slug);
+        const photo = d.photos[c.hero ?? 0] ?? d.photos[0];
+        const from = d.stats.available ? priceFrom(d) : '';
+        const rows = [
+          { k: 'Adresse', v: addressLine(d.address) },
+          { k: 'Logements', v: d.stats.units ? `${d.stats.units}${d.stats.available ? `, dont ${d.stats.available} disponibles` : ', tous vendus ou réservés'}` : '' },
+          { k: 'Typologies', v: typeRange(d.stats.rooms) },
+          { k: 'Surfaces', v: surfaceRange(d.stats.living_surface) },
+          { k: 'Livraison', v: deliveryText(d).replace(/^Livraison /, '') },
+        ].filter((r) => r.v);
+        return (
+          <li class:list={['card', i % 2 && 'flip']}>
+            <a class="media frame settle" href={programmeUrl(d)} tabindex="-1" aria-hidden="true">
+              {photo && <RaImage src={photo} alt="" width={1200} height={860} sizes="(min-width: 960px) 58vw, 100vw" priority={i === 0} />}
+              {programmeStatus(d) && <span class="tag" data-status={d.status}>{programmeStatus(d)}</span>}
+            </a>
+            <div class="body reveal">
+              <p class="city">{d.address.city}</p>
+              <h2 class="t"><a href={programmeUrl(d)}>{d.title}</a></h2>
+              <dl>
+                {rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}
+              </dl>
+              {from && <p class="from num">{from}</p>}
+              <div class="actions">
+                <a class="button button--solid" href={programmeUrl(d)}>Découvrir<span class="sr-only"> {d.title}</span></a>
+                {d.stats.units > 0 && <a class="link" href={programmeUrl(d, 'logements')}>Les logements<span class="sr-only"> de {d.title}</span></a>}
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+  <ContactBand team={team} />
+</Site>
+<style>
+  .intro { margin: 28px 0 0; }
+  .filter { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+  .filter a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border: 1px solid var(--line-strong); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; }
+  .filter a span { color: var(--muted); }
+  .filter a[aria-current='page'] { background: var(--text); color: var(--brand); border-color: var(--text); }
+  .filter a[aria-current='page'] span { color: var(--brand); }
+  .list { list-style: none; margin: 0 auto; display: grid; gap: clamp(72px, 10vw, 160px); }
+  .card { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px clamp(32px, 5vw, 88px); align-items: center; }
+  .flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); }
+  .flip .media { order: 2; }
+  .media { position: relative; display: block; aspect-ratio: 1200 / 860; }
+  .media .tag { position: absolute; left: 20px; top: 20px; }
+  .body { display: grid; gap: 18px; align-content: center; }
+  .body > * { margin: 0; }
+  .city { font-size: var(--fs-small); color: var(--muted); }
+  .t { font: 500 clamp(2.4rem, 4.4vw, 4rem) / 0.98 var(--serif); }
+  .t a { text-decoration: none; }
+  .t a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+  dl { border-top: 1px solid var(--line); }
+  dl div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }
+  dt { color: var(--muted); }
+  dd { margin: 0; }
+  .from { font: 500 1.25rem / 1.2 var(--sans); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+  @media (max-width: 900px) {
+    .card, .flip { grid-template-columns: 1fr; }
+    .flip .media { order: 0; }
+  }
+</style>

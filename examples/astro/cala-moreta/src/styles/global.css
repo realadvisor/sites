@@ -1,0 +1,143 @@
+/* Cala Moreta: Mediterranean. Limestone and sand neutrals (warm), terracotta
+   from the brand colour, a deep sea colour for the footer and bands. */
+:root {
+  --bg: #f6f0e7;          /* limestone */
+  --paper: #fbf8f3;       /* whitewash */
+  --surface: #ede3d3;     /* sand */
+  --stone: #d9ccb8;
+  --text: #2a231d;        /* warm umber */
+  --muted: #6b5e52;
+  --line: #dccfbd;
+  --accent: #b4532a;      /* brand: terracotta */
+  --accent-strong: #9c4422;
+  --accent-soft: #f1dccd;
+  --sea: #1f4650;
+  --sea-deep: #173740;
+  --on-sea: #f6f0e7;
+  --on-sea-muted: #d9ccb8;
+  --danger: #a3311f;
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Jost', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+
+  --radius-card: 2px;
+  --radius-btn: 999px;
+  --control-radius: 2px;
+  --control-h: 50px;
+  --header-h: 76px;
+
+  --gutter: clamp(20px, 4.5vw, 64px);
+  --max: 1360px;
+  --section: clamp(72px, 10vw, 144px);
+
+  /* Kit search tokens */
+  --rs-columns: 2;
+  --rs-gap: 28px;
+  --rs-active: var(--sea);
+  --rs-on-active: var(--paper);
+  --rs-pill-radius: 999px;
+  --rs-sheet-radius: 4px;
+  --rs-heading-weight: 400;
+  --map-h: calc(100vh - var(--header-h) - 32px);
+
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.0625rem/1.6 var(--font-body);
+  font-feature-settings: 'kern';
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 300; line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; }
+::selection { background: var(--accent-soft); }
+
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.num { font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+
+.display-xl { font-size: clamp(2.75rem, 7.2vw, 6.5rem); line-height: 0.98; letter-spacing: -0.02em; }
+.display-l { font-size: clamp(2.25rem, 4.6vw, 4rem); line-height: 1.02; }
+.display-m { font-size: clamp(1.75rem, 3vw, 2.625rem); line-height: 1.08; }
+.lead { font-size: clamp(1.0625rem, 1.3vw, 1.25rem); line-height: 1.6; color: var(--muted); max-width: 56ch; }
+
+/* Buttons and text links */
+.cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 50px; padding: 0 28px; border-radius: var(--radius-btn); border: 1px solid transparent;
+  font: 500 0.8125rem/1 var(--font-body); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.cta-accent { background: var(--accent); color: #fff; }
+.cta-accent:hover { background: var(--accent-strong); }
+.cta-sea { background: var(--sea); color: var(--paper); }
+.cta-sea:hover { background: var(--sea-deep); }
+.cta-line { border-color: currentColor; color: var(--text); background: transparent; }
+.cta-line:hover { background: var(--text); color: var(--paper); border-color: var(--text); }
+.cta-light { border-color: rgb(255 255 255 / .7); color: #fff; }
+.cta-light:hover { background: #fff; color: var(--text); }
+.link {
+  display: inline-flex; align-items: center; gap: 10px; color: var(--accent-strong);
+  font: 500 0.8125rem/1.3 var(--font-body); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
+  padding-block: 6px; border-bottom: 1px solid currentColor;
+}
+.link:hover { color: var(--text); }
+.arrow { transition: transform .2s; }
+a:hover > .arrow { transform: translateX(4px); }
+
+/* Section heads */
+.section { padding-block: var(--section); }
+.section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: clamp(32px, 4vw, 56px); }
+.section-head > div { display: grid; gap: 18px; max-width: 760px; }
+
+/* Rich text from data (sanitized) and from content collections */
+.prose { font-size: 1.0625rem; line-height: 1.75; max-width: 66ch; }
+.prose > * + * { margin-top: 1.1em; }
+.prose h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); margin-top: 1.8em; font-weight: 300; }
+.prose h3, .prose h4 { font-size: 1.25rem; font-weight: 400; margin-top: 1.6em; }
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose li + li { margin-top: .4em; }
+.prose a { color: var(--accent-strong); }
+.prose strong { font-weight: 500; }
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Enquiry form (kit) themed */
+/* Kit buttons (form submit, search) in the site's voice. */
+.btn { border-radius: var(--radius-btn); font-size: .8125rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.field-label { font-weight: 500; letter-spacing: .02em; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Kit form controls: these win over the kit's own :root defaults. */
+html:root {
+  --control-h: 50px;
+  --control-radius: 2px;
+  --control-bg: var(--paper);
+  --control-border: var(--stone);
+  --control-focus: var(--sea);
+}
+
+/* Card grids */
+.grid3 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(36px, 4vw, 56px) clamp(20px, 2.6vw, 40px); }
+@media (max-width: 1000px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .grid3 { grid-template-columns: 1fr; } }
+
+/* Page head on text pages */
+.phead { padding-block: clamp(56px, 7vw, 112px) clamp(32px, 4vw, 56px); display: grid; gap: 20px; }
+.phead h1 { max-width: 20ch; }
+
+/* Kit enquiry form: terracotta submit, like every other primary action. */
+.enquiry .btn { background: var(--accent); border-color: var(--accent); color: #fff; }
+.enquiry .btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); }

@@ -1,0 +1,25 @@
+/* From components/TypeStrip.astro (scoped there: every selector under .types). */
+.types { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-radius: var(--radius-card); overflow: hidden; background: var(--paper); }
+.types li + li { border-left: 2px solid var(--ink); }
+.types .type { display: grid; gap: 16px; padding: 24px; height: 100%; text-decoration: none; color: var(--ink); align-content: start; }
+.types .type:hover { background: var(--butter-soft); text-decoration: none; }
+.types .type:focus-visible { outline-offset: -6px; }
+.types .t-name { font: 700 1.25rem/1 var(--display); }
+.types .n { font: 800 clamp(3rem, 2rem + 3vw, 4.75rem)/0.85 var(--display); letter-spacing: -0.05em; display: block; margin-bottom: 4px; }
+.types .plan { width: 100%; aspect-ratio: 600 / 470; border-radius: 10px; border: 1px solid var(--line); }
+.types dl { margin: 0; display: grid; gap: 6px; }
+.types dl div { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.types dt { color: var(--muted); font-size: 0.9375rem; }
+.types dd { margin: 0; font-weight: 700; }
+.types .avail { display: inline-flex; align-items: center; gap: 8px; font-weight: 650; }
+@media (max-width: 1000px) { .types { grid-template-columns: 1fr 1fr; } .types li:nth-child(3) { border-left: 0; } .types li:nth-child(n + 3) { border-top: 2px solid var(--ink); } }
+@media (max-width: 560px) {
+  .types { grid-template-columns: 1fr; }
+  .types li + li { border-left: 0; border-top: 2px solid var(--ink); }
+  .types .type { grid-template-columns: 1fr 1.1fr; grid-template-areas: 'name plan' 'dl plan' 'avail avail'; gap: 12px 16px; padding: 18px; }
+  .types .t-name { grid-area: name; }
+  .types .plan { grid-area: plan; align-self: center; }
+  .types dl { grid-area: dl; }
+  .types .avail { grid-area: avail; }
+  .types dl div { display: grid; border: 0; padding: 0; gap: 0; }
+}

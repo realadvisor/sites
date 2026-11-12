@@ -1,0 +1,48 @@
+/* From src/pages/lage.astro (scoped there: every selector under .p-lage). */
+.p-lage .map-row { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); padding-block: clamp(36px, 5vw, 72px); align-items: start; }
+.p-lage .map-row .big-map { --map-h: 520px; }
+.p-lage .dist-wrap { display: grid; gap: 14px; }
+.p-lage .dist { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.p-lage .dist span { display: grid; gap: 2px; }
+.p-lage .dist small { font-size: 0.8125rem; color: var(--muted); }
+.p-lage .note { font-size: 0.8125rem; color: var(--muted); max-width: 52ch; }
+.p-lage .dist li { display: grid; grid-template-columns: 30px 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.p-lage .dist strong { font: 750 1.125rem/1 var(--display); }
+.p-lage .text-band { background: var(--sand); }
+.p-lage .text-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+.p-lage .txt { display: grid; gap: 14px; align-content: start; grid-column: span 3; }
+.p-lage .txt h2 { font-size: var(--step-3); }
+.p-lage .txt p { max-width: 58ch; }
+.p-lage .card { grid-column: span 2; padding: clamp(20px, 2.4vw, 28px); border: 2px solid var(--ink); border-radius: var(--radius-card); }
+.p-lage .card h2 { font-size: var(--step-2); }
+.p-lage .card--verkehr { background: var(--zinnober); }
+.p-lage .card--alltag { background: var(--butter); }
+.p-lage .card--freizeit { background: var(--lilac); }
+.p-lage .mini { list-style: none; margin: 6px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+.p-lage .mini li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgb(20 15 58 / 0.3); font-size: 0.9375rem; }
+.p-lage .head-pic { margin: 0; width: min(100%, 460px); border: 2px solid var(--ink); border-radius: var(--radius-card); overflow: hidden; transform: rotate(1.5deg); }
+.p-lage .head-pic img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.p-lage .head-pic figcaption, .p-lage figure.ph figcaption { padding: 8px 12px; font: 650 0.8125rem/1.2 var(--body); background: var(--paper); border-top: 2px solid var(--ink); }
+.p-lage .photos { display: grid; gap: 24px; }
+.p-lage .photos-title { font-size: var(--step-4); }
+.p-lage .photo-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 16px; }
+.p-lage figure.ph-0 { grid-row: span 2; }
+.p-lage figure.ph-0 img { height: 100%; }
+.p-lage figure.ph { margin: 0; border-radius: var(--radius-card); overflow: hidden; border: 2px solid var(--ink); }
+.p-lage figure.ph { display: grid; grid-template-rows: minmax(0, 1fr) auto; background: var(--paper); }
+.p-lage figure.ph picture { min-height: 0; }
+.p-lage figure.ph img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.p-lage figure.ph-0 img { aspect-ratio: auto; }
+.p-lage .cta-in { display: grid; gap: 18px; justify-items: start; }
+.p-lage .cta-in h2 { font-size: var(--step-4); }
+@media (max-width: 1000px) {
+  .p-lage .map-row { grid-template-columns: 1fr; }
+  .p-lage .map-row .big-map { --map-h: 380px; }
+  .p-lage .txt, .p-lage .card { grid-column: 1 / -1; }
+  .p-lage .photo-grid { grid-template-columns: 1fr; }
+  .p-lage figure.ph-0 { grid-row: auto; }
+  .p-lage figure.ph-0 img { aspect-ratio: 4 / 5; }
+}
+@media (max-width: 640px) {
+  .p-lage .head-pic { transform: none; width: 100%; }
+}

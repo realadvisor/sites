@@ -1,0 +1,31 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. A listing
+// that left the site shows "no longer available" (objekte/[slug].astro sets
+// `locals.listingGone` and answers 410).
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import { t } from '@realadvisor/sites-kit/i18n';
+
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? t('listingGone') : t('notFound');
+if (Astro.response.status === 200) Astro.response.status = 404;
+---
+<Layout title={title} description={title} noindex>
+  <section class="nf wrap">
+    <p class="eyebrow">{gone ? 'Nicht mehr verfügbar' : 'Fehler 404'}</p>
+    <h1 class="h1">{title}</h1>
+    <p class="lede muted">{gone ? t('listingGoneText') : t('notFoundText')}</p>
+    <ul class="nf-links">
+      <li><a class="button button--solid" href="/kaufen">Objekte zum Kauf</a></li>
+      <li><a class="button" href="/mieten">Objekte zur Miete</a></li>
+      <li><a class="more" href="/">{t('home')}</a></li>
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .nf { display: grid; gap: 24px; justify-items: start; padding-block: clamp(80px, 12vw, 180px); }
+  .nf .lede { max-width: 44ch; }
+  .nf-links { list-style: none; display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin-top: 12px; }
+</style>

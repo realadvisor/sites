@@ -1,0 +1,60 @@
+---
+/**
+ * One office: city photo, name, address, phone, figures from the data
+ * (advisors, listings), link to the office page.
+ */
+import type { Team } from '@realadvisor/sites-sdk/types';
+import { href, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+import { officePlace, placeAlt } from '../content/places';
+import PlacePhoto from './PlacePhoto.astro';
+
+interface Props {
+  team: Team;
+  slug: string;
+  agents: number;
+  listings: number;
+  l: L;
+  as?: 'h2' | 'h3';
+  priority?: boolean;
+}
+const { team, slug, agents, listings, l, as: H = 'h3', priority = false } = Astro.props;
+const t = tx(l);
+const place = officePlace(team.address.city);
+const city = cityName(team.address.city, l) || team.name;
+---
+<article class="oc">
+  <a class="oc__media" href={href('offices', l, slug)} tabindex="-1" aria-hidden="true">
+    {place
+      ? <PlacePhoto place={place} alt={placeAlt(place, l)} width={800} height={560} sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, calc(100vw - 32px)" priority={priority} widths={priority ? [480, 800, 1000] : undefined} />
+      : <span class="oc__ph">{city}</span>}
+  </a>
+  <div class="oc__body">
+    <H class="oc__city"><a href={href('offices', l, slug)}>{city}</a></H>
+    <address>
+      {team.address.street && <span>{team.address.street}</span>}
+      {(team.address.postcode || team.address.city) && <span>{[team.address.postcode, cityName(team.address.city, l)].filter(Boolean).join(' ')}</span>}
+    </address>
+    {team.phone && <a class="oc__tel num" href={tel(team.phone)}>{team.phone}</a>}
+    <p class="oc__figs num">
+      {agents > 0 && <span>{agents === 1 ? t('nAgent1') : t('nAgents', { n: agents })}</span>}
+      {listings > 0 && <span>{listings === 1 ? t('nListing1') : t('nListings', { n: listings })}</span>}
+    </p>
+    <a class="link" href={href('offices', l, slug)}>{t('visitOffice')}<span class="sr-only"> {city}</span></a>
+  </div>
+</article>
+
+<style>
+  .oc { display: grid; gap: 22px; align-content: start; }
+  .oc__media { display: block; aspect-ratio: 10 / 7; overflow: hidden; background: var(--paper-2); }
+  .oc__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .oc:hover .oc__media :global(img) { transform: scale(1.03); }
+  .oc__ph { display: grid; place-items: center; height: 100%; font: 400 2rem var(--font-display); color: var(--navy); }
+  .oc__body { display: grid; gap: 6px; justify-items: start; }
+  .oc__city { font-size: var(--step-2); }
+  .oc__city a { text-decoration: none; }
+  .oc address { font-style: normal; display: grid; color: var(--muted); }
+  .oc__tel { color: var(--navy); min-height: 32px; display: inline-flex; align-items: center; font-weight: 600; }
+  .oc__figs { display: flex; gap: 18px; font-size: 0.875rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 6px; width: 100%; }
+</style>

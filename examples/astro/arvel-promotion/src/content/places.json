@@ -1,0 +1,24 @@
+{
+ "_about": "Place photos (generic RealAdvisor image pool, Pexels licence) from the RealAdvisor image pool",
+ "annecy": [
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12266759.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12266770.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780891.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780893.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780951.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12780953.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34605738.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34605742.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18339359.jpg"
+ ],
+ "lyon": [
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39352757.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12823481.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12823618.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12823621.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16632264.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16632275.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16632276.jpg",
+  "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34811176.jpg"
+ ]
+}

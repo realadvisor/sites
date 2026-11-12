@@ -1,0 +1,68 @@
+---
+/**
+ * Listing card: rounded 4:3 photo with a save heart, price first, then the
+ * title, facts and place. The whole card is one link (stretched from the
+ * title); the heart sits above it. No photo: a neutral tile with the type.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import type { Listing } from '../lib/data';
+import { cityLine, factsLine, listingHref, price, typeLabel } from '../lib/site';
+import SaveButton from './SaveButton.astro';
+
+interface Props {
+  listing: Listing;
+  priority?: boolean;
+  as?: 'h2' | 'h3';
+  sizes?: string;
+}
+const { listing: l, priority, as: H = 'h3', sizes = '(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw' } = Astro.props;
+const photo = l.photos[0];
+const href = listingHref(l);
+const sold = l.status === 'sold';
+const facts = factsLine(l);
+const place = cityLine(l);
+---
+<article class:list={['card', { 'is-sold': sold }]}>
+  <div class="card__media">
+    {photo ? (
+      <RaImage src={photo} alt={photo.alt || `${typeLabel(l.property_type)} à ${l.address.city ?? ''}`} width={640} height={480} sizes={sizes} priority={priority} />
+    ) : (
+      <span class="card__nophoto">{typeLabel(l.property_type)}</span>
+    )}
+    {sold && <span class="card__badge">{l.offer_type === 'rent' ? 'Loué' : 'Vendu'}</span>}
+    {!sold && (
+      <SaveButton class="card__save" id={l.id} href={href} title={l.title} price={price(l)} place={place} facts={facts}
+        img={photo ? img(photo.url, { w: 320, h: 240 }) : ''} alt={photo?.alt ?? ''} />
+    )}
+  </div>
+  <div class="card__body">
+    <p class="card__price num">{price(l)}</p>
+    <H class="card__title"><a href={href}>{l.title}</a></H>
+    {facts && <p class="card__facts">{facts}</p>}
+    {place && <p class="card__place">{typeLabel(l.property_type)} · {place}</p>}
+  </div>
+</article>
+
+<style>
+  .card { position: relative; display: grid; gap: 12px; }
+  .card__media { position: relative; border-radius: var(--radius-img); overflow: hidden; background: var(--surface); aspect-ratio: 4 / 3; }
+  .card__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .card:hover .card__media :global(img) { transform: scale(1.03); }
+  .card__nophoto { display: grid; place-items: center; height: 100%; color: var(--muted); font-weight: 550; }
+  .card__badge {
+    position: absolute; top: 12px; left: 12px; padding: 6px 12px; border-radius: 999px; background: var(--bg);
+    font-size: 0.8125rem; font-weight: 650; box-shadow: var(--shadow);
+  }
+  .card :global(.card__save) { position: absolute; top: 8px; right: 8px; z-index: 2; }
+  .card__body { display: grid; gap: 2px; }
+  .card__price { font-weight: 650; font-size: 1.125rem; letter-spacing: -0.01em; }
+  .is-sold .card__price { color: var(--muted); }
+  .card__title { font-size: 1rem; font-weight: 550; letter-spacing: -0.005em; line-height: 1.35; }
+  .card__title a { text-decoration: none; }
+  .card__title a::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--radius-img); }
+  .card__title a:focus-visible { outline: none; }
+  .card__title a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .card__facts, .card__place { color: var(--muted); font-size: 0.9375rem; }
+  .card__facts { color: var(--text); }
+</style>

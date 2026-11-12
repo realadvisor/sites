@@ -1,0 +1,2 @@
+main { outline: none; display: block; }
+@media (max-width: 1023px) { .bar-space { padding-bottom: 76px; } }

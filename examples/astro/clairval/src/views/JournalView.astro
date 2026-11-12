@@ -1,0 +1,63 @@
+---
+/** Journal: the newest article large, then the others as a plain list. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { siteData } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+import { dateLong } from '../lib/format';
+import { POSTS } from '../content/journal';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org } = await siteData();
+const posts = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+const [lead, ...rest] = posts;
+const C = {
+  en: { title: 'Journal', lede: 'Practical notes from our offices on buying, selling and renting.' },
+  fr: { title: 'Journal', lede: 'Des notes pratiques de nos bureaux sur l’achat, la vente et la location.' },
+}[l];
+---
+<Site l={l} route="journal" title={`${C.title} | ${org.name}`} description={C.lede}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navJournal') }]} title={C.title} lede={C.lede} />
+  {lead && (
+    <section class="wrap">
+      <a class="lead" href={href('journal', l, lead.slug)}>
+        <RaImage src={lead.cover.url} alt={lead.cover.alt[l]} width={1200} height={800} priority sizes="(min-width: 1024px) 58vw, 100vw" />
+        <span class="lead__text">
+          <time datetime={lead.date} class="muted">{dateLong(lead.date, l)}</time>
+          <h2 class="h2">{lead.title[l]}</h2>
+          <span class="lede">{lead.summary[l]}</span>
+        </span>
+      </a>
+    </section>
+  )}
+  <ul class="plain wrap list">
+    {rest.map((p) => (
+      <li>
+        <a class="item" href={href('journal', l, p.slug)}>
+          <RaImage src={p.cover.url} alt={p.cover.alt[l]} width={480} height={320} sizes="(min-width: 768px) 280px, 100vw" />
+          <span class="item__text">
+            <time datetime={p.date} class="muted small">{dateLong(p.date, l)}</time>
+            <h2 class="h3">{p.title[l]}</h2>
+            <span>{p.summary[l]}</span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Site>
+
+<style>
+  .lead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 72px); align-items: center; text-decoration: none; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
+  .lead :global(img) { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .lead__text { display: grid; gap: 16px; }
+  .lead:hover h2, .item:hover h2 { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; }
+  .list { padding-bottom: var(--section); }
+  .item { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 40px; align-items: center; padding-block: 40px; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .item :global(img) { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .item__text { display: grid; gap: 10px; max-width: 64ch; }
+  @media (max-width: 767px) { .lead, .item { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+</style>

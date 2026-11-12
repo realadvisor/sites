@@ -1,0 +1,76 @@
+---
+/** About: the firm in plain text, today's facts computed from the data, and the three offices. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import PageBand from '../components/PageBand.astro';
+import { siteData, sites } from '../lib/data';
+import { ABOUT } from '../content/about';
+import { placeOf } from '../content/places';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, langNames, tx } from '../lib/copy';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents }, live] = await Promise.all([siteData(), sites.allListings({ status: 'available' })]);
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const langs = langNames([...new Set(agents.flatMap((a) => a.languages ?? []))], l);
+const facts = [
+  { k: t('factOffices'), v: String(teams.length), h: href('offices', l) },
+  { k: t('factAdvisers'), v: String(agents.length), h: href('team', l) },
+  { k: t('factListings'), v: String(live.length), h: href('buy', l) },
+  langs && { k: t('factLanguages'), v: langs },
+].filter(Boolean) as { k: string; v: string; h?: string }[];
+---
+<Site l={l} route="about" title={`${t('aboutTitle', { name: org.name })}`} description={t('aboutLede', { name: org.name, cities })}>
+  <PageBand l={l} title={t('aboutTitle', { name: org.name })} lede={t('aboutLede', { name: org.name, cities })} crumbs={[{ label: t('navAbout') }]} />
+  <div class="wrap section cols">
+    <div class="text">
+      {ABOUT[l].map((s) => (
+        <section>
+          <h2 class="h3">{s.h}</h2>
+          <p>{s.p}</p>
+        </section>
+      ))}
+    </div>
+    <aside class="facts" aria-labelledby="h-today">
+      <h2 id="h-today" class="h3">{t('aboutFacts')}</h2>
+      <dl>{facts.map((f) => <div><dt>{f.k}</dt><dd>{f.h ? <a class="num" href={f.h}>{f.v}</a> : f.v}</dd></div>)}</dl>
+    </aside>
+  </div>
+  <section class="offices" aria-label={t('navOffices')}>
+    <ul class="plain-list offices__row">
+      {teams.map((x) => {
+        const slug = teamSlug(x, teams);
+        const place = placeOf(slug, 1);
+        return (
+          <li>
+            <a href={href('offices', l, slug)}>
+              {place && <RaImage src={place.photo} alt={place.alt[l]} width={800} height={560} sizes="(min-width: 800px) 33vw, 100vw" />}
+              <span>{t('officeOf', { city: cityName(x.address.city, l) || x.name })}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+</Site>
+
+<style>
+  .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 112px); align-items: start; }
+  .text { display: grid; gap: 36px; max-width: 64ch; }
+  .text section { display: grid; gap: 10px; }
+  .text h2, .facts h2 { color: var(--green-ink); }
+  .text p { font-size: 1.0625rem; }
+  .facts { background: var(--paper); padding: 28px; display: grid; gap: 14px; }
+  .facts dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line-strong); }
+  .facts dt { color: var(--muted); }
+  .facts dd { font-weight: 600; text-align: right; }
+  .facts dd a { color: var(--green); font: 400 1.5rem/1 var(--font-display); }
+  .offices__row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
+  .offices__row a { position: relative; display: block; aspect-ratio: 10 / 7; overflow: hidden; color: #fff; text-decoration: none; background: var(--green-ink); }
+  .offices__row :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .offices__row span { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: rgb(16 43 32 / 0.9); font: 400 1.25rem/1.2 var(--font-display); }
+  .offices__row a:hover span { text-decoration: underline; }
+  @media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } .offices__row { grid-template-columns: minmax(0, 1fr); } }
+</style>

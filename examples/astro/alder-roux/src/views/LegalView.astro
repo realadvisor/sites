@@ -1,0 +1,40 @@
+---
+/** Legal notice and privacy policy: the kit's text from the organisation data, in the site frame. Never edited here. */
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import Site from '../layouts/Site.astro';
+import { siteData } from '../lib/data';
+import { LOCALE, type L } from '../lib/routes';
+
+interface Props { l: L; kind: 'legal' | 'privacy' }
+const { l, kind } = Astro.props;
+const lg = klang(LOCALE[l]);
+const { org, primary } = await siteData();
+const agency = { id: org.id, name: org.name, phone: primary?.phone, email: primary?.email, address: org.address, website: org.website };
+const title = kt(kind === 'legal' ? 'legalNotice' : 'privacyPolicy', {}, lg);
+const sections = kind === 'legal' ? legalNotice(agency, lg) : privacyPolicy(agency, { analytics: !!analyticsId() }, lg);
+---
+<Site l={l} route={kind} title={`${title} | ${org.name}`} description={`${title} ${org.name}`}>
+  <section class="band on-navy">
+    <div class="wrap band__inner"><h1 class="h1">{title}</h1></div>
+  </section>
+  <div class="wrap section legal-wrap">
+    <LegalContent sections={sections} />
+  </div>
+</Site>
+
+<style>
+  .legal-wrap { max-width: 860px; margin-inline: 0; }
+  .legal-wrap :global(.legal) { display: grid; gap: 48px; }
+  .legal-wrap :global(h2) { font-size: var(--step-2); margin-bottom: 16px; }
+  .legal-wrap :global(dl) { display: grid; border-top: 1px solid var(--line); }
+  .legal-wrap :global(dl > div) { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .legal-wrap :global(dt) { color: var(--muted); }
+  .legal-wrap :global(dd a) { color: var(--navy); overflow-wrap: anywhere; }
+  .legal-wrap :global(p) { color: var(--text); max-width: 68ch; }
+  .legal-wrap :global(p + p) { margin-top: 12px; }
+  @media (max-width: 600px) { .legal-wrap :global(dl > div) { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+  @media (min-width: 1360px) { .legal-wrap { margin-left: calc((100vw - var(--max)) / 2); } }
+</style>

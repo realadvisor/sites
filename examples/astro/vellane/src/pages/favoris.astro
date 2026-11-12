@@ -1,0 +1,47 @@
+---
+export const prerender = false;
+/**
+ * Mes favoris: the shortlist and saved searches kept in this browser
+ * (scripts/saved.ts renders them from localStorage). Static: no data here.
+ */
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { searchUrl } from '../lib/site';
+---
+<Site nav="saved" title="Mes favoris | Vellane Immobilier" description="Vos annonces et recherches enregistrées sur cet appareil." noindex>
+  <PageHead title="Mes favoris" lede="Les annonces et les recherches que vous avez enregistrées. Elles restent sur cet appareil : rien n'est envoyé à nos agences." />
+  <div class="wrap saved">
+    <div class="saved__empty" data-saved-empty>
+      <p>Aucun favori pour l'instant. Touchez le cœur d'une annonce pour la retrouver ici.</p>
+      <p class="saved__go"><a class="vb" href={searchUrl('buy')}>Biens à vendre</a><a class="vb vb--ghost" href={searchUrl('rent')}>Biens à louer</a></p>
+    </div>
+    <ul class="saved__list" data-saved-list hidden></ul>
+    <section class="saved__searches" data-searches hidden aria-labelledby="ss-h">
+      <h2 id="ss-h" class="h3">Recherches enregistrées</h2>
+      <ul data-searches-list></ul>
+    </section>
+  </div>
+</Site>
+
+<style>
+  .saved { display: grid; gap: 48px; }
+  .saved__empty { display: grid; gap: 20px; padding: 32px; border-radius: var(--radius-card); background: var(--surface); }
+  .saved__go { display: flex; flex-wrap: wrap; gap: 12px; }
+  .saved__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+  .saved__list :global(.saved-item) { display: grid; gap: 8px; }
+  .saved__list :global(.saved-link) { display: grid; gap: 12px; text-decoration: none; }
+  .saved__list :global(.saved-img) { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-img); background: var(--surface); }
+  .saved__list :global(.saved-body) { display: grid; gap: 2px; }
+  .saved__list :global(.saved-price) { font-weight: 650; font-size: 1.125rem; }
+  .saved__list :global(.saved-title) { font-weight: 550; }
+  .saved__list :global(.saved-link:hover .saved-title) { text-decoration: underline; }
+  .saved__list :global(.saved-meta) { color: var(--muted); font-size: 0.9375rem; }
+  .saved :global(.saved-remove) {
+    justify-self: start; min-height: 40px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--bg); color: var(--text);
+    font-weight: 600; font-size: 0.875rem; cursor: pointer;
+  }
+  .saved :global(.saved-remove:hover) { border-color: var(--text); }
+  .saved__searches { display: grid; gap: 16px; }
+  .saved__searches ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .saved__searches :global(li) { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+</style>

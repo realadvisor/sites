@@ -1,0 +1,74 @@
+---
+/** Offices: each office as a row, then a map with one pin per office (the map comes last so it is not the LCP image) (photo, address, phone, e-mail, agents). */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { siteData, sites } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+import { placeOf } from '../content/places';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents }, all] = await Promise.all([siteData(), sites.allListings({ status: 'available' })]);
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const C = {
+  en: { title: 'Our offices', lede: `${teams.length} offices: ${cities}.`, agents: (n: number) => `${n} ${n === 1 ? 'agent' : 'agents'}`, listings: (n: number) => `${n} ${n === 1 ? 'property' : 'properties'}`, map: 'Map of the offices', osm: 'Open the map', page: 'Office page' },
+  fr: { title: 'Nos bureaux', lede: `${teams.length} bureaux : ${cities}.`, agents: (n: number) => `${n} ${n === 1 ? 'agent' : 'agents'}`, listings: (n: number) => `${n} ${n === 1 ? 'bien' : 'biens'}`, map: 'Carte des bureaux', osm: 'Ouvrir la carte', page: 'Page du bureau' },
+}[l];
+const pts = teams.filter((x) => x.address.lat != null && x.address.lng != null);
+const lat = pts.length ? (Math.min(...pts.map((p) => p.address.lat!)) + Math.max(...pts.map((p) => p.address.lat!))) / 2 : 0;
+const lng = pts.length ? (Math.min(...pts.map((p) => p.address.lng!)) + Math.max(...pts.map((p) => p.address.lng!))) / 2 : 0;
+---
+<Site l={l} route="offices" title={`${C.title} | ${org.name}`} description={C.lede}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navOffices') }]} title={C.title} lede={C.lede} />
+  <ul class="plain wrap offices">
+    {teams.map((x, i) => {
+      const slug = teamSlug(x, teams);
+      const photo = placeOf(slug)?.photos[0];
+      const n = agents.filter((a) => a.team_ids.includes(x.id)).length;
+      const m = all.filter((y) => y.team_ids.includes(x.id)).length;
+      return (
+        <li class="office">
+          {photo && <RaImage src={photo.url} alt={photo.alt[l]} width={800} height={600} sizes="(min-width: 1024px) 40vw, 100vw" priority={i === 0} />}
+          <div class="office__text">
+            <h2 class="h2"><a href={href('offices', l, slug)}>{cityName(x.address.city, l) || x.name}</a></h2>
+            <address>
+              {x.address.street && <span>{x.address.street}</span>}
+              <span>{[x.address.postcode, x.address.city].filter(Boolean).join(' ')}{x.address.country && `, ${x.address.country === 'Switzerland' ? (l === 'fr' ? 'Suisse' : 'Switzerland') : x.address.country}`}</span>
+            </address>
+            <ul class="plain office__c">
+              {x.phone && <li><a class="num" href={tel(x.phone)}>{x.phone}</a></li>}
+              {x.email && <li><a href={`mailto:${x.email}`}>{x.email}</a></li>}
+            </ul>
+            <p class="muted">{C.agents(n)} · {C.listings(m)}</p>
+            <a class="link" href={href('offices', l, slug)}>{C.page}</a>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+  {pts.length > 1 && (
+    <div class="wrap offices-map">
+      <StaticMap lat={lat} lng={lng} zoom={7} height={520} label={C.map} linkLabel={C.osm}
+        points={pts.map((p) => ({ lat: p.address.lat!, lng: p.address.lng!, label: cityName(p.address.city, l), href: href('offices', l, teamSlug(p, teams)) }))} />
+    </div>
+  )}
+</Site>
+
+<style>
+  .offices { display: grid; gap: 0; padding-block: 56px; }
+  .offices-map { padding-bottom: var(--section); }
+  .office { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 80px); align-items: center; padding-block: 40px; border-bottom: 1px solid var(--line); }
+  .office:first-child { border-top: 1px solid var(--line); }
+  .office :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .office__text { display: grid; gap: 14px; justify-items: start; }
+  .office h2 a { text-decoration: none; }
+  .office h2 a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; }
+  .office address { font-style: normal; display: grid; }
+  .office__c a { display: inline-flex; min-height: 36px; align-items: center; overflow-wrap: anywhere; }
+  @media (max-width: 767px) { .office { grid-template-columns: minmax(0, 1fr); } }
+</style>

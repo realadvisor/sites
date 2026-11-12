@@ -1,0 +1,95 @@
+---
+/** One district: a photo, the agency's text on it, its homes for sale, to rent and sold. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { render } from 'astro:content';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, brandName, byNewest, sites } from '../lib/data';
+import { districtsWithListings, type District } from '../lib/districts';
+import { placePhotos } from '../lib/places';
+import { districtText } from '../lib/journal';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang; district: District }
+const { lang, district: d } = Astro.props;
+const ui = UI[lang];
+const [ag, all] = await Promise.all([agency(), sites.allListings()]);
+const withListings = districtsWithListings(all);
+const mine = (withListings.find((x) => x.slug === d.slug)?.listings ?? []).sort(byNewest);
+const sale = mine.filter((l) => l.status === 'available' && l.offer_type === 'buy');
+const rent = mine.filter((l) => l.status === 'available' && l.offer_type === 'rent');
+const sold = mine.filter((l) => l.status === 'sold');
+const entry = await districtText(d.slug, lang);
+const Body = entry ? (await render(entry)).Content : null;
+const places = placePhotos(d.place, lang);
+const listingPhoto = (sale[0] ?? rent[0] ?? sold[0])?.photos[0];
+const hero = places[0] ?? listingPhoto;
+const second = places[1];
+const others = withListings.filter((x) => x.slug !== d.slug);
+const name = d.name;
+const sections = [
+  { id: 'sale', title: fill(ui.areaForSale, { name }), list: sale, price: true },
+  { id: 'rent', title: fill(ui.areaToRent, { name }), list: rent, price: true },
+  { id: 'sold', title: fill(ui.areaSold, { name }), list: sold, price: false },
+].filter((s) => s.list.length > 0);
+---
+<Site lang={lang} current="areas" title={`${fill(ui.areaHomes, { name })} | ${brandName(ag)}`}
+  description={entry?.data.lead ?? fill(ui.areaHomes, { name })}
+  image={hero && img(hero.url, { w: 1200, h: 630 })} alternates={alternates('areas', d.slug)}>
+  <header class="wrap phead head">
+    <p class="small"><a class="back" href={href('areas', lang)}><span aria-hidden="true">←</span> {ui.nav.areas}</a></p>
+    <h1 class="d-mega">{name}</h1>
+    {entry && <p class="lead">{entry.data.lead}</p>}
+  </header>
+  {hero && (
+    <div class="wrap">
+      <div class="frame hero"><RaImage src={hero} alt={hero.alt || name} width={1600} height={800} priority quality={55} widths={[640, 960, 1280, 1600, 1920]} sizes="(min-width: 1520px) 1424px, 100vw" mobile={{ width: 800, height: 640 }} /></div>
+    </div>
+  )}
+  {Body && (
+    <section class="wrap text">
+      <div class="prose"><Body /></div>
+      {second && <div class="frame text-photo"><RaImage src={second} alt={second.alt} width={800} height={1000} sizes="(min-width: 900px) 30vw, 100vw" /></div>}
+    </section>
+  )}
+
+  {sections.length ? sections.map((s) => (
+    <section class="wrap homes" aria-labelledby={`h-${s.id}`}>
+      <h2 id={`h-${s.id}`} class="d-l">{s.title}</h2>
+      <div class="grid">{s.list.map((l) => <ListingCard listing={l} lang={lang} showPrice={s.price} />)}</div>
+    </section>
+  )) : (
+    <section class="wrap homes">
+      <p class="lead">{fill(ui.areaNone, { name })}</p>
+      <p><a class="cta cta-solid" href={href('contact', lang)}>{ui.areaAsk}</a></p>
+    </section>
+  )}
+
+  {others.length > 0 && (
+    <nav class="wrap others" aria-labelledby="others-h">
+      <h2 id="others-h" class="label muted">{ui.otherAreas}</h2>
+      <ul>{others.map((o) => <li><a class="d-m" href={href('areas', lang, o.slug)}>{o.name}</a></li>)}</ul>
+    </nav>
+  )}
+</Site>
+
+<style>
+  .head { display: grid; gap: 20px; }
+  .back { color: var(--muted); text-decoration: none; display: inline-flex; min-height: 32px; align-items: center; }
+  .back:hover { color: var(--text); text-decoration: underline; }
+  .hero { aspect-ratio: 2 / 1; }
+  @media (max-width: 760px) { .hero { aspect-ratio: 5 / 4; } }
+  .text { display: grid; grid-template-columns: 1fr minmax(0, var(--text-w)) 1fr; gap: 40px; padding-top: clamp(48px, 6vw, 96px); align-items: start; }
+  .text .prose { grid-column: 2; font-size: var(--fs-lead); line-height: 1.5; }
+  .text-photo { grid-column: 3; aspect-ratio: 4 / 5; margin-top: 120px; }
+  @media (max-width: 1080px) { .text { grid-template-columns: 2fr 1fr; } .text .prose { grid-column: 1; } .text-photo { grid-column: 2; } }
+  @media (max-width: 700px) { .text { grid-template-columns: 1fr; } .text-photo { grid-column: 1; margin-top: 0; aspect-ratio: 4 / 5; } }
+  .homes { padding-top: var(--section); display: grid; gap: clamp(24px, 3vw, 40px); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 72px) clamp(24px, 3.5vw, 56px); border-top: 1px solid var(--text); padding-top: 24px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .others { padding-top: var(--section); display: grid; gap: 16px; }
+  .others ul { display: flex; flex-wrap: wrap; gap: 4px 28px; border-top: 1px solid var(--text); padding-top: 16px; }
+  .others a { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; }
+  .others a:hover { text-decoration: underline; }
+</style>

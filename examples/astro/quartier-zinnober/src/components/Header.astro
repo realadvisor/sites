@@ -1,0 +1,114 @@
+---
+import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  /** Units available right now, from the development's stats. */
+  available?: number;
+  /** Header over a coloured page head: same look, the bar stays solid. */
+  current?: string;
+}
+const { available, current = Astro.url.pathname } = Astro.props;
+const NAV = [
+  { href: '/wohnungen', label: 'Wohnungen' },
+  { href: '/lage', label: 'Lage' },
+  { href: '/galerie', label: 'Galerie' },
+  { href: '/news', label: 'Baustelle' },
+  { href: '/dokumente', label: 'Dokumente' },
+];
+const isCurrent = (href: string) => current === href || current.startsWith(`${href}/`);
+---
+<header class="site-header" data-header>
+  <div class="bar wrap">
+    <a class="brand" href="/" aria-label="Quartier Zinnober, Startseite"><Wordmark /></a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <ul>
+        {NAV.map((n) => <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="actions">
+      <a class="cta cta--zinnober cta--sm" href="/kontakt" aria-current={isCurrent('/kontakt') ? 'page' : undefined}>
+        Interesse anmelden
+        {available != null && available > 0 && <span class="count num" aria-label={`${available} Wohnungen frei`}>{available} frei</span>}
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+        <Icon name="menu" size={26} /><span class="visually-hidden">Menü öffnen</span>
+      </button>
+    </div>
+  </div>
+  <div class="sheet" id="menu" data-menu role="dialog" aria-modal="true" aria-label="Menü">
+    <div class="sheet-bar wrap">
+      <a class="brand" href="/" aria-label="Quartier Zinnober, Startseite"><Wordmark /></a>
+      <button class="menu-btn" type="button" data-menu-close><Icon name="close" size={28} /><span class="visually-hidden">Menü schliessen</span></button>
+    </div>
+    <nav class="wrap sheet-nav" aria-label="Menü">
+      <ul>
+        <li><a href="/">Start</a></li>
+        {NAV.map((n) => <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+        <li><a href="/kontakt" aria-current={isCurrent('/kontakt') ? 'page' : undefined}>Kontakt</a></li>
+      </ul>
+      <a class="cta cta--ink" href="/kontakt">Interesse anmelden <Icon name="arrow" /></a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 2px solid var(--ink); }
+  .bar { height: var(--header-h); display: flex; align-items: center; gap: 24px; }
+  .brand { display: inline-flex; text-decoration: none; flex: none; }
+  .nav { margin-left: auto; }
+  .nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.975rem; }
+  .nav a:hover { background: var(--sand); }
+  .nav a[aria-current='page'] { background: var(--ink); color: #fff; }
+  .actions { display: flex; align-items: center; gap: 8px; }
+  .cta--sm { min-height: 46px; padding: 0 8px 0 20px; font-size: 0.95rem; }
+  .count { background: var(--ink); color: #fff; border-radius: 999px; padding: 7px 11px; font-size: 0.8125rem; }
+  .menu-btn { display: none; width: 48px; height: 48px; align-items: center; justify-content: center; border: 2px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
+  .sheet { position: fixed; inset: 0; z-index: 60; background: var(--zinnober); color: var(--ink); display: flex; flex-direction: column; visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.18s ease, visibility 0s linear 0.18s; overflow-y: auto; }
+  .sheet.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.18s ease; }
+  .sheet-bar { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--ink); }
+  .sheet .menu-btn { display: inline-flex; }
+  .sheet-nav { padding-block: 24px 40px; display: grid; gap: 28px; align-content: start; }
+  .sheet-nav ul { list-style: none; margin: 0; padding: 0; }
+  .sheet-nav li a { display: block; padding: 6px 0; font: 780 clamp(2.4rem, 10vw, 3.6rem)/1.05 var(--display); letter-spacing: -0.03em; text-decoration: none; }
+  .sheet-nav li a[aria-current='page'] { text-decoration: underline; text-decoration-thickness: 4px; }
+  .cta--ink { justify-self: start; }
+  @media (max-width: 1080px) {
+    .nav { display: none; }
+    .actions { margin-left: auto; }
+    .menu-btn { display: inline-flex; }
+  }
+  @media (max-width: 560px) {
+    .actions .cta { display: none; }
+  }
+</style>
+
+<script>
+  const sheet = document.querySelector<HTMLElement>('[data-menu]');
+  const open = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const close = sheet?.querySelector<HTMLButtonElement>('[data-menu-close]');
+  const setOpen = (on: boolean) => {
+    if (!sheet || !open) return;
+    sheet.classList.toggle('is-open', on);
+    open.setAttribute('aria-expanded', String(on));
+    document.body.classList.toggle('menu-open', on);
+    (on ? close : open)?.focus();
+  };
+  open?.addEventListener('click', () => setOpen(true));
+  close?.addEventListener('click', () => setOpen(false));
+  sheet?.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sheet?.classList.contains('is-open')) setOpen(false);
+    // Keep focus inside the open menu.
+    if (e.key === 'Tab' && sheet?.classList.contains('is-open')) {
+      const f = [...sheet.querySelectorAll<HTMLElement>('a, button')];
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    }
+  });
+</script>

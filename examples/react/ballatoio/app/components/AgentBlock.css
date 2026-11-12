@@ -1,0 +1,12 @@
+  .agent { display: grid; gap: 20px; align-content: start; }
+  .agent.has-photo.agent-m { grid-template-columns: 120px 1fr; align-items: start; }
+  .agent-photo { aspect-ratio: 4 / 5; }
+  .agent-l .agent-photo { max-width: 320px; }
+  @media (min-width: 600px) { .agent-l.has-photo { grid-template-columns: minmax(0, 220px) 1fr; gap: 28px; align-items: end; } }
+  .agent-text { display: grid; gap: 6px; }
+  .agent-m .agent-name { font-size: var(--fs-s); }
+  .agent-name a { text-decoration: none; }
+  .agent-name a:hover { text-decoration: underline; }
+  .agent-contacts { display: grid; margin-top: 8px; }
+  .agent-contacts a { display: inline-flex; align-items: center; min-height: 36px; overflow-wrap: anywhere; }
+  .agent-note { margin-top: 4px; }

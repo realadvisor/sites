@@ -1,0 +1,8 @@
+  .band__inner { padding-bottom: 0; }
+  .band { padding-bottom: 0; }
+  .switch { display: flex; gap: 10px; margin-top: 8px; padding-bottom: 28px; }
+  .switch a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border: 1px solid rgb(255 255 255 / 0.55); border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.9375rem; }
+  .switch a:hover { border-color: #fff; }
+  .switch a[aria-current] { background: #fff; color: var(--green); border-color: #fff; }
+  .search { padding-top: 28px; padding-bottom: var(--section); }
+  .search .rs-grid { row-gap: 44px; }

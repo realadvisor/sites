@@ -1,0 +1,14 @@
+/* ListingsPager: part of kit.css (import it alone for a site without the other parts). */
+  .rs-pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rs-line); }
+  .rs-pager ol { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .rs-pager a, .rs-gap { display: grid; place-items: center; min-width: 44px; height: 44px; color: var(--rs-ink); text-decoration: none; font-variant-numeric: tabular-nums; border-radius: var(--control-radius, 8px); }
+  .rs-pager a:hover { background: color-mix(in srgb, var(--rs-ink) 6%, transparent); }
+  .rs-pager a[aria-current] { background: var(--rs-on); color: var(--rs-on-ink); }
+  .rs-step { display: inline-flex !important; gap: 6px; padding: 0 12px; min-width: 96px; }
+  .rs-step:last-child { justify-content: end; }
+  @media (max-width: 639px) {
+    .rs-step span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .rs-step { min-width: 44px; padding: 0; }
+    .rs-pager ol li:not(:has([aria-current])):not(:first-child):not(:last-child) { display: none; }
+  }
+

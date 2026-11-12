@@ -1,0 +1,44 @@
+---
+/**
+ * A static map from OpenStreetMap tiles (no library, no iframe, no JS): a
+ * grid of 256 px tiles centred on the point, a marker, the attribution and a
+ * link to the full map. Coordinates from the API are rounded, never exact.
+ */
+import type { L } from '../lib/routes';
+import { c } from '../lib/copy';
+interface Props { lat: number; lng: number; zoom?: number; label: string; cols?: number; rows?: number; class?: string; l: L }
+const { lat, lng, zoom = 15, label, cols = 7, rows = 5, class: cls, l } = Astro.props;
+const n = 2 ** zoom;
+const fx = ((lng + 180) / 360) * n;
+const rad = (lat * Math.PI) / 180;
+const fy = ((1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2) * n;
+const x0 = Math.floor(fx - cols / 2);
+const y0 = Math.floor(fy - rows / 2);
+// Marker position inside the grid, in % of the grid.
+const mx = ((fx - x0) / cols) * 100;
+const my = ((fy - y0) / rows) * 100;
+const tiles = Array.from({ length: rows }, (_, j) => Array.from({ length: cols }, (_, i) => ({ x: x0 + i, y: y0 + j }))).flat();
+const osm = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=${zoom}/${lat}/${lng}`;
+---
+<figure class:list={['map', cls]} style={`--cols:${cols};--rows:${rows};--mx:${mx}%;--my:${my}%`}>
+  <div class="frame">
+    <div class="grid" role="img" aria-label={`${c('map', l)}: ${label}`}>
+      {tiles.map((t) => <img src={`https://tile.openstreetmap.org/${zoom}/${t.x}/${t.y}.png`} alt="" width="256" height="256" loading="lazy" decoding="async" fetchpriority="low" />)}
+      <span class="pin" aria-hidden="true"></span>
+    </div>
+  </div>
+  <figcaption>
+    <span>{label}</span>
+    <span><a href={osm} rel="noopener" target="_blank">{c('openMap', l)}</a> · © <a href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">{c('mapContrib', l)}</a></span>
+  </figcaption>
+</figure>
+<style>
+  .map { margin: 0; }
+  .frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--sand); border: 1px solid var(--line); border-radius: var(--radius-card); }
+  .grid { position: absolute; width: calc(var(--cols) * 256px); height: calc(var(--rows) * 256px); left: 50%; top: 50%; display: grid; grid-template-columns: repeat(var(--cols), 256px); transform: translate(calc(-1 * var(--mx)), calc(-1 * var(--my))); }
+  .grid img { width: 256px; height: 256px; max-width: none; filter: grayscale(0.85) sepia(0.18) contrast(0.95) brightness(1.03); }
+  .pin { position: absolute; left: var(--mx); top: var(--my); width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px rgb(138 106 74 / 0.28), 0 0 0 1px #fff inset; }
+  figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; font-size: 0.8125rem; color: var(--muted); }
+  figcaption a { color: inherit; display: inline-block; padding-block: 8px; }
+  @media (max-width: 640px) { .frame { aspect-ratio: 4 / 3; } }
+</style>

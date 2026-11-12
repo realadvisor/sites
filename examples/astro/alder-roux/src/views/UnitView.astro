@@ -1,0 +1,168 @@
+---
+/**
+ * One unit of a development: indicative plan first, facts, price (only when
+ * available), enquiry form filed on this unit (developmentId + lotId),
+ * other units of the same type. Sold units are noindex.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { extraStr, siteData, type DevelopmentWithUnits } from '../lib/data';
+import type { Unit } from '@realadvisor/sites-sdk/types';
+import { agentSlug, href, LOCALE, unitSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { floor, formatSurface, orientation, price, rooms, tel } from '../lib/format';
+import { unitInSentence, outdoor, statusLabel, typeOf, unitHref, unitLine, unitTitle, unitTypes } from '../lib/dev';
+
+interface Props { l: L; dev: DevelopmentWithUnits; unit: Unit }
+const { l, dev, unit: u } = Astro.props;
+const t = tx(l);
+const locale = LOCALE[l];
+const unitParam = unitSlug(u);
+const { org, agents } = await siteData();
+const types = unitTypes(dev.units);
+const type = typeOf(types, u);
+const title = unitTitle(u, l);
+const city = cityName(dev.address.city, l);
+const agent = dev.agents[0] ? (agents.find((a) => a.id === dev.agents[0]!.id) ?? dev.agents[0]) : undefined;
+// fixture only: orientation
+const ori = orientation(extraStr('units', u.id, 'orientation'), l);
+const out = outdoor(u);
+const facts = [
+  u.rooms != null && { k: t('rooms'), v: String(u.rooms) },
+  u.bedrooms != null && { k: t('bedrooms'), v: String(u.bedrooms) },
+  u.bathrooms != null && { k: t('bathrooms'), v: String(u.bathrooms) },
+  u.living_surface != null && { k: t('livingArea'), v: formatSurface(u.living_surface) },
+  out != null && { k: u.floor === 0 ? t('garden') : t('outdoor'), v: formatSurface(out) },
+  u.floor != null && { k: t('floor'), v: floor(u.floor, l) },
+  ori && { k: t('orientation'), v: ori },
+].filter(Boolean) as { k: string; v: string }[];
+const siblings = (type?.units ?? []).filter((x) => x.id !== u.id);
+const available = u.status === 'available';
+const canAsk = u.status !== 'sold';
+const unitLabelForMsg = unitInSentence(u, l);
+---
+<Site l={l} route="developments" segs={[dev.slug, unitParam]}
+  title={`${title} · ${dev.title} · ${unitLine(u, l)} | ${org.name}`}
+  description={`${dev.title}, ${city}: ${unitLine(u, l)}, ${formatSurface(u.living_surface)} · ${available ? price({ ...u, status: 'available' }, l) : statusLabel(u.status, l)}`}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+  noindex={u.status === 'sold'}>
+  <div class="wrap top">
+    <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navNew'), href: href('developments', l) }, { label: dev.title, href: href('developments', l, dev.slug) }, { label: title }]} />
+  </div>
+  <div class="wrap unit">
+    <figure class="plan">
+      {type?.plan
+        ? <img src={type.plan(l, u)} alt={t('planOf', { u: title })} width="560" height="460" />
+        : <div class="plan__none">{rooms(u.rooms, l)}</div>}
+      <figcaption>{type && <b>{t('typeName', { k: type.letter })}</b>} {t('planIndicative')}</figcaption>
+    </figure>
+    <div class="info">
+      <span class="eyebrow">{dev.title} · {city}</span>
+      <h1 class="h1 title">{title}</h1>
+      <p class="sub">{unitLine(u, l)}</p>
+      <div class="status">
+        <span class:list={['pill', `pill--${u.status}`]}>{statusLabel(u.status, l)}</span>
+        {available && <span class="price num">{price({ ...u, status: 'available' }, l)}</span>}
+      </div>
+      {u.status === 'sold' && <p class="note">{t('unitSoldNote')}</p>}
+      {u.status === 'reserved' && <p class="note">{t('unitReservedNote')}</p>}
+      <dl class="kv">{facts.map((f) => <div><dt>{f.k}</dt><dd>{f.v}</dd></div>)}</dl>
+      {u.features.length > 0 && <p class="feats">{u.features.map((f) => featureLabel(f, locale)).join(' · ')}</p>}
+      {u.description && <div class="prose" set:html={sanitizeHtml(u.description)} />}
+      <div class="ctas">
+        {canAsk && <a class="button" href="#contact">{t('askUnit')}</a>}
+        <a class="button button--ghost" href={href('developments', l, dev.slug)}>{t('backToDev')}</a>
+      </div>
+    </div>
+  </div>
+
+  {siblings.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="head"><div><h2 class="h2">{t('otherUnits')}</h2></div></div>
+        <ul class="plain-list sibs">
+          {siblings.map((s) => (
+            <li>
+              <a href={unitHref(dev, s, l)}>
+                <span class="sibs__t">{unitTitle(s, l)}</span>
+                <span>{unitLine(s, l)} · {formatSurface(s.living_surface)}</span>
+                <span class:list={['pill', `pill--${s.status}`]}>{statusLabel(s.status, l)}</span>
+                {s.status === 'available' && <span class="num sibs__p">{price({ ...s, status: 'available' }, l)}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--paper" id="contact">
+    <div class="wrap contact">
+      <div class="contact__who">
+        <h2 class="h2">{canAsk ? t('askUnit') : t('devContact')}</h2>
+        {agent && (
+          <div class="adv">
+            {agent.photo?.url && <RaImage class="adv__photo" src={agent.photo} alt={`${agent.first_name} ${agent.last_name}`} width={128} height={160} sizes="64px" />}
+            <div>
+              <p class="adv__name"><a href={href('team', l, agentSlug(agent, agents))}>{agent.first_name} {agent.last_name}</a></p>
+              {agent.phone && <a class="num" href={tel(agent.phone)}>{agent.phone}</a>}
+            </div>
+          </div>
+        )}
+      </div>
+      <div class="contact__form">
+        {canAsk
+          ? <EnquiryForm locale={locale} developmentId={dev.id} lotId={u.id} agentName={agent?.first_name} message={kt('unitInterested', { unit: unitLabelForMsg, title: dev.title }, klang(locale))} />
+          : <EnquiryForm locale={locale} developmentId={dev.id} units={dev.units.filter((x) => x.status !== 'sold').map((x) => ({ value: x.id, label: `${unitTitle(x, l)} · ${unitLine(x, l)}` }))} agentName={agent?.first_name} message={kt('devInterested', { title: dev.title }, klang(locale))} />}
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .top { padding-top: 28px; }
+  .unit { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); padding-block: 28px var(--section); align-items: start; }
+  .plan { margin: 0; background: #fff; border: 1px solid var(--line); padding: clamp(16px, 3vw, 40px); display: grid; gap: 16px; position: sticky; top: calc(var(--header-h) + 24px); }
+  .plan img { width: 100%; height: auto; }
+  .plan__none { aspect-ratio: 56 / 46; display: grid; place-items: center; background: var(--paper); color: var(--muted); }
+  .plan figcaption { font-size: 0.8125rem; color: var(--muted); }
+  .plan b { color: var(--brass-ink); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.75rem; margin-right: 8px; }
+  .info { display: grid; gap: 20px; }
+  .title { font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem); }
+  .sub { color: var(--muted); font-size: var(--step-1); }
+  .status { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .price { font: 400 var(--step-3)/1 var(--font-display); color: var(--navy); }
+  .note { color: var(--muted); }
+  .info .kv { border-top: 1px solid var(--line); }
+  .feats { color: var(--muted); }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .pill { display: inline-block; padding: 6px 12px; font: 600 0.6875rem/1 var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; }
+  .pill--available { background: var(--ok-bg); color: var(--ok); }
+  .pill--reserved { background: var(--warn-bg); color: var(--warn); }
+  .pill--sold { background: var(--paper-2); color: var(--muted); }
+  .sibs { display: grid; border-top: 1px solid var(--line); }
+  .sibs a { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr) auto minmax(0, 180px); gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .sibs a:hover .sibs__t { text-decoration: underline; }
+  .sibs__t { font: 400 1.25rem/1.2 var(--font-display); color: var(--navy); }
+  .sibs__p { text-align: right; font-weight: 600; }
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .contact__who { display: grid; gap: 20px; }
+  .adv :global(.adv__photo) { width: 64px; height: 80px; object-fit: cover; flex: none; }
+  .adv { display: flex; gap: 16px; align-items: center; }
+  .adv__name { font: 400 1.375rem/1.2 var(--font-display); }
+  .adv__name a { text-decoration: none; }
+  .adv a.num { color: var(--navy); min-height: 32px; display: inline-flex; align-items: center; }
+  .contact__form { background: #fff; padding: clamp(22px, 3vw, 40px); }
+  @media (max-width: 960px) {
+    .unit, .contact { grid-template-columns: minmax(0, 1fr); }
+    .plan { position: static; }
+    .sibs a { grid-template-columns: minmax(0, 1fr) auto; }
+    .sibs a > span:nth-child(2) { grid-column: 1; color: var(--muted); font-size: 0.9375rem; }
+    .sibs__p { grid-column: 1 / -1; text-align: left; }
+  }
+</style>

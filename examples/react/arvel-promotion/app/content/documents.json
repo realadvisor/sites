@@ -1,0 +1,89 @@
+{
+ "les-balcons-du-semnoz": [
+  {
+   "href": "/documents/les-balcons-du-semnoz-brochure.pdf",
+   "title": "Brochure",
+   "description": "Le programme, ses typologies, sa situation et vos contacts.",
+   "kind": "brochure",
+   "bytes": 705723,
+   "pages": 5,
+   "date": "2026-11-11"
+  },
+  {
+   "href": "/documents/les-balcons-du-semnoz-plans-types.pdf",
+   "title": "Plans types",
+   "description": "Un plan indicatif par typologie, du T1 au T5.",
+   "kind": "plans",
+   "bytes": 415430,
+   "pages": 5,
+   "date": "2026-11-11"
+  },
+  {
+   "href": "/documents/les-balcons-du-semnoz-grille-des-prix.pdf",
+   "title": "Grille des prix",
+   "description": "Tous les logements avec leur surface, leur étage, leur statut et le prix des logements disponibles.",
+   "kind": "prices",
+   "bytes": 80851,
+   "pages": 3,
+   "date": "2026-11-11"
+  }
+ ],
+ "quai-des-tanneurs": [
+  {
+   "href": "/documents/quai-des-tanneurs-brochure.pdf",
+   "title": "Brochure",
+   "description": "Le programme, ses typologies, sa situation et vos contacts.",
+   "kind": "brochure",
+   "bytes": 700311,
+   "pages": 5,
+   "date": "2026-11-11"
+  },
+  {
+   "href": "/documents/quai-des-tanneurs-plans-types.pdf",
+   "title": "Plans types",
+   "description": "Un plan indicatif par typologie, du T1 au T4.",
+   "kind": "plans",
+   "bytes": 338853,
+   "pages": 4,
+   "date": "2026-11-11"
+  },
+  {
+   "href": "/documents/quai-des-tanneurs-grille-des-prix.pdf",
+   "title": "Grille des prix",
+   "description": "Tous les logements avec leur surface, leur étage, leur statut et le prix des logements disponibles.",
+   "kind": "prices",
+   "bytes": 74200,
+   "pages": 2,
+   "date": "2026-11-11"
+  }
+ ],
+ "le-clos-des-tilleuls": [
+  {
+   "href": "/documents/le-clos-des-tilleuls-brochure.pdf",
+   "title": "Brochure",
+   "description": "Le programme, ses typologies, sa situation et vos contacts.",
+   "kind": "brochure",
+   "bytes": 674553,
+   "pages": 5,
+   "date": "2026-11-11"
+  },
+  {
+   "href": "/documents/le-clos-des-tilleuls-plans-types.pdf",
+   "title": "Plans types",
+   "description": "Un plan indicatif par typologie, du T1 au T4.",
+   "kind": "plans",
+   "bytes": 338194,
+   "pages": 4,
+   "date": "2026-11-11"
+  },
+  {
+   "href": "/documents/le-clos-des-tilleuls-grille-des-prix.pdf",
+   "title": "Grille des prix",
+   "description": "Tous les logements avec leur surface, leur étage, leur statut et le prix des logements disponibles.",
+   "kind": "prices",
+   "bytes": 70754,
+   "pages": 1,
+   "date": "2026-11-11"
+  }
+ ]
+}

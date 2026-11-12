@@ -1,0 +1,263 @@
+---
+// Home: hero with the brochure form beside it, key figures from the units,
+// the project, the unit types, the building, a gallery collage, the place.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import StackingPlan from '../components/StackingPlan.astro';
+import TypeStrip from '../components/TypeStrip.astro';
+import ContactBand from '../components/ContactBand.astro';
+import Arrow from '../components/Arrow.astro';
+import { loadSite, legalAgency, developmentExtra } from '../lib/data';
+import { keyFigures, unitTypes } from '../lib/units';
+import { PLACES, crowKm, LAUSANNE_STATION } from '../content/place';
+
+const site = await loadSite();
+const { dev } = site;
+const k = keyFigures(dev);
+const types = unitTypes(dev.units);
+const [hero, ...rest] = dev.photos;
+const collage = rest.slice(0, 5);
+const intro = rest.slice(5, 7);
+const extra = developmentExtra(dev); // fixture only: developer, architect, general contractor
+const credits = [
+  ['Maître d’ouvrage', extra.developer],
+  ['Architecte', extra.architect],
+  ['Entreprise générale', extra.general_contractor],
+].filter((c): c is [string, string] => !!c[1]);
+const place = [dev.address.city, 'Lavaux'].filter(Boolean).join(' · ');
+const figures = [
+  { v: `${k.available}/${k.units}`, l: k.available > 1 ? 'appartements disponibles' : 'appartement disponible', s: '', text: false },
+  { v: k.rooms, l: k.roomsUnit, s: '', text: false },
+  { v: k.surfaces, l: 'm² habitables', s: '', text: false },
+  { v: k.delivery, l: 'livraison prévue', s: '', text: true },
+].filter((f) => f.v);
+const description = (dev.description_text ?? dev.title).replace(/\s+/g, ' ').slice(0, 155);
+const siteUrl = Astro.site?.href ?? '/';
+const { lat, lng } = dev.address;
+const km = lat != null && lng != null ? crowKm({ lat, lng }, LAUSANNE_STATION) : null;
+const count = (s: string) => dev.units.filter((u) => u.status === s).length;
+---
+<Site
+  site={site}
+  overlay
+  title={`${dev.title}, appartements neufs à ${dev.address.city ?? ''} | ${site.org.name}`}
+  description={description}
+  image={hero && img(hero.url, { w: 1200, h: 630 })}
+  jsonLd={agencyJsonLd(legalAgency(site), siteUrl)}
+>
+  <section class="hero" data-hero>
+    {hero && (
+      <RaImage src={hero} alt={hero.alt || dev.title} width={1600} height={1000} priority sizes="100vw" mobile={{ width: 800, height: 1000 }} class="hero-img" />
+    )}
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow plain" data-rise>{place}</p>
+        <h1 data-rise="2">{dev.title}</h1>
+        <p class="kicker" data-rise="3"><em>Appartements neufs face au Léman</em></p>
+        <p class="hero-meta num" data-rise="3">
+          {k.delivery && <span>Livraison {k.delivery}</span>}
+          {k.priceFrom && <span>Dès {k.priceFrom}</span>}
+        </p>
+        <p class="hero-actions" data-rise="3">
+          <a class="cta" href="/contact?demande=brochure">Recevoir la brochure</a>
+          <a class="cta ghost" href="/appartements">Voir les appartements</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="figures" aria-label="Le projet en chiffres">
+    <dl class="wrap fig-grid">
+      {figures.map((f) => (
+        <div class="fig">
+          <dt class="sr-only">{f.l}</dt>
+          <dd>
+            <span class:list={['v', { text: f.text }]}>{f.v}</span>
+            <span class="l">{f.s ? `${f.l} ${f.s}` : f.l}</span>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="section intro">
+    <div class="wrap intro-grid">
+      <div class="intro-text">
+        <h2>{[dev.address.street, dev.address.city].filter(Boolean).join(', ')}</h2>
+        {dev.description && <div class="prose lede" set:html={sanitizeHtml(dev.description)} />}
+        <a class="link" href="/situation">Découvrir la situation <Arrow /></a>
+      </div>
+      {intro.length > 0 && (
+        <div class="intro-photos">
+          {intro.map((p, i) => (
+            <RaImage src={p} alt={p.alt || dev.title} width={i === 0 ? 720 : 560} height={i === 0 ? 900 : 700} sizes="(min-width: 1000px) 28vw, 50vw" class={`ip ip${i}`} />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  {types.length > 0 && (
+    <section class="section types" aria-labelledby="types-h">
+      <div class="wrap">
+        <h2 id="types-h" class="types-h">Appartements de {types[0]!.label.replace(/\s*pièces?$/, '')} à {types[types.length - 1]!.label}</h2>
+        <TypeStrip types={types} />
+        <a class="link after" href="/appartements">Tous les appartements et leurs prix <Arrow /></a>
+      </div>
+    </section>
+  )}
+
+  <section class="section building" aria-labelledby="b-h">
+    <div class="wrap b-grid">
+      <div class="b-text">
+        <h2 id="b-h">Disponibilités par étage</h2>
+        <p class="lede">Cliquez sur un lot pour voir son plan, ses surfaces et son prix.</p>
+        <ul class="legend">
+          {count('available') > 0 && <li><span class="status available">{count('available')} disponibles</span></li>}
+          {count('reserved') > 0 && <li><span class="status reserved">{count('reserved')} réservés</span></li>}
+          {count('sold') > 0 && <li><span class="status sold">{count('sold')} vendus</span></li>}
+        </ul>
+        <a class="button" href="/appartements">Voir les appartements</a>
+      </div>
+      <StackingPlan units={dev.units} compact />
+    </div>
+  </section>
+
+  {collage.length >= 4 && (
+    <section class="section gallery" aria-labelledby="g-h">
+      <div class="wrap">
+        <h2 id="g-h" class="sr-only">Images du projet</h2>
+        <div class="collage">
+          {collage.slice(0, 4).map((p, i) => (
+            <a href={`/galerie#photo-${i + 2}`} class={`c c${i} zoom`} aria-label={`${p.alt || dev.title}, ouvrir la galerie`}>
+              <RaImage src={p} alt="" width={[800, 640, 640, 1200][i]!} height={[1000, 760, 760, 760][i]!} sizes="(min-width: 1000px) 33vw, 50vw" />
+            </a>
+          ))}
+        </div>
+        <p class="g-foot"><span class="muted">Visualisations non contractuelles.</span> <a class="link" href="/galerie">Les {dev.photos.length} images du projet <Arrow /></a></p>
+      </div>
+    </section>
+  )}
+
+  <section class="place" aria-labelledby="p-h">
+    <RaImage src={PLACES.hero.url} alt={PLACES.hero.alt} width={1600} height={900} sizes="100vw" mobile={{ width: 800, height: 1000 }} class="place-img" />
+    <div class="place-scrim" aria-hidden="true"></div>
+    <div class="wrap place-inner">
+      <h2 id="p-h">{dev.address.city}, à l’entrée du vignoble de Lavaux</h2>
+      <p>Gare CFF de {dev.address.city} sur la ligne Lausanne–Vevey.{km != null && ` Gare de Lausanne à ${String(Math.round(km * 2) / 2).replace('.', ',')} km à vol d’oiseau.`}</p>
+      <a class="button light" href="/situation">La situation</a>
+    </div>
+  </section>
+
+  {credits.length > 0 && (
+    <section class="credits" aria-label="Intervenants">
+      <dl class="wrap cr-grid">
+        {credits.map(([k2, v]) => <div><dt>{k2}</dt><dd>{v}</dd></div>)}
+      </dl>
+    </section>
+  )}
+
+  <ContactBand site={site} />
+</Site>
+
+<style>
+  .hero { position: relative; min-height: max(760px, 100svh); display: grid; align-items: end; color: #fff; isolation: isolate; overflow: hidden; background: var(--dark); }
+  .hero :global(.hero-img), .hero :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+  .hero :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .scrim { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(20 17 13 / 0.66) 0%, rgb(20 17 13 / 0.3) 50%, rgb(20 17 13 / 0.2) 100%), linear-gradient(0deg, rgb(20 17 13 / 0.6) 0%, rgb(20 17 13 / 0) 50%); }
+  .hero-inner { padding-block: 160px clamp(56px, 8vw, 104px); }
+  .hero-copy { max-width: 44rem; }
+  .hero .eyebrow { color: rgb(255 255 255 / 0.88); }
+  .hero h1 { margin-top: 22px; color: #fff; font-size: clamp(3rem, 1.4rem + 5.2vw, 6.5rem); line-height: 0.95; }
+  .kicker { font: italic 500 clamp(1.5rem, 1.1rem + 1.4vw, 2.375rem)/1.15 var(--serif); margin-top: 18px; color: #f1eadf; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 36px; font: 600 0.75rem/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; }
+  .hero-meta span + span { padding-left: 28px; border-left: 1px solid rgb(255 255 255 / 0.45); }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+  .cta { display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; font: 600 0.75rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; background: #f4efe7; color: #211d18; border: 1px solid #f4efe7; transition: background 0.2s, color 0.2s; }
+  .cta:hover { background: #fff; }
+  .cta.ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.6); }
+  .cta.ghost:hover { background: rgb(255 255 255 / 0.1); }
+  .cta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  @media (max-width: 480px) { .cta { flex: 1 1 100%; justify-content: center; } }
+
+  .figures { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .fig-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-block: 0; }
+  .fig { padding: 44px 28px 40px; border-left: 1px solid var(--line); }
+  .fig:first-child { border-left: 0; padding-left: 0; }
+  .fig dd { margin: 0; display: grid; gap: 10px; }
+  .v { font: 500 clamp(2.5rem, 1.8rem + 2.2vw, 4rem)/1 var(--serif); font-variant-numeric: lining-nums; white-space: nowrap; }
+  .v.text { font-size: clamp(2rem, 1.5rem + 1.6vw, 3rem); }
+  .v.text::first-letter { text-transform: uppercase; }
+  .l { font: 600 0.6875rem/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 120px); align-items: center; }
+  .intro-text h2 { margin: 0 0 32px; max-width: 20ch; }
+  .intro-text .link { margin-top: 32px; }
+  .intro-photos { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: start; }
+  .intro-photos :global(.ip) { width: 100%; height: auto; }
+  .intro-photos :global(.ip1) { margin-top: 38%; }
+
+  .types { background: var(--paper); border-block: 1px solid var(--line); }
+  .types-h { margin-bottom: clamp(32px, 4vw, 48px); }
+  .types .after { margin-top: 28px; }
+  .g-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 20px; font-size: 0.875rem; }
+
+  .b-grid { display: grid; grid-template-columns: 0.8fr 1.4fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+  .b-text h2 { margin: 0 0 20px; }
+  .legend { list-style: none; padding: 0; margin: 28px 0 36px; display: grid; gap: 12px; }
+
+  .gallery { padding-top: 0; }
+  /* Four photos, edges aligned: a tall one left, two above one wide right. */
+  .collage { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 20px); aspect-ratio: 16 / 10; }
+  .c { display: block; overflow: hidden; background: var(--line); min-height: 0; }
+  .c :global(picture) { display: block; height: 100%; }
+  .c :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .c0 { grid-row: 1 / span 2; }
+  .c3 { grid-column: 2 / span 2; }
+
+  .place { position: relative; isolation: isolate; color: #fff; min-height: 680px; display: grid; align-items: end; overflow: hidden; background: var(--dark); }
+  .place :global(.place-img), .place :global(picture) { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
+  .place :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .place-scrim { position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgb(20 17 13 / 0.78), rgb(20 17 13 / 0.2) 75%); }
+  .place-inner { padding-block: 120px 88px; }
+    .place-inner h2 { color: #fff; margin: 0 0 18px; max-width: 18ch; }
+  .place-inner p { max-width: 44ch; font-size: 1.125rem; margin-bottom: 32px; }
+
+  .credits { border-bottom: 1px solid var(--line); }
+  .cr-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-block: 0; }
+  .cr-grid div { padding: 36px 28px; border-left: 1px solid var(--line); }
+  .cr-grid div:first-child { border-left: 0; padding-left: 0; }
+  .cr-grid dt { font: 600 0.6875rem/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .cr-grid dd { margin: 8px 0 0; font: 500 1.5rem/1.2 var(--serif); }
+
+  @media (max-width: 1000px) {
+    .hero { min-height: 84svh; }
+    .hero-inner { padding-block: 140px 44px; }
+    .fig-grid { grid-template-columns: 1fr 1fr; }
+    .fig { padding: 28px 20px 26px; }
+    .fig:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .fig:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .intro-grid, .b-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero-meta { flex-direction: column; gap: 6px; }
+    .hero-meta span + span { padding-left: 0; border-left: 0; }
+    .collage { grid-template-columns: 1fr 1fr; grid-template-rows: none; gap: 10px; aspect-ratio: auto; }
+    .c0 { grid-row: auto; grid-column: span 2; aspect-ratio: 4 / 3; }
+    .c1, .c2 { aspect-ratio: 4 / 5; }
+    .c3 { grid-column: span 2; aspect-ratio: 3 / 2; }
+    .cr-grid { grid-template-columns: 1fr; }
+    .cr-grid div { border-left: 0; padding: 20px 0; border-top: 1px solid var(--line); }
+    .cr-grid div:first-child { border-top: 0; }
+    .place { min-height: 560px; }
+    .fig .v { font-size: 2.25rem; }
+    .fig .v.text { font-size: 1.75rem; }
+  }
+</style>

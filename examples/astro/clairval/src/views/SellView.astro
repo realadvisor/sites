@@ -1,0 +1,79 @@
+---
+/** Sell: what a valuation is, the valuation form, the offices, and recent sales from the data. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, LOCALE, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams }, sold, forSale] = await Promise.all([siteData(), sites.allListings({ status: 'sold' }), sites.allListings({ status: 'available', offer_type: 'buy' })]);
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const photo = forSale.find((x) => x.photos[1])?.photos[1];
+const C = {
+  en: {
+    title: 'Sell with Clairval', lede: `A free valuation of your house or apartment in ${cities}, by the agent of the nearest office, after a visit.`,
+    what: 'What you receive', items: ['A price range and the price we would advertise, with the sales and listings it is based on.', 'How we would present the house, and to which buyers.', 'The documents to gather before a sale.', 'Our fee, in writing.'],
+    form: 'Ask for a valuation', formNote: 'Tell us the address, the type of property and when you would like to sell.',
+    msg: 'I would like a valuation of my property. Address: \nType: \nTiming: ',
+    call: 'Or call the office', recent: 'Recently sold',
+  },
+  fr: {
+    title: 'Vendre avec Clairval', lede: `Une estimation gratuite de votre maison ou de votre appartement à ${cities}, par l’agent du bureau le plus proche, après une visite.`,
+    what: 'Ce que vous recevez', items: ['Une fourchette de prix et le prix d’annonce que nous proposerions, avec les ventes et annonces sur lesquelles il repose.', 'La façon dont nous présenterions la maison, et à quels acheteurs.', 'Les documents à réunir avant une vente.', 'Nos honoraires, par écrit.'],
+    form: 'Demander une estimation', formNote: 'Indiquez l’adresse, le type de bien et quand vous souhaitez vendre.',
+    msg: 'Je souhaite une estimation de mon bien. Adresse : \nType : \nCalendrier : ',
+    call: 'Ou appelez le bureau', recent: 'Vendus récemment',
+  },
+}[l];
+const title = C.title.replace('Clairval', org.name.replace(/\s+SA$/, ''));
+---
+<Site l={l} route="sell" title={`${title} | ${org.name}`} description={C.lede}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navSell') }]} title={title} lede={C.lede} />
+  <section class="wrap grid">
+    <div class="left">
+      {photo && <RaImage src={photo} alt={photo.alt} width={900} height={640} priority sizes="(min-width: 1024px) 40vw, 100vw" />}
+      <h2 class="h3">{C.what}</h2>
+      <ul class="plain list">{C.items.map((x) => <li>{x}</li>)}</ul>
+      <h2 class="h3">{C.call}</h2>
+      <ul class="plain phones">
+        {teams.filter((x) => x.phone).map((x) => <li><span>{cityName(x.address.city, l)}</span><a class="num" href={tel(x.phone!)}>{x.phone}</a></li>)}
+      </ul>
+    </div>
+    <div class="form" id="valuation-form">
+      <h2 class="h3">{C.form}</h2>
+      <p class="muted">{C.formNote}</p>
+      <EnquiryForm id="valuation" contactReason="valuation" message={C.msg} locale={LOCALE[l]} />
+    </div>
+  </section>
+  {sold.length > 0 && (
+    <section class="on-paper recent">
+      <div class="wrap">
+        <h2 class="h2">{C.recent}</h2>
+        <ul class="plain grid3">{sold.slice(0, 3).map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</Site>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); padding-bottom: var(--section); align-items: start; }
+  .left { display: grid; gap: 24px; }
+  .left :global(img) { width: 100%; aspect-ratio: 45 / 32; object-fit: cover; margin-bottom: 16px; }
+  .list { border-top: 1px solid var(--line); margin-bottom: 24px; }
+  .list li { padding-block: 14px; border-bottom: 1px solid var(--line); font-size: 1.0625rem; }
+  .phones li { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+  .phones a { display: inline-flex; min-height: 32px; align-items: center; }
+  .form { position: sticky; top: 24px; background: var(--paper); border: 1px solid var(--line); padding: clamp(24px, 3vw, 40px); display: grid; gap: 14px; }
+  .form :global(.enquiry-grid) { grid-template-columns: minmax(0, 1fr); }
+  .recent { padding-block: var(--section); border-top: 1px solid var(--line); }
+  .grid3 { margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+  @media (max-width: 1023px) { .grid { grid-template-columns: minmax(0, 1fr); } .form { position: static; } .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+</style>

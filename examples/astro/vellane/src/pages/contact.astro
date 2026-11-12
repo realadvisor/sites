@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+/** Contact: the general enquiry form and the four agencies with address, phone and e-mail. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { siteData } from '../lib/data';
+import { joinFr, teamHref, teamShortName, tel } from '../lib/site';
+
+const { org, teams, primary } = await siteData();
+const brand = org.name.replace(/\s+SAS$/, '');
+const cities = [...new Set(teams.map((t) => t.address.city).filter(Boolean))] as string[];
+const jsonLd = agencyJsonLd({ id: org.id, name: org.name, website: org.website, phone: primary?.phone, email: primary?.email, address: org.address }, (Astro.site ?? Astro.url).origin);
+---
+<Site title={`Contact | ${brand}`} description={`Contactez ${brand} à ${joinFr(cities)} : formulaire, téléphones et adresses des ${teams.length} agences.`} jsonLd={jsonLd}>
+  <PageHead title="Contact" lede="Une question sur une annonce, une visite ou une estimation ? Écrivez-nous, l'agence concernée vous répond." />
+  <div class="wrap contact">
+    <div class="contact__form">
+      <EnquiryForm id="contact-form" contactReason="other" />
+    </div>
+    <ul class="offices">
+      {teams.map((t) => (
+        <li class="office">
+          <h2 class="office__name"><a href={teamHref(t)}>{teamShortName(t)}</a></h2>
+          <address>
+            {t.address.street && <span>{t.address.street}</span>}
+            <span>{[t.address.postcode, t.address.city].filter(Boolean).join(' ')}</span>
+          </address>
+          {t.phone && <a class="num" href={tel(t.phone)}>{t.phone}</a>}
+          {t.email && <a href={`mailto:${t.email}`}>{t.email}</a>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</Site>
+
+<style>
+  .contact { display: grid; gap: 48px; align-items: start; }
+  @media (min-width: 1024px) { .contact { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 80px; } }
+  .contact__form { padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-card); background: var(--surface); }
+  .offices { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .office { display: grid; gap: 2px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .office__name { font-size: 1.25rem; }
+  .office__name a { text-decoration: none; }
+  .office__name a:hover { color: var(--accent-strong); }
+  .office address { font-style: normal; display: grid; color: var(--muted); margin-bottom: 4px; }
+  .office > a { display: inline-flex; align-items: center; min-height: 36px; text-decoration: none; overflow-wrap: anywhere; }
+  .office > a:hover { text-decoration: underline; }
+</style>

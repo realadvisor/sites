@@ -1,0 +1,8 @@
+.blog { padding-bottom: var(--section); display: grid; gap: clamp(56px, 7vw, 96px); }
+.feature .post { grid-template-columns: 7fr 5fr; column-gap: clamp(32px, 5vw, 80px); align-items: center; }
+.feature .post-photo { grid-row: 1 / span 4; margin: 0; }
+.feature .post-title { font-size: clamp(2rem, 3.4vw, 3rem); }
+/* 3n+1 posts below the feature: two per row, so no row is left with one card. */
+.pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .feature .post { grid-template-columns: 1fr; } .feature .post-photo { grid-row: auto; margin-bottom: 20px; } }

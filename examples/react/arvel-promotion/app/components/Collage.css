@@ -1,0 +1,10 @@
+.collage { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: clamp(12px, 2vw, 28px); align-items: start; }
+.collage figure { margin: 0; }
+.collage .cl-f1 { aspect-ratio: 4 / 3; margin-top: 18%; }
+.collage .cl-f2 { aspect-ratio: 3 / 4; }
+.collage .cl-f3 { aspect-ratio: 4 / 3; margin-top: 44%; }
+@media (max-width: 700px) {
+  .collage { grid-template-columns: 1fr 1fr; }
+  .collage .cl-f2 { grid-column: 1 / -1; grid-row: 1; aspect-ratio: 4 / 3; }
+  .collage .cl-f1, .collage .cl-f3 { margin-top: 0; }
+}

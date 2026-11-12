@@ -1,0 +1,7 @@
+.jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.jump a { display: inline-flex; gap: 10px; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--line-on-navy); color: #fff; text-decoration: none; font-weight: 600; }
+.jump a span { color: var(--brass-on-navy); }
+.jump a:hover { background: #fff; color: var(--navy); }
+.groups { display: grid; gap: clamp(56px, 6vw, 96px); }
+.grp { display: grid; gap: 12px; scroll-margin-top: calc(var(--header-h) + 24px); }
+.grp__head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; }

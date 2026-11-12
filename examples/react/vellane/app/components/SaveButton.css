@@ -1,0 +1,13 @@
+.save { display: inline-grid; place-items: center; cursor: pointer; border: 0; color: var(--text); }
+.save--icon { width: 44px; height: 44px; border-radius: 999px; background: rgb(255 255 255 / 0.92); box-shadow: 0 1px 4px rgb(0 0 0 / 0.18); }
+.save--icon:hover { background: #fff; transform: scale(1.06); }
+.save--label {
+  display: inline-flex; gap: 8px; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--bg); font-weight: 600; font-size: 0.9375rem;
+}
+.save--label:hover { border-color: var(--text); }
+.save svg { transition: fill 0.15s, color 0.15s; }
+.save[aria-pressed='true'] svg { fill: var(--accent); color: var(--accent); }
+.save__on { display: none; }
+.save[aria-pressed='true'] .save__on { display: inline; }
+.save[aria-pressed='true'] .save__off { display: none; }

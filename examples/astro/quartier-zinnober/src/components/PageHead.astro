@@ -1,0 +1,28 @@
+---
+/** Coloured page head: eyebrow, big h1, optional lead and a slot for figures or actions. */
+interface Props { title: string; eyebrow?: string; lead?: string; tone?: 'zinnober' | 'lilac' | 'butter' | 'ink' | 'sand' }
+const { title, eyebrow, lead, tone = 'zinnober' } = Astro.props;
+---
+<section class:list={['ph', `ph--${tone}`]}>
+  <div class="wrap ph-in">
+    <div class="ph-text">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+    </div>
+    {Astro.slots.has('default') && <div class="ph-aside"><slot /></div>}
+  </div>
+</section>
+<style>
+  .ph { border-bottom: 2px solid var(--ink); }
+  .ph--zinnober { background: var(--zinnober); }
+  .ph--lilac { background: var(--lilac); }
+  .ph--butter { background: var(--butter); }
+  .ph--sand { background: var(--sand); }
+  .ph--ink { background: var(--ink); color: #fff; }
+  .ph--ink .eyebrow { color: var(--butter); }
+  .ph-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 48px; padding-block: clamp(40px, 6vw, 88px) clamp(28px, 4vw, 52px); }
+  .ph-text { display: grid; gap: 14px; max-width: 62rem; }
+  h1 { font-size: var(--step-5); letter-spacing: -0.045em; line-height: 0.92; overflow-wrap: anywhere; hyphens: auto; }
+  .lead { max-width: 50ch; }
+</style>

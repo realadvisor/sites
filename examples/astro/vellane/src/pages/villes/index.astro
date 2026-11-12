@@ -1,0 +1,54 @@
+---
+export const prerender = false;
+/** Cities: one tile per city with 3+ listings (photo, counts), a plain list of the rest. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/PageHead.astro';
+import { siteData, sites } from '../../lib/data';
+import { citiesOf, cityHref, searchUrl } from '../../lib/site';
+import { placeFor } from '../../content/places';
+
+const [{ org }, all] = await Promise.all([siteData(), sites.allListings()]);
+const brand = org.name.replace(/\s+SAS$/, '');
+const big = citiesOf(all);
+const bigNames = new Set(big.map((c) => c.city));
+const small = citiesOf(all, 1).filter((c) => !bigNames.has(c.city) && c.listings.some((l) => l.status === 'available'));
+const n = (ls: typeof all, offer: 'buy' | 'rent') => ls.filter((l) => l.status === 'available' && l.offer_type === offer).length;
+---
+<Site title={`Nos villes | ${brand}`} description={`Acheter ou louer avec ${brand} : ${big.map((c) => c.city).join(', ')}.`}>
+  <PageHead title="Nos villes" lede="Les villes où nous avons le plus de biens, avec ce que nous y vendons et louons." />
+  <ul class="wrap tiles">
+    {big.map((c, i) => {
+      const p = placeFor(c.slug)[0];
+      return (
+        <li class="tile">
+          {p && <RaImage src={p} alt={p.alt} width={800} height={560} sizes="(min-width: 960px) 420px, 100vw" priority={i === 0} />}
+          <h2 class="tile__name"><a href={cityHref(c.city)}>{c.city}</a></h2>
+          <p class="muted">{n(c.listings, 'buy')} à vendre · {n(c.listings, 'rent')} à louer</p>
+        </li>
+      );
+    })}
+  </ul>
+  {small.length > 0 && (
+    <div class="wrap small">
+      <h2 class="h3">Aussi</h2>
+      <ul>
+        {small.map((c) => <li><a class="link" href={searchUrl(c.listings[0]!.offer_type, { city: c.city })}>{c.city}</a> <span class="muted">{c.listings.length} annonce{c.listings.length > 1 ? 's' : ''}</span></li>)}
+      </ul>
+    </div>
+  )}
+</Site>
+
+<style>
+  .tiles { list-style: none; margin-block: 0; display: grid; gap: 36px 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+  .tile { position: relative; display: grid; gap: 6px; }
+  .tile :global(img) { width: 100%; height: auto; aspect-ratio: 10 / 7; object-fit: cover; border-radius: var(--radius-card); margin-bottom: 8px; }
+  .tile__name { font-size: var(--step-2); }
+  .tile__name a { text-decoration: none; }
+  .tile__name a::after { content: ''; position: absolute; inset: 0; }
+  .tile__name a:focus-visible { outline: none; }
+  .tile__name a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: var(--radius-card); }
+  .tile:hover .tile__name { color: var(--accent-strong); }
+  .small { margin-top: 56px; display: grid; gap: 12px; }
+  .small ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+</style>

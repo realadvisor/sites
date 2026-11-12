@@ -1,0 +1,114 @@
+---
+export const prerender = false;
+
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ListingsMap from '@realadvisor/sites-kit/components/ListingsMap.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { formatAmount } from '@realadvisor/sites-kit/format';
+import { propertyTypeLabel } from '@realadvisor/sites-kit/i18n';
+import SoldList from '../../components/SoldList.astro';
+import Collection from '../../components/Collection.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import ValuationBand from '../../components/ValuationBand.astro';
+import { areas, brandName, listingUrl, site, sites } from '../../lib/data';
+import { price } from '../../lib/kit';
+import { AREAS, defaultArea, placePhotoOg } from '../../content/places';
+import PlacePhoto from '../../components/PlacePhoto.astro';
+
+const area = (await areas()).find((a) => a.slug === Astro.params.city);
+if (!area) return Astro.rewrite('/404');
+const s = await site();
+const all = await sites.allListings({ city: area.city });
+const buy = all.filter((l) => l.status === 'available' && l.offer_type === 'buy');
+const rent = all.filter((l) => l.status === 'available' && l.offer_type === 'rent');
+const sold = all.filter((l) => l.status === 'sold');
+const copy = AREAS[area.slug] ?? defaultArea(area.city);
+const posts = (await getCollection('journal')).filter((p) => p.data.cities.includes(area.city)).slice(0, 3);
+const located = all.filter((l) => l.status === 'available' && l.address.lat != null && l.address.lng != null);
+// Figures from the data only.
+const prices = buy.map((l) => (l.price_on_request ? undefined : l.price)).filter((n): n is number => n != null);
+const types = [...new Set(buy.concat(rent).map((l) => propertyTypeLabel(l.property_type)))];
+const facts = [
+  buy.length && { k: 'Zum Kauf', v: buy.length === 1 ? '1 Objekt' : `${buy.length} Objekte` },
+  rent.length && { k: 'Zur Miete', v: rent.length === 1 ? '1 Objekt' : `${rent.length} Objekte` },
+  prices.length > 1 && { k: 'Kaufpreise', v: `${formatAmount(Math.min(...prices))} bis ${formatAmount(Math.max(...prices))}` },
+  prices.length === 1 && { k: 'Kaufpreis', v: formatAmount(prices[0]!) },
+  types.length && { k: 'Objektarten', v: types.join(', ') },
+  sold.length && { k: 'Verkauft', v: sold.length === 1 ? '1 Objekt' : `${sold.length} Objekte` },
+].filter(Boolean) as { k: string; v: string }[];
+const q = encodeURIComponent(area.city);
+---
+<Layout title={`Immobilien in ${area.city} | ${brandName(s)}`} description={`${copy.lede} Aktuelle Objekte von ${brandName(s)} in ${area.city}.`} image={new URL(placePhotoOg(copy.photo, img), Astro.url).href}>
+  <section class="oh">
+    <div class="oh-media"><PlacePhoto photo={copy.photo} width={1600} height={1100} priority sizes="(min-width: 1024px) 60vw, 100vw" mobile={{ width: 800, height: 600 }} /></div>
+    <div class="oh-panel">
+      <h1 class="h-display">{area.city}</h1>
+      <p class="lede">{copy.lede}</p>
+    </div>
+  </section>
+
+  <section class="wrap section ob flow">
+    <div class="prose ob-prose">{copy.body.map((p) => <p>{p}</p>)}</div>
+    {facts.length > 0 && (
+      <dl class="ob-facts" aria-label={`${area.city} in Zahlen`}>
+        {facts.map((f) => <div><dt class="caps muted">{f.k}</dt><dd class="num">{f.v}</dd></div>)}
+      </dl>
+    )}
+  </section>
+
+  <Collection id="c-buy" label="Zum Kauf" title={`Kaufen in ${area.city}`} listings={buy.slice(0, 6)} href={`/kaufen?city=${q}`} linkLabel={buy.length > 6 ? 'Alle ansehen' : 'Suchen und filtern'} />
+  <Collection id="c-rent" label="Zur Miete" title={`Mieten in ${area.city}`} listings={rent.slice(0, 3)} href={`/mieten?city=${q}`} linkLabel="Alle ansehen" tone="tint" />
+
+  {located.length > 0 && (
+    <section class="wrap section-tight flow" aria-labelledby="h-map">
+      <header class="sec"><h2 class="h2" id="h-map">Unsere Objekte in {area.city}</h2></header>
+      <div class="om"><ListingsMap listings={located} href={(l) => listingUrl(l)} price={(l) => price(all.find((x) => x.id === l.id)!)} /></div>
+    </section>
+  )}
+
+  {sold.length > 0 && (
+    <section class="wrap section-tight os" aria-labelledby="h-sold">
+      <h2 class="h3" id="h-sold">Vermittelt in {area.city}</h2>
+      <SoldList listings={sold.slice(0, 4)} />
+    </section>
+  )}
+
+  {posts.length > 0 && (
+    <section class="section journal" aria-labelledby="h-journal">
+      <div class="wrap">
+        <header class="sec"><h2 class="h2" id="h-journal">Über {area.city}</h2></header>
+        <ul class="grid">{posts.map((p) => <li><JournalCard post={p} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <ValuationBand sold={sold.length} where={`in ${area.city}`} />
+</Layout>
+
+<style>
+  .oh { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); min-height: min(calc(100svh - var(--header-h)), 720px); }
+  .oh-media { position: relative; background: var(--surface); min-height: 420px; }
+  .oh-media :global(picture) { display: contents; }
+  .oh-media :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .oh-panel { background: var(--surface); display: grid; gap: 26px; align-content: center; justify-items: start; padding: clamp(40px, 5vw, 80px) clamp(28px, 4.5vw, 72px); }
+  .oh-panel .lede { max-width: 34ch; }
+  .ob { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 40px clamp(40px, 6vw, 112px); align-items: start; }
+  .ob-prose { font: 400 1.25rem/1.6 var(--serif); }
+  .ob-facts { margin: 0; border-top: 1px solid var(--line-strong); }
+  .ob-facts div { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .ob-facts dd { margin: 0; font: 400 1.25rem/1.35 var(--serif); white-space: normal; }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(28px, 3vw, 44px); }
+  .om { --map-h: min(64svh, 560px); }
+  .journal { background: var(--surface); }
+  .grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  @media (max-width: 1023px) {
+    .oh, .ob { grid-template-columns: minmax(0, 1fr); }
+    .oh { min-height: 0; }
+    .oh-media { min-height: 0; aspect-ratio: 4 / 3; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 639px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+  .os { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 24px clamp(40px, 6vw, 112px); align-items: start; }
+  @media (max-width: 1023px) { .os { grid-template-columns: minmax(0, 1fr); } }
+</style>

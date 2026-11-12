@@ -1,0 +1,19 @@
+{
+  "name": "@realadvisor/sites-sdk",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The data client of every RealAdvisor site: createClient, createFixtureClient, handleEnquiry, SitesApiError and the types. No dependencies, web standards only: it runs unchanged in Astro, React Router and plain Node.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check": "pnpm test",
+    "test": "node --experimental-strip-types --no-warnings=ExperimentalWarning --test \"test/*.test.ts\""
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

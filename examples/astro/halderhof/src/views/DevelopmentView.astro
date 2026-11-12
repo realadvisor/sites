@@ -1,0 +1,338 @@
+---
+/**
+ * Development page: photo hero with the figures that matter to a buyer
+ * (available units, price from, move-in), description and project team,
+ * "Preise und Verfügbarkeit" as a plain list per unit type, the table of
+ * every unit (filter "only available" in CSS, no JavaScript), indicative
+ * plans, photos, the building site, documents, location and the enquiry
+ * form with the unit select.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import type { DevelopmentWithUnits } from '@realadvisor/sites-sdk/types';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import AgentCard from '../components/AgentCard.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { extra, siteData } from '../lib/data';
+import { groupLine, groups, outdoor, planUrl, sortUnits, statusLabel, unitHref, unitNo, unitPrice, unitSelect, isAttic } from '../lib/dev';
+import { documentsFor } from '../content/documents';
+import { href, LOCALE, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { dayMonthYear, dec, floorShort, formatAmount, formatSurface, monthYear, rooms, roomsRange } from '../lib/format';
+
+interface Props { l: L; dev: DevelopmentWithUnits }
+const { l, dev: d } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const units = sortUnits(d.units);
+const gs = groups(units, l);
+const city = cityName(d.address.city, l);
+const where = [d.address.street, [d.address.postcode, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const s = d.stats;
+const delivery = monthYear(d.delivery_date, l);
+// fixture only: developer, architect, general contractor, construction photos
+const x = extra('developments', d.id);
+const credits = [
+  typeof x.developer === 'string' && { k: t('developer'), v: x.developer },
+  typeof x.architect === 'string' && { k: t('architect'), v: x.architect },
+  typeof x.general_contractor === 'string' && { k: t('contractor'), v: x.general_contractor },
+].filter(Boolean) as { k: string; v: string }[];
+const site = Array.isArray(x.construction_photos) ? (x.construction_photos as unknown[]).filter((u): u is string => typeof u === 'string') : [];
+const docs = documentsFor(d.slug, l);
+// One plan per type, garden-level variants only on the unit pages.
+const planTypes = gs.map((g) => ({ g, u: g.units.find((u) => u.floor !== 0) ?? g.units[0]! })).map(({ g, u }) => ({ g, src: planUrl(u, l), u })).filter((p) => p.src);
+const agent = d.agents[0] ? (agents.find((a) => a.id === d.agents[0]!.id) ?? d.agents[0]) : undefined;
+const lot = Astro.url.searchParams.get('lot') ?? undefined;
+const options = unitSelect(units, l);
+const selected = options.some((o) => o.value === lot) ? lot : undefined;
+const hero = d.photos[0];
+const gallery = d.photos.slice(1);
+const asOf = dayMonthYear(new Date().toISOString(), l);
+const reserved = units.filter((u) => u.status === 'reserved').length;
+---
+<Site l={l} route="developments" segs={[d.slug]} title={`${d.title}, ${city} | ${t('devTitle')} | ${org.name}`}
+  description={(d.description_text ?? d.title).replace(/\s+/g, ' ').slice(0, 155)} image={hero && img(hero.url, { w: 1200, h: 630 })}>
+
+  <section class="hero" data-hero>
+    {hero && <RaImage src={hero} alt={hero.alt || d.title} width={1600} height={800} priority sizes="100vw" mobile={{ width: 800, height: 760 }} />}
+    <div class="hero__panel on-green">
+      <div class="wrap hero__in">
+        <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navNew'), href: href('developments', l) }, { label: d.title }]} />
+        <div class="hero__row">
+          <div>
+            <h1 class="h1">{d.title}</h1>
+            <p class="hero__where">{where}</p>
+          </div>
+          <dl class="figs">
+            <div><dt>{t('units')}</dt><dd class="num">{t('unitsAvailable', { n: s.available, t: s.units })}</dd></div>
+            {s.price && <div><dt>{t('price')}</dt><dd class="num">{t('priceFrom', { p: formatAmount(s.price.min) })}</dd></div>}
+            {delivery && <div><dt>{t('delivery')}</dt><dd>{delivery}</dd></div>}
+          </dl>
+        </div>
+        <ul class="plain-list jump">
+          <li><a href="#preise">{t('priceAvail')}</a></li>
+          {planTypes.length > 0 && <li><a href="#plans">{t('plans')}</a></li>}
+          {docs.length > 0 && <li><a href="#docs">{t('documents')}</a></li>}
+          <li><a class="jump__cta" href="#contact">{t('devContact')}</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap intro">
+    <div class="prose">{d.description && <div set:html={sanitizeHtml(d.description)} />}</div>
+    <dl class="kv">
+      {s.rooms && <div><dt>{t('rooms')}</dt><dd>{roomsRange(s.rooms, l)}</dd></div>}
+      {s.living_surface && <div><dt>{t('livingArea')}</dt><dd class="num">{s.living_surface.min === s.living_surface.max ? formatSurface(s.living_surface.min) : `${s.living_surface.min} – ${formatSurface(s.living_surface.max)}`}</dd></div>}
+      {credits.map((c) => <div><dt>{c.k}</dt><dd>{c.v}</dd></div>)}
+    </dl>
+  </section>
+
+  <section class="section section--paper" id="preise" aria-labelledby="h-preise">
+    <div class="wrap">
+      <div class="pa-head">
+        <h2 id="h-preise" class="h2">{t('priceAvail')}</h2>
+        <p class="muted">{t('asOf', { d: asOf })}</p>
+      </div>
+      <ul class="plain-list pa">
+        {gs.map((g) => {
+          const line = groupLine(g, l);
+          return (
+            <li class:list={{ 'pa--out': !g.available.length }}>
+              <span class="pa__type">{g.label}</span>
+              <span class="pa__price num">{line.price ?? ''}</span>
+              <span class="pa__status">{line.status}</span>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div class="units">
+        <div class="units__bar">
+          <h3 class="h3">{t('table')}</h3>
+          <label class="only"><input type="checkbox" id="only-available" /> {t('onlyAvailable')}</label>
+        </div>
+        <table class="ut">
+          <caption class="sr-only">{t('table')}: {t('unitsAvailable', { n: s.available, t: s.units })}{reserved ? `, ${t('nReserved', { n: reserved })}` : ''}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{t('colUnit')}</th><th scope="col">{t('colFloor')}</th><th scope="col" class="r">{t('colRooms')}</th>
+              <th scope="col" class="r">{t('colArea')}</th><th scope="col" class="r">{t('colOut')}</th><th scope="col" class="r">{t('colPrice')}</th>
+              <th scope="col">{t('colStatus')}</th><th scope="col"><span class="sr-only">{t('plan')}</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {units.map((u) => {
+              const out = outdoor(u, l);
+              return (
+                <tr class:list={[`st-${u.status}`]} data-status={u.status}>
+                  <th scope="row" class="num">{unitNo(u) ?? '–'}</th>
+                  <td>{floorShort(u.floor, l, isAttic(u))}</td>
+                  <td class="r num">{u.rooms != null && <><span class="d">{dec(u.rooms, l)}</span><span class="m">{rooms(u.rooms, l)}</span></>}</td>
+                  <td class="r num">{u.living_surface != null ? formatSurface(u.living_surface) : ''}</td>
+                  <td class="r num">{out ? `${formatSurface(out.m2)}` : ''}</td>
+                  <td class="r num price">{unitPrice(u, l)}</td>
+                  <td><span class:list={['pill', `pill--${u.status}`]}>{statusLabel(u.status, l)}</span></td>
+                  <td class="go"><a href={unitHref(d, u, l)} aria-label={`${t('unitN', { n: unitNo(u) ?? '' })}: ${statusLabel(u.status, l)}`}>{t('plan')} →</a></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {planTypes.length > 0 && (
+    <section class="section wrap" id="plans" aria-labelledby="h-plans">
+      <h2 id="h-plans" class="h2 sec-h">{t('plans')}</h2>
+      <ul class="plain-list plans">
+        {planTypes.map(({ g, src, u }) => (
+          <li>
+            <figure>
+              <a href={unitHref(d, (g.available[0] ?? u), l)}><img src={src} alt={t('planOf', { u: g.label })} width="560" height="440" loading="lazy" decoding="async" /></a>
+              <figcaption><span class="plans__name">{g.label}</span><span class="num">{g.units[0]?.living_surface ? formatSurface(Math.min(...g.units.map((x) => x.living_surface ?? Infinity))) : ''}</span></figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <p class="note">{t('planIndicative')}</p>
+    </section>
+  )}
+
+  {gallery.length > 0 && (
+    <section class="section wrap gallery" aria-labelledby="h-photos">
+      <h2 id="h-photos" class="h2 sec-h">{t('photos')}</h2>
+      <ul class="plain-list photos">
+        {gallery.map((p, i) => (
+          <li class:list={{ wide: i === 0 && gallery.length % 3 === 0 }}><RaImage src={p} alt={p.alt || `${d.title}, ${t('photo', { n: i + 2 })}`} width={i === 0 ? 1200 : 600} height={i === 0 ? 900 : 450} sizes={i === 0 ? '(min-width: 900px) 66vw, 100vw' : '(min-width: 900px) 33vw, 100vw'} /></li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {site.length > 0 && (
+    <section class="section section--paper" aria-labelledby="h-site">
+      <div class="wrap">
+        <h2 id="h-site" class="h2 sec-h">{t('construction')}</h2>
+        <ul class="plain-list site">
+          {site.map((u, i) => <li><RaImage src={u} alt={`${d.title}: ${t('constructionNote')} ${i + 1}`} width={800} height={560} sizes="(min-width: 900px) 33vw, 100vw" /></li>)}
+        </ul>
+        <p class="note">{t('constructionNote')}</p>
+      </div>
+    </section>
+  )}
+
+  <section class="section wrap where" aria-labelledby="h-loc">
+    <div class="where__text">
+      <h2 id="h-loc" class="h2">{t('location')}</h2>
+      <p>{where}</p>
+      {docs.length > 0 && (
+        <div id="docs" class="docs">
+          <h3 class="h3">{t('documents')}</h3>
+          <ul class="plain-list">
+            {docs.map((x) => <li><a href={x.href} download><span>{x.label}</span><span class="muted">PDF, {x.size}</span></a></li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+    {d.address.lat != null && d.address.lng != null && (
+      <StaticMap lat={d.address.lat} lng={d.address.lng} zoom={15} height={420} label={`${t('location')}: ${where}`} linkLabel={t('openMap')} />
+    )}
+  </section>
+
+  <section class="contact on-green" id="contact" aria-labelledby="h-contact">
+    <div class="wrap contact__in">
+      <div class="contact__text">
+        <h2 id="h-contact" class="h2">{t('devContact')}</h2>
+        {agent && <div class="contact__agent"><AgentCard agent={agent} agents={agents} teams={teams} l={l} compact /></div>}
+      </div>
+      <div class="contact__form">
+        <EnquiryForm locale={LOCALE[l]} developmentId={d.id} units={options} selectedUnit={selected} agentId={agent?.id} agentName={agent?.first_name} />
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .hero { position: relative; display: grid; min-height: min(78vh, 760px); background: var(--green-ink); }
+  .hero > :global(picture), .hero > :global(img) { position: absolute; inset: 0; }
+  .hero :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .hero__panel { position: relative; align-self: end; background: rgb(23 60 45 / 0.95); }
+  .hero__in { display: grid; gap: 18px; padding-block: 24px 20px; }
+  .hero__row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 48px; }
+  .hero__where { color: var(--on-green-muted); margin-top: 6px; }
+  .figs { display: flex; flex-wrap: wrap; gap: 16px clamp(24px, 3.5vw, 56px); }
+  .figs div { display: grid; gap: 4px; }
+  .figs dt { font-size: 0.875rem; color: var(--on-green-muted); }
+  .figs dd { font: 400 1.5rem/1.1 var(--font-display); white-space: nowrap; }
+  .jump { display: flex; flex-wrap: wrap; gap: 4px 24px; border-top: 1px solid var(--line-on-green); padding-top: 10px; }
+  .jump a { display: inline-flex; min-height: 40px; align-items: center; color: #fff; font-weight: 500; }
+  .jump li:last-child { margin-left: auto; }
+
+  .intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 88px); align-items: start; }
+  .intro .prose { font-size: 1.0625rem; }
+  .intro .prose :global(p:first-child) { font: 400 var(--step-2)/1.4 var(--font-display); color: var(--green-ink); }
+  .kv { display: grid; border-top: 1px solid var(--line-strong); }
+  .kv div { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .kv dt { color: var(--muted); }
+
+  .pa-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 20px; }
+  .pa-head h2 { color: var(--green-ink); }
+  .pa { border-top: 2px solid var(--green); }
+  .pa li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid var(--line-strong); align-items: baseline; }
+  .pa__type { font: 400 1.375rem/1.2 var(--font-display); color: var(--green-ink); }
+  .pa__price { font-weight: 600; font-size: 1.0625rem; white-space: nowrap; }
+  .pa__status { color: var(--muted); }
+  .pa--out .pa__type { color: var(--muted); }
+
+  .units { margin-top: clamp(40px, 5vw, 64px); }
+  .units__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; margin-bottom: 12px; }
+  .units__bar h3 { color: var(--green-ink); }
+  .only { display: inline-flex; gap: 10px; align-items: center; min-height: 44px; cursor: pointer; font-weight: 500; }
+  .only input { width: 20px; height: 20px; accent-color: var(--green); }
+  .ut { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.9375rem; }
+  .ut th, .ut td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .ut thead th { font-weight: 500; color: var(--muted); font-size: 0.875rem; background: var(--paper); border-bottom: 1px solid var(--line-strong); }
+  .ut .r { text-align: right; }
+  .ut .m { display: none; }
+  .ut tbody th { font-weight: 600; }
+  .ut .price { font-weight: 600; }
+  .ut tr.st-sold td, .ut tr.st-sold th { color: var(--muted); }
+  .ut .go a { color: var(--green); font-weight: 600; display: inline-flex; min-height: 32px; align-items: center; }
+  .units:has(#only-available:checked) tr:not([data-status='available']):not(thead tr) { display: none; }
+  .pill { display: inline-block; padding: 4px 10px; font-size: 0.8125rem; font-weight: 600; border-radius: 999px; }
+  .pill--available { background: var(--ok-bg); color: var(--ok); }
+  .pill--reserved { background: var(--warn-bg); color: var(--warn); }
+  .pill--sold { background: var(--paper-2); color: var(--muted); }
+
+  .sec-h { color: var(--green-ink); margin-bottom: 28px; }
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+  .plans figure { margin: 0; border: 1px solid var(--line); background: #fff; }
+  .plans a { display: block; padding: 10px; }
+  .plans img { width: 100%; height: auto; aspect-ratio: 56 / 44; object-fit: contain; }
+  .plans figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 10px 12px; font-size: 0.9375rem; border-top: 1px solid var(--line); }
+  .plans__name { font-weight: 600; }
+  .note { margin-top: 16px; font-size: 0.875rem; color: var(--muted); }
+
+  .photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .photos li { aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2); }
+  .photos li.wide { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .photos :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .site { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .site li { aspect-ratio: 10 / 7; overflow: hidden; }
+  .site :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .where { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .where__text { display: grid; gap: 14px; }
+  .where__text h2 { color: var(--green-ink); }
+  .docs { margin-top: 20px; display: grid; gap: 10px; scroll-margin-top: calc(var(--header-h) + 16px); }
+  .docs h3 { color: var(--green-ink); }
+  .docs li a { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--green); font-weight: 600; }
+  .docs li a:hover span:first-child { text-decoration: underline; }
+  .docs li:first-child a { border-top: 1px solid var(--line); }
+
+  .contact { padding-block: var(--section); scroll-margin-top: var(--header-h); }
+  .contact__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 88px); align-items: start; }
+  .contact__text { display: grid; gap: 28px; }
+  .contact__agent { background: rgb(255 255 255 / 0.06); padding: 20px; }
+  .contact__agent :global(.ag__name), .contact__agent :global(.ag__name a) { color: #fff; }
+  .contact__agent :global(.ag__role), .contact__agent :global(.ag__langs) { color: var(--on-green-muted); }
+  .contact__agent :global(.ag__contact a) { color: #fff; }
+  .contact__form { background: #fff; color: var(--text); padding: clamp(22px, 3vw, 36px); }
+
+  @media (max-width: 1000px) {
+    .intro, .where, .contact__in { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .hero { min-height: 640px; }
+    .figs dd { font-size: 1.1875rem; }
+    .jump li:last-child { margin-left: 0; }
+    .pa li { grid-template-columns: minmax(0, 1fr) auto; }
+    .pa__status { grid-column: 1 / -1; }
+    .ut thead { display: none; }
+    .ut, .ut tbody, .ut tr, .ut td, .ut th { display: block; }
+    .ut { background: none; }
+    .ut tbody { display: grid; gap: 8px; }
+    .ut tr { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr); gap: 6px 12px; padding: 14px; background: #fff; border: 1px solid var(--line); align-items: baseline; }
+    .ut th, .ut td { border: 0; padding: 0; white-space: nowrap; text-align: left !important; }
+    .ut tbody th { grid-area: 1 / 1; font-size: 1.0625rem; }
+    .ut td:nth-of-type(1) { grid-area: 1 / 2; }
+    .ut td:nth-of-type(6) { grid-area: 1 / 3; justify-self: end; }
+    .ut td:nth-of-type(2) { grid-area: 2 / 1; }
+    .ut td:nth-of-type(3) { grid-area: 2 / 2; }
+    .ut td:nth-of-type(4) { grid-area: 2 / 3; }
+    .ut td.price { grid-area: 3 / 1 / 4 / 3; font-size: 1.0625rem; }
+    .ut td.go { grid-area: 3 / 3; justify-self: end; }
+    .ut .d { display: none; }
+    .ut .m { display: inline; }
+    .ut td:nth-of-type(4):not(:empty)::before { content: '+ '; color: var(--muted); }
+    .units:has(#only-available:checked) tr:not([data-status='available']) { display: none; }
+    .photos, .site { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .photos li.wide { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 3 / 2; }
+    .contact__form { margin-inline: calc(-1 * var(--gutter)); }
+  }
+</style>

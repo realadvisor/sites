@@ -1,0 +1,91 @@
+---
+/** One office: photo, description from the data, address and contacts, the agents, its listings, a form. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import type { Team } from '@realadvisor/sites-sdk/types';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import AgentCard from '../components/AgentCard.astro';
+import ListingCard from '../components/ListingCard.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { siteData, sites } from '../lib/data';
+import { href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+import { placeOf } from '../content/places';
+
+interface Props { l: L; team: Team }
+const { l, team: x } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents }, listings] = await Promise.all([siteData(), sites.allListings({ team_id: x.id, status: 'available' })]);
+const slug = teamSlug(x, teams);
+const city = cityName(x.address.city, l) || x.name;
+const people = agents.filter((a) => a.team_ids.includes(x.id));
+const photo = placeOf(slug)?.photos[0];
+const C = {
+  en: { title: `${org.name.replace(/\s+SA$/, '')} ${city}`, team: 'The team', props: 'Properties from this office', all: 'All properties', write: `Write to the ${city} office`, map: `Map: ${x.address.street ?? city}`, osm: 'Open in OpenStreetMap', dest: `About ${city}` },
+  fr: { title: `${org.name.replace(/\s+SA$/, '')} ${city}`, team: 'L’équipe', props: 'Les biens de ce bureau', all: 'Tous les biens', write: `Écrire au bureau de ${city}`, map: `Plan : ${x.address.street ?? city}`, osm: 'Ouvrir dans OpenStreetMap', dest: `Découvrir ${city}` },
+}[l];
+---
+<Site l={l} route="offices" segs={[slug]} title={`${C.title} | ${org.name}`} description={x.description_text ?? `${C.title}: ${x.address.street ?? ''} ${x.address.city ?? ''}`}>
+  <div class="wrap top">
+    <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navOffices'), href: href('offices', l) }, { label: city }]} />
+  </div>
+  <section class="wrap hero">
+    <div class="hero__text">
+      <h1 class="h1">{C.title}</h1>
+      {x.description && <div class="prose" set:html={sanitizeHtml(x.description)} />}
+      <address>
+        {x.address.street && <span>{x.address.street}</span>}
+        <span>{[x.address.postcode, x.address.city].filter(Boolean).join(' ')}</span>
+      </address>
+      <ul class="plain contacts">
+        {x.phone && <li><a class="num" href={tel(x.phone)}>{x.phone}</a></li>}
+        {x.email && <li><a href={`mailto:${x.email}`}>{x.email}</a></li>}
+      </ul>
+      <a class="link" href={href('destinations', l, slug)}>{C.dest}</a>
+    </div>
+    {photo && <div class="hero__media"><RaImage src={photo.url} alt={photo.alt[l]} width={900} height={1100} priority sizes="(min-width: 1024px) 45vw, 100vw" mobile={{ width: 800, height: 600 }} /></div>}
+  </section>
+  {people.length > 0 && (
+    <section class="wrap block">
+      <h2 class="h2 block__h">{C.team}</h2>
+      <ul class="plain agents">{people.map((a) => <li><AgentCard agent={a} all={agents} teams={teams} l={l} /></li>)}</ul>
+    </section>
+  )}
+  {listings.length > 0 && (
+    <section class="wrap block">
+      <h2 class="h2 block__h">{C.props}</h2>
+      <ul class="plain grid3">{listings.slice(0, 6).map((y) => <li><ListingCard listing={y} l={l} /></li>)}</ul>
+    </section>
+  )}
+  <section class="on-paper form">
+    <div class="wrap form__in">
+      <div>
+        <h2 class="h2">{C.write}</h2>
+        {x.address.lat != null && x.address.lng != null && <StaticMap lat={x.address.lat} lng={x.address.lng} zoom={15} height={300} label={C.map} linkLabel={C.osm} class="form__map" />}
+      </div>
+      <EnquiryForm contactReason="other" locale={LOCALE[l]} />
+    </div>
+  </section>
+</Site>
+
+<style>
+  .top { padding-top: 16px; }
+  .hero { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: center; padding-block: 32px var(--section); }
+  .hero__text { display: grid; gap: 22px; justify-items: start; }
+  .hero__media :global(img) { width: 100%; aspect-ratio: 9 / 11; object-fit: cover; }
+  address { font-style: normal; display: grid; }
+  .contacts a { display: inline-flex; align-items: center; min-height: 36px; }
+  .block { padding-bottom: var(--section); }
+  .block__h { margin-bottom: 36px; }
+  .agents { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 28px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+  .form { padding-block: var(--section); border-top: 1px solid var(--line); }
+  .form__in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; }
+  .form :global(.form__map) { margin-top: 28px; }
+  @media (max-width: 1023px) { .agents, .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .form__in { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 767px) { .hero { grid-template-columns: minmax(0, 1fr); } .hero__media { order: -1; } .hero__media :global(img) { aspect-ratio: 4 / 3; } }
+  @media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+</style>

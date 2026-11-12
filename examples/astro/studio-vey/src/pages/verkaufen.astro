@@ -1,0 +1,76 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import PlacePhoto from '../components/PlacePhoto.astro';
+import { AREAS } from '../content/places';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Steps from '../components/Steps.astro';
+import Collection from '../components/Collection.astro';
+import AgentCard from '../components/AgentCard.astro';
+import { brandName, site, sites } from '../lib/data';
+import { telHref } from '../lib/format';
+import { SELL_STEPS } from '../content/process';
+
+const s = await site();
+const brand = brandName(s);
+const sold = await sites.listings({ status: 'sold', limit: 3 });
+const photo = sold.data.find((l) => l.photos[0])?.photos[0];
+---
+<Layout title={`Immobilie verkaufen und bewerten lassen | ${brand}`} description={`Verkaufen mit ${brand}: persönliche Bewertung, sorgfältige Vorbereitung und Begleitung bis zur Beurkundung in Zürich, am See und in Zug.`} image={photo && img(photo.url, { w: 1200, h: 630 })}>
+  <section class="sh">
+    <div class="wrap sh-in">
+      <div class="sh-text">
+        <h1 class="h-display">Ihre Wohnung oder Ihr Haus verkaufen</h1>
+        <p class="lede muted">Wir bewerten vor Ort, stellen die Unterlagen für Käufer und Banken zusammen und führen jede Besichtigung selbst. Die Bewertung ist unverbindlich.</p>
+        <p class="sh-actions"><a class="button button--solid" href="#bewertung">Bewertung anfragen</a>{s.team.phone && <a class="more" href={telHref(s.team.phone)}>{s.team.phone}</a>}</p>
+      </div>
+      {/* Houses on the slope above the lake (bucket photo): the sold villa itself already leads the "Zuletzt vermittelt" row below. */}
+      <div class="sh-media"><PlacePhoto photo={AREAS.kuesnacht!.photo} width={1200} height={1200} priority sizes="(min-width: 1024px) 40vw, 100vw" /></div>
+    </div>
+  </section>
+
+  <section class="section wrap flow" aria-labelledby="steps-title">
+    <header class="sec">
+      <h2 class="h2" id="steps-title">So läuft ein Verkauf ab</h2>
+    </header>
+    <Steps steps={SELL_STEPS} />
+  </section>
+
+  <Collection id="c-sold" label="Verkauft" title="Zuletzt vermittelt" listings={sold.data} href="/verkauft" linkLabel="Alle verkauften Objekte" />
+
+  <section id="bewertung" class="val section" aria-labelledby="val-title">
+    <div class="wrap val-in">
+      <div class="val-side">
+        <h2 class="h2" id="val-title">Was ist Ihre Immobilie wert?</h2>
+        <p class="muted">Beschreiben Sie Ihr Objekt in ein paar Sätzen: Art, Ort, Grösse und Zeitrahmen. Wir melden uns für einen Termin vor Ort. Die Einschätzung ist unverbindlich.</p>
+        <ul class="val-agents">{s.agents.map((a) => <li><AgentCard agent={a} layout="row" link /></li>)}</ul>
+      </div>
+      <EnquiryForm id="valuation" contactReason="valuation" message="Guten Tag, ich möchte meine Immobilie bewerten lassen. Art und Ort des Objekts: " submitLabel="Bewertung anfragen" />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .sh { background: var(--surface); }
+  .sh-in { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 112px); align-items: center; padding-block: clamp(48px, 6vw, 96px); }
+  .sh-text { display: grid; gap: 26px; justify-items: start; }
+  .sh-text h1 { max-width: 16ch; }
+  .sh-text .lede { max-width: 44ch; }
+  .sh-actions { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; }
+  .sh-media { aspect-ratio: 4 / 5; overflow: hidden; }
+  .sh-media :global(picture) { display: contents; }
+  .sh-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(32px, 4vw, 56px); }
+  .val { scroll-margin-top: var(--header-h); }
+  .val-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); align-items: start; }
+  .val-side { display: grid; gap: 20px; justify-items: start; }
+  .val-side > .muted { max-width: 44ch; }
+  .val-agents { list-style: none; display: grid; gap: 28px; margin-top: 20px; padding-top: 28px; border-top: 1px solid var(--line); width: 100%; }
+  @media (max-width: 1023px) {
+    .sh-in, .val-in { grid-template-columns: minmax(0, 1fr); }
+    .sh-media { aspect-ratio: 4 / 3; order: -1; }
+    .val-agents { display: none; }
+  }
+</style>

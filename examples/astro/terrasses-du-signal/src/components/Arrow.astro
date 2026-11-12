@@ -1,0 +1,7 @@
+---
+/** Thin arrow for text links (decorative). */
+interface Props { dir?: 'right' | 'down' | 'left' }
+const { dir = 'right' } = Astro.props;
+const r = { right: 0, down: 90, left: 180 }[dir];
+---
+<svg width="18" height="10" viewBox="0 0 18 10" aria-hidden="true" style={r ? `transform:rotate(${r}deg)` : undefined}><path d="M0 5h16.5M12.5 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2" /></svg>

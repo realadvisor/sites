@@ -1,0 +1,18 @@
+/* The Astro Site.astro <style>: main and the phone action bar. */
+main.main { display: block; outline: none; }
+.phone-bar.phone-bar { display: none; }
+@media (max-width: 760px) {
+  .phone-bar.phone-bar {
+    position: fixed; inset: auto 0 0 0; z-index: 30; display: grid; grid-template-columns: 1fr 1.3fr;
+    gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgb(246 241 232 / 0.96); border-top: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+  .phone-bar a {
+    display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px;
+    font: 600 0.9375rem/1 var(--sans); text-decoration: none;
+    border: 1px solid var(--line-strong); color: var(--text); background: var(--surface);
+  }
+  .phone-bar a.primary { background: var(--text); border-color: var(--text); color: var(--bg); }
+  body { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
+}

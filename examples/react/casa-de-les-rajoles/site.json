@@ -1,0 +1,7 @@
+{
+  "country": "ES",
+  "locale": "es-ES",
+  "locales": ["es-ES", "en-ES"],
+  "developmentsPath": "/viviendas",
+  "redirects": {}
+}

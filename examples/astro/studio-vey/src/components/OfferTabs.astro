@@ -1,0 +1,110 @@
+---
+/**
+ * Buy and rent in one section. Without JavaScript both panels show one after
+ * the other, each with its own heading; the bundled script turns them into
+ * ARIA tabs (arrow keys, Home/End) and hides the inactive panel.
+ */
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import ListingCard from './ListingCard.astro';
+
+interface Panel { key: string; label: string; heading: string; total: number; listings: Listing[]; href: string; linkLabel: string }
+interface Props { title: string; panels: Panel[] }
+const { title, panels } = Astro.props;
+const shown = panels.filter((p) => p.listings.length > 0);
+const n = (x: number) => (x === 1 ? '1 Objekt' : `${x} Objekte`);
+---
+{shown.length > 0 && (
+  <section class="ot section" aria-labelledby="ot-title" data-offer-tabs>
+    <div class="wrap">
+      <header class="ot-head">
+        <h2 class="h2" id="ot-title">{title}</h2>
+        {shown.length > 1 && (
+          <div class="ot-tabs" role="tablist" aria-labelledby="ot-title" hidden data-tablist>
+            {shown.map((p, i) => (
+              <button type="button" role="tab" id={`ot-tab-${p.key}`} aria-controls={`ot-panel-${p.key}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+                {p.label} <span class="num">{p.total}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </header>
+      {shown.map((p) => (
+        <div class="ot-panel" id={`ot-panel-${p.key}`} aria-labelledby={`ot-h-${p.key}`} data-panel>
+          <div class="ot-sub">
+            <h3 class="h3 ot-h" id={`ot-h-${p.key}`}>{p.heading} <span class="muted num">{n(p.total)}</span></h3>
+          </div>
+          <ul class="ot-grid">{p.listings.map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+          <p class="ot-more"><a class="more" href={p.href}>{p.linkLabel}</a></p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-offer-tabs]')) {
+    const list = root.querySelector<HTMLElement>('[data-tablist]');
+    if (!list) continue;
+    const tabs = [...list.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls') ?? ''));
+    const select = (i: number, focus = false) => {
+      tabs.forEach((t, j) => {
+        const on = i === j;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        const panel = panels[j];
+        if (panel) {
+          panel.hidden = !on;
+          panel.setAttribute('aria-labelledby', t.id);
+        }
+      });
+      if (focus) tabs[i]?.focus();
+    };
+    for (const p of panels) {
+      p?.setAttribute('role', 'tabpanel');
+      p?.setAttribute('tabindex', '-1');
+    }
+    tabs.forEach((t, i) => t.addEventListener('click', () => select(i)));
+    list.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(document.activeElement as HTMLButtonElement);
+      if (i < 0) return;
+      const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (next == null) return;
+      e.preventDefault();
+      select((next + tabs.length) % tabs.length, true);
+    });
+    root.classList.add('is-tabbed');
+    list.hidden = false;
+    select(0);
+  }
+</script>
+
+<style>
+  .ot-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 32px; flex-wrap: wrap; margin-bottom: clamp(28px, 3vw, 44px); }
+  .ot-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line-strong); }
+  .ot-tabs[hidden] { display: none; }
+  .ot-tabs button {
+    appearance: none; background: none; border: 0; color: var(--muted); cursor: pointer;
+    font: 400 1.25rem/1 var(--serif); padding: 12px 16px 14px; min-height: 48px;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .ot-tabs button .num { font: 500 var(--fs-small)/1 var(--sans); margin-left: 4px; }
+  .ot-tabs button[aria-selected='true'] { color: var(--text); border-bottom-color: currentColor; }
+  .ot-tabs button:hover { color: var(--text); }
+  .ot-panel + .ot-panel { margin-top: clamp(56px, 6vw, 88px); }
+  .ot-panel:focus { outline: none; }
+  .ot-sub { margin-bottom: 24px; }
+  .ot-h .muted { font: 400 var(--fs-small)/1 var(--sans); margin-left: 8px; }
+  /* With tabs, the tab itself names the panel. */
+  .is-tabbed .ot-sub { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .is-tabbed .ot-panel + .ot-panel { margin-top: 0; }
+  .ot-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  .ot-more { margin-top: clamp(28px, 3vw, 40px); }
+  @media (max-width: 1023px) { .ot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ot-grid > li:nth-child(3) { display: none; } }
+  @media (max-width: 639px) {
+    .ot-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .ot-grid > li:nth-child(3) { display: block; }
+    .ot-tabs { width: 100%; }
+    .ot-tabs button { flex: 1; }
+  }
+</style>

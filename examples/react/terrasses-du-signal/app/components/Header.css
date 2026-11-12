@@ -1,0 +1,44 @@
+.site-header { position: sticky; top: 0; z-index: 40; background: rgb(246 242 235 / 0.97); border-bottom: 1px solid var(--line); }
+/* Over the home hero: transparent, then solid once the page scrolls. It stays sticky like on every page. */
+.site-header.overlay { margin-bottom: calc(-1 * var(--header-h) - 1px); background: linear-gradient(rgb(20 17 13 / 0.55), rgb(20 17 13 / 0)); border-color: transparent; color: #fff; transition: background-color 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease); }
+.site-header.overlay.is-solid { background: rgb(246 242 235 / 0.97); color: var(--text); border-color: var(--line); }
+.site-header .bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: var(--header-h); gap: 24px; }
+.site-header ul { list-style: none; margin: 0; padding: 0; }
+.site-header .left ul { display: flex; gap: clamp(18px, 2.4vw, 36px); }
+.site-header .left a, .site-header .right .text {
+  font: 600 0.75rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
+  padding-block: 14px; border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease);
+}
+.site-header .left a:hover, .site-header .left a[aria-current], .site-header .right .text:hover, .site-header .right .text[aria-current] { border-bottom-color: currentColor; }
+.site-header .mark { display: grid; justify-items: center; text-decoration: none; gap: 3px; }
+.site-header .name { font: 500 clamp(1.375rem, 1.1rem + 0.7vw, 1.75rem)/1 var(--serif); letter-spacing: 0.01em; white-space: nowrap; }
+.site-header .city { font: 600 0.625rem/1 var(--sans); letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.8; padding-left: 0.32em; }
+.site-header .right { display: flex; justify-content: flex-end; align-items: center; gap: 28px; }
+.site-header .cta {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px;
+  font: 600 0.75rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+  border: 1px solid currentColor; transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.site-header .cta:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+.site-header.overlay:not(.is-solid) .cta:hover { background: #fff; color: var(--dark); border-color: #fff; }
+.site-header .menu-btn { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; margin-right: -10px; background: none; border: 0; color: inherit; cursor: pointer; }
+.site-header .menu {
+  position: fixed; inset: var(--header-h) 0 0 0; z-index: 39; background: var(--bg); color: var(--text);
+  padding: 32px var(--gutter); overflow-y: auto;
+  visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.35s var(--ease), visibility 0s 0.35s;
+}
+.site-header .menu.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.35s var(--ease); }
+.site-header .menu li { border-bottom: 1px solid var(--line); }
+.site-header .menu li a { display: block; padding: 18px 0; font: 500 2rem/1.1 var(--serif); text-decoration: none; }
+.site-header .menu li a[aria-current] { font-style: italic; }
+.site-header .menu-foot { margin-top: 28px; font-size: 0.9375rem; }
+html.menu-open { overflow: hidden; }
+html.menu-open .site-header.overlay { background: var(--bg); color: var(--text); }
+
+@media (max-width: 1000px) {
+  .site-header .bar { grid-template-columns: 1fr auto; }
+  .site-header .left, .site-header .right .text, .site-header .right .cta { display: none; }
+  .site-header .mark { justify-items: start; }
+  .site-header .menu-btn { display: inline-flex; }
+}
+@media (min-width: 1001px) { .site-header .menu { display: none; } }

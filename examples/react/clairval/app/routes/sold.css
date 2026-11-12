@@ -1,0 +1,7 @@
+.list { padding-bottom: var(--section); }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+@media (max-width: 1023px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+.cta-band { padding-block: clamp(56px, 7vw, 96px); }
+.cta-band__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+.cta-band .lede { margin-top: 10px; }

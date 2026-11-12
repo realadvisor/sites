@@ -1,0 +1,19 @@
+{
+  "name": "Alder & Roux",
+  "short_name": "Alder & Roux",
+  "theme_color": "#1f3a5f",
+  "background_color": "#1f3a5f",
+  "display": "browser",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

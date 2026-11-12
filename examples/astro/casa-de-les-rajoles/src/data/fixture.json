@@ -1,0 +1,2752 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "es",
+  "en"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "174c5929-35c2-46c1-b580-f2611bf4d84f",
+  "name": "Mirall Promocions SL",
+  "website": "https://mirall-promocions.example.com",
+  "address": {
+   "street": "Gran Via del Marqués del Túria 49",
+   "postcode": "46005",
+   "city": "València",
+   "country": "Spain",
+   "lat": 39.468,
+   "lng": -0.369
+  },
+  "brand": {
+   "primary": "#D9654B"
+  }
+ },
+ "teams": [
+  {
+   "id": "610c4dce-3ddf-4a66-95c8-0a764744a351",
+   "name": "Mirall Promocions",
+   "primary": true,
+   "website": "https://mirall-promocions.example.com",
+   "phone": "+34 000 000 001",
+   "email": "ventas@mirall-promocions.example.com",
+   "address": {
+    "street": "Gran Via del Marqués del Túria 49",
+    "postcode": "46005",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.468,
+    "lng": -0.369
+   },
+   "socials": {},
+   "description": "<p>Promotora valenciana dedicada a la rehabilitación de edificios del Ensanche y Russafa. Pocas promociones, cuidadas de principio a fin.</p>",
+   "description_text": "Promotora valenciana dedicada a la rehabilitación de edificios del Ensanche y Russafa. Pocas promociones, cuidadas de principio a fin."
+  }
+ ],
+ "agents": [
+  {
+   "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+   "first_name": "Marta",
+   "last_name": "Ferrer",
+   "phone": "+34 000 000 002",
+   "email": "marta.ferrer@mirall-promocions.example.com",
+   "languages": [
+    "es",
+    "en"
+   ],
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+    "alt": "Marta Ferrer"
+   }
+  },
+  {
+   "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+   "first_name": "Pau",
+   "last_name": "Llorens",
+   "phone": "+34 000 000 003",
+   "email": "pau.llorens@mirall-promocions.example.com",
+   "languages": [
+    "es",
+    "en"
+   ],
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+    "alt": "Pau Llorens"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "12443161-3961-4f00-b876-9577e6afd71a",
+   "slug": "estudio-planta-baja-con-patio-12443161-3961-4f00-b876-9577e6afd71a",
+   "title": "Estudio, planta baja con patio",
+   "description": "<p>Un estudio de 38 m² en la planta baja del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.</p><p>Sale a un patio privado de 14 m² con una higuera que se mantiene. Cocina integrada, aerotermia y trastero.</p>",
+   "description_text": "Un estudio de 38 m² en la planta baja del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.\n\nSale a un patio privado de 14 m² con una higuera que se mantiene. Cocina integrada, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment_studio",
+   "status": "available",
+   "price": 189000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 38,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "Estudio, planta baja con patio"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "Estudio, planta baja con patio, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "Estudio, planta baja con patio, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+     "alt": "Estudio, planta baja con patio, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+     "alt": "Estudio, planta baja con patio, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "3DTK-M5FB",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "98e8eeba-ada6-4483-ac98-e0a4577c338a",
+   "slug": "2-dormitorios-1-planta-fachada-98e8eeba-ada6-4483-ac98-e0a4577c338a",
+   "title": "2 dormitorios, 1.ª planta, fachada",
+   "description": "<p>Una vivienda de 78 m² con 2 dormitorios en la primera planta del edificio de 1908, orientada a la calle Sueca.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, balcón de 4 m², aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 78 m² con 2 dormitorios en la primera planta del edificio de 1908, orientada a la calle Sueca.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, balcón de 4 m², aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 365000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 78,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "2 dormitorios, 1.ª planta, fachada"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "2 dormitorios, 1.ª planta, fachada, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+     "alt": "2 dormitorios, 1.ª planta, fachada, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+     "alt": "2 dormitorios, 1.ª planta, fachada, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+     "alt": "2 dormitorios, 1.ª planta, fachada, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "GN27-5AH8",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "c8bd86e4-ec94-4843-b532-9693c78fce25",
+   "slug": "estudio-2-planta-c8bd86e4-ec94-4843-b532-9693c78fce25",
+   "title": "Estudio, 2.ª planta",
+   "description": "<p>Un estudio de 41 m² en la segunda planta del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.</p><p>Tiene un balcón de forja a la calle Sueca y altillo de almacenaje sobre el baño. Cocina integrada, aerotermia y trastero.</p>",
+   "description_text": "Un estudio de 41 m² en la segunda planta del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.\n\nTiene un balcón de forja a la calle Sueca y altillo de almacenaje sobre el baño. Cocina integrada, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment_studio",
+   "status": "available",
+   "price": 205000,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 41,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "Estudio, 2.ª planta"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+     "alt": "Estudio, 2.ª planta, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+     "alt": "Estudio, 2.ª planta, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+     "alt": "Estudio, 2.ª planta, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+     "alt": "Estudio, 2.ª planta, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "MQ39-KVG2",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "f503b5fd-354c-4c35-a123-a039c3014d02",
+   "slug": "3-dormitorios-2-planta-esquina-f503b5fd-354c-4c35-a123-a039c3014d02",
+   "title": "3 dormitorios, 2.ª planta, esquina",
+   "description": "<p>Una vivienda de 105 m² con 3 dormitorios en la segunda planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 105 m² con 3 dormitorios en la segunda planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 498000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 105,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+     "alt": "3 dormitorios, 2.ª planta, esquina"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+     "alt": "3 dormitorios, 2.ª planta, esquina, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+     "alt": "3 dormitorios, 2.ª planta, esquina, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+     "alt": "3 dormitorios, 2.ª planta, esquina, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+     "alt": "3 dormitorios, 2.ª planta, esquina, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "8KWD-754R",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "7c849bfc-a8f5-4fa7-bf0a-1f3569f5bffc",
+   "slug": "1-dormitorio-3-planta-interior-7c849bfc-a8f5-4fa7-bf0a-1f3569f5bffc",
+   "title": "1 dormitorio, 3.ª planta, interior",
+   "description": "<p>Una vivienda de 53 m² con 1 dormitorio en la tercera planta del edificio de 1908, orientada al patio de manzana, más tranquila.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 53 m² con 1 dormitorio en la tercera planta del edificio de 1908, orientada al patio de manzana, más tranquila.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 249000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 53,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+     "alt": "1 dormitorio, 3.ª planta, interior"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+     "alt": "1 dormitorio, 3.ª planta, interior, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+     "alt": "1 dormitorio, 3.ª planta, interior, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+     "alt": "1 dormitorio, 3.ª planta, interior, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+     "alt": "1 dormitorio, 3.ª planta, interior, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "8HF3-ESKR",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "8427da08-251b-4792-9ab6-6663977b0da8",
+   "slug": "4-dormitorios-3-planta-esquina-8427da08-251b-4792-9ab6-6663977b0da8",
+   "title": "4 dormitorios, 3.ª planta, esquina",
+   "description": "<p>Una vivienda de 132 m² con 4 dormitorios en la tercera planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 132 m² con 4 dormitorios en la tercera planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 629000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 132,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+     "alt": "4 dormitorios, 3.ª planta, esquina"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+     "alt": "4 dormitorios, 3.ª planta, esquina, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+     "alt": "4 dormitorios, 3.ª planta, esquina, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+     "alt": "4 dormitorios, 3.ª planta, esquina, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+     "alt": "4 dormitorios, 3.ª planta, esquina, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "7KA4-39TQ",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "a2fa2701-acbc-4224-8487-1b59dad15b78",
+   "slug": "2-dormitorios-4-planta-fachada-a2fa2701-acbc-4224-8487-1b59dad15b78",
+   "title": "2 dormitorios, 4.ª planta, fachada",
+   "description": "<p>Una vivienda de 80 m² con 2 dormitorios en la cuarta planta del edificio de 1908, orientada a la calle Sueca.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 80 m² con 2 dormitorios en la cuarta planta del edificio de 1908, orientada a la calle Sueca.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 392000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 80,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+     "alt": "2 dormitorios, 4.ª planta, fachada"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+     "alt": "2 dormitorios, 4.ª planta, fachada, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+     "alt": "2 dormitorios, 4.ª planta, fachada, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "2 dormitorios, 4.ª planta, fachada, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+     "alt": "2 dormitorios, 4.ª planta, fachada, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "LXVW-59GT",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "be819251-c884-4238-913f-12fb5652dbd5",
+   "slug": "3-dormitorios-4-planta-esquina-be819251-c884-4238-913f-12fb5652dbd5",
+   "title": "3 dormitorios, 4.ª planta, esquina",
+   "description": "<p>Una vivienda de 106 m² con 3 dormitorios en la cuarta planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 106 m² con 3 dormitorios en la cuarta planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 515000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 106,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+     "alt": "3 dormitorios, 4.ª planta, esquina"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+     "alt": "3 dormitorios, 4.ª planta, esquina, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "3 dormitorios, 4.ª planta, esquina, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "3 dormitorios, 4.ª planta, esquina, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+     "alt": "3 dormitorios, 4.ª planta, esquina, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "L9PA-JB5J",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "01d78556-9127-45b3-80e7-57f9099e2dda",
+   "slug": "2-dormitorios-5-planta-fachada-01d78556-9127-45b3-80e7-57f9099e2dda",
+   "title": "2 dormitorios, 5.ª planta, fachada",
+   "description": "<p>Una vivienda de 81 m² con 2 dormitorios en la quinta planta del edificio de 1908, orientada a la calle Sueca.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 81 m² con 2 dormitorios en la quinta planta del edificio de 1908, orientada a la calle Sueca.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 399000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 81,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+     "alt": "2 dormitorios, 5.ª planta, fachada"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "2 dormitorios, 5.ª planta, fachada, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "2 dormitorios, 5.ª planta, fachada, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "2 dormitorios, 5.ª planta, fachada, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+     "alt": "2 dormitorios, 5.ª planta, fachada, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "JGK7-ATSL",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "3350475a-682c-4cd0-9f08-e8706803ec6b",
+   "slug": "atico-con-terraza-2-dormitorios-3350475a-682c-4cd0-9f08-e8706803ec6b",
+   "title": "Ático con terraza, 2 dormitorios",
+   "description": "<p>Un ático del edificio de 1908 con 2 dormitorios, 76 m² interiores y una terraza de 38 m² sobre los tejados de Russafa.</p><p>Dos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.</p>",
+   "description_text": "Un ático del edificio de 1908 con 2 dormitorios, 76 m² interiores y una terraza de 38 m² sobre los tejados de Russafa.\n\nDos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 549000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 76,
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+     "alt": "Ático con terraza, 2 dormitorios"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+    "first_name": "Marta",
+    "last_name": "Ferrer",
+    "phone": "+34 000 000 002",
+    "email": "marta.ferrer@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+     "alt": "Marta Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "NW4H-W3UZ",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "0e04ef59-59a9-4768-9cc4-2f410a1aff96",
+   "slug": "2-dormitorios-1-planta-ala-nueva-0e04ef59-59a9-4768-9cc4-2f410a1aff96",
+   "title": "2 dormitorios, 1.ª planta, ala nueva",
+   "description": "<p>Una vivienda de 74 m² con 2 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 74 m² con 2 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 345000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 74,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+     "alt": "2 dormitorios, 1.ª planta, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+     "alt": "2 dormitorios, 1.ª planta, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "2 dormitorios, 1.ª planta, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+     "alt": "2 dormitorios, 1.ª planta, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "B92K-3SLW",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "26aa55e4-be7c-4301-ae62-201224e07347",
+   "slug": "3-dormitorios-1-planta-ala-nueva-26aa55e4-be7c-4301-ae62-201224e07347",
+   "title": "3 dormitorios, 1.ª planta, ala nueva",
+   "description": "<p>Una vivienda de 96 m² con 3 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 9 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 96 m² con 3 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 9 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 445000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 96,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+     "alt": "3 dormitorios, 1.ª planta, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "3 dormitorios, 1.ª planta, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+     "alt": "3 dormitorios, 1.ª planta, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+     "alt": "3 dormitorios, 1.ª planta, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "RRBL-W6CC",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "e000b8d3-dba7-439d-9871-7644158ae212",
+   "slug": "1-dormitorio-2-planta-ala-nueva-e000b8d3-dba7-439d-9871-7644158ae212",
+   "title": "1 dormitorio, 2.ª planta, ala nueva",
+   "description": "<p>Una vivienda de 55 m² con 1 dormitorio en la segunda planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 55 m² con 1 dormitorio en la segunda planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 255000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 55,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "1 dormitorio, 2.ª planta, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+     "alt": "1 dormitorio, 2.ª planta, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+     "alt": "1 dormitorio, 2.ª planta, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+     "alt": "1 dormitorio, 2.ª planta, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "MEG8-BTGB",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "d8e00b1a-a71d-4487-9da3-b00c3e5a7152",
+   "slug": "2-dormitorios-3-planta-ala-nueva-d8e00b1a-a71d-4487-9da3-b00c3e5a7152",
+   "title": "2 dormitorios, 3.ª planta, ala nueva",
+   "description": "<p>Una vivienda de 75 m² con 2 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 75 m² con 2 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 362000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 75,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+     "alt": "2 dormitorios, 3.ª planta, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+     "alt": "2 dormitorios, 3.ª planta, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+     "alt": "2 dormitorios, 3.ª planta, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+     "alt": "2 dormitorios, 3.ª planta, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "UCVS-ZCV4",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "98479dd8-c6e6-49bf-8fb2-a4b210208f28",
+   "slug": "4-dormitorios-3-planta-ala-nueva-98479dd8-c6e6-49bf-8fb2-a4b210208f28",
+   "title": "4 dormitorios, 3.ª planta, ala nueva",
+   "description": "<p>Una vivienda de 121 m² con 4 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 10 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 121 m² con 4 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 10 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 585000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 121,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+     "alt": "4 dormitorios, 3.ª planta, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+     "alt": "4 dormitorios, 3.ª planta, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+     "alt": "4 dormitorios, 3.ª planta, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+     "alt": "4 dormitorios, 3.ª planta, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "2XFU-BU62",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "12d6b92d-58c0-458c-bb30-1392cf76cb57",
+   "slug": "1-dormitorio-4-planta-ala-nueva-12d6b92d-58c0-458c-bb30-1392cf76cb57",
+   "title": "1 dormitorio, 4.ª planta, ala nueva",
+   "description": "<p>Una vivienda de 56 m² con 1 dormitorio en la cuarta planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.</p>",
+   "description_text": "Una vivienda de 56 m² con 1 dormitorio en la cuarta planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 268000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 56,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+     "alt": "1 dormitorio, 4.ª planta, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+     "alt": "1 dormitorio, 4.ª planta, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+     "alt": "1 dormitorio, 4.ª planta, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "1 dormitorio, 4.ª planta, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "Z644-JASN",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "93229384-d58d-4f56-afc1-ac948f5b87e3",
+   "slug": "atico-con-terraza-2-dormitorios-ala-nueva-93229384-d58d-4f56-afc1-ac948f5b87e3",
+   "title": "Ático con terraza, 2 dormitorios, ala nueva",
+   "description": "<p>Un ático del ala nueva con 2 dormitorios, 72 m² interiores y una terraza de 45 m² sobre los tejados de Russafa.</p><p>Dos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.</p>",
+   "description_text": "Un ático del ala nueva con 2 dormitorios, 72 m² interiores y una terraza de 45 m² sobre los tejados de Russafa.\n\nDos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 535000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 72,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "Ático con terraza, 2 dormitorios, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "A38D-3UT4",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  },
+  {
+   "id": "772ea5fb-863c-4891-8c59-258c90374e45",
+   "slug": "atico-duplex-con-terraza-3-dormitorios-ala-nueva-772ea5fb-863c-4891-8c59-258c90374e45",
+   "title": "Ático dúplex con terraza, 3 dormitorios, ala nueva",
+   "description": "<p>Un ático del ala nueva con 3 dormitorios, 112 m² interiores y una terraza de 60 m² sobre los tejados de Russafa.</p><p>Dos baños completos. Los dormitorios están en la planta de abajo y el salón arriba, con salida directa a la terraza. Trastero y plaza de aparcamiento opcional en un garaje cercano.</p>",
+   "description_text": "Un ático del ala nueva con 3 dormitorios, 112 m² interiores y una terraza de 60 m² sobre los tejados de Russafa.\n\nDos baños completos. Los dormitorios están en la planta de abajo y el salón arriba, con salida directa a la terraza. Trastero y plaza de aparcamiento opcional en un garaje cercano.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 745000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 112,
+   "address": {
+    "street": "Carrer de Sueca 40",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+     "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+     "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+     "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "21084ba1-82d8-4822-ad20-6005af2dcfb3",
+    "first_name": "Pau",
+    "last_name": "Llorens",
+    "phone": "+34 000 000 003",
+    "email": "pau.llorens@mirall-promocions.example.com",
+    "languages": [
+     "es",
+     "en"
+    ],
+    "team_ids": [
+     "610c4dce-3ddf-4a66-95c8-0a764744a351"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853422-sq.jpg",
+     "alt": "Pau Llorens"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "55GE-24K7",
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ]
+  }
+ ],
+ "developments": [
+  {
+   "id": "8a70316e-1d57-4953-b308-82d0bf03c044",
+   "slug": "casa-de-les-rajoles",
+   "title": "Casa de les Rajoles",
+   "description": "<p>Veintiocho viviendas en la calle Sueca, en pleno Russafa: un edificio de 1908 rehabilitado y un ala nueva en el patio de manzana.</p><p>En el edificio antiguo se conservan la fachada con sus balcones de forja, los techos altos y los suelos hidráulicos originales, que se restauran pieza a pieza. El ala nueva, de cinco plantas, tiene viviendas más luminosas hacia el interior de la manzana. Del estudio al piso de cuatro dormitorios, con áticos con terraza en las dos alas. Ascensor, trasteros y aerotermia en todas las viviendas.</p><p>A cinco minutos a pie del Mercado de Russafa y a diez del jardín del Turia. Obras en curso, entrega prevista en septiembre de 2027.</p>",
+   "description_text": "Veintiocho viviendas en la calle Sueca, en pleno Russafa: un edificio de 1908 rehabilitado y un ala nueva en el patio de manzana.\n\nEn el edificio antiguo se conservan la fachada con sus balcones de forja, los techos altos y los suelos hidráulicos originales, que se restauran pieza a pieza. El ala nueva, de cinco plantas, tiene viviendas más luminosas hacia el interior de la manzana. Del estudio al piso de cuatro dormitorios, con áticos con terraza en las dos alas. Ascensor, trasteros y aerotermia en todas las viviendas.\n\nA cinco minutos a pie del Mercado de Russafa y a diez del jardín del Turia. Obras en curso, entrega prevista en septiembre de 2027.",
+   "status": "construction",
+   "delivery_date": "2027-09-30",
+   "address": {
+    "street": "Carrer de Sueca 38",
+    "postcode": "46006",
+    "city": "València",
+    "country": "Spain",
+    "lat": 39.46,
+    "lng": -0.374
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-17627991.jpg",
+     "alt": "Casa de les Rajoles"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "Casa de les Rajoles, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "Casa de les Rajoles, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+     "alt": "Casa de les Rajoles, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "Casa de les Rajoles, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+     "alt": "Casa de les Rajoles, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+     "alt": "Casa de les Rajoles, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+     "alt": "Casa de les Rajoles, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+     "alt": "Casa de les Rajoles, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+     "alt": "Casa de les Rajoles, photo 10"
+    }
+   ],
+   "stats": {
+    "units": 28,
+    "available": 18,
+    "reserved": 6,
+    "sold": 4,
+    "price": {
+     "min": 189000,
+     "max": 745000
+    },
+    "rooms": {
+     "min": 1,
+     "max": 5
+    },
+    "living_surface": {
+     "min": 38,
+     "max": 134
+    }
+   },
+   "currency": "EUR",
+   "agents": [
+    {
+     "id": "4c45224f-6f8f-46ea-ac1a-624197a38029",
+     "first_name": "Marta",
+     "last_name": "Ferrer",
+     "phone": "+34 000 000 002",
+     "email": "marta.ferrer@mirall-promocions.example.com",
+     "languages": [
+      "es",
+      "en"
+     ],
+     "team_ids": [
+      "610c4dce-3ddf-4a66-95c8-0a764744a351"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853403-sq.jpg",
+      "alt": "Marta Ferrer"
+     }
+    }
+   ],
+   "team_ids": [
+    "610c4dce-3ddf-4a66-95c8-0a764744a351"
+   ],
+   "units": [
+    {
+     "id": "d5f6ed19-d806-4e85-92b1-32a3c985ce1f",
+     "name": "Estudio, planta baja con patio",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_studio",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 38,
+     "balcony_surface": 14,
+     "floor": 0,
+     "floor_label": "Planta baja",
+     "price": 189000,
+     "currency": "EUR",
+     "description": "<p>Un estudio de 38 m² en la planta baja del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.</p><p>Sale a un patio privado de 14 m² con una higuera que se mantiene. Cocina integrada, aerotermia y trastero.</p>",
+     "description_text": "Un estudio de 38 m² en la planta baja del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.\n\nSale a un patio privado de 14 m² con una higuera que se mantiene. Cocina integrada, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+       "alt": "Estudio, planta baja con patio"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+       "alt": "Estudio, planta baja con patio, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+       "alt": "Estudio, planta baja con patio, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+       "alt": "Estudio, planta baja con patio, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+       "alt": "Estudio, planta baja con patio, photo 5"
+      }
+     ],
+     "listing_slug": "estudio-planta-baja-con-patio-12443161-3961-4f00-b876-9577e6afd71a",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "45e41ef7-92a9-42a3-99f2-cc36f021b610",
+     "name": "1 dormitorio, 1.ª planta, interior",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 52,
+     "floor": 1,
+     "floor_label": "Planta 1",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "c55ecec5-afa5-4289-9ae4-aa73e43944d4",
+     "name": "2 dormitorios, 1.ª planta, fachada",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 78,
+     "balcony_surface": 4,
+     "floor": 1,
+     "floor_label": "Planta 1",
+     "price": 365000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 78 m² con 2 dormitorios en la primera planta del edificio de 1908, orientada a la calle Sueca.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, balcón de 4 m², aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 78 m² con 2 dormitorios en la primera planta del edificio de 1908, orientada a la calle Sueca.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, balcón de 4 m², aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+       "alt": "2 dormitorios, 1.ª planta, fachada"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+       "alt": "2 dormitorios, 1.ª planta, fachada, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+       "alt": "2 dormitorios, 1.ª planta, fachada, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+       "alt": "2 dormitorios, 1.ª planta, fachada, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+       "alt": "2 dormitorios, 1.ª planta, fachada, photo 5"
+      }
+     ],
+     "listing_slug": "2-dormitorios-1-planta-fachada-98e8eeba-ada6-4483-ac98-e0a4577c338a",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "66b8fa46-1231-4a70-bedf-f4ae5e2c70d8",
+     "name": "3 dormitorios, 1.ª planta, esquina",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 104,
+     "balcony_surface": 6,
+     "floor": 1,
+     "floor_label": "Planta 1",
+     "price": 489000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "be24a697-5dd7-4446-865f-13bb1e51414c",
+     "name": "Estudio, 2.ª planta",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_studio",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 41,
+     "balcony_surface": 3,
+     "floor": 2,
+     "floor_label": "Planta 2",
+     "price": 205000,
+     "currency": "EUR",
+     "description": "<p>Un estudio de 41 m² en la segunda planta del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.</p><p>Tiene un balcón de forja a la calle Sueca y altillo de almacenaje sobre el baño. Cocina integrada, aerotermia y trastero.</p>",
+     "description_text": "Un estudio de 41 m² en la segunda planta del edificio de 1908, con el techo a 3,4 metros y suelo hidráulico restaurado.\n\nTiene un balcón de forja a la calle Sueca y altillo de almacenaje sobre el baño. Cocina integrada, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+       "alt": "Estudio, 2.ª planta"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+       "alt": "Estudio, 2.ª planta, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+       "alt": "Estudio, 2.ª planta, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+       "alt": "Estudio, 2.ª planta, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+       "alt": "Estudio, 2.ª planta, photo 5"
+      }
+     ],
+     "listing_slug": "estudio-2-planta-c8bd86e4-ec94-4843-b532-9693c78fce25",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "c54c9b9d-e0e2-420d-836e-e351860fe474",
+     "name": "2 dormitorios, 2.ª planta, fachada",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 79,
+     "balcony_surface": 4,
+     "floor": 2,
+     "floor_label": "Planta 2",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "64bf36b4-4c64-4396-a88b-57fb9bd2bf23",
+     "name": "3 dormitorios, 2.ª planta, esquina",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 105,
+     "balcony_surface": 6,
+     "floor": 2,
+     "floor_label": "Planta 2",
+     "price": 498000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 105 m² con 3 dormitorios en la segunda planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 105 m² con 3 dormitorios en la segunda planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851862.jpg",
+       "alt": "3 dormitorios, 2.ª planta, esquina"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+       "alt": "3 dormitorios, 2.ª planta, esquina, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+       "alt": "3 dormitorios, 2.ª planta, esquina, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+       "alt": "3 dormitorios, 2.ª planta, esquina, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+       "alt": "3 dormitorios, 2.ª planta, esquina, photo 5"
+      }
+     ],
+     "listing_slug": "3-dormitorios-2-planta-esquina-f503b5fd-354c-4c35-a123-a039c3014d02",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "aff76e21-0149-4f8e-9262-a8ed96a2a993",
+     "name": "1 dormitorio, 3.ª planta, interior",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 53,
+     "floor": 3,
+     "floor_label": "Planta 3",
+     "price": 249000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 53 m² con 1 dormitorio en la tercera planta del edificio de 1908, orientada al patio de manzana, más tranquila.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 53 m² con 1 dormitorio en la tercera planta del edificio de 1908, orientada al patio de manzana, más tranquila.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 1 baño, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851864.jpg",
+       "alt": "1 dormitorio, 3.ª planta, interior"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+       "alt": "1 dormitorio, 3.ª planta, interior, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+       "alt": "1 dormitorio, 3.ª planta, interior, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+       "alt": "1 dormitorio, 3.ª planta, interior, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+       "alt": "1 dormitorio, 3.ª planta, interior, photo 5"
+      }
+     ],
+     "listing_slug": "1-dormitorio-3-planta-interior-7c849bfc-a8f5-4fa7-bf0a-1f3569f5bffc",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "629b24b6-ada0-4fcd-8898-78c8431e51bd",
+     "name": "2 dormitorios, 3.ª planta, fachada",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 80,
+     "balcony_surface": 4,
+     "floor": 3,
+     "floor_label": "Planta 3",
+     "price": 385000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "9ba6bec2-38c3-4650-abcb-a87866441572",
+     "name": "4 dormitorios, 3.ª planta, esquina",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 132,
+     "balcony_surface": 6,
+     "floor": 3,
+     "floor_label": "Planta 3",
+     "price": 629000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 132 m² con 4 dormitorios en la tercera planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 132 m² con 4 dormitorios en la tercera planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851901.jpg",
+       "alt": "4 dormitorios, 3.ª planta, esquina"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+       "alt": "4 dormitorios, 3.ª planta, esquina, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+       "alt": "4 dormitorios, 3.ª planta, esquina, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+       "alt": "4 dormitorios, 3.ª planta, esquina, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+       "alt": "4 dormitorios, 3.ª planta, esquina, photo 5"
+      }
+     ],
+     "listing_slug": "4-dormitorios-3-planta-esquina-8427da08-251b-4792-9ab6-6663977b0da8",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "74096b13-1fbe-47b7-af70-fdfe65a88d1b",
+     "name": "Estudio, 4.ª planta",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment_studio",
+     "rooms": 1,
+     "bedrooms": 0,
+     "bathrooms": 1,
+     "living_surface": 40,
+     "balcony_surface": 3,
+     "floor": 4,
+     "floor_label": "Planta 4",
+     "price": 209000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "892ed2a5-b60c-452c-918e-12dd35da8250",
+     "name": "2 dormitorios, 4.ª planta, fachada",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 80,
+     "balcony_surface": 4,
+     "floor": 4,
+     "floor_label": "Planta 4",
+     "price": 392000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 80 m² con 2 dormitorios en la cuarta planta del edificio de 1908, orientada a la calle Sueca.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 80 m² con 2 dormitorios en la cuarta planta del edificio de 1908, orientada a la calle Sueca.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+       "alt": "2 dormitorios, 4.ª planta, fachada"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+       "alt": "2 dormitorios, 4.ª planta, fachada, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+       "alt": "2 dormitorios, 4.ª planta, fachada, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+       "alt": "2 dormitorios, 4.ª planta, fachada, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+       "alt": "2 dormitorios, 4.ª planta, fachada, photo 5"
+      }
+     ],
+     "listing_slug": "2-dormitorios-4-planta-fachada-a2fa2701-acbc-4224-8487-1b59dad15b78",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "89a899ab-9476-4278-965b-277d81d9ce41",
+     "name": "3 dormitorios, 4.ª planta, esquina",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 106,
+     "balcony_surface": 6,
+     "floor": 4,
+     "floor_label": "Planta 4",
+     "price": 515000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 106 m² con 3 dormitorios en la cuarta planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 106 m² con 3 dormitorios en la cuarta planta del edificio de 1908, orientada en la esquina, con ventanas a dos calles.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 6 m², aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851908.jpg",
+       "alt": "3 dormitorios, 4.ª planta, esquina"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+       "alt": "3 dormitorios, 4.ª planta, esquina, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+       "alt": "3 dormitorios, 4.ª planta, esquina, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+       "alt": "3 dormitorios, 4.ª planta, esquina, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7047485.jpg",
+       "alt": "3 dormitorios, 4.ª planta, esquina, photo 5"
+      }
+     ],
+     "listing_slug": "3-dormitorios-4-planta-esquina-be819251-c884-4238-913f-12fb5652dbd5",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "09a47599-86fe-4515-98e0-9817e1795cf5",
+     "name": "1 dormitorio, 5.ª planta, interior",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 54,
+     "floor": 5,
+     "floor_label": "Planta 5",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "ad4b1efd-def3-4467-a07c-691c7b3f8071",
+     "name": "2 dormitorios, 5.ª planta, fachada",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 81,
+     "balcony_surface": 4,
+     "floor": 5,
+     "floor_label": "Planta 5",
+     "price": 399000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 81 m² con 2 dormitorios en la quinta planta del edificio de 1908, orientada a la calle Sueca.</p><p>Techos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 81 m² con 2 dormitorios en la quinta planta del edificio de 1908, orientada a la calle Sueca.\n\nTechos de más de tres metros, puertas de doble hoja y suelo hidráulico original recuperado en el pasillo y la cocina. 2 baños, balcón de 4 m², aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851913.jpg",
+       "alt": "2 dormitorios, 5.ª planta, fachada"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+       "alt": "2 dormitorios, 5.ª planta, fachada, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+       "alt": "2 dormitorios, 5.ª planta, fachada, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+       "alt": "2 dormitorios, 5.ª planta, fachada, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505437.jpg",
+       "alt": "2 dormitorios, 5.ª planta, fachada, photo 5"
+      }
+     ],
+     "listing_slug": "2-dormitorios-5-planta-fachada-01d78556-9127-45b3-80e7-57f9099e2dda",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "aed37e6f-64e3-49d4-bad5-b2fdd6ff2ffa",
+     "name": "4 dormitorios, 5.ª planta, esquina",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 3,
+     "living_surface": 134,
+     "balcony_surface": 6,
+     "floor": 5,
+     "floor_label": "Planta 5",
+     "price": 659000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "a007b38c-71c8-4b0a-a475-d4d316d5b71f",
+     "name": "Ático con terraza, 2 dormitorios",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_penthouse",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 76,
+     "balcony_surface": 38,
+     "floor": 6,
+     "floor_label": "Planta 6",
+     "price": 549000,
+     "currency": "EUR",
+     "description": "<p>Un ático del edificio de 1908 con 2 dormitorios, 76 m² interiores y una terraza de 38 m² sobre los tejados de Russafa.</p><p>Dos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.</p>",
+     "description_text": "Un ático del edificio de 1908 con 2 dormitorios, 76 m² interiores y una terraza de 38 m² sobre los tejados de Russafa.\n\nDos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+       "alt": "Ático con terraza, 2 dormitorios"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, photo 4"
+      }
+     ],
+     "listing_slug": "atico-con-terraza-2-dormitorios-3350475a-682c-4cd0-9f08-e8706803ec6b",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "7a2578ac-30b6-4c2c-831c-f372ec5d68a8",
+     "name": "Ático con terraza, 3 dormitorios",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment_penthouse",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 98,
+     "balcony_surface": 52,
+     "floor": 6,
+     "floor_label": "Planta 6",
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "3e57d7d5-8ff8-4dfd-9a98-714933afc8ec",
+     "name": "2 dormitorios, 1.ª planta, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 74,
+     "balcony_surface": 7,
+     "floor": 1,
+     "floor_label": "Planta 1",
+     "price": 345000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 74 m² con 2 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 74 m² con 2 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+       "alt": "2 dormitorios, 1.ª planta, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+       "alt": "2 dormitorios, 1.ª planta, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+       "alt": "2 dormitorios, 1.ª planta, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+       "alt": "2 dormitorios, 1.ª planta, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "2-dormitorios-1-planta-ala-nueva-0e04ef59-59a9-4768-9cc4-2f410a1aff96",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "3146b2d0-4134-4344-92dd-b46659f7395c",
+     "name": "3 dormitorios, 1.ª planta, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 96,
+     "balcony_surface": 9,
+     "floor": 1,
+     "floor_label": "Planta 1",
+     "price": 445000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 96 m² con 3 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 9 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 96 m² con 3 dormitorios en la primera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 9 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+       "alt": "3 dormitorios, 1.ª planta, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+       "alt": "3 dormitorios, 1.ª planta, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+       "alt": "3 dormitorios, 1.ª planta, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+       "alt": "3 dormitorios, 1.ª planta, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "3-dormitorios-1-planta-ala-nueva-26aa55e4-be7c-4301-ae62-201224e07347",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "d97802d3-1222-4ae8-b51f-c69599560645",
+     "name": "1 dormitorio, 2.ª planta, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 55,
+     "balcony_surface": 6,
+     "floor": 2,
+     "floor_label": "Planta 2",
+     "price": 255000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 55 m² con 1 dormitorio en la segunda planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 55 m² con 1 dormitorio en la segunda planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+       "alt": "1 dormitorio, 2.ª planta, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+       "alt": "1 dormitorio, 2.ª planta, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+       "alt": "1 dormitorio, 2.ª planta, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+       "alt": "1 dormitorio, 2.ª planta, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "1-dormitorio-2-planta-ala-nueva-e000b8d3-dba7-439d-9871-7644158ae212",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "627d6242-6ed2-4b83-8c7c-3d4b2fdf2e9f",
+     "name": "3 dormitorios, 2.ª planta, ala nueva",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 97,
+     "balcony_surface": 9,
+     "floor": 2,
+     "floor_label": "Planta 2",
+     "price": 455000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "502fed2e-5390-4160-adf3-5dafb85ac73b",
+     "name": "2 dormitorios, 3.ª planta, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 75,
+     "balcony_surface": 7,
+     "floor": 3,
+     "floor_label": "Planta 3",
+     "price": 362000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 75 m² con 2 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 75 m² con 2 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 7 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+       "alt": "2 dormitorios, 3.ª planta, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+       "alt": "2 dormitorios, 3.ª planta, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+       "alt": "2 dormitorios, 3.ª planta, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+       "alt": "2 dormitorios, 3.ª planta, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "2-dormitorios-3-planta-ala-nueva-d8e00b1a-a71d-4487-9da3-b00c3e5a7152",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "f13b529b-433b-4bf7-88df-a468e5fe5425",
+     "name": "4 dormitorios, 3.ª planta, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 121,
+     "balcony_surface": 10,
+     "floor": 3,
+     "floor_label": "Planta 3",
+     "price": 585000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 121 m² con 4 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 10 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 121 m² con 4 dormitorios en la tercera planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 10 m² y suelos de roble. 2 baños, cocina abierta al salón, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852050.jpg",
+       "alt": "4 dormitorios, 3.ª planta, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+       "alt": "4 dormitorios, 3.ª planta, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+       "alt": "4 dormitorios, 3.ª planta, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+       "alt": "4 dormitorios, 3.ª planta, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "4-dormitorios-3-planta-ala-nueva-98479dd8-c6e6-49bf-8fb2-a4b210208f28",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "1ad49396-46c9-4747-9687-b727c3819634",
+     "name": "1 dormitorio, 4.ª planta, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 56,
+     "balcony_surface": 6,
+     "floor": 4,
+     "floor_label": "Planta 4",
+     "price": 268000,
+     "currency": "EUR",
+     "description": "<p>Una vivienda de 56 m² con 1 dormitorio en la cuarta planta del ala nueva, abierta al patio de manzana.</p><p>Ventanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.</p>",
+     "description_text": "Una vivienda de 56 m² con 1 dormitorio en la cuarta planta del ala nueva, abierta al patio de manzana.\n\nVentanales de suelo a techo, terraza de 6 m² y suelos de roble. 1 baño, cocina abierta al salón, aerotermia y trastero.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852051.jpg",
+       "alt": "1 dormitorio, 4.ª planta, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+       "alt": "1 dormitorio, 4.ª planta, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+       "alt": "1 dormitorio, 4.ª planta, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+       "alt": "1 dormitorio, 4.ª planta, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "1-dormitorio-4-planta-ala-nueva-12d6b92d-58c0-458c-bb30-1392cf76cb57",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0c1f059c-8e95-45b4-baad-8a5950b6f97a",
+     "name": "3 dormitorios, 4.ª planta, ala nueva",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 98,
+     "balcony_surface": 9,
+     "floor": 4,
+     "floor_label": "Planta 4",
+     "price": 475000,
+     "currency": "EUR",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "16ebaed0-161f-45fe-9dcf-189f4f373cee",
+     "name": "Ático con terraza, 2 dormitorios, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_penthouse",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 72,
+     "balcony_surface": 45,
+     "floor": 5,
+     "floor_label": "Planta 5",
+     "price": 535000,
+     "currency": "EUR",
+     "description": "<p>Un ático del ala nueva con 2 dormitorios, 72 m² interiores y una terraza de 45 m² sobre los tejados de Russafa.</p><p>Dos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.</p>",
+     "description_text": "Un ático del ala nueva con 2 dormitorios, 72 m² interiores y una terraza de 45 m² sobre los tejados de Russafa.\n\nDos baños completos. Salón y cocina abiertos a la terraza, con toldo y toma de agua. Trastero y plaza de aparcamiento opcional en un garaje cercano.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852035.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+       "alt": "Ático con terraza, 2 dormitorios, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "atico-con-terraza-2-dormitorios-ala-nueva-93229384-d58d-4f56-afc1-ac948f5b87e3",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "7ffc3b9e-fc39-4fcb-ae2f-7dc411c73116",
+     "name": "Ático dúplex con terraza, 3 dormitorios, ala nueva",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_penthouse",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 112,
+     "balcony_surface": 60,
+     "floor": 5,
+     "floor_label": "Planta 5",
+     "price": 745000,
+     "currency": "EUR",
+     "description": "<p>Un ático del ala nueva con 3 dormitorios, 112 m² interiores y una terraza de 60 m² sobre los tejados de Russafa.</p><p>Dos baños completos. Los dormitorios están en la planta de abajo y el salón arriba, con salida directa a la terraza. Trastero y plaza de aparcamiento opcional en un garaje cercano.</p>",
+     "description_text": "Un ático del ala nueva con 3 dormitorios, 112 m² interiores y una terraza de 60 m² sobre los tejados de Russafa.\n\nDos baños completos. Los dormitorios están en la planta de abajo y el salón arriba, con salida directa a la terraza. Trastero y plaza de aparcamiento opcional en un garaje cercano.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9584741.jpg",
+       "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852025.jpg",
+       "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852048.jpg",
+       "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7852047.jpg",
+       "alt": "Ático dúplex con terraza, 3 dormitorios, ala nueva, photo 4"
+      }
+     ],
+     "listing_slug": "atico-duplex-con-terraza-3-dormitorios-ala-nueva-772ea5fb-863c-4891-8c59-258c90374e45",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  }
+ ],
+ "fixture_only": {
+  "listings": {
+   "12443161-3961-4f00-b876-9577e6afd71a": {
+    "energy_class": "C",
+    "year_built": 1908,
+    "floor": 0,
+    "terrace_surface": 14
+   },
+   "98e8eeba-ada6-4483-ac98-e0a4577c338a": {
+    "energy_class": "A",
+    "year_built": 1908,
+    "floor": 1,
+    "balcony_surface": 4
+   },
+   "c8bd86e4-ec94-4843-b532-9693c78fce25": {
+    "energy_class": "B",
+    "year_built": 1908,
+    "floor": 2,
+    "balcony_surface": 3
+   },
+   "f503b5fd-354c-4c35-a123-a039c3014d02": {
+    "energy_class": "B",
+    "year_built": 1908,
+    "floor": 2,
+    "balcony_surface": 6
+   },
+   "7c849bfc-a8f5-4fa7-bf0a-1f3569f5bffc": {
+    "energy_class": "A",
+    "year_built": 1908,
+    "floor": 3
+   },
+   "8427da08-251b-4792-9ab6-6663977b0da8": {
+    "energy_class": "E",
+    "year_built": 1908,
+    "floor": 3,
+    "balcony_surface": 6
+   },
+   "a2fa2701-acbc-4224-8487-1b59dad15b78": {
+    "energy_class": "A",
+    "year_built": 1908,
+    "floor": 4,
+    "balcony_surface": 4
+   },
+   "be819251-c884-4238-913f-12fb5652dbd5": {
+    "energy_class": "D",
+    "year_built": 1908,
+    "floor": 4,
+    "balcony_surface": 6
+   },
+   "01d78556-9127-45b3-80e7-57f9099e2dda": {
+    "energy_class": "C",
+    "year_built": 1908,
+    "floor": 5,
+    "balcony_surface": 4
+   },
+   "3350475a-682c-4cd0-9f08-e8706803ec6b": {
+    "energy_class": "C",
+    "year_built": 1908,
+    "floor": 6,
+    "terrace_surface": 38
+   },
+   "0e04ef59-59a9-4768-9cc4-2f410a1aff96": {
+    "energy_class": "D",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 7
+   },
+   "26aa55e4-be7c-4301-ae62-201224e07347": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 9
+   },
+   "e000b8d3-dba7-439d-9871-7644158ae212": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 6
+   },
+   "d8e00b1a-a71d-4487-9da3-b00c3e5a7152": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 7
+   },
+   "98479dd8-c6e6-49bf-8fb2-a4b210208f28": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 10
+   },
+   "12d6b92d-58c0-458c-bb30-1392cf76cb57": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 4,
+    "balcony_surface": 6
+   },
+   "93229384-d58d-4f56-afc1-ac948f5b87e3": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 5,
+    "terrace_surface": 45
+   },
+   "772ea5fb-863c-4891-8c59-258c90374e45": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 5,
+    "terrace_surface": 60
+   }
+  },
+  "units": {
+   "d5f6ed19-d806-4e85-92b1-32a3c985ce1f": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "terrace_surface": 14
+   },
+   "45e41ef7-92a9-42a3-99f2-cc36f021b610": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW"
+   },
+   "c55ecec5-afa5-4289-9ae4-aa73e43944d4": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W"
+   },
+   "66b8fa46-1231-4a70-bedf-f4ae5e2c70d8": {
+    "unit_number": "1.3",
+    "position": 3,
+    "orientation": "SE"
+   },
+   "be24a697-5dd7-4446-865f-13bb1e51414c": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W"
+   },
+   "c54c9b9d-e0e2-420d-836e-e351860fe474": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE"
+   },
+   "64bf36b4-4c64-4396-a88b-57fb9bd2bf23": {
+    "unit_number": "2.3",
+    "position": 3,
+    "orientation": "E"
+   },
+   "aff76e21-0149-4f8e-9262-a8ed96a2a993": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE"
+   },
+   "629b24b6-ada0-4fcd-8898-78c8431e51bd": {
+    "unit_number": "3.2",
+    "position": 2,
+    "orientation": "E"
+   },
+   "9ba6bec2-38c3-4650-abcb-a87866441572": {
+    "unit_number": "3.3",
+    "position": 3,
+    "orientation": "NW"
+   },
+   "74096b13-1fbe-47b7-af70-fdfe65a88d1b": {
+    "unit_number": "4.1",
+    "position": 1,
+    "orientation": "E"
+   },
+   "892ed2a5-b60c-452c-918e-12dd35da8250": {
+    "unit_number": "4.2",
+    "position": 2,
+    "orientation": "NW"
+   },
+   "89a899ab-9476-4278-965b-277d81d9ce41": {
+    "unit_number": "4.3",
+    "position": 3,
+    "orientation": "S"
+   },
+   "09a47599-86fe-4515-98e0-9817e1795cf5": {
+    "unit_number": "5.1",
+    "position": 1,
+    "orientation": "NW"
+   },
+   "ad4b1efd-def3-4467-a07c-691c7b3f8071": {
+    "unit_number": "5.2",
+    "position": 2,
+    "orientation": "S"
+   },
+   "aed37e6f-64e3-49d4-bad5-b2fdd6ff2ffa": {
+    "unit_number": "5.3",
+    "position": 3,
+    "orientation": "SW"
+   },
+   "a007b38c-71c8-4b0a-a475-d4d316d5b71f": {
+    "unit_number": "6.1",
+    "position": 1,
+    "orientation": "S",
+    "terrace_surface": 38
+   },
+   "7a2578ac-30b6-4c2c-831c-f372ec5d68a8": {
+    "unit_number": "6.2",
+    "position": 2,
+    "orientation": "SW",
+    "terrace_surface": 52
+   },
+   "3e57d7d5-8ff8-4dfd-9a98-714933afc8ec": {
+    "unit_number": "1.4",
+    "position": 4,
+    "orientation": "E"
+   },
+   "3146b2d0-4134-4344-92dd-b46659f7395c": {
+    "unit_number": "1.5",
+    "position": 5,
+    "orientation": "NW"
+   },
+   "d97802d3-1222-4ae8-b51f-c69599560645": {
+    "unit_number": "2.4",
+    "position": 4,
+    "orientation": "NW"
+   },
+   "627d6242-6ed2-4b83-8c7c-3d4b2fdf2e9f": {
+    "unit_number": "2.5",
+    "position": 5,
+    "orientation": "S"
+   },
+   "502fed2e-5390-4160-adf3-5dafb85ac73b": {
+    "unit_number": "3.4",
+    "position": 4,
+    "orientation": "S"
+   },
+   "f13b529b-433b-4bf7-88df-a468e5fe5425": {
+    "unit_number": "3.5",
+    "position": 5,
+    "orientation": "SW"
+   },
+   "1ad49396-46c9-4747-9687-b727c3819634": {
+    "unit_number": "4.4",
+    "position": 4,
+    "orientation": "SW"
+   },
+   "0c1f059c-8e95-45b4-baad-8a5950b6f97a": {
+    "unit_number": "4.5",
+    "position": 5,
+    "orientation": "W"
+   },
+   "16ebaed0-161f-45fe-9dcf-189f4f373cee": {
+    "unit_number": "5.4",
+    "position": 4,
+    "orientation": "W",
+    "terrace_surface": 45
+   },
+   "7ffc3b9e-fc39-4fcb-ae2f-7dc411c73116": {
+    "unit_number": "5.5",
+    "position": 5,
+    "orientation": "SE",
+    "terrace_surface": 60
+   }
+  },
+  "developments": {
+   "8a70316e-1d57-4953-b308-82d0bf03c044": {
+    "developer": "Mirall Promocions SL",
+    "architect": "Taller Turia Arquitectura",
+    "general_contractor": "Construccions Albufera SL",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": [
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38326993.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27134625.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-15798782.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36035073.jpg"
+    ]
+   }
+  }
+ }
+}

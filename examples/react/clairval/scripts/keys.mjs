@@ -1,0 +1,51 @@
+// Keyboard checks: skip link, focus ring, phone menu (popover: open, Escape, focus back), gallery dialog (open at photo, Escape, focus back).
+import { chromium } from 'playwright';
+const base = process.argv[2] ?? 'http://127.0.0.1:4521';
+const browser = await chromium.launch();
+const ok = (c, m) => console.log(`${c ? 'PASS' : 'FAIL'} ${m}`);
+
+const desk = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+await desk.goto(base + '/');
+await desk.keyboard.press('Tab');
+ok(await desk.evaluate(() => document.activeElement?.classList.contains('skip')), 'first Tab lands on skip link');
+await desk.keyboard.press('Enter');
+ok(await desk.evaluate(() => location.hash === '#main'), 'skip link goes to #main');
+await desk.keyboard.press('Tab');
+const outline = await desk.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
+ok(outline !== 'none', `focus ring visible (${outline})`);
+
+const sitemap = await fetch(`${base}/sitemap.xml`).then((r) => r.text());
+const listing = new URL(sitemap.match(/<loc>([^<]*\/property\/[^<]+)<\/loc>/)[1]).pathname;
+await desk.goto(base + listing);
+await desk.focus('.gal__tile[data-open="2"]');
+await desk.keyboard.press('Enter');
+await desk.waitForTimeout(300);
+ok(await desk.evaluate(() => document.querySelector('[data-dialog]').open), 'Enter on a gallery tile opens the photo dialog');
+ok(await desk.evaluate(() => { const r = document.querySelector('[data-photo="2"]').getBoundingClientRect(); return r.top > -4 && r.top < 200; }), 'dialog scrolled to the clicked photo');
+ok(await desk.evaluate(() => getComputedStyle(document.documentElement).overflow === 'hidden'), 'page scroll locked while open');
+await desk.keyboard.press('Escape');
+await desk.waitForTimeout(200);
+ok(await desk.evaluate(() => !document.querySelector('[data-dialog]').open && document.activeElement?.dataset.open === '2'), 'Escape closes the dialog, focus back on the tile');
+await desk.focus('.gal__all');
+await desk.keyboard.press('Enter');
+await desk.waitForTimeout(200);
+ok(await desk.evaluate(() => document.activeElement?.classList.contains('gal__close')), 'focus starts on Close inside the dialog');
+await desk.keyboard.press('Escape');
+
+const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+await phone.goto(base + '/');
+await phone.focus('.hd__burger');
+await phone.keyboard.press('Enter');
+await phone.waitForTimeout(200);
+ok(await phone.evaluate(() => document.querySelector('#menu').matches(':popover-open') && document.querySelector('.hd__burger').getAttribute('aria-expanded') === 'true'), 'menu opens with Enter (aria-expanded true)');
+await phone.keyboard.press('Tab');
+ok(await phone.evaluate(() => document.activeElement?.closest('#menu') != null), 'Tab moves focus into the menu');
+await phone.keyboard.press('Escape');
+await phone.waitForTimeout(200);
+ok(await phone.evaluate(() => !document.querySelector('#menu').matches(':popover-open') && document.activeElement?.classList.contains('hd__burger')), 'Escape closes menu, focus back on button');
+await phone.goto(base + listing);
+ok(await phone.evaluate(() => getComputedStyle(document.querySelector('.bar')).position === 'fixed'), 'phone Message / Call bar is fixed');
+await phone.click('.bar__msg');
+await phone.waitForTimeout(300);
+ok(await phone.evaluate(() => location.hash === '#enquiry'), 'Message goes to the enquiry form');
+await browser.close();

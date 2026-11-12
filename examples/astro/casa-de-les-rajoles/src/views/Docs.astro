@@ -1,0 +1,66 @@
+---
+/** Documents: the generated PDFs (dossier, price list, plans) and every plan as SVG. */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import Icon from '../components/Icon.astro';
+import { loadSite } from '../lib/data';
+import { alternates, fill, longDate, tr, type Lang } from '../lib/i18n';
+import { DOCS, docsFor } from '../lib/docs';
+import { kindLabel, planSrc, planVariants } from '../lib/units';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = tr(lang);
+const site = await loadSite();
+const { dev } = site;
+const files = docsFor(lang);
+const kb = (b: number) => `${new Intl.NumberFormat(lang === 'es' ? 'es-ES' : 'en-GB', { maximumFractionDigits: 0 }).format(Math.max(1, Math.round(b / 1024)))} KB`;
+const variants = planVariants(dev.units);
+const vTitle = (v: (typeof variants)[number]) => (v.kind === 'atico' ? `${t.kinds.atico[0]}, ${fill(t.bedroomsN, { n: v.bedrooms })}` : kindLabel(v.kind, lang));
+---
+<Site site={site} lang={lang} route="docs" title={`${t.docsTitle} | ${dev.title}`} description={fill(t.docsLead, { d: longDate(DOCS.updated, lang) })} image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })} alternates={alternates('docs')}>
+  <section class="wrap head">
+    <h1>{t.docsTitle}</h1>
+    <p class="lede">{fill(t.docsLead, { d: longDate(DOCS.updated, lang) })}</p>
+  </section>
+  <section class="wrap">
+    <ul class="docs">
+      {files.map((d) => (
+        <li>
+          <a href={d.href} download>
+            <span class="t">{d.title}</span>
+            <span class="d">{d.description}</span>
+            <span class="m num">PDF · {d.pages === 1 ? t.pageOne : fill(t.pages, { n: d.pages })} · {kb(d.bytes)}</span>
+            <span class="go"><Icon name="download" size={20} /> {t.download}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="wrap plans" aria-labelledby="p-h">
+    <h2 id="p-h">{t.docsPlans}</h2>
+    <p class="muted">{t.docsPlansLead}</p>
+    <ul>
+      {variants.map((v) => (
+        <li><a href={planSrc(v.key, lang)}>{vTitle(v)} · {t.wings[v.wing]}</a></li>
+      ))}
+    </ul>
+  </section>
+</Site>
+<style>
+  .head { padding-block: clamp(48px, 6vw, 88px) clamp(28px, 3vw, 44px); display: grid; gap: 14px; }
+  .docs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); }
+  .docs a { display: grid; gap: 10px; height: 100%; align-content: start; padding: clamp(24px, 2.6vw, 36px); background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); text-decoration: none; color: var(--text); }
+  .docs a:hover { border-color: var(--line-strong); border-top-color: var(--accent); background: #fff; }
+  .t { font: 400 clamp(1.5rem, 1.2rem + 0.8vw, 2rem)/1.15 var(--serif); }
+  .d { color: var(--muted); }
+  .m { font-size: 0.875rem; color: var(--muted); }
+  .go { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--accent-strong); margin-top: 8px; }
+  .plans { margin-top: var(--space-section); }
+  .plans h2 { margin-bottom: 8px; }
+  .plans ul { list-style: none; margin: 24px 0 0; padding: 0; columns: 2; column-gap: 40px; border-top: 1px solid var(--line-strong); }
+  .plans li { break-inside: avoid; border-bottom: 1px solid var(--line); }
+  .plans a { display: block; padding: 13px 0; text-decoration: none; }
+  .plans a:hover { color: var(--accent-strong); text-decoration: underline; }
+  @media (max-width: 900px) { .docs { grid-template-columns: 1fr; } .plans ul { columns: 1; } }
+</style>

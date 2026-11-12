@@ -1,0 +1,13 @@
+/* From pages/team/index.astro (scoped there). */
+  .team { padding-bottom: var(--section); }
+  .team-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); }
+  .team-grid > li { padding: 40px var(--gap) 40px 0; border-bottom: 1px solid var(--line); }
+  .team-grid > li + li { padding-left: var(--gap); border-left: 1px solid var(--line); }
+  @media (max-width: 1023px) {
+    .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .team-grid > li:nth-child(odd) { padding-left: 0; border-left: 0; }
+  }
+  @media (max-width: 559px) {
+    .team-grid { grid-template-columns: minmax(0, 1fr); }
+    .team-grid > li, .team-grid > li + li { padding: 32px 0; border-left: 0; }
+  }

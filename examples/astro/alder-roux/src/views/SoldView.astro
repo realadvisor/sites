@@ -1,0 +1,37 @@
+---
+/** Sold: past sales in the same grid, "Vendu" on the photo, no prices; valuation call to action. */
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import ValuationBand from '../components/ValuationBand.astro';
+import { siteData, sites } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org }, sold] = await Promise.all([siteData(), sites.allListings({ status: 'sold' })]);
+---
+<Site l={l} route="sold" title={`${t('soldTitle')} | ${org.name}`} description={t('soldLede')}>
+  <section class="band on-navy">
+    <div class="wrap band__inner">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navSold') }]} />
+      <h1 class="h1">{t('soldTitle')}</h1>
+      <p class="lede">{t('soldLede')}</p>
+      {sold.length > 0 && <p class="count num">{t('soldByUs', { n: sold.length })}</p>}
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      {sold.length > 0
+        ? <ul class="plain-list grid grid--3">{sold.map((x, i) => <li><ListingCard listing={x} l={l} priority={i === 0} as="h2" /></li>)}</ul>
+        : <p class="lede">{t('soldCta')}</p>}
+    </div>
+  </section>
+  <ValuationBand l={l} />
+</Site>
+
+<style>
+  .count { color: var(--brass-on-navy); font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; }
+</style>

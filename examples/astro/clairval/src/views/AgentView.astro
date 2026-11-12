@@ -1,0 +1,96 @@
+---
+/** Agent page: portrait, office, languages and contacts; their listings; a form addressed to them. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import type { Agent } from '@realadvisor/sites-sdk/types';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { agentSlug, href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, languages, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L; agent: Agent }
+const { l, agent: a } = Astro.props;
+const t = tx(l);
+const [{ org, teams, agents }, all] = await Promise.all([siteData(), sites.allListings()]);
+const mine = all.filter((x) => x.agent?.id === a.id);
+const available = mine.filter((x) => x.status === 'available');
+const sold = mine.filter((x) => x.status === 'sold');
+const team = teams.find((x) => a.team_ids.includes(x.id));
+const name = `${a.first_name} ${a.last_name}`;
+const city = team ? cityName(team.address.city, l) || team.name : '';
+const C = {
+  en: { role: a.title ?? (city ? `${city} office` : ''), langs: 'Languages', props: (n: number) => `${n} ${n === 1 ? 'property' : 'properties'} with ${a.first_name}`, sold: 'Sold', write: `Write to ${a.first_name}`, office: 'Office' },
+  fr: { role: a.title ?? (city ? `Bureau de ${city}` : ''), langs: 'Langues', props: (n: number) => `${n} ${n === 1 ? 'bien' : 'biens'} avec ${a.first_name}`, sold: 'Vendus', write: `Écrire à ${a.first_name}`, office: 'Bureau' },
+}[l];
+const langs = languages(a.languages, l);
+---
+<Site l={l} route="team" segs={[agentSlug(a, agents)]} title={`${name}${C.role ? `, ${C.role}` : ''} | ${org.name}`} description={`${name}, ${org.name}. ${C.props(available.length)}.`} image={undefined}>
+  <div class="wrap top">
+    <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navTeam'), href: href('team', l) }, { label: name }]} />
+  </div>
+  <section class="wrap hero">
+    {a.photo && (
+      <div class="hero__photo">
+        <RaImage src={a.photo} alt={a.photo.alt || name} width={720} height={900} priority sizes="(min-width: 1024px) 420px, 100vw" widths={[480, 720, 960]} />
+      </div>
+    )}
+    <div class="hero__text">
+      <h1 class="h1 hero__name">{name}</h1>
+      {C.role && <p class="lede">{C.role}</p>}
+      <dl class="facts">
+        {langs && <div><dt>{C.langs}</dt><dd>{langs}</dd></div>}
+        {a.phone && <div><dt>{t('phone')}</dt><dd><a class="num" href={tel(a.phone)}>{a.phone}</a></dd></div>}
+        {a.email && <div><dt>{t('email')}</dt><dd><a href={`mailto:${a.email}`}>{a.email}</a></dd></div>}
+        {team && <div><dt>{C.office}</dt><dd><a href={href('offices', l, teamSlug(team, teams))}>{[team.address.street, team.address.city].filter(Boolean).join(', ')}</a></dd></div>}
+      </dl>
+      {a.bio && <p class="bio">{a.bio}</p>}
+    </div>
+  </section>
+  {available.length > 0 && (
+    <section class="wrap block">
+      <h2 class="h2 block__h">{C.props(available.length)}</h2>
+      <ul class="plain grid3">{available.map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+    </section>
+  )}
+  {sold.length > 0 && (
+    <section class="wrap block">
+      <h2 class="h3 block__h">{C.sold}</h2>
+      <ul class="plain grid3">{sold.map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+    </section>
+  )}
+  <section class="on-paper form">
+    <div class="wrap form__in">
+      <h2 class="h2">{C.write}</h2>
+      <EnquiryForm agentId={a.id} agentName={a.first_name} contactReason="other" locale={LOCALE[l]} />
+    </div>
+  </section>
+</Site>
+
+<style>
+  .top { padding-top: 16px; }
+  .hero { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: end; padding-block: 32px var(--section); }
+  .hero__photo { aspect-ratio: 4 / 5; overflow: hidden; background: var(--line); }
+  .hero__photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+  .hero__name { font-size: clamp(2.4rem, 1.6rem + 3vw, 4.2rem); }
+  .hero .lede { margin-top: 10px; }
+  .facts { margin-top: 36px; border-top: 1px solid var(--line); max-width: 620px; }
+  .facts div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+  .facts dt { color: var(--muted); }
+  .facts a { overflow-wrap: anywhere; }
+  .bio { margin-top: 28px; max-width: 60ch; }
+  .block { padding-bottom: var(--section); }
+  .block__h { margin-bottom: 36px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+  .form { padding-block: var(--section); border-top: 1px solid var(--line); }
+  .form__in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; }
+  @media (max-width: 1023px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .form__in { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 767px) {
+    .hero { grid-template-columns: minmax(0, 1fr); }
+    .hero__photo { max-width: 360px; }
+    .facts div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  }
+  @media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+</style>

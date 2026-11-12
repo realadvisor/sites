@@ -1,0 +1,6 @@
+/* From components/ValuationBand.astro (scoped there). */
+  .val { background: var(--tint); padding-block: clamp(72px, 9vw, 136px); text-align: center; }
+  .val-in { display: grid; justify-items: center; gap: 22px; }
+  .val-title { max-width: 18ch; }
+  .val-text { max-width: 54ch; color: var(--muted); font-size: 1.0625rem; }
+  .val-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 32px; margin-top: 8px; }

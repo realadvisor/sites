@@ -1,0 +1,10 @@
+.doc { padding-bottom: var(--section); }
+.doc .doc-body { max-width: 760px; display: grid; gap: 48px; border-top: 1px solid var(--text); padding-top: 40px; }
+.doc .doc-body h2 { font: 300 1.75rem/1.2 var(--font-display); margin-bottom: 16px; }
+.doc .doc-body dl { margin: 0; }
+.doc .doc-body dl div { display: grid; grid-template-columns: 220px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.doc .doc-body dt { color: var(--muted); }
+.doc .doc-body dd { margin: 0; overflow-wrap: anywhere; }
+.doc .doc-body a { color: var(--accent-strong); }
+.doc .doc-body p + p { margin-top: 14px; }
+@media (max-width: 640px) { .doc .doc-body dl div { grid-template-columns: 1fr; gap: 2px; } }

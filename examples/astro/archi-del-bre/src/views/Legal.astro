@@ -1,0 +1,39 @@
+---
+/** Legal notice and privacy policy: the kit's text from the organisation data, in the site frame. Never edited here. */
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { t } from '@realadvisor/sites-kit/i18n';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import { legalAgency, loadSite } from '../lib/data';
+import type { L } from '../lib/routes';
+
+interface Props { l: L; kind: 'legal' | 'privacy' }
+const { l, kind } = Astro.props;
+const site = await loadSite();
+const agency = legalAgency(site);
+const title = t(kind === 'legal' ? 'legalNotice' : 'privacyPolicy', {}, l);
+const sections = kind === 'legal' ? legalNotice(agency, l) : privacyPolicy(agency, { analytics: !!analyticsId() }, l);
+const cover = site.dev.photos[0];
+---
+<Site site={site} l={l} route={kind} title={`${title} | ${site.dev.title}`} description={`${title}, ${site.org.name}`} image={cover ? img(cover.url, { w: 1200, h: 630 }) : undefined}>
+  <div class="wrap page">
+    <h1 class="h1">{title}</h1>
+    <div class="body"><LegalContent sections={sections} /></div>
+  </div>
+</Site>
+
+<style>
+  .page { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 40px clamp(40px, 6vw, 112px); padding-block: clamp(40px, 6vw, 88px) var(--section); align-items: start; }
+  .body :global(.legal) { display: grid; gap: 44px; }
+  .body :global(h2) { font: 400 var(--step-2)/1.1 var(--serif); margin-bottom: 14px; }
+  .body :global(dl) { display: grid; margin: 0; border-top: 1px solid var(--line); }
+  .body :global(dl > div) { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .body :global(dt) { color: var(--muted); }
+  .body :global(dd) { margin: 0; overflow-wrap: anywhere; }
+  .body :global(p) { max-width: 68ch; }
+  .body :global(p + p) { margin-top: 12px; }
+  @media (max-width: 860px) { .page { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .body :global(dl > div) { grid-template-columns: 1fr; gap: 2px; } }
+</style>

@@ -1,0 +1,26 @@
+{
+  "updated": "2026-11-12",
+  "files": [
+    {
+      "href": "/documents/brochure-terrasses-du-signal.pdf",
+      "title": "Brochure",
+      "description": "Le projet, les typologies, les intervenants et l’espace de vente.",
+      "pages": 4,
+      "bytes": 721554
+    },
+    {
+      "href": "/documents/liste-de-prix-terrasses-du-signal.pdf",
+      "title": "Liste de prix",
+      "description": "Tous les lots avec surfaces, étage, prix et disponibilité.",
+      "pages": 1,
+      "bytes": 66117
+    },
+    {
+      "href": "/documents/plans-terrasses-du-signal.pdf",
+      "title": "Plans",
+      "description": "Un plan indicatif par typologie, à la même échelle.",
+      "pages": 8,
+      "bytes": 172717
+    }
+  ]
+}

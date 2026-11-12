@@ -1,0 +1,57 @@
+---
+// The listing search. Keep this structure on every agency site: one pool
+// (`allListings()`), `runSearch`, and `<ListingsSearch>` for filters, chips,
+// list / map, pagination and empty states. Design the heading, the intro and
+// the card (the slot), and theme the rest with tokens (DESIGN.md 4.4).
+// Renamed path (/proprietes): pass `base` and keep the filter params.
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { allListings, ra } from '@realadvisor/sites-kit/ra';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
+import { formatAmount, formatPrice, listingUrl, LOCALE } from '@realadvisor/sites-kit/format';
+import { img } from '@realadvisor/sites-kit/image';
+import { count, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+
+const params = parseSearch(Astro.url.searchParams);
+const [agency, pool] = await Promise.all([ra.agency(), allListings()]);
+const result = runSearch(pool, params, { locale: LOCALE });
+
+// Title, h1 and description carry every active filter: no two URLs share one.
+const parts = [
+  params.status === 'sold' ? t('soldListings') : params.offerType ? offerTypeLabel(params.offerType) : t('allListings'),
+  params.propertyType && propertyTypeLabel(params.propertyType),
+  params.city,
+  params.minRooms && t('roomsMin', { n: String(params.minRooms) }),
+  params.minPrice && t('priceMin', { price: formatAmount(params.minPrice) }),
+  params.maxPrice && t('priceMax', { price: formatAmount(params.maxPrice) }),
+].filter(Boolean);
+const heading = parts.join(' · ');
+const suffix = `${params.view === 'map' ? ` – ${t('viewMap')}` : ''}${result.page > 1 ? ` – ${t('page')} ${result.page}` : ''}`;
+const first = result.items.find((l) => l.photos[0])?.photos[0];
+---
+<Base title={`${heading}${suffix} | ${agency.name}`} description={`${count('listingsFound', result.total)} – ${heading} – ${agency.name}`}
+      image={first && img(first.url, { w: 1200, h: 630 })}>
+  <main id="main" class="listings">
+    <h1 data-rs-sync="h1">{heading}{suffix}</h1>
+    <ListingsSearch result={result} contactHref="/contact" valuationHref="/contact#valuation">
+      {(l: (typeof result.items)[number], i: number) => (
+        // Wiring example of the design's card: replace with your ListingCard.
+        <a href={listingUrl(l)}>
+          {l.photos[0]
+            ? <RaImage src={l.photos[0]} width={600} height={400} priority={i === 0} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" alt={l.photos[0].alt ?? l.title} />
+            : <span aria-hidden="true">{propertyTypeLabel(l.property_type)}</span>}
+          {l.title} · {formatPrice(l)}
+        </a>
+      )}
+    </ListingsSearch>
+  </main>
+</Base>
+
+<style>
+  /* Wiring example only. */
+  .listings { max-width: 1280px; margin: 0 auto; padding: 32px 20px 96px; }
+  .listings :global(img) { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+</style>

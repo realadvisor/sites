@@ -1,0 +1,65 @@
+.hero { background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); padding-block: clamp(40px, 7vw, 96px) clamp(24px, 3vw, 40px); }
+.hero__in { display: grid; justify-items: center; text-align: center; gap: 18px; }
+.hero__title { font-size: var(--step-4); max-width: 20ch; letter-spacing: -0.035em; }
+.hero__lede { color: var(--muted); font-size: var(--step-1); margin-bottom: 14px; }
+.hero__in .sp { text-align: left; }
+.hero__in .sp__tabs { justify-content: center; }
+.hero__quick { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 8px; align-items: center; color: var(--muted); font-size: 0.9375rem; margin-top: 6px; }
+.hero__quick span { margin-right: 4px; }
+.hero__quick a {
+  display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px;
+  text-decoration: none; color: var(--text); background: var(--bg); font-weight: 550;
+}
+.hero__quick a:hover { border-color: var(--text); }
+
+.block { margin-top: var(--section); }
+.hero + .block { margin-top: clamp(32px, 4vw, 56px); }
+.cards--4 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+@media (min-width: 1200px) { .cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* Phones: four newest, the map link gives the rest. */
+@media (max-width: 639px) { .cards--4 > li:nth-child(n + 5) { display: none; } }
+
+.cities { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.city { position: relative; display: block; border-radius: var(--radius-card); overflow: hidden; color: #fff; text-decoration: none; aspect-ratio: 3 / 2; }
+.city img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.city:hover img { transform: scale(1.03); }
+.city::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(0 0 0 / 0) 40%, rgb(0 0 0 / 0.66) 100%); }
+.city__text { position: absolute; left: 28px; right: 28px; bottom: 24px; z-index: 1; display: grid; gap: 2px; }
+.city__name { font-size: var(--step-3); font-weight: 650; letter-spacing: -0.03em; line-height: 1.05; }
+.city__n { font-size: 1rem; font-weight: 500; }
+@media (max-width: 759px) { .city { aspect-ratio: 8 / 9; } .city__text { left: 20px; bottom: 18px; } }
+
+.row {
+  list-style: none; margin: 0; padding: 4px 0 16px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 300px); gap: 20px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; overscroll-behavior-x: contain;
+}
+.row > li { scroll-snap-align: start; min-width: 0; }
+.row:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+
+.agl { list-style: none; margin: 20px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.agl__row {
+  display: grid; grid-template-columns: minmax(180px, 1.2fr) minmax(0, 2fr) auto auto; align-items: center; gap: 8px 32px;
+  padding: 18px 0; border-bottom: 1px solid var(--line);
+}
+.agl__name { font-size: 1.25rem; font-weight: 650; letter-spacing: -0.02em; text-decoration: none; display: grid; }
+.agl__name:hover { color: var(--accent-strong); }
+.agl__city { font-size: 0.875rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.agl__addr { color: var(--muted); }
+.agl__tel, .agl__n { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; text-decoration: none; font-weight: 550; }
+.agl__n { color: var(--accent-strong); }
+.agl__tel:hover, .agl__n:hover { text-decoration: underline; }
+@media (max-width: 859px) {
+  .agl__row { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; }
+  .agl__addr { grid-column: 1 / -1; grid-row: 2; }
+  .agl__tel { grid-row: 3; }
+  .agl__n { grid-row: 3; justify-self: end; }
+}
+
+.sell { display: grid; gap: 16px; padding: clamp(28px, 5vw, 56px); border-radius: var(--radius-card); background: var(--accent); color: #fff; }
+.sell p { max-width: 62ch; font-size: var(--step-1); }
+.sell__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.sell .vb { background: #fff; color: var(--text); }
+.sell .vb:hover { background: var(--surface); }
+.sell .vb--ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.7); }
+.sell .vb--ghost:hover { background: rgb(255 255 255 / 0.12); border-color: #fff; }
+.sell :focus-visible { outline-color: #fff; }

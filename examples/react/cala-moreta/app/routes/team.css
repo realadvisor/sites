@@ -1,0 +1,20 @@
+.team { padding-bottom: var(--section); }
+.band { background: var(--accent); color: #fff; }
+.band-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; padding-block: clamp(56px, 7vw, 96px); }
+.band-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.agents { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--text); }
+.agent { display: grid; align-content: start; padding: 48px 32px 48px 0; border-bottom: 1px solid var(--line); }
+.agent + .agent { padding-left: 32px; border-left: 1px solid var(--line); }
+.agent { gap: 28px; }
+.agent-photo { display: block; max-width: 340px; }
+.agent-body { display: grid; gap: 8px; justify-items: start; }
+.agent-name { font: 300 clamp(1.75rem, 2.6vw, 2.5rem)/1.05 var(--font-display); margin-bottom: 6px; }
+.agent-name a { text-decoration: none; }
+.agent-title, .agent-meta { color: var(--muted); }
+.agent-contact { display: grid; gap: 2px; margin: 12px 0 16px; }
+.agent-contact a { text-decoration: none; overflow-wrap: anywhere; }
+.agent-contact a:hover { text-decoration: underline; }
+@media (max-width: 960px) {
+  .agents { grid-template-columns: 1fr; }
+  .agent, .agent + .agent { padding: 36px 0; border-left: 0; }
+}

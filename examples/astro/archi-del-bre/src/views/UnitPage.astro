@@ -1,0 +1,278 @@
+---
+/**
+ * One unit: plan first (our indicative drawing), the key figures and price
+ * beside it, its place in the building (the axonometric with this unit
+ * lit), photos, text, and the enquiry form filed on this unit.
+ * Sold units: noindex, no price, the form offers the other units.
+ */
+import type { Unit } from '@realadvisor/sites-sdk/types';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import IsoDrawing from '../components/IsoDrawing.astro';
+import AgentCard from '../components/AgentCard.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { loadSite } from '../lib/data';
+import { href, LOCALE, LANGS, type L } from '../lib/routes';
+import { c } from '../lib/copy';
+import {
+  building, buildingName, deliveryLabel, floorName, formatRooms, isPenthouse, outdoorLabel, outdoors, orientation, planKey, planSrc,
+  shortId, sortUnits, statusLabel, unitLabel, unitNumber, unitOptions, unitPath, unitPrice, unitTitle, hasPrice,
+} from '../lib/units';
+import { unitTextDe } from '../content/project';
+import { photoAlt } from '../content/photo-alts';
+
+interface Props { l: L; u: Unit }
+const { l, u } = Astro.props;
+const site = await loadSite();
+const { dev } = site;
+const all = dev.units;
+
+const list = sortUnits(all);
+const i = list.indexOf(u);
+const prev = list[i - 1];
+const next = list[i + 1];
+const num = unitNumber(u);
+const label = unitLabel(u, l, all);
+const outs = outdoors(u);
+const plan = planSrc(planKey(u, all), l, true);
+const delivery = deliveryLabel(dev, l);
+const ori = orientation(u, l);
+const sold = u.status === 'sold';
+const pent = isPenthouse(u, all);
+const photos = u.photos ?? [];
+const same = list.filter((x) => x !== u && x.rooms === u.rooms && isPenthouse(x, all) === pent && x.status !== 'sold');
+const roomsTxt = formatRooms(u.rooms, l);
+const descDe = unitTextDe({
+  rooms: String(u.rooms ?? ''),
+  surface: u.living_surface ? `${u.living_surface} m²` : '',
+  floor: floorName(u, l, all),
+  house: buildingName(building(u), l),
+  bedrooms: u.bedrooms,
+  bathrooms: u.bathrooms,
+  outdoor: outs.map((o) => `${outdoorLabel(o, l)} von ${o.m2} m²`).join(' und '),
+});
+const T = {
+  it: {
+    title: `${num ? `${num}, ` : ''}${label} | ${unitPrice(u, 'it')} | ${dev.title}`,
+    desc: `${roomsTxt}${u.living_surface ? ` di ${u.living_surface} m²` : ''}, ${floorName(u, l, all).toLowerCase()}, ${buildingName(building(u), l)}. ${dev.title}, Castagnola, Lugano.`,
+    back: 'Tutti gli appartamenti',
+    where: 'Nella casa',
+    whereCap: `${num} in ${buildingName(building(u), l)}, ${floorName(u, l, all).toLowerCase()}.`,
+    photos: 'Foto',
+    photosNote: 'Foto di riferimento delle finiture, non dell’appartamento.',
+    about: 'L’appartamento',
+    enquiry: sold ? 'Questo appartamento è venduto' : 'Richiedi informazioni su questo appartamento',
+    enquiryP: sold ? 'Scrivici per uno degli appartamenti ancora disponibili.' : 'Rispondiamo entro un giorno lavorativo con il listino, la descrizione e una proposta di visita.',
+    message: `Buongiorno, vorrei ricevere informazioni sull’appartamento ${num ? `${num} (${label})` : label}.`,
+    similar: 'Altri appartamenti di questo tipo',
+    planNone: 'Pianta su richiesta.',
+    priceLabel: c('price', 'it'),
+  },
+  de: {
+    title: `${num ? `${num}, ` : ''}${label} | ${unitPrice(u, 'de')} | ${dev.title}`,
+    desc: `${roomsTxt}${u.living_surface ? `, ${u.living_surface} m²` : ''}, ${floorName(u, l, all)}, ${buildingName(building(u), l)}. ${dev.title}, Castagnola, Lugano.`,
+    back: 'Alle Wohnungen',
+    where: 'Im Haus',
+    whereCap: `${num} in ${buildingName(building(u), l)}, ${floorName(u, l, all)}.`,
+    photos: 'Fotos',
+    photosNote: 'Referenzfotos zum Ausbau, nicht der Wohnung selbst.',
+    about: 'Die Wohnung',
+    enquiry: sold ? 'Diese Wohnung ist verkauft' : 'Informationen zu dieser Wohnung anfordern',
+    enquiryP: sold ? 'Schreiben Sie uns zu einer der noch verfügbaren Wohnungen.' : 'Wir antworten innert eines Arbeitstags mit Preisliste, Baubeschrieb und einem Besichtigungstermin.',
+    message: `Guten Tag, ich interessiere mich für die Wohnung ${num ? `${num} (${label})` : label}.`,
+    similar: 'Weitere Wohnungen dieses Typs',
+    planNone: 'Grundriss auf Anfrage.',
+    priceLabel: c('price', 'de'),
+  },
+}[l];
+const facts: [string, string][] = [
+  [c('house', l), buildingName(building(u), l)],
+  [c('floor', l), floorName(u, l, all)],
+  [c('bedrooms', l), u.bedrooms != null ? String(u.bedrooms) : ''],
+  [c('bathrooms', l), u.bathrooms != null ? String(u.bathrooms) : ''],
+  ...outs.slice(1).map((o) => [outdoorLabel(o, l), `${o.m2} m²`] as [string, string]),
+  [c('orientation', l), ori], // fixture only: orientation
+  [c('delivery', l), delivery],
+].filter((x): x is [string, string] => !!x[1]);
+const alternates = LANGS.map((x) => ({ lang: LOCALE[x], href: unitPath(u, x) }));
+const cover = photos[0] ?? dev.photos[0];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Apartment',
+  name: `${dev.title}, ${num ? `${num}, ` : ''}${label}`,
+  numberOfRooms: u.rooms,
+  floorSize: u.living_surface ? { '@type': 'QuantitativeValue', value: u.living_surface, unitCode: 'MTK' } : undefined,
+  address: { '@type': 'PostalAddress', addressLocality: dev.address.city, postalCode: dev.address.postcode, addressCountry: 'CH' },
+  ...(hasPrice(u) ? { offers: { '@type': 'Offer', price: u.price, priceCurrency: u.currency, availability: 'https://schema.org/InStock' } } : {}),
+};
+const lb = (url: string) => img(url, { w: 2000, fit: 'fit', quality: 78 });
+void shortId;
+---
+<Site site={site} l={l} route="unit" alternates={alternates} title={T.title} description={T.desc} image={cover ? img(cover.url, { w: 1200, h: 630 }) : undefined} noindex={sold} jsonLd={jsonLd} bar={false}>
+  <div class="wrap crumbs">
+    <a href={href('units', l)} class="link">← {T.back}</a>
+    <span class="pager">
+      {prev && <a href={unitPath(prev, l)} rel="prev" aria-label={`${c('prev', l)}: ${unitTitle(prev, l, all)}`}>‹ {unitNumber(prev)}</a>}
+      {next && <a href={unitPath(next, l)} rel="next" aria-label={`${c('next', l)}: ${unitTitle(next, l, all)}`}>{unitNumber(next)} ›</a>}
+    </span>
+  </div>
+
+  <section class="wrap top">
+    <figure class="plan">
+      {plan ? (
+        <>
+          <img src={plan} alt={`${c('indicativePlan', l)}: ${label}`} width="960" height="860" decoding="async" fetchpriority="high" />
+          <figcaption>{c('indicativePlan', l)}</figcaption>
+        </>
+      ) : <p class="muted">{T.planNone}</p>}
+    </figure>
+
+    <div class="facts">
+      <p class="no">{num}</p>
+      <h1 class="h2">{label}</h1>
+      <dl class="big">
+        {u.living_surface && <div><dt>{c('livingArea', l)}</dt><dd class="num">{u.living_surface} m²</dd></div>}
+        {outs[0] && <div><dt>{outdoorLabel(outs[0], l)}</dt><dd class="num">{outs[0].m2} m²</dd></div>}
+      </dl>
+      <div class="price">
+        {hasPrice(u) ? <p class="amount num">{unitPrice(u, l)}</p> : null}
+        <span class:list={['pill', u.status]}>{statusLabel(u, l)}</span>
+      </div>
+      <dl class="list">
+        {facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+      <p class="actions">
+        <a class="btn" href="#richiesta">{c('writeUs', l)}</a>
+        {!sold && (
+          <button type="button" class="btn ghost fav" data-fav={shortId(u)} data-unit={num} data-label-on={c('addFav', l)} data-label-off={c('removeFav', l)} data-label-full={c('favFull', l)} aria-pressed="false" hidden>
+            <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2.6 2.2 4.6 5 .6-3.7 3.5.9 5-4.4-2.4-4.4 2.4.9-5L2.8 7.8l5-.6z" /></svg>
+            <span data-fav-text>{c('addFav', l)}</span>
+          </button>
+        )}
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap where">
+    <div class="where-text">
+      <h2 class="h3">{T.where}</h2>
+      <p class="muted">{T.whereCap}</p>
+    </div>
+    <IsoDrawing units={all} l={l} current={u.id} />
+  </section>
+
+  {photos.length > 0 && (
+    <section class="wrap photos" aria-labelledby="ph-h">
+      <h2 id="ph-h" class="h3">{T.photos}</h2>
+      <div class="grid">
+        {photos.slice(0, 5).map((p, k) => (
+          <a href={lb(p.url)} data-lightbox data-alt={photoAlt(p.url, l, `${label}, ${c('photo', l)} ${k + 1}`)} class:list={['ph', { lead: k === 0 }]}>
+            <Photo src={p.url} alt={photoAlt(p.url, l, `${label}, ${c('photo', l)} ${k + 1}`)} width={k === 0 ? 1200 : 600} height={k === 0 ? 900 : 450} sizes={k === 0 ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 50vw, 25vw'} />
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="wrap about">
+    <h2 class="h3">{T.about}</h2>
+    {l === 'it' && u.description ? <div class="prose" set:html={sanitizeHtml(u.description)} /> : <div class="prose">{descDe.map((p) => <p>{p}</p>)}</div>}
+  </section>
+
+  <section class="enquiry-band" id="richiesta">
+    <div class="wrap section e-grid">
+      <div class="e-text">
+        <h2 class="h3">{T.enquiry}</h2>
+        <p>{T.enquiryP}</p>
+        {site.agent && <AgentCard agent={site.agent} l={l} />}
+      </div>
+      <div class="e-form">
+        {sold ? (
+          <EnquiryForm developmentId={dev.id} units={unitOptions(all, l)} agentId={site.agent?.id} agentName={site.agent?.first_name} locale={LOCALE[l]} />
+        ) : (
+          <EnquiryForm developmentId={dev.id} lotId={u.id} agentId={site.agent?.id} agentName={site.agent?.first_name} message={T.message} locale={LOCALE[l]} />
+        )}
+      </div>
+    </div>
+  </section>
+
+  {same.length > 0 && (
+    <section class="wrap similar">
+      <h2 class="h3">{T.similar}</h2>
+      <ul>
+        {same.map((x) => (
+          <li><a href={unitPath(x, l)}><strong>{unitNumber(x)}</strong> <span>{unitLabel(x, l, all)}</span> <span class="num">{x.living_surface} m²</span> <span class="num p">{unitPrice(x, l)}</span></a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+  <Lightbox l={l} />
+</Site>
+
+<script>
+  import { initFavButtons } from '../scripts/favourites';
+  initFavButtons();
+</script>
+
+<style>
+  .crumbs { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; }
+  .crumbs a { display: inline-block; padding-block: 10px; }
+  .pager { display: flex; gap: 20px; font-weight: 600; }
+  .pager a { text-decoration: none; padding: 10px 4px; }
+  .top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 80px); align-items: start; padding-bottom: var(--section); }
+  .plan { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-card); padding: clamp(12px, 2vw, 28px); }
+  .plan img { width: 100%; height: auto; }
+  .plan figcaption { font-size: 0.8125rem; color: var(--muted); margin-top: 8px; }
+  .facts { display: grid; gap: 22px; position: sticky; top: calc(var(--header-h) + 24px); }
+  .no { font: 700 0.9375rem/1 var(--sans); color: var(--accent-strong); letter-spacing: 0.04em; }
+  .big { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-block: 1px solid var(--line); }
+  .big div { padding: 18px 0; }
+  .big div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .big dt { font-size: 0.875rem; color: var(--muted); }
+  .big dd { margin: 4px 0 0; font: 400 clamp(2rem, 1.5rem + 1.6vw, 3rem)/1 var(--serif); }
+  .price { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .amount { font: 600 1.625rem/1 var(--sans); }
+  .list { margin: 0; display: grid; }
+  .list div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .list dt { color: var(--muted); }
+  .list dd { margin: 0; text-align: right; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fav[aria-pressed='true'] svg { fill: currentColor; }
+  .fav svg { fill: none; stroke: currentColor; stroke-width: 1.4; }
+
+  .where { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; align-items: center; padding-bottom: var(--section); }
+  .where-text { display: grid; gap: 12px; }
+
+  .photos { padding-bottom: var(--section); display: grid; gap: 24px; }
+  .grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 10px; }
+  .ph { display: block; border-radius: 10px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand); }
+  .ph.lead { grid-row: span 2; aspect-ratio: auto; }
+  .ph :global(picture) { height: 100%; }
+  .ph:hover :global(img) { transform: scale(1.02); }
+  .ph :global(img) { transition: transform 0.5s var(--ease); }
+
+  .about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; padding-bottom: var(--section); }
+  .enquiry-band { background: var(--paper); border-block: 1px solid var(--line); }
+  .e-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); }
+  .e-text { display: grid; gap: 20px; align-content: start; }
+  .similar { padding-block: var(--section); display: grid; gap: 20px; }
+  .similar ul { list-style: none; border-top: 1px solid var(--line-strong); }
+  .similar a { display: grid; grid-template-columns: 5em minmax(0, 1fr) auto 10em; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .similar a:hover span:first-of-type { text-decoration: underline; }
+  .similar .p { text-align: right; font-weight: 600; }
+
+  @media (max-width: 960px) {
+    .top, .where, .about, .e-grid { grid-template-columns: 1fr; }
+    .facts { position: static; }
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .ph.lead { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+    .similar a { grid-template-columns: 4em minmax(0, 1fr); }
+    .similar a .num { grid-column: 2; }
+    .similar .p { text-align: left; }
+  }
+</style>

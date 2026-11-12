@@ -1,0 +1,28 @@
+---
+// Not found, rendered on request so routes can rewrite to it (prerender = false).
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import { t } from '@realadvisor/sites-kit/i18n';
+import { loadSite } from '../lib/data';
+
+Astro.response.status = 404;
+const site = await loadSite();
+const title = t('notFound');
+---
+<Site site={site} title={`${title} | ${site.dev.title}`} description={t('notFoundText')} noindex>
+  <div class="wrap nf">
+    <p class="eyebrow">Erreur 404</p>
+    <h1>{title}</h1>
+    <p class="lede">{t('notFoundText')}</p>
+    <p class="actions">
+      <a class="button" href="/appartements">Voir les appartements</a>
+      <a class="button ghost" href="/">{t('home')}</a>
+    </p>
+  </div>
+</Site>
+<style>
+  .nf { padding-block: clamp(80px, 12vw, 180px); min-height: 60svh; }
+  h1 { margin: 18px 0 24px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+</style>

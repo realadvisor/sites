@@ -1,0 +1,99 @@
+---
+/**
+ * Contact / register interest: the development enquiry form (developmentId +
+ * the required unit select), prefilled from ?u= (shortlist) or ?lot=, the
+ * sales office and the team's agents.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import AgentCard from '../components/AgentCard.astro';
+import { loadSite } from '../lib/data';
+import { LOCALE, tel, type L } from '../lib/routes';
+import { unitLabel, unitNumber, unitOptions, unitsFromIds } from '../lib/units';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const site = await loadSite();
+const { dev, team, org, agents } = site;
+const q = Astro.url.searchParams;
+const picked = unitsFromIds(dev, q.get('u') ?? q.get('lot')).filter((u) => u.status !== 'sold');
+const name = (u: (typeof picked)[number]) => (unitNumber(u) ? `${unitNumber(u)} (${unitLabel(u, l, dev.units)})` : unitLabel(u, l, dev.units));
+const T = {
+  it: {
+    title: `Contatti e richieste | ${dev.title}`,
+    h1: 'Contatti',
+    intro: 'Per il listino, la descrizione tecnica o una visita del cantiere scrivici o chiamaci. Rispondiamo entro un giorno lavorativo.',
+    formH: 'La tua richiesta',
+    office: 'Ufficio vendite',
+    people: 'Le persone che vi seguono',
+    msg: picked.length
+      ? `Buongiorno, vorrei ricevere informazioni ${picked.length === 1 ? 'sull’appartamento' : 'sugli appartamenti'} ${picked.map(name).join(', ')}.`
+      : undefined,
+  },
+  de: {
+    title: `Kontakt und Anfragen | ${dev.title}`,
+    h1: 'Kontakt',
+    intro: 'Für Preisliste, Baubeschrieb oder eine Besichtigung der Baustelle schreiben oder rufen Sie uns an. Wir antworten innert eines Arbeitstags.',
+    formH: 'Ihre Anfrage',
+    office: 'Verkaufsbüro',
+    people: 'Ihre Ansprechpersonen',
+    msg: picked.length
+      ? `Guten Tag, ich interessiere mich für ${picked.length === 1 ? 'die Wohnung' : 'die Wohnungen'} ${picked.map(name).join(', ')}.`
+      : undefined,
+  },
+}[l];
+// The development's broker first, then the rest of the team.
+const people = [...(site.agent ? [site.agent] : []), ...agents.filter((a) => a.id !== site.agent?.id && (!team || a.team_ids.includes(team.id)))];
+const office = team?.address ?? org.address;
+const cover = dev.photos[0];
+---
+<Site site={site} l={l} route="contact" title={T.title} description={T.intro} image={cover ? img(cover.url, { w: 1200, h: 630 }) : undefined} bar={false}>
+  <div class="wrap grid">
+    <div class="intro">
+      <h1 class="h1">{T.h1}</h1>
+      <p class="lede">{T.intro}</p>
+    </div>
+    <div class="info">
+      <div class="office">
+        <h2 class="h3">{T.office}</h2>
+        <p>{team?.name ?? org.name}</p>
+        {office && <p class="muted">{office.street}, {office.postcode} {office.city}</p>}
+        {team?.phone && <p><a class="big num" href={tel(team.phone)}>{team.phone}</a></p>}
+        {team?.email && <p><a href={`mailto:${team.email}`}>{team.email}</a></p>}
+      </div>
+      {people.length > 0 && (
+        <div class="people">
+          <h2 class="h3">{T.people}</h2>
+          {people.map((a) => <AgentCard agent={a} l={l} />)}
+        </div>
+      )}
+    </div>
+    <section class="form" id="richiesta" aria-labelledby="form-h">
+      <h2 id="form-h" class="h3">{T.formH}</h2>
+      <EnquiryForm
+        developmentId={dev.id}
+        units={unitOptions(dev.units, l)}
+        selectedUnit={picked[0]?.id}
+        message={T.msg}
+        agentId={site.agent?.id}
+        agentName={site.agent?.first_name}
+        locale={LOCALE[l]}
+      />
+    </section>
+  </div>
+</Site>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-areas: 'intro form' 'info form'; grid-template-rows: auto 1fr; gap: 40px clamp(40px, 6vw, 112px); padding-block: clamp(40px, 6vw, 88px) var(--section); align-items: start; }
+  .intro { grid-area: intro; display: grid; gap: 22px; }
+  .info { grid-area: info; display: grid; gap: 28px; align-content: start; }
+  .form { grid-area: form; }
+  .office, .people { display: grid; gap: 8px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .people { gap: 32px; }
+  .office h2, .people h2 { margin-bottom: 6px; }
+  .office a { display: inline-block; padding-block: 6px; }
+  .big { font: 400 var(--step-2)/1.1 var(--serif); text-decoration: none; }
+  .form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-frame); padding: clamp(22px, 3.5vw, 48px); display: grid; gap: 24px; position: sticky; top: calc(var(--header-h) + 24px); }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; grid-template-areas: 'intro' 'form' 'info'; } .form { position: static; } }
+</style>

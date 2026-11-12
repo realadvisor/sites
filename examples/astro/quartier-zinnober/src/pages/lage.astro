@@ -1,0 +1,157 @@
+---
+// Lage: Tössfeld and Winterthur as written content (transport, schools,
+// shops, leisure), distances computed from the address coordinates
+// (src/lib/place.ts), the static map and place photos (bucket, Pexels: see
+// src/content/photo-credits.md).
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import BucketPicture from '../components/BucketPicture.astro';
+import StaticMap from '../components/StaticMap.astro';
+import Icon from '../components/Icon.astro';
+import { site as load } from '../lib/data';
+import { distances, METHOD_NOTE } from '../lib/place';
+
+const site = await load();
+const { dev } = site;
+const near = distances(dev.address);
+const at = (label: string) => near.find((d) => d.label === label);
+const bus = at('Bushaltestelle Gaswerk');
+const station = at('Bahnhof Winterthur-Töss');
+const hb = at('Winterthur Hauptbahnhof');
+const lok = at('Lokstadt, Dialogplatz');
+const river = at('Ufer der Töss');
+const oldTown = at('Altstadt, Marktgasse');
+const place = [dev.address.street, [dev.address.postcode, dev.address.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const groups = [
+  { key: 'verkehr', title: 'Unterwegs' },
+  { key: 'alltag', title: 'Alltag' },
+  { key: 'freizeit', title: 'Freizeit' },
+] as const;
+const photos = [
+  { name: 'pexels-25906507', alt: 'Gasse in der Winterthurer Altstadt mit Tischen im Freien', caption: 'Altstadt Winterthur' },
+  { name: 'pexels-958430', alt: 'Waldweg bei Winterthur im Gegenlicht', caption: 'Wald bei Winterthur' },
+  { name: 'pexels-25906437', alt: 'Strassenecke in Winterthur mit Altbauten und Fahrleitungen', caption: 'Winterthur, Strassenecke' },
+];
+const walk = (d?: { minutes?: number }) => (d?.minutes ? `, zu Fuss etwa ${d.minutes} Min.` : '');
+---
+<Site
+  site={site}
+  title={`Lage: ${dev.address.city ?? ''}-Tössfeld, bei der Lokstadt | ${dev.title}`}
+  description={`${dev.title} liegt im Tössfeld in ${dev.address.city ?? ''}: Bushaltestelle${bus ? ` ${bus.distance}` : ''}, Bahnhof Winterthur-Töss${station ? ` ${station.distance}` : ''} und Hauptbahnhof${hb ? ` ${hb.distance}` : ''} Luftlinie, Schule, Läden und die Lokstadt in der Nähe.`}
+>
+  <PageHead title="Lage" eyebrow={place} lead={`Das Quartier Zinnober liegt im Tössfeld, südwestlich der Winterthurer Innenstadt: zwischen der Lokstadt auf dem früheren Sulzer-Areal und dem Fluss Töss${hb ? `, ${hb.distance} Luftlinie vom Hauptbahnhof` : ''}.`} tone="lilac">
+    <figure class="head-pic">
+      <BucketPicture name="pexels-25906487" alt="Gasse in der Altstadt von Winterthur mit Cafés und historischen Häusern" ratio={3 / 2} position="50% 66%" sizes="(min-width: 1000px) 460px, 100vw" priority />
+      <figcaption>Altstadt Winterthur</figcaption>
+    </figure>
+  </PageHead>
+
+  <section class="wrap map-row">
+    {dev.address.lat != null && dev.address.lng != null && <StaticMap lat={dev.address.lat} lng={dev.address.lng} label={dev.title} zoom={16} cols={7} rows={4} class="big-map" />}
+    <div class="dist-wrap">
+      <ul class="dist" aria-label="Distanzen ab der Adresse, Luftlinie">
+        {near.map((d) => (
+          <li>
+            <Icon name={d.icon} size={24} />
+            <span>{d.label}{d.minutes != null && <small>zu Fuss etwa {d.minutes} Min.</small>}</span>
+            <strong class="num">{d.distance}</strong>
+          </li>
+        ))}
+      </ul>
+      <p class="note">{METHOD_NOTE}</p>
+    </div>
+  </section>
+
+  <section class="band text-band">
+    <div class="wrap text-grid">
+      <article class="txt">
+        <h2>Tössfeld</h2>
+        <p>Das Tössfeld war lange von der Industrie geprägt. Auf dem früheren Sulzer-Areal ist die Lokstadt entstanden, mit Wohnungen, Läden und Plätzen; der Dialogplatz liegt {lok?.distance ?? ''} Luftlinie vom Quartier Zinnober. Die Bushaltestelle Gaswerk liegt {bus?.distance ?? ''} entfernt, der Bahnhof Winterthur-Töss ist {station?.distance ?? ''} entfernt{walk(station) || '.'}</p>
+      </article>
+      <article class="txt">
+        <h2>Winterthur</h2>
+        <p>Winterthur ist die sechstgrösste Stadt der Schweiz: eine Altstadt mit Gassen und Plätzen{oldTown ? ` (${oldTown.distance} Luftlinie)` : ''}, mehrere Kunstmuseen, Parks und Wälder am Stadtrand. Ab dem Hauptbahnhof{hb ? `, ${hb.distance} vom Quartier,` : ''} fahren Züge direkt nach Zürich und zum Flughafen.</p>
+      </article>
+      {groups.map((g) => (
+        <article class:list={['txt', 'card', `card--${g.key}`]}>
+          <h2>{g.title}</h2>
+          {g.key === 'verkehr' && <p>Bus ab der Haltestelle Gaswerk, S-Bahn ab Bahnhof Winterthur-Töss, Fernverkehr ab Hauptbahnhof. Im Hof gibt es eine Velohalle, Autoabstellplätze in der Tiefgarage.</p>}
+          {g.key === 'alltag' && <p>Kindergarten, Schule und ein Supermarkt liegen im Tössfeld, alle in wenigen hundert Metern.</p>}
+          {g.key === 'freizeit' && <p>Im Hof: Spielplatz und Gemeinschaftsgärten. Um die Ecke: die Tössfeld-Anlage und die Plätze der Lokstadt, weiter südwestlich das Ufer der Töss{river ? ` (${river.distance})` : ''}.</p>}
+          <ul class="mini">
+            {near.filter((d) => d.group === g.key).map((d) => <li><span>{d.label}</span><strong class="num">{d.distance}</strong></li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap photos band" aria-labelledby="photos-title">
+    <h2 id="photos-title" class="photos-title">Winterthur</h2>
+    <div class="photo-grid">
+      {photos.map((p, i) => (
+        <figure class={`ph ph-${i}`}>
+          <BucketPicture name={p.name} alt={p.alt} ratio={i === 0 ? 4 / 5 : 4 / 3} sizes={i === 0 ? '(min-width: 900px) 40vw, 100vw' : '(min-width: 900px) 30vw, 100vw'} />
+          <figcaption>{p.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="band band--zinnober cta-band">
+    <div class="wrap cta-in">
+      <h2>Musterwohnung besichtigen</h2>
+      <p class="lead">Die Musterwohnung im Quartier kann nach Vereinbarung besichtigt werden. Schreiben Sie uns, welche Wohnung Sie interessiert.</p>
+      <a class="cta" href="/kontakt">Termin anfragen <Icon name="arrow" /></a>
+    </div>
+  </section>
+</Site>
+<style>
+  .map-row { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); padding-block: clamp(36px, 5vw, 72px); align-items: start; }
+  .map-row :global(.big-map) { --map-h: 520px; }
+  .dist-wrap { display: grid; gap: 14px; }
+  .dist { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .dist span { display: grid; gap: 2px; }
+  .dist small { font-size: 0.8125rem; color: var(--muted); }
+  .note { font-size: 0.8125rem; color: var(--muted); max-width: 52ch; }
+  .dist li { display: grid; grid-template-columns: 30px 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .dist strong { font: 750 1.125rem/1 var(--display); }
+  .text-band { background: var(--sand); }
+  .text-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+  .txt { display: grid; gap: 14px; align-content: start; grid-column: span 3; }
+  .txt h2 { font-size: var(--step-3); }
+  .txt p { max-width: 58ch; }
+  .card { grid-column: span 2; padding: clamp(20px, 2.4vw, 28px); border: 2px solid var(--ink); border-radius: var(--radius-card); }
+  .card h2 { font-size: var(--step-2); }
+  .card--verkehr { background: var(--zinnober); }
+  .card--alltag { background: var(--butter); }
+  .card--freizeit { background: var(--lilac); }
+  .mini { list-style: none; margin: 6px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+  .mini li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgb(20 15 58 / 0.3); font-size: 0.9375rem; }
+  .head-pic { margin: 0; width: min(100%, 460px); border: 2px solid var(--ink); border-radius: var(--radius-card); overflow: hidden; transform: rotate(1.5deg); }
+  .head-pic :global(img) { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  figcaption { padding: 8px 12px; font: 650 0.8125rem/1.2 var(--body); background: var(--paper); border-top: 2px solid var(--ink); }
+  .photos { display: grid; gap: 24px; }
+  .photos-title { font-size: var(--step-4); }
+  .photo-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 16px; }
+  .ph-0 { grid-row: span 2; }
+  .ph-0 :global(img) { height: 100%; }
+  .ph { margin: 0; border-radius: var(--radius-card); overflow: hidden; border: 2px solid var(--ink); }
+  .ph { display: grid; grid-template-rows: minmax(0, 1fr) auto; background: var(--paper); }
+  .ph :global(picture) { min-height: 0; }
+  .ph :global(img) { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .ph-0 :global(img) { aspect-ratio: auto; }
+  .cta-in { display: grid; gap: 18px; justify-items: start; }
+  .cta-in h2 { font-size: var(--step-4); }
+  @media (max-width: 1000px) {
+    .map-row { grid-template-columns: 1fr; }
+    .map-row :global(.big-map) { --map-h: 380px; }
+    .txt, .card { grid-column: 1 / -1; }
+    .photo-grid { grid-template-columns: 1fr; }
+    .ph-0 { grid-row: auto; }
+    .ph-0 :global(img) { aspect-ratio: 4 / 5; }
+  }
+  @media (max-width: 640px) { .head-pic { transform: none; width: 100%; } }
+</style>

@@ -1,0 +1,200 @@
+---
+export const prerender = false;
+
+import { getCollection } from 'astro:content';
+import { agencyOf } from '@realadvisor/sites-kit/agency';
+import Layout from '../layouts/Layout.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import OfferTabs from '../components/OfferTabs.astro';
+import SoldList from '../components/SoldList.astro';
+import TalkBand from '../components/TalkBand.astro';
+import { areas, areaUrl, brandName, listingUrl, site, sites } from '../lib/data';
+import { price } from '../lib/kit';
+import { facts, formatDate, kind } from '../lib/format';
+import { AREAS, defaultArea } from '../content/places';
+import PlacePhoto from '../components/PlacePhoto.astro';
+
+const s = await site();
+const brand = brandName(s);
+const [buy, rent, sold, places, posts] = await Promise.all([
+  sites.listings({ offer_type: 'buy', status: 'available', limit: 24 }),
+  sites.listings({ offer_type: 'rent', status: 'available', limit: 4 }),
+  sites.listings({ status: 'sold', limit: 4 }),
+  areas(),
+  getCollection('journal'),
+]);
+const journal = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+
+// Hero: the newest listing for sale with a photo (else for rent).
+const hero = buy.data.find((l) => l.photos[0]) ?? rent.data.find((l) => l.photos[0]);
+const shown = new Set(hero ? [hero.id] : []);
+const take = (list: typeof buy.data, n: number) => {
+  const out = list.filter((l) => !shown.has(l.id)).slice(0, n);
+  out.forEach((l) => shown.add(l.id));
+  return out;
+};
+const fresh = take(buy.data, 3);
+const toRent = take(rent.data, 3);
+const objects = (n: number) => (n === 1 ? '1 Objekt' : `${n} Objekte`);
+const siteUrl = Astro.site?.href ?? new URL('/', Astro.url).href;
+---
+<Layout
+  title={`${brand} · Immobilien in Zürich, am See und in Zug`}
+  description={s.team.description_text ?? `${brand}: Immobilien kaufen, verkaufen und mieten in Zürich.`}
+  image={hero?.photos[0] && img(hero.photos[0].url, { w: 1200, h: 630 })}
+  jsonLd={agencyJsonLd(agencyOf(s.org, s.team), siteUrl)}
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media">
+      {hero?.photos[0] && (
+        <a href={listingUrl(hero)} tabindex="-1" aria-hidden="true">
+          <RaImage src={hero.photos[0]} alt="" width={1600} height={1200} priority sizes="(min-width: 1024px) 60vw, 100vw" mobile={{ width: 800, height: 640 }} />
+        </a>
+      )}
+    </div>
+    <div class="hero-panel">
+      <div class="hero-text">
+        <p class="eyebrow">{brand} · {s.team.address.city}</p>
+        <h1 class="h-display" id="hero-title">Häuser und Wohnungen am See, in der Stadt und in Zug.</h1>
+        <ul class="hero-links">
+          {buy.pagination.total > 0 && <li><a href="/kaufen"><span>Kaufen</span><span class="num muted">{objects(buy.pagination.total)}</span></a></li>}
+          {rent.pagination.total > 0 && <li><a href="/mieten"><span>Mieten</span><span class="num muted">{objects(rent.pagination.total)}</span></a></li>}
+          <li><a href="/verkaufen"><span>Verkaufen</span><span class="muted">Bewertung</span></a></li>
+        </ul>
+      </div>
+      {hero && (
+        <a class="hero-caption" href={listingUrl(hero)}>
+          <span class="caps muted">Im Bild · {kind(hero)}</span>
+          <span class="hero-caption-title">{hero.title}</span>
+          <span class="num">{price(hero)}{facts(hero) && <span class="muted"> · {facts(hero)}</span>}</span>
+        </a>
+      )}
+    </div>
+  </section>
+
+  <OfferTabs
+    title="Aktuelle Objekte"
+    panels={[
+      { key: 'kaufen', label: 'Kaufen', heading: 'Zum Kauf', total: buy.pagination.total, listings: fresh, href: '/kaufen', linkLabel: `Alle ${objects(buy.pagination.total)} zum Kauf` },
+      { key: 'mieten', label: 'Mieten', heading: 'Zur Miete', total: rent.pagination.total, listings: toRent, href: '/mieten', linkLabel: `Alle ${objects(rent.pagination.total)} zur Miete` },
+    ]}
+  />
+
+  <section class="sell section" aria-labelledby="sell-title">
+    <div class="wrap sell-in">
+      <div class="sell-text">
+        <h2 class="h2" id="sell-title">Was ist Ihre Immobilie wert?</h2>
+        <p class="muted">Wir besichtigen Ihr Haus oder Ihre Wohnung und begründen die Einschätzung mit vergleichbaren Verkäufen. Die Bewertung ist kostenlos und unverbindlich.</p>
+        <p class="sell-actions"><a class="button button--solid" href="/verkaufen#bewertung">Bewertung anfragen</a></p>
+      </div>
+      {sold.data.length > 0 && (
+        <div class="sell-sold">
+          <h3 class="sell-h"><span>Zuletzt vermittelt</span><a class="more" href="/verkauft">Alle</a></h3>
+          <SoldList listings={sold.data} />
+        </div>
+      )}
+    </div>
+  </section>
+
+  {places.length > 0 && (
+    <section class="places section" aria-labelledby="places-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <h2 class="h2" id="places-title">Orte</h2>
+        </header>
+        <ul class="places-grid">
+          {places.map((p) => {
+            const copy = AREAS[p.slug] ?? defaultArea(p.city);
+            return (
+              <li>
+                <a class="place" href={areaUrl(p.city)}>
+                  <div class="place-media"><PlacePhoto photo={copy.photo} width={1200} height={800} sizes="(min-width: 768px) 46vw, 100vw" /></div>
+                  <span class="place-name">{p.city}</span>
+                  <span class="caps muted">{objects(p.total)} aktuell und vermittelt</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {journal.length > 0 && (
+    <section class="journal wrap section" aria-labelledby="journal-title">
+      <div class="journal-side">
+        <h2 class="h2" id="journal-title">Journal</h2>
+        <a class="more" href="/journal">Alle Beiträge</a>
+      </div>
+      <ul class="journal-list">
+        {journal.map((p) => (
+          <li>
+            <a href={`/journal/${p.id}`}>
+              <span class="journal-meta muted"><time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date)}</time> · {p.data.author}</span>
+              <span class="journal-title">{p.data.title}</span>
+              <span class="journal-excerpt muted">{p.data.excerpt}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <TalkBand title="Kontakt" text={`Unser Büro ist an der ${[s.team.address.street, s.team.address.city].filter(Boolean).join(' in ')}. Für eine Bewertung kommen wir zu Ihnen.`} phone={s.team.phone} email={s.team.email} action={{ href: '/kontakt', label: 'Termin vereinbaren' }} />
+</Layout>
+
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); min-height: min(calc(100svh - var(--header-h)), 820px); }
+  .hero-media { position: relative; background: var(--surface); min-height: 420px; }
+  .hero-media a, .hero-media :global(picture) { display: contents; }
+  .hero-media :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-panel { background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: clamp(40px, 5vw, 80px) clamp(28px, 4.5vw, 72px) clamp(32px, 3.5vw, 48px); }
+  .hero-text { display: grid; gap: 28px; align-content: center; flex: 1; }
+  .hero-text h1 { max-width: 13ch; }
+  .hero-links { list-style: none; display: grid; border-top: 1px solid var(--line-strong); max-width: 420px; }
+  .hero-links a {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; min-height: 52px;
+    border-bottom: 1px solid var(--line-strong); text-decoration: none; font: 400 1.375rem/1.2 var(--serif);
+  }
+  .hero-links a .muted { font: 400 var(--fs-small)/1 var(--sans); }
+  .hero-links a:hover span:first-child { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  .hero-caption { display: grid; gap: 4px; text-decoration: none; max-width: 420px; padding-top: 18px; border-top: 1px solid var(--line-strong); font-size: 0.9375rem; }
+  .hero-caption-title { font: 400 1.25rem/1.25 var(--serif); }
+  .hero-caption:hover .hero-caption-title { text-decoration: underline; text-decoration-thickness: 1px; }
+
+  .sec-head { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(28px, 3vw, 44px); }
+  .sell { background: var(--surface); }
+  .sell-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px clamp(40px, 6vw, 112px); align-items: start; }
+  .sell-text { display: grid; gap: 20px; justify-items: start; }
+  .sell-text .muted { max-width: 44ch; font-size: 1.0625rem; }
+  .sell-h { display: flex; justify-content: space-between; align-items: center; gap: 16px; font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .sell-h .more { min-height: 44px; color: var(--text); }
+  .places-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px var(--gap); }
+  .place { display: grid; gap: 8px; text-decoration: none; }
+  .place-media :global(picture) { display: contents; }
+  .place-media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--surface); margin-bottom: 10px; }
+  .place-media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .place:hover .place-media :global(img) { transform: scale(1.03); }
+  .place-name { font: 400 var(--fs-h2)/1.1 var(--serif); }
+  .journal { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px clamp(40px, 6vw, 112px); align-items: start; }
+  .journal-side { display: grid; gap: 12px; justify-items: start; }
+  .journal-list { list-style: none; border-top: 1px solid var(--line-strong); }
+  .journal-list li { border-bottom: 1px solid var(--line); }
+  .journal-list a { display: grid; gap: 6px; padding: 24px 0; text-decoration: none; }
+  .journal-meta { font-size: var(--fs-small); }
+  .journal-title { font: 400 var(--fs-h3)/1.25 var(--serif); }
+  .journal-list a:hover .journal-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  .journal-excerpt { max-width: 60ch; }
+
+  @media (max-width: 1023px) {
+    .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+    .hero-media { aspect-ratio: 5 / 4; min-height: 0; }
+    .sell-in { grid-template-columns: minmax(0, 1fr); }
+    .journal { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 639px) {
+    .hero-panel { padding-inline: var(--gutter); }
+  }
+</style>

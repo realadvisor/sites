@@ -1,0 +1,31 @@
+---
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, sites } from '../lib/data';
+import { UI, alternates, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, sold] = await Promise.all([agency(), sites.allListings({ status: 'sold' })]);
+const name = ag.team?.name ?? ag.org.name;
+const first = sold.find((l) => l.photos[0])?.photos[0];
+---
+<Site lang={lang} current="sold" title={`${ui.soldH1} | ${name}`} description={ui.soldLead}
+  image={first && img(first.url, { w: 1200, h: 630 })} alternates={alternates('sold')}>
+  <header class="phead wrap">
+    <h1 class="display-l">{ui.soldH1}</h1>
+    <p class="lead">{ui.soldLead}</p>
+  </header>
+  <section class="wrap sold">
+    {sold.length > 0
+      ? <ul class="grid3">{sold.map((l, i) => <li><ListingCard listing={l} lang={lang} heading="h2" priority={i === 0} /></li>)}</ul>
+      : <p class="lead">{ui.soldEmpty}</p>}
+    <p class="sold-cta"><a class="cta cta-sea" href={href('contact', lang)}>{ui.soldCta}</a></p>
+  </section>
+</Site>
+<style>
+  .sold { padding-bottom: var(--section); }
+  .sold-cta { margin-top: clamp(48px, 6vw, 88px); display: flex; justify-content: center; }
+</style>

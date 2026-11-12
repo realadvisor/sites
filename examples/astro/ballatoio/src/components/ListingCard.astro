@@ -1,0 +1,72 @@
+---
+/**
+ * The listing card: a photo at magazine scale, then where it is, the title
+ * in condensed caps and one line of facts with the price. `shape` sets the
+ * photo ratio so a grid can mix landscape and portrait cards.
+ * Listing titles are Italian: on English pages they carry lang="it".
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import { CONTENT_LANG, UI, listingHref, type Lang } from '../lib/i18n';
+import { factLine, price, typeLabel } from '../lib/format';
+import { placeOf } from '../lib/districts';
+
+interface Props {
+  listing: Listing;
+  lang: Lang;
+  shape?: 'wide' | 'land' | 'tall';
+  priority?: boolean;
+  sizes?: string;
+  heading?: 'h2' | 'h3';
+  /** Sold listings: no price, a "sold" line instead. */
+  showPrice?: boolean;
+}
+const { listing: l, lang, shape = 'land', priority = false, heading: H = 'h3', showPrice = true } = Astro.props;
+const ui = UI[lang];
+const photo = l.photos[0];
+const kind = typeLabel(l, lang);
+const textLang = lang === CONTENT_LANG ? undefined : CONTENT_LANG;
+const dims = { wide: [1500, 1000], land: [900, 675], tall: [800, 1000] }[shape];
+const sizes = Astro.props.sizes ?? (shape === 'wide' ? '(min-width: 1520px) 1424px, 100vw' : '(min-width: 1520px) 700px, (min-width: 760px) 48vw, 100vw');
+const alt = photo?.alt || `${kind}, ${l.address.city ?? ''}`;
+const sold = l.status === 'sold';
+const facts = factLine(l, lang);
+---
+<article class:list={['card', `card-${shape}`]}>
+  <div class="frame card-photo">
+    {photo
+      ? <RaImage src={photo} alt={alt} width={dims[0]!} height={dims[1]!} sizes={sizes} priority={priority} widths={priority ? [480, 640, 800, 1100, 1500] : undefined} />
+      : <span class="no-photo" aria-hidden="true">{kind}</span>}
+  </div>
+  <div class="card-text">
+    <p class="card-place">{placeOf(l)}</p>
+    <H class="card-title d-s"><a href={listingHref(l, lang)} lang={textLang}>{l.title}</a></H>
+    <p class="card-facts">
+      {facts && <span class="num">{facts}</span>}
+      {sold
+        ? <span class="card-status">{l.offer_type === 'rent' ? ui.rented : ui.sold}</span>
+        : showPrice && <span class="num card-price">{price(l, lang)}</span>}
+    </p>
+  </div>
+</article>
+
+<style>
+  .card { position: relative; display: grid; align-content: start; gap: 18px; }
+  .card-photo { aspect-ratio: 4 / 3; }
+  .card-wide .card-photo { aspect-ratio: 3 / 2; }
+  .card-tall .card-photo { aspect-ratio: 4 / 5; }
+  .card-photo :global(img) { transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .card:hover .card-photo :global(img) { transform: scale(1.025); }
+  .card-text { display: grid; gap: 8px; }
+  .card-place { font-size: 0.9375rem; color: var(--muted); }
+  .card-title { max-width: 24ch; }
+  .card-wide .card-title { font-size: var(--fs-m); max-width: 22ch; }
+  .card-title a { text-decoration: none; }
+  .card-title a::after { content: ''; position: absolute; inset: 0; }
+  .card-title a:focus-visible { outline: none; }
+  .card:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 6px; }
+  .card:hover .card-title a { text-decoration: underline; text-decoration-thickness: 2px; }
+  .card-facts { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px; font-size: 0.9375rem; border-top: 1px solid var(--line); padding-top: 10px; }
+  .card-price { font-weight: 650; }
+  .card-status { font-weight: 650; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.8125rem; }
+</style>

@@ -1,0 +1,31 @@
+---
+/**
+ * Spanish energy certificate: the A–G scale with the listing's class marked.
+ * fixture only: the class comes from fixture_only (energyClass() in lib/data.ts).
+ */
+import { UI, type Lang } from '../lib/i18n';
+interface Props { value: string; lang: Lang }
+const { value, lang } = Astro.props;
+const CLASSES = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+---
+<figure class="energy">
+  <figcaption><span class="energy-t">{UI[lang].energy}</span><span class="energy-note">{UI[lang].energyNote}</span></figcaption>
+  <ol class="energy-scale">
+    {CLASSES.map((c, i) => (
+      <li class:list={[`e${i}`, { on: c === value }]} aria-current={c === value ? 'true' : undefined}>
+        <span>{c}</span>
+      </li>
+    ))}
+  </ol>
+</figure>
+<style>
+  .energy { margin: 0; display: grid; gap: 14px; }
+  .energy figcaption { display: grid; gap: 4px; }
+  .energy-t { font: 500 .75rem/1.2 var(--font-body); letter-spacing: .2em; text-transform: uppercase; }
+  .energy-note { font-size: .875rem; color: var(--muted); }
+  .energy-scale { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; max-width: 420px; }
+  .energy-scale li { height: 36px; display: grid; place-items: center; font-weight: 500; font-size: .875rem; color: var(--text); background: color-mix(in srgb, var(--c) 22%, var(--paper)); }
+  .energy-scale li.on { height: 44px; margin-top: -4px; color: #fff; background: var(--c); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--text); }
+  .e0 { --c: #276b37; } .e1 { --c: #3d7a2c; } .e2 { --c: #5b7522; } .e3 { --c: #786b10; }
+  .e4 { --c: #9a5a14; } .e5 { --c: #a8481c; } .e6 { --c: #a3311f; }
+</style>

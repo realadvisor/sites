@@ -1,0 +1,98 @@
+---
+// Documents: brochure, price list and plans as PDFs (generated from our own
+// HTML by scripts/documents.mjs into public/documents/; the API has no
+// documents yet: fixture only), plus every plan as an image.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import ContactBand from '../components/ContactBand.astro';
+import Arrow from '../components/Arrow.astro';
+import { loadSite } from '../lib/data';
+import { unitTypes, planFor, formatRooms } from '../lib/units';
+import DOCS from '../content/documents.json';
+
+const site = await loadSite();
+const { dev } = site;
+const types = unitTypes(dev.units);
+// Every distinct plan drawing in use, with the types it shows.
+const plans = [...new Map(dev.units.map((u) => [planFor(u, dev.units), u] as const)).entries()]
+  .filter((e): e is [string, (typeof dev.units)[number]] => !!e[0])
+  .map(([src, u]) => ({ src, label: `${formatRooms(u.rooms)}${src.includes('attique') ? ', attique' : src.includes('jardin') ? ', rez-de-jardin' : ''}`, rooms: u.rooms ?? 0, garden: src.includes('jardin') }))
+  .sort((a, b) => a.rooms - b.rooms || Number(b.garden) - Number(a.garden));
+const kb = (n: number) => `${Math.max(1, Math.round(n / 1024))} Ko`;
+const date = (d: string) => new Intl.DateTimeFormat('fr-CH', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(d));
+---
+<Site
+  site={site}
+  title={`Documents : brochure, plans et liste de prix | ${dev.title}`}
+  description={`Téléchargez la brochure, la liste de prix et les plans des ${dev.title.replace(/^Les /, "")} (PDF).`}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+>
+  <section class="wrap intro">
+    <h1>Documents</h1>
+    <p class="lede muted">Brochure, liste de prix et plans en PDF, non contractuels, mis à jour le {date(DOCS.updated)}.</p>
+  </section>
+
+  <section class="wrap docs" aria-label="Téléchargements">
+    <ul>
+      {DOCS.files.map((d, i) => (
+        <li>
+          <a href={d.href} download class="doc">
+            <span class="idx">{String(i + 1).padStart(2, '0')}</span>
+            <span class="t">{d.title}</span>
+            <span class="d">{d.description}</span>
+            <span class="m">PDF · {d.pages} {d.pages > 1 ? 'pages' : 'page'} · {kb(d.bytes)}</span>
+            <span class="dl"><Arrow dir="down" /><span class="sr-only">Télécharger</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap plans" aria-labelledby="p-h">
+    <div class="head">
+      <h2 id="p-h">Plans par typologie</h2>
+      <p class="muted">Tous les plans sont dessinés à la même échelle. {types.length} typologies, du {types[0]?.label} au {types[types.length - 1]?.label}.</p>
+    </div>
+    <ul class="grid">
+      {plans.map((p) => (
+        <li>
+          <a href={p.src} class="plan" aria-label={`Plan indicatif ${p.label}, ouvrir l’image`}>
+            <img src={p.src} alt={`Plan indicatif, ${p.label}`} width="1000" height="720" loading="lazy" decoding="async" />
+          </a>
+          <p class="pl">{p.label}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <ContactBand site={site} heading="Plans et descriptif d’un lot sur demande" />
+</Site>
+
+<style>
+  .intro { padding-block: clamp(56px, 7vw, 104px) clamp(32px, 4vw, 56px); }
+  .intro h1 { margin: 0 0 20px; }
+  .docs ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+  .docs li { border-bottom: 1px solid var(--line); }
+  .doc { display: grid; grid-template-columns: 64px 1.1fr 1.4fr auto 56px; align-items: center; gap: 24px; padding: 32px 0; text-decoration: none; transition: background-color 0.4s var(--ease), padding 0.4s var(--ease); }
+  .doc:hover { background: var(--paper); padding-inline: 16px; }
+  .idx { font: 600 0.75rem/1 var(--sans); letter-spacing: 0.14em; color: var(--muted); }
+  .t { font: 500 clamp(1.625rem, 1.3rem + 1vw, 2.25rem)/1.1 var(--serif); }
+  .d { color: var(--muted); font-size: 0.9375rem; }
+  .m { font-size: 0.8125rem; color: var(--muted); white-space: nowrap; }
+  .dl { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--line-strong); color: var(--accent); justify-self: end; }
+  .plans { padding-block: var(--space-section); }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 16px 40px; flex-wrap: wrap; margin-bottom: 36px; }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 24px; }
+  .plan { display: block; background: #fff; border: 1px solid var(--line); transition: border-color 0.3s var(--ease); }
+  .plan:hover { border-color: var(--text); }
+  .pl { margin-top: 12px; font: 500 1.25rem/1.2 var(--serif); }
+  @media (max-width: 1000px) {
+    .doc { grid-template-columns: 40px 1fr 48px; gap: 6px 16px; }
+    .d, .m { grid-column: 2; }
+    .dl { grid-column: 3; grid-row: 1 / span 3; }
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>

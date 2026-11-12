@@ -1,0 +1,10 @@
+---
+export const prerender = false;
+import AreaPage from '../../../views/AreaPage.astro';
+import { sites } from '../../../lib/data';
+import { districtsWithListings } from '../../../lib/districts';
+
+const district = districtsWithListings(await sites.allListings()).find((d) => d.slug === Astro.params.slug);
+if (!district) return Astro.rewrite('/404');
+---
+<AreaPage lang="en" district={district} />

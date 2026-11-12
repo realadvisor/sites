@@ -1,0 +1,92 @@
+---
+/**
+ * Contact and register interest: the enquiry form with the unit select
+ * (?lot=<id> preselects one, ?aviso=<plan key> asks to be told when a sold-out
+ * type comes back, ?dossier=1 asks for the documents), the team, the sales
+ * office and its map.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import People from '../components/People.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { legalAgency, loadSite } from '../lib/data';
+import { LOCALE_OF, alternates, fill, tr, type Lang } from '../lib/i18n';
+import { docHref, tel } from '../lib/docs';
+import { kindLabel, planVariants, unitNumber, unitOptions, unitTitle } from '../lib/units';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = tr(lang);
+const site = await loadSite();
+const { dev, org, team } = site;
+const q = Astro.url.searchParams;
+const chosen = dev.units.find((u) => u.id === q.get('lot') && u.status !== 'sold');
+const notify = planVariants(dev.units).find((v) => v.key === q.get('aviso'));
+const options = unitOptions(dev.units, lang);
+const nearest = notify && (dev.units.find((u) => u.status !== 'sold' && notify.units.some((x) => x.bedrooms === u.bedrooms)) ?? undefined);
+const kind = notify ? (notify.kind === 'atico' ? `${t.kinds.atico[0].toLowerCase()} (${notify.bedrooms} ${t.bedroomsShort})` : kindLabel(notify.kind, lang).toLowerCase()) : '';
+const message = chosen
+  ? fill(t.msgUnit, { u: unitNumber(chosen) ? `${t.unit.toLowerCase()} ${unitNumber(chosen)} (${unitTitle(chosen, lang)})` : unitTitle(chosen, lang) })
+  : notify
+    ? fill(t.msgNotify, { k: kind, w: t.wings[notify.wing] })
+    : q.get('dossier') === '1'
+      ? t.msgDossier
+      : t.msgDefault;
+const office = [org.address?.street, [org.address?.postcode, org.address?.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const filtered = q.has('lot') || q.has('aviso') || q.has('dossier');
+---
+<Site
+  site={site}
+  lang={lang}
+  route="contact"
+  title={`${t.contactH1} | ${dev.title}`}
+  description={`${t.contactLead} ${t.sales}: ${org.name}.`}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+  jsonLd={agencyJsonLd(legalAgency(site), Astro.site?.href ?? Astro.url.origin)}
+  alternates={alternates('contact')}
+  noindex={filtered}
+>
+  <div class="wrap grid">
+    <div class="left">
+      <h1>{t.contactH1}</h1>
+      <p class="lede">{t.contactLead}</p>
+      <People site={site} lang={lang} class="people" />
+      <dl class="office">
+        <div><dt>{t.office}</dt><dd>{org.name}{office && <><br />{office}</>}</dd></div>
+        {team?.phone && <div><dt>{t.phone}</dt><dd><a href={tel(team.phone)}>{team.phone}</a></dd></div>}
+        {team?.email && <div><dt>{t.email}</dt><dd><a href={`mailto:${team.email}`}>{team.email}</a></dd></div>}
+        <div><dt>{t.dossier}</dt><dd><a href={docHref('dossier', lang)}>{t.dossierPdf}</a></dd></div>
+      </dl>
+    </div>
+    <div class="right" id="consulta">
+      <h2>{t.formTitle}</h2>
+      {notify && <p class="note">{t.notifyText}</p>}
+      <EnquiryForm id="contacto" developmentId={dev.id} units={options} selectedUnit={chosen?.id ?? nearest?.id} agentName={dev.agents[0]?.first_name} locale={LOCALE_OF[lang]} message={message} />
+    </div>
+  </div>
+  {org.address?.lat != null && org.address?.lng != null && (
+    <section class="wrap map" aria-labelledby="m-h">
+      <h2 id="m-h">{t.office}</h2>
+      <StaticMap lat={org.address.lat} lng={org.address.lng} zoom={16} lang={lang} label={[org.name, office].filter(Boolean).join(', ')} />
+    </section>
+  )}
+</Site>
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 580px); gap: clamp(40px, 7vw, 112px); padding-top: clamp(48px, 6vw, 88px); align-items: start; }
+  h1 { margin-bottom: 20px; }
+  .left :global(.people) { margin-top: 48px; }
+  .office { margin: 48px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .office dt { font-size: 0.875rem; color: var(--muted); margin-bottom: 4px; }
+  .office dd { margin: 0; }
+  .office a { display: inline-block; padding-block: 4px; overflow-wrap: anywhere; }
+  .right { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: clamp(24px, 3.2vw, 44px); scroll-margin-top: 16px; }
+  .right h2 { font-size: 2rem; margin-bottom: 20px; }
+  .note { margin-bottom: 18px; padding: 12px 14px; background: var(--st-re); color: var(--st-re-ink); font-size: 0.9375rem; }
+  .map { margin-top: var(--space-section); }
+  .map h2 { margin-bottom: 20px; }
+  .map { --ratio: 21 / 9; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .office { grid-template-columns: 1fr; } }
+</style>

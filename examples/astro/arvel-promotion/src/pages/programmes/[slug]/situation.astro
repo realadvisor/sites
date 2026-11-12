@@ -1,0 +1,103 @@
+---
+// Location: the neighbourhood (site content), the address on a static map,
+// straight-line distances computed from the coordinates, and place photos.
+export const prerender = false;
+
+import Site from '../../../layouts/Site.astro';
+import Hero from '../../../components/Hero.astro';
+import StaticMap from '../../../components/StaticMap.astro';
+import EnquiryBlock from '../../../components/EnquiryBlock.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { sites } from '../../../lib/data';
+import { contentFor, crowFlies, placePhotos } from '../../../content/programmes';
+import { addressLine } from '../../../lib/fr';
+import { ogImage } from '../../../lib/seo';
+
+const d = await sites.development(Astro.params.slug!);
+if (!d) return Astro.rewrite('/404');
+const c = contentFor(d.slug);
+const photos = placePhotos(c);
+const hero = photos[0] ?? d.photos[0]?.url;
+const placeName = c.placeName ?? d.address.city ?? '';
+const photosOf = c.placePhotosOf ?? placeName;
+const distances = (c.landmarks ?? [])
+  .map((l) => ({ name: l.name, km: crowFlies(d.address, l) }))
+  .filter((l): l is { name: string; km: number } => l.km != null)
+  .sort((a, b) => a.km - b.km);
+const km = (v: number) => (v < 1 ? `${Math.round(v * 10) * 100} m` : `${new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 }).format(v)} km`);
+const address = addressLine(d.address);
+---
+<Site title={`Situation · ${d.title}, ${d.address.city ?? ''} | Arvel Promotion`} description={`${d.title}, ${address}. Le quartier, le plan et les distances.`} image={ogImage(hero)} programme={d} section="situation" current="programmes">
+  <Hero slot="hero" size="band" photo={hero} alt={photosOf} kicker={d.title} title="Situation" line={placeName} />
+
+  <section class="section" aria-labelledby="h-q">
+    <div class="wrap grid">
+      <div class="text">
+        <h2 id="h-q" class="display">Le quartier</h2>
+        {c.situation?.map((p, i) => <p class:list={[i === 0 ? 'lead' : 'muted']}>{p}</p>)}
+        {address && <p class="addr"><span class="lbl">Adresse</span>{address}</p>}
+      </div>
+      {d.address.lat != null && d.address.lng != null && (
+        <div class="reveal"><StaticMap lat={d.address.lat} lng={d.address.lng} label={d.title} /></div>
+      )}
+    </div>
+  </section>
+
+  {distances.length > 0 && (
+    <section class="section section--tight section--deep" aria-labelledby="h-dist">
+      <div class="wrap">
+        <div class="dhead">
+          <h2 id="h-dist" class="h3">À proximité</h2>
+          <p class="muted">Distances à vol d’oiseau, calculées depuis l’adresse de la résidence.</p>
+        </div>
+        <ol class="dist">
+          {distances.map((l) => (
+            <li class="reveal"><span class="km num">{km(l.km)}</span><span class="nm">{l.name}</span></li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  {photos.length > 1 && (
+    <section class="section" aria-labelledby="h-ph">
+      <div class="wrap">
+        <h2 id="h-ph" class="h3 ph-h">{photosOf} en images</h2>
+        <ul class="places">
+          {photos.slice(1, 7).map((p, i) => (
+            <li class:list={['frame', 'settle', `p${i}`]}><RaImage src={p} alt={`${photosOf}, photo ${i + 1}`} width={i === 0 ? 1200 : 720} height={i === 0 ? 800 : 480} sizes={i === 0 ? '(min-width: 900px) 66vw, 100vw' : '(min-width: 900px) 33vw, 50vw'} /></li>
+          ))}
+        </ul>
+        <p class="muted credit">{c.placePhotosOf ? `Photos d’ambiance de ${c.placePhotosOf}, à proximité.` : 'Photos d’ambiance de la ville.'}</p>
+      </div>
+    </section>
+  )}
+
+  <EnquiryBlock programme={d} />
+</Site>
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 48px clamp(40px, 6vw, 112px); align-items: start; }
+  .text { display: grid; gap: 22px; }
+  .text p { margin: 0; max-width: 52ch; }
+  .addr { display: grid; gap: 6px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .lbl { font: 500 0.6875rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .dhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; margin-bottom: 36px; }
+  .dhead p { margin: 0; font-size: var(--fs-small); }
+  .dist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+  .dist li { display: grid; gap: 10px; padding: 32px 28px 28px 0; border-bottom: 1px solid var(--line); }
+  .dist li + li { padding-left: 28px; border-left: 1px solid var(--line); }
+  .km { font: 500 clamp(2.4rem, 4vw, 3.6rem) / 1 var(--serif); color: var(--brass); }
+  .nm { font-size: var(--fs-small); }
+  .ph-h { margin-bottom: 28px; }
+  .places { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .places li { aspect-ratio: 3 / 2; }
+  .places .p0 { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .credit { font-size: 0.8125rem; margin-top: 16px; }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .dist { grid-template-columns: 1fr; }
+    .dist li, .dist li + li { padding: 22px 0; border-left: 0; }
+    .places { grid-template-columns: 1fr 1fr; }
+    .places .p0 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 3 / 2; }
+  }
+</style>

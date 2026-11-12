@@ -1,0 +1,92 @@
+---
+/**
+ * Affordability calculator (Swiss rules, stated assumptions, indicative).
+ * Server-rendered with example inputs; a small bundled script recomputes on
+ * input. No market figures: the 5 % is the banks' notional rate, said so.
+ */
+import { afford, chf, defaults, group, pct } from '../lib/afford';
+import { LOCALE, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+interface Props { l: L; price: number; id?: string; heading?: 'h2' | 'h3'; tone?: 'paper' | 'white' }
+const { l, price, id = 'calc', heading: H = 'h2', tone = 'paper' } = Astro.props;
+const t = tx(l);
+const d = defaults(price);
+const r = afford(d.price, d.own, d.income);
+const locale = LOCALE[l];
+const f = (n: string) => `${id}-${n}`;
+---
+<section class:list={['calc', `calc--${tone}`]} aria-labelledby={f('h')} data-calc data-locale={locale}
+  data-ok={t('calcOk')} data-no={t('calcNo')} data-own-low={t('calcOwnLow')}>
+  <div class="calc__head">
+    <H id={f('h')} class="calc__title">{t('calcTitle')}</H>
+    <p class="calc__lede">{t('calcLede')}</p>
+  </div>
+  <div class="calc__grid">
+    <div class="calc__inputs">
+      {[['price', t('calcPrice'), d.price], ['own', t('calcOwn'), d.own], ['income', t('calcIncome'), d.income]].map(([n, label, v]) => (
+        <div class="calc__field">
+          <label for={f(String(n))}>{label}</label>
+          <div class="calc__control"><span aria-hidden="true">CHF</span><input id={f(String(n))} name={String(n)} type="text" inputmode="numeric" autocomplete="off" value={group(Number(v))} /></div>
+        </div>
+      ))}
+    </div>
+    <div class="calc__out" aria-live="polite">
+      <dl>
+        <div><dt>{t('calcMortgage')}</dt><dd class="num" data-out="mortgage">{chf(r.mortgage)}</dd></div>
+        <div><dt>{t('calcLtv')}</dt><dd class="num" data-out="ltv">{pct(r.ltv, locale)}</dd></div>
+        <div><dt>{t('calcCosts')}</dt><dd class="num big" data-out="monthly">{chf(r.monthly)}</dd></div>
+        <div><dt>{t('calcShare')}</dt><dd class="num" data-out="share">{pct(r.share, locale)}</dd></div>
+      </dl>
+      <p class="calc__verdict" data-out="verdict" data-state={r.ok ? 'ok' : 'no'}>{!r.ownOk ? t('calcOwnLow') : r.ok ? t('calcOk') : t('calcNo')}</p>
+    </div>
+    <div class="calc__notes">
+      <p class="calc__k">{t('calcAssume')}</p>
+      <ul>
+        <li>{t('calcA1')}</li>
+        <li>{t('calcA2')}</li>
+        <li>{t('calcA3')}</li>
+        <li>{t('calcA4')}</li>
+      </ul>
+      <p class="calc__note">{t('calcNote')}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/calc';
+</script>
+
+<style>
+  .calc { display: grid; gap: 28px; padding: clamp(24px, 3.5vw, 48px); container-type: inline-size; }
+  .calc--paper { background: var(--paper); }
+  .calc--white { background: #fff; border: 1px solid var(--line); }
+  .calc__head { display: grid; gap: 10px; max-width: 64ch; }
+  .calc__title { font-size: var(--step-3); color: var(--green-ink); }
+  .calc__lede { color: var(--muted); }
+  .calc__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 44px); align-items: start; }
+  .calc__inputs { display: grid; gap: 18px; }
+  .calc__field { display: grid; gap: 6px; }
+  .calc__field label { font-weight: 600; font-size: 0.9375rem; }
+  .calc__control { display: flex; align-items: center; height: var(--control-h); border: 1px solid var(--line-strong); background: #fff; border-radius: var(--control-radius); }
+  .calc__control span { padding-left: 14px; color: var(--muted); font-size: 0.9375rem; }
+  .calc__control input { flex: 1; min-width: 0; height: 100%; border: 0; background: none; padding: 0 14px 0 8px; font: 500 1.0625rem var(--font-sans); font-variant-numeric: tabular-nums; color: var(--text); }
+  .calc__control:focus-within { outline: 2px solid var(--green); outline-offset: 2px; }
+  .calc__control input:focus-visible { outline: none; }
+  .calc__out { background: var(--green); color: #fff; padding: 24px; display: grid; gap: 18px; }
+  .calc__out dl { display: grid; }
+  .calc__out dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line-on-green); }
+  .calc__out dt { color: var(--on-green-muted); font-size: 0.9375rem; }
+  .calc__out dd { font-weight: 600; white-space: nowrap; }
+  .calc__out dd.big { font: 400 1.625rem/1 var(--font-display); }
+  .calc__verdict { font-weight: 600; display: flex; gap: 10px; align-items: center; }
+  .calc__verdict::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--mint); flex: none; }
+  .calc__verdict[data-state='no']::before { background: #f0b27a; }
+  .calc__notes { font-size: 0.9375rem; color: var(--muted); display: grid; gap: 10px; }
+  .calc__k { font-weight: 600; color: var(--text); }
+  .calc__notes ul { padding-left: 1.1em; display: grid; gap: 6px; }
+  .calc__note { font-size: 0.875rem; border-top: 1px solid var(--line); padding-top: 10px; }
+  @container (max-width: 900px) { .calc__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .calc__notes { grid-column: 1 / -1; } }
+  @container (max-width: 540px) { .calc__grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) { .calc { padding: 22px 18px; } }
+</style>

@@ -1,0 +1,59 @@
+---
+/**
+ * Document shell: <head> SEO tags, fonts, global styles. The page design is
+ * in layouts/Site.astro (header, footer) and the pages.
+ */
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit/seo';
+import ConsentBanner from '@realadvisor/sites-kit/components/ConsentBanner.astro';
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '@fontsource-variable/inter/wght.css';
+import display from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute URL, ~1200x630: the page's main photo. */
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+}
+const { title, description, jsonLd, noindex, image } = Astro.props;
+const locale = 'de-CH';
+const base = Astro.site ?? Astro.url;
+const canonical = canonicalUrl(Astro.url, base);
+const gaId = analyticsId();
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#E4572E" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="de_CH" />
+    {image && <meta property="og:image" content={image} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={display} />
+    {/* Guard: nothing may undo `hidden` (an invisible open menu layer blocks every click). Never remove. */}
+    <style is:inline>[hidden]{display:none!important}</style>
+    {jsonLd && <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />}
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    {gaId && <ConsentBanner analyticsId={gaId} locale={locale} />}
+  </body>
+</html>

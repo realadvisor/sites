@@ -1,0 +1,34 @@
+/* Scoped to the drawing (.iso): the Astro component's <style>. */
+.iso.iso { margin: 0; }
+.iso svg { width: 100%; height: auto; overflow: visible; }
+.iso .ground { fill: var(--sand); stroke: none; }
+.iso .top { fill: var(--surface); stroke: var(--line-strong); stroke-width: 0.06; stroke-linejoin: round; }
+.iso .u { cursor: pointer; outline: none; }
+.iso .u .f { stroke-width: 0.07; stroke-linejoin: round; transition: fill 0.2s var(--ease); }
+.iso .u.available .f { fill: var(--st-av); stroke: var(--st-av-edge); }
+.iso .u.reserved .f { fill: var(--st-re); stroke: var(--st-re-edge); }
+.iso .u.sold .f { fill: var(--st-so); stroke: var(--st-so-edge); }
+.iso .u .shade { fill: #2a251f; opacity: 0.12; pointer-events: none; }
+.iso .u text { font: 600 1.2px/1 var(--sans); fill: var(--text); text-anchor: middle; pointer-events: none; }
+.iso .u.sold text { fill: var(--st-so-ink); }
+.iso .u.is-hot .f, .iso .u:hover .f, .iso .u:focus-visible .f { fill: var(--accent); stroke: var(--accent-strong); stroke-width: 0.12; }
+.iso .u.is-hot text, .iso .u:hover text, .iso .u:focus-visible text { fill: #fff; }
+.iso .u.is-dim { opacity: 0.28; }
+.iso.single .u.is-current { cursor: default; }
+.iso.single a.u:hover .f, .iso.single a.u:focus-visible .f { fill: var(--sand, #efe6d8); stroke: var(--accent); }
+.iso.single a.u:hover text, .iso.single a.u:focus-visible text { fill: var(--text); }
+.iso.single a.u:focus-visible .f { stroke-width: 0.25; }
+.iso.single .u:not(.is-current) .f { fill: var(--paper); stroke: var(--line-strong); }
+.iso.single .u:not(.is-current) text { fill: var(--muted); font-weight: 500; }
+.iso.single .u.is-current .f { fill: var(--accent); stroke: var(--accent-strong); stroke-width: 0.12; }
+.iso.single .u.is-current text { fill: #fff; }
+.iso .bname { font: 400 2px/1 var(--serif); fill: var(--text); }
+.iso figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; margin-top: 16px; font-size: 0.875rem; color: var(--muted); }
+.iso .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; }
+.iso .legend li { display: inline-flex; align-items: center; gap: 8px; }
+.iso .sw { width: 14px; height: 14px; border-radius: 3px; border: 1px solid; }
+.iso .sw.available { background: var(--st-av); border-color: var(--st-av-edge); }
+.iso .sw.reserved { background: var(--st-re); border-color: var(--st-re-edge); }
+.iso .sw.sold { background: var(--st-so); border-color: var(--st-so-edge); }
+.iso.single .legend { display: none; }
+@media (prefers-reduced-motion: reduce) { .iso .u .f { transition: none; } }

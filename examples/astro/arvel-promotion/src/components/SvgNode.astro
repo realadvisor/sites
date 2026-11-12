@@ -1,0 +1,13 @@
+---
+/** Renders a plans.ts element tree as inline SVG (no set:html). */
+import type { Node } from '../lib/plans';
+interface Props { node: Node | string }
+const { node } = Astro.props;
+const Tag = typeof node === 'string' ? null : (node.t as any);
+const attrs = typeof node === 'string' ? {} : { ...(node.a ?? {}) };
+if (typeof node !== 'string' && node.t === 'svg') {
+  delete (attrs as Record<string, unknown>).width;
+  delete (attrs as Record<string, unknown>).height;
+}
+---
+{typeof node === 'string' ? node : <Tag {...attrs}>{node.c?.map((c) => <Astro.self node={c} />)}</Tag>}

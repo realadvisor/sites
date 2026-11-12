@@ -1,0 +1,262 @@
+---
+// Units: the stacking plan of the building and the sortable table, filtered
+// by rooms and "only available". Filters and sort are GET parameters (work
+// without JS, shareable); a small script applies them in place.
+export const prerender = false;
+
+import Site from '../../layouts/Site.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import StackingPlan from '../../components/StackingPlan.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import Arrow from '../../components/Arrow.astro';
+import TypeStrip from '../../components/TypeStrip.astro';
+import { loadSite, unitExtra } from '../../lib/data';
+import {
+  deliveryLabel, floorName, formatSurface, orientation, outdoor, planFor, sortUnits, statusLabel, unitPath, unitPrice, unitTypes,
+} from '../../lib/units';
+import { BROCHURE } from '../../lib/nav';
+
+const site = await loadSite();
+const { dev } = site;
+const types = unitTypes(dev.units);
+const q = Astro.url.searchParams;
+const roomsParam = Number(q.get('pieces'));
+const rooms = types.some((t) => t.rooms === roomsParam) ? roomsParam : null;
+const onlyAvailable = q.get('dispo') === '1';
+const SORTS = ['etage', 'pieces', 'surface', 'prix'] as const;
+type Sort = (typeof SORTS)[number];
+const sort: Sort = (SORTS as readonly string[]).includes(q.get('tri') ?? '') ? (q.get('tri') as Sort) : 'etage';
+const desc = q.get('ordre') === 'desc';
+
+const key = (u: (typeof dev.units)[number]): number => {
+  if (sort === 'pieces') return u.rooms ?? 0;
+  if (sort === 'surface') return u.living_surface ?? 0;
+  if (sort === 'prix') return u.status === 'available' && u.price ? u.price : Number.MAX_SAFE_INTEGER;
+  return (u.floor ?? 0) * 100 + (unitExtra(u).position ?? 0); // fixture only: position on the floor
+};
+const base = sortUnits(dev.units);
+const MAX = Number.MAX_SAFE_INTEGER;
+// Units without a public price stay last in both directions.
+const rows = [...base].sort((a, b) => {
+  const ka = key(a), kb = key(b);
+  if (ka === MAX || kb === MAX) return ka === kb ? 0 : ka === MAX ? 1 : -1;
+  return (ka - kb) * (desc ? -1 : 1);
+});
+const match = (u: (typeof dev.units)[number]) => (rooms == null || u.rooms === rooms) && (!onlyAvailable || u.status === 'available');
+const shown = dev.units.filter(match).length;
+
+const href = (p: Record<string, string | null>) => {
+  const s = new URLSearchParams();
+  const all = { pieces: rooms != null ? String(rooms) : null, dispo: onlyAvailable ? '1' : null, tri: sort === 'etage' ? null : sort, ordre: desc ? 'desc' : null, ...p };
+  for (const [k, v] of Object.entries(all)) if (v) s.set(k, v);
+  const str = s.toString();
+  return `/appartements${str ? `?${str}` : ''}#lots`;
+};
+const sortHref = (s: Sort) => href({ tri: s === 'etage' ? null : s, ordre: sort === s && !desc ? 'desc' : null });
+const ariaSort = (s: Sort) => (sort === s ? (desc ? 'descending' : 'ascending') : undefined);
+const heading = rooms != null ? `Appartements de ${types.find((t) => t.rooms === rooms)!.label}` : 'Les appartements';
+const title = `${heading}${onlyAvailable ? ' disponibles' : ''} | ${dev.title}`;
+const delivery = deliveryLabel(dev);
+---
+<Site
+  site={site}
+  title={title}
+  description={`${dev.units.length} appartements du ${types[0]?.label ?? ''} au ${types[types.length - 1]?.label ?? ''} aux ${dev.title.replace(/^Les /, "")}, ${dev.address.city}. Plan de l’immeuble, surfaces, prix et disponibilités.`}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+>
+  <section class="intro wrap">
+    <h1>{heading}{onlyAvailable && ' disponibles'}</h1>
+    <p class="lede">Choisissez un lot dans l’immeuble ou dans la liste : plan, surfaces, orientation et prix sur sa page.{delivery && ` Livraison prévue en ${delivery}.`}</p>
+  </section>
+
+  <form class="filters wrap" method="get" action="/appartements#lots" data-filters aria-label="Filtrer les appartements">
+    <fieldset class="types">
+      <legend class="sr-only">Nombre de pièces</legend>
+      <label class="chip"><input type="radio" name="pieces" value="" checked={rooms == null} /><span>Tous</span></label>
+      {types.map((t) => (
+        <label class="chip">
+          <input type="radio" name="pieces" value={String(t.rooms)} checked={rooms === t.rooms} />
+          <span><b>{t.rooms}</b> pièces <small>{t.available.length} dispo.</small></span>
+        </label>
+      ))}
+    </fieldset>
+    <label class="only">
+      <input type="checkbox" name="dispo" value="1" checked={onlyAvailable} />
+      <span>Disponibles uniquement</span>
+    </label>
+    {sort !== 'etage' && <input type="hidden" name="tri" value={sort} />}
+    {desc && <input type="hidden" name="ordre" value="desc" />}
+    <button class="button ghost apply" type="submit" data-apply>Afficher</button>
+    <p class="count" aria-live="polite"><span data-count>{shown}</span> <span data-count-label>{shown > 1 ? 'lots' : 'lot'}</span> sur {dev.units.length}</p>
+  </form>
+
+  <section class="plan-sec wrap" aria-labelledby="plan-h">
+    <h2 id="plan-h" class="sr-only">Plan de l’immeuble</h2>
+    <div class="plan-grid">
+      <StackingPlan units={dev.units} rooms={rooms} onlyAvailable={onlyAvailable} />
+      <aside class="aside">
+        <ul class="legend">
+          <li><span class="sw available"></span>Disponible</li>
+          <li><span class="sw reserved"></span>Réservé</li>
+          <li><span class="sw sold"></span>Vendu</li>
+        </ul>
+        <p class="muted small">La largeur de chaque lot suit sa surface habitable. Les prix des lots réservés et vendus ne sont pas publiés.</p>
+        <a class="link" href={BROCHURE} download>Brochure (PDF) <Arrow dir="down" /></a>
+        <a class="link" href="/documents">Plans et liste de prix <Arrow /></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="table-sec wrap" id="lots" aria-labelledby="t-h">
+    <h2 id="t-h">Liste des lots</h2>
+    <div class="table" data-table>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Lot</th>
+            <th scope="col" aria-sort={ariaSort('pieces')}><a href={sortHref('pieces')} data-sort="pieces">Pièces</a></th>
+            <th scope="col" aria-sort={ariaSort('etage')}><a href={sortHref('etage')} data-sort="etage">Étage</a></th>
+            <th scope="col" class="r" aria-sort={ariaSort('surface')}><a href={sortHref('surface')} data-sort="surface">Surface</a></th>
+            <th scope="col" class="r">Extérieur</th>
+            <th scope="col">Orientation</th>
+            <th scope="col" class="r" aria-sort={ariaSort('prix')}><a href={sortHref('prix')} data-sort="prix">Prix</a></th>
+            <th scope="col">Statut</th>
+            <th scope="col"><span class="sr-only">Plan</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((u) => {
+            const x = unitExtra(u); // fixture only: unit number, position
+            const o = outdoor(u);
+            const plan = planFor(u, dev.units);
+            return (
+              <tr
+                class:list={[u.status, { hide: !match(u) }]}
+                data-row
+                data-rooms={u.rooms}
+                data-status={u.status}
+                data-k-etage={(u.floor ?? 0) * 100 + (x.position ?? 0)}
+                data-k-pieces={u.rooms ?? 0}
+                data-k-surface={u.living_surface ?? 0}
+                data-k-prix={u.status === 'available' && u.price ? u.price : ''}
+              >
+                <td class="no" data-l="Lot">{x.unit_number ?? '–'}</td>
+                <td class="rooms"><a href={unitPath(u)}>{u.rooms != null ? `${u.rooms} pièces` : 'Lot'}<span class="sr-only">, {floorName(u)}</span></a></td>
+                <td class="floor" data-l="Étage">{floorName(u)}</td>
+                <td class="r num surf" data-l="Surface">{formatSurface(u.living_surface)}</td>
+                <td class="r num out" data-l={o?.kind === 'garden' ? 'Jardin' : 'Terrasse'}>{o ? formatSurface(o.m2) : '–'}</td>
+                <td class="ori" data-l="Orientation">{orientation(u) || '–'}</td>
+                <td class="r num price">{u.status === 'available' ? unitPrice(u) : '–'}</td>
+                <td class="st"><span class:list={['status', u.status]}>{statusLabel(u)}</span></td>
+                <td class="plan">{plan && <a href={unitPath(u)} class="plan-link" aria-label={`Plan et détails, ${u.rooms} pièces, ${floorName(u)}`}>Plan <Arrow /></a>}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <p class="empty" data-empty hidden={shown > 0}>Aucun lot ne correspond. <a href="/appartements#lots">Voir tous les lots</a></p>
+    </div>
+    <p class="note muted small">Surfaces habitables indicatives. Orientation, numéros de lot et surfaces extérieures selon les plans de vente.</p>
+  </section>
+
+  {types.length > 0 && (
+    <section class="typologies" aria-labelledby="typ-h">
+      <div class="wrap">
+        <h2 id="typ-h">Plans par typologie</h2>
+        <TypeStrip types={types} />
+      </div>
+    </section>
+  )}
+
+  <ContactBand site={site} heading="Réserver une visite de l’espace de vente" />
+</Site>
+
+<script>
+  import '../../scripts/units-filter';
+</script>
+
+<style>
+  .typologies { padding-block: clamp(64px, 8vw, 120px); background: var(--paper); border-top: 1px solid var(--line); }
+  .typologies h2 { margin: 0 0 clamp(32px, 4vw, 52px); }
+  .intro { padding-block: clamp(56px, 7vw, 104px) 40px; }
+  .intro h1 { margin: 0 0 24px; }
+
+  .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding-block: 24px; border-block: 1px solid var(--line); position: sticky; top: var(--header-h); z-index: 20; background: rgb(246 242 235 / 0.97); }
+  .types { display: flex; flex-wrap: wrap; gap: 8px; border: 0; margin: 0; padding: 0; min-width: 0; min-inline-size: 0; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span { display: inline-flex; align-items: baseline; gap: 6px; min-height: 44px; padding: 12px 16px; border: 1px solid var(--line-strong); font-size: 0.875rem; transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease); }
+  .chip b { font: 500 1.125rem/1 var(--serif); }
+  .chip small { font-size: 0.75rem; color: var(--muted); }
+  .chip input:checked + span { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .chip input:checked + span small { color: #d9d0c2; }
+  .chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .chip:hover span { border-color: var(--text); }
+  .only { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; font-size: 0.9375rem; }
+  .only input { width: 20px; height: 20px; accent-color: var(--accent); margin: 0; }
+  .count { margin-left: auto; font-size: 0.9375rem; color: var(--muted); }
+  .count [data-count] { font: 500 1.5rem/1 var(--serif); color: var(--text); }
+  :global(.js) .apply { display: none; }
+
+  .plan-sec { padding-block: clamp(40px, 5vw, 72px); }
+  .plan-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; align-items: start; }
+  .aside { display: grid; gap: 20px; padding-top: 22px; position: sticky; top: calc(var(--header-h) + 120px); }
+  .legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 0.9375rem; }
+  .sw { display: inline-block; width: 22px; height: 14px; margin-right: 12px; vertical-align: -2px; }
+  .sw.available { background: var(--av-bg); box-shadow: inset 0 0 0 1px var(--av-dot); }
+  .sw.reserved { background: var(--re-bg); box-shadow: inset 0 0 0 1px var(--re-dot); }
+  .sw.sold { background: var(--so-bg); box-shadow: inset 0 0 0 1px var(--so-dot); }
+  .small { font-size: 0.875rem; line-height: 1.6; }
+  .aside .link { justify-self: start; }
+
+  .table-sec { padding-bottom: var(--space-section); }
+  .table-sec h2 { margin-bottom: 28px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  th { text-align: left; font: 600 0.6875rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 14px 12px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+  th a { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; min-height: 28px; }
+  th a::after { content: '↕'; font-size: 0.75rem; opacity: 0.45; letter-spacing: 0; }
+  th[aria-sort='ascending'] a::after { content: '↑'; opacity: 1; }
+  th[aria-sort='descending'] a::after { content: '↓'; opacity: 1; }
+  th[aria-sort] { color: var(--text); }
+  td { padding: 16px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: middle; }
+  .r { text-align: right; }
+  th.r a { justify-content: flex-end; }
+  tbody tr { transition: background-color 0.3s var(--ease); }
+  tbody tr:hover { background: var(--paper); }
+  tr.hide { display: none; }
+  tr.sold td:not(.st) { color: var(--muted); }
+  td.no { font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.06em; color: var(--muted); }
+  td.rooms a { font: 500 1.375rem/1 var(--serif); text-decoration: none; }
+  td.rooms a:hover { text-decoration: underline; }
+  td.price { font-weight: 600; }
+  .plan-link { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; font: 600 0.75rem/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--accent); }
+  .empty { padding: 32px 0; }
+  .note { margin-top: 20px; }
+
+  @media (max-width: 1000px) {
+    .plan-grid { grid-template-columns: 1fr; }
+    .aside { position: static; grid-template-columns: 1fr; padding-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  }
+  @media (max-width: 760px) {
+    .filters { position: static; gap: 12px 16px; }
+    .types { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scrollbar-width: none; width: calc(100% + 2 * var(--gutter)); }
+    .chip span { white-space: nowrap; }
+    .count { margin-left: 0; }
+    thead { display: none; }
+    table, tbody, tr, td { display: block; }
+    tbody { display: grid; gap: 10px; }
+    tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; padding: 16px; border: 1px solid var(--line); background: var(--paper); }
+    tbody tr.hide { display: none; }
+    td { padding: 0; border: 0; white-space: normal; }
+    td.no { grid-column: 1; grid-row: 1; }
+    td.no::before { content: 'Lot '; }
+    td.st { grid-column: 2; grid-row: 1; justify-self: end; }
+    td.rooms { grid-column: 1; }
+    td.price { grid-column: 2; grid-row: 2; align-self: center; text-align: right; }
+    td.floor, td.surf, td.out, td.ori { grid-column: 1 / -1; font-size: 0.875rem; color: var(--muted); display: flex; gap: 8px; }
+    td.floor::before, td.surf::before, td.out::before, td.ori::before { content: attr(data-l); min-width: 104px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    td.plan { grid-column: 1 / -1; }
+    .r { text-align: left; }
+  }
+</style>

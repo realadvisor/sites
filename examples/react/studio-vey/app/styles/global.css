@@ -1,0 +1,98 @@
+@import './tokens.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.0625rem/1.6 var(--sans);
+  font-feature-settings: 'ss01';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body.is-locked { overflow: hidden; }
+img, svg, picture { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.1; letter-spacing: -0.012em; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.on-accent :focus-visible { outline-color: var(--on-accent); }
+::selection { background: var(--tint); }
+
+.wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+.narrow { max-width: 780px; }
+.section { padding-block: var(--section); }
+.section-tight { padding-block: clamp(56px, 6vw, 96px); }
+/* Vertical rhythm: two plain (same background) bands in a row share one gap,
+   the bottom padding of the first. Tinted bands keep their full padding on both sides.
+   Doubled class: beats the component-scoped padding of Collection. */
+.flow + .flow.flow { padding-top: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip { position: absolute; left: 16px; top: -100px; z-index: 100; padding: 12px 18px; background: var(--accent); color: var(--on-accent); text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* Small spaced capitals: labels, eyebrows, nav. */
+.caps { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; }
+.eyebrow { display: inline-block; font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid currentColor; }
+.muted { color: var(--muted); }
+.lede { font: 400 var(--fs-lede)/1.55 var(--serif); color: var(--text); }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.h-display { font-size: var(--fs-display); line-height: 1.04; }
+.h1 { font-size: var(--fs-h1); line-height: 1.06; }
+.h2 { font-size: var(--fs-h2); }
+.h3 { font-size: var(--fs-h3); line-height: 1.2; }
+
+/* Buttons: hairline outline by default, ink-filled for the main action. */
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--control-h); padding: 0 26px;
+  font: 500 0.8125rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text); background: transparent; border: 1px solid currentColor; border-radius: var(--radius-btn);
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.button:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+.button--solid { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.button--solid:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: var(--on-accent); }
+.button--light { color: var(--on-accent); border-color: var(--on-accent); }
+.button--light:hover { background: var(--on-accent); color: var(--accent); border-color: var(--on-accent); }
+
+/* Arrow text link. */
+.more { display: inline-flex; align-items: center; gap: 10px; font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; min-height: 44px; }
+.more::after { content: ''; width: 22px; height: 1px; background: currentColor; transition: width .2s; }
+.more:hover::after { width: 34px; }
+
+/* Rich text from the data (sanitized) and from the journal. */
+.prose { font-size: 1.0625rem; line-height: 1.7; max-width: 66ch; }
+.prose > * + * { margin-top: 1.1em; }
+.prose h2 { font-size: var(--fs-h3); margin-top: 2em; }
+.prose h3, .prose h4 { font-size: 1.1875rem; margin-top: 1.8em; }
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose li + li { margin-top: .4em; }
+.prose strong { font-weight: 600; }
+
+/* Kit enquiry form, themed. */
+.enquiry .enquiry-grid { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 20px; }
+.enquiry .enquiry-full { grid-column: 1 / -1; }
+.enquiry .enquiry-grid > div:nth-child(3) { grid-column: 1 / -1; }
+@media (max-width: 640px) { .enquiry .enquiry-grid { grid-template-columns: minmax(0, 1fr); } }
+.enquiry .field-label { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.enquiry .control { background: var(--paper); }
+.enquiry .field-error { margin: 6px 0 0; color: var(--danger); font-size: var(--fs-small); }
+.enquiry .btn { font: 500 0.8125rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; padding: 0 28px; background: var(--accent); border-color: var(--accent); }
+.enquiry .btn:hover { background: var(--accent-strong); }
+.enquiry .enquiry-note { margin-top: 16px; font-size: var(--fs-small); color: var(--muted); }
+.enquiry .enquiry-status { margin-bottom: 16px; padding: 14px 16px; background: var(--surface); border-left: 2px solid var(--accent); }
+
+/* Photo fallback tile: no photo, the property type. */
+.nophoto { display: grid; place-items: center; width: 100%; height: 100%; background: var(--surface); color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

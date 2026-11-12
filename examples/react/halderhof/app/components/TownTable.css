@@ -1,0 +1,8 @@
+  .tt { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .tt th, .tt td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  .tt thead th { font-weight: 500; color: var(--muted); font-size: 0.875rem; border-bottom-color: var(--line-strong); }
+  .tt tbody th { font-weight: 600; }
+  .tt .n { text-align: right; width: 5.5rem; }
+  .tt .p { text-align: right; white-space: nowrap; }
+  .tt a { color: var(--green); font-weight: 600; display: inline-flex; min-width: 32px; min-height: 32px; align-items: center; justify-content: flex-end; }
+  @media (max-width: 560px) { .tt .p { white-space: normal; } .tt .n { width: auto; } }

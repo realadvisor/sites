@@ -1,0 +1,6 @@
+.groups { display: grid; gap: 56px; }
+.group { display: grid; gap: 20px; }
+@media (min-width: 960px) { .group { grid-template-columns: 260px minmax(0, 1fr); gap: 40px; } }
+.group__head { display: grid; gap: 4px; align-content: start; }
+.people { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+.people > li { padding-top: 18px; border-top: 1px solid var(--line); }

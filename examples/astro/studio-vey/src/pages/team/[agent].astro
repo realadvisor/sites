@@ -1,0 +1,103 @@
+---
+export const prerender = false;
+
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SoldList from '../../components/SoldList.astro';
+import ListingCard from '../../components/ListingCard.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { agentSlug, brandName, site, sites } from '../../lib/data';
+import { fullName, languages, telHref } from '../../lib/format';
+
+const s = await site();
+const agent = s.agents.find((a) => agentSlug(a) === Astro.params.agent);
+if (!agent) return Astro.rewrite('/404');
+
+const mine = (await sites.allListings()).filter((l) => l.agent?.id === agent.id);
+const active = mine.filter((l) => l.status === 'available');
+const sold = mine.filter((l) => l.status === 'sold');
+const name = fullName(agent);
+const posts = (await getCollection('journal')).filter((p) => p.data.author === name).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const photo = active.find((l) => l.photos[0])?.photos[0];
+const langs = languages(agent.languages);
+const cities = [...new Set(mine.map((l) => l.address.city).filter(Boolean))] as string[];
+---
+<Layout title={`${name} | ${brandName(s)}`} description={`${name}, ${brandName(s)}${cities.length ? `: Objekte in ${cities.join(', ')}` : ''}.`} image={photo && img(photo.url, { w: 1200, h: 630 })}>
+  <section class="ah">
+    <div class="wrap ah-in">
+      <div class="ah-text">
+        <p class="ah-back"><a href="/team">Team</a></p>
+        <h1 class="h1">{name}</h1>
+        {agent.title && <p class="caps muted">{agent.title}</p>}
+        {agent.bio && <p class="lede">{agent.bio}</p>}
+        <dl class="ah-facts">
+          {langs && <div><dt>Sprachen</dt><dd>{langs}</dd></div>}
+          {cities.length > 0 && <div><dt>Objekte in</dt><dd>{cities.join(', ')}</dd></div>}
+          {agent.phone && <div><dt>Telefon</dt><dd><a href={telHref(agent.phone)}>{agent.phone}</a></dd></div>}
+          {agent.email && <div><dt>E-Mail</dt><dd><a href={`mailto:${agent.email}`}>{agent.email}</a></dd></div>}
+        </dl>
+      </div>
+      {agent.photo && (
+        <div class="ah-photo"><RaImage src={agent.photo.url} alt={name} width={880} height={1100} priority sizes="(min-width: 1024px) 400px, (min-width: 640px) 320px, 100vw" mobile={{ width: 640, height: 800, sizes: '(min-width: 400px) 320px, 100vw' }} /></div>
+      )}
+    </div>
+  </section>
+
+  {active.length > 0 && (
+    <section class="wrap section-tight flow" aria-labelledby="h-active">
+      <header class="sec"><h2 class="h2" id="h-active">{active.length === 1 ? 'Ein Objekt' : `${active.length} Objekte`} von {agent.first_name}</h2></header>
+      <ul class="grid">{active.map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+    </section>
+  )}
+  {sold.length > 0 && (
+    <section class="wrap section-tight flow" aria-labelledby="h-sold">
+      <header class="sec"><h2 class="h2" id="h-sold">Zuletzt vermittelt</h2></header>
+      <div class="sold-list"><SoldList listings={sold} /></div>
+    </section>
+  )}
+  {posts.length > 0 && (
+    <section class="wrap section-tight flow" aria-labelledby="h-posts">
+      <header class="sec"><h2 class="h2" id="h-posts">Beiträge von {agent.first_name}</h2></header>
+      <ul class="grid">{posts.map((p) => <li><JournalCard post={p} /></li>)}</ul>
+    </section>
+  )}
+
+  <section class="enq section" aria-labelledby="h-contact">
+    <div class="wrap enq-in">
+      <div>
+        <h2 class="h2" id="h-contact">Schreiben Sie {agent.first_name}</h2>
+      </div>
+      <EnquiryForm agentId={agent.id} agentName={agent.first_name} contactReason="other" />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .ah { background: var(--surface); }
+  .ah-in { padding-block: clamp(56px, 7vw, 112px); }
+  .ah-in:has(.ah-photo) { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(40px, 6vw, 112px); align-items: center; }
+  .ah-photo { aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper); max-width: 400px; width: 100%; justify-self: end; }
+  .ah-photo :global(picture) { display: contents; }
+  .ah-photo :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .ah-text { display: grid; gap: 18px; justify-items: start; }
+  .ah-back { font-size: var(--fs-small); }
+  .ah-back a::before { content: '← '; }
+  .ah-facts { margin: 12px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: 16px 56px; }
+  .ah-facts dt { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .ah-facts dd { margin: 0; }
+  .ah-facts a { text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(28px, 3vw, 44px); }
+  .grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  .enq { background: var(--surface); margin-top: clamp(40px, 5vw, 72px); }
+  .enq-in { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 40px clamp(40px, 6vw, 112px); }
+  .enq-in > div { display: grid; gap: 18px; align-content: start; justify-items: start; }
+  @media (max-width: 1023px) { .ah-in:has(.ah-photo) { grid-template-columns: minmax(0, 1fr); } .ah-photo { order: -1; justify-self: start; max-width: 320px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .enq-in { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 639px) {
+    .ah-facts { grid-template-columns: minmax(0, 1fr); }
+    .grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  }
+  .sold-list { max-width: 760px; }
+</style>

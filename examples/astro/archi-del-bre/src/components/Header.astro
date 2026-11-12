@@ -1,0 +1,131 @@
+---
+/**
+ * Header: wordmark left, links and the language switch in the middle, the
+ * brochure button right (no hero form: the brochure is a header button).
+ * Phone: wordmark and a menu button (44x44, Escape closes, scroll locked).
+ * The shortlist count appears once a unit is saved (bundled script).
+ */
+import type { Site } from '../lib/data';
+import { href, LOCALE, type L, type RouteKey } from '../lib/routes';
+import { c } from '../lib/copy';
+import { brochure } from '../lib/docs';
+
+interface Props { site: Site; l: L; route: RouteKey | 'unit' | '404'; alternates?: { lang: string; href: string }[] }
+const { site, l, route, alternates } = Astro.props;
+const NAV: { key: RouteKey; label: string }[] = [
+  { key: 'units', label: c('units', l) },
+  { key: 'location', label: c('location', l) },
+  { key: 'gallery', label: c('gallery', l) },
+  { key: 'documents', label: c('documents', l) },
+  { key: 'contact', label: c('contact', l) },
+];
+const active = (k: RouteKey) => (k === route || (k === 'units' && (route === 'unit' || route === 'compare')) ? 'page' : undefined);
+const other = (['it', 'de'] as const).map((x) => ({ l: x, href: alternates?.find((a) => a.lang === LOCALE[x])?.href ?? href('home', x) }));
+const pdf = brochure(l);
+const city = site.dev.address.city;
+---
+<header class="site-header" data-header>
+  <div class="bar wrap">
+    <a class="mark" href={href('home', l)}>
+      <span class="name">{site.dev.title.replace(/^Residenza\s+/i, '')}</span>
+      <span class="place">Castagnola{city ? ` · ${city}` : ''}</span>
+    </a>
+    <nav class="nav" aria-label={c('mainNav', l)}>
+      <ul>
+        {NAV.map((n) => <li><a href={href(n.key, l)} aria-current={active(n.key)}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="tools">
+      <a class="fav" href={href('compare', l)} data-fav-link hidden>
+        {c('favourites', l)} <span class="count" data-fav-count>0</span>
+      </a>
+      <ul class="langs" aria-label={c('language', l)}>
+        {other.map((o) => (
+          <li><a href={o.href} hreflang={LOCALE[o.l]} lang={LOCALE[o.l]} aria-current={o.l === l ? 'true' : undefined}>{o.l.toUpperCase()}</a></li>
+        ))}
+      </ul>
+      {pdf && (
+        <a class="btn ghost brochure" href={pdf} download>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0 3.2-3.2M8 10 4.8 6.8M3 13h10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          {c('brochure', l)}
+        </a>
+      )}
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn>
+        <span class="sr-only">{c('menu', l)}</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.5" fill="none" /></svg>
+      </button>
+    </div>
+  </div>
+  <div class="menu" id="menu" data-menu>
+    <nav aria-label={c('menu', l)}>
+      <ul class="menu-list">
+        <li><a href={href('home', l)} aria-current={route === 'home' ? 'page' : undefined}>{site.dev.title}</a></li>
+        {NAV.map((n) => <li><a href={href(n.key, l)} aria-current={active(n.key)}>{n.label}</a></li>)}
+      </ul>
+      {pdf && <p class="menu-foot"><a class="btn ghost" href={pdf} download>{c('brochurePdf', l)}</a></p>}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  if (btn && menu) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('is-open', open);
+      document.documentElement.classList.toggle('menu-open', open);
+      if (open) menu.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) set(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) { set(false); btn.focus(); }
+    });
+    matchMedia('(min-width: 1081px)').addEventListener('change', (m) => m.matches && set(false));
+  }
+</script>
+<script>
+  import { initFavCount } from '../scripts/favourites';
+  initFavCount();
+</script>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 40; background: rgb(246 241 232 / 0.97); border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; gap: 24px; height: var(--header-h); }
+  ul { list-style: none; }
+  .mark { display: grid; gap: 4px; text-decoration: none; margin-right: auto; }
+  .name { font: 400 clamp(1.5rem, 1.3rem + 0.6vw, 1.875rem)/1 var(--serif); white-space: nowrap; }
+  .place { font: 500 0.75rem/1 var(--sans); letter-spacing: 0.04em; color: var(--muted); }
+  .nav ul { display: flex; gap: clamp(16px, 2vw, 30px); }
+  .nav a { display: block; padding: 12px 0; font: 500 0.9375rem/1 var(--sans); text-decoration: none; border-bottom: 1px solid transparent; }
+  .nav a:hover, .nav a[aria-current] { border-bottom-color: currentColor; }
+  .tools { display: flex; align-items: center; gap: 18px; }
+  .langs { display: flex; gap: 2px; font: 600 0.8125rem/1 var(--sans); letter-spacing: 0.06em; }
+  .langs a { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; min-height: 44px; text-decoration: none; color: var(--muted); }
+  .langs a[aria-current] { color: var(--text); text-decoration: underline; }
+  .langs li + li::before { content: '·'; color: var(--line-strong); margin-right: 2px; }
+  .langs li { display: flex; align-items: center; }
+  .brochure { min-height: 44px; padding: 0 18px; }
+  .fav { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font: 500 0.9375rem/1 var(--sans); text-decoration: none; }
+  .fav .count { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font-size: 0.8125rem; font-weight: 700; }
+  .menu-btn { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; margin-right: -10px; background: none; border: 0; cursor: pointer; }
+  .menu {
+    position: fixed; inset: var(--header-h) 0 0 0; z-index: 39; background: var(--bg); padding: 24px var(--gutter) 40px; overflow-y: auto;
+    visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.3s var(--ease), visibility 0s 0.3s;
+  }
+  .menu.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.3s var(--ease); }
+  .menu-list li { border-bottom: 1px solid var(--line); }
+  .menu-list a { display: block; padding: 16px 0; font: 400 2rem/1.1 var(--serif); text-decoration: none; }
+  .menu-list a[aria-current] { color: var(--accent-strong); }
+  .menu-foot { margin-top: 28px; }
+  :global(html.menu-open) { overflow: hidden; }
+
+  @media (max-width: 1080px) {
+    .nav, .brochure { display: none; }
+    .menu-btn { display: inline-flex; }
+    .tools { gap: 8px; }
+  }
+  @media (max-width: 420px) { .fav { font-size: 0; gap: 0; } .fav .count { font-size: 0.8125rem; } }
+  @media (min-width: 1081px) { .menu { display: none; } }
+</style>

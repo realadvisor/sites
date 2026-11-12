@@ -1,0 +1,55 @@
+---
+export const prerender = false;
+/** About: who we are, in plain sentences, with figures computed from the data only. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { siteData, sites } from '../lib/data';
+import { joinFr, R, searchUrl, teamHref, teamShortName } from '../lib/site';
+import { PLACES } from '../content/places';
+
+const [{ org, teams, agents }, all] = await Promise.all([siteData(), sites.allListings()]);
+const brand = org.name.replace(/\s+SAS$/, '');
+const cities = [...new Set(teams.map((t) => t.address.city).filter(Boolean))] as string[];
+const live = all.filter((l) => l.status === 'available');
+const towns = [...new Set(live.map((l) => l.address.city).filter(Boolean))] as string[];
+const photos = [PLACES['lyon-presquile']?.[0], PLACES['bordeaux']?.[0]].filter(Boolean);
+---
+<Site title={`À propos | ${brand}`} description={`${brand} : ${teams.length} agences immobilières à ${joinFr(cities)}, pour acheter, vendre et louer.`}>
+  <PageHead title={`${brand}, à ${joinFr(cities)}`} />
+  <div class="wrap about">
+    <div class="about__text">
+      <p class="lede-strong">Nous sommes {agents.length} agents dans {teams.length} agences, à {joinFr(cities)}. Chacun travaille dans le secteur de son agence.</p>
+      <ul class="about__teams">
+        {teams.map((t) => (
+          <li>
+            <a class="link" href={teamHref(t)}>{teamShortName(t)}</a>
+            {t.description_text ? <span>{t.description_text}</span> : <span class="muted">{[t.address.street, t.address.city].filter(Boolean).join(', ')}</span>}
+          </li>
+        ))}
+      </ul>
+      <p>Nous vendons surtout de l'ancien : appartements en pierre, appartements de canuts, échoppes, maisons avec jardin. Nous louons aussi, principalement des appartements meublés et vides en centre-ville.</p>
+      <p>Toutes nos annonces sont sur ce site, avec leur DPE, leur adresse approximative et le contact direct de l'agent. En ce moment : {live.length} biens à {joinFr(towns)}.</p>
+      <p class="about__links">
+        <a class="vb" href={searchUrl('buy')}>Voir les annonces</a>
+        <a class="vb vb--ghost" href={R.agencies}>Nos agences</a>
+      </p>
+    </div>
+    <div class="about__photos">
+      {photos.map((p, i) => p && <RaImage src={p} alt={p.alt} width={800} height={1000} sizes="(min-width: 960px) 260px, 50vw" priority={i === 0} />)}
+    </div>
+  </div>
+</Site>
+
+<style>
+  .about { display: grid; gap: 40px; align-items: start; }
+  @media (min-width: 960px) { .about { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 80px; } }
+  .about__text { display: grid; gap: 20px; max-width: 64ch; font-size: 1.0625rem; }
+  .lede-strong { font-size: var(--step-1); font-weight: 550; }
+  .about__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  .about__teams { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .about__teams li { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+  .about__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .about__photos :global(img) { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-card); }
+  .about__photos :global(img:nth-child(2)) { margin-top: 48px; }
+</style>

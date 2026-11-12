@@ -1,0 +1,109 @@
+---
+/**
+ * Navy footer: wordmark and one line, one column per office (address, phone,
+ * email), the site map, area links, then the legal line with the kit's legal
+ * paths and labels in the page language.
+ */
+import type { Organisation, Team } from '@realadvisor/sites-sdk/types';
+import { lang, legalPath, privacyPath, t as kt } from '@realadvisor/sites-kit/i18n';
+import Wordmark from './Wordmark.astro';
+import { href, LANGS, LOCALE, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props {
+  l: L;
+  org: Organisation;
+  teams: Team[];
+  areas: { slug: string; city: string }[];
+  switchTo: Record<L, string>;
+  hasDevelopments: boolean;
+}
+const { l, org, teams, areas, switchTo, hasDevelopments } = Astro.props;
+const t = tx(l);
+const locale = LOCALE[l];
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const explore = [
+  { h: href('buy', l), label: t('navBuy') },
+  { h: href('rent', l), label: t('navRent') },
+  ...(hasDevelopments ? [{ h: href('developments', l), label: t('navNew') }] : []),
+  { h: href('sold', l), label: t('navSold') },
+  { h: href('sell', l), label: t('valuationCta') },
+];
+const company = [
+  { h: href('offices', l), label: t('navOffices') },
+  { h: href('team', l), label: t('navTeam') },
+  { h: href('about', l), label: t('navAbout') },
+  { h: href('contact', l), label: t('navContact') },
+];
+const year = new Date().getFullYear();
+---
+<footer class="ft on-navy">
+  <div class="wrap">
+    <div class="ft__top">
+      <div class="ft__brand">
+        <Wordmark org={org} href={href('home', l)} tone="light" label={org.name} />
+        {cities && <p>{t('footerLine', { cities })}</p>}
+      </div>
+      <div class="ft__offices">
+        {teams.map((x) => (
+          <address>
+            <p class="ft__h">{cityName(x.address.city, l) || x.name}</p>
+            {x.address.street && <span>{x.address.street}</span>}
+            {(x.address.postcode || x.address.city) && <span>{[x.address.postcode, cityName(x.address.city, l)].filter(Boolean).join(' ')}</span>}
+            {x.phone && <a class="num" href={tel(x.phone)}>{x.phone}</a>}
+            {x.email && <a href={`mailto:${x.email}`}>{x.email}</a>}
+          </address>
+        ))}
+      </div>
+    </div>
+    <div class="ft__links">
+      <nav aria-label={t('explore')}>
+        <p class="ft__h">{t('explore')}</p>
+        <ul>{explore.map((x) => <li><a href={x.h}>{x.label}</a></li>)}</ul>
+      </nav>
+      {areas.length > 0 && (
+        <nav aria-label={t('navAreas')}>
+          <p class="ft__h"><a href={href('areas', l)}>{t('navAreas')}</a></p>
+          <ul>{areas.map((a) => <li><a href={href('areas', l, a.slug)}>{cityName(a.city, l)}</a></li>)}</ul>
+        </nav>
+      )}
+      <nav aria-label={t('company')}>
+        <p class="ft__h">{t('company')}</p>
+        <ul>{company.map((x) => <li><a href={x.h}>{x.label}</a></li>)}</ul>
+      </nav>
+    </div>
+    <div class="ft__legal">
+      <p>© {year} {org.name}. {t('rights')}</p>
+      <ul>
+        <li><a href={legalPath(locale)}>{kt('legalNotice', {}, lang(locale))}</a></li>
+        <li><a href={privacyPath(locale)}>{kt('privacyPolicy', {}, lang(locale))}</a></li>
+        {LANGS.map((x) => <li><a href={switchTo[x]} hreflang={x} lang={x} aria-current={x === l ? 'true' : undefined}>{x.toUpperCase()}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ft { background: var(--navy-deep); color: var(--on-navy-muted); font-size: 0.9375rem; padding-top: clamp(56px, 6vw, 88px); }
+  .ft a { color: #fff; text-decoration: none; }
+  .ft a:hover { text-decoration: underline; }
+  .ft__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--line-on-navy); }
+  .ft__brand { display: grid; gap: 18px; align-content: start; max-width: 340px; }
+  .ft__offices { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 32px; }
+  .ft address { font-style: normal; display: grid; gap: 4px; align-content: start; }
+  .ft address a { min-height: 28px; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+  .ft__h { font: 600 0.75rem/1.2 var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass-on-navy); margin-bottom: 10px; }
+  .ft__links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 40px; border-bottom: 1px solid var(--line-on-navy); }
+  .ft__links ul { list-style: none; display: grid; gap: 2px; }
+  .ft__links li a { display: inline-flex; min-height: 34px; align-items: center; }
+  .ft__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-block: 24px 32px; font-size: 0.8125rem; }
+  .ft__legal ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 24px; }
+  .ft__legal a { min-height: 32px; display: inline-flex; align-items: center; }
+  .ft__legal a[aria-current] { color: var(--brass-on-navy); }
+  @media (max-width: 860px) {
+    .ft__top { grid-template-columns: minmax(0, 1fr); }
+    .ft__links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 420px) { .ft__links { grid-template-columns: minmax(0, 1fr); } }
+</style>

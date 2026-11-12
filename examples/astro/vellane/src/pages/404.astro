@@ -1,0 +1,22 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. A listing
+// that left the portal shows "no longer available" (410, set by /annonces/[slug]).
+export const prerender = false;
+import { t } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { R, searchUrl } from '../lib/site';
+
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? t('listingGone', {}, 'fr') : t('notFound', {}, 'fr');
+const text = gone ? t('listingGoneText', {}, 'fr') : t('notFoundText', {}, 'fr');
+---
+<Site title={title} description={title} noindex>
+  <PageHead title={title} lede={text}>
+    <p class="nf"><a class="vb" href={searchUrl('buy')}>Voir les biens à vendre</a><a class="vb vb--ghost" href={R.home}>Accueil</a></p>
+  </PageHead>
+</Site>
+
+<style>
+  .nf { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+</style>

@@ -1,0 +1,16 @@
+.smap { margin: 0; }
+.smap .sm-viewport { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: #E8E4DC; }
+.smap .sm-grid {
+  position: absolute; left: 50%; top: 50%; width: 1280px; height: 768px;
+  display: grid; grid-template-columns: repeat(5, 256px); grid-template-rows: repeat(3, 256px);
+  transform: translate(calc(-1 * var(--px)), calc(-1 * var(--py)));
+  filter: grayscale(1) contrast(0.9) brightness(0.98) sepia(0.12);
+}
+.smap .sm-grid img { width: 256px; height: 256px; max-width: none; }
+.smap .sm-pin { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 6px rgb(14 26 36 / 0.25), 0 0 0 1px #fff inset; }
+.smap .sm-pin::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--brass); }
+.smap .sm-attr { position: absolute; right: 0; bottom: 0; padding: 3px 8px; font-size: 0.6875rem; background: rgb(255 255 255 / 0.85); color: #222; }
+.smap .sm-attr a { color: inherit; }
+.smap figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 14px; font-size: var(--fs-small); }
+.smap .sm-links { display: flex; gap: 20px; }
+.smap .sm-links a { display: inline-flex; min-height: 44px; align-items: center; }

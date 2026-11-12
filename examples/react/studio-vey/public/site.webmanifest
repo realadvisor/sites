@@ -1,0 +1,19 @@
+{
+  "name": "Studio Vey",
+  "short_name": "Studio Vey",
+  "theme_color": "#2f3a36",
+  "background_color": "#2f3a36",
+  "display": "browser",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

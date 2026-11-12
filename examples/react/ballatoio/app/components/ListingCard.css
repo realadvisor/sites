@@ -1,0 +1,18 @@
+  .card { position: relative; display: grid; align-content: start; gap: 18px; }
+  .card-photo { aspect-ratio: 4 / 3; }
+  .card-wide .card-photo { aspect-ratio: 3 / 2; }
+  .card-tall .card-photo { aspect-ratio: 4 / 5; }
+  .card-photo img { transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .card:hover .card-photo img { transform: scale(1.025); }
+  .card-text { display: grid; gap: 8px; }
+  .card-place { font-size: 0.9375rem; color: var(--muted); }
+  .card-title { max-width: 24ch; }
+  .card-wide .card-title { font-size: var(--fs-m); max-width: 22ch; }
+  .card-title a { text-decoration: none; }
+  .card-title a::after { content: ''; position: absolute; inset: 0; }
+  .card-title a:focus-visible { outline: none; }
+  .card:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 6px; }
+  .card:hover .card-title a { text-decoration: underline; text-decoration-thickness: 2px; }
+  .card-facts { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px; font-size: 0.9375rem; border-top: 1px solid var(--line); padding-top: 10px; }
+  .card-price { font-weight: 650; }
+  .card-status { font-weight: 650; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.8125rem; }

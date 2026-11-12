@@ -1,0 +1,11 @@
+{
+  "country": "CH",
+  "locale": "de-CH",
+  "locales": ["de-CH"],
+  "developmentsPath": "/developments",
+  "redirects": {
+    "/listings": "/kaufen",
+    "/contact": "/kontakt",
+    "/sell": "/verkaufen"
+  }
+}

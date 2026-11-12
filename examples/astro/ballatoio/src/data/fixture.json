@@ -1,0 +1,2019 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "it",
+  "en"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "36765c8c-d82b-4b1a-8c31-0a1c2a6b0087",
+  "name": "Ballatoio Case S.r.l.",
+  "website": "https://ballatoio.example.com",
+  "address": {
+   "street": "Via Solferino 27",
+   "postcode": "20121",
+   "city": "Milano",
+   "country": "Italy",
+   "lat": 45.477,
+   "lng": 9.187
+  },
+  "brand": {
+   "primary": "#2F3A32"
+  }
+ },
+ "teams": [
+  {
+   "id": "b73add62-641e-425c-a532-1f3443e74348",
+   "name": "Ballatoio",
+   "primary": true,
+   "website": "https://ballatoio.example.com",
+   "phone": "+39 02 000 000 01",
+   "email": "ciao@ballatoio.example.com",
+   "address": {
+    "street": "Via Solferino 27",
+    "postcode": "20121",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.477,
+    "lng": 9.187
+   },
+   "socials": {},
+   "description": "<p>Agenzia indipendente a Brera. Case con carattere a Milano: appartamenti d'epoca, loft in ex laboratori, qualche casa sul Lago di Como e in Brianza. Ogni immobile raccontato con fotografie e testi curati.</p>",
+   "description_text": "Agenzia indipendente a Brera. Case con carattere a Milano: appartamenti d'epoca, loft in ex laboratori, qualche casa sul Lago di Como e in Brianza. Ogni immobile raccontato con fotografie e testi curati."
+  }
+ ],
+ "agents": [
+  {
+   "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+   "first_name": "Giulia",
+   "last_name": "Ferrante",
+   "phone": "+39 02 000 000 02",
+   "email": "giulia.ferrante@ballatoio.example.com",
+   "languages": [
+    "it",
+    "en"
+   ],
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+    "alt": "Giulia Ferrante"
+   }
+  },
+  {
+   "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+   "first_name": "Matteo",
+   "last_name": "Cattaneo",
+   "phone": "+39 02 000 000 03",
+   "email": "matteo.cattaneo@ballatoio.example.com",
+   "languages": [
+    "it",
+    "en"
+   ],
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+    "alt": "Matteo Cattaneo"
+   }
+  },
+  {
+   "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+   "first_name": "Chiara",
+   "last_name": "Brambilla",
+   "phone": "+39 02 000 000 04",
+   "email": "chiara.brambilla@ballatoio.example.com",
+   "languages": [
+    "it",
+    "en"
+   ],
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+    "alt": "Chiara Brambilla"
+   }
+  },
+  {
+   "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+   "first_name": "Luca",
+   "last_name": "Sartori",
+   "phone": "+39 02 000 000 05",
+   "email": "luca.sartori@ballatoio.example.com",
+   "languages": [
+    "en"
+   ],
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+    "alt": "Luca Sartori"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "a1113055-a917-4309-8f83-43f9f0701bc4",
+   "slug": "villa-contemporanea-nel-verde-di-lesmo-a1113055-a917-4309-8f83-43f9f0701bc4",
+   "title": "Villa contemporanea nel verde di Lesmo",
+   "description": "<p>Villa su un unico piano costruita nel 2019, in un lotto di 1.500 m² con prato e pini ad alto fusto, a pochi minuti dal Parco di Monza.</p><p>Il soggiorno con cucina a isola guarda il giardino da tre lati attraverso grandi vetrate scorrevoli. Parquet a spina di pesce in tutta la casa, quattro camere, tre bagni. All'esterno una pedana in legno di 60 m² coperta da una pergola in acciaio, per mangiare fuori da maggio a settembre.</p><p>Pompa di calore, impianto fotovoltaico e box doppio. Lesmo centro e la stazione di Arcore sono a cinque minuti in auto.</p>",
+   "description_text": "Villa su un unico piano costruita nel 2019, in un lotto di 1.500 m² con prato e pini ad alto fusto, a pochi minuti dal Parco di Monza.\n\nIl soggiorno con cucina a isola guarda il giardino da tre lati attraverso grandi vetrate scorrevoli. Parquet a spina di pesce in tutta la casa, quattro camere, tre bagni. All'esterno una pedana in legno di 60 m² coperta da una pergola in acciaio, per mangiare fuori da maggio a settembre.\n\nPompa di calore, impianto fotovoltaico e box doppio. Lesmo centro e la stazione di Arcore sono a cinque minuti in auto.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 1450000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 260,
+   "land_surface": 1500,
+   "address": {
+    "street": "Via Vittorio Veneto 18",
+    "postcode": "20855",
+    "city": "Lesmo",
+    "country": "Italy",
+    "lat": 45.645,
+    "lng": 9.308
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587879.jpg",
+     "alt": "Villa contemporanea nel verde di Lesmo"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587857.jpg",
+     "alt": "Villa contemporanea nel verde di Lesmo, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587865.jpg",
+     "alt": "Villa contemporanea nel verde di Lesmo, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587864.jpg",
+     "alt": "Villa contemporanea nel verde di Lesmo, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587863.jpg",
+     "alt": "Villa contemporanea nel verde di Lesmo, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587877.jpg",
+     "alt": "Villa contemporanea nel verde di Lesmo, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+    "first_name": "Luca",
+    "last_name": "Sartori",
+    "phone": "+39 02 000 000 05",
+    "email": "luca.sartori@ballatoio.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+     "alt": "Luca Sartori"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "JT2K-CXMU",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "49d35c54-153c-48d1-9fb3-58881e4ea613",
+   "slug": "casa-sul-lago-con-pergolato-cernobbio-49d35c54-153c-48d1-9fb3-58881e4ea613",
+   "title": "Casa sul lago con pergolato, Cernobbio",
+   "description": "<p>Casa di inizio Novecento affacciata direttamente sul Lago di Como, con terrazza sull'acqua coperta da un pergolato di vite.</p><p>Tre piani, quattro camere, tre bagni, facciata gialla e persiane verdi come vuole la tradizione del lago. Piccolo giardino terrazzato e accesso privato alla riva. Venduta nel 2026.</p>",
+   "description_text": "Casa di inizio Novecento affacciata direttamente sul Lago di Como, con terrazza sull'acqua coperta da un pergolato di vite.\n\nTre piani, quattro camere, tre bagni, facciata gialla e persiane verdi come vuole la tradizione del lago. Piccolo giardino terrazzato e accesso privato alla riva. Venduta nel 2026.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "sold",
+   "price": 2350000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 280,
+   "land_surface": 600,
+   "address": {
+    "street": "Via Regina 121",
+    "postcode": "22012",
+    "city": "Cernobbio",
+    "country": "Italy",
+    "lat": 45.845,
+    "lng": 9.079
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28267417.jpg",
+     "alt": "Casa sul lago con pergolato, Cernobbio"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28267416.jpg",
+     "alt": "Casa sul lago con pergolato, Cernobbio, photo 2"
+    }
+   ],
+   "agent": {
+    "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+    "first_name": "Giulia",
+    "last_name": "Ferrante",
+    "phone": "+39 02 000 000 02",
+    "email": "giulia.ferrante@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+     "alt": "Giulia Ferrante"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "93J7-GWB3",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "fcc9961b-7201-475b-b898-5f1d1bc43eee",
+   "slug": "villa-con-piscina-e-parco-a-carate-brianza-fcc9961b-7201-475b-b898-5f1d1bc43eee",
+   "title": "Villa con piscina e parco a Carate Brianza",
+   "description": "<p>Villa in mattoni a vista in un parco di oltre 4.000 m², con piscina e viale d'ingresso in pietra, in una zona residenziale tranquilla di Carate Brianza.</p><p>Al piano terra un salone con camino e soffitti alti, parquet a spina di pesce e serramenti a tutta altezza sul giardino. La cucina abitabile, con parete in mattoni, si apre direttamente sul portico. Cinque camere e quattro bagni.</p><p>Dependance per gli ospiti, box per tre auto e impianto di irrigazione. Milano si raggiunge in 35 minuti per la Valassina.</p>",
+   "description_text": "Villa in mattoni a vista in un parco di oltre 4.000 m², con piscina e viale d'ingresso in pietra, in una zona residenziale tranquilla di Carate Brianza.\n\nAl piano terra un salone con camino e soffitti alti, parquet a spina di pesce e serramenti a tutta altezza sul giardino. La cucina abitabile, con parete in mattoni, si apre direttamente sul portico. Cinque camere e quattro bagni.\n\nDependance per gli ospiti, box per tre auto e impianto di irrigazione. Milano si raggiunge in 35 minuti per la Valassina.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 2100000,
+   "currency": "EUR",
+   "rooms": 9,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 480,
+   "land_surface": 4200,
+   "address": {
+    "street": "Via Cusani 7",
+    "postcode": "20841",
+    "city": "Carate Brianza",
+    "country": "Italy",
+    "lat": 45.678,
+    "lng": 9.24
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143671.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143677.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143672.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143679.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143680.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143676.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143666.jpg",
+     "alt": "Villa con piscina e parco a Carate Brianza, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+    "first_name": "Luca",
+    "last_name": "Sartori",
+    "phone": "+39 02 000 000 05",
+    "email": "luca.sartori@ballatoio.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+     "alt": "Luca Sartori"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "PEM4-8E6D",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "e5054c34-5f98-4fa5-bfbd-122cf36da0bc",
+   "slug": "appartamento-d-epoca-in-via-melzo-e5054c34-5f98-4fa5-bfbd-122cf36da0bc",
+   "title": "Appartamento d'epoca in Via Melzo",
+   "description": "<p>Al terzo piano di un palazzo del 1910 a Porta Venezia, 145 m² con soffitti di 3,9 metri, cornici in gesso e parquet a spina originale.</p><p>Doppio salone con porte a vetri, due camere e due bagni. Le finestre del salone danno su un balconcino verso la via alberata. Riscaldamento centralizzato con contabilizzatori, cantina.</p><p>Metro rossa a Porta Venezia a quattro minuti a piedi; bar e ristoranti di Via Melzo e Via Lecco sotto casa.</p>",
+   "description_text": "Al terzo piano di un palazzo del 1910 a Porta Venezia, 145 m² con soffitti di 3,9 metri, cornici in gesso e parquet a spina originale.\n\nDoppio salone con porte a vetri, due camere e due bagni. Le finestre del salone danno su un balconcino verso la via alberata. Riscaldamento centralizzato con contabilizzatori, cantina.\n\nMetro rossa a Porta Venezia a quattro minuti a piedi; bar e ristoranti di Via Melzo e Via Lecco sotto casa.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1390000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 145,
+   "address": {
+    "street": "Via Melzo 24",
+    "postcode": "20129",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.476,
+    "lng": 9.208
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36006667.jpg",
+     "alt": "Appartamento d'epoca in Via Melzo"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36006670.jpg",
+     "alt": "Appartamento d'epoca in Via Melzo, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35734644.jpg",
+     "alt": "Appartamento d'epoca in Via Melzo, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+    "first_name": "Chiara",
+    "last_name": "Brambilla",
+    "phone": "+39 02 000 000 04",
+    "email": "chiara.brambilla@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+     "alt": "Chiara Brambilla"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "HVRZ-6U5U",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "e9701532-bbd3-4f47-8903-59a1186a000f",
+   "slug": "trilocale-luminoso-con-balconi-alla-francese-e9701532-bbd3-4f47-8903-59a1186a000f",
+   "title": "Trilocale luminoso con balconi alla francese",
+   "description": "<p>Trilocale di 110 m² al secondo piano di una casa degli anni Trenta, a due passi da Corso Lodi.</p><p>Soggiorno doppio con due portefinestre e ringhiere in ferro battuto, sala da pranzo separata, due camere e un bagno. Pavimenti in legno scuro, impianti rifatti nel 2022.</p><p>Metro gialla a Porta Romana a cinque minuti, Fondazione Prada raggiungibile a piedi.</p>",
+   "description_text": "Trilocale di 110 m² al secondo piano di una casa degli anni Trenta, a due passi da Corso Lodi.\n\nSoggiorno doppio con due portefinestre e ringhiere in ferro battuto, sala da pranzo separata, due camere e un bagno. Pavimenti in legno scuro, impianti rifatti nel 2022.\n\nMetro gialla a Porta Romana a cinque minuti, Fondazione Prada raggiungibile a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 870000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 110,
+   "address": {
+    "street": "Via Crema 15",
+    "postcode": "20135",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.452,
+    "lng": 9.204
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851906.jpg",
+     "alt": "Trilocale luminoso con balconi alla francese"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851911.jpg",
+     "alt": "Trilocale luminoso con balconi alla francese, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851903.jpg",
+     "alt": "Trilocale luminoso con balconi alla francese, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851912.jpg",
+     "alt": "Trilocale luminoso con balconi alla francese, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851904.jpg",
+     "alt": "Trilocale luminoso con balconi alla francese, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7851914.jpg",
+     "alt": "Trilocale luminoso con balconi alla francese, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+    "first_name": "Matteo",
+    "last_name": "Cattaneo",
+    "phone": "+39 02 000 000 03",
+    "email": "matteo.cattaneo@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+     "alt": "Matteo Cattaneo"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "W6RH-4HLS",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "6d19f1b7-8512-4255-b18f-fddecb10a941",
+   "slug": "quadrilocale-con-terrazzo-in-via-pascoli-6d19f1b7-8512-4255-b18f-fddecb10a941",
+   "title": "Quadrilocale con terrazzo in Via Pascoli",
+   "description": "<p>Quinto piano di un palazzo signorile degli anni Sessanta in Città Studi, 135 m² con terrazzo di 25 m² protetto da tenda da sole.</p><p>Soggiorno con zona pranzo in un unico ambiente, parquet a spina di pesce, tre camere di cui una usata come studio, due bagni. Dal terrazzo vista sui tetti e sugli alberi del quartiere.</p><p>Portineria, cantina e posto auto nel cortile. Politecnico e metro verde a Piola a dieci minuti a piedi.</p>",
+   "description_text": "Quinto piano di un palazzo signorile degli anni Sessanta in Città Studi, 135 m² con terrazzo di 25 m² protetto da tenda da sole.\n\nSoggiorno con zona pranzo in un unico ambiente, parquet a spina di pesce, tre camere di cui una usata come studio, due bagni. Dal terrazzo vista sui tetti e sugli alberi del quartiere.\n\nPortineria, cantina e posto auto nel cortile. Politecnico e metro verde a Piola a dieci minuti a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 890000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 135,
+   "address": {
+    "street": "Via Giovanni Pascoli 40",
+    "postcode": "20133",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.479,
+    "lng": 9.226
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4409365.jpg",
+     "alt": "Quadrilocale con terrazzo in Via Pascoli"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4409364.jpg",
+     "alt": "Quadrilocale con terrazzo in Via Pascoli, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4409370.jpg",
+     "alt": "Quadrilocale con terrazzo in Via Pascoli, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4409372.jpg",
+     "alt": "Quadrilocale con terrazzo in Via Pascoli, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4409369.jpg",
+     "alt": "Quadrilocale con terrazzo in Via Pascoli, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4409366.jpg",
+     "alt": "Quadrilocale con terrazzo in Via Pascoli, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+    "first_name": "Chiara",
+    "last_name": "Brambilla",
+    "phone": "+39 02 000 000 04",
+    "email": "chiara.brambilla@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+     "alt": "Chiara Brambilla"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "6VRK-RZX5",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "65d389bf-883d-46a3-ad7d-361397cca330",
+   "slug": "appartamento-bianco-in-via-solferino-65d389bf-883d-46a3-ad7d-361397cca330",
+   "title": "Appartamento bianco in Via Solferino",
+   "description": "<p>Nel cuore di Brera, 125 m² al secondo piano di un palazzo di fine Ottocento, ristrutturati con pochi interventi e molto rispetto.</p><p>Pareti bianche, boiserie e archi originali, parquet a spina in rovere lucidato. Le finestre alte portano luce in tutte le stanze. Due camere, due bagni, cucina separata.</p><p>Corso Garibaldi, la Pinacoteca e la metro verde a Moscova sono a pochi minuti a piedi.</p>",
+   "description_text": "Nel cuore di Brera, 125 m² al secondo piano di un palazzo di fine Ottocento, ristrutturati con pochi interventi e molto rispetto.\n\nPareti bianche, boiserie e archi originali, parquet a spina in rovere lucidato. Le finestre alte portano luce in tutte le stanze. Due camere, due bagni, cucina separata.\n\nCorso Garibaldi, la Pinacoteca e la metro verde a Moscova sono a pochi minuti a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1650000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 125,
+   "address": {
+    "street": "Via Solferino 32",
+    "postcode": "20121",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.477,
+    "lng": 9.187
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7098014.jpg",
+     "alt": "Appartamento bianco in Via Solferino"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7101234.jpg",
+     "alt": "Appartamento bianco in Via Solferino, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7098012.jpg",
+     "alt": "Appartamento bianco in Via Solferino, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7101235.jpg",
+     "alt": "Appartamento bianco in Via Solferino, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7098013.jpg",
+     "alt": "Appartamento bianco in Via Solferino, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7101236.jpg",
+     "alt": "Appartamento bianco in Via Solferino, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+    "first_name": "Giulia",
+    "last_name": "Ferrante",
+    "phone": "+39 02 000 000 02",
+    "email": "giulia.ferrante@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+     "alt": "Giulia Ferrante"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "LT92-SNKH",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "3321a380-6a1b-442d-a1c1-7767212a11c7",
+   "slug": "salone-con-stucchi-in-via-san-marco-3321a380-6a1b-442d-a1c1-7767212a11c7",
+   "title": "Salone con stucchi in Via San Marco",
+   "description": "<p>Primo piano nobile di una casa del 1890 vicino al Naviglio della Martesana coperto, con il salone ancora decorato dagli stucchi originali.</p><p>Porte vetrate a tutta altezza, lampadario centrale, bow-window luminoso e parquet a spina chiaro. Due camere e un bagno, da completare a gusto dell'acquirente.</p><p>Proposta d'acquisto accettata, in attesa del rogito.</p>",
+   "description_text": "Primo piano nobile di una casa del 1890 vicino al Naviglio della Martesana coperto, con il salone ancora decorato dagli stucchi originali.\n\nPorte vetrate a tutta altezza, lampadario centrale, bow-window luminoso e parquet a spina chiaro. Due camere e un bagno, da completare a gusto dell'acquirente.\n\nProposta d'acquisto accettata, in attesa del rogito.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1180000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 95,
+   "address": {
+    "street": "Via San Marco 18",
+    "postcode": "20121",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.478,
+    "lng": 9.19
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8753032.jpg",
+     "alt": "Salone con stucchi in Via San Marco"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8753029.jpg",
+     "alt": "Salone con stucchi in Via San Marco, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8753031.jpg",
+     "alt": "Salone con stucchi in Via San Marco, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8753030.jpg",
+     "alt": "Salone con stucchi in Via San Marco, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+    "first_name": "Giulia",
+    "last_name": "Ferrante",
+    "phone": "+39 02 000 000 02",
+    "email": "giulia.ferrante@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+     "alt": "Giulia Ferrante"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "WHJJ-RVYZ",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "c4e91ccc-af98-460a-ac10-a91df6ddf466",
+   "slug": "casa-d-epoca-con-veranda-in-via-borsieri-c4e91ccc-af98-460a-ac10-a91df6ddf466",
+   "title": "Casa d'epoca con veranda in Via Borsieri",
+   "description": "<p>All'Isola, quarto piano di una casa del 1925 con portone in legno e cortile interno.</p><p>Soggiorno con soffitti decorati e parquet a spina, due camere, bagno con finestra. Una piccola veranda vetrata sul cortile è oggi un giardino d'inverno pieno di piante.</p><p>Piazzale Segrino, i locali di Via Borsieri e la metro lilla a Isola sono a due minuti.</p>",
+   "description_text": "All'Isola, quarto piano di una casa del 1925 con portone in legno e cortile interno.\n\nSoggiorno con soffitti decorati e parquet a spina, due camere, bagno con finestra. Una piccola veranda vetrata sul cortile è oggi un giardino d'inverno pieno di piante.\n\nPiazzale Segrino, i locali di Via Borsieri e la metro lilla a Isola sono a due minuti.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 890000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 100,
+   "address": {
+    "street": "Via Pietro Borsieri 9",
+    "postcode": "20159",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.489,
+    "lng": 9.19
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35633297.jpg",
+     "alt": "Casa d'epoca con veranda in Via Borsieri"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35633292.jpg",
+     "alt": "Casa d'epoca con veranda in Via Borsieri, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35633300.jpg",
+     "alt": "Casa d'epoca con veranda in Via Borsieri, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35633299.jpg",
+     "alt": "Casa d'epoca con veranda in Via Borsieri, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35633289.jpg",
+     "alt": "Casa d'epoca con veranda in Via Borsieri, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+    "first_name": "Matteo",
+    "last_name": "Cattaneo",
+    "phone": "+39 02 000 000 03",
+    "email": "matteo.cattaneo@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+     "alt": "Matteo Cattaneo"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "CLJV-6V3M",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "17a91b2a-d6cf-4360-ac95-f8e538db90bd",
+   "slug": "bilocale-arredato-in-via-varanini-17a91b2a-d6cf-4360-ac95-f8e538db90bd",
+   "title": "Bilocale arredato in Via Varanini",
+   "description": "<p>Bilocale di 58 m² a NoLo, ristrutturato e arredato nel 2024, disponibile da gennaio 2027.</p><p>Soggiorno con divano letto e cucina a vista con piastrelle a scacchi, camera matrimoniale, bagno con doccia. Balcone verso il cortile alberato.</p><p>Metro rossa a Pasteur a sei minuti. Contratto 4+4, spese condominiali comprese nelle spese indicate.</p>",
+   "description_text": "Bilocale di 58 m² a NoLo, ristrutturato e arredato nel 2024, disponibile da gennaio 2027.\n\nSoggiorno con divano letto e cucina a vista con piastrelle a scacchi, camera matrimoniale, bagno con doccia. Balcone verso il cortile alberato.\n\nMetro rossa a Pasteur a sei minuti. Contratto 4+4, spese condominiali comprese nelle spese indicate.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1650,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 58,
+   "address": {
+    "street": "Via Varanini 22",
+    "postcode": "20127",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.494,
+    "lng": 9.218
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30386991.jpg",
+     "alt": "Bilocale arredato in Via Varanini"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30386985.jpg",
+     "alt": "Bilocale arredato in Via Varanini, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30386992.jpg",
+     "alt": "Bilocale arredato in Via Varanini, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30386994.jpg",
+     "alt": "Bilocale arredato in Via Varanini, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30386993.jpg",
+     "alt": "Bilocale arredato in Via Varanini, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+    "first_name": "Chiara",
+    "last_name": "Brambilla",
+    "phone": "+39 02 000 000 04",
+    "email": "chiara.brambilla@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+     "alt": "Chiara Brambilla"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "H98R-WWTA",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "0e75c2b9-bf84-4219-90a2-f9bbb5415701",
+   "slug": "appartamento-con-mattoni-a-vista-in-via-pollaiuolo-0e75c2b9-bf84-4219-90a2-f9bbb5415701",
+   "title": "Appartamento con mattoni a vista in Via Pollaiuolo",
+   "description": "<p>Appartamento di 115 m² all'Isola, ricavato da un unico grande ambiente con bovindo su strada.</p><p>Muri in mattoni lasciati a vista, finestre con telai rossi e tende a pacchetto, libreria su misura e cucina lineare lunga sei metri. Due camere separate da una parete in vetro e ferro.</p><p>Ascensore, cantina, riscaldamento autonomo. A cinque minuti dalla Biblioteca degli Alberi.</p>",
+   "description_text": "Appartamento di 115 m² all'Isola, ricavato da un unico grande ambiente con bovindo su strada.\n\nMuri in mattoni lasciati a vista, finestre con telai rossi e tende a pacchetto, libreria su misura e cucina lineare lunga sei metri. Due camere separate da una parete in vetro e ferro.\n\nAscensore, cantina, riscaldamento autonomo. A cinque minuti dalla Biblioteca degli Alberi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 990000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 115,
+   "address": {
+    "street": "Via Antonio Pollaiuolo 5",
+    "postcode": "20159",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.491,
+    "lng": 9.188
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092191.jpg",
+     "alt": "Appartamento con mattoni a vista in Via Pollaiuolo"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092188.jpg",
+     "alt": "Appartamento con mattoni a vista in Via Pollaiuolo, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092189.jpg",
+     "alt": "Appartamento con mattoni a vista in Via Pollaiuolo, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092198.jpg",
+     "alt": "Appartamento con mattoni a vista in Via Pollaiuolo, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092194.jpg",
+     "alt": "Appartamento con mattoni a vista in Via Pollaiuolo, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092190.jpg",
+     "alt": "Appartamento con mattoni a vista in Via Pollaiuolo, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+    "first_name": "Matteo",
+    "last_name": "Cattaneo",
+    "phone": "+39 02 000 000 03",
+    "email": "matteo.cattaneo@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+     "alt": "Matteo Cattaneo"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "SG2T-BGXU",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "eb4299bd-62a9-4e58-89ed-60aedef46b68",
+   "slug": "trilocale-vintage-in-via-pontano-eb4299bd-62a9-4e58-89ed-60aedef46b68",
+   "title": "Trilocale vintage in Via Pontano",
+   "description": "<p>Novanta metri quadrati a NoLo, in una casa di ringhiera degli anni Venti con cortile.</p><p>Parete in mattoni a vista nel soggiorno, finestre in legno su due lati, parquet originale. Una camera e uno studio, cucina abitabile, bagno ristrutturato.</p><p>Parco Trotter e la metro rossa a Rovereto sono a pochi minuti. Spese condominiali basse.</p>",
+   "description_text": "Novanta metri quadrati a NoLo, in una casa di ringhiera degli anni Venti con cortile.\n\nParete in mattoni a vista nel soggiorno, finestre in legno su due lati, parquet originale. Una camera e uno studio, cucina abitabile, bagno ristrutturato.\n\nParco Trotter e la metro rossa a Rovereto sono a pochi minuti. Spese condominiali basse.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 520000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 90,
+   "address": {
+    "street": "Via Giovanni Pontano 11",
+    "postcode": "20127",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.492,
+    "lng": 9.216
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5824521.jpg",
+     "alt": "Trilocale vintage in Via Pontano"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5824514.jpg",
+     "alt": "Trilocale vintage in Via Pontano, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5824524.jpg",
+     "alt": "Trilocale vintage in Via Pontano, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5824519.jpg",
+     "alt": "Trilocale vintage in Via Pontano, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5824526.jpg",
+     "alt": "Trilocale vintage in Via Pontano, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5824520.jpg",
+     "alt": "Trilocale vintage in Via Pontano, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+    "first_name": "Luca",
+    "last_name": "Sartori",
+    "phone": "+39 02 000 000 05",
+    "email": "luca.sartori@ballatoio.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+     "alt": "Luca Sartori"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "8RLZ-6D73",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "ca058a1c-004a-4ed2-8413-76105b1400d5",
+   "slug": "bilocale-nuovo-in-via-ampere-ca058a1c-004a-4ed2-8413-76105b1400d5",
+   "title": "Bilocale nuovo in Via Ampère",
+   "description": "<p>Bilocale di 55 m² completamente rifatto nel 2025, al quarto piano con ascensore, in Città Studi.</p><p>Soggiorno con divano angolare e tavolo da pranzo, cucina separata in rovere, camera matrimoniale con armadio a muro, bagno con doccia. Arredato, disponibile subito.</p><p>Ideale per docenti o ricercatori: Politecnico e Istituto dei Tumori a dieci minuti a piedi.</p>",
+   "description_text": "Bilocale di 55 m² completamente rifatto nel 2025, al quarto piano con ascensore, in Città Studi.\n\nSoggiorno con divano angolare e tavolo da pranzo, cucina separata in rovere, camera matrimoniale con armadio a muro, bagno con doccia. Arredato, disponibile subito.\n\nIdeale per docenti o ricercatori: Politecnico e Istituto dei Tumori a dieci minuti a piedi.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1450,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 55,
+   "address": {
+    "street": "Via Andrea Maria Ampère 61",
+    "postcode": "20131",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.481,
+    "lng": 9.229
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054904.jpg",
+     "alt": "Bilocale nuovo in Via Ampère"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054903.jpg",
+     "alt": "Bilocale nuovo in Via Ampère, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054901.jpg",
+     "alt": "Bilocale nuovo in Via Ampère, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054910.jpg",
+     "alt": "Bilocale nuovo in Via Ampère, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054907.jpg",
+     "alt": "Bilocale nuovo in Via Ampère, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+    "first_name": "Chiara",
+    "last_name": "Brambilla",
+    "phone": "+39 02 000 000 04",
+    "email": "chiara.brambilla@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+     "alt": "Chiara Brambilla"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "67FP-5CAX",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "9badbd44-448a-47ec-b1c6-19e10871f49f",
+   "slug": "appartamento-elegante-in-via-degli-orti-9badbd44-448a-47ec-b1c6-19e10871f49f",
+   "title": "Appartamento elegante in Via degli Orti",
+   "description": "<p>Terzo piano di un palazzo del 1910 tra Porta Romana e Crocetta, 105 m² rifiniti in stile classico.</p><p>Ingresso e sala da pranzo con pavimento a scacchiera bianco e nero, soggiorno con camino, due camere con soffitti alti e tende in lino, due bagni. Cucina moderna con elettrodomestici da incasso.</p><p>Riservato: compromesso firmato, rogito previsto a gennaio 2027.</p>",
+   "description_text": "Terzo piano di un palazzo del 1910 tra Porta Romana e Crocetta, 105 m² rifiniti in stile classico.\n\nIngresso e sala da pranzo con pavimento a scacchiera bianco e nero, soggiorno con camino, due camere con soffitti alti e tende in lino, due bagni. Cucina moderna con elettrodomestici da incasso.\n\nRiservato: compromesso firmato, rogito previsto a gennaio 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 960000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 105,
+   "address": {
+    "street": "Via degli Orti 12",
+    "postcode": "20122",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.456,
+    "lng": 9.2
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061058.jpg",
+     "alt": "Appartamento elegante in Via degli Orti"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061069.jpg",
+     "alt": "Appartamento elegante in Via degli Orti, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061063.jpg",
+     "alt": "Appartamento elegante in Via degli Orti, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061071.jpg",
+     "alt": "Appartamento elegante in Via degli Orti, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061062.jpg",
+     "alt": "Appartamento elegante in Via degli Orti, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061065.jpg",
+     "alt": "Appartamento elegante in Via degli Orti, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+    "first_name": "Giulia",
+    "last_name": "Ferrante",
+    "phone": "+39 02 000 000 02",
+    "email": "giulia.ferrante@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+     "alt": "Giulia Ferrante"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "26CW-WKEP",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "db34483c-9d2a-47a7-9b84-626c08e3a9bd",
+   "slug": "bilocale-arredato-all-isola-db34483c-9d2a-47a7-9b84-626c08e3a9bd",
+   "title": "Bilocale arredato all'Isola",
+   "description": "<p>Bilocale d'angolo di 60 m² in una casa degli anni Trenta all'Isola, arredato e pronto da abitare.</p><p>Soggiorno con finestre su due lati e libreria a parete, zona notte separata da una parete attrezzata, cucina con mensole a vista, bagno con finestra.</p><p>Metro gialla a Zara e lilla a Isola a sette minuti. Contratto transitorio o 4+4.</p>",
+   "description_text": "Bilocale d'angolo di 60 m² in una casa degli anni Trenta all'Isola, arredato e pronto da abitare.\n\nSoggiorno con finestre su due lati e libreria a parete, zona notte separata da una parete attrezzata, cucina con mensole a vista, bagno con finestra.\n\nMetro gialla a Zara e lilla a Isola a sette minuti. Contratto transitorio o 4+4.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1700,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 60,
+   "address": {
+    "street": "Via Thaon di Revel 14",
+    "postcode": "20159",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.492,
+    "lng": 9.19
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857234.jpg",
+     "alt": "Bilocale arredato all'Isola"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857233.jpg",
+     "alt": "Bilocale arredato all'Isola, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857239.jpg",
+     "alt": "Bilocale arredato all'Isola, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857238.jpg",
+     "alt": "Bilocale arredato all'Isola, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857230.jpg",
+     "alt": "Bilocale arredato all'Isola, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857222.jpg",
+     "alt": "Bilocale arredato all'Isola, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+    "first_name": "Matteo",
+    "last_name": "Cattaneo",
+    "phone": "+39 02 000 000 03",
+    "email": "matteo.cattaneo@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+     "alt": "Matteo Cattaneo"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "N2WZ-6UX2",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "e86d229a-10d2-4094-ac66-7ed4790edb96",
+   "slug": "trilocale-in-via-vigevano-e86d229a-10d2-4094-ac66-7ed4790edb96",
+   "title": "Trilocale in Via Vigevano",
+   "description": "<p>Ai Navigli, terzo piano di una casa del 1910 ristrutturata nelle parti comuni, con ascensore.</p><p>Soggiorno con angolo cottura, cucina con piastrelle bianche e nere e finestra sul cortile, due camere e un bagno. Corridoio con porte originali in legno.</p><p>Darsena e stazione di Porta Genova a tre minuti a piedi.</p>",
+   "description_text": "Ai Navigli, terzo piano di una casa del 1910 ristrutturata nelle parti comuni, con ascensore.\n\nSoggiorno con angolo cottura, cucina con piastrelle bianche e nere e finestra sul cortile, due camere e un bagno. Corridoio con porte originali in legno.\n\nDarsena e stazione di Porta Genova a tre minuti a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 660000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 85,
+   "address": {
+    "street": "Via Vigevano 33",
+    "postcode": "20144",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.455,
+    "lng": 9.173
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857269.jpg",
+     "alt": "Trilocale in Via Vigevano"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857267.jpg",
+     "alt": "Trilocale in Via Vigevano, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857262.jpg",
+     "alt": "Trilocale in Via Vigevano, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857266.jpg",
+     "alt": "Trilocale in Via Vigevano, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+    "first_name": "Luca",
+    "last_name": "Sartori",
+    "phone": "+39 02 000 000 05",
+    "email": "luca.sartori@ballatoio.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+     "alt": "Luca Sartori"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "7GFV-UX6E",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "af839e74-aebc-4d79-9202-45ff8b3ee78d",
+   "slug": "bilocale-ristrutturato-in-via-morgagni-af839e74-aebc-4d79-9202-45ff8b3ee78d",
+   "title": "Bilocale ristrutturato in Via Morgagni",
+   "description": "<p>Bilocale di 52 m² a Porta Venezia, rifatto nel 2024 con materiali naturali: legno, intonaco a calce, piastrelle esagonali in cucina.</p><p>Venduto a ottobre 2026 dopo tre settimane di pubblicazione.</p>",
+   "description_text": "Bilocale di 52 m² a Porta Venezia, rifatto nel 2024 con materiali naturali: legno, intonaco a calce, piastrelle esagonali in cucina.\n\nVenduto a ottobre 2026 dopo tre settimane di pubblicazione.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 480000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 52,
+   "address": {
+    "street": "Via Giovanni Battista Morgagni 20",
+    "postcode": "20129",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.479,
+    "lng": 9.209
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29559667.jpg",
+     "alt": "Bilocale ristrutturato in Via Morgagni"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29559662.jpg",
+     "alt": "Bilocale ristrutturato in Via Morgagni, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29559669.jpg",
+     "alt": "Bilocale ristrutturato in Via Morgagni, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29559671.jpg",
+     "alt": "Bilocale ristrutturato in Via Morgagni, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+    "first_name": "Chiara",
+    "last_name": "Brambilla",
+    "phone": "+39 02 000 000 04",
+    "email": "chiara.brambilla@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+     "alt": "Chiara Brambilla"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "KKJ6-ND24",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "5398126c-2ddf-4cf1-8b5c-838829d4881b",
+   "slug": "loft-in-un-ex-laboratorio-di-via-crespi-5398126c-2ddf-4cf1-8b5c-838829d4881b",
+   "title": "Loft in un ex laboratorio di Via Crespi",
+   "description": "<p>Ex laboratorio degli anni Venti a NoLo trasformato in loft nel 2021, al piano terra di un cortile tranquillo.</p><p>Un unico ambiente di 6 metri d'altezza con finestre ad arco, cucina lunga a parete e pavimento in rovere. Il soppalco con scala a chiocciola ospita la camera principale; una seconda camera e due bagni al piano.</p><p>Riscaldamento a pavimento, accatastato come abitazione (A/3). Metro rossa a Turro a cinque minuti.</p>",
+   "description_text": "Ex laboratorio degli anni Venti a NoLo trasformato in loft nel 2021, al piano terra di un cortile tranquillo.\n\nUn unico ambiente di 6 metri d'altezza con finestre ad arco, cucina lunga a parete e pavimento in rovere. Il soppalco con scala a chiocciola ospita la camera principale; una seconda camera e due bagni al piano.\n\nRiscaldamento a pavimento, accatastato come abitazione (A/3). Metro rossa a Turro a cinque minuti.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "available",
+   "price": 890000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 140,
+   "address": {
+    "street": "Via Daniele Crespi 8",
+    "postcode": "20127",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.494,
+    "lng": 9.214
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025684.jpg",
+     "alt": "Loft in un ex laboratorio di Via Crespi"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025686.jpg",
+     "alt": "Loft in un ex laboratorio di Via Crespi, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025683.jpg",
+     "alt": "Loft in un ex laboratorio di Via Crespi, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025685.jpg",
+     "alt": "Loft in un ex laboratorio di Via Crespi, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36025682.jpg",
+     "alt": "Loft in un ex laboratorio di Via Crespi, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+    "first_name": "Matteo",
+    "last_name": "Cattaneo",
+    "phone": "+39 02 000 000 03",
+    "email": "matteo.cattaneo@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+     "alt": "Matteo Cattaneo"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "VUL3-7NCL",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "dde576c1-8e13-420a-89e0-f2aebcd548af",
+   "slug": "loft-ex-industriale-sul-naviglio-grande-dde576c1-8e13-420a-89e0-f2aebcd548af",
+   "title": "Loft ex industriale sul Naviglio Grande",
+   "description": "<p>Capannone degli anni Cinquanta convertito in residenza nel 2020, a cento metri dal Naviglio Grande.</p><p>230 m² su un livello principale con soffitti in cemento a vista, pilastri originali e pavimento in gres scuro. Cucina in rovere con isola, camino sospeso e scala in legno e vetro che porta alla zona notte.</p><p>Due camere, due bagni, ingresso indipendente dal cortile. Accatastato A/2.</p>",
+   "description_text": "Capannone degli anni Cinquanta convertito in residenza nel 2020, a cento metri dal Naviglio Grande.\n\n230 m² su un livello principale con soffitti in cemento a vista, pilastri originali e pavimento in gres scuro. Cucina in rovere con isola, camino sospeso e scala in legno e vetro che porta alla zona notte.\n\nDue camere, due bagni, ingresso indipendente dal cortile. Accatastato A/2.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "available",
+   "price": 1750000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 230,
+   "address": {
+    "street": "Via Corsico 12",
+    "postcode": "20144",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.453,
+    "lng": 9.172
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031578.jpg",
+     "alt": "Loft ex industriale sul Naviglio Grande"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031590.jpg",
+     "alt": "Loft ex industriale sul Naviglio Grande, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031580.jpg",
+     "alt": "Loft ex industriale sul Naviglio Grande, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031409.jpg",
+     "alt": "Loft ex industriale sul Naviglio Grande, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031591.jpg",
+     "alt": "Loft ex industriale sul Naviglio Grande, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031583.jpg",
+     "alt": "Loft ex industriale sul Naviglio Grande, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+    "first_name": "Luca",
+    "last_name": "Sartori",
+    "phone": "+39 02 000 000 05",
+    "email": "luca.sartori@ballatoio.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+     "alt": "Luca Sartori"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "HSVQ-6TS2",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "10cae992-c1bf-48a8-92bf-fc009a491f62",
+   "slug": "loft-su-due-livelli-in-via-confalonieri-10cae992-c1bf-48a8-92bf-fc009a491f62",
+   "title": "Loft su due livelli in Via Confalonieri",
+   "description": "<p>Loft di 95 m² su due livelli all'Isola, in un ex magazzino degli anni Trenta.</p><p>Soggiorno a doppia altezza con parete in mattoni, scala in ferro e soppalco con la camera. Cucina bianca con piano in legno, due bagni, grandi finestre verso il cortile.</p><p>Stufa a legna, ascensore fino al primo livello. Piazza Gae Aulenti a sei minuti a piedi.</p>",
+   "description_text": "Loft di 95 m² su due livelli all'Isola, in un ex magazzino degli anni Trenta.\n\nSoggiorno a doppia altezza con parete in mattoni, scala in ferro e soppalco con la camera. Cucina bianca con piano in legno, due bagni, grandi finestre verso il cortile.\n\nStufa a legna, ascensore fino al primo livello. Piazza Gae Aulenti a sei minuti a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "available",
+   "price": 920000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 1,
+   "bathrooms": 2,
+   "living_surface": 95,
+   "address": {
+    "street": "Via Federico Confalonieri 19",
+    "postcode": "20124",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.489,
+    "lng": 9.191
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252606.jpg",
+     "alt": "Loft su due livelli in Via Confalonieri"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252608.jpg",
+     "alt": "Loft su due livelli in Via Confalonieri, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252612.jpg",
+     "alt": "Loft su due livelli in Via Confalonieri, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252613.jpg",
+     "alt": "Loft su due livelli in Via Confalonieri, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252609.jpg",
+     "alt": "Loft su due livelli in Via Confalonieri, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+    "first_name": "Giulia",
+    "last_name": "Ferrante",
+    "phone": "+39 02 000 000 02",
+    "email": "giulia.ferrante@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+     "alt": "Giulia Ferrante"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "AUYK-C2GH",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "0e5fece8-cf86-4700-a9d8-8c522cccb2a5",
+   "slug": "loft-con-vetrate-industriali-in-via-pacini-0e5fece8-cf86-4700-a9d8-8c522cccb2a5",
+   "title": "Loft con vetrate industriali in Via Pacini",
+   "description": "<p>Loft di 120 m² in un ex edificio produttivo vicino a Piazza Leonardo da Vinci, con vetrate in ferro lunghe tutta la parete.</p><p>Venduto a settembre 2026.</p>",
+   "description_text": "Loft di 120 m² in un ex edificio produttivo vicino a Piazza Leonardo da Vinci, con vetrate in ferro lunghe tutta la parete.\n\nVenduto a settembre 2026.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "sold",
+   "price": 780000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 120,
+   "address": {
+    "street": "Via Giovanni Pacini 27",
+    "postcode": "20131",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.483,
+    "lng": 9.231
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38661238.jpg",
+     "alt": "Loft con vetrate industriali in Via Pacini"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38661233.jpg",
+     "alt": "Loft con vetrate industriali in Via Pacini, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38661229.jpg",
+     "alt": "Loft con vetrate industriali in Via Pacini, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38661237.jpg",
+     "alt": "Loft con vetrate industriali in Via Pacini, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38661240.jpg",
+     "alt": "Loft con vetrate industriali in Via Pacini, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "744b9706-7fa9-4aab-9634-a4279c7b57c9",
+    "first_name": "Chiara",
+    "last_name": "Brambilla",
+    "phone": "+39 02 000 000 04",
+    "email": "chiara.brambilla@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955066-sq.jpg",
+     "alt": "Chiara Brambilla"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "8KF8-2QRG",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "02269577-471a-4cc4-82f4-b765d81f32ed",
+   "slug": "trilocale-ristrutturato-in-corso-lodi-02269577-471a-4cc4-82f4-b765d81f32ed",
+   "title": "Trilocale ristrutturato in Corso Lodi",
+   "description": "<p>Sesto piano con ascensore in Corso Lodi, 100 m² ristrutturati nel 2025 da uno studio di architettura.</p><p>Soggiorno con parete in noce e cucina in marmo con penisola, due camere, due bagni. Parquet in rovere naturale, porte filo muro, aria condizionata canalizzata.</p><p>Metro gialla a Lodi a tre minuti; Porta Romana e Scalo Romana a piedi.</p>",
+   "description_text": "Sesto piano con ascensore in Corso Lodi, 100 m² ristrutturati nel 2025 da uno studio di architettura.\n\nSoggiorno con parete in noce e cucina in marmo con penisola, due camere, due bagni. Parquet in rovere naturale, porte filo muro, aria condizionata canalizzata.\n\nMetro gialla a Lodi a tre minuti; Porta Romana e Scalo Romana a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 820000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 100,
+   "address": {
+    "street": "Corso Lodi 64",
+    "postcode": "20135",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.448,
+    "lng": 9.209
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585764.jpg",
+     "alt": "Trilocale ristrutturato in Corso Lodi"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585760.jpg",
+     "alt": "Trilocale ristrutturato in Corso Lodi, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585767.jpg",
+     "alt": "Trilocale ristrutturato in Corso Lodi, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585762.jpg",
+     "alt": "Trilocale ristrutturato in Corso Lodi, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585756.jpg",
+     "alt": "Trilocale ristrutturato in Corso Lodi, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "34fc1ca2-487c-4276-87b7-8927f820f63e",
+    "first_name": "Matteo",
+    "last_name": "Cattaneo",
+    "phone": "+39 02 000 000 03",
+    "email": "matteo.cattaneo@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20955046-sq.jpg",
+     "alt": "Matteo Cattaneo"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "HTZC-ACQL",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "e41c96a3-f7db-487b-a5c6-01e7b0e86e14",
+   "slug": "trilocale-con-mattoni-a-vista-in-via-padova-e41c96a3-f7db-487b-a5c6-01e7b0e86e14",
+   "title": "Trilocale con mattoni a vista in Via Padova",
+   "description": "<p>Trilocale di 85 m² a NoLo, rinnovato con pareti in mattoni recuperati e pavimento in legno scuro.</p><p>Soggiorno con zona pranzo, cucina in noce, due camere e bagno. Balcone sul retro, lontano dal traffico della via.</p><p>Metro rossa a Pasteur a cinque minuti, mercato comunale di Viale Monza vicino.</p>",
+   "description_text": "Trilocale di 85 m² a NoLo, rinnovato con pareti in mattoni recuperati e pavimento in legno scuro.\n\nSoggiorno con zona pranzo, cucina in noce, due camere e bagno. Balcone sul retro, lontano dal traffico della via.\n\nMetro rossa a Pasteur a cinque minuti, mercato comunale di Viale Monza vicino.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 480000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 85,
+   "address": {
+    "street": "Via Padova 51",
+    "postcode": "20127",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.49,
+    "lng": 9.22
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6238683.jpg",
+     "alt": "Trilocale con mattoni a vista in Via Padova"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6238679.jpg",
+     "alt": "Trilocale con mattoni a vista in Via Padova, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6238680.jpg",
+     "alt": "Trilocale con mattoni a vista in Via Padova, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6238684.jpg",
+     "alt": "Trilocale con mattoni a vista in Via Padova, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0e0e77af-a05b-4161-927d-533a5ca3e07b",
+    "first_name": "Luca",
+    "last_name": "Sartori",
+    "phone": "+39 02 000 000 05",
+    "email": "luca.sartori@ballatoio.example.com",
+    "languages": [
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713135-sq.jpg",
+     "alt": "Luca Sartori"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-08T09:00:00.000Z",
+   "reference": "69YC-AUSD",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  },
+  {
+   "id": "4d88f041-875a-41b7-a67f-50b4dc0dad67",
+   "slug": "appartamento-sul-naviglio-pavese-4d88f041-875a-41b7-a67f-50b4dc0dad67",
+   "title": "Appartamento sul Naviglio Pavese",
+   "description": "<p>Quinto piano di un condominio degli anni Settanta affacciato sul Naviglio Pavese, 98 m² completamente rifatti.</p><p>Soggiorno con pranzo e cucina a vista, parete verde petrolio e grandi finestre, due camere, due bagni. Balcone sul naviglio.</p><p>Box in autorimessa condominiale. Darsena a dieci minuti a piedi.</p>",
+   "description_text": "Quinto piano di un condominio degli anni Settanta affacciato sul Naviglio Pavese, 98 m² completamente rifatti.\n\nSoggiorno con pranzo e cucina a vista, parete verde petrolio e grandi finestre, due camere, due bagni. Balcone sul naviglio.\n\nBox in autorimessa condominiale. Darsena a dieci minuti a piedi.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 790000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 98,
+   "address": {
+    "street": "Alzaia Naviglio Pavese 38",
+    "postcode": "20143",
+    "city": "Milano",
+    "country": "Italy",
+    "lat": 45.447,
+    "lng": 9.179
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585599.jpg",
+     "alt": "Appartamento sul Naviglio Pavese"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585598.jpg",
+     "alt": "Appartamento sul Naviglio Pavese, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585600.jpg",
+     "alt": "Appartamento sul Naviglio Pavese, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585597.jpg",
+     "alt": "Appartamento sul Naviglio Pavese, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585602.jpg",
+     "alt": "Appartamento sul Naviglio Pavese, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "b5c72aff-ac92-495a-9501-adcf0daac5c5",
+    "first_name": "Giulia",
+    "last_name": "Ferrante",
+    "phone": "+39 02 000 000 02",
+    "email": "giulia.ferrante@ballatoio.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "b73add62-641e-425c-a532-1f3443e74348"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-22046245-sq.jpg",
+     "alt": "Giulia Ferrante"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-04T09:00:00.000Z",
+   "reference": "4TP9-UVB6",
+   "team_ids": [
+    "b73add62-641e-425c-a532-1f3443e74348"
+   ]
+  }
+ ],
+ "developments": [],
+ "fixture_only": {
+  "listings": {
+   "a1113055-a917-4309-8f83-43f9f0701bc4": {
+    "energy_class": "B",
+    "year_built": 2019,
+    "terrace_surface": 60
+   },
+   "49d35c54-153c-48d1-9fb3-58881e4ea613": {
+    "energy_class": "C",
+    "year_built": 1910,
+    "terrace_surface": 40
+   },
+   "fcc9961b-7201-475b-b898-5f1d1bc43eee": {
+    "energy_class": "E",
+    "year_built": 2005
+   },
+   "e5054c34-5f98-4fa5-bfbd-122cf36da0bc": {
+    "energy_class": "B",
+    "year_built": 1910,
+    "floor": 3,
+    "balcony_surface": 6
+   },
+   "e9701532-bbd3-4f47-8903-59a1186a000f": {
+    "energy_class": "A",
+    "year_built": 1930,
+    "floor": 2
+   },
+   "6d19f1b7-8512-4255-b18f-fddecb10a941": {
+    "energy_class": "B",
+    "year_built": 1965,
+    "floor": 5,
+    "terrace_surface": 25
+   },
+   "65d389bf-883d-46a3-ad7d-361397cca330": {
+    "energy_class": "E",
+    "year_built": 1900,
+    "floor": 2,
+    "balcony_surface": 4
+   },
+   "3321a380-6a1b-442d-a1c1-7767212a11c7": {
+    "energy_class": "B",
+    "year_built": 1890,
+    "floor": 1
+   },
+   "c4e91ccc-af98-460a-ac10-a91df6ddf466": {
+    "energy_class": "B",
+    "year_built": 1925,
+    "floor": 4
+   },
+   "17a91b2a-d6cf-4360-ac95-f8e538db90bd": {
+    "energy_class": "A",
+    "year_built": 1960,
+    "floor": 3,
+    "balcony_surface": 4,
+    "charges": 150
+   },
+   "0e75c2b9-bf84-4219-90a2-f9bbb5415701": {
+    "energy_class": "E",
+    "year_built": 1930,
+    "floor": 3
+   },
+   "eb4299bd-62a9-4e58-89ed-60aedef46b68": {
+    "energy_class": "B",
+    "year_built": 1920,
+    "floor": 2
+   },
+   "ca058a1c-004a-4ed2-8413-76105b1400d5": {
+    "energy_class": "A",
+    "year_built": 1970,
+    "floor": 4,
+    "charges": 120
+   },
+   "9badbd44-448a-47ec-b1c6-19e10871f49f": {
+    "energy_class": "C",
+    "year_built": 1910,
+    "floor": 3
+   },
+   "db34483c-9d2a-47a7-9b84-626c08e3a9bd": {
+    "energy_class": "B",
+    "year_built": 1935,
+    "floor": 2,
+    "charges": 140
+   },
+   "e86d229a-10d2-4094-ac66-7ed4790edb96": {
+    "energy_class": "E",
+    "year_built": 1910,
+    "floor": 3,
+    "balcony_surface": 3
+   },
+   "af839e74-aebc-4d79-9202-45ff8b3ee78d": {
+    "energy_class": "B",
+    "year_built": 1958,
+    "floor": 1
+   },
+   "5398126c-2ddf-4cf1-8b5c-838829d4881b": {
+    "energy_class": "D",
+    "year_built": 1925,
+    "floor": 0
+   },
+   "dde576c1-8e13-420a-89e0-f2aebcd548af": {
+    "energy_class": "E",
+    "year_built": 1950,
+    "floor": 0
+   },
+   "10cae992-c1bf-48a8-92bf-fc009a491f62": {
+    "energy_class": "B",
+    "year_built": 1935,
+    "floor": 1
+   },
+   "0e5fece8-cf86-4700-a9d8-8c522cccb2a5": {
+    "energy_class": "C",
+    "year_built": 1938,
+    "floor": 2
+   },
+   "02269577-471a-4cc4-82f4-b765d81f32ed": {
+    "energy_class": "A",
+    "year_built": 1965,
+    "floor": 6,
+    "balcony_surface": 8
+   },
+   "e41c96a3-f7db-487b-a5c6-01e7b0e86e14": {
+    "energy_class": "D",
+    "year_built": 1960,
+    "floor": 4,
+    "balcony_surface": 4
+   },
+   "4d88f041-875a-41b7-a67f-50b4dc0dad67": {
+    "energy_class": "E",
+    "year_built": 1970,
+    "floor": 5,
+    "balcony_surface": 6
+   }
+  },
+  "units": {},
+  "developments": {}
+ }
+}

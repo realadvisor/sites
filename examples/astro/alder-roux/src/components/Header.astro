@@ -1,0 +1,158 @@
+---
+/**
+ * Two-row header that scales to many offices: a thin utility row (one phone
+ * per office, language switch) and the main bar (wordmark, sections,
+ * valuation call to action). Phone: wordmark and a menu button that opens a
+ * full-height sheet (native popover: Escape and outside click close it, no
+ * JavaScript).
+ */
+import type { Organisation, Team } from '@realadvisor/sites-sdk/types';
+import Wordmark from './Wordmark.astro';
+import { href, LANGS, type L, type RouteKey } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props {
+  l: L;
+  org: Organisation;
+  teams: Team[];
+  /** Section of the current page, for aria-current. */
+  section?: RouteKey;
+  /** The same page in each language. */
+  switchTo: Record<L, string>;
+  hasDevelopments: boolean;
+}
+const { l, org, teams, section, switchTo, hasDevelopments } = Astro.props;
+const t = tx(l);
+const nav: { key: RouteKey; label: string }[] = [
+  { key: 'buy', label: t('navBuy') },
+  { key: 'rent', label: t('navRent') },
+  ...(hasDevelopments ? [{ key: 'developments' as const, label: t('navNew') }] : []),
+  { key: 'sell', label: t('navSell') },
+  { key: 'offices', label: t('navOffices') },
+  { key: 'team', label: t('navTeam') },
+  { key: 'about', label: t('navAbout') },
+];
+const phones = teams.filter((x) => x.phone);
+---
+<a class="skip" href="#main">{t('skip')}</a>
+<header class="hd">
+  <div class="hd__util">
+    <div class="wrap hd__util-in">
+      <ul class="hd__phones" aria-label={t('phone')}>
+        {phones.map((x) => (
+          <li><span>{cityName(x.address.city, l) || x.name}</span> <a href={tel(x.phone!)} class="num">{x.phone}</a></li>
+        ))}
+      </ul>
+      <nav class="hd__langs" aria-label={t('language')}>
+        {LANGS.map((x) => (
+          <a href={switchTo[x]} hreflang={x} lang={x} aria-current={x === l ? 'true' : undefined}>{x.toUpperCase()}</a>
+        ))}
+      </nav>
+    </div>
+  </div>
+  <div class="hd__bar">
+    <div class="wrap hd__bar-in">
+      <Wordmark org={org} href={href('home', l)} label={`${org.name}, ${t('home')}`} />
+      <nav class="hd__nav" aria-label={t('mainNav')}>
+        <ul>
+          {nav.map((n) => (
+            <li><a href={href(n.key, l)} aria-current={section === n.key ? 'page' : undefined}>{n.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <div class="hd__actions">
+        <a class="hd__contact" href={href('contact', l)} aria-current={section === 'contact' ? 'page' : undefined}>{t('navContact')}</a>
+        <a class="button hd__cta" href={href('sell', l)}>{t('valuationCta')}</a>
+        <button class="hd__burger" type="button" popovertarget="hd-menu" aria-controls="hd-menu" aria-label={t('menu')}>
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18" /></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="hd-menu" class="sheet on-navy" popover>
+    <div class="sheet__top">
+      <Wordmark org={org} href={href('home', l)} tone="light" label={`${org.name}, ${t('home')}`} />
+      <button class="sheet__close" type="button" popovertarget="hd-menu" popovertargetaction="hide" aria-label={t('closeMenu')}>
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19" /></svg>
+      </button>
+    </div>
+    <nav aria-label={t('mainNav')}>
+      <ul class="sheet__nav">
+        {nav.map((n) => <li><a href={href(n.key, l)} aria-current={section === n.key ? 'page' : undefined}>{n.label}</a></li>)}
+        <li><a href={href('contact', l)}>{t('navContact')}</a></li>
+      </ul>
+    </nav>
+    <ul class="sheet__phones">
+      {phones.map((x) => <li><span>{cityName(x.address.city, l) || x.name}</span><a class="num" href={tel(x.phone!)}>{x.phone}</a></li>)}
+    </ul>
+    <div class="sheet__langs" aria-label={t('language')} role="group">
+      {LANGS.map((x) => <a href={switchTo[x]} hreflang={x} lang={x} aria-current={x === l ? 'true' : undefined}>{x === 'fr' ? 'Français' : 'Deutsch'}</a>)}
+    </div>
+  </div>
+</header>
+
+<style>
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--navy); color: #fff; padding: 12px 18px; text-decoration: none; font-weight: 600; }
+  .skip:focus { top: 12px; }
+
+  .hd { position: sticky; top: -36px; z-index: 40; background: #fff; }
+  .hd__util { background: var(--navy-deep); color: var(--on-navy-muted); font-size: 0.8125rem; }
+  .hd__util-in { display: flex; align-items: center; justify-content: space-between; min-height: 36px; gap: 24px; }
+  .hd__phones { list-style: none; display: flex; gap: 28px; }
+  .hd__phones span { color: #fff; font-weight: 600; letter-spacing: 0.04em; margin-right: 6px; }
+  .hd__phones a { color: var(--on-navy-muted); text-decoration: none; }
+  .hd__phones a:hover { color: #fff; text-decoration: underline; }
+  .hd__langs { display: flex; gap: 2px; }
+  .hd__langs a { color: var(--on-navy-muted); text-decoration: none; font-weight: 600; letter-spacing: 0.1em; padding: 8px 8px; }
+  .hd__langs a[aria-current] { color: #fff; box-shadow: inset 0 -2px 0 var(--brass); }
+  .hd__langs a:hover { color: #fff; }
+
+  .hd__bar { border-bottom: 1px solid var(--line); }
+  .hd__bar-in { display: flex; align-items: center; gap: 32px; min-height: var(--header-h); }
+  .hd__nav { margin-inline: auto; }
+  .hd__nav ul { list-style: none; display: flex; gap: clamp(14px, 1.7vw, 30px); }
+  .hd__nav a, .hd__contact {
+    display: inline-flex; align-items: center; min-height: 44px; text-decoration: none;
+    font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text);
+    box-shadow: inset 0 -1px 0 transparent; transition: box-shadow .15s, color .15s;
+  }
+  .hd__nav a:hover, .hd__contact:hover { color: var(--navy); box-shadow: inset 0 -1px 0 var(--navy); }
+  .hd__nav a[aria-current='page'], .hd__contact[aria-current='page'] { color: var(--navy); box-shadow: inset 0 -2px 0 var(--brass); }
+  .hd__actions { display: flex; align-items: center; gap: 24px; }
+  .hd__cta { min-height: 44px; padding: 0 18px; font-size: 0.75rem; }
+  .hd__burger { display: none; width: 44px; height: 44px; border: 0; background: none; align-items: center; justify-content: center; cursor: pointer; color: var(--navy); margin-right: -10px; }
+
+  @media (max-width: 1180px) {
+    .hd__nav ul { gap: 16px; }
+    .hd__contact { display: none; }
+  }
+  @media (max-width: 1024px) {
+    .hd { top: 0; }
+    .hd__util { display: none; }
+    .hd__nav, .hd__cta { display: none; }
+    .hd__burger { display: inline-flex; }
+    .hd__bar-in { justify-content: space-between; min-height: 64px; }
+  }
+
+  .sheet {
+    position: fixed; inset: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0; border: 0;
+    padding: 12px var(--gutter) 32px; background: var(--navy); color: #fff; overflow-y: auto;
+    display: none; flex-direction: column; gap: 28px;
+  }
+  .sheet:popover-open { display: flex; }
+  .sheet::backdrop { background: rgb(12 24 40 / 0.5); }
+  :global(body:has(#hd-menu:popover-open)) { overflow: hidden; }
+  .sheet__top { display: flex; align-items: center; justify-content: space-between; min-height: 52px; }
+  .sheet__close { width: 44px; height: 44px; border: 0; background: none; color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; margin-right: -10px; }
+  .sheet__nav { list-style: none; display: grid; border-top: 1px solid var(--line-on-navy); }
+  .sheet__nav a { display: flex; align-items: center; min-height: 56px; border-bottom: 1px solid var(--line-on-navy); text-decoration: none; font: 400 1.625rem/1.1 var(--font-display); }
+  .sheet__nav a[aria-current='page'] { color: var(--brass-on-navy); }
+  .sheet__phones { list-style: none; display: grid; gap: 10px; font-size: 0.9375rem; }
+  .sheet__phones li { display: flex; justify-content: space-between; gap: 12px; }
+  .sheet__phones span { color: var(--on-navy-muted); }
+  .sheet__phones a { color: #fff; min-height: 32px; display: inline-flex; align-items: center; }
+  .sheet__langs { display: flex; gap: 8px; margin-top: auto; }
+  .sheet__langs a { flex: 1; display: inline-flex; justify-content: center; align-items: center; min-height: 48px; border: 1px solid var(--line-on-navy); text-decoration: none; font-weight: 600; }
+  .sheet__langs a[aria-current] { background: #fff; color: var(--navy); }
+</style>

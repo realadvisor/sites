@@ -1,0 +1,80 @@
+---
+import type { Development, Team } from '@realadvisor/sites-sdk/types';
+import { t, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { addressLine, programmeStatus, programmeUrl, telHref, PROGRAMMES_PATH } from '../lib/fr';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  name: string;
+  legalName: string;
+  team?: Team;
+  programmes: Pick<Development, 'slug' | 'title' | 'address' | 'status'>[];
+}
+const { name, legalName, team, programmes } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap top">
+    <div class="brand">
+      <Wordmark name={name} />
+      <p class="tagline">Promoteur immobilier{team?.address?.city ? `, bureau à ${team.address.city}` : ''}.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h2 class="fh">Programmes</h2>
+        <ul>
+          {programmes.map((d) => (
+            <li><a href={programmeUrl(d)}>{d.title}</a><span class="muted"> · {d.address.city}{programmeStatus(d) && ` · ${programmeStatus(d)}`}</span></li>
+          ))}
+          <li><a href={PROGRAMMES_PATH}>Tous nos programmes</a></li>
+        </ul>
+      </div>
+      {team && (
+        <div>
+          <h2 class="fh">Nous écrire, nous appeler</h2>
+          <address>
+            {addressLine(team.address) && <p>{addressLine(team.address)}</p>}
+            {team.phone && <p><a href={telHref(team.phone)} class="num">{team.phone}</a></p>}
+            {team.email && <p><a href={`mailto:${team.email}`}>{team.email}</a></p>}
+          </address>
+        </div>
+      )}
+      <div>
+        <h2 class="fh">Informations</h2>
+        <ul>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href={legalPath()}>{t('legalNotice')}</a></li>
+          <li><a href={privacyPath()}>{t('privacyPolicy')}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap bottom">
+    <p>© {year} {legalName}</p>
+    <p>Visuels et plans non contractuels.</p>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--ink-0); border-top: 1px solid var(--line); padding-top: clamp(72px, 9vw, 128px); }
+  .top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 64px; padding-bottom: 72px; }
+  .brand { display: grid; gap: 28px; align-content: start; justify-items: start; }
+  .tagline { font-size: var(--fs-small); color: var(--muted); max-width: 30ch; margin: 0; }
+  .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+  .fh { font: 500 var(--fs-small) / 1.3 var(--sans); color: var(--text); margin: 0 0 16px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  li, address p { font-size: var(--fs-small); line-height: 1.5; }
+  li a, address a { display: inline-block; padding: 6px 0; text-decoration: none; }
+  li a:hover, address a:hover { text-decoration: underline; }
+  address { font-style: normal; }
+  address p { margin: 0 0 4px; color: var(--muted); }
+  address a { color: var(--text); }
+  .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-block: 24px 32px; border-top: 1px solid var(--line); font-size: 0.8125rem; color: var(--muted); }
+  .bottom p { margin: 0; }
+  @media (max-width: 960px) {
+    .top { grid-template-columns: 1fr; gap: 48px; }
+  }
+  @media (max-width: 640px) {
+    .cols { grid-template-columns: 1fr; gap: 36px; }
+  }
+</style>

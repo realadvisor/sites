@@ -1,0 +1,79 @@
+---
+export const prerender = false;
+/** One agent: contact, agency, bio when set, their listings and sales, and a form addressed to them. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../../layouts/Site.astro';
+import ListingCard from '../../components/ListingCard.astro';
+import Icon from '../../components/Icon.astro';
+import { siteData, sites } from '../../lib/data';
+import { agentName, agentSlug, languages, R, teamHref, teamShortName, tel } from '../../lib/site';
+
+const { org, teams, agents } = await siteData();
+const agent = agents.find((a) => agentSlug(a) === Astro.params.slug);
+if (!agent) return Astro.rewrite('/404');
+const all = await sites.allListings();
+const mine = all.filter((l) => l.agent?.id === agent.id);
+const live = mine.filter((l) => l.status === 'available');
+const sold = mine.filter((l) => l.status === 'sold');
+const team = teams.find((t) => agent.team_ids.includes(t.id));
+const name = agentName(agent);
+const brand = org.name.replace(/\s+SAS$/, '');
+const langs = languages(agent.languages);
+---
+<Site nav="team" title={`${name}${team ? `, ${brand} ${teamShortName(team)}` : ''} | ${brand}`}
+  description={`${name}, ${agent.title ?? 'agent immobilier'}${team ? ` à l'agence ${brand} ${teamShortName(team)} (${team.address.city})` : ''}. Téléphone, e-mail et annonces.`}>
+  <div class="wrap top"><a class="back" href={R.team}><Icon name="back" size={18} />L'équipe</a></div>
+  <section class="wrap who">
+    {agent.photo && <RaImage class="who__photo" src={agent.photo} alt={agent.photo.alt || name} width={640} height={800} sizes="(min-width: 960px) 320px, 60vw" priority />}
+    <div class="who__text">
+      <h1 class="who__h1">{name}</h1>
+      <p class="who__role">{[agent.title, team && `${brand} ${teamShortName(team)}`].filter(Boolean).join(' · ')}</p>
+      {agent.bio && <p class="who__bio">{agent.bio}</p>}
+      <dl class="who__facts">
+        {agent.phone && <div><dt>Téléphone</dt><dd><a class="num" href={tel(agent.phone)}>{agent.phone}</a></dd></div>}
+        {agent.email && <div><dt>E-mail</dt><dd><a href={`mailto:${agent.email}`}>{agent.email}</a></dd></div>}
+        {langs && <div><dt>Langues</dt><dd>{langs}</dd></div>}
+        {team && <div><dt>Agence</dt><dd><a href={teamHref(team)}>{teamShortName(team)}</a>, {[team.address.street, team.address.city].filter(Boolean).join(', ')}</dd></div>}
+      </dl>
+    </div>
+  </section>
+
+  {live.length > 0 && (
+    <section class="wrap sec" aria-labelledby="l-h">
+      <h2 id="l-h" class="h3">Les annonces de {agent.first_name}</h2>
+      <ul class="cards">{live.map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+    </section>
+  )}
+  {sold.length > 0 && (
+    <section class="wrap sec" aria-labelledby="s-h">
+      <h2 id="s-h" class="h3">Vendus par {agent.first_name}</h2>
+      <ul class="cards">{sold.map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+    </section>
+  )}
+  <section class="wrap sec form" aria-labelledby="f-h">
+    <h2 id="f-h" class="h3">Écrire à {agent.first_name}</h2>
+    <EnquiryForm agentId={agent.id} agentName={agent.first_name} contactReason="other" />
+  </section>
+</Site>
+
+<style>
+  .top { padding-top: 16px; }
+  .back { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; text-decoration: none; font-weight: 550; }
+  .back:hover { text-decoration: underline; }
+  .who { display: grid; gap: 32px; padding-top: 16px; align-items: start; }
+  @media (min-width: 960px) { .who:has(.who__photo) { grid-template-columns: 320px minmax(0, 1fr); gap: 56px; } }
+  :global(.who__photo) { width: 100%; max-width: 320px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-card); }
+  .who__text { display: grid; gap: 12px; max-width: 720px; }
+  .who__h1 { font-size: var(--step-4); letter-spacing: -0.035em; }
+  .who__role { font-size: var(--step-1); color: var(--muted); }
+  .who__bio { font-size: 1.0625rem; max-width: 62ch; }
+  .who__facts { margin: 16px 0 0; border-top: 1px solid var(--line); }
+  .who__facts div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .who__facts dt { color: var(--muted); }
+  .who__facts dd { margin: 0; font-weight: 550; overflow-wrap: anywhere; }
+  .who__facts a { text-decoration: none; }
+  .who__facts a:hover { text-decoration: underline; }
+  .sec { margin-top: var(--section); display: grid; gap: 28px; }
+  .form :global(.enquiry) { max-width: 760px; }
+</style>

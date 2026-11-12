@@ -1,0 +1,8 @@
+.crumbs ol { display: flex; flex-wrap: wrap; gap: 0 2px; font-size: 0.875rem; color: var(--muted); }
+.crumbs li + li::before { content: '/'; margin: 0 8px; color: var(--line-strong); }
+.crumbs a { display: inline-flex; align-items: center; min-height: 32px; text-decoration: none; color: var(--muted); }
+.crumbs a:hover { color: var(--text); text-decoration: underline; }
+.crumbs span { display: inline-flex; align-items: center; min-height: 32px; }
+.crumbs--light ol, .crumbs--light a { color: var(--on-ink-muted); }
+.crumbs--light li + li::before { color: rgb(246 243 237 / 0.35); }
+.crumbs--light a:hover { color: var(--on-ink); }

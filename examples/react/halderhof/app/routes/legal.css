@@ -1,0 +1,10 @@
+  .legal-wrap { max-width: 860px; }
+  .legal-wrap .legal { display: grid; gap: 44px; }
+  .legal-wrap h2 { font-size: var(--step-2); color: var(--green-ink); margin-bottom: 14px; }
+  .legal-wrap dl { display: grid; border-top: 1px solid var(--line); }
+  .legal-wrap dl > div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .legal-wrap dt { color: var(--muted); }
+  .legal-wrap dd a { color: var(--green); overflow-wrap: anywhere; }
+  .legal-wrap p { max-width: 68ch; }
+  .legal-wrap p + p { margin-top: 12px; }
+  @media (max-width: 600px) { .legal-wrap dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

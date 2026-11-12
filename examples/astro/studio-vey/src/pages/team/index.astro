@@ -1,0 +1,39 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import AgentCard from '../../components/AgentCard.astro';
+import TalkBand from '../../components/TalkBand.astro';
+import { brandName, site, sites } from '../../lib/data';
+import { languages } from '../../lib/format';
+
+const s = await site();
+const listings = await sites.allListings({ status: 'available' });
+const countOf = (id: string) => listings.filter((l) => l.agent?.id === id).length;
+const langs = languages([...new Set(s.agents.flatMap((a) => a.languages ?? []))]);
+---
+<Layout title={`Team | ${brandName(s)}`} description={`Das Team von ${brandName(s)} in ${s.team.address.city ?? 'Zürich'}: ${s.agents.map((a) => `${a.first_name} ${a.last_name}`).join(', ')}.`}>
+  <PageHead title="Team" lede={langs ? `Wir beraten Sie auf ${langs}.` : undefined} />
+  <section class="wrap team" aria-label="Unser Team">
+    <ul class="team-grid">
+      {s.agents.map((a) => <li><AgentCard agent={a} count={countOf(a.id)} as="h2" /></li>)}
+    </ul>
+  </section>
+  <TalkBand text="Schreiben Sie uns, wir leiten Ihre Anfrage an die richtige Person weiter." phone={s.team.phone} email={s.team.email} action={{ href: '/kontakt', label: 'Zum Kontaktformular' }} />
+</Layout>
+
+<style>
+  .team { padding-bottom: var(--section); }
+  .team-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); }
+  .team-grid > li { padding: 40px var(--gap) 40px 0; border-bottom: 1px solid var(--line); }
+  .team-grid > li + li { padding-left: var(--gap); border-left: 1px solid var(--line); }
+  @media (max-width: 1023px) {
+    .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .team-grid > li:nth-child(odd) { padding-left: 0; border-left: 0; }
+  }
+  @media (max-width: 559px) {
+    .team-grid { grid-template-columns: minmax(0, 1fr); }
+    .team-grid > li, .team-grid > li + li { padding: 32px 0; border-left: 0; }
+  }
+</style>

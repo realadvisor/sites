@@ -1,0 +1,93 @@
+---
+/** One region: photo band, towns with counts and prices, the listings available, recent sales and the office in charge. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import TownTable from '../components/TownTable.astro';
+import { siteData } from '../lib/data';
+import type { Region } from '../lib/regions';
+import { placeOf } from '../content/places';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L; region: Region }
+const { l, region: r } = Astro.props;
+const t = tx(l);
+const { org, teams } = await siteData();
+const city = cityName(r.team.address.city, l) || r.team.name;
+const place = placeOf(r.slug);
+const places = joinList(r.towns.map((x) => cityName(x.city, l)), l);
+const buy = r.available.filter((x) => x.offer_type === 'buy');
+const rent = r.available.filter((x) => x.offer_type === 'rent');
+const x = r.team;
+---
+<Site l={l} route="areas" segs={[r.slug]} title={`${t('regionTitle', { city })} | ${org.name}`}
+  description={places ? t('regionLede', { places, city }) : t('regionTitle', { city })} image={place && img(place.photo, { w: 1200, h: 630 })}>
+  <section class="hero" data-hero>
+    {place && <RaImage src={place.photo} alt={place.alt[l]} width={1600} height={700} priority sizes="100vw" mobile={{ width: 800, height: 700 }} />}
+    <div class="hero__panel on-green">
+      <div class="wrap hero__in">
+        <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navAreas'), href: href('areas', l) }, { label: city }]} />
+        <h1 class="h1">{t('regionTitle', { city })}</h1>
+        {places && <p class="lede">{t('regionLede', { places, city })}</p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap cols" aria-labelledby="h-towns">
+    <div>
+      <h2 id="h-towns" class="h3 sec-h">{t('placesTitle')}</h2>
+      <TownTable l={l} towns={r.towns} caption={t('placesTitle')} />
+    </div>
+    <aside class="office" aria-label={t('officeOf', { city })}>
+      <h2 class="h3"><a href={href('offices', l, teamSlug(x, teams))}>{t('officeOf', { city })}</a></h2>
+      <address>{[x.address.street, [x.address.postcode, cityName(x.address.city, l)].filter(Boolean).join(' ')].filter(Boolean).join(', ')}</address>
+      <ul class="plain-list">
+        {x.phone && <li><a class="num" href={tel(x.phone)}>{x.phone}</a></li>}
+        {x.email && <li><a href={`mailto:${x.email}`}>{x.email}</a></li>}
+      </ul>
+      <a class="button" href={href('sell', l)}>{t('valuationCta')}</a>
+    </aside>
+  </section>
+
+  {r.available.length > 0 ? (
+    <section class="section section--paper" aria-labelledby="h-av">
+      <div class="wrap">
+        <h2 id="h-av" class="h2 sec-h">{t('regionAvailable', { city })}</h2>
+        <ul class="plain-list grid3">{[...buy, ...rent].map((y) => <li><ListingCard listing={y} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  ) : (
+    <p class="wrap section lede">{t('regionNone', { city })}</p>
+  )}
+
+  {r.sold.length > 0 && (
+    <section class="section wrap" aria-labelledby="h-sold">
+      <h2 id="h-sold" class="h2 sec-h">{t('regionSold', { city })}</h2>
+      <ul class="plain-list grid3">{r.sold.map((y) => <li><ListingCard listing={y} l={l} /></li>)}</ul>
+    </section>
+  )}
+</Site>
+
+<style>
+  .hero { position: relative; display: grid; min-height: 600px; background: var(--green-ink); }
+  .hero > :global(picture), .hero > :global(img) { position: absolute; inset: 0; }
+  .hero :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .hero__panel { position: relative; align-self: end; background: rgb(31 77 58 / 0.94); }
+  .hero__in { display: grid; gap: 12px; padding-block: 28px 36px; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .sec-h { color: var(--green-ink); margin-bottom: 24px; }
+  .office { background: var(--paper); padding: 28px; display: grid; gap: 10px; }
+  .office h2 { color: var(--green-ink); }
+  .office h2 a { text-decoration: none; }
+  .office h2 a:hover { text-decoration: underline; }
+  .office address { font-style: normal; color: var(--muted); }
+  .office li a { display: inline-flex; min-height: 34px; align-items: center; color: var(--green); }
+  .office .button { justify-self: start; margin-top: 8px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+  @media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .grid3 { grid-template-columns: minmax(0, 1fr); } .hero { min-height: 520px; } }
+</style>

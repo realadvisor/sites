@@ -1,0 +1,36 @@
+---
+export const prerender = false;
+/** Team: every agent, grouped by agency, as name, role, languages, phone and e-mail (portrait when set). */
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/PageHead.astro';
+import AgentBlock from '../../components/AgentBlock.astro';
+import { siteData } from '../../lib/data';
+import { teamHref, teamShortName } from '../../lib/site';
+
+const { org, teams, agents } = await siteData();
+const brand = org.name.replace(/\s+SAS$/, '');
+const groups = teams.map((t) => ({ team: t, people: agents.filter((a) => a.team_ids.includes(t.id)) })).filter((g) => g.people.length);
+---
+<Site nav="team" title={`L'équipe | ${brand}`} description={`Les ${agents.length} agents ${brand} dans nos ${teams.length} agences : téléphone, e-mail et langues parlées.`}>
+  <PageHead title="L'équipe" lede={`${agents.length} agents dans ${teams.length} agences. Appelez directement celui ou celle de votre secteur.`} />
+  <div class="wrap groups">
+    {groups.map(({ team, people }) => (
+      <section class="group" aria-labelledby={`g-${team.id}`}>
+        <div class="group__head">
+          <h2 id={`g-${team.id}`} class="h3">{teamShortName(team)}</h2>
+          <p class="muted">{team.address.city} · <a class="link" href={teamHref(team)}>L'agence</a></p>
+        </div>
+        <ul class="people">{people.map((a) => <li><AgentBlock agent={a} /></li>)}</ul>
+      </section>
+    ))}
+  </div>
+</Site>
+
+<style>
+  .groups { display: grid; gap: 56px; }
+  .group { display: grid; gap: 20px; }
+  @media (min-width: 960px) { .group { grid-template-columns: 260px minmax(0, 1fr); gap: 40px; } }
+  .group__head { display: grid; gap: 4px; align-content: start; }
+  .people { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+  .people > li { padding-top: 18px; border-top: 1px solid var(--line); }
+</style>

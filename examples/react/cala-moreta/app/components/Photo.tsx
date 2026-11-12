@@ -1,0 +1,53 @@
+/**
+ * A place photo (app/lib/photos.ts): <picture> with AVIF and WebP srcsets and
+ * a JPEG fallback, from the RealAdvisor bucket through imgproxy. Lazy by
+ * default; `priority` for the one LCP image of the page. CSS sets the box;
+ * the photo's `focus` sets object-position for the crop.
+ */
+import { photoFallback, photoSize, photoSrcset, type PlacePhoto } from '../lib/photos';
+import type { Lang } from '../lib/i18n';
+
+type Props = {
+  photo: PlacePhoto;
+  lang: Lang;
+  /** Browser layout width per breakpoint. */
+  sizes?: string;
+  priority?: boolean;
+  /** Decorative (alt=""), e.g. behind a heading that already names the place. */
+  decorative?: boolean;
+  /** Full-bleed box taller than the photo on phones (hero): the browser must
+   * pick by the cropped height, not the viewport width, or it upscales. */
+  cover?: boolean;
+  /** Where the box is landscape (`true` = always, or a media query): a
+   * portrait photo then serves its 3:2 crop there instead of a tall file. */
+  landscapeAt?: boolean | string;
+  className?: string;
+};
+
+export function Photo({ photo, lang, sizes: sizesProp = '100vw', priority = false, decorative = false, cover = false, landscapeAt = false, className }: Props) {
+  const size = photoSize(photo);
+  const { width, height } = size;
+  // Phone hero box is about one screen tall: a landscape photo serves its 2:3
+  // portrait crop there, and the browser picks by height (needed width =
+  // 100vh × ratio), never below the viewport width.
+  const phoneCover = cover && !!size.portrait;
+  const coverRatio = phoneCover ? 2 / 3 : width / height;
+  // Capped at 380 CSS px so a 2.6x phone takes the 1000w file, not 1200w: a
+  // darkened hero under text does not need more, and it is the LCP.
+  const sizes = cover ? `(max-width: 767px) min(max(100vw, ${Math.round(coverRatio * 100)}vh), 380px), ${sizesProp}` : sizesProp;
+  const crop = landscapeAt && size.landscape ? (landscapeAt === true ? 'all' : landscapeAt) : undefined;
+  const box = crop === 'all' && size.landscape ? size.landscape : size;
+  return (
+    <picture className={className}>
+      {phoneCover && <source type="image/avif" media="(max-width: 767px)" srcSet={photoSrcset(photo, 'avif', 'p')} sizes={sizes} />}
+      {phoneCover && <source type="image/webp" media="(max-width: 767px)" srcSet={photoSrcset(photo, 'webp', 'p')} sizes={sizes} />}
+      {crop && crop !== 'all' && <source type="image/avif" media={crop} srcSet={photoSrcset(photo, 'avif', true)} sizes={sizes} />}
+      {crop && crop !== 'all' && <source type="image/webp" media={crop} srcSet={photoSrcset(photo, 'webp', true)} sizes={sizes} />}
+      <source type="image/avif" srcSet={photoSrcset(photo, 'avif', crop === 'all')} sizes={sizes} />
+      <source type="image/webp" srcSet={photoSrcset(photo, 'webp', crop === 'all')} sizes={sizes} />
+      <img src={photoFallback(photo)} alt={decorative ? '' : photo.alt[lang]} width={box.width} height={box.height}
+        loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : undefined} decoding="async"
+        style={photo.focus && crop !== 'all' ? { objectPosition: photo.focus } : undefined} />
+    </picture>
+  );
+}

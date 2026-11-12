@@ -1,0 +1,21 @@
+/*
+ * Every kit part's styles (from the Astro components, scoped there, plain
+ * class selectors here: rs-*, ra-map-*, consent*, enquiry*, field-*,
+ * control, btn; themed with the same tokens): the Astro kit's form.css, then
+ * search.css, pager.css, map.css, consent.css.
+ *
+ * Import it once, in root.tsx, where the Astro layout imports the kit's
+ * components (ConsentBanner): after the site's global CSS by default, so the
+ * kit's rules win at equal specificity (--control-h 48px), as in Astro.
+ * Imported from JS, the kit's Vite plugin turns it into one import per part
+ * (no @import for the bundler to hoist): the rules sit exactly where the
+ * import is. A site that needs fewer parts imports them one by one:
+ *   import '@realadvisor/sites-kit/styles/form.css';
+ *   import '@realadvisor/sites-kit-react/styles/consent.css';
+ * From another stylesheet (`@import`) this file is plain CSS, below.
+ */
+@import '@realadvisor/sites-kit/styles/form.css';
+@import './search.css';
+@import './pager.css';
+@import './map.css';
+@import './consent.css';

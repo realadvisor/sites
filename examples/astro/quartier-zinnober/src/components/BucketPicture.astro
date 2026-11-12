@@ -1,0 +1,46 @@
+---
+/**
+ * A Pexels photo from the RealAdvisor image bucket (src/lib/bucket.ts), served
+ * by imgproxy on img.realadvisor.ch through the kit helper (lib/image.ts):
+ * <picture> with AVIF and WebP srcsets and a JPEG fallback. The kit's RaImage
+ * only does AVIF for priority images, so this wraps img()/srcset() instead.
+ * The crop is done in CSS (object-fit / object-position), imgproxy keeps the
+ * photo's own ratio.
+ */
+import { img, srcset } from '@realadvisor/sites-kit/image';
+import { BUCKET } from '../lib/bucket';
+
+interface Props {
+  name: string;
+  alt: string;
+  sizes: string;
+  /** Rendered aspect (width / height); the crop is done in CSS (object-fit). */
+  ratio?: number;
+  priority?: boolean;
+  position?: string;
+  class?: string;
+}
+const { name, alt, sizes, ratio, priority = false, position, class: cls } = Astro.props;
+const p = BUCKET[name];
+if (!p) throw new Error(`BucketPicture: unknown photo "${name}" (src/lib/bucket.ts)`);
+const widths = [480, 800, 1200, 1600];
+const set = (format: 'avif' | 'webp' | 'jpg', quality: number) => srcset(p.url, widths, undefined, { format, quality });
+const w = 1200;
+const h = Math.round(ratio ? w / ratio : (w * p.height) / p.width);
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={set('avif', 50)} sizes={sizes} />
+  <source type="image/webp" srcset={set('webp', 68)} sizes={sizes} />
+  <img
+    src={img(p.url, { w: 1200, format: 'jpg', quality: 72, fit: 'fit' })}
+    srcset={set('jpg', 72)}
+    sizes={sizes}
+    alt={alt}
+    width={w}
+    height={h}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : undefined}
+    decoding="async"
+    style={position ? `object-position:${position}` : undefined}
+  />
+</picture>

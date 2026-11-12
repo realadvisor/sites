@@ -1,0 +1,90 @@
+---
+/**
+ * Sell: valuation request (the kit's EnquiryForm, reason "valuation") beside
+ * the navy intro with the offices to call, the process as a plain list,
+ * recent sales from the data.
+ */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+import { SELL_STEPS } from '../content/pages';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams }, sold] = await Promise.all([siteData(), sites.allListings({ status: 'sold' })]);
+const steps = SELL_STEPS[l];
+---
+<Site l={l} route="sell" title={`${t('sellTitle')} | ${org.name}`} description={t('sellLede')}>
+  <section class="band on-navy">
+    <div class="wrap sell">
+      <div class="sell__copy">
+        <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navSell') }]} />
+        <h1 class="h1">{t('sellTitle')}</h1>
+        <p class="lede">{t('sellLede')}</p>
+        <ul class="offices">
+          {teams.map((x) => (
+            <li>
+              <a href={href('offices', l, teamSlug(x, teams))}>{cityName(x.address.city, l) || x.name}</a>
+              {x.phone && <a class="num" href={tel(x.phone)}>{x.phone}</a>}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="sell__form" id="valuation">
+        <h2 class="h3">{t('valuationForm')}</h2>
+        <EnquiryForm id="valuation-form" locale={LOCALE[l]} contactReason="valuation" message={t('valuationMessage')} submitLabel={t('sendValuation')} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="how">
+        <h2 class="h2">{t('howWeSell')}</h2>
+        <ol class="steps">
+          {steps.map((s) => <li><h3 class="steps__t">{s.title}</h3><p>{s.text}</p></li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  {sold.length > 0 && (
+    <section class="section section--paper">
+      <div class="wrap">
+        <div class="head">
+          <h2 class="h2">{t('ourSales')}</h2>
+          <a class="link" href={href('sold', l)}>{t('seeSold')} <span class="num">({sold.length})</span></a>
+        </div>
+        <ul class="plain-list grid grid--3">{sold.slice(0, 3).map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</Site>
+
+<style>
+  .sell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: clamp(40px, 6vw, 96px); padding-block: clamp(40px, 5vw, 72px); align-items: start; }
+  .sell__copy { display: grid; gap: 22px; align-content: start; }
+  .offices { list-style: none; display: grid; margin-top: 12px; border-top: 1px solid var(--line-on-navy); }
+  .offices li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-on-navy); }
+  .offices a { color: #fff; text-decoration: none; min-height: 28px; display: inline-flex; align-items: center; }
+  .offices a:first-child { font: 400 1.25rem/1 var(--font-display); }
+  .offices a:hover { text-decoration: underline; }
+  .sell__form { background: #fff; color: var(--text); padding: clamp(24px, 3vw, 40px); display: grid; gap: 20px; }
+  .how { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .steps { display: grid; gap: 28px; padding-left: 1.4em; font-size: 1.0625rem; }
+  .steps li { padding-left: 0.4em; }
+  .steps li::marker { font: 400 1.25rem var(--font-display); color: var(--muted); }
+  .steps__t { font: 400 1.375rem/1.3 var(--font-display); margin-bottom: 6px; }
+  .steps p { color: var(--muted); max-width: 60ch; }
+  @media (max-width: 960px) {
+    .sell { grid-template-columns: minmax(0, 1fr); }
+    .how { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) { .sell__form { margin-inline: calc(-1 * var(--gutter)); } }
+</style>

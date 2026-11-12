@@ -1,0 +1,26 @@
+.plate:not(._) { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.plate .side { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; fill: var(--muted); text-anchor: middle; font-weight: 600; }
+.plate .shell { fill: var(--paper); stroke: var(--ink); stroke-width: 5; }
+.plate:not(._) .core rect { fill: #e9e1d4; stroke: var(--ink); stroke-width: 2; }
+.plate:not(._) .core line { stroke: #b9ab97; stroke-width: 2; }
+.plate .core-t, .plate .cm { font-size: 14px; fill: var(--muted); text-anchor: middle; letter-spacing: 0.08em; text-transform: uppercase; }
+.plate:not(._) .u rect { stroke-width: 2; transition: stroke 0.12s, stroke-width 0.12s; }
+.plate:not(._) .u.available rect { fill: var(--st-av); stroke: var(--st-av-line); }
+.plate:not(._) .u.reserved rect { fill: var(--st-re); stroke: var(--st-re-line); }
+.plate:not(._) .u.sold rect { fill: var(--st-so); stroke: var(--st-so-line); }
+.plate:not(._) .u text { fill: var(--text); }
+.plate:not(._) .u.sold text { fill: var(--muted); }
+.plate .no { font: 400 34px var(--serif); }
+.plate.compact:not(._) .no { font-size: 30px; }
+.plate .kd { font-size: 19px; font-weight: 600; }
+.plate .sz { font-size: 18px; }
+.plate .st { font-size: 15px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.plate:not(._) .u:hover rect, .plate:not(._) .u.hl rect { stroke: var(--ink); stroke-width: 4; }
+.plate:not(._) .u.sel rect { stroke: var(--accent); stroke-width: 7; }
+.plate .u:focus-visible { outline: none; }
+@media (max-width: 760px) {
+  .plate:not(.compact):not(._):not(._) .kd, .plate:not(.compact):not(._):not(._) .sz, .plate:not(.compact):not(._):not(._) .st, .plate .core-t, .plate .cm { display: none; }
+  .plate:not(.compact):not(._):not(._) .no { font-size: 64px; }
+  .plate .side { font-size: 30px; }
+}
+.plate:not(._) .u:focus-visible rect { stroke: var(--accent-strong); stroke-width: 7; }

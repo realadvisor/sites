@@ -1,0 +1,16 @@
+  .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 112px); align-items: start; }
+  .text { display: grid; gap: 36px; max-width: 64ch; }
+  .text section { display: grid; gap: 10px; }
+  .text h2, .facts h2 { color: var(--green-ink); }
+  .text p { font-size: 1.0625rem; }
+  .facts { background: var(--paper); padding: 28px; display: grid; gap: 14px; }
+  .facts dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line-strong); }
+  .facts dt { color: var(--muted); }
+  .facts dd { font-weight: 600; text-align: right; }
+  .facts dd a { color: var(--green); font: 400 1.5rem/1 var(--font-display); }
+  .offices__row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
+  .offices__row a { position: relative; display: block; aspect-ratio: 10 / 7; overflow: hidden; color: #fff; text-decoration: none; background: var(--green-ink); }
+  .offices__row img { width: 100%; height: 100%; object-fit: cover; }
+  .offices__row span { position: absolute; left: 0; bottom: 0; padding: 12px 18px; background: rgb(16 43 32 / 0.9); font: 400 1.25rem/1.2 var(--font-display); }
+  .offices__row a:hover span { text-decoration: underline; }
+  @media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } .offices__row { grid-template-columns: minmax(0, 1fr); } }

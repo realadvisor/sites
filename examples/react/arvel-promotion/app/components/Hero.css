@@ -1,0 +1,34 @@
+.hero { position: relative; isolation: isolate; display: grid; min-height: 100svh; overflow: hidden; background: var(--ink-1); }
+.hero.hero--band { min-height: clamp(460px, 68svh, 760px); }
+.hero .hero-media, .hero .hero-scrim { position: absolute; inset: 0; }
+.hero .hero-media { z-index: -2; }
+.hero .hero-media img, .hero .hero-media picture { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero .hero-noimg { width: 100%; height: 100%; background: radial-gradient(120% 80% at 70% 20%, var(--surface-2), var(--ink-1)); }
+.hero .hero-scrim {
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgb(7 14 20 / 0.95) 0%, rgb(7 14 20 / 0.84) 30%, rgb(7 14 20 / 0.6) 58%, rgb(7 14 20 / 0.42) 80%, rgb(7 14 20 / 0.55) 100%),
+    linear-gradient(to right, rgb(7 14 20 / 0.55), rgb(7 14 20 / 0) 65%);
+}
+.hero .hero-content {
+  align-self: end; width: 100%; max-width: var(--max); margin-inline: auto;
+  padding: calc(var(--header-h) + 48px) var(--gutter) clamp(48px, 7vw, 96px);
+}
+.hero .hero-tag { margin: 0 0 22px; }
+.hero .hero-kicker { margin: 0 0 14px; font-size: var(--fs-small); color: var(--text); opacity: 0.86; }
+.hero .hero-title { margin: 0; max-width: 15ch; font: 500 var(--fs-hero) / 0.98 var(--serif); letter-spacing: -0.012em; color: var(--text); text-wrap: balance; }
+.hero--band .hero-title { font-size: clamp(2.6rem, 6vw, 5.6rem); max-width: 18ch; }
+.hero .hero-sub { margin: 22px 0 0; max-width: 46ch; font-size: var(--fs-lead); font-weight: 300; line-height: 1.5; color: var(--text); }
+.hero .hero-facts { display: flex; flex-wrap: wrap; gap: 20px clamp(28px, 4vw, 64px); margin: clamp(32px, 5vw, 56px) 0 0; padding-top: 24px; border-top: 1px solid var(--line-strong); }
+.hero .hero-facts div { display: grid; gap: 6px; }
+.hero .hero-facts dt { font: 500 0.6875rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.hero .hero-facts dd { margin: 0; font: 500 clamp(1.35rem, 2vw, 1.75rem) / 1.1 var(--serif); }
+@media (max-width: 640px) {
+  .hero .hero-facts { display: grid; grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero .hero-media img { animation: hero-drift linear both; animation-timeline: scroll(root); animation-range: 0 100svh; }
+    @keyframes hero-drift { from { transform: scale(1.04); } to { transform: translate3d(0, 14svh, 0) scale(1.12); } }
+  }
+}

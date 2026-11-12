@@ -1,0 +1,83 @@
+---
+/**
+ * Indicative monthly loan repayment for a listing for sale. Everything is an
+ * assumption the visitor can change (down payment, rate, duration); the
+ * default rate is a round example, not a market figure or an offer. The
+ * server renders the default result, the script recomputes on input.
+ * Excludes insurance, notary fees and agency fees; says so.
+ */
+import { formatAmount } from '@realadvisor/sites-kit/format';
+
+interface Props { price: number; id?: string }
+const { price, id = 'pay' } = Astro.props;
+const D = { down: 20, rate: 3.5, years: 20 };
+const monthly = (p: number, down: number, rate: number, years: number) => {
+  const loan = p * (1 - down / 100);
+  const n = years * 12;
+  const r = rate / 100 / 12;
+  return r === 0 ? loan / n : (loan * r) / (1 - Math.pow(1 + r, -n));
+};
+const m = Math.round(monthly(price, D.down, D.rate, D.years));
+---
+<section class="pay" id={id} aria-labelledby={`${id}-h`} data-pay data-price={price}>
+  <div class="pay__head">
+    <h3 id={`${id}-h`} class="pay__h">Mensualité estimée</h3>
+    <p class="pay__out"><output data-pay-out for={`${id}-down ${id}-rate ${id}-years`} class="num">{formatAmount(m)}</output><span> / mois</span></p>
+  </div>
+  <p class="pay__note">Estimation indicative pour un prêt de <span class="num" data-pay-loan>{formatAmount(Math.round(price * (1 - D.down / 100)))}</span>, à taux fixe, hors assurance emprunteur, frais de notaire et frais de garantie. Modifiez les hypothèses ci-dessous ; ce n'est pas une offre de prêt.</p>
+  <div class="pay__fields">
+    <label class="pay__f">
+      <span>Apport (%)</span>
+      <input id={`${id}-down`} name="down" type="number" inputmode="decimal" min="0" max="90" step="5" value={D.down} data-pay-in />
+    </label>
+    <label class="pay__f">
+      <span>Taux annuel (%)</span>
+      <input id={`${id}-rate`} name="rate" type="number" inputmode="decimal" min="0" max="15" step="0.1" value={D.rate} data-pay-in />
+    </label>
+    <label class="pay__f">
+      <span>Durée (ans)</span>
+      <input id={`${id}-years`} name="years" type="number" inputmode="numeric" min="5" max="30" step="1" value={D.years} data-pay-in />
+    </label>
+  </div>
+</section>
+
+<script>
+  const eur = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  document.querySelectorAll<HTMLElement>('[data-pay]').forEach((box) => {
+    const price = Number(box.dataset.price);
+    const out = box.querySelector<HTMLOutputElement>('[data-pay-out]');
+    const loanEl = box.querySelector<HTMLElement>('[data-pay-loan]');
+    const ins = [...box.querySelectorAll<HTMLInputElement>('[data-pay-in]')];
+    const get = (name: string, lo: number, hi: number) => {
+      const v = Number(ins.find((i) => i.name === name)?.value.replace(',', '.'));
+      return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : NaN;
+    };
+    const run = () => {
+      const down = get('down', 0, 90), rate = get('rate', 0, 15), years = get('years', 1, 40);
+      if (!out || [down, rate, years].some(Number.isNaN)) return;
+      const loan = price * (1 - down / 100);
+      const n = years * 12, r = rate / 100 / 12;
+      const m = r === 0 ? loan / n : (loan * r) / (1 - Math.pow(1 + r, -n));
+      out.textContent = eur.format(Math.round(m));
+      if (loanEl) loanEl.textContent = eur.format(Math.round(loan));
+    };
+    ins.forEach((i) => i.addEventListener('input', run));
+  });
+</script>
+
+<style>
+  .pay { display: grid; gap: 14px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-card); }
+  .pay__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+  .pay__h { font-size: 1.125rem; }
+  .pay__out { font-size: 1.5rem; font-weight: 650; letter-spacing: -0.02em; }
+  .pay__out span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+  .pay__note { color: var(--muted); font-size: 0.875rem; }
+  .pay__fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .pay__f { display: grid; gap: 6px; font-size: 0.875rem; font-weight: 600; }
+  .pay__f input {
+    min-height: var(--control-h); padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--control-radius);
+    font: inherit; font-weight: 500; font-size: 1rem; color: var(--text); background: var(--bg); width: 100%; font-variant-numeric: tabular-nums;
+  }
+  .pay__f input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  @media (max-width: 479px) { .pay__fields { grid-template-columns: 1fr 1fr; } .pay__f:last-child { grid-column: 1 / -1; } }
+</style>

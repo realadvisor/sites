@@ -1,0 +1,7 @@
+.nf-lead { margin-top: 28px; }
+.nf-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.nf-list a { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; padding: 26px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.nf-list a:hover .nf-t { text-decoration: underline; }
+.nf-list .nf-t { font: 500 clamp(1.8rem, 3.4vw, 2.8rem) / 1.05 var(--serif); }
+.nf-list .nf-m { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.nf-links { display: flex; flex-wrap: wrap; gap: 8px 40px; margin-top: 40px; }

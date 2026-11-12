@@ -1,0 +1,24 @@
+---
+/**
+ * A bucket photo cropped from its original (imgproxy), same contract as
+ * RaImage (lazy by default, `priority` for the page's LCP image) plus AVIF for
+ * every image, WebP and JPEG fallback, srcset per width and a focal point for
+ * boxes that crop further (object-fit: cover is set by the parent).
+ */
+import { cropImg, type Crop } from '../lib/photo';
+
+interface Props { url: string; crop: Crop; ratio: number; alt: string; position?: string; sizes?: string; priority?: boolean; widths?: number[] }
+const { url, crop, ratio, alt, position, sizes = '100vw', priority = false, widths = [480, 800, 1200, 1600] } = Astro.props;
+const set = (format: 'avif' | 'webp' | 'jpg') =>
+  widths.map((w) => `${cropImg(url, crop, { w, h: Math.round(w / ratio), format, quality: 70 })} ${w}w`).join(', ');
+const w = 1200;
+const fallback = cropImg(url, crop, { w, h: Math.round(w / ratio), format: 'jpg', quality: 75 });
+---
+{priority && <link rel="preload" as="image" type="image/avif" imagesrcset={set('avif')} imagesizes={sizes} fetchpriority="high" />}
+<picture>
+  <source type="image/avif" srcset={set('avif')} sizes={sizes} />
+  <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+  <img src={fallback} srcset={set('jpg')} sizes={sizes} width={w} height={Math.round(w / ratio)} alt={alt}
+    style={position ? `object-position: ${position}` : undefined}
+    loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async" />
+</picture>

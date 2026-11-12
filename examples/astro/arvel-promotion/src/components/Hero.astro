@@ -1,0 +1,92 @@
+---
+/**
+ * Full-bleed cinematic hero: one photo (the page's LCP), a deep scrim, a
+ * large serif title, an optional plain subline and a figures row (only
+ * figures a buyer needs: units, delivery, price). `kicker` is a small line of
+ * context above the title (the programme name on its sub-pages), in plain type.
+ * `size="band"` is the shorter version for inner pages. The photo drifts
+ * slowly on scroll (transform only, off with reduced motion).
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import BucketPhoto, { type PhotoName } from './BucketPhoto.astro';
+
+interface Props {
+  photo?: string;
+  /** A site photo (src/content/photos.ts) instead of a data photo: art direction. */
+  local?: { name: PhotoName; position?: string };
+  alt: string;
+  kicker?: string;
+  /** Programme status tag (data-status) shown above the title. */
+  tag?: { label: string; status?: string };
+  title: string;
+  line?: string;
+  facts?: { label: string; value: string }[];
+  size?: 'full' | 'band';
+  headingLevel?: 'h1' | 'p';
+}
+const { photo, local, alt, kicker, tag, title, line, facts = [], size = 'full', headingLevel = 'h1' } = Astro.props;
+const H = headingLevel;
+const box = size === 'full' ? { width: 1600, height: 900, mobile: { width: 800, height: 1160 } } : { width: 1600, height: 700, mobile: { width: 800, height: 900 } };
+---
+<section class:list={['hero', `hero--${size}`]} data-hero>
+  <div class="media">
+    {local ? (
+      <BucketPhoto name={local.name} alt={alt} position={local.position} priority sizes="100vw" />
+    ) : photo ? (
+      <RaImage src={photo} alt={alt} width={box.width} height={box.height} mobile={box.mobile} priority sizes="100vw" widths={[640, 960, 1280, 1600, 2000]} />
+    ) : (
+      <div class="noimg" aria-hidden="true"></div>
+    )}
+  </div>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="content">
+    {tag?.label && <p class="hero-tag"><span class="tag" data-status={tag.status}>{tag.label}</span></p>}
+    {kicker && <p class="kicker">{kicker}</p>}
+    <H class="hero-title">{title}</H>
+    {line && <p class="sub">{line}</p>}
+    <slot />
+    {facts.length > 0 && (
+      <dl class="facts">
+        {facts.map((f) => (
+          <div><dt>{f.label}</dt><dd class="num">{f.value}</dd></div>
+        ))}
+      </dl>
+    )}
+  </div>
+</section>
+<style>
+  .hero { position: relative; isolation: isolate; display: grid; min-height: 100svh; overflow: hidden; background: var(--ink-1); }
+  .hero--band { min-height: clamp(460px, 68svh, 760px); }
+  .media, .scrim { position: absolute; inset: 0; }
+  .media { z-index: -2; }
+  .media :global(img), .media :global(picture) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .noimg { width: 100%; height: 100%; background: radial-gradient(120% 80% at 70% 20%, var(--surface-2), var(--ink-1)); }
+  .scrim {
+    z-index: -1;
+    background:
+      linear-gradient(to top, rgb(7 14 20 / 0.95) 0%, rgb(7 14 20 / 0.84) 30%, rgb(7 14 20 / 0.6) 58%, rgb(7 14 20 / 0.42) 80%, rgb(7 14 20 / 0.55) 100%),
+      linear-gradient(to right, rgb(7 14 20 / 0.55), rgb(7 14 20 / 0) 65%);
+  }
+  .content {
+    align-self: end; width: 100%; max-width: var(--max); margin-inline: auto;
+    padding: calc(var(--header-h) + 48px) var(--gutter) clamp(48px, 7vw, 96px);
+  }
+  .hero-tag { margin: 0 0 22px; }
+  .kicker { margin: 0 0 14px; font-size: var(--fs-small); color: var(--text); opacity: 0.86; }
+  .hero-title { margin: 0; max-width: 15ch; font: 500 var(--fs-hero) / 0.98 var(--serif); letter-spacing: -0.012em; color: var(--text); text-wrap: balance; }
+  .hero--band .hero-title { font-size: clamp(2.6rem, 6vw, 5.6rem); max-width: 18ch; }
+  .sub { margin: 22px 0 0; max-width: 46ch; font-size: var(--fs-lead); font-weight: 300; line-height: 1.5; color: var(--text); }
+  .facts { display: flex; flex-wrap: wrap; gap: 20px clamp(28px, 4vw, 64px); margin: clamp(32px, 5vw, 56px) 0 0; padding-top: 24px; border-top: 1px solid var(--line-strong); }
+  .facts div { display: grid; gap: 6px; }
+  .facts dt { font: 500 0.6875rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { margin: 0; font: 500 clamp(1.35rem, 2vw, 1.75rem) / 1.1 var(--serif); }
+  @media (max-width: 640px) {
+    .facts { display: grid; grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .media :global(img) { animation: hero-drift linear both; animation-timeline: scroll(root); animation-range: 0 100svh; }
+      @keyframes hero-drift { from { transform: scale(1.04); } to { transform: translate3d(0, 14svh, 0) scale(1.12); } }
+    }
+  }
+</style>

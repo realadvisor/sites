@@ -1,0 +1,10 @@
+  .first { position: relative; display: grid; grid-template-columns: 7fr 5fr; gap: 28px clamp(32px, 5vw, 96px); align-items: end; }
+  .first-photo { aspect-ratio: 3 / 2; }
+  .first-text { display: grid; gap: 16px; border-top: 1px solid var(--text); padding-top: 18px; }
+  .first h2 a, .list h2 a { text-decoration: none; }
+  .first h2 a:hover, .list h2 a:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .first { grid-template-columns: 1fr; } }
+  .list { padding-top: var(--section); }
+  .list li { display: grid; grid-template-columns: 10rem minmax(0, 1.3fr) minmax(0, 1fr) 12rem; gap: 10px 32px; align-items: baseline; padding: 24px 0; border-top: 1px solid var(--line); }
+  .list li:first-child { border-top-color: var(--text); }
+  @media (max-width: 900px) { .list li { grid-template-columns: 1fr; } }

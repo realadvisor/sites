@@ -1,0 +1,94 @@
+---
+/** Chi siamo / About: where the name comes from, what the agency sells now (counted from the data), how a sale works, the team. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import AgentBlock from '../components/AgentBlock.astro';
+import { agency, brandName, sites } from '../lib/data';
+import { districtsWithListings } from '../lib/districts';
+import { placePhoto } from '../lib/places';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, all, agents] = await Promise.all([agency(), sites.allListings(), sites.agents()]);
+const live = all.filter((l) => l.status === 'available');
+const sale = live.filter((l) => l.offer_type === 'buy').length;
+const rent = live.filter((l) => l.offer_type === 'rent').length;
+const areas = districtsWithListings(live).length;
+const photo = placePhoto('milano', lang, 2);
+const photo2 = placePhoto('brera', lang, 1);
+---
+<Site lang={lang} current="about" title={`${ui.aboutH1} | ${brandName(ag)}`} description={ui.aboutLine}
+  image={photo && img(photo.url, { w: 1200, h: 630 })} alternates={alternates('about')}>
+  <header class="wrap phead">
+    <h1 class="d-xl">{ui.aboutH1}</h1>
+    <p class="lead">{ui.aboutLine}</p>
+  </header>
+
+  <section class="wrap story">
+    {photo && (
+      <div class="frame story-photo">
+        <RaImage src={photo} alt={photo.alt} width={1000} height={1250} priority sizes="(min-width: 900px) 42vw, 100vw" mobile={{ width: 800, height: 700 }} />
+      </div>
+    )}
+    <div class="story-text">
+      {ui.aboutBody.map((p, i) => <p class:list={{ big: i === 0 }}>{p}</p>)}
+      {(sale > 0 || rent > 0) && (
+        <div class="now">
+          <h2 class="label muted">{ui.nowTitle}</h2>
+          <p>{fill(ui.nowLine, { sale, rent, areas })}</p>
+          <p class="now-links">
+            {sale > 0 && <a class="arrow-link" href={href('buy', lang)}>{ui.nav.buy} <span aria-hidden="true">→</span></a>}
+            {rent > 0 && <a class="arrow-link" href={href('rent', lang)}>{ui.nav.rent} <span aria-hidden="true">→</span></a>}
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {photo2 && (
+    <div class="wrap wide">
+      <div class="frame wide-photo"><RaImage src={photo2} alt={photo2.alt} width={1600} height={900} sizes="(min-width: 1520px) 1424px, 100vw" /></div>
+    </div>
+  )}
+
+  <section class="wrap how" aria-labelledby="how-h">
+    <h2 id="how-h" class="d-l">{ui.howTitle}</h2>
+    <dl class="how-list">
+      {ui.steps.map(([k, v]) => <div><dt class="d-m">{k}</dt><dd>{v}</dd></div>)}
+    </dl>
+  </section>
+
+  {agents.length > 0 && (
+    <section class="wrap people" aria-labelledby="people-h">
+      <h2 id="people-h" class="d-l"><a href={href('team', lang)}>{ui.teamH1}</a></h2>
+      <ul class="people-list">
+        {agents.map((a) => <li><AgentBlock agent={a} lang={lang} /></li>)}
+      </ul>
+    </section>
+  )}
+</Site>
+
+<style>
+  .story { display: grid; grid-template-columns: 5fr 6fr; gap: 40px clamp(40px, 6vw, 120px); align-items: start; }
+  .story-photo { aspect-ratio: 4 / 5; }
+  .story-text { display: grid; gap: 1.2em; max-width: 38rem; }
+  .story-text .big { font-size: var(--fs-s); line-height: 1.35; font-weight: 500; }
+  .now { border-top: 1px solid var(--text); padding-top: 18px; margin-top: 24px; display: grid; gap: 10px; }
+  .now-links { display: flex; gap: 28px; flex-wrap: wrap; }
+  @media (max-width: 900px) { .story { grid-template-columns: 1fr; } .story-photo { aspect-ratio: 8 / 7; } }
+  .wide { padding-top: var(--section); }
+  .wide-photo { aspect-ratio: 16 / 9; }
+  .how { display: grid; grid-template-columns: 1fr 2fr; gap: 24px clamp(32px, 6vw, 120px); padding-top: var(--section); }
+  .how-list { border-top: 1px solid var(--text); }
+  .how-list div { display: grid; grid-template-columns: minmax(10rem, 1fr) 2fr; gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  @media (max-width: 900px) { .how { grid-template-columns: 1fr; } .how-list div { grid-template-columns: 1fr; } }
+  .people { padding-top: var(--section); display: grid; gap: clamp(24px, 3vw, 40px); }
+  .people h2 a { text-decoration: none; }
+  .people h2 a:hover { text-decoration: underline; }
+  .people-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px clamp(24px, 4vw, 64px); }
+  .people-list li { border-top: 1px solid var(--text); padding-top: 16px; }
+    @media (max-width: 560px) { .people-list { grid-template-columns: 1fr; } }
+</style>

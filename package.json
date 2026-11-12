@@ -1,0 +1,14 @@
+{
+  "name": "@realadvisor/sites",
+  "private": true,
+  "description": "RealAdvisor Sites: the data SDK, the Astro and React Router kits, the site template and twelve example sites.",
+  "packageManager": "pnpm@10.11.1",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "pnpm --dir sdk test && pnpm --dir kit test",
+    "check:template": "pnpm --dir template install && pnpm --dir template check && pnpm --dir template check:deploy",
+    "check:examples": "pnpm --dir examples install && pnpm --dir examples check && pnpm --dir examples check:deploy"
+  }
+}

@@ -1,0 +1,184 @@
+---
+/**
+ * The site frame: skip link, sticky header (nav, favourites, phone menu),
+ * main, footer with the four agencies. Every page renders through it.
+ */
+import { t as kt } from '@realadvisor/sites-kit/i18n';
+import Base from './Base.astro';
+import Icon from '../components/Icon.astro';
+import { siteData } from '../lib/data';
+import { R, searchUrl, teamHref, teamShortName, tel } from '../lib/site';
+
+type Nav = 'buy' | 'rent' | 'sell' | 'agencies' | 'team' | 'saved' | 'none';
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  nav?: Nav;
+  /** Extra bottom padding on phones for a page's own sticky bar. */
+  stickyBar?: boolean;
+}
+const { nav = 'none', stickyBar, ...base } = Astro.props;
+const { org, teams } = await siteData();
+const brand = org.name.replace(/\s+(SAS|SA|SARL|SASU)$/i, '');
+const [word, ...rest] = brand.split(' ');
+const links: { key: Nav; label: string; href: string }[] = [
+  { key: 'buy', label: 'Acheter', href: searchUrl('buy') },
+  { key: 'rent', label: 'Louer', href: searchUrl('rent') },
+  { key: 'sell', label: 'Vendre', href: R.sell },
+  { key: 'agencies', label: 'Agences', href: R.agencies },
+  { key: 'team', label: 'Équipe', href: R.team },
+];
+const year = new Date().getFullYear();
+---
+<Base {...base}>
+  <a class="skip" href="#main">Aller au contenu</a>
+  <header class="hd">
+    <div class="wrap hd__in">
+      <a class="logo" href={R.home} aria-label={`${org.name}, accueil`}>
+        <span class="logo__word">{word}</span>{rest.length > 0 && <span class="logo__rest">{rest.join(' ')}</span>}
+      </a>
+      <nav class="hd__nav" aria-label="Navigation principale">
+        <ul>
+          {links.map((x) => (
+            <li><a href={x.href} aria-current={nav === x.key ? 'page' : undefined}>{x.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <div class="hd__tools">
+        <a class="hd__saved" href={R.saved} aria-current={nav === 'saved' ? 'page' : undefined}>
+          <Icon name="heart" />
+          <span class="hd__saved-label">Favoris</span>
+          <span class="hd__count" data-saved-count hidden></span>
+        </a>
+        <a class="vb vb--ghost hd__cta" href={R.sell}>Estimer mon bien</a>
+        <button type="button" class="hd__menu" data-menu-btn aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+          <Icon name="menu" size={22} />
+        </button>
+      </div>
+    </div>
+    <div class="menu" id="menu" data-menu>
+      <nav class="menu__panel" aria-label="Menu">
+        <ul>
+          {links.map((x) => <li><a href={x.href} aria-current={nav === x.key ? 'page' : undefined}>{x.label}</a></li>)}
+          <li><a href={R.sold}>Biens vendus</a></li>
+          <li><a href={R.about}>À propos</a></li>
+          <li><a href={R.contact}>Contact</a></li>
+        </ul>
+        <a class="vb menu__cta" href={R.sell}>Estimer mon bien</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class:list={{ 'has-bar': stickyBar }} tabindex="-1">
+    <slot />
+  </main>
+
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft__top">
+        <p class="ft__brand"><span class="logo__word">{word}</span>{rest.length > 0 && <span class="logo__rest">{rest.join(' ')}</span>}</p>
+        <nav class="ft__links" aria-label="Pied de page">
+          <a href={searchUrl('buy')}>Acheter</a>
+          <a href={searchUrl('rent')}>Louer</a>
+          <a href={R.sell}>Estimer mon bien</a>
+          <a href={R.sold}>Biens vendus</a>
+          <a href={R.cities}>Villes</a>
+          <a href={R.about}>À propos</a>
+          <a href={R.contact}>Contact</a>
+        </nav>
+      </div>
+      <ul class="ft__agencies">
+        {teams.map((tm) => (
+          <li>
+            <a class="ft__agency" href={teamHref(tm)}>{teamShortName(tm)}</a>
+            <address>
+              {tm.address.street && <span>{tm.address.street}</span>}
+              <span>{[tm.address.postcode, tm.address.city].filter(Boolean).join(' ')}</span>
+              {tm.phone && <a href={tel(tm.phone)}>{tm.phone}</a>}
+            </address>
+          </li>
+        ))}
+      </ul>
+      <div class="ft__legal">
+        <span>© {year} {org.name}</span>
+        <a href={R.legal}>{kt('legalNotice', {}, 'fr')}</a>
+        <a href={R.privacy}>{kt('privacyPolicy', {}, 'fr')}</a>
+      </div>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  import '../scripts/menu';
+  import '../scripts/saved';
+</script>
+
+<style>
+  .hd { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .hd__in { display: flex; align-items: center; gap: 24px; height: var(--header-h); }
+  .logo { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none; color: var(--text); min-height: 44px; align-items: center; }
+  .logo__word, .ft__brand .logo__word { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.04em; color: var(--accent); }
+  .logo__rest { font-weight: 500; font-size: 0.9375rem; color: var(--muted); letter-spacing: -0.01em; }
+  .hd__nav { margin-inline: auto; }
+  .hd__nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .hd__nav a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px;
+    text-decoration: none; font-weight: 550; font-size: 0.9375rem; color: var(--text);
+  }
+  .hd__nav a:hover { background: var(--surface); }
+  .hd__nav a[aria-current] { background: var(--surface-2); }
+  .hd__tools { display: flex; align-items: center; gap: 8px; }
+  .hd__saved {
+    position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+    border-radius: 999px; text-decoration: none; font-weight: 550; font-size: 0.9375rem;
+  }
+  .hd__saved:hover, .hd__saved[aria-current] { background: var(--surface); }
+  .hd__count {
+    display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px;
+    background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 650; font-variant-numeric: tabular-nums;
+  }
+  .hd__cta { min-height: 44px; padding: 0 18px; }
+  .hd__menu { display: none; width: 44px; height: 44px; border: 0; border-radius: 999px; background: none; color: var(--text); cursor: pointer; place-items: center; }
+  .menu { display: none; }
+
+  @media (max-width: 1099px) { .hd__cta { display: none; } }
+  @media (max-width: 959px) {
+    :root { --header-h: 64px; }
+    .hd__nav { display: none; }
+    .hd__tools { margin-left: auto; gap: 0; }
+    .hd__saved-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .hd__saved { padding: 0 10px; }
+    .hd__count { position: absolute; top: 2px; right: 0; min-width: 18px; height: 18px; font-size: 0.6875rem; padding: 0 4px; }
+    .hd__menu { display: grid; }
+    .menu {
+      display: block; position: fixed; inset: var(--header-h) 0 0 0; z-index: 49; background: rgb(28 25 23 / 0.35);
+      visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.2s, visibility 0.2s;
+    }
+    .menu.is-open { visibility: visible; pointer-events: auto; opacity: 1; }
+    .menu__panel { background: var(--bg); padding: 8px var(--gutter) 24px; border-bottom: 1px solid var(--line); }
+    .menu__panel ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    .menu__panel li + li { border-top: 1px solid var(--line); }
+    .menu__panel a:not(.vb) { display: flex; align-items: center; min-height: 52px; text-decoration: none; font-size: 1.125rem; font-weight: 550; }
+    .menu__panel a[aria-current] { color: var(--accent-strong); }
+    .menu__cta { width: 100%; }
+  }
+
+  main { display: block; min-height: 60vh; outline: none; }
+
+  .ft { margin-top: var(--section); border-top: 1px solid var(--line); background: var(--surface); padding-block: 48px 28px; font-size: 0.9375rem; }
+  .ft__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px 40px; align-items: center; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .ft__brand { display: inline-flex; align-items: baseline; gap: 6px; }
+  .ft__links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .ft__links a, .ft__legal a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+  .ft__links a:hover, .ft__legal a:hover { text-decoration: underline; }
+  .ft__agencies { list-style: none; margin: 0; padding: 32px 0; display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .ft__agency { display: inline-flex; min-height: 32px; font-weight: 650; text-decoration: none; }
+  .ft__agency:hover { text-decoration: underline; }
+  .ft address { font-style: normal; display: grid; color: var(--muted); }
+  .ft address a { color: var(--text); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+  .ft__legal { display: flex; flex-wrap: wrap; gap: 0 24px; align-items: center; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.875rem; }
+  @media (max-width: 1023px) { main.has-bar + .ft { padding-bottom: 104px; } }
+</style>

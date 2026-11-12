@@ -1,0 +1,132 @@
+---
+/**
+ * The home search: Acheter / Louer tabs over one rounded pill (où, type,
+ * budget) that opens the split results view (cards beside the map). Plain
+ * GET forms, one per offer type, switched by two radios with CSS only: it
+ * works without JavaScript. Options come from the listings themselves, with
+ * the same facets as the kit's search (typeGroup, priceSteps).
+ */
+import { priceSteps, typeGroup } from '@realadvisor/sites-kit/search';
+import { formatAmount } from '@realadvisor/sites-kit/format';
+import type { Listing } from '../lib/data';
+import { R, typeLabel } from '../lib/site';
+import Icon from './Icon.astro';
+
+interface Props { listings: Listing[] }
+const { listings } = Astro.props;
+const live = listings.filter((l) => l.status === 'available');
+
+const optionsFor = (offer: 'buy' | 'rent') => {
+  const ls = live.filter((l) => l.offer_type === offer);
+  const count = (xs: string[]) => [...xs.reduce((m, x) => m.set(x, (m.get(x) ?? 0) + 1), new Map<string, number>())].sort((a, b) => b[1] - a[1]);
+  const cities = count(ls.flatMap((l) => (l.address.city ? [l.address.city] : []))).map(([c]) => c).sort((a, b) => a.localeCompare(b, 'fr'));
+  const types = count(ls.map((l) => typeGroup(l.property_type))).map(([t]) => t);
+  const prices = priceSteps(ls.flatMap((l) => (l.price && !l.price_on_request ? [l.price] : [])), offer, 8);
+  return { n: ls.length, cities, types, prices };
+};
+const forms = (['buy', 'rent'] as const).map((offer) => ({ offer, ...optionsFor(offer) })).filter((f) => f.n > 0);
+const amount = (n: number, offer: 'buy' | 'rent') => (offer === 'rent' ? `${formatAmount(n)} / mois` : formatAmount(n));
+---
+{forms.length > 0 && (
+  <div class="sp">
+    {forms.length > 1 && (
+      <div class="sp__tabs" role="radiogroup" aria-label="Type de recherche">
+        {forms.map((f, i) => (
+          <label class="sp__tab">
+            <input type="radio" name="sp-offer" value={f.offer} checked={i === 0} class={`sp__radio sp__radio--${f.offer}`} />
+            <span>{f.offer === 'buy' ? 'Acheter' : 'Louer'}</span>
+          </label>
+        ))}
+      </div>
+    )}
+    {forms.map((f) => (
+      <form class={`sp__form sp__form--${f.offer}`} method="get" action={f.offer === 'buy' ? R.buy : R.rent} role="search"
+        aria-label={f.offer === 'buy' ? 'Rechercher un bien à acheter' : 'Rechercher un bien à louer'}>
+        <input type="hidden" name="view" value="map" />
+        <label class="sp__field sp__field--where">
+          <span class="sp__label">Où</span>
+          <select name="city">
+            <option value="">Toutes les villes</option>
+            {f.cities.map((c) => <option value={c}>{c}</option>)}
+          </select>
+        </label>
+        <label class="sp__field">
+          <span class="sp__label">Type de bien</span>
+          <select name="propertyType">
+            <option value="">Tous les types</option>
+            {f.types.map((t) => <option value={t}>{typeLabel(t)}</option>)}
+          </select>
+        </label>
+        {f.prices.length > 0 && (
+          <label class="sp__field">
+            <span class="sp__label">Budget max.</span>
+            <select name="maxPrice">
+              <option value="">Sans limite</option>
+              {f.prices.map((p) => <option value={String(p)}>{amount(p, f.offer)}</option>)}
+            </select>
+          </label>
+        )}
+        <button class="sp__go" type="submit">
+          <Icon name="search" size={20} stroke={2.25} />
+          <span>Rechercher</span>
+        </button>
+      </form>
+    ))}
+  </div>
+)}
+
+<script>
+  // Clean URLs: empty choices are left out of the query (the form still works without this).
+  document.querySelectorAll<HTMLFormElement>('.sp__form').forEach((f) =>
+    f.addEventListener('submit', () => f.querySelectorAll('select').forEach((s) => (s.disabled = !s.value))),
+  );
+  // Back from the results: re-enable them.
+  window.addEventListener('pageshow', () => document.querySelectorAll<HTMLSelectElement>('.sp__form select').forEach((s) => (s.disabled = false)));
+</script>
+
+<style>
+  .sp { display: grid; gap: 14px; width: 100%; max-width: 920px; }
+  .sp__tabs { display: flex; gap: 4px; }
+  .sp__tab { position: relative; }
+  .sp__radio { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+  .sp__tab span {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px;
+    font-weight: 600; color: var(--muted); transition: background 0.15s, color 0.15s;
+  }
+  .sp__radio:checked + span { background: var(--text); color: #fff; }
+  .sp__radio:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sp__tab:hover span { color: var(--text); }
+  .sp__radio:checked:hover + span { color: #fff; }
+
+  .sp__form {
+    display: grid; grid-template-columns: 1.3fr 1fr 1fr auto; align-items: stretch;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow-lg); padding: 8px;
+  }
+  .sp:has(.sp__radio--buy:checked) .sp__form--rent,
+  .sp:has(.sp__radio--rent:checked) .sp__form--buy { display: none; }
+  .sp__field {
+    position: relative; display: grid; align-content: center; gap: 2px; padding: 8px 24px; border-radius: 999px; min-width: 0; cursor: pointer;
+  }
+  .sp__field + .sp__field::before { content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--line); }
+  .sp__field:hover { background: var(--surface); }
+  .sp__field:hover::before, .sp__field:hover + .sp__field::before { opacity: 0; }
+  .sp__label { font-size: 0.8125rem; font-weight: 650; }
+  .sp__field select {
+    appearance: none; border: 0; background: transparent; padding: 0; margin: 0; font: inherit; font-size: 0.9375rem; color: var(--muted);
+    width: 100%; min-height: 24px; cursor: pointer; text-overflow: ellipsis;
+  }
+  .sp__field select:focus { outline: none; }
+  .sp__field:focus-within { background: var(--surface); box-shadow: inset 0 0 0 2px var(--accent); }
+  .sp__go {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 64px; min-height: 64px; padding: 0 26px;
+    border: 0; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 650; font-size: 1rem; cursor: pointer;
+  }
+  .sp__go:hover { background: var(--accent-strong); }
+
+  @media (max-width: 759px) {
+    .sp__form { grid-template-columns: 1fr; border-radius: 24px; padding: 8px; gap: 0; }
+    .sp__field { border-radius: 16px; padding: 12px 16px; }
+    .sp__field + .sp__field::before { left: 16px; right: 16px; top: 0; bottom: auto; width: auto; height: 1px; }
+    .sp__go { margin-top: 8px; min-height: 52px; border-radius: 16px; }
+  }
+</style>

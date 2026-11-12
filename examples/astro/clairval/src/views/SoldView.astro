@@ -1,0 +1,46 @@
+---
+/** Sold: past sales in the same grid, "Sold" on the photo, no prices; then the valuation link. */
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org }, sold] = await Promise.all([siteData(), sites.allListings({ status: 'sold' })]);
+const C = {
+  en: { title: 'Sold by Clairval', lede: (n: number) => `${n} ${n === 1 ? 'house' : 'houses'} we sold recently. Prices stay between the buyer and the seller.`, none: 'No sales to show yet.', cta: 'Thinking of selling?', ctaText: 'We value houses in the same areas, with a visit.' },
+  fr: { title: 'Vendus par Clairval', lede: (n: number) => `${n} ${n === 1 ? 'maison vendue' : 'maisons vendues'} récemment. Les prix restent entre l’acheteur et le vendeur.`, none: 'Aucune vente à montrer pour l’instant.', cta: 'Vous pensez vendre ?', ctaText: 'Nous estimons les maisons dans les mêmes secteurs, avec une visite.' },
+}[l];
+const title = C.title.replace('Clairval', org.name.replace(/\s+SA$/, ''));
+---
+<Site l={l} route="sold" title={`${title} | ${org.name}`} description={sold.length ? C.lede(sold.length) : C.none}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navSold') }]} title={title} lede={sold.length ? C.lede(sold.length) : C.none} />
+  {sold.length > 0 && (
+    <section class="wrap list">
+      <ul class="plain grid3">{sold.map((x, i) => <li><ListingCard listing={x} l={l} priority={i === 0} as="h2" /></li>)}</ul>
+    </section>
+  )}
+  <section class="on-ink cta-band">
+    <div class="wrap cta-band__in">
+      <div>
+        <h2 class="h2">{C.cta}</h2>
+        <p class="lede">{C.ctaText}</p>
+      </div>
+      <a class="cta cta--gold" href={href('sell', l)}>{t('valuation')}</a>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .list { padding-bottom: var(--section); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+  @media (max-width: 1023px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+  .cta-band { padding-block: clamp(56px, 7vw, 96px); }
+  .cta-band__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+  .cta-band .lede { margin-top: 10px; }
+</style>

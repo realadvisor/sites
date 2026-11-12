@@ -1,0 +1,20 @@
+---
+/** Valuation band: one line, one action, full width. */
+interface Props { href?: string; sold?: number; where?: string }
+const { href = '/verkaufen#bewertung', sold = 0, where = 'am See und in der Stadt' } = Astro.props;
+---
+<section class="val" aria-labelledby="val-title">
+  <div class="wrap val-in">
+    <h2 class="val-title h1" id="val-title">Was ist Ihre Immobilie wert?</h2>
+    <p class="val-text">Wir sehen uns Ihr Haus oder Ihre Wohnung an und begründen unsere Einschätzung, unverbindlich und persönlich.{sold > 0 && <> Zuletzt haben wir {sold === 1 ? 'ein Objekt' : `${sold} Objekte`} {where} verkauft.</>}</p>
+    <p class="val-actions"><a class="button button--solid" href={href}>Bewertung anfragen</a><a class="more" href="/verkauft">Verkaufte Objekte</a></p>
+  </div>
+</section>
+
+<style>
+  .val { background: var(--tint); padding-block: clamp(72px, 9vw, 136px); text-align: center; }
+  .val-in { display: grid; justify-items: center; gap: 22px; }
+  .val-title { max-width: 18ch; }
+  .val-text { max-width: 54ch; color: var(--muted); font-size: 1.0625rem; }
+  .val-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 32px; margin-top: 8px; }
+</style>

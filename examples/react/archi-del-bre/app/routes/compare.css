@@ -1,0 +1,16 @@
+  .v-compare .head { display: grid; gap: 18px; padding-block: clamp(40px, 6vw, 88px) 36px; }
+  .v-compare .body { padding-bottom: var(--section); }
+  .v-compare .empty { display: grid; gap: 20px; padding: 40px 0; border-top: 1px solid var(--line); }
+  .v-compare .scroller { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+  .v-compare table { border-collapse: collapse; width: 100%; max-width: calc(200px + var(--n) * 340px); min-width: calc(140px + var(--n) * 220px); table-layout: fixed; }
+  .v-compare thead td { width: 180px; }
+  .v-compare thead th { text-align: left; vertical-align: top; padding: 0 16px 20px 0; font-weight: 400; }
+  .v-compare thead img { width: 100%; height: auto; background: #fff; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 14px; }
+  .v-compare .no { display: block; font: 400 var(--step-2)/1 var(--serif); text-decoration: none; }
+  .v-compare .lbl { display: block; color: var(--muted); font-size: 0.9375rem; margin-top: 6px; }
+  .v-compare .rm { display: inline-block; margin-top: 8px; padding-block: 8px; font-size: 0.875rem; }
+  .v-compare tbody th { text-align: left; font-weight: 500; color: var(--muted); padding: 12px 16px 12px 0; border-top: 1px solid var(--line); }
+  .v-compare tbody td { padding: 12px 16px 12px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  .v-compare .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 36px; }
+  .v-compare .small { font-size: 0.875rem; margin-top: 14px; }
+  @media (max-width: 640px) { .v-compare thead td { width: 110px; } .v-compare table { min-width: calc(110px + var(--n) * 170px); } .v-compare .actions .btn { white-space: normal; text-align: center; line-height: 1.3; padding-block: 12px; } }

@@ -1,0 +1,3 @@
+.nf { min-height: 62svh; display: grid; align-content: center; justify-items: center; text-align: center; gap: 22px; padding-block: var(--section); }
+.nf-code { font: 300 italic clamp(5rem, 14vw, 11rem)/1 var(--font-display); color: var(--accent); opacity: .85; }
+.nf-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 12px; }

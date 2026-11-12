@@ -1,0 +1,30 @@
+---
+/** Full-width navy valuation band: one call to action, and the sales link when there are sales. */
+import { href, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+interface Props { l: L; sold?: number }
+const { l, sold = 0 } = Astro.props;
+const t = tx(l);
+---
+<section class="vb on-navy">
+  <div class="wrap vb__in">
+    <div class="vb__copy">
+      <h2 class="h2">{t('valuationTitle')}</h2>
+      <p class="lede">{t('valuationText')}</p>
+    </div>
+    <div class="vb__acts">
+      <a class="button button--light" href={href('sell', l)}>{t('valuationCta')}</a>
+      {sold > 0 && <a class="vb__sold" href={href('sold', l)}>{t('seeSoldN', { n: sold })}</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .vb { background: var(--navy); color: #fff; }
+  .vb__in { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px 64px; padding-block: clamp(56px, 6vw, 96px); }
+  .vb__copy { display: grid; gap: 18px; max-width: 760px; }
+  .vb h2 { color: #fff; }
+  .vb__acts { display: grid; gap: 12px; justify-items: start; }
+  .vb__sold { color: #fff; min-height: 44px; display: inline-flex; align-items: center; }
+</style>

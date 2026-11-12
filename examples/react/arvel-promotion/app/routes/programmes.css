@@ -1,0 +1,28 @@
+.phead .pl-intro { margin: 28px 0 0; }
+.pl-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+.pl-filter a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border: 1px solid var(--line-strong); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.pl-filter a span { color: var(--muted); }
+.pl-filter a[aria-current='page'] { background: var(--text); color: var(--brand); border-color: var(--text); }
+.pl-filter a[aria-current='page'] span { color: var(--brand); }
+.wrap.pl-list { list-style: none; margin: 0 auto; display: grid; gap: clamp(72px, 10vw, 160px); }
+.pl-list .pl-card { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px clamp(32px, 5vw, 88px); align-items: center; }
+.pl-list .pl-flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); }
+.pl-list .pl-flip .pl-media { order: 2; }
+.pl-list .pl-media { position: relative; display: block; aspect-ratio: 1200 / 860; }
+.pl-list .pl-media .tag { position: absolute; left: 20px; top: 20px; }
+.pl-list .pl-body { display: grid; gap: 18px; align-content: center; }
+.pl-list .pl-body > * { margin: 0; }
+.pl-list .pl-city { font-size: var(--fs-small); color: var(--muted); }
+.pl-list .pl-t { font: 500 clamp(2.4rem, 4.4vw, 4rem) / 0.98 var(--serif); }
+.pl-list .pl-t a { text-decoration: none; }
+.pl-list .pl-t a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.pl-list dl { border-top: 1px solid var(--line); }
+.pl-list dl div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }
+.pl-list dt { color: var(--muted); }
+.pl-list dd { margin: 0; }
+.pl-list .pl-from { font: 500 1.25rem / 1.2 var(--sans); }
+.pl-list .pl-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+@media (max-width: 900px) {
+  .pl-list .pl-card, .pl-list .pl-flip { grid-template-columns: 1fr; }
+  .pl-list .pl-flip .pl-media { order: 0; }
+}

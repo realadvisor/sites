@@ -1,0 +1,30 @@
+// Keyboard: filter sheet on /acheter (open with Enter, focus inside, Escape closes) and the contact form (Tab order, focus ring, validation without submit).
+import { chromium } from 'playwright';
+const base = process.argv[2] ?? 'http://127.0.0.1:4513';
+const ok = (c, m) => console.log(`${c ? 'PASS' : 'FAIL'} ${m}`);
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 390, height: 844 } });
+await p.goto(base + '/acheter');
+await p.focus('.rs-filters-btn');
+await p.keyboard.press('Enter');
+await p.waitForTimeout(300);
+ok(await p.evaluate(() => document.querySelector('#rs-sheet').matches(':popover-open')), 'Enter on Filter opens the sheet');
+await p.keyboard.press('Tab');
+ok(await p.evaluate(() => document.querySelector('#rs-sheet').contains(document.activeElement)), 'Tab moves focus into the sheet');
+await p.keyboard.press('Escape');
+await p.waitForTimeout(200);
+ok(await p.evaluate(() => !document.querySelector('#rs-sheet').matches(':popover-open')), 'Escape closes the sheet');
+const d = await b.newPage({ viewport: { width: 1440, height: 900 } });
+await d.goto(base + '/contact');
+await d.focus('#enquiry-name');
+await d.waitForTimeout(300); // ring animates in (box-shadow transition)
+const ring = await d.evaluate(() => getComputedStyle(document.activeElement).outlineStyle + '/' + getComputedStyle(document.activeElement).boxShadow);
+ok(/ 3px$/.test(ring), `name field shows a 3px focus ring (${ring})`);
+await d.keyboard.type('Test');
+await d.keyboard.press('Tab');
+ok(await d.evaluate(() => document.activeElement?.id === 'enquiry-email'), 'Tab goes name -> e-mail');
+await d.keyboard.press('Tab');
+ok(await d.evaluate(() => document.activeElement?.id === 'enquiry-phone'), 'Tab goes e-mail -> phone');
+const valid = await d.evaluate(() => document.querySelector('#enquiry-email').closest('form').checkValidity());
+ok(!valid, 'form is invalid without e-mail/message (nothing submitted)');
+await b.close();

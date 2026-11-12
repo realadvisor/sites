@@ -1,0 +1,35 @@
+---
+import type { Agent, Team } from '@realadvisor/sites-sdk/types';
+import Icon from './Icon.astro';
+import AgentPhoto from './AgentPhoto.astro';
+
+interface Props { agent: Agent; team?: Team }
+const { agent, team } = Astro.props;
+const tel = (p: string) => `tel:${p.replace(/[^\d+]/g, '')}`;
+const phone = agent.phone ?? team?.phone;
+const email = agent.email ?? team?.email;
+const LANG: Record<string, string> = { de: 'Deutsch', en: 'Englisch', fr: 'Französisch', it: 'Italienisch', es: 'Spanisch' };
+const langs = agent.languages?.length ? agent.languages.map((l) => LANG[l] ?? l.toUpperCase()).join(', ') : '';
+---
+<div class="card">
+  <AgentPhoto agent={agent} size={104} />
+  <div class="who">
+    <p class="name">{agent.first_name} {agent.last_name}</p>
+    <p class="role">{agent.title ?? 'Erstvermietung'}{team?.name ? `, ${team.name}` : ''}</p>
+    {langs && <p class="role">Spricht {langs}</p>}
+    <ul>
+      {phone && <li><a href={tel(phone)}><Icon name="phone" size={18} /><span class="num">{phone}</span></a></li>}
+      {email && <li><a href={`mailto:${email}`}><Icon name="mail" size={18} /><span>{email.split('@')[0]}<wbr />@{email.split('@')[1]}</span></a></li>}
+    </ul>
+  </div>
+</div>
+<style>
+  .card { display: flex; gap: 18px; align-items: flex-start; }
+  @media (max-width: 420px) { .card { flex-direction: column; } }
+  .who { display: grid; gap: 4px; min-width: 0; }
+  .name { font: 750 var(--step-1)/1.1 var(--display); }
+  .role { font-size: 0.9375rem; }
+  ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; }
+  a { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 600; text-decoration: none; overflow-wrap: normal; }
+  a:hover span { text-decoration: underline; }
+</style>

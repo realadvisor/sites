@@ -1,0 +1,30 @@
+/* From components/Header.astro (scoped there: every selector under .site-header). */
+.site-header { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 2px solid var(--ink); }
+.site-header .bar { height: var(--header-h); display: flex; align-items: center; gap: 24px; }
+.site-header .brand { display: inline-flex; text-decoration: none; flex: none; }
+.site-header .nav { margin-left: auto; }
+.site-header .nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.site-header .nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.975rem; }
+.site-header .nav a:hover { background: var(--sand); }
+.site-header .nav a[aria-current='page'] { background: var(--ink); color: #fff; }
+.site-header .actions { display: flex; align-items: center; gap: 8px; }
+.site-header .cta--sm { min-height: 46px; padding: 0 8px 0 20px; font-size: 0.95rem; }
+.site-header .count { background: var(--ink); color: #fff; border-radius: 999px; padding: 7px 11px; font-size: 0.8125rem; }
+.site-header .menu-btn { display: none; width: 48px; height: 48px; align-items: center; justify-content: center; border: 2px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
+.site-header .sheet { position: fixed; inset: 0; z-index: 60; background: var(--zinnober); color: var(--ink); display: flex; flex-direction: column; visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.18s ease, visibility 0s linear 0.18s; overflow-y: auto; }
+.site-header .sheet.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.18s ease; }
+.site-header .sheet-bar { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--ink); }
+.site-header .sheet .menu-btn { display: inline-flex; }
+.site-header .sheet-nav { padding-block: 24px 40px; display: grid; gap: 28px; align-content: start; }
+.site-header .sheet-nav ul { list-style: none; margin: 0; padding: 0; }
+.site-header .sheet-nav li a { display: block; padding: 6px 0; font: 780 clamp(2.4rem, 10vw, 3.6rem)/1.05 var(--display); letter-spacing: -0.03em; text-decoration: none; }
+.site-header .sheet-nav li a[aria-current='page'] { text-decoration: underline; text-decoration-thickness: 4px; }
+.site-header .cta--ink { justify-self: start; }
+@media (max-width: 1080px) {
+  .site-header .nav { display: none; }
+  .site-header .actions { margin-left: auto; }
+  .site-header .menu-btn { display: inline-flex; }
+}
+@media (max-width: 560px) {
+  .site-header .actions .cta { display: none; }
+}

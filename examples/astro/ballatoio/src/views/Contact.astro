@@ -1,0 +1,101 @@
+---
+/** Contatti / Contact: the office on a street photo, phone, e-mail, the form. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { agencyOf } from '@realadvisor/sites-kit/agency';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import AgentBlock from '../components/AgentBlock.astro';
+import { agency, brandName, sites } from '../lib/data';
+import { placePhoto } from '../lib/places';
+import { LOCALE_OF, UI, alternates, type Lang } from '../lib/i18n';
+import { telHref } from '../lib/format';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, agents] = await Promise.all([agency(), sites.agents()]);
+const team = ag.team;
+const addr = team?.address ?? ag.org.address;
+const photo = placePhoto('milano', lang, 3);
+const osm = addr?.lat != null && addr?.lng != null
+  ? `https://www.openstreetmap.org/?mlat=${addr.lat}&mlon=${addr.lng}#map=17/${addr.lat}/${addr.lng}`
+  : undefined;
+const siteUrl = new URL('/', Astro.site ?? Astro.url).href;
+---
+<Site lang={lang} current="contact" title={`${ui.contactH1} | ${brandName(ag)}`} description={ui.contactLead}
+  image={photo && img(photo.url, { w: 1200, h: 630 })} alternates={alternates('contact')}
+  jsonLd={agencyJsonLd(agencyOf(ag.org, ag.team), siteUrl)}>
+  <header class="wrap phead">
+    <h1 class="d-xl">{ui.contactH1}</h1>
+    <p class="lead">{ui.contactLead}</p>
+  </header>
+
+  <section class="wrap office" aria-label={ui.footerOffice}>
+    {photo && (
+      <div class="frame office-photo">
+        <RaImage src={photo} alt={photo.alt} width={1000} height={1200} priority sizes="(min-width: 900px) 46vw, 100vw" mobile={{ width: 800, height: 700 }} />
+      </div>
+    )}
+    <dl class="office-facts">
+      {addr && (
+        <div>
+          <dt class="label muted">{ui.address}</dt>
+          <dd class="d-m">{addr.street}<br />{[addr.postcode, addr.city].filter(Boolean).join(' ')}</dd>
+          {osm && <dd><a class="arrow-link" href={osm} rel="noopener">{ui.openMap} <span aria-hidden="true">↗</span></a></dd>}
+        </div>
+      )}
+      {team?.phone && (
+        <div>
+          <dt class="label muted">{ui.phone}</dt>
+          <dd class="d-m"><a class="num" href={telHref(team.phone)}>{team.phone}</a></dd>
+        </div>
+      )}
+      {team?.email && (
+        <div>
+          <dt class="label muted">{ui.email}</dt>
+          <dd class="office-mail"><a href={`mailto:${team.email}`}>{team.email}</a></dd>
+        </div>
+      )}
+      <div><dd class="muted">{ui.byAppointment}</dd></div>
+    </dl>
+  </section>
+
+  {agents.length > 0 && (
+    <section class="wrap people" aria-labelledby="people-h">
+      <h2 id="people-h" class="d-l">{ui.teamH1}</h2>
+      <ul class="people-list">
+        {agents.map((a) => <li><AgentBlock agent={a} lang={lang} /></li>)}
+      </ul>
+    </section>
+  )}
+
+  <section class="form" aria-labelledby="form-h">
+    <div class="wrap form-in">
+      <h2 id="form-h" class="d-l">{ui.writeUs}</h2>
+      <EnquiryForm contactReason="other" locale={LOCALE_OF[lang]} />
+    </div>
+  </section>
+</Site>
+
+<style>
+  .office { display: grid; grid-template-columns: 1fr 1fr; gap: 40px clamp(40px, 6vw, 120px); align-items: start; }
+  .office-photo { aspect-ratio: 5 / 6; }
+  .office-facts { display: grid; border-top: 1px solid var(--text); }
+  .office-facts div { display: grid; gap: 10px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .office-facts a { text-decoration: none; }
+  .office-facts .d-m a:hover, .office-mail a:hover { text-decoration: underline; }
+  .office-mail { font-size: var(--fs-s); font-weight: 600; overflow-wrap: anywhere; }
+  @media (max-width: 900px) {
+    .office { grid-template-columns: 1fr; }
+    .office-photo { aspect-ratio: 8 / 7; }
+  }
+  .people { padding-top: var(--section); display: grid; gap: clamp(24px, 3vw, 40px); }
+  .people-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px clamp(24px, 4vw, 64px); }
+  .people-list li { border-top: 1px solid var(--text); padding-top: 18px; }
+  @media (max-width: 700px) { .people-list { grid-template-columns: 1fr; } }
+  .form { background: var(--paper); margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); }
+  .form-in { display: grid; grid-template-columns: 1fr 1fr; gap: 40px clamp(40px, 6vw, 120px); }
+  @media (max-width: 900px) { .form-in { grid-template-columns: 1fr; } }
+</style>

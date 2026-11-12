@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+import Search from '../views/Search.astro';
+import { href } from '../lib/i18n';
+// A search form without JS may send ?offerType=rent here: forward to the rent page.
+if (Astro.url.searchParams.get('offerType') === 'rent') {
+  const q = new URLSearchParams(Astro.url.searchParams);
+  q.delete('offerType');
+  return Astro.redirect(`${href('rent', 'it')}${q.size ? `?${q}` : ''}`, 303);
+}
+---
+<Search lang="it" offer="buy" />

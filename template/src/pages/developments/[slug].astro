@@ -1,0 +1,125 @@
+---
+// Wiring example only. Replace the markup with the real design.
+// One development: photos, description, key figures, the units table
+// (availability and prices; a unit that is a public listing links to it),
+// map, agent and an enquiry form. Unknown slug: 404.
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { img } from '@realadvisor/sites-kit/image';
+import { LOCALE, formatSurface } from '@realadvisor/sites-kit/format';
+import { count, featureLabel, t } from '@realadvisor/sites-kit/i18n';
+import {
+  DEVELOPMENTS_PATH, developmentStatus, formatFloor, formatRooms, priceFrom, sortUnits, unitEnquiryUrl, unitLabel, unitListingUrl, unitOptions, unitPrice,
+  unitStatusLabel,
+} from '@realadvisor/sites-kit/developments';
+
+const dev = await ra.development(Astro.params.slug!);
+if (!dev) return Astro.rewrite('/404');
+const agency = await ra.agency();
+const units = sortUnits(dev.units);
+const agent = dev.agents[0];
+// A unit row's "Enquire" link (?lot=<id>#contact) preselects it in the form.
+const chosen = units.find((u) => u.id === Astro.url.searchParams.get('lot') && u.status !== 'sold');
+const place = [dev.address.street, [dev.address.postcode, dev.address.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const summary = [
+  developmentStatus(dev),
+  dev.stats.units ? `${count('unitsAvailable', dev.stats.available)} / ${count('unitsTotal', dev.stats.units)}` : '',
+  priceFrom(dev),
+].filter(Boolean).join(' · ');
+const range = (r: { min: number; max: number } | undefined, f: (n: number) => string) =>
+  r ? (r.min === r.max ? f(r.min) : `${f(r.min)} – ${f(r.max)}`) : '';
+const description = (dev.description_text ?? [dev.title, place, summary].filter(Boolean).join(' – ')).replace(/\s+/g, ' ').slice(0, 155);
+---
+<Base
+  title={`${dev.title}${dev.address.city && !dev.title.includes(dev.address.city) ? ` · ${dev.address.city}` : ''} | ${agency.name}`}
+  description={description}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+>
+  <main>
+    <p><a href={DEVELOPMENTS_PATH}>{t('developments')}</a></p>
+    <h1>{dev.title}</h1>
+    {place && <p>{place}</p>}
+    {summary && <p>{summary}</p>}
+    {dev.photos[0] && (
+      <RaImage src={dev.photos[0]} width={1600} height={900} priority sizes="100vw" mobile={{ width: 800, height: 600 }} alt={dev.photos[0].alt ?? dev.title} />
+    )}
+    {dev.photos.length > 1 && (
+      <ul class="photos">
+        {dev.photos.slice(1).map((p, i) => (
+          <li><RaImage src={p} width={720} height={480} sizes="(min-width: 960px) 33vw, 100vw" alt={p.alt ?? `${dev.title}, ${i + 2}`} /></li>
+        ))}
+      </ul>
+    )}
+    {/* description: HTML the SDK already sanitized; sanitizeHtml again is the only allowed set:html. */}
+    {dev.description && <div class="prose" set:html={sanitizeHtml(dev.description)} />}
+
+    <dl class="facts">
+      {dev.stats.units > 0 && <><dt>{t('units')}</dt><dd>{count('unitsTotal', dev.stats.units)}</dd></>}
+      {dev.stats.rooms && <><dt>{t('rooms')}</dt><dd>{range(dev.stats.rooms, (n) => formatRooms(n))}</dd></>}
+      {dev.stats.living_surface && <><dt>{t('livingArea')}</dt><dd>{range(dev.stats.living_surface, formatSurface)}</dd></>}
+      {dev.delivery_date && <><dt>{t('delivery')}</dt><dd>{new Intl.DateTimeFormat(LOCALE, { month: 'long', year: 'numeric' }).format(new Date(dev.delivery_date))}</dd></>}
+    </dl>
+
+    {units.length > 0 && (
+      <section id="lots">
+        <h2>{t('units')}</h2>
+        <table>
+          <thead><tr><th>{t('unit')}</th><th>{t('floor')}</th><th>{t('livingArea')}</th><th>{t('price')}</th><th>{t('status')}</th></tr></thead>
+          <tbody>
+            {units.map((u) => {
+              const href = unitListingUrl(u);
+              return (
+                <tr data-status={u.status}>
+                  <td>{href ? <a href={href}>{formatRooms(u.rooms) || t('unit')}</a> : formatRooms(u.rooms) || t('unit')}
+                    {u.features?.length ? <small>{` · ${u.features.map((f) => featureLabel(f)).join(', ')}`}</small> : null}</td>
+                  <td>{formatFloor(u)}</td>
+                  <td>{formatSurface(u.living_surface)}</td>
+                  <td>{u.status === 'available' ? unitPrice(u) : '–'}</td>
+                  <td>{unitStatusLabel(u)}{href && u.status === 'available' ? <> · <a href={href}>{t('seeListing')}</a></> : null}
+                    {u.status !== 'sold' && <> · <a href={unitEnquiryUrl(dev, u)} rel="nofollow">{t('askUnit')}</a></>}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+    )}
+
+
+    {dev.address.lat != null && dev.address.lng != null && (
+      <section>
+        <h2>{t('location')}</h2>
+        {place && <p>{place}</p>}
+        <p><a href={`https://www.google.com/maps/search/?api=1&query=${dev.address.lat},${dev.address.lng}`} target="_blank" rel="noopener">{t('openInGoogleMaps')}</a></p>
+      </section>
+    )}
+
+    <section id="contact">
+      <h2>{t('contactUs')}</h2>
+      {agent && <p>{agent.first_name} {agent.last_name}{agent.phone && <> · <a href={`tel:${agent.phone.replace(/[^\d+]/g, '')}`}>{agent.phone}</a></>}</p>}
+      {/* developmentId links the enquiry to the development in the CRM (its broker gets it); the required unit select files it on a unit. */}
+      <EnquiryForm
+        developmentId={dev.id}
+        units={unitOptions(units)}
+        selectedUnit={chosen?.id}
+        agentName={agent?.first_name}
+        message={chosen ? t('unitInterested', { unit: unitLabel(chosen), title: dev.title }) : t('devInterested', { title: dev.title })}
+      />
+    </section>
+  </main>
+</Base>
+
+<style>
+  .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 8px; padding: 0; list-style: none; }
+  main :global(img) { max-width: 100%; height: auto; }
+  .facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+  tr[data-status='sold'] td { color: #767676; }
+  @media (max-width: 640px) { table, thead, tbody, tr, td, th { display: block; } thead { display: none; } tr { padding: 8px 0; } td { border: 0; padding: 2px 0; } }
+</style>

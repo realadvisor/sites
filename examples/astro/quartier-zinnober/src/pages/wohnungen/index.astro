@@ -1,0 +1,282 @@
+---
+// Wohnungen: one stacking plan per building with a building picker, then the
+// filterable table. Filters are GET parameters (shareable, work without JS);
+// with JS they apply instantly and update the URL.
+export const prerender = false;
+
+import Site from '../../layouts/Site.astro';
+import StackingPlan from '../../components/StackingPlan.astro';
+import Icon from '../../components/Icon.astro';
+import { site as load } from '../../lib/data';
+import { img } from '@realadvisor/sites-kit/image';
+import {
+  buildings, chf, floorShort, matches, monthYear, netRent, parseFilters, rooms, rowsOf, statusLabel, surface, types, unitUrl,
+} from '../../lib/units';
+
+const site = await load();
+const { dev } = site;
+const rows = rowsOf(dev);
+const houses = buildings(rows);
+const f = parseFilters(Astro.url.searchParams);
+const shown = rows.filter((r) => matches(r, f));
+const typeList = types(rows);
+const floors = [...new Set(rows.map((r) => r.u.floor ?? 0))].sort((a, b) => a - b);
+const moves = [...new Set(rows.map((r) => r.x.moveIn?.slice(0, 7)).filter((m): m is string => !!m))].sort();
+const rents = rows.map((r) => netRent(r.u)).filter((n): n is number => n != null);
+const steps = rents.length ? [1600, 2000, 2400, 2800, 3200].filter((s) => s >= Math.min(...rents)) : [];
+const active = [f.haus, f.zimmer, f.maxMiete, f.geschoss, f.bezug, f.frei || undefined].some((v) => v != null);
+
+const titleParts = [f.zimmer != null ? `${String(f.zimmer)}-Zimmer-Wohnungen` : 'Mietwohnungen', f.haus ? `Haus ${f.haus}` : '', f.frei ? 'frei' : ''].filter(Boolean);
+const title = `${titleParts.join(' · ')} | ${dev.title}, ${dev.address.city ?? ''}`.replace(/, $/, '');
+const updated = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
+---
+<Site
+  site={site}
+  title={title}
+  description={`${dev.stats.units} Mietwohnungen in drei Häusern, ${dev.stats.available} frei. Stockwerkplan, Grundrisse, Mieten netto und Nebenkosten, Bezugstermine.`}
+  image={dev.photos[1] && img(dev.photos[1].url, { w: 1200, h: 630 })}
+>
+  <section class="head">
+    <div class="wrap head-in">
+      <div>
+        <h1>Wohnungen</h1>
+      </div>
+      <dl class="tally">
+        <div><dt>frei</dt><dd class="num">{dev.stats.available}</dd></div>
+        <div><dt>reserviert</dt><dd class="num">{dev.stats.reserved}</dd></div>
+        <div><dt>vermietet</dt><dd class="num">{dev.stats.sold}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <form class="filters wrap" method="get" action="/wohnungen" data-filters aria-label="Wohnungen filtern">
+    <fieldset class="picker">
+      <legend class="visually-hidden">Haus</legend>
+      <label class="seg"><input type="radio" name="haus" value="" checked={!f.haus} /><span>Alle Häuser</span></label>
+      {houses.map((h) => (
+        <label class:list={['seg', `seg--${h.key.toLowerCase()}`]}>
+          <input type="radio" name="haus" value={h.key} checked={f.haus === h.key} />
+          <span>{h.name} <small class="num">{h.available} frei</small></span>
+        </label>
+      ))}
+    </fieldset>
+    <div class="row">
+      <fieldset class="chips">
+        <legend class="flabel">Zimmer</legend>
+        <label class="chip"><input type="radio" name="zimmer" value="" checked={f.zimmer == null} /><span>Alle</span></label>
+        {typeList.map((t) => (
+          <label class="chip"><input type="radio" name="zimmer" value={String(t.rooms)} checked={f.zimmer === t.rooms} /><span class="num">{String(t.rooms)}</span></label>
+        ))}
+      </fieldset>
+      <label class="sel">
+        <span class="flabel">Miete netto bis</span>
+        <select name="miete">
+          <option value="">Alle</option>
+          {steps.map((s) => <option value={s} selected={f.maxMiete === s}>{chf(s)}</option>)}
+        </select>
+      </label>
+      <label class="sel">
+        <span class="flabel">Geschoss</span>
+        <select name="geschoss">
+          <option value="">Alle</option>
+          {floors.map((n) => <option value={n} selected={f.geschoss === n}>{n === 0 ? 'Erdgeschoss' : `${n}. Obergeschoss`}</option>)}
+        </select>
+      </label>
+      <label class="sel">
+        <span class="flabel">Bezug</span>
+        <select name="bezug">
+          <option value="">Alle</option>
+          {moves.map((m) => <option value={m} selected={f.bezug === m}>ab {monthYear(`${m}-01`)}</option>)}
+        </select>
+      </label>
+      <label class="switch">
+        <input type="checkbox" name="frei" value="1" checked={f.frei} />
+        <span class="track" aria-hidden="true"></span>
+        <span>Nur freie</span>
+      </label>
+      <div class="form-actions">
+        <button class="cta" type="submit" data-apply>Anwenden</button>
+        <a class="reset" href="/wohnungen" data-reset hidden={!active}>Zurücksetzen</a>
+      </div>
+    </div>
+    <p class="result" aria-live="polite"><strong class="num" data-count>{shown.length}</strong> <span data-count-word>{shown.length === 1 ? 'Wohnung' : 'Wohnungen'}</span> · Stand {updated}</p>
+  </form>
+
+  <section class="plans wrap" aria-label="Stockwerkplan">
+    <div class="legend" aria-hidden="true">
+      <span class="lg lg--free">Frei</span><span class="lg lg--res">Reserviert</span><span class="lg lg--let">Vermietet</span>
+      <span class="hint">Grössere Wohnungen, breitere Felder</span>
+    </div>
+    <div class="buildings">
+      {houses.map((h) => (
+        <div class="building" data-building-panel={h.key} hidden={!!f.haus && f.haus !== h.key}>
+          <StackingPlan building={h} filters={f} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="list wrap" aria-labelledby="list-title">
+    <h2 id="list-title" class="list-title">Alle Wohnungen im Überblick</h2>
+    <table class="table">
+      <caption class="visually-hidden">Alle Wohnungen mit Zimmern, Fläche, Geschoss, Bezug, Miete und Status</caption>
+      <thead>
+        <tr>
+          <th scope="col">Wohnung</th>
+          <th scope="col">Zimmer</th>
+          <th scope="col">Fläche</th>
+          <th scope="col">Aussen</th>
+          <th scope="col">Geschoss</th>
+          <th scope="col">Bezug</th>
+          <th scope="col" class="r">Netto</th>
+          <th scope="col" class="r">NK</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => {
+          const rent = netRent(r.u);
+          return (
+            <tr
+              class:list={[`st-${r.u.status}`]}
+              hidden={!matches(r, f)}
+              data-row
+              data-status={r.u.status}
+              data-rooms={r.u.rooms}
+              data-rent={rent ?? ''}
+              data-floor={r.u.floor ?? 0}
+              data-movein={r.x.moveIn?.slice(0, 7) ?? ''}
+              data-haus={r.x.building}
+            >
+              {/* fixture only: unit number, building, move-in date, charges */}
+              <td class="c-name">
+                <a class="row-link" href={unitUrl(r.u)} aria-label={r.u.name}><b class="num">{r.x.number}</b></a>
+                <span class="c-house">Haus {r.x.building}</span>
+                <span class="m-meta">{[floorShort(r.u), surface(r.u.living_surface), r.x.moveIn ? `Bezug ${monthYear(r.x.moveIn)}` : ''].filter(Boolean).join(' · ')}</span>
+              </td>
+              <td class="c-rooms num">{rooms(r.u)}</td>
+              <td class="num c-area">{surface(r.u.living_surface)}</td>
+              <td class="num c-out">{r.u.balcony_surface ? surface(r.u.balcony_surface) : ''}</td>
+              <td class="c-floor">{floorShort(r.u)}</td>
+              <td class="c-move">{monthYear(r.x.moveIn)}</td>
+              <td class="r num c-rent">{rent ? chf(rent) : ''}</td>
+              <td class="r num c-nk">{rent && r.x.charges ? chf(r.x.charges) : ''}</td>
+              <td class="c-st"><span class={`pill pill--${r.u.status}`}>{statusLabel(r.u)}</span><Icon name="arrow" class="go" /></td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+    <div class="empty" data-empty hidden={shown.length > 0}>
+      <p><strong>Keine Wohnung passt zu diesen Filtern.</strong> Lockern Sie die Auswahl, oder melden Sie Ihr Interesse an: Wir informieren Sie, wenn eine passende Wohnung frei wird.</p>
+      <div class="empty-actions"><a class="cta cta--ghost" href="/wohnungen">Filter zurücksetzen</a><a class="cta cta--zinnober" href="/kontakt">Interesse anmelden</a></div>
+    </div>
+    <p class="note muted">Mieten pro Monat. Netto = Nettomiete, NK = Nebenkosten (Akonto). Reservierte Wohnungen mit Mietzins (Warteliste möglich), vermietete ohne. Alle Angaben ohne Gewähr.</p>
+  </section>
+</Site>
+
+<script>
+  import '../../scripts/units-filter';
+</script>
+
+<style>
+  .head { background: var(--zinnober); border-bottom: 2px solid var(--ink); }
+  .head-in { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; padding-block: clamp(40px, 6vw, 88px) clamp(28px, 4vw, 48px); }
+  .head h1 { font-size: var(--step-5); letter-spacing: -0.045em; }
+  .head .eyebrow { margin-bottom: 12px; }
+  .tally { display: flex; gap: clamp(16px, 3vw, 40px); margin: 0; }
+  .tally div { display: grid; }
+  .tally dt { order: 2; font-weight: 600; }
+  .tally dd { margin: 0; font: 800 var(--step-4)/0.9 var(--display); letter-spacing: -0.04em; }
+
+  .filters { display: grid; gap: 18px; padding-block: 28px 8px; }
+  .picker { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .seg { position: relative; }
+  .seg input, .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .seg span { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 20px; border: 2px solid var(--ink); border-radius: 999px; font: 750 1.0625rem/1 var(--display); background: var(--paper); }
+  .seg small { font: 600 0.8125rem/1 var(--body); padding: 5px 9px; border-radius: 999px; background: var(--sand); }
+  .seg input:checked + span { background: var(--ink); color: #fff; }
+  .seg--a input:checked + span { background: var(--haus-a); color: var(--ink); }
+  .seg--b input:checked + span { background: var(--haus-b); color: var(--ink); }
+  .seg--c input:checked + span { background: var(--haus-c); color: var(--ink); }
+  .seg input:checked + span small { background: rgb(255 255 255 / 0.7); color: var(--ink); }
+  .seg input:focus-visible + span, .chip input:focus-visible + span, .switch input:focus-visible + .track { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+  .row { display: flex; flex-wrap: wrap; align-items: end; gap: 14px 18px; }
+  .flabel { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; padding: 0; }
+  .chips { border: 0; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; }
+  .chips legend { float: left; width: 100%; }
+  .chip { position: relative; }
+  .chip span { display: inline-grid; place-items: center; min-width: 52px; height: 48px; padding: 0 12px; border: 1.5px solid #cfc3b3; border-radius: 12px; background: var(--paper); font-weight: 650; }
+  .chip input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .sel select { height: 48px; min-width: 150px; padding: 0 36px 0 14px; border: 1.5px solid #cfc3b3; border-radius: 12px; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23140F3A' stroke-width='1.75' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center / 12px 8px; appearance: none; font: inherit; color: var(--ink); cursor: pointer; }
+  .switch { position: relative; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; font-weight: 650; cursor: pointer; }
+  .switch input { position: absolute; opacity: 0; width: 44px; height: 26px; margin: 0; cursor: pointer; }
+  .track { width: 48px; height: 28px; border-radius: 999px; background: #d8cfc2; border: 2px solid var(--ink); position: relative; transition: background 0.15s; }
+  .track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid var(--ink); transition: transform 0.15s; }
+  .switch input:checked + .track { background: var(--zinnober); }
+  .switch input:checked + .track::after { transform: translateX(20px); }
+  .form-actions { display: flex; align-items: center; gap: 16px; }
+  .form-actions .cta { min-height: 48px; }
+  .reset { font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; }
+  .result { font-size: 0.9375rem; color: var(--muted); }
+  .result strong { color: var(--ink); font-size: 1.0625rem; }
+
+  .plans { padding-block: 20px 8px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 20px; font-size: 0.9375rem; }
+  .lg::before { content: ''; display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 2px solid var(--ink); margin-right: 8px; vertical-align: -3px; }
+  .lg--free::before { background: linear-gradient(90deg, var(--haus-a) 33%, var(--haus-b) 33% 66%, var(--haus-c) 66%); }
+  .lg--res::before { background: repeating-linear-gradient(135deg, #fff 0 3px, #ccc 3px 6px); }
+  .lg--let::before { background: #ebe6f0; border-color: #b9b1c9; }
+  .hint { color: var(--muted); }
+  .buildings { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: clamp(28px, 4vw, 48px); }
+
+  .list { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 8vw, 120px); }
+  .list-title { font-size: var(--step-3); margin-bottom: 24px; }
+  .table { width: 100%; border-collapse: collapse; border-top: 2px solid var(--ink); }
+  .table th { text-align: left; font-size: 0.8125rem; font-weight: 650; color: var(--muted); letter-spacing: 0.03em; padding: 12px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .table td { padding: 14px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .table tbody tr { position: relative; }
+  .table tbody tr:hover { background: var(--paper); }
+  .table tbody tr:hover :global(.go) { transform: translateX(3px); }
+  .row-link { text-decoration: none; }
+  .row-link::after { content: ''; position: absolute; inset: 0; }
+  .row-link:focus-visible { outline: none; }
+  .row-link:focus-visible::after { outline: 3px solid var(--ink); outline-offset: -3px; border-radius: 6px; }
+  .r { text-align: right !important; }
+  .c-name b { font: 800 1.125rem/1 var(--display); margin-right: 10px; }
+  .c-house { font-size: 0.875rem; color: var(--muted); }
+  .m-meta { display: none; }
+  .c-rent { font-weight: 700; }
+  .c-st { white-space: nowrap; }
+  .c-st :global(.go) { display: inline-block; vertical-align: middle; margin-left: 10px; transition: transform 0.15s; }
+  .st-sold { color: var(--muted); }
+  .empty { margin-top: 24px; padding: 28px; border: 2px dashed var(--ink); border-radius: var(--radius-card); display: grid; gap: 18px; justify-items: start; }
+  .empty-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .note { margin-top: 20px; font-size: 0.875rem; max-width: 80ch; }
+
+  @media (max-width: 960px) {
+    .table thead { display: none; }
+    .table, .table tbody { display: block; }
+    .table tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'name st' 'name rent' 'rooms nk'; gap: 4px 12px; padding: 14px 4px; border-bottom: 1px solid var(--line); }
+    .table tbody tr[hidden] { display: none; }
+    .table td { padding: 0; border: 0; }
+    .c-name { grid-area: name; }
+    .m-meta { display: block; margin-top: 6px; font-size: 0.875rem; color: var(--muted); }
+    .c-st { grid-area: st; justify-self: end; }
+    .c-rooms { grid-area: rooms; font-weight: 650; }
+    .c-rent { grid-area: rent; justify-self: end; font-size: 1.0625rem; }
+    .c-nk { grid-area: nk; justify-self: end; font-size: 0.875rem; color: var(--muted); }
+    .c-nk:not(:empty)::before { content: '+ '; }
+    .c-nk:not(:empty)::after { content: ' NK'; }
+    .c-area, .c-out, .c-floor, .c-move { display: none; }
+    .c-st :global(.go) { display: none; }
+  }
+  @media (max-width: 640px) {
+    .row { gap: 12px; }
+    .sel { flex: 1 1 calc(50% - 6px); }
+    .sel select { width: 100%; min-width: 0; }
+    .chips { flex: 1 1 100%; }
+    .seg span { min-height: 46px; padding: 0 14px; font-size: 0.975rem; }
+  }
+</style>

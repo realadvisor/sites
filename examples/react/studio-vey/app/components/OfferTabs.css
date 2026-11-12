@@ -1,0 +1,28 @@
+/* From components/OfferTabs.astro (scoped there). */
+  .ot-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 32px; flex-wrap: wrap; margin-bottom: clamp(28px, 3vw, 44px); }
+  .ot-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line-strong); }
+  .ot-tabs[hidden] { display: none; }
+  .ot-tabs button {
+    appearance: none; background: none; border: 0; color: var(--muted); cursor: pointer;
+    font: 400 1.25rem/1 var(--serif); padding: 12px 16px 14px; min-height: 48px;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .ot-tabs button .num { font: 500 var(--fs-small)/1 var(--sans); margin-left: 4px; }
+  .ot-tabs button[aria-selected='true'] { color: var(--text); border-bottom-color: currentColor; }
+  .ot-tabs button:hover { color: var(--text); }
+  .ot-panel + .ot-panel { margin-top: clamp(56px, 6vw, 88px); }
+  .ot-panel:focus { outline: none; }
+  .ot-sub { margin-bottom: 24px; }
+  .ot-h .muted { font: 400 var(--fs-small)/1 var(--sans); margin-left: 8px; }
+  /* With tabs, the tab itself names the panel. */
+  .is-tabbed .ot-sub { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .is-tabbed .ot-panel + .ot-panel { margin-top: 0; }
+  .ot-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  .ot-more { margin-top: clamp(28px, 3vw, 40px); }
+  @media (max-width: 1023px) { .ot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ot-grid > li:nth-child(3) { display: none; } }
+  @media (max-width: 639px) {
+    .ot-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .ot-grid > li:nth-child(3) { display: block; }
+    .ot-tabs { width: 100%; }
+    .ot-tabs button { flex: 1; }
+  }

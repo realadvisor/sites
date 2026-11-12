@@ -1,0 +1,62 @@
+---
+/** Contact: enquiry form and every office with address, phone, e-mail and a map link. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import PageBand from '../components/PageBand.astro';
+import { siteData } from '../lib/data';
+import { href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, primary } = await siteData();
+const siteUrl = new URL(href('home', l), Astro.site ?? Astro.url).href;
+---
+<Site l={l} route="contact" title={`${t('contactTitle')} | ${org.name}`} description={t('contactLede')}
+  jsonLd={agencyJsonLd({ id: org.id, name: org.name, phone: primary?.phone, email: primary?.email, address: org.address }, siteUrl)}>
+  <PageBand l={l} title={t('contactTitle')} lede={t('contactLede')} crumbs={[{ label: t('navContact') }]} />
+  <section class="section">
+    <div class="wrap cols">
+      <div class="form">
+        <h2 class="h3">{t('writeUs')}</h2>
+        <EnquiryForm locale={LOCALE[l]} contactReason="other" />
+      </div>
+      <ul class="plain-list offices" aria-label={t('navOffices')}>
+        {teams.map((x) => {
+          const osm = x.address.lat != null ? `https://www.openstreetmap.org/?mlat=${x.address.lat}&mlon=${x.address.lng}#map=17/${x.address.lat}/${x.address.lng}` : undefined;
+          return (
+            <li>
+              <h2 class="h3"><a href={href('offices', l, teamSlug(x, teams))}>{t('officeOf', { city: cityName(x.address.city, l) || x.name })}</a></h2>
+              <address>
+                {x.address.street && <span>{x.address.street}</span>}
+                {(x.address.postcode || x.address.city) && <span>{[x.address.postcode, cityName(x.address.city, l)].filter(Boolean).join(' ')}</span>}
+              </address>
+              <ul class="plain-list links">
+                {x.phone && <li><a class="num" href={tel(x.phone)}>{x.phone}</a></li>}
+                {x.email && <li><a href={`mailto:${x.email}`}>{x.email}</a></li>}
+                {osm && <li><a href={osm} rel="noopener">{t('directions')} ↗</a></li>}
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .cols { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+  .form { display: grid; gap: 20px; background: var(--paper); padding: clamp(22px, 3vw, 40px); }
+  .form h2, .offices h2 { color: var(--green-ink); }
+  .offices { display: grid; }
+  .offices > li { display: grid; gap: 8px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .offices > li:first-child { padding-top: 0; }
+  .offices h2 a { text-decoration: none; }
+  .offices h2 a:hover { text-decoration: underline; }
+  address { font-style: normal; display: grid; color: var(--muted); }
+  .links a { display: inline-flex; min-height: 36px; align-items: center; color: var(--green); }
+  @media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } .form { margin-inline: calc(-1 * var(--gutter)); } }
+</style>

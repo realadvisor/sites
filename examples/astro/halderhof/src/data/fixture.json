@@ -1,0 +1,4611 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "de",
+  "fr",
+  "en"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "c0b21b1a-2d63-4e87-a5c5-28bf525e1ef0",
+  "name": "Halderhof Immobilien AG",
+  "website": "https://halderhof.example.com",
+  "address": {
+   "street": "Talstrasse 58",
+   "postcode": "8001",
+   "city": "Zürich",
+   "country": "Switzerland",
+   "lat": 47.37,
+   "lng": 8.536
+  },
+  "brand": {
+   "primary": "#1F4D3A"
+  }
+ },
+ "teams": [
+  {
+   "id": "fd36eb04-6c16-4c9b-8561-cd4e1404edab",
+   "name": "Halderhof Zürich",
+   "primary": true,
+   "website": "https://halderhof.example.com",
+   "phone": "+41 00 000 00 01",
+   "email": "zuerich@halderhof.example.com",
+   "address": {
+    "street": "Talstrasse 58",
+    "postcode": "8001",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.37,
+    "lng": 8.536
+   },
+   "socials": {},
+   "description": "<p>Unser Hauptsitz an der Talstrasse. Wohnungen und Häuser in der Stadt Zürich, vor allem Enge, Wollishofen, Oberstrass, Fluntern, Hottingen und Seefeld, sowie in Küsnacht.</p>",
+   "description_text": "Unser Hauptsitz an der Talstrasse. Wohnungen und Häuser in der Stadt Zürich, vor allem Enge, Wollishofen, Oberstrass, Fluntern, Hottingen und Seefeld, sowie in Küsnacht."
+  },
+  {
+   "id": "e91e12eb-d61a-4b1a-bf17-7862c79d9b00",
+   "name": "Halderhof Basel",
+   "website": "https://halderhof.example.com",
+   "phone": "+41 00 000 00 02",
+   "email": "basel@halderhof.example.com",
+   "address": {
+    "street": "Aeschenvorstadt 36",
+    "postcode": "4051",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.553,
+    "lng": 7.593
+   },
+   "socials": {},
+   "description": "<p>An der Aeschenvorstadt. Wohneigentum im Gundeldinger Quartier, in St. Alban und im Gellert, in Riehen, und der Verkauf unserer Neubauprojekte in Basel.</p>",
+   "description_text": "An der Aeschenvorstadt. Wohneigentum im Gundeldinger Quartier, in St. Alban und im Gellert, in Riehen, und der Verkauf unserer Neubauprojekte in Basel."
+  },
+  {
+   "id": "13485894-ff9c-4158-8f14-152dba2db3c1",
+   "name": "Halderhof Bern",
+   "website": "https://halderhof.example.com",
+   "phone": "+41 00 000 00 03",
+   "email": "bern@halderhof.example.com",
+   "address": {
+    "street": "Helvetiaplatz 4",
+    "postcode": "3005",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.944,
+    "lng": 7.448
+   },
+   "socials": {},
+   "description": "<p>Am Helvetiaplatz im Kirchenfeld. Wohnungen und Häuser im Kirchenfeld, in der Länggasse und in Muri bei Bern.</p>",
+   "description_text": "Am Helvetiaplatz im Kirchenfeld. Wohnungen und Häuser im Kirchenfeld, in der Länggasse und in Muri bei Bern."
+  }
+ ],
+ "agents": [
+  {
+   "id": "716bb4eb-2621-486c-ba9b-1ab75c87685c",
+   "first_name": "Andrea",
+   "last_name": "Meili",
+   "phone": "+41 00 000 00 04",
+   "email": "andrea.meili@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872061-sq.jpg",
+    "alt": "Andrea Meili"
+   }
+  },
+  {
+   "id": "3cd2347f-288c-4408-9c42-1161533ddd4f",
+   "first_name": "Patrick",
+   "last_name": "Huber",
+   "phone": "+41 00 000 00 05",
+   "email": "patrick.huber@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872076-sq.jpg",
+    "alt": "Patrick Huber"
+   }
+  },
+  {
+   "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+   "first_name": "Nadine",
+   "last_name": "Steiner",
+   "phone": "+41 00 000 00 06",
+   "email": "nadine.steiner@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+    "alt": "Nadine Steiner"
+   }
+  },
+  {
+   "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+   "first_name": "Simone",
+   "last_name": "Vogt",
+   "phone": "+41 00 000 00 07",
+   "email": "simone.vogt@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+    "alt": "Simone Vogt"
+   }
+  },
+  {
+   "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+   "first_name": "Fabian",
+   "last_name": "Kunz",
+   "phone": "+41 00 000 00 08",
+   "email": "fabian.kunz@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+    "alt": "Fabian Kunz"
+   }
+  },
+  {
+   "id": "c8d7bbfc-6d89-428e-83d5-453408b8d391",
+   "first_name": "Claude",
+   "last_name": "Rossier",
+   "phone": "+41 00 000 00 09",
+   "email": "claude.rossier@halderhof.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124401-sq.jpg",
+    "alt": "Claude Rossier"
+   }
+  },
+  {
+   "id": "e6d9d809-849c-4df4-ba8f-8289384809b3",
+   "first_name": "Thomas",
+   "last_name": "Wyss",
+   "phone": "+41 00 000 00 10",
+   "email": "thomas.wyss@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8123906-sq.jpg",
+    "alt": "Thomas Wyss"
+   }
+  },
+  {
+   "id": "77b27521-df4e-40b9-94d9-7b308497e8ad",
+   "first_name": "Leo",
+   "last_name": "Zbinden",
+   "phone": "+41 00 000 00 11",
+   "email": "leo.zbinden@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124200-sq.jpg",
+    "alt": "Leo Zbinden"
+   }
+  },
+  {
+   "id": "51520788-af4c-4f20-8e3a-7bdaadf5faa3",
+   "first_name": "Rafael",
+   "last_name": "Gerber",
+   "phone": "+41 00 000 00 12",
+   "email": "rafael.gerber@halderhof.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124420-sq.jpg",
+    "alt": "Rafael Gerber"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "24080510-9109-4dda-b1ad-cd77949b26ad",
+   "slug": "4-5-zimmer-wohnung-in-der-enge-24080510-9109-4dda-b1ad-cd77949b26ad",
+   "title": "4,5-Zimmer-Wohnung in der Enge",
+   "description": "<p>Eine helle 4,5-Zimmer-Wohnung im dritten Obergeschoss eines Mehrfamilienhauses von 1932, wenige Schritte vom Rieterpark.</p><p>Wohn- und Esszimmer mit Eichenparkett und Erker, offene Küche von 2021, drei Zimmer, Bad und separates Duschbad. Balkon gegen Westen in den Hof.</p><p>Lift, Kellerabteil und gemeinsamer Waschraum. Tram 7 und Bahnhof Enge in fünf Minuten zu Fuss.</p>",
+   "description_text": "Eine helle 4,5-Zimmer-Wohnung im dritten Obergeschoss eines Mehrfamilienhauses von 1932, wenige Schritte vom Rieterpark.\n\nWohn- und Esszimmer mit Eichenparkett und Erker, offene Küche von 2021, drei Zimmer, Bad und separates Duschbad. Balkon gegen Westen in den Hof.\n\nLift, Kellerabteil und gemeinsamer Waschraum. Tram 7 und Bahnhof Enge in fünf Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2350000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 118,
+   "address": {
+    "street": "Gablerstrasse 17",
+    "postcode": "8002",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.359,
+    "lng": 8.53
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195896.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195894.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195900.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195901.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195891.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195890.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195892.jpg",
+     "alt": "4,5-Zimmer-Wohnung in der Enge, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "716bb4eb-2621-486c-ba9b-1ab75c87685c",
+    "first_name": "Andrea",
+    "last_name": "Meili",
+    "phone": "+41 00 000 00 04",
+    "email": "andrea.meili@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872061-sq.jpg",
+     "alt": "Andrea Meili"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "Q2K8-K8QD",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "4d4a469e-2ca8-40d7-b252-1d23d4dc9b9b",
+   "slug": "attika-mit-seesicht-in-wollishofen-4d4a469e-2ca8-40d7-b252-1d23d4dc9b9b",
+   "title": "Attika mit Seesicht in Wollishofen",
+   "description": "<p>Die Attikawohnung eines Mehrfamilienhauses von 2015 am Hang von Wollishofen, mit Blick über den See bis zu den Glarner Alpen.</p><p>Grosser Wohnraum mit Küche, drei Zimmer, Elternbad mit Ankleide und ein zweites Bad. Die Terrasse von 64 m² umläuft die Wohnung auf drei Seiten.</p><p>Direkter Liftzugang, zwei Einstellplätze in der Tiefgarage. Bahnhof Wollishofen und Schiffsteg in zehn Minuten zu Fuss.</p>",
+   "description_text": "Die Attikawohnung eines Mehrfamilienhauses von 2015 am Hang von Wollishofen, mit Blick über den See bis zu den Glarner Alpen.\n\nGrosser Wohnraum mit Küche, drei Zimmer, Elternbad mit Ankleide und ein zweites Bad. Die Terrasse von 64 m² umläuft die Wohnung auf drei Seiten.\n\nDirekter Liftzugang, zwei Einstellplätze in der Tiefgarage. Bahnhof Wollishofen und Schiffsteg in zehn Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 3150000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 142,
+   "address": {
+    "street": "Kilchbergstrasse 41",
+    "postcode": "8038",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.341,
+    "lng": 8.535
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7534547.jpg",
+     "alt": "Attika mit Seesicht in Wollishofen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7534545.jpg",
+     "alt": "Attika mit Seesicht in Wollishofen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7534549.jpg",
+     "alt": "Attika mit Seesicht in Wollishofen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7534541.jpg",
+     "alt": "Attika mit Seesicht in Wollishofen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7534539.jpg",
+     "alt": "Attika mit Seesicht in Wollishofen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7534544.jpg",
+     "alt": "Attika mit Seesicht in Wollishofen, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3cd2347f-288c-4408-9c42-1161533ddd4f",
+    "first_name": "Patrick",
+    "last_name": "Huber",
+    "phone": "+41 00 000 00 05",
+    "email": "patrick.huber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872076-sq.jpg",
+     "alt": "Patrick Huber"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "NHVP-4CD4",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "857b71c4-9bb5-4f82-8491-19e81d81f23b",
+   "slug": "3-5-zimmer-wohnung-an-der-seestrasse-857b71c4-9bb5-4f82-8491-19e81d81f23b",
+   "title": "3,5-Zimmer-Wohnung an der Seestrasse",
+   "description": "<p>Eine 2020 sanierte 3,5-Zimmer-Wohnung im zweiten Obergeschoss, zwischen Seestrasse und Mythenquai.</p><p>Wohnzimmer mit Balkon, Küche mit Geschirrspüler und Steamer, zwei Zimmer, Bad mit Badewanne und eigene Waschmaschine.</p><p>Bezug ab 1. Januar 2027 oder nach Vereinbarung. Einstellplatz für CHF 220 im Monat zusätzlich mietbar.</p>",
+   "description_text": "Eine 2020 sanierte 3,5-Zimmer-Wohnung im zweiten Obergeschoss, zwischen Seestrasse und Mythenquai.\n\nWohnzimmer mit Balkon, Küche mit Geschirrspüler und Steamer, zwei Zimmer, Bad mit Badewanne und eigene Waschmaschine.\n\nBezug ab 1. Januar 2027 oder nach Vereinbarung. Einstellplatz für CHF 220 im Monat zusätzlich mietbar.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 4200,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 92,
+   "address": {
+    "street": "Seestrasse 91",
+    "postcode": "8002",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.36,
+    "lng": 8.532
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6523302.jpg",
+     "alt": "3,5-Zimmer-Wohnung an der Seestrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6523299.jpg",
+     "alt": "3,5-Zimmer-Wohnung an der Seestrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6523300.jpg",
+     "alt": "3,5-Zimmer-Wohnung an der Seestrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6523297.jpg",
+     "alt": "3,5-Zimmer-Wohnung an der Seestrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6523298.jpg",
+     "alt": "3,5-Zimmer-Wohnung an der Seestrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6523294.jpg",
+     "alt": "3,5-Zimmer-Wohnung an der Seestrasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "716bb4eb-2621-486c-ba9b-1ab75c87685c",
+    "first_name": "Andrea",
+    "last_name": "Meili",
+    "phone": "+41 00 000 00 04",
+    "email": "andrea.meili@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872061-sq.jpg",
+     "alt": "Andrea Meili"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "ZKVV-UU4N",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "8bb3b9a9-8fd2-47c5-857d-f666d0586ff1",
+   "slug": "altbauwohnung-an-der-rigistrasse-8bb3b9a9-8fd2-47c5-857d-f666d0586ff1",
+   "title": "Altbauwohnung an der Rigistrasse",
+   "description": "<p>Eine grosszügige 5,5-Zimmer-Wohnung im zweiten Obergeschoss eines Jugendstilhauses von 1910 in Oberstrass.</p><p>Raumhöhe 3,1 m, Stuck, Wandtäfer und Cheminée im Wohnzimmer. Wohnküche mit Sitzbank, Küche und beide Bäder von 2019. Vier Zimmer, eines davon mit Balkon zum Garten.</p><p>Kein Lift. Estrich- und Kellerabteil. Rigiblick-Seilbahn und Tram 9 und 10 in wenigen Minuten erreichbar.</p>",
+   "description_text": "Eine grosszügige 5,5-Zimmer-Wohnung im zweiten Obergeschoss eines Jugendstilhauses von 1910 in Oberstrass.\n\nRaumhöhe 3,1 m, Stuck, Wandtäfer und Cheminée im Wohnzimmer. Wohnküche mit Sitzbank, Küche und beide Bäder von 2019. Vier Zimmer, eines davon mit Balkon zum Garten.\n\nKein Lift. Estrich- und Kellerabteil. Rigiblick-Seilbahn und Tram 9 und 10 in wenigen Minuten erreichbar.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2680000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 146,
+   "address": {
+    "street": "Rigistrasse 28",
+    "postcode": "8006",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.385,
+    "lng": 8.551
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6947285.jpg",
+     "alt": "Altbauwohnung an der Rigistrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6947283.jpg",
+     "alt": "Altbauwohnung an der Rigistrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6947277.jpg",
+     "alt": "Altbauwohnung an der Rigistrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6947273.jpg",
+     "alt": "Altbauwohnung an der Rigistrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6947278.jpg",
+     "alt": "Altbauwohnung an der Rigistrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6947279.jpg",
+     "alt": "Altbauwohnung an der Rigistrasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3cd2347f-288c-4408-9c42-1161533ddd4f",
+    "first_name": "Patrick",
+    "last_name": "Huber",
+    "phone": "+41 00 000 00 05",
+    "email": "patrick.huber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872076-sq.jpg",
+     "alt": "Patrick Huber"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "FDVT-JQ6X",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "b8dd1485-9e18-4832-8418-3f907d7f570b",
+   "slug": "2-5-zimmer-wohnung-in-unterstrass-b8dd1485-9e18-4832-8418-3f907d7f570b",
+   "title": "2,5-Zimmer-Wohnung in Unterstrass",
+   "description": "<p>Eine 2,5-Zimmer-Wohnung im dritten Obergeschoss, komplett renoviert 2022.</p><p>Offener Wohn- und Essbereich mit Küche, Schlafzimmer mit Einbauschrank, Bad mit bodenebener Dusche. Balkon nach Süden.</p><p>Lift, Kellerabteil. Bahnhof Wipkingen und Tram 11 in fünf Minuten zu Fuss.</p>",
+   "description_text": "Eine 2,5-Zimmer-Wohnung im dritten Obergeschoss, komplett renoviert 2022.\n\nOffener Wohn- und Essbereich mit Küche, Schlafzimmer mit Einbauschrank, Bad mit bodenebener Dusche. Balkon nach Süden.\n\nLift, Kellerabteil. Bahnhof Wipkingen und Tram 11 in fünf Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1190000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 64,
+   "address": {
+    "street": "Scheuchzerstrasse 64",
+    "postcode": "8006",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.386,
+    "lng": 8.546
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920454.jpg",
+     "alt": "2,5-Zimmer-Wohnung in Unterstrass"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920445.jpg",
+     "alt": "2,5-Zimmer-Wohnung in Unterstrass, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920446.jpg",
+     "alt": "2,5-Zimmer-Wohnung in Unterstrass, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920448.jpg",
+     "alt": "2,5-Zimmer-Wohnung in Unterstrass, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920447.jpg",
+     "alt": "2,5-Zimmer-Wohnung in Unterstrass, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920450.jpg",
+     "alt": "2,5-Zimmer-Wohnung in Unterstrass, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+    "first_name": "Nadine",
+    "last_name": "Steiner",
+    "phone": "+41 00 000 00 06",
+    "email": "nadine.steiner@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+     "alt": "Nadine Steiner"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "8YXE-SNET",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "c8c8975e-405c-4dc0-a2b3-2a75cdf76e34",
+   "slug": "4-5-zimmer-wohnung-in-oberstrass-c8c8975e-405c-4dc0-a2b3-2a75cdf76e34",
+   "title": "4,5-Zimmer-Wohnung in Oberstrass",
+   "description": "<p>Eine Familienwohnung im ersten Obergeschoss eines gepflegten Mehrfamilienhauses von 1974, nahe der Universität Irchel.</p><p>Wohnzimmer mit Zugang zur Loggia, offene Küche mit Essplatz, drei Zimmer, Bad und Gäste-WC mit Dusche. Parkett in allen Zimmern.</p><p>Lift, Kellerabteil und ein Einstellplatz im Kaufpreis. Schulhaus und Irchelpark in der Nähe.</p>",
+   "description_text": "Eine Familienwohnung im ersten Obergeschoss eines gepflegten Mehrfamilienhauses von 1974, nahe der Universität Irchel.\n\nWohnzimmer mit Zugang zur Loggia, offene Küche mit Essplatz, drei Zimmer, Bad und Gäste-WC mit Dusche. Parkett in allen Zimmern.\n\nLift, Kellerabteil und ein Einstellplatz im Kaufpreis. Schulhaus und Irchelpark in der Nähe.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1780000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 104,
+   "address": {
+    "street": "Winterthurerstrasse 63",
+    "postcode": "8006",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.389,
+    "lng": 8.546
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782369.jpg",
+     "alt": "4,5-Zimmer-Wohnung in Oberstrass"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782363.jpg",
+     "alt": "4,5-Zimmer-Wohnung in Oberstrass, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782370.jpg",
+     "alt": "4,5-Zimmer-Wohnung in Oberstrass, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782364.jpg",
+     "alt": "4,5-Zimmer-Wohnung in Oberstrass, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782367.jpg",
+     "alt": "4,5-Zimmer-Wohnung in Oberstrass, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782362.jpg",
+     "alt": "4,5-Zimmer-Wohnung in Oberstrass, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+    "first_name": "Nadine",
+    "last_name": "Steiner",
+    "phone": "+41 00 000 00 06",
+    "email": "nadine.steiner@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+     "alt": "Nadine Steiner"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "5AMB-SJDZ",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "e2ac272d-d12e-4add-8b42-cd217dc671ce",
+   "slug": "stadtvilla-in-fluntern-e2ac272d-d12e-4add-8b42-cd217dc671ce",
+   "title": "Stadtvilla in Fluntern",
+   "description": "<p>Eine Villa am Zürichberg, 2019 bis auf die Grundmauern erneuert, auf einem Grundstück von 780 m² mit Pool und altem Baumbestand.</p><p>Wohnhalle über zwei Geschosse mit Galerie und Cheminée, offene Küche, raumhohe Schiebefenster zur Gartenterrasse und zum Pool. Fünf Schlafzimmer und drei Bäder, Eichenparkett im ganzen Haus.</p><p>Doppelgarage, Weinkeller. Zoo und Waldrand in zehn Minuten zu Fuss, Tram 6 an der nächsten Ecke.</p>",
+   "description_text": "Eine Villa am Zürichberg, 2019 bis auf die Grundmauern erneuert, auf einem Grundstück von 780 m² mit Pool und altem Baumbestand.\n\nWohnhalle über zwei Geschosse mit Galerie und Cheminée, offene Küche, raumhohe Schiebefenster zur Gartenterrasse und zum Pool. Fünf Schlafzimmer und drei Bäder, Eichenparkett im ganzen Haus.\n\nDoppelgarage, Weinkeller. Zoo und Waldrand in zehn Minuten zu Fuss, Tram 6 an der nächsten Ecke.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 6900000,
+   "currency": "CHF",
+   "rooms": 8.5,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 290,
+   "land_surface": 780,
+   "address": {
+    "street": "Zürichbergstrasse 84",
+    "postcode": "8044",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.377,
+    "lng": 8.561
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134763.jpg",
+     "alt": "Stadtvilla in Fluntern"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134760.jpg",
+     "alt": "Stadtvilla in Fluntern, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134762.jpg",
+     "alt": "Stadtvilla in Fluntern, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134752.jpg",
+     "alt": "Stadtvilla in Fluntern, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134758.jpg",
+     "alt": "Stadtvilla in Fluntern, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "3cd2347f-288c-4408-9c42-1161533ddd4f",
+    "first_name": "Patrick",
+    "last_name": "Huber",
+    "phone": "+41 00 000 00 05",
+    "email": "patrick.huber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872076-sq.jpg",
+     "alt": "Patrick Huber"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "WXC4-8M52",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "7db78178-706f-496a-818f-95ce49516f07",
+   "slug": "gartenwohnung-in-hottingen-7db78178-706f-496a-818f-95ce49516f07",
+   "title": "Gartenwohnung in Hottingen",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung im Erdgeschoss, mit Sitzplatz und eigenem Garten von rund 60 m².</p><p>Wohn- und Essbereich mit raumhohen Fenstern zum Garten, Küche mit Kochinsel, drei Zimmer, zwei Bäder. Bodenheizung und Eichenparkett.</p><p>Zwei Einstellplätze und ein Kellerabteil. Römerhof und Kreuzplatz in wenigen Minuten zu Fuss.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung im Erdgeschoss, mit Sitzplatz und eigenem Garten von rund 60 m².\n\nWohn- und Essbereich mit raumhohen Fenstern zum Garten, Küche mit Kochinsel, drei Zimmer, zwei Bäder. Bodenheizung und Eichenparkett.\n\nZwei Einstellplätze und ein Kellerabteil. Römerhof und Kreuzplatz in wenigen Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2750000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Freiestrasse 76",
+    "postcode": "8032",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.368,
+    "lng": 8.557
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6489119.jpg",
+     "alt": "Gartenwohnung in Hottingen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6489117.jpg",
+     "alt": "Gartenwohnung in Hottingen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6489113.jpg",
+     "alt": "Gartenwohnung in Hottingen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6489110.jpg",
+     "alt": "Gartenwohnung in Hottingen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6489116.jpg",
+     "alt": "Gartenwohnung in Hottingen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6489122.jpg",
+     "alt": "Gartenwohnung in Hottingen, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+    "first_name": "Nadine",
+    "last_name": "Steiner",
+    "phone": "+41 00 000 00 06",
+    "email": "nadine.steiner@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+     "alt": "Nadine Steiner"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "QNPM-HAA9",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "9a0eeec5-4fed-44dc-a43d-18495d74eb03",
+   "slug": "reihenhaus-in-witikon-9a0eeec5-4fed-44dc-a43d-18495d74eb03",
+   "title": "Reihenhaus in Witikon",
+   "description": "<p>Ein Reihenmittelhaus von 1988 in einer ruhigen Siedlung oberhalb der Witikonerstrasse.</p><p>Wohn- und Essbereich mit Ausgang zum Garten, Küche, vier Zimmer, Bad und Duschbad, ausgebautes Untergeschoss mit Hobbyraum. Helle Holztreppe über alle Geschosse. Fenster und Heizung wurden 2020 ersetzt.</p><p>Zwei Plätze in der gemeinsamen Tiefgarage. Bus 34 zum Klusplatz, Schulen und Wald in der Nähe.</p>",
+   "description_text": "Ein Reihenmittelhaus von 1988 in einer ruhigen Siedlung oberhalb der Witikonerstrasse.\n\nWohn- und Essbereich mit Ausgang zum Garten, Küche, vier Zimmer, Bad und Duschbad, ausgebautes Untergeschoss mit Hobbyraum. Helle Holztreppe über alle Geschosse. Fenster und Heizung wurden 2020 ersetzt.\n\nZwei Plätze in der gemeinsamen Tiefgarage. Bus 34 zum Klusplatz, Schulen und Wald in der Nähe.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 2450000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 165,
+   "land_surface": 210,
+   "address": {
+    "street": "Witikonerstrasse 312",
+    "postcode": "8053",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.359,
+    "lng": 8.592
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29904150.jpg",
+     "alt": "Reihenhaus in Witikon"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29904156.jpg",
+     "alt": "Reihenhaus in Witikon, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29904164.jpg",
+     "alt": "Reihenhaus in Witikon, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29904146.jpg",
+     "alt": "Reihenhaus in Witikon, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29904169.jpg",
+     "alt": "Reihenhaus in Witikon, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29904143.jpg",
+     "alt": "Reihenhaus in Witikon, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "716bb4eb-2621-486c-ba9b-1ab75c87685c",
+    "first_name": "Andrea",
+    "last_name": "Meili",
+    "phone": "+41 00 000 00 04",
+    "email": "andrea.meili@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872061-sq.jpg",
+     "alt": "Andrea Meili"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "8VXZ-BGBV",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "8f0252fb-64a6-4e03-828f-912a3e12fa41",
+   "slug": "3-5-zimmer-wohnung-in-hottingen-8f0252fb-64a6-4e03-828f-912a3e12fa41",
+   "title": "3,5-Zimmer-Wohnung in Hottingen",
+   "description": "<p>Eine 3,5-Zimmer-Wohnung im zweiten Obergeschoss eines Altbaus von 1930 zwischen Hottingerplatz und Kunsthaus.</p><p>Wohnzimmer mit Balkon, Küche von 2016, zwei Zimmer, Bad. Parkett und hohe Räume.</p>",
+   "description_text": "Eine 3,5-Zimmer-Wohnung im zweiten Obergeschoss eines Altbaus von 1930 zwischen Hottingerplatz und Kunsthaus.\n\nWohnzimmer mit Balkon, Küche von 2016, zwei Zimmer, Bad. Parkett und hohe Räume.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1590000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 86,
+   "address": {
+    "street": "Gemeindestrasse 33",
+    "postcode": "8032",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.369,
+    "lng": 8.555
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252574.jpg",
+     "alt": "3,5-Zimmer-Wohnung in Hottingen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252576.jpg",
+     "alt": "3,5-Zimmer-Wohnung in Hottingen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252572.jpg",
+     "alt": "3,5-Zimmer-Wohnung in Hottingen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252573.jpg",
+     "alt": "3,5-Zimmer-Wohnung in Hottingen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252568.jpg",
+     "alt": "3,5-Zimmer-Wohnung in Hottingen, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "716bb4eb-2621-486c-ba9b-1ab75c87685c",
+    "first_name": "Andrea",
+    "last_name": "Meili",
+    "phone": "+41 00 000 00 04",
+    "email": "andrea.meili@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872061-sq.jpg",
+     "alt": "Andrea Meili"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "VPCT-FZSC",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "311f3855-2c6d-4e06-ad34-537a1cef0b39",
+   "slug": "dachwohnung-im-seefeld-311f3855-2c6d-4e06-ad34-537a1cef0b39",
+   "title": "Dachwohnung im Seefeld",
+   "description": "<p>Eine Dachwohnung über zwei Ebenen im fünften Obergeschoss eines Hauses von 1902, ausgebaut 2018.</p><p>Offener Wohnraum mit Sichtbalken und Küche, zwei Schlafzimmer, zwei Bäder. Dachterrasse von 18 m² mit Blick über die Dächer des Seefelds.</p><p>Lift bis ins fünfte Geschoss. See und Zürichhorn in fünf Minuten zu Fuss, Tram 2 und 4 vor dem Haus.</p>",
+   "description_text": "Eine Dachwohnung über zwei Ebenen im fünften Obergeschoss eines Hauses von 1902, ausgebaut 2018.\n\nOffener Wohnraum mit Sichtbalken und Küche, zwei Schlafzimmer, zwei Bäder. Dachterrasse von 18 m² mit Blick über die Dächer des Seefelds.\n\nLift bis ins fünfte Geschoss. See und Zürichhorn in fünf Minuten zu Fuss, Tram 2 und 4 vor dem Haus.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 2480000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 105,
+   "address": {
+    "street": "Seefeldstrasse 152",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.357,
+    "lng": 8.555
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587847.jpg",
+     "alt": "Dachwohnung im Seefeld"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587850.jpg",
+     "alt": "Dachwohnung im Seefeld, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587851.jpg",
+     "alt": "Dachwohnung im Seefeld, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+    "first_name": "Nadine",
+    "last_name": "Steiner",
+    "phone": "+41 00 000 00 06",
+    "email": "nadine.steiner@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+     "alt": "Nadine Steiner"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "RAA7-B86F",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "bb44a47d-6c63-4672-a4b2-b071fd0d8c60",
+   "slug": "maisonette-in-riesbach-bb44a47d-6c63-4672-a4b2-b071fd0d8c60",
+   "title": "Maisonette in Riesbach",
+   "description": "<p>Eine 4,5-Zimmer-Maisonette über dem dritten und vierten Obergeschoss eines Neubaus von 2012.</p><p>Unten Wohnen, Essen und Küche mit Balkon, oben drei Zimmer, ein Bad en suite und ein zweites Bad. Eichenparkett, Bodenheizung, Komfortlüftung.</p><p>Lift, Einstellplatz und Kellerabteil. Stadelhofen und Opernhaus in zehn Minuten zu Fuss.</p>",
+   "description_text": "Eine 4,5-Zimmer-Maisonette über dem dritten und vierten Obergeschoss eines Neubaus von 2012.\n\nUnten Wohnen, Essen und Küche mit Balkon, oben drei Zimmer, ein Bad en suite und ein zweites Bad. Eichenparkett, Bodenheizung, Komfortlüftung.\n\nLift, Einstellplatz und Kellerabteil. Stadelhofen und Opernhaus in zehn Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment_duplex",
+   "status": "available",
+   "price": 2950000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 138,
+   "address": {
+    "street": "Mühlebachstrasse 58",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.363,
+    "lng": 8.553
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005703.jpg",
+     "alt": "Maisonette in Riesbach"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005705.jpg",
+     "alt": "Maisonette in Riesbach, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005700.jpg",
+     "alt": "Maisonette in Riesbach, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005712.jpg",
+     "alt": "Maisonette in Riesbach, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005709.jpg",
+     "alt": "Maisonette in Riesbach, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005706.jpg",
+     "alt": "Maisonette in Riesbach, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3cd2347f-288c-4408-9c42-1161533ddd4f",
+    "first_name": "Patrick",
+    "last_name": "Huber",
+    "phone": "+41 00 000 00 05",
+    "email": "patrick.huber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872076-sq.jpg",
+     "alt": "Patrick Huber"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "LNKH-SKBF",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "9980cb11-1ae6-4335-bbb9-d85801324623",
+   "slug": "mobliertes-studio-im-seefeld-9980cb11-1ae6-4335-bbb9-d85801324623",
+   "title": "Möbliertes Studio im Seefeld",
+   "description": "<p>Ein möbliertes Studio im ersten Obergeschoss, renoviert 2023.</p><p>Ein Raum mit Doppelbett, Sofa und Esstisch, Küchenzeile mit Backofen und Geschirrspüler, Duschbad. Waschmaschine im Keller.</p><p>Bezug ab 1. Dezember 2026, Mietdauer mindestens sechs Monate. Internet und Strom in den Nebenkosten enthalten.</p>",
+   "description_text": "Ein möbliertes Studio im ersten Obergeschoss, renoviert 2023.\n\nEin Raum mit Doppelbett, Sofa und Esstisch, Küchenzeile mit Backofen und Geschirrspüler, Duschbad. Waschmaschine im Keller.\n\nBezug ab 1. Dezember 2026, Mietdauer mindestens sechs Monate. Internet und Strom in den Nebenkosten enthalten.",
+   "offer_type": "rent",
+   "property_type": "apartment_studio",
+   "status": "available",
+   "price": 1950,
+   "currency": "CHF",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 34,
+   "address": {
+    "street": "Dufourstrasse 45",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.361,
+    "lng": 8.551
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890390.jpg",
+     "alt": "Möbliertes Studio im Seefeld"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890392.jpg",
+     "alt": "Möbliertes Studio im Seefeld, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890397.jpg",
+     "alt": "Möbliertes Studio im Seefeld, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890396.jpg",
+     "alt": "Möbliertes Studio im Seefeld, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890398.jpg",
+     "alt": "Möbliertes Studio im Seefeld, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890388.jpg",
+     "alt": "Möbliertes Studio im Seefeld, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+    "first_name": "Nadine",
+    "last_name": "Steiner",
+    "phone": "+41 00 000 00 06",
+    "email": "nadine.steiner@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+     "alt": "Nadine Steiner"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "FFEU-4CXM",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "e0556ff5-56bd-43c9-bd7f-c0b8cd2cbeae",
+   "slug": "villa-mit-seesicht-in-kusnacht-e0556ff5-56bd-43c9-bd7f-c0b8cd2cbeae",
+   "title": "Villa mit Seesicht in Küsnacht",
+   "description": "<p>Eine Villa von 1996, umfassend erneuert 2021, am Hang über der Alten Landstrasse, mit freier Sicht auf den See.</p><p>Wohnzimmer und Esszimmer zur Terrasse, Küche mit Kochinsel, fünf Schlafzimmer, vier Bäder. Im Untergeschoss Fitnessraum, Weinkeller und Waschküche. Garten von rund 800 m² mit Pool.</p><p>Doppelgarage und zwei Aussenplätze. Bahnhof Küsnacht und Seebad in zehn Minuten zu Fuss.</p>",
+   "description_text": "Eine Villa von 1996, umfassend erneuert 2021, am Hang über der Alten Landstrasse, mit freier Sicht auf den See.\n\nWohnzimmer und Esszimmer zur Terrasse, Küche mit Kochinsel, fünf Schlafzimmer, vier Bäder. Im Untergeschoss Fitnessraum, Weinkeller und Waschküche. Garten von rund 800 m² mit Pool.\n\nDoppelgarage und zwei Aussenplätze. Bahnhof Küsnacht und Seebad in zehn Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 9800000,
+   "currency": "CHF",
+   "rooms": 7.5,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 320,
+   "land_surface": 1150,
+   "address": {
+    "street": "Alte Landstrasse 118",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.324,
+    "lng": 8.582
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283967.jpg",
+     "alt": "Villa mit Seesicht in Küsnacht"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283963.jpg",
+     "alt": "Villa mit Seesicht in Küsnacht, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283960.jpg",
+     "alt": "Villa mit Seesicht in Küsnacht, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283969.jpg",
+     "alt": "Villa mit Seesicht in Küsnacht, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283972.jpg",
+     "alt": "Villa mit Seesicht in Küsnacht, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6283974.jpg",
+     "alt": "Villa mit Seesicht in Küsnacht, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3cd2347f-288c-4408-9c42-1161533ddd4f",
+    "first_name": "Patrick",
+    "last_name": "Huber",
+    "phone": "+41 00 000 00 05",
+    "email": "patrick.huber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872076-sq.jpg",
+     "alt": "Patrick Huber"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "ZYET-RNTJ",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "2fb2025d-25ff-4cdd-b9db-f193bd79525e",
+   "slug": "terrassenwohnung-in-kusnacht-2fb2025d-25ff-4cdd-b9db-f193bd79525e",
+   "title": "Terrassenwohnung in Küsnacht",
+   "description": "<p>Eine 4,5-Zimmer-Terrassenwohnung von 2010 in Goldbach, mit Seesicht aus allen Zimmern.</p><p>Wohn- und Essbereich mit Küche, drei Zimmer, zwei Bäder und Reduit. Gedeckte Terrasse von 40 m².</p><p>Lift, zwei Einstellplätze. Bahnhof Goldbach in fünf Minuten zu Fuss.</p>",
+   "description_text": "Eine 4,5-Zimmer-Terrassenwohnung von 2010 in Goldbach, mit Seesicht aus allen Zimmern.\n\nWohn- und Essbereich mit Küche, drei Zimmer, zwei Bäder und Reduit. Gedeckte Terrasse von 40 m².\n\nLift, zwei Einstellplätze. Bahnhof Goldbach in fünf Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3650000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 152,
+   "address": {
+    "street": "Goldbacherstrasse 27",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.328,
+    "lng": 8.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7167073.jpg",
+     "alt": "Terrassenwohnung in Küsnacht"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7167071.jpg",
+     "alt": "Terrassenwohnung in Küsnacht, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7167067.jpg",
+     "alt": "Terrassenwohnung in Küsnacht, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7167068.jpg",
+     "alt": "Terrassenwohnung in Küsnacht, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7167070.jpg",
+     "alt": "Terrassenwohnung in Küsnacht, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7167065.jpg",
+     "alt": "Terrassenwohnung in Küsnacht, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "716bb4eb-2621-486c-ba9b-1ab75c87685c",
+    "first_name": "Andrea",
+    "last_name": "Meili",
+    "phone": "+41 00 000 00 04",
+    "email": "andrea.meili@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872061-sq.jpg",
+     "alt": "Andrea Meili"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "8DJV-KM4F",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "4e81b806-cb73-4871-aa50-c78ee9dde5f5",
+   "slug": "einfamilienhaus-auf-einer-ebene-in-kusnacht-4e81b806-cb73-4871-aa50-c78ee9dde5f5",
+   "title": "Einfamilienhaus auf einer Ebene in Küsnacht",
+   "description": "<p>Ein eingeschossiges Haus von 2019 mit dunkler Holzfassade, hinter einer hohen Hecke, auf einem Grundstück von 640 m².</p><p>Offener Wohn- und Essbereich mit Kochinsel aus Naturstein, Fischgratparkett, drei Schlafzimmer und zwei Bäder. Grosse Schiebefenster zum Rasen und zur gedeckten Terrasse.</p><p>Carport für zwei Autos, Wärmepumpe. Primarschule, Dorfladen und Bahnhof in wenigen Minuten zu Fuss.</p>",
+   "description_text": "Ein eingeschossiges Haus von 2019 mit dunkler Holzfassade, hinter einer hohen Hecke, auf einem Grundstück von 640 m².\n\nOffener Wohn- und Essbereich mit Kochinsel aus Naturstein, Fischgratparkett, drei Schlafzimmer und zwei Bäder. Grosse Schiebefenster zum Rasen und zur gedeckten Terrasse.\n\nCarport für zwei Autos, Wärmepumpe. Primarschule, Dorfladen und Bahnhof in wenigen Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 4250000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 172,
+   "land_surface": 640,
+   "address": {
+    "street": "Wiltisgasse 9",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.316,
+    "lng": 8.581
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587880.jpg",
+     "alt": "Einfamilienhaus auf einer Ebene in Küsnacht"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587882.jpg",
+     "alt": "Einfamilienhaus auf einer Ebene in Küsnacht, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587881.jpg",
+     "alt": "Einfamilienhaus auf einer Ebene in Küsnacht, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587871.jpg",
+     "alt": "Einfamilienhaus auf einer Ebene in Küsnacht, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587872.jpg",
+     "alt": "Einfamilienhaus auf einer Ebene in Küsnacht, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587873.jpg",
+     "alt": "Einfamilienhaus auf einer Ebene in Küsnacht, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "3770098f-e16b-497c-b6b4-b844b9eca44d",
+    "first_name": "Nadine",
+    "last_name": "Steiner",
+    "phone": "+41 00 000 00 06",
+    "email": "nadine.steiner@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872054-sq.jpg",
+     "alt": "Nadine Steiner"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "XZQ6-Y6CZ",
+   "team_ids": [
+    "fd36eb04-6c16-4c9b-8561-cd4e1404edab"
+   ]
+  },
+  {
+   "id": "67dcf192-4c28-4b7e-b9b3-3dd56045b35f",
+   "slug": "4-5-zimmer-wohnung-im-gundeli-67dcf192-4c28-4b7e-b9b3-3dd56045b35f",
+   "title": "4,5-Zimmer-Wohnung im Gundeli",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung im zweiten Obergeschoss eines Hauses von 1905, 2022 vollständig renoviert, zwischen Tellplatz und Bahnhof SBB.</p><p>Offener Wohn- und Essbereich mit Küche und Bar, Balkon zum Hof, drei Zimmer, Bad mit Badewanne. Neue Parkettböden in allen Räumen.</p><p>Kein Lift. Kellerabteil und Estrich. Bahnhof SBB in acht Minuten zu Fuss.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung im zweiten Obergeschoss eines Hauses von 1905, 2022 vollständig renoviert, zwischen Tellplatz und Bahnhof SBB.\n\nOffener Wohn- und Essbereich mit Küche und Bar, Balkon zum Hof, drei Zimmer, Bad mit Badewanne. Neue Parkettböden in allen Räumen.\n\nKein Lift. Kellerabteil und Estrich. Bahnhof SBB in acht Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1150000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 108,
+   "address": {
+    "street": "Gundeldingerstrasse 92",
+    "postcode": "4053",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.538,
+    "lng": 7.6
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29716617.jpg",
+     "alt": "4,5-Zimmer-Wohnung im Gundeli"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29716619.jpg",
+     "alt": "4,5-Zimmer-Wohnung im Gundeli, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29716620.jpg",
+     "alt": "4,5-Zimmer-Wohnung im Gundeli, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29716616.jpg",
+     "alt": "4,5-Zimmer-Wohnung im Gundeli, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29716618.jpg",
+     "alt": "4,5-Zimmer-Wohnung im Gundeli, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29716615.jpg",
+     "alt": "4,5-Zimmer-Wohnung im Gundeli, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "PJBS-RBEH",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "516e201e-7844-461d-bfec-380b0bd16e50",
+   "slug": "neubauwohnung-an-der-guterstrasse-516e201e-7844-461d-bfec-380b0bd16e50",
+   "title": "Neubauwohnung an der Güterstrasse",
+   "description": "<p>Eine 3,5-Zimmer-Wohnung im vierten Obergeschoss eines Neubaus von 2019.</p><p>Offene Küche zum Wohnbereich, Loggia nach Südwesten, zwei Zimmer, Bad und Duschbad. Bodenheizung, Fernwärme, Waschturm in der Wohnung.</p><p>Lift, Einstellplatz gegen Aufpreis. Tram 15 und 16 vor dem Haus.</p>",
+   "description_text": "Eine 3,5-Zimmer-Wohnung im vierten Obergeschoss eines Neubaus von 2019.\n\nOffene Küche zum Wohnbereich, Loggia nach Südwesten, zwei Zimmer, Bad und Duschbad. Bodenheizung, Fernwärme, Waschturm in der Wohnung.\n\nLift, Einstellplatz gegen Aufpreis. Tram 15 und 16 vor dem Haus.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 925000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 89,
+   "address": {
+    "street": "Güterstrasse 210",
+    "postcode": "4053",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.543,
+    "lng": 7.595
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587779.jpg",
+     "alt": "Neubauwohnung an der Güterstrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587781.jpg",
+     "alt": "Neubauwohnung an der Güterstrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587778.jpg",
+     "alt": "Neubauwohnung an der Güterstrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587782.jpg",
+     "alt": "Neubauwohnung an der Güterstrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587780.jpg",
+     "alt": "Neubauwohnung an der Güterstrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587774.jpg",
+     "alt": "Neubauwohnung an der Güterstrasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "PUS4-28NK",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "dbc19003-e71a-4984-a57a-753baf1e5873",
+   "slug": "3-zimmer-wohnung-an-der-dornacherstrasse-dbc19003-e71a-4984-a57a-753baf1e5873",
+   "title": "3-Zimmer-Wohnung an der Dornacherstrasse",
+   "description": "<p>Eine 3-Zimmer-Wohnung im ersten Obergeschoss, renoviert 2021.</p><p>Wohnzimmer mit Balkon zum Hof, Küche mit Geschirrspüler, zwei Zimmer, Bad. Parkett in allen Räumen.</p><p>Bezug ab 1. Februar 2027. Kellerabteil, gemeinsame Waschküche.</p>",
+   "description_text": "Eine 3-Zimmer-Wohnung im ersten Obergeschoss, renoviert 2021.\n\nWohnzimmer mit Balkon zum Hof, Küche mit Geschirrspüler, zwei Zimmer, Bad. Parkett in allen Räumen.\n\nBezug ab 1. Februar 2027. Kellerabteil, gemeinsame Waschküche.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1980,
+   "currency": "CHF",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 72,
+   "address": {
+    "street": "Dornacherstrasse 141",
+    "postcode": "4053",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.543,
+    "lng": 7.591
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512031.jpg",
+     "alt": "3-Zimmer-Wohnung an der Dornacherstrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512034.jpg",
+     "alt": "3-Zimmer-Wohnung an der Dornacherstrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512035.jpg",
+     "alt": "3-Zimmer-Wohnung an der Dornacherstrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512037.jpg",
+     "alt": "3-Zimmer-Wohnung an der Dornacherstrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512030.jpg",
+     "alt": "3-Zimmer-Wohnung an der Dornacherstrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512033.jpg",
+     "alt": "3-Zimmer-Wohnung an der Dornacherstrasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "3J72-QJ8X",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "af39a205-a6c7-497b-9387-7b8e61845d11",
+   "slug": "2-5-zimmer-wohnung-im-gundeli-af39a205-a6c7-497b-9387-7b8e61845d11",
+   "title": "2,5-Zimmer-Wohnung im Gundeli",
+   "description": "<p>Eine 2,5-Zimmer-Wohnung im dritten Obergeschoss an der Thiersteinerallee.</p><p>Wohnzimmer mit Balkon, Küche, Schlafzimmer, Bad. Renoviert 2018.</p>",
+   "description_text": "Eine 2,5-Zimmer-Wohnung im dritten Obergeschoss an der Thiersteinerallee.\n\nWohnzimmer mit Balkon, Küche, Schlafzimmer, Bad. Renoviert 2018.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 640000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 58,
+   "address": {
+    "street": "Thiersteinerallee 38",
+    "postcode": "4053",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.542,
+    "lng": 7.598
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20348119.jpg",
+     "alt": "2,5-Zimmer-Wohnung im Gundeli"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20348124.jpg",
+     "alt": "2,5-Zimmer-Wohnung im Gundeli, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20348125.jpg",
+     "alt": "2,5-Zimmer-Wohnung im Gundeli, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20348129.jpg",
+     "alt": "2,5-Zimmer-Wohnung im Gundeli, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20348120.jpg",
+     "alt": "2,5-Zimmer-Wohnung im Gundeli, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "LP36-CXRN",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "6672db59-767e-4164-a8d1-610bf0e3e61a",
+   "slug": "altbauwohnung-in-der-st-alban-vorstadt-6672db59-767e-4164-a8d1-610bf0e3e61a",
+   "title": "Altbauwohnung in der St. Alban-Vorstadt",
+   "description": "<p>Eine 5,5-Zimmer-Wohnung im zweiten Obergeschoss eines Altstadthauses von 1840, zwischen Kunstmuseum und St. Alban-Tal.</p><p>Eingangshalle mit Marmorboden, Salon und Esszimmer mit Wandtäfer und Stuck, Küche von 2020, vier Zimmer, zwei Bäder. Die Wohnung wurde 2020 umfassend renoviert.</p><p>Kein Lift. Kellerabteil im Gewölbekeller. Rhein und Wettsteinbrücke in fünf Minuten zu Fuss.</p>",
+   "description_text": "Eine 5,5-Zimmer-Wohnung im zweiten Obergeschoss eines Altstadthauses von 1840, zwischen Kunstmuseum und St. Alban-Tal.\n\nEingangshalle mit Marmorboden, Salon und Esszimmer mit Wandtäfer und Stuck, Küche von 2020, vier Zimmer, zwei Bäder. Die Wohnung wurde 2020 umfassend renoviert.\n\nKein Lift. Kellerabteil im Gewölbekeller. Rhein und Wettsteinbrücke in fünf Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2250000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 165,
+   "address": {
+    "street": "St. Alban-Vorstadt 54",
+    "postcode": "4052",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.553,
+    "lng": 7.603
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587820.jpg",
+     "alt": "Altbauwohnung in der St. Alban-Vorstadt"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587823.jpg",
+     "alt": "Altbauwohnung in der St. Alban-Vorstadt, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587826.jpg",
+     "alt": "Altbauwohnung in der St. Alban-Vorstadt, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587827.jpg",
+     "alt": "Altbauwohnung in der St. Alban-Vorstadt, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587828.jpg",
+     "alt": "Altbauwohnung in der St. Alban-Vorstadt, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "c8d7bbfc-6d89-428e-83d5-453408b8d391",
+    "first_name": "Claude",
+    "last_name": "Rossier",
+    "phone": "+41 00 000 00 09",
+    "email": "claude.rossier@halderhof.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124401-sq.jpg",
+     "alt": "Claude Rossier"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "TC9R-ZXA2",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "849112f3-c037-46cf-89d6-6ef30f6d20ed",
+   "slug": "stadthaus-im-st-alban-849112f3-c037-46cf-89d6-6ef30f6d20ed",
+   "title": "Stadthaus im St. Alban",
+   "description": "<p>Ein schmales Stadthaus von 1870 in der Malzgasse, über vier Geschosse, mit kleinem Garten hinter dem Haus.</p><p>Im Erdgeschoss Wohnzimmer mit Bücherwand und Esszimmer mit gekacheltem Cheminée, Küche zum Garten. Darüber vier Zimmer und drei Bäder. Sanierung 2016 mit neuer Haustechnik.</p><p>Gewölbekeller. Aeschenplatz und Kunstmuseum in wenigen Minuten zu Fuss.</p>",
+   "description_text": "Ein schmales Stadthaus von 1870 in der Malzgasse, über vier Geschosse, mit kleinem Garten hinter dem Haus.\n\nIm Erdgeschoss Wohnzimmer mit Bücherwand und Esszimmer mit gekacheltem Cheminée, Küche zum Garten. Darüber vier Zimmer und drei Bäder. Sanierung 2016 mit neuer Haustechnik.\n\nGewölbekeller. Aeschenplatz und Kunstmuseum in wenigen Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 3400000,
+   "currency": "CHF",
+   "rooms": 7,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 210,
+   "land_surface": 180,
+   "address": {
+    "street": "Malzgasse 12",
+    "postcode": "4052",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.554,
+    "lng": 7.598
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5998033.jpg",
+     "alt": "Stadthaus im St. Alban"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5998034.jpg",
+     "alt": "Stadthaus im St. Alban, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5998035.jpg",
+     "alt": "Stadthaus im St. Alban, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "c8d7bbfc-6d89-428e-83d5-453408b8d391",
+    "first_name": "Claude",
+    "last_name": "Rossier",
+    "phone": "+41 00 000 00 09",
+    "email": "claude.rossier@halderhof.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124401-sq.jpg",
+     "alt": "Claude Rossier"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "CULZ-W74A",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "180ace91-9087-48ce-97f3-9bb2e3d9990f",
+   "slug": "wohnung-am-st-alban-rheinweg-180ace91-9087-48ce-97f3-9bb2e3d9990f",
+   "title": "Wohnung am St. Alban-Rheinweg",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung im dritten Obergeschoss direkt am Rhein, mit Blick aufs Kleinbasler Ufer.</p><p>Wohn- und Esszimmer mit Balkon zum Rhein, Küche von 2022, drei Zimmer, zwei Bäder.</p><p>Lift, Kellerabteil. Rheinschwimmen vor der Haustür, St. Alban-Fähre in fünf Minuten.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung im dritten Obergeschoss direkt am Rhein, mit Blick aufs Kleinbasler Ufer.\n\nWohn- und Esszimmer mit Balkon zum Rhein, Küche von 2022, drei Zimmer, zwei Bäder.\n\nLift, Kellerabteil. Rheinschwimmen vor der Haustür, St. Alban-Fähre in fünf Minuten.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2150000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "St. Alban-Rheinweg 88",
+    "postcode": "4052",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.555,
+    "lng": 7.607
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546557.jpg",
+     "alt": "Wohnung am St. Alban-Rheinweg"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546550.jpg",
+     "alt": "Wohnung am St. Alban-Rheinweg, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546548.jpg",
+     "alt": "Wohnung am St. Alban-Rheinweg, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546562.jpg",
+     "alt": "Wohnung am St. Alban-Rheinweg, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546559.jpg",
+     "alt": "Wohnung am St. Alban-Rheinweg, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546552.jpg",
+     "alt": "Wohnung am St. Alban-Rheinweg, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-08T09:00:00.000Z",
+   "reference": "D4XF-2UD9",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "4d4935df-0c0b-4711-a9ef-34a7bc667f09",
+   "slug": "penthouse-im-gellert-4d4935df-0c0b-4711-a9ef-34a7bc667f09",
+   "title": "Penthouse im Gellert",
+   "description": "<p>Das Penthouse eines Mehrfamilienhauses von 2017 im Gellert, über den Baumkronen des Quartiers.</p><p>Wohnraum mit offener Küche, drei Zimmer, zwei Bäder und Reduit. Terrasse von 55 m² nach Süden und Westen.</p><p>Lift direkt in die Wohnung, zwei Einstellplätze. Gellertpark und Tram 3 in der Nähe.</p>",
+   "description_text": "Das Penthouse eines Mehrfamilienhauses von 2017 im Gellert, über den Baumkronen des Quartiers.\n\nWohnraum mit offener Küche, drei Zimmer, zwei Bäder und Reduit. Terrasse von 55 m² nach Süden und Westen.\n\nLift direkt in die Wohnung, zwei Einstellplätze. Gellertpark und Tram 3 in der Nähe.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 2890000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 160,
+   "address": {
+    "street": "Gellertstrasse 75",
+    "postcode": "4052",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.549,
+    "lng": 7.618
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005295.jpg",
+     "alt": "Penthouse im Gellert"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005296.jpg",
+     "alt": "Penthouse im Gellert, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005300.jpg",
+     "alt": "Penthouse im Gellert, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005297.jpg",
+     "alt": "Penthouse im Gellert, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005293.jpg",
+     "alt": "Penthouse im Gellert, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7005292.jpg",
+     "alt": "Penthouse im Gellert, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-04T09:00:00.000Z",
+   "reference": "RWHK-Z2S5",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "406de5d1-5445-4428-b625-ca119ed0351f",
+   "slug": "moderne-villa-in-riehen-406de5d1-5445-4428-b625-ca119ed0351f",
+   "title": "Moderne Villa in Riehen",
+   "description": "<p>Eine Villa von 2016 in Klinker und dunklem Metall, am Waldrand unter dem Ausserberg, auf einem Grundstück von 1350 m² mit Föhren.</p><p>Wohnhalle mit Sichtbalken und Galerie, offene Küche, fünf Schlafzimmer, drei Bäder und eine Sauna. Holzdeck mit Pool im Garten.</p><p>Garage, Gartenhaus. Fondation Beyeler und Tram 6 in zehn Minuten zu Fuss.</p>",
+   "description_text": "Eine Villa von 2016 in Klinker und dunklem Metall, am Waldrand unter dem Ausserberg, auf einem Grundstück von 1350 m² mit Föhren.\n\nWohnhalle mit Sichtbalken und Galerie, offene Küche, fünf Schlafzimmer, drei Bäder und eine Sauna. Holzdeck mit Pool im Garten.\n\nGarage, Gartenhaus. Fondation Beyeler und Tram 6 in zehn Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 4350000,
+   "currency": "CHF",
+   "rooms": 7.5,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 280,
+   "land_surface": 1350,
+   "address": {
+    "street": "Bettingerstrasse 64",
+    "postcode": "4125",
+    "city": "Riehen",
+    "country": "Switzerland",
+    "lat": 47.572,
+    "lng": 7.657
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598376.jpg",
+     "alt": "Moderne Villa in Riehen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598368.jpg",
+     "alt": "Moderne Villa in Riehen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598374.jpg",
+     "alt": "Moderne Villa in Riehen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598367.jpg",
+     "alt": "Moderne Villa in Riehen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598372.jpg",
+     "alt": "Moderne Villa in Riehen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598365.jpg",
+     "alt": "Moderne Villa in Riehen, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "c8d7bbfc-6d89-428e-83d5-453408b8d391",
+    "first_name": "Claude",
+    "last_name": "Rossier",
+    "phone": "+41 00 000 00 09",
+    "email": "claude.rossier@halderhof.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124401-sq.jpg",
+     "alt": "Claude Rossier"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-31T09:00:00.000Z",
+   "reference": "JTB5-7FMP",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "176f1779-9b4a-4e14-bff1-3031371fcf89",
+   "slug": "reihenhaus-in-riehen-176f1779-9b4a-4e14-bff1-3031371fcf89",
+   "title": "Reihenhaus in Riehen",
+   "description": "<p>Ein Reihenmittelhaus von 1985 im Quartier Niederholz, mit Garten nach Süden.</p><p>Wohn- und Esszimmer mit Gartenausgang, Küche, vier Zimmer, Bad und Duschbad. Hobbyraum im Untergeschoss.</p><p>Einstellplatz in der Siedlungsgarage. S-Bahn Niederholz und Schulen in der Nähe.</p>",
+   "description_text": "Ein Reihenmittelhaus von 1985 im Quartier Niederholz, mit Garten nach Süden.\n\nWohn- und Esszimmer mit Gartenausgang, Küche, vier Zimmer, Bad und Duschbad. Hobbyraum im Untergeschoss.\n\nEinstellplatz in der Siedlungsgarage. S-Bahn Niederholz und Schulen in der Nähe.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 1580000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 145,
+   "land_surface": 190,
+   "address": {
+    "street": "Rauracherstrasse 17",
+    "postcode": "4125",
+    "city": "Riehen",
+    "country": "Switzerland",
+    "lat": 47.572,
+    "lng": 7.631
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195740.jpg",
+     "alt": "Reihenhaus in Riehen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195741.jpg",
+     "alt": "Reihenhaus in Riehen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195739.jpg",
+     "alt": "Reihenhaus in Riehen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195737.jpg",
+     "alt": "Reihenhaus in Riehen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195731.jpg",
+     "alt": "Reihenhaus in Riehen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195742.jpg",
+     "alt": "Reihenhaus in Riehen, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-27T09:00:00.000Z",
+   "reference": "DWRM-AHU7",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "1642386a-856d-4b30-b814-6cb4f617a3f1",
+   "slug": "einfamilienhaus-in-riehen-1642386a-856d-4b30-b814-6cb4f617a3f1",
+   "title": "Einfamilienhaus in Riehen",
+   "description": "<p>Ein freistehendes Einfamilienhaus von 2015, auf einem Grundstück von 620 m².</p><p>Offene Küche mit Kochinsel, Wohn- und Esszimmer mit Ausgang zum Sitzplatz, vier Schlafzimmer, zwei Bäder, eines mit freistehender Wanne. Wärmepumpe und Bodenheizung.</p><p>Garage. Primarschule und Wiese-Ufer in der Nähe, Tram 6 in acht Minuten zu Fuss.</p>",
+   "description_text": "Ein freistehendes Einfamilienhaus von 2015, auf einem Grundstück von 620 m².\n\nOffene Küche mit Kochinsel, Wohn- und Esszimmer mit Ausgang zum Sitzplatz, vier Schlafzimmer, zwei Bäder, eines mit freistehender Wanne. Wärmepumpe und Bodenheizung.\n\nGarage. Primarschule und Wiese-Ufer in der Nähe, Tram 6 in acht Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 2350000,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 185,
+   "land_surface": 620,
+   "address": {
+    "street": "Grenzacherweg 35",
+    "postcode": "4125",
+    "city": "Riehen",
+    "country": "Switzerland",
+    "lat": 47.578,
+    "lng": 7.648
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031582.jpg",
+     "alt": "Einfamilienhaus in Riehen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031589.jpg",
+     "alt": "Einfamilienhaus in Riehen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031577.jpg",
+     "alt": "Einfamilienhaus in Riehen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031574.jpg",
+     "alt": "Einfamilienhaus in Riehen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031576.jpg",
+     "alt": "Einfamilienhaus in Riehen, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-23T09:00:00.000Z",
+   "reference": "2GPW-XJPY",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "98433b51-232b-40c9-b7f7-9e383ade1b5b",
+   "slug": "altbauwohnung-im-kirchenfeld-98433b51-232b-40c9-b7f7-9e383ade1b5b",
+   "title": "Altbauwohnung im Kirchenfeld",
+   "description": "<p>Eine 5,5-Zimmer-Wohnung im ersten Obergeschoss eines Hauses von 1908, im Kirchenfeld zwischen Helvetiaplatz und Thunplatz.</p><p>Salon und Esszimmer mit Flügeltüren, Parkett und Stuck, Küche von 2019, vier Zimmer, zwei Bäder. Balkon zum Garten.</p><p>Kein Lift. Kellerabteil und Estrich. Altstadt über die Kirchenfeldbrücke in zehn Minuten.</p>",
+   "description_text": "Eine 5,5-Zimmer-Wohnung im ersten Obergeschoss eines Hauses von 1908, im Kirchenfeld zwischen Helvetiaplatz und Thunplatz.\n\nSalon und Esszimmer mit Flügeltüren, Parkett und Stuck, Küche von 2019, vier Zimmer, zwei Bäder. Balkon zum Garten.\n\nKein Lift. Kellerabteil und Estrich. Altstadt über die Kirchenfeldbrücke in zehn Minuten.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1850000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 150,
+   "address": {
+    "street": "Marienstrasse 21",
+    "postcode": "3005",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.944,
+    "lng": 7.453
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598129.jpg",
+     "alt": "Altbauwohnung im Kirchenfeld"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598127.jpg",
+     "alt": "Altbauwohnung im Kirchenfeld, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598126.jpg",
+     "alt": "Altbauwohnung im Kirchenfeld, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598132.jpg",
+     "alt": "Altbauwohnung im Kirchenfeld, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598138.jpg",
+     "alt": "Altbauwohnung im Kirchenfeld, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598140.jpg",
+     "alt": "Altbauwohnung im Kirchenfeld, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "e6d9d809-849c-4df4-ba8f-8289384809b3",
+    "first_name": "Thomas",
+    "last_name": "Wyss",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.wyss@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8123906-sq.jpg",
+     "alt": "Thomas Wyss"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-19T09:00:00.000Z",
+   "reference": "BD5G-VD49",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "8cfe162b-0349-4f83-9937-cb3f5dc6c50c",
+   "slug": "villa-im-kirchenfeld-8cfe162b-0349-4f83-9937-cb3f5dc6c50c",
+   "title": "Villa im Kirchenfeld",
+   "description": "<p>Eine Villa von 1911 im Kirchenfeld, auf einem Grundstück von 900 m² mit Garten nach Süden.</p><p>Salon, Esszimmer und ein verglaster Wintergarten im Erdgeschoss, Küche mit Zugang zur Terrasse, fünf Schlafzimmer und drei Bäder in den Obergeschossen. Sanierung von Dach und Haustechnik 2018.</p><p>Garage und zwei Aussenplätze. Gymnasium Kirchenfeld, Dählhölzli und Aare in der Nähe.</p>",
+   "description_text": "Eine Villa von 1911 im Kirchenfeld, auf einem Grundstück von 900 m² mit Garten nach Süden.\n\nSalon, Esszimmer und ein verglaster Wintergarten im Erdgeschoss, Küche mit Zugang zur Terrasse, fünf Schlafzimmer und drei Bäder in den Obergeschossen. Sanierung von Dach und Haustechnik 2018.\n\nGarage und zwei Aussenplätze. Gymnasium Kirchenfeld, Dählhölzli und Aare in der Nähe.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 4600000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 300,
+   "land_surface": 900,
+   "address": {
+    "street": "Seminarstrasse 30",
+    "postcode": "3006",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.942,
+    "lng": 7.459
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143700.jpg",
+     "alt": "Villa im Kirchenfeld"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143703.jpg",
+     "alt": "Villa im Kirchenfeld, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143705.jpg",
+     "alt": "Villa im Kirchenfeld, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143704.jpg",
+     "alt": "Villa im Kirchenfeld, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143702.jpg",
+     "alt": "Villa im Kirchenfeld, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143701.jpg",
+     "alt": "Villa im Kirchenfeld, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "e6d9d809-849c-4df4-ba8f-8289384809b3",
+    "first_name": "Thomas",
+    "last_name": "Wyss",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.wyss@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8123906-sq.jpg",
+     "alt": "Thomas Wyss"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-15T09:00:00.000Z",
+   "reference": "TF23-7PPA",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "2d858898-4401-4064-a048-f79cfd89c1d3",
+   "slug": "4-5-zimmer-wohnung-an-der-thunstrasse-2d858898-4401-4064-a048-f79cfd89c1d3",
+   "title": "4,5-Zimmer-Wohnung an der Thunstrasse",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung im zweiten Obergeschoss, renoviert 2022.</p><p>Wohnzimmer mit Balkon, Wohnküche, drei Zimmer, Bad und Duschbad, eigene Waschmaschine.</p><p>Bezug ab 1. Januar 2027. Tram 6, 7 und 8 am Thunplatz.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung im zweiten Obergeschoss, renoviert 2022.\n\nWohnzimmer mit Balkon, Wohnküche, drei Zimmer, Bad und Duschbad, eigene Waschmaschine.\n\nBezug ab 1. Januar 2027. Tram 6, 7 und 8 am Thunplatz.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3350,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 112,
+   "address": {
+    "street": "Thunstrasse 52",
+    "postcode": "3005",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.94,
+    "lng": 7.458
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587311.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Thunstrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587304.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Thunstrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587310.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Thunstrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587313.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Thunstrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587306.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Thunstrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587302.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Thunstrasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "77b27521-df4e-40b9-94d9-7b308497e8ad",
+    "first_name": "Leo",
+    "last_name": "Zbinden",
+    "phone": "+41 00 000 00 11",
+    "email": "leo.zbinden@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124200-sq.jpg",
+     "alt": "Leo Zbinden"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-11T09:00:00.000Z",
+   "reference": "RY8U-H3UB",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "f60ad293-d278-4c62-8062-741fa0508eb4",
+   "slug": "3-5-zimmer-wohnung-in-der-langgasse-f60ad293-d278-4c62-8062-741fa0508eb4",
+   "title": "3,5-Zimmer-Wohnung in der Länggasse",
+   "description": "<p>Eine 3,5-Zimmer-Wohnung im zweiten Obergeschoss, nahe Universität und Bremgartenwald.</p><p>Wohnzimmer mit Balkon, Küche mit Essplatz, zwei Zimmer, Bad. Parkett, Küche und Bad von 2020.</p><p>Kein Lift. Kellerabteil. Bus 12 vor dem Haus, Bahnhof Bern in zehn Minuten.</p>",
+   "description_text": "Eine 3,5-Zimmer-Wohnung im zweiten Obergeschoss, nahe Universität und Bremgartenwald.\n\nWohnzimmer mit Balkon, Küche mit Essplatz, zwei Zimmer, Bad. Parkett, Küche und Bad von 2020.\n\nKein Lift. Kellerabteil. Bus 12 vor dem Haus, Bahnhof Bern in zehn Minuten.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1090000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 88,
+   "address": {
+    "street": "Länggassstrasse 44",
+    "postcode": "3012",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.954,
+    "lng": 7.431
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089166.jpg",
+     "alt": "3,5-Zimmer-Wohnung in der Länggasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089170.jpg",
+     "alt": "3,5-Zimmer-Wohnung in der Länggasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089172.jpg",
+     "alt": "3,5-Zimmer-Wohnung in der Länggasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089163.jpg",
+     "alt": "3,5-Zimmer-Wohnung in der Länggasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089168.jpg",
+     "alt": "3,5-Zimmer-Wohnung in der Länggasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089171.jpg",
+     "alt": "3,5-Zimmer-Wohnung in der Länggasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "77b27521-df4e-40b9-94d9-7b308497e8ad",
+    "first_name": "Leo",
+    "last_name": "Zbinden",
+    "phone": "+41 00 000 00 11",
+    "email": "leo.zbinden@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124200-sq.jpg",
+     "alt": "Leo Zbinden"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-07T09:00:00.000Z",
+   "reference": "GHSZ-SU5L",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "24bb26fc-7b59-45b1-9f60-136c7edf22ed",
+   "slug": "dachwohnung-in-der-langgasse-24bb26fc-7b59-45b1-9f60-136c7edf22ed",
+   "title": "Dachwohnung in der Länggasse",
+   "description": "<p>Eine 4-Zimmer-Dachwohnung im vierten Obergeschoss, ausgebaut 2017.</p><p>Wohnraum mit Sichtbalken und offener Küche, drei Zimmer, Bad. Dachterrasse von 10 m² mit Blick auf das Münster.</p><p>Kein Lift. Kellerabteil.</p>",
+   "description_text": "Eine 4-Zimmer-Dachwohnung im vierten Obergeschoss, ausgebaut 2017.\n\nWohnraum mit Sichtbalken und offener Küche, drei Zimmer, Bad. Dachterrasse von 10 m² mit Blick auf das Münster.\n\nKein Lift. Kellerabteil.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 1280000,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 98,
+   "address": {
+    "street": "Zähringerstrasse 15",
+    "postcode": "3012",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.954,
+    "lng": 7.437
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799747.jpg",
+     "alt": "Dachwohnung in der Länggasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799753.jpg",
+     "alt": "Dachwohnung in der Länggasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799744.jpg",
+     "alt": "Dachwohnung in der Länggasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799739.jpg",
+     "alt": "Dachwohnung in der Länggasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799737.jpg",
+     "alt": "Dachwohnung in der Länggasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799733.jpg",
+     "alt": "Dachwohnung in der Länggasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "51520788-af4c-4f20-8e3a-7bdaadf5faa3",
+    "first_name": "Rafael",
+    "last_name": "Gerber",
+    "phone": "+41 00 000 00 12",
+    "email": "rafael.gerber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124420-sq.jpg",
+     "alt": "Rafael Gerber"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-03T09:00:00.000Z",
+   "reference": "4RGN-MG2H",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "74a6f9d7-504b-4ea1-9cc7-42b1b10e0321",
+   "slug": "2-5-zimmer-wohnung-an-der-mittelstrasse-74a6f9d7-504b-4ea1-9cc7-42b1b10e0321",
+   "title": "2,5-Zimmer-Wohnung an der Mittelstrasse",
+   "description": "<p>Eine 2,5-Zimmer-Wohnung im ersten Obergeschoss, renoviert 2021.</p><p>Wohnzimmer, separate Küche, Schlafzimmer, Bad mit Dusche. Parkett.</p><p>Bezug ab 1. Dezember 2026. Kellerabteil, gemeinsame Waschküche.</p>",
+   "description_text": "Eine 2,5-Zimmer-Wohnung im ersten Obergeschoss, renoviert 2021.\n\nWohnzimmer, separate Küche, Schlafzimmer, Bad mit Dusche. Parkett.\n\nBezug ab 1. Dezember 2026. Kellerabteil, gemeinsame Waschküche.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1780,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 61,
+   "address": {
+    "street": "Mittelstrasse 27",
+    "postcode": "3012",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.956,
+    "lng": 7.437
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054915.jpg",
+     "alt": "2,5-Zimmer-Wohnung an der Mittelstrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054916.jpg",
+     "alt": "2,5-Zimmer-Wohnung an der Mittelstrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054920.jpg",
+     "alt": "2,5-Zimmer-Wohnung an der Mittelstrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054913.jpg",
+     "alt": "2,5-Zimmer-Wohnung an der Mittelstrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054911.jpg",
+     "alt": "2,5-Zimmer-Wohnung an der Mittelstrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33054918.jpg",
+     "alt": "2,5-Zimmer-Wohnung an der Mittelstrasse, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "51520788-af4c-4f20-8e3a-7bdaadf5faa3",
+    "first_name": "Rafael",
+    "last_name": "Gerber",
+    "phone": "+41 00 000 00 12",
+    "email": "rafael.gerber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124420-sq.jpg",
+     "alt": "Rafael Gerber"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-06-29T09:00:00.000Z",
+   "reference": "8QN7-E2QP",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "e185ccbb-36a7-40ea-a8d3-23026fd85694",
+   "slug": "4-5-zimmer-wohnung-an-der-gesellschaftsstrasse-e185ccbb-36a7-40ea-a8d3-23026fd85694",
+   "title": "4,5-Zimmer-Wohnung an der Gesellschaftsstrasse",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung im dritten Obergeschoss in der Länggasse.</p><p>Wohnzimmer mit Balkon, Küche, drei Zimmer, Bad. Parkett.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung im dritten Obergeschoss in der Länggasse.\n\nWohnzimmer mit Balkon, Küche, drei Zimmer, Bad. Parkett.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1240000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 102,
+   "address": {
+    "street": "Gesellschaftsstrasse 22",
+    "postcode": "3012",
+    "city": "Bern",
+    "country": "Switzerland",
+    "lat": 46.953,
+    "lng": 7.436
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252362.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Gesellschaftsstrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252364.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Gesellschaftsstrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252369.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Gesellschaftsstrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252368.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Gesellschaftsstrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29252366.jpg",
+     "alt": "4,5-Zimmer-Wohnung an der Gesellschaftsstrasse, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "77b27521-df4e-40b9-94d9-7b308497e8ad",
+    "first_name": "Leo",
+    "last_name": "Zbinden",
+    "phone": "+41 00 000 00 11",
+    "email": "leo.zbinden@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124200-sq.jpg",
+     "alt": "Leo Zbinden"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-25T09:00:00.000Z",
+   "reference": "WHJP-VUQK",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "40f92a0d-47d4-461b-ad83-3b2eb2e7725a",
+   "slug": "einfamilienhaus-in-muri-40f92a0d-47d4-461b-ad83-3b2eb2e7725a",
+   "title": "Einfamilienhaus in Muri",
+   "description": "<p>Ein freistehendes Einfamilienhaus von 2020, mit Holz und hellem Putz, auf einem Grundstück von 750 m² mit grosser Rasenfläche.</p><p>Wohn- und Essbereich mit Fensterfront zum Garten, Küche mit Essplatz, vier Schlafzimmer, drei Bäder. Wärmepumpe und Photovoltaik. Die Räume sind leer und sofort bezugsbereit.</p><p>Doppelgarage. Tram 6 nach Bern in fünf Minuten zu Fuss, Schulen in Muri.</p>",
+   "description_text": "Ein freistehendes Einfamilienhaus von 2020, mit Holz und hellem Putz, auf einem Grundstück von 750 m² mit grosser Rasenfläche.\n\nWohn- und Essbereich mit Fensterfront zum Garten, Küche mit Essplatz, vier Schlafzimmer, drei Bäder. Wärmepumpe und Photovoltaik. Die Räume sind leer und sofort bezugsbereit.\n\nDoppelgarage. Tram 6 nach Bern in fünf Minuten zu Fuss, Schulen in Muri.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 2650000,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 200,
+   "land_surface": 750,
+   "address": {
+    "street": "Thunstrasse 84",
+    "postcode": "3074",
+    "city": "Muri bei Bern",
+    "country": "Switzerland",
+    "lat": 46.931,
+    "lng": 7.487
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031600.jpg",
+     "alt": "Einfamilienhaus in Muri"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031602.jpg",
+     "alt": "Einfamilienhaus in Muri, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031606.jpg",
+     "alt": "Einfamilienhaus in Muri, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031608.jpg",
+     "alt": "Einfamilienhaus in Muri, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031599.jpg",
+     "alt": "Einfamilienhaus in Muri, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031603.jpg",
+     "alt": "Einfamilienhaus in Muri, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "e6d9d809-849c-4df4-ba8f-8289384809b3",
+    "first_name": "Thomas",
+    "last_name": "Wyss",
+    "phone": "+41 00 000 00 10",
+    "email": "thomas.wyss@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8123906-sq.jpg",
+     "alt": "Thomas Wyss"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-21T09:00:00.000Z",
+   "reference": "BZ2B-XRCL",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "f9c504aa-c77e-4c7e-bd65-d72bce947de7",
+   "slug": "reihenhaus-in-muri-f9c504aa-c77e-4c7e-bd65-d72bce947de7",
+   "title": "Reihenhaus in Muri",
+   "description": "<p>Ein Reiheneckhaus von 1990 mit Garten auf zwei Seiten.</p><p>Wohnzimmer mit offenem Cheminée und Gartenausgang, Küche, vier Zimmer, Bad und Duschbad. Ausgebautes Dachgeschoss.</p><p>Einstellplatz in der Siedlungsgarage. Bahnhof Gümligen in zehn Minuten zu Fuss.</p>",
+   "description_text": "Ein Reiheneckhaus von 1990 mit Garten auf zwei Seiten.\n\nWohnzimmer mit offenem Cheminée und Gartenausgang, Küche, vier Zimmer, Bad und Duschbad. Ausgebautes Dachgeschoss.\n\nEinstellplatz in der Siedlungsgarage. Bahnhof Gümligen in zehn Minuten zu Fuss.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 1690000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 150,
+   "land_surface": 200,
+   "address": {
+    "street": "Worbstrasse 31",
+    "postcode": "3074",
+    "city": "Muri bei Bern",
+    "country": "Switzerland",
+    "lat": 46.936,
+    "lng": 7.491
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799720.jpg",
+     "alt": "Reihenhaus in Muri"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799723.jpg",
+     "alt": "Reihenhaus in Muri, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799719.jpg",
+     "alt": "Reihenhaus in Muri, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29799722.jpg",
+     "alt": "Reihenhaus in Muri, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "51520788-af4c-4f20-8e3a-7bdaadf5faa3",
+    "first_name": "Rafael",
+    "last_name": "Gerber",
+    "phone": "+41 00 000 00 12",
+    "email": "rafael.gerber@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "13485894-ff9c-4158-8f14-152dba2db3c1"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124420-sq.jpg",
+     "alt": "Rafael Gerber"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-17T09:00:00.000Z",
+   "reference": "6NG9-SV9Z",
+   "team_ids": [
+    "13485894-ff9c-4158-8f14-152dba2db3c1"
+   ]
+  },
+  {
+   "id": "19835a1f-824f-42fd-971b-244f08c91cfd",
+   "slug": "3-5-zimmer-1-og-19835a1f-824f-42fd-971b-244f08c91cfd",
+   "title": "3,5 Zimmer, 1. OG",
+   "description": "<p>Eine 3,5-Zimmer-Wohnung von 86 m² im 1. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 3,5-Zimmer-Wohnung von 86 m² im 1. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1080000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 86,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+     "alt": "3,5 Zimmer, 1. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "3,5 Zimmer, 1. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338444.jpg",
+     "alt": "3,5 Zimmer, 1. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+     "alt": "3,5 Zimmer, 1. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-13T09:00:00.000Z",
+   "reference": "8M6L-FN3X",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "30bba948-edc8-4c22-970b-db22fdc83682",
+   "slug": "2-5-zimmer-2-og-30bba948-edc8-4c22-970b-db22fdc83682",
+   "title": "2,5 Zimmer, 2. OG",
+   "description": "<p>Eine 2,5-Zimmer-Wohnung von 62 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 2,5-Zimmer-Wohnung von 62 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 805000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 62,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+     "alt": "2,5 Zimmer, 2. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+     "alt": "2,5 Zimmer, 2. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+     "alt": "2,5 Zimmer, 2. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+     "alt": "2,5 Zimmer, 2. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-09T09:00:00.000Z",
+   "reference": "2D3S-3P5C",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "3fef25db-7b26-46d8-9577-6283717f6d94",
+   "slug": "4-5-zimmer-2-og-3fef25db-7b26-46d8-9577-6283717f6d94",
+   "title": "4,5 Zimmer, 2. OG",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung von 108 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung von 108 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1380000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 108,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+     "alt": "4,5 Zimmer, 2. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "4,5 Zimmer, 2. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+     "alt": "4,5 Zimmer, 2. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+     "alt": "4,5 Zimmer, 2. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-05T09:00:00.000Z",
+   "reference": "MRWU-6444",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "bc28dba8-b18f-4b7c-84f3-f9379134f50e",
+   "slug": "4-5-zimmer-3-og-bc28dba8-b18f-4b7c-84f3-f9379134f50e",
+   "title": "4,5 Zimmer, 3. OG",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung von 108 m² im 3. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung von 108 m² im 3. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1400000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 108,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+     "alt": "4,5 Zimmer, 3. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "4,5 Zimmer, 3. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+     "alt": "4,5 Zimmer, 3. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+     "alt": "4,5 Zimmer, 3. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-01T09:00:00.000Z",
+   "reference": "GAV6-RYHB",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "b1720f6d-2726-41a7-affb-1e934ce997be",
+   "slug": "2-5-zimmer-4-og-b1720f6d-2726-41a7-affb-1e934ce997be",
+   "title": "2,5 Zimmer, 4. OG",
+   "description": "<p>Eine 2,5-Zimmer-Wohnung von 62 m² im 4. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 2,5-Zimmer-Wohnung von 62 m² im 4. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 825000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 62,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+     "alt": "2,5 Zimmer, 4. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+     "alt": "2,5 Zimmer, 4. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+     "alt": "2,5 Zimmer, 4. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+     "alt": "2,5 Zimmer, 4. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-28T09:00:00.000Z",
+   "reference": "ENBG-U639",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "21f0b0eb-0339-445f-9ab9-ad42260a87d4",
+   "slug": "3-5-zimmer-5-og-21f0b0eb-0339-445f-9ab9-ad42260a87d4",
+   "title": "3,5 Zimmer, 5. OG",
+   "description": "<p>Eine 3,5-Zimmer-Wohnung von 86 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 3,5-Zimmer-Wohnung von 86 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1140000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 86,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+     "alt": "3,5 Zimmer, 5. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "3,5 Zimmer, 5. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338444.jpg",
+     "alt": "3,5 Zimmer, 5. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+     "alt": "3,5 Zimmer, 5. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-24T09:00:00.000Z",
+   "reference": "85F4-RMAN",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "bcbccd2c-05d3-48ee-be3c-216e90d27574",
+   "slug": "4-5-zimmer-5-og-bcbccd2c-05d3-48ee-be3c-216e90d27574",
+   "title": "4,5 Zimmer, 5. OG",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung von 108 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung von 108 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1440000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 108,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+     "alt": "4,5 Zimmer, 5. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "4,5 Zimmer, 5. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+     "alt": "4,5 Zimmer, 5. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+     "alt": "4,5 Zimmer, 5. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-20T09:00:00.000Z",
+   "reference": "JXXB-EBYT",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "ebbd46a4-24b1-4642-8ff0-0595ba760e7f",
+   "slug": "2-5-zimmer-6-og-ebbd46a4-24b1-4642-8ff0-0595ba760e7f",
+   "title": "2,5 Zimmer, 6. OG",
+   "description": "<p>Eine 2,5-Zimmer-Wohnung von 62 m² im 6. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 2,5-Zimmer-Wohnung von 62 m² im 6. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 845000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 62,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+     "alt": "2,5 Zimmer, 6. OG"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+     "alt": "2,5 Zimmer, 6. OG, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+     "alt": "2,5 Zimmer, 6. OG, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+     "alt": "2,5 Zimmer, 6. OG, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "0c8ee911-9ca3-4504-abcf-d5a7fece5e93",
+    "first_name": "Fabian",
+    "last_name": "Kunz",
+    "phone": "+41 00 000 00 08",
+    "email": "fabian.kunz@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-4872065-sq.jpg",
+     "alt": "Fabian Kunz"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-16T09:00:00.000Z",
+   "reference": "URD5-ZL2H",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  },
+  {
+   "id": "8f9e04d4-6857-4726-90cc-f0afde5cdfc8",
+   "slug": "attika-4-5-zimmer-8f9e04d4-6857-4726-90cc-f0afde5cdfc8",
+   "title": "Attika, 4,5 Zimmer",
+   "description": "<p>Eine 4,5-Zimmer-Wohnung von 128 m² im Attikageschoss des Dorenbachhofs. Terrasse von 45 m² auf zwei Seiten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+   "description_text": "Eine 4,5-Zimmer-Wohnung von 128 m² im Attikageschoss des Dorenbachhofs. Terrasse von 45 m² auf zwei Seiten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 1950000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+     "alt": "Attika, 4,5 Zimmer"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+     "alt": "Attika, 4,5 Zimmer, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "Attika, 4,5 Zimmer, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338444.jpg",
+     "alt": "Attika, 4,5 Zimmer, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+    "first_name": "Simone",
+    "last_name": "Vogt",
+    "phone": "+41 00 000 00 07",
+    "email": "simone.vogt@halderhof.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+     "alt": "Simone Vogt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-12T09:00:00.000Z",
+   "reference": "GE66-8UQS",
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ]
+  }
+ ],
+ "developments": [
+  {
+   "id": "2cd927c8-919f-4d07-a095-3c8c3431bda5",
+   "slug": "dorenbachhof",
+   "title": "Dorenbachhof",
+   "description": "<p>Sechzehn Eigentumswohnungen an der Holeestrasse im Bachletten, wenige Schritte von der Dorenbach-Promenade und dem Zoo Basel.</p><p>Ein Haus mit Erdgeschoss, sechs Obergeschossen und Attika. Von der 2,5- bis zur 4,5-Zimmer-Wohnung, alle mit Loggia oder Gartensitzplatz, Eichenparkett, Bodenheizung, Waschturm und Fernwärme. Im Erdgeschoss zwei Gartenwohnungen, im Attikageschoss zwei Wohnungen mit grossen Terrassen. Tiefgarage mit Ladestationen und Velokeller.</p><p>Baubeginn war im März 2026, der Rohbau wächst. Bezug ab Ende September 2027.</p>",
+   "description_text": "Sechzehn Eigentumswohnungen an der Holeestrasse im Bachletten, wenige Schritte von der Dorenbach-Promenade und dem Zoo Basel.\n\nEin Haus mit Erdgeschoss, sechs Obergeschossen und Attika. Von der 2,5- bis zur 4,5-Zimmer-Wohnung, alle mit Loggia oder Gartensitzplatz, Eichenparkett, Bodenheizung, Waschturm und Fernwärme. Im Erdgeschoss zwei Gartenwohnungen, im Attikageschoss zwei Wohnungen mit grossen Terrassen. Tiefgarage mit Ladestationen und Velokeller.\n\nBaubeginn war im März 2026, der Rohbau wächst. Bezug ab Ende September 2027.",
+   "status": "marketing",
+   "delivery_date": "2027-09-30",
+   "address": {
+    "street": "Holeestrasse 41",
+    "postcode": "4054",
+    "city": "Basel",
+    "country": "Switzerland",
+    "lat": 47.544,
+    "lng": 7.575
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338459.jpg",
+     "alt": "Dorenbachhof"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338452.jpg",
+     "alt": "Dorenbachhof, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338450.jpg",
+     "alt": "Dorenbachhof, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338458.jpg",
+     "alt": "Dorenbachhof, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+     "alt": "Dorenbachhof, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+     "alt": "Dorenbachhof, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+     "alt": "Dorenbachhof, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+     "alt": "Dorenbachhof, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+     "alt": "Dorenbachhof, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+     "alt": "Dorenbachhof, photo 10"
+    }
+   ],
+   "stats": {
+    "units": 16,
+    "available": 9,
+    "reserved": 4,
+    "sold": 3,
+    "price": {
+     "min": 805000,
+     "max": 1950000
+    },
+    "rooms": {
+     "min": 2.5,
+     "max": 4.5
+    },
+    "living_surface": {
+     "min": 62,
+     "max": 128
+    }
+   },
+   "currency": "CHF",
+   "agents": [
+    {
+     "id": "6470b7bc-2b34-4222-b688-82ce368a2e03",
+     "first_name": "Simone",
+     "last_name": "Vogt",
+     "phone": "+41 00 000 00 07",
+     "email": "simone.vogt@halderhof.example.com",
+     "languages": [
+      "de",
+      "en"
+     ],
+     "team_ids": [
+      "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8124423-sq.jpg",
+      "alt": "Simone Vogt"
+     }
+    }
+   ],
+   "team_ids": [
+    "e91e12eb-d61a-4b1a-bf17-7862c79d9b00"
+   ],
+   "units": [
+    {
+     "id": "555f3285-9277-4a80-a4dd-a3fe1dc53f9e",
+     "name": "3,5 Zimmer, EG mit Garten",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 88,
+     "floor": 0,
+     "floor_label": "Erdgeschoss",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "5dec730c-bde6-45a5-baf8-fad66844bcb4",
+     "name": "4,5 Zimmer, EG mit Garten",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 110,
+     "floor": 0,
+     "floor_label": "Erdgeschoss",
+     "price": 1390000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "c5a3266c-9d65-4f08-bab7-a63081072e3a",
+     "name": "3,5 Zimmer, 1. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 86,
+     "balcony_surface": 9,
+     "floor": 1,
+     "floor_label": "1. Obergeschoss",
+     "price": 1080000,
+     "currency": "CHF",
+     "description": "<p>Eine 3,5-Zimmer-Wohnung von 86 m² im 1. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 3,5-Zimmer-Wohnung von 86 m² im 1. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+       "alt": "3,5 Zimmer, 1. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+       "alt": "3,5 Zimmer, 1. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338444.jpg",
+       "alt": "3,5 Zimmer, 1. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+       "alt": "3,5 Zimmer, 1. OG, photo 4"
+      }
+     ],
+     "listing_slug": "3-5-zimmer-1-og-19835a1f-824f-42fd-971b-244f08c91cfd",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "f064709c-3f83-4f43-8ca3-5d72a6296436",
+     "name": "4,5 Zimmer, 1. OG",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 11,
+     "floor": 1,
+     "floor_label": "1. Obergeschoss",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "e7498d2d-3a5d-4b0b-93b1-0b6b40f68a89",
+     "name": "2,5 Zimmer, 2. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 62,
+     "balcony_surface": 7,
+     "floor": 2,
+     "floor_label": "2. Obergeschoss",
+     "price": 805000,
+     "currency": "CHF",
+     "description": "<p>Eine 2,5-Zimmer-Wohnung von 62 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 2,5-Zimmer-Wohnung von 62 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+       "alt": "2,5 Zimmer, 2. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+       "alt": "2,5 Zimmer, 2. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+       "alt": "2,5 Zimmer, 2. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+       "alt": "2,5 Zimmer, 2. OG, photo 4"
+      }
+     ],
+     "listing_slug": "2-5-zimmer-2-og-30bba948-edc8-4c22-970b-db22fdc83682",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "f511fad3-cecc-4f3a-8364-b36cc7a60b2e",
+     "name": "4,5 Zimmer, 2. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 11,
+     "floor": 2,
+     "floor_label": "2. Obergeschoss",
+     "price": 1380000,
+     "currency": "CHF",
+     "description": "<p>Eine 4,5-Zimmer-Wohnung von 108 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 4,5-Zimmer-Wohnung von 108 m² im 2. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+       "alt": "4,5 Zimmer, 2. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+       "alt": "4,5 Zimmer, 2. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+       "alt": "4,5 Zimmer, 2. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+       "alt": "4,5 Zimmer, 2. OG, photo 4"
+      }
+     ],
+     "listing_slug": "4-5-zimmer-2-og-3fef25db-7b26-46d8-9577-6283717f6d94",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "23bb5c43-0b98-4219-bba1-a379ac7d5c60",
+     "name": "3,5 Zimmer, 3. OG",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 86,
+     "balcony_surface": 9,
+     "floor": 3,
+     "floor_label": "3. Obergeschoss",
+     "price": 1110000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "80cd5e53-605b-424d-aab1-7d248e9bfd49",
+     "name": "4,5 Zimmer, 3. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 11,
+     "floor": 3,
+     "floor_label": "3. Obergeschoss",
+     "price": 1400000,
+     "currency": "CHF",
+     "description": "<p>Eine 4,5-Zimmer-Wohnung von 108 m² im 3. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 4,5-Zimmer-Wohnung von 108 m² im 3. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+       "alt": "4,5 Zimmer, 3. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+       "alt": "4,5 Zimmer, 3. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+       "alt": "4,5 Zimmer, 3. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+       "alt": "4,5 Zimmer, 3. OG, photo 4"
+      }
+     ],
+     "listing_slug": "4-5-zimmer-3-og-bc28dba8-b18f-4b7c-84f3-f9379134f50e",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "b9ac0504-84aa-4c78-9f70-2630ba08a0f5",
+     "name": "2,5 Zimmer, 4. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 62,
+     "balcony_surface": 7,
+     "floor": 4,
+     "floor_label": "4. Obergeschoss",
+     "price": 825000,
+     "currency": "CHF",
+     "description": "<p>Eine 2,5-Zimmer-Wohnung von 62 m² im 4. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 2,5-Zimmer-Wohnung von 62 m² im 4. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+       "alt": "2,5 Zimmer, 4. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+       "alt": "2,5 Zimmer, 4. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+       "alt": "2,5 Zimmer, 4. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+       "alt": "2,5 Zimmer, 4. OG, photo 4"
+      }
+     ],
+     "listing_slug": "2-5-zimmer-4-og-b1720f6d-2726-41a7-affb-1e934ce997be",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "60e21dd1-97ef-4383-9524-cd9bb6f2df63",
+     "name": "4,5 Zimmer, 4. OG",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 11,
+     "floor": 4,
+     "floor_label": "4. Obergeschoss",
+     "price": 1420000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "de57fb5b-d90a-4a84-b132-a66ea85662dd",
+     "name": "3,5 Zimmer, 5. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 86,
+     "balcony_surface": 9,
+     "floor": 5,
+     "floor_label": "5. Obergeschoss",
+     "price": 1140000,
+     "currency": "CHF",
+     "description": "<p>Eine 3,5-Zimmer-Wohnung von 86 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 3,5-Zimmer-Wohnung von 86 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 9 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 2 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+       "alt": "3,5 Zimmer, 5. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+       "alt": "3,5 Zimmer, 5. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338444.jpg",
+       "alt": "3,5 Zimmer, 5. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+       "alt": "3,5 Zimmer, 5. OG, photo 4"
+      }
+     ],
+     "listing_slug": "3-5-zimmer-5-og-21f0b0eb-0339-445f-9ab9-ad42260a87d4",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "20ac91f4-1d6a-46d6-8cf3-fb365a12dcac",
+     "name": "4,5 Zimmer, 5. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 11,
+     "floor": 5,
+     "floor_label": "5. Obergeschoss",
+     "price": 1440000,
+     "currency": "CHF",
+     "description": "<p>Eine 4,5-Zimmer-Wohnung von 108 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 4,5-Zimmer-Wohnung von 108 m² im 5. Obergeschoss des Dorenbachhofs. Loggia von 11 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338457.jpg",
+       "alt": "4,5 Zimmer, 5. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+       "alt": "4,5 Zimmer, 5. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+       "alt": "4,5 Zimmer, 5. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+       "alt": "4,5 Zimmer, 5. OG, photo 4"
+      }
+     ],
+     "listing_slug": "4-5-zimmer-5-og-bcbccd2c-05d3-48ee-be3c-216e90d27574",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0246cde1-e5ca-490b-8d3a-d9fc60766bf8",
+     "name": "2,5 Zimmer, 6. OG",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 62,
+     "balcony_surface": 7,
+     "floor": 6,
+     "floor_label": "6. Obergeschoss",
+     "price": 845000,
+     "currency": "CHF",
+     "description": "<p>Eine 2,5-Zimmer-Wohnung von 62 m² im 6. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.</p><p>Offene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 2,5-Zimmer-Wohnung von 62 m² im 6. Obergeschoss des Dorenbachhofs. Loggia von 7 m² nach Südwesten.\n\nOffene Küche zum Wohn- und Essbereich, 1 Schlafzimmer, 1 Bad, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338463.jpg",
+       "alt": "2,5 Zimmer, 6. OG"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338461.jpg",
+       "alt": "2,5 Zimmer, 6. OG, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338472.jpg",
+       "alt": "2,5 Zimmer, 6. OG, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338475.jpg",
+       "alt": "2,5 Zimmer, 6. OG, photo 4"
+      }
+     ],
+     "listing_slug": "2-5-zimmer-6-og-ebbd46a4-24b1-4642-8ff0-0595ba760e7f",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "cc122804-2bd8-4715-8d98-7fbc979ff6f0",
+     "name": "4,5 Zimmer, 6. OG",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 108,
+     "balcony_surface": 11,
+     "floor": 6,
+     "floor_label": "6. Obergeschoss",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "63194c68-fe19-4fb8-9638-0db46ada9174",
+     "name": "Attika, 3,5 Zimmer",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment_penthouse",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 2,
+     "living_surface": 96,
+     "balcony_surface": 35,
+     "floor": 7,
+     "floor_label": "7. Obergeschoss",
+     "price": 1550000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0b641300-820a-459e-bab6-d9e49d4649ea",
+     "name": "Attika, 4,5 Zimmer",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_penthouse",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 128,
+     "balcony_surface": 45,
+     "floor": 7,
+     "floor_label": "7. Obergeschoss",
+     "price": 1950000,
+     "currency": "CHF",
+     "description": "<p>Eine 4,5-Zimmer-Wohnung von 128 m² im Attikageschoss des Dorenbachhofs. Terrasse von 45 m² auf zwei Seiten.</p><p>Offene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.</p>",
+     "description_text": "Eine 4,5-Zimmer-Wohnung von 128 m² im Attikageschoss des Dorenbachhofs. Terrasse von 45 m² auf zwei Seiten.\n\nOffene Küche zum Wohn- und Essbereich, 3 Zimmer, 2 Bäder, Reduit mit Waschturm. Eichenparkett und Bodenheizung, Ausbauwünsche bis Frühjahr 2027 möglich.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338469.jpg",
+       "alt": "Attika, 4,5 Zimmer"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338447.jpg",
+       "alt": "Attika, 4,5 Zimmer, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338465.jpg",
+       "alt": "Attika, 4,5 Zimmer, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39338444.jpg",
+       "alt": "Attika, 4,5 Zimmer, photo 4"
+      }
+     ],
+     "listing_slug": "attika-4-5-zimmer-8f9e04d4-6857-4726-90cc-f0afde5cdfc8",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  }
+ ],
+ "fixture_only": {
+  "listings": {
+   "24080510-9109-4dda-b1ad-cd77949b26ad": {
+    "energy_class": "D",
+    "year_built": 1932,
+    "floor": 3,
+    "balcony_surface": 9
+   },
+   "4d4a469e-2ca8-40d7-b252-1d23d4dc9b9b": {
+    "energy_class": "A",
+    "year_built": 2015,
+    "floor": 4,
+    "terrace_surface": 64
+   },
+   "857b71c4-9bb5-4f82-8491-19e81d81f23b": {
+    "energy_class": "A",
+    "year_built": 1958,
+    "floor": 2,
+    "balcony_surface": 7,
+    "charges": 280
+   },
+   "8bb3b9a9-8fd2-47c5-857d-f666d0586ff1": {
+    "energy_class": "B",
+    "year_built": 1910,
+    "floor": 2,
+    "balcony_surface": 8
+   },
+   "b8dd1485-9e18-4832-8418-3f907d7f570b": {
+    "energy_class": "B",
+    "year_built": 1962,
+    "floor": 3,
+    "balcony_surface": 6
+   },
+   "c8c8975e-405c-4dc0-a2b3-2a75cdf76e34": {
+    "energy_class": "D",
+    "year_built": 1974,
+    "floor": 1,
+    "balcony_surface": 10
+   },
+   "e2ac272d-d12e-4add-8b42-cd217dc671ce": {
+    "energy_class": "A",
+    "year_built": 2019,
+    "terrace_surface": 45
+   },
+   "7db78178-706f-496a-818f-95ce49516f07": {
+    "energy_class": "B",
+    "year_built": 2008,
+    "floor": 0,
+    "terrace_surface": 60
+   },
+   "9a0eeec5-4fed-44dc-a43d-18495d74eb03": {
+    "energy_class": "E",
+    "year_built": 1988,
+    "terrace_surface": 30
+   },
+   "8f0252fb-64a6-4e03-828f-912a3e12fa41": {
+    "energy_class": "B",
+    "year_built": 1930,
+    "floor": 2,
+    "balcony_surface": 8
+   },
+   "311f3855-2c6d-4e06-ad34-537a1cef0b39": {
+    "energy_class": "C",
+    "year_built": 1902,
+    "floor": 5,
+    "balcony_surface": 18
+   },
+   "bb44a47d-6c63-4672-a4b2-b071fd0d8c60": {
+    "energy_class": "A",
+    "year_built": 2012,
+    "floor": 3,
+    "balcony_surface": 12
+   },
+   "9980cb11-1ae6-4335-bbb9-d85801324623": {
+    "energy_class": "C",
+    "year_built": 1965,
+    "floor": 1,
+    "charges": 150
+   },
+   "e0556ff5-56bd-43c9-bd7f-c0b8cd2cbeae": {
+    "energy_class": "C",
+    "year_built": 1996,
+    "terrace_surface": 90
+   },
+   "2fb2025d-25ff-4cdd-b9db-f193bd79525e": {
+    "energy_class": "C",
+    "year_built": 2010,
+    "floor": 2,
+    "terrace_surface": 40
+   },
+   "4e81b806-cb73-4871-aa50-c78ee9dde5f5": {
+    "energy_class": "C",
+    "year_built": 2019,
+    "terrace_surface": 40
+   },
+   "67dcf192-4c28-4b7e-b9b3-3dd56045b35f": {
+    "energy_class": "B",
+    "year_built": 1905,
+    "floor": 2,
+    "balcony_surface": 8
+   },
+   "516e201e-7844-461d-bfec-380b0bd16e50": {
+    "energy_class": "C",
+    "year_built": 2019,
+    "floor": 4,
+    "balcony_surface": 11
+   },
+   "dbc19003-e71a-4984-a57a-753baf1e5873": {
+    "energy_class": "D",
+    "year_built": 1928,
+    "floor": 1,
+    "balcony_surface": 6,
+    "charges": 220
+   },
+   "af39a205-a6c7-497b-9387-7b8e61845d11": {
+    "energy_class": "D",
+    "year_built": 1968,
+    "floor": 3,
+    "balcony_surface": 5
+   },
+   "6672db59-767e-4164-a8d1-610bf0e3e61a": {
+    "energy_class": "A",
+    "year_built": 1840,
+    "floor": 2
+   },
+   "849112f3-c037-46cf-89d6-6ef30f6d20ed": {
+    "energy_class": "E",
+    "year_built": 1870,
+    "terrace_surface": 20
+   },
+   "180ace91-9087-48ce-97f3-9bb2e3d9990f": {
+    "energy_class": "B",
+    "year_built": 1956,
+    "floor": 3,
+    "balcony_surface": 10
+   },
+   "4d4935df-0c0b-4711-a9ef-34a7bc667f09": {
+    "energy_class": "E",
+    "year_built": 2017,
+    "floor": 5,
+    "terrace_surface": 55
+   },
+   "406de5d1-5445-4428-b625-ca119ed0351f": {
+    "energy_class": "A",
+    "year_built": 2016,
+    "terrace_surface": 80
+   },
+   "176f1779-9b4a-4e14-bff1-3031371fcf89": {
+    "energy_class": "E",
+    "year_built": 1985,
+    "terrace_surface": 20
+   },
+   "1642386a-856d-4b30-b814-6cb4f617a3f1": {
+    "energy_class": "C",
+    "year_built": 2015,
+    "terrace_surface": 30
+   },
+   "98433b51-232b-40c9-b7f7-9e383ade1b5b": {
+    "energy_class": "A",
+    "year_built": 1908,
+    "floor": 1,
+    "balcony_surface": 9
+   },
+   "8cfe162b-0349-4f83-9937-cb3f5dc6c50c": {
+    "energy_class": "E",
+    "year_built": 1911,
+    "terrace_surface": 40
+   },
+   "2d858898-4401-4064-a048-f79cfd89c1d3": {
+    "energy_class": "D",
+    "year_built": 1936,
+    "floor": 2,
+    "balcony_surface": 8,
+    "charges": 260
+   },
+   "f60ad293-d278-4c62-8062-741fa0508eb4": {
+    "energy_class": "C",
+    "year_built": 1928,
+    "floor": 2,
+    "balcony_surface": 6
+   },
+   "24bb26fc-7b59-45b1-9f60-136c7edf22ed": {
+    "energy_class": "C",
+    "year_built": 1912,
+    "floor": 4,
+    "balcony_surface": 10
+   },
+   "74a6f9d7-504b-4ea1-9cc7-42b1b10e0321": {
+    "energy_class": "B",
+    "year_built": 1930,
+    "floor": 1,
+    "charges": 180
+   },
+   "e185ccbb-36a7-40ea-a8d3-23026fd85694": {
+    "energy_class": "D",
+    "year_built": 1934,
+    "floor": 3,
+    "balcony_surface": 8
+   },
+   "40f92a0d-47d4-461b-ad83-3b2eb2e7725a": {
+    "energy_class": "D",
+    "year_built": 2020,
+    "terrace_surface": 35
+   },
+   "f9c504aa-c77e-4c7e-bd65-d72bce947de7": {
+    "energy_class": "C",
+    "year_built": 1990,
+    "terrace_surface": 20
+   },
+   "19835a1f-824f-42fd-971b-244f08c91cfd": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 1,
+    "balcony_surface": 9
+   },
+   "30bba948-edc8-4c22-970b-db22fdc83682": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 7
+   },
+   "3fef25db-7b26-46d8-9577-6283717f6d94": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 2,
+    "balcony_surface": 11
+   },
+   "bc28dba8-b18f-4b7c-84f3-f9379134f50e": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 3,
+    "balcony_surface": 11
+   },
+   "b1720f6d-2726-41a7-affb-1e934ce997be": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 4,
+    "balcony_surface": 7
+   },
+   "21f0b0eb-0339-445f-9ab9-ad42260a87d4": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 5,
+    "balcony_surface": 9
+   },
+   "bcbccd2c-05d3-48ee-be3c-216e90d27574": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 5,
+    "balcony_surface": 11
+   },
+   "ebbd46a4-24b1-4642-8ff0-0595ba760e7f": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 6,
+    "balcony_surface": 7
+   },
+   "8f9e04d4-6857-4726-90cc-f0afde5cdfc8": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 7,
+    "terrace_surface": 45
+   }
+  },
+  "units": {
+   "555f3285-9277-4a80-a4dd-a3fe1dc53f9e": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "garden_surface": 60
+   },
+   "5dec730c-bde6-45a5-baf8-fad66844bcb4": {
+    "unit_number": "0.2",
+    "position": 2,
+    "orientation": "SW",
+    "garden_surface": 80
+   },
+   "c5a3266c-9d65-4f08-bab7-a63081072e3a": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW"
+   },
+   "f064709c-3f83-4f43-8ca3-5d72a6296436": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W"
+   },
+   "e7498d2d-3a5d-4b0b-93b1-0b6b40f68a89": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W"
+   },
+   "f511fad3-cecc-4f3a-8364-b36cc7a60b2e": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE"
+   },
+   "23bb5c43-0b98-4219-bba1-a379ac7d5c60": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE"
+   },
+   "80cd5e53-605b-424d-aab1-7d248e9bfd49": {
+    "unit_number": "3.2",
+    "position": 2,
+    "orientation": "E"
+   },
+   "b9ac0504-84aa-4c78-9f70-2630ba08a0f5": {
+    "unit_number": "4.1",
+    "position": 1,
+    "orientation": "E"
+   },
+   "60e21dd1-97ef-4383-9524-cd9bb6f2df63": {
+    "unit_number": "4.2",
+    "position": 2,
+    "orientation": "NW"
+   },
+   "de57fb5b-d90a-4a84-b132-a66ea85662dd": {
+    "unit_number": "5.1",
+    "position": 1,
+    "orientation": "NW"
+   },
+   "20ac91f4-1d6a-46d6-8cf3-fb365a12dcac": {
+    "unit_number": "5.2",
+    "position": 2,
+    "orientation": "S"
+   },
+   "0246cde1-e5ca-490b-8d3a-d9fc60766bf8": {
+    "unit_number": "6.1",
+    "position": 1,
+    "orientation": "S"
+   },
+   "cc122804-2bd8-4715-8d98-7fbc979ff6f0": {
+    "unit_number": "6.2",
+    "position": 2,
+    "orientation": "SW"
+   },
+   "63194c68-fe19-4fb8-9638-0db46ada9174": {
+    "unit_number": "7.1",
+    "position": 1,
+    "orientation": "SW",
+    "terrace_surface": 35
+   },
+   "0b641300-820a-459e-bab6-d9e49d4649ea": {
+    "unit_number": "7.2",
+    "position": 2,
+    "orientation": "W",
+    "terrace_surface": 45
+   }
+  },
+  "developments": {
+   "2cd927c8-919f-4d07-a095-3c8c3431bda5": {
+    "developer": "Halderhof Development AG",
+    "architect": "Rhyner Stucki Architekten",
+    "general_contractor": "Birsig Bau AG",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": [
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5505119.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-18082446.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9964624.jpg"
+    ]
+   }
+  }
+ }
+}

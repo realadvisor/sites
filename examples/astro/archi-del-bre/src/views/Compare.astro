@@ -1,0 +1,152 @@
+---
+/**
+ * Shortlist comparison, server-rendered from ?u=<id8>,<id8>,<id8> so it can be
+ * shared and works without JS. Without ?u= the script fills it from the
+ * stored shortlist. "Request info for these" opens the contact form with the
+ * units named in the message.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import { loadSite } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { c } from '../lib/copy';
+import {
+  building, buildingName, floorName, formatRooms, hasPrice, outdoorLabel, outdoors, orientation, planKey, planSrc, shortId,
+  statusLabel, unitLabel, unitNumber, unitPath, unitPrice, unitsFromIds,
+} from '../lib/units';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const site = await loadSite();
+const { dev } = site;
+const all = dev.units;
+const picked = unitsFromIds(dev, Astro.url.searchParams.get('u'));
+const ids = picked.map(shortId);
+const without = (id: string) => {
+  const rest = ids.filter((x) => x !== id);
+  return rest.length ? `${href('compare', l)}?u=${rest.join(',')}` : href('compare', l);
+};
+const T = {
+  it: {
+    title: `Confronto dei preferiti | ${dev.title}`,
+    h1: 'Confronto',
+    intro: 'Fino a tre appartamenti affiancati. Salvali con la stella nell’elenco degli appartamenti.',
+    empty: 'Non hai ancora salvato appartamenti.',
+    toList: 'Vai agli appartamenti',
+    ask: 'Richiedi informazioni su questi appartamenti',
+    remove: 'Togli',
+    share: 'Il link di questa pagina contiene la selezione e si può condividere.',
+  },
+  de: {
+    title: `Vergleich der Merkliste | ${dev.title}`,
+    h1: 'Vergleich',
+    intro: 'Bis zu drei Wohnungen nebeneinander. Merken Sie sie mit dem Stern in der Wohnungsliste.',
+    empty: 'Sie haben noch keine Wohnungen gemerkt.',
+    toList: 'Zu den Wohnungen',
+    ask: 'Informationen zu diesen Wohnungen anfordern',
+    remove: 'Entfernen',
+    share: 'Der Link dieser Seite enthält die Auswahl und lässt sich teilen.',
+  },
+}[l];
+const rows: [string, (u: (typeof picked)[number]) => string][] = [
+  [c('house', l), (u) => buildingName(building(u), l)],
+  [c('floor', l), (u) => floorName(u, l, all)],
+  [c('rooms', l), (u) => formatRooms(u.rooms, l)],
+  [c('livingArea', l), (u) => (u.living_surface ? `${u.living_surface} m²` : '–')],
+  [c('outdoor', l), (u) => outdoors(u).map((o) => `${outdoorLabel(o, l)} ${o.m2} m²`).join(', ') || '–'],
+  [c('bedrooms', l), (u) => (u.bedrooms != null ? String(u.bedrooms) : '–')],
+  [c('bathrooms', l), (u) => (u.bathrooms != null ? String(u.bathrooms) : '–')],
+  [c('orientation', l), (u) => orientation(u, l) || '–'], // fixture only: orientation
+  [c('price', l), (u) => (hasPrice(u) ? unitPrice(u, l) : '–')],
+  [c('status', l), (u) => statusLabel(u, l)],
+];
+const askable = picked.filter((u) => u.status !== 'sold');
+const cover = dev.photos[0];
+---
+<Site site={site} l={l} route="compare" title={T.title} description={T.intro} noindex image={cover ? img(cover.url, { w: 1200, h: 630 }) : undefined}>
+  <div class="wrap head">
+    <h1 class="h1">{T.h1}</h1>
+    <p class="lede">{T.intro}</p>
+  </div>
+  <div class="wrap body" data-compare data-has={picked.length ? '1' : undefined}>
+    {picked.length === 0 ? (
+      <div class="empty">
+        <p>{T.empty}</p>
+        <p><a class="btn" href={href('units', l)}>{T.toList}</a></p>
+      </div>
+    ) : (
+      <>
+        <div class="scroller">
+          <table style={`--n:${picked.length}`}>
+            <caption class="sr-only">{T.h1}</caption>
+            <thead>
+              <tr>
+                <td></td>
+                {picked.map((u) => {
+                  const plan = planSrc(planKey(u, all), l, true);
+                  return (
+                    <th scope="col">
+                      {plan && <img src={plan} alt={`${c('indicativePlan', l)}: ${unitLabel(u, l, all)}`} width="320" height="240" loading="lazy" decoding="async" />}
+                      <a href={unitPath(u, l)} class="no">{unitNumber(u) || formatRooms(u.rooms, l)}</a>
+                      <span class="lbl">{unitLabel(u, l, all)}</span>
+                      <a class="rm link" href={without(shortId(u))} data-remove={shortId(u)}>{T.remove}<span class="sr-only"> {unitNumber(u)}</span></a>
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([k, f]) => (
+                <tr>
+                  <th scope="row">{k}</th>
+                  {picked.map((u) => <td class:list={{ status: k === c('status', l) }}>{k === c('status', l) ? <span class:list={['pill', u.status]}>{f(u)}</span> : f(u)}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="actions">
+          {askable.length > 0 && <a class="btn" href={`${href('contact', l)}?u=${askable.map(shortId).join(',')}#richiesta`}>{T.ask}</a>}
+          <a class="link" href={href('units', l)}>{T.toList}</a>
+        </p>
+        <p class="muted small">{T.share}</p>
+      </>
+    )}
+  </div>
+</Site>
+
+<script>
+  import { readFavs, writeFavs } from '../scripts/favourites';
+  const root = document.querySelector<HTMLElement>('[data-compare]');
+  const params = new URLSearchParams(location.search);
+  if (root && !params.get('u')) {
+    const list = readFavs();
+    if (list.length) location.replace(`${location.pathname}?u=${list.join(',')}`);
+  } else if (root) {
+    // A shared link becomes the shortlist on this device.
+    const ids = (params.get('u') ?? '').split(',').filter((x) => /^[0-9a-f]{8}$/.test(x));
+    if (ids.length) writeFavs(ids);
+    for (const a of root.querySelectorAll<HTMLAnchorElement>('[data-remove]')) {
+      a.addEventListener('click', () => writeFavs(readFavs().filter((x) => x !== a.dataset.remove)));
+    }
+  }
+</script>
+
+<style>
+  .head { display: grid; gap: 18px; padding-block: clamp(40px, 6vw, 88px) 36px; }
+  .body { padding-bottom: var(--section); }
+  .empty { display: grid; gap: 20px; padding: 40px 0; border-top: 1px solid var(--line); }
+  .scroller { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+  table { border-collapse: collapse; width: 100%; max-width: calc(200px + var(--n) * 340px); min-width: calc(140px + var(--n) * 220px); table-layout: fixed; }
+  thead td { width: 180px; }
+  thead th { text-align: left; vertical-align: top; padding: 0 16px 20px 0; font-weight: 400; }
+  thead img { width: 100%; height: auto; background: #fff; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 14px; }
+  .no { display: block; font: 400 var(--step-2)/1 var(--serif); text-decoration: none; }
+  .lbl { display: block; color: var(--muted); font-size: 0.9375rem; margin-top: 6px; }
+  .rm { display: inline-block; margin-top: 8px; padding-block: 8px; font-size: 0.875rem; }
+  tbody th { text-align: left; font-weight: 500; color: var(--muted); padding: 12px 16px 12px 0; border-top: 1px solid var(--line); }
+  tbody td { padding: 12px 16px 12px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 36px; }
+  .small { font-size: 0.875rem; margin-top: 14px; }
+  @media (max-width: 640px) { thead td { width: 110px; } table { min-width: calc(110px + var(--n) * 170px); } .actions .btn { white-space: normal; text-align: center; line-height: 1.3; padding-block: 12px; } }
+</style>

@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import { PHOTOS, photoOg } from '../lib/photos';
+import { agency, sites, towns } from '../lib/data';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, all, texts] = await Promise.all([agency(), sites.allListings(), getCollection('areas', (e) => e.id.startsWith(`${lang}/`))]);
+const name = ag.team?.name ?? ag.org.name;
+const list = towns(all).map((t) => {
+  const text = texts.find((x) => x.id === `${lang}/${t.slug}`);
+  return { ...t, text, photo: PHOTOS[text?.data.photo ?? 'home'] };
+});
+// Tiles that span two columns (see the grid rule in the styles).
+const wide = (i: number) => (list.length % 3 !== 0 && i === 0) || (list.length % 3 === 1 && list.length > 1 && i === list.length - 1);
+// Smaller towns (fewer than 3 listings) get no page: they link to the search.
+const big = new Set(list.map((t) => t.slug));
+const small = towns(all.filter((l) => l.status === 'available'), 1).filter((t) => !big.has(t.slug)).sort((a, b) => a.name.localeCompare(b.name, 'es'));
+const searchIn = (t: { name: string; listings: { offer_type: string }[] }) =>
+  `${href(t.listings.some((l) => l.offer_type === 'buy') ? 'buy' : 'rent', lang)}?city=${encodeURIComponent(t.name)}`;
+---
+<Site lang={lang} current="areas" title={`${ui.areasH1} | ${name}`} description={ui.areasIntro}
+  image={photoOg(list[0]?.photo ?? PHOTOS.home, Astro.url)} alternates={alternates('areas')}>
+  <header class="phead wrap">
+    <h1 class="display-l">{ui.areasH1}</h1>
+    <p class="lead">{ui.areasIntro}</p>
+  </header>
+  <section class="wrap tiles-wrap">
+    <ul class="tiles">
+      {list.map((t, i) => (
+        <li class="tile">
+          <div class="tile-photo"><Photo photo={t.photo} lang={lang} decorative landscapeAt={wide(i) ? true : '(max-width: 900px)'} sizes={wide(i) ? '(min-width: 900px) 62vw, 100vw' : '(min-width: 900px) 30vw, 100vw'} priority={i === 0} /></div>
+          <p class="tile-n num">{fill(ui.areaCount, { n: t.listings.length })}</p>
+          <h2 class="tile-name"><a href={href('areas', lang, t.slug)}>{t.name}</a></h2>
+          {t.text && <p class="tile-tag">{t.text.data.tagline}</p>}
+        </li>
+      ))}
+    </ul>
+    {small.length > 0 && (
+      <div class="more">
+        <h2 class="display-m">{ui.otherAreas}</h2>
+        <ul>{small.map((t) => <li><a href={searchIn(t)}>{t.name}</a> <span class="num">{t.listings.length}</span></li>)}</ul>
+      </div>
+    )}
+  </section>
+</Site>
+<style>
+  .tiles-wrap { padding-bottom: var(--section); }
+  /* Rows of three, never a half-empty last row: with 3n+2 tiles the first spans two columns; with 3n+1 the first and the last do. Same photo height everywhere. */
+  .tiles-wrap { container-type: inline-size; --tgap: clamp(20px, 2.6vw, 40px); }
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--tgap); }
+  .tile:first-child:nth-last-child(3n + 1), .tile:first-child:nth-last-child(3n + 2), .tile:last-child:nth-child(3n + 1):not(:first-child) { grid-column: span 2; }
+  .tile { position: relative; display: grid; gap: 10px; align-content: start; }
+  .tile-photo { height: calc((100cqi - 2 * var(--tgap)) / 3 * 11 / 9); overflow: hidden; margin-bottom: 14px; }
+  .tile-photo :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  .tile:hover .tile-photo :global(img) { transform: scale(1.03); }
+  .tile-n { font-size: .9375rem; color: var(--muted); order: 1; }
+  .tile-name { font-size: clamp(2.25rem, 3.6vw, 3.25rem); }
+  .tile-name a { text-decoration: none; }
+  .tile-name a::after { content: ''; position: absolute; inset: 0; }
+  .tile-name a:focus-visible { outline: none; }
+  .tile:has(a:focus-visible) { outline: 2px solid var(--accent-strong); outline-offset: 6px; }
+  .tile-tag { color: var(--muted); }
+  .more { margin-top: clamp(56px, 7vw, 104px); padding-top: 32px; border-top: 1px solid var(--line); display: grid; gap: 20px; }
+  .more ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 40px; }
+  .more a { font: 300 clamp(1.5rem, 2.4vw, 2.125rem)/1.2 var(--font-display); text-decoration: none; }
+  .more a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+  .more span { font-size: .8125rem; color: var(--muted); vertical-align: super; }
+  @media (max-width: 900px) { .tiles { grid-template-columns: 1fr; } .tile:first-child:nth-last-child(3n + 1), .tile:first-child:nth-last-child(3n + 2), .tile:last-child:nth-child(3n + 1):not(:first-child) { grid-column: auto; } .tile-photo { height: auto; aspect-ratio: 4 / 3; } }
+</style>

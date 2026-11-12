@@ -1,0 +1,295 @@
+---
+/**
+ * Listing page: serif title with the three key figures beside it, 1 + 4
+ * gallery (a swipe strip with counters on the phone), anchor chips, facts,
+ * description, features, energy label, every photo, approximate location,
+ * the affordability calculator for a home for sale; the enquiry card with
+ * the adviser sticks beside it. A unit of a development links back to it.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import { img } from '@realadvisor/sites-kit/image';
+import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import StaticMap from '../components/StaticMap.astro';
+import EnergyScale from '../components/EnergyScale.astro';
+import Portrait from '../components/Portrait.astro';
+import Affordability from '../components/Affordability.astro';
+import { extraNum, extraStr, siteData, sites } from '../lib/data';
+import { agentSlug, href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { dec, floor, formatAmount, formatSurface, price, tel, typeLabel } from '../lib/format';
+
+interface Props { l: L; listing: Listing }
+const { l, listing: x } = Astro.props;
+const t = tx(l);
+const locale = LOCALE[l];
+const [{ teams, agents }, sameCity, devs] = await Promise.all([
+  siteData(),
+  x.address.city ? sites.allListings({ city: x.address.city }) : Promise.resolve([]),
+  sites.developments(),
+]);
+const full = await Promise.all(devs.map((d) => sites.development(d.slug)));
+const dev = full.find((d) => d?.units.some((u) => u.listing_slug === x.slug)) ?? null;
+const agent = x.agent ? (agents.find((a) => a.id === x.agent!.id) ?? x.agent) : undefined;
+const team = teams.find((tm) => x.team_ids.includes(tm.id)) ?? teams.find((tm) => agent?.team_ids.includes(tm.id));
+const similar = sameCity.filter((y) => y.id !== x.id && y.status === 'available' && y.offer_type === x.offer_type).slice(0, 3);
+const isRent = x.offer_type === 'rent';
+const sold = x.status === 'sold';
+const city = cityName(x.address.city, l);
+
+// fixture only: energy class, year built, floor, terrace / balcony surface, monthly charges
+const energy = extraStr('listings', x.id, 'energy_class');
+const year = extraNum('listings', x.id, 'year_built');
+const fl = extraNum('listings', x.id, 'floor');
+const terrace = extraNum('listings', x.id, 'terrace_surface');
+const balcony = extraNum('listings', x.id, 'balcony_surface');
+const charges = extraNum('listings', x.id, 'charges');
+
+const facts = [
+  x.rooms != null && { k: t('rooms'), v: dec(x.rooms, l) },
+  x.bedrooms != null && { k: t('bedrooms'), v: String(x.bedrooms) },
+  x.bathrooms != null && { k: t('bathrooms'), v: String(x.bathrooms) },
+  x.living_surface != null && { k: t('livingArea'), v: formatSurface(x.living_surface) },
+  x.land_surface != null && { k: t('landArea'), v: formatSurface(x.land_surface) },
+  terrace != null && { k: t('terrace'), v: formatSurface(terrace) },
+  balcony != null && { k: t('balcony'), v: formatSurface(balcony) },
+  fl != null && { k: t('floor'), v: floor(fl, l) },
+  year != null && { k: t('yearBuilt'), v: String(year) },
+].filter(Boolean) as { k: string; v: string }[];
+
+const photos = x.photos;
+const back = isRent ? { label: t('navRent'), href: href('rent', l) } : sold ? { label: t('navSold'), href: href('sold', l) } : { label: t('navBuy'), href: href('buy', l) };
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const where = [x.address.street, [x.address.postcode, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const ref = listingRef({ id: x.id, reference: x.reference });
+const alt = (i: number) => photos[i]?.alt || `${typeLabel(x.property_type, l)} ${city}, ${t('photo', { n: i + 1 })}`;
+const phone = agent?.phone ?? team?.phone;
+const showCalc = !isRent && !sold && !!x.price && !x.price_on_request;
+const chips = [
+  facts.length > 0 && { h: '#h-facts', label: t('facts') },
+  x.description && { h: '#h-desc', label: t('description') },
+  energy && { h: '#h-energy', label: t('energy').replace(/ \(.*\)$/, '') },
+  photos.length > 5 && { h: '#h-photos', label: t('allPhotos', { n: photos.length }) },
+  x.address.lat != null && { h: '#h-loc', label: t('location') },
+  showCalc && { h: '#listing-calc-h', label: t('calcTitle') },
+].filter(Boolean) as { h: string; label: string }[];
+---
+<Site l={l} route="listing" segs={[x.slug]} section={isRent ? 'rent' : sold ? 'sold' : 'buy'}
+  title={`${listingTitle(x, sameCity)} | ${price(x, l)}`}
+  description={(x.description_text ?? x.title).replace(/\s+/g, ' ').slice(0, 155)}
+  image={photos[0] && img(photos[0].url, { w: 1200, h: 630 })}
+  jsonLd={listingJsonLd(x, pageUrl)}
+  noindex={sold}>
+
+  <div class="wrap top">
+    <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, back, { label: x.title }]} />
+    <div class="intro">
+      <div class="intro__main">
+        <p class="kicker">{isRent ? t('forRent') : sold ? t('sold') : t('forSale')} · {typeLabel(x.property_type, l)}</p>
+        <h1 class="title">{x.title}</h1>
+        {where && <p class="where">{where}</p>}
+      </div>
+      <dl class="intro__figs">
+        {x.rooms != null && <div><dt>{t('rooms')}</dt><dd class="num">{dec(x.rooms, l)}</dd></div>}
+        {x.living_surface != null && <div><dt>{t('livingArea')}</dt><dd class="num">{formatSurface(x.living_surface)}</dd></div>}
+        <div><dt>{isRent ? t('rent') : t('price')}</dt><dd class="num">{price(x, l)}</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  {photos.length > 0 ? (
+    <div class="wrap">
+      <div class:list={['gal', `gal--${Math.min(photos.length, 5)}`]}>
+        {photos.slice(0, 5).map((p, i) => (
+          <a class="gal__item" href={photos.length > 5 ? `#photo-${i + 1}` : undefined}>
+            <RaImage src={p} alt={alt(i)} width={i === 0 ? 1200 : 600} height={i === 0 ? 800 : 400} priority={i === 0}
+              sizes={i === 0 ? '(min-width: 1320px) 610px, (min-width: 761px) 48vw, 88vw' : '(min-width: 1320px) 300px, (min-width: 761px) 24vw, 88vw'} />
+            {i === 4 && photos.length > 5 && <span class="gal__more">{t('allPhotos', { n: photos.length })}</span>}
+            <span class="gal__n num" aria-hidden="true">{i + 1} / {photos.length}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <div class="wrap"><div class="nophoto">{t('noPhoto')}</div></div>
+  )}
+
+  {chips.length > 1 && (
+    <nav class="wrap chips" aria-label={t('facts')}>
+      <ul class="plain-list">{chips.map((c) => <li><a href={c.h}>{c.label}</a></li>)}</ul>
+    </nav>
+  )}
+
+  <div class="wrap body">
+    <div class="main">
+      {dev && (
+        <p class="devnote">{t('partOfDev', { name: dev.title })} <a class="more" href={href('developments', l, dev.slug)}>{t('seeAllUnits')}</a></p>
+      )}
+      {facts.length > 0 && (
+        <section aria-labelledby="h-facts">
+          <h2 id="h-facts" class="sec-h">{t('facts')}</h2>
+          <dl class="facts">
+            {facts.map((f) => <div><dt>{f.k}</dt><dd class="num">{f.v}</dd></div>)}
+            {isRent && charges != null && <div><dt>{t('charges')}</dt><dd class="num">{formatAmount(charges)}</dd></div>}
+          </dl>
+        </section>
+      )}
+      {x.description && (
+        <section aria-labelledby="h-desc">
+          <h2 id="h-desc" class="sec-h">{t('description')}</h2>
+          <div class="prose" set:html={sanitizeHtml(x.description)} />
+        </section>
+      )}
+      {x.features.length > 0 && (
+        <section aria-labelledby="h-feat">
+          <h2 id="h-feat" class="sec-h">{t('features')}</h2>
+          <ul class="feats">{x.features.map((f) => <li>{featureLabel(f, locale)}</li>)}</ul>
+        </section>
+      )}
+      {energy && (
+        <section aria-labelledby="h-energy">
+          <h2 id="h-energy" class="sec-h">{t('energy')}</h2>
+          <EnergyScale value={energy} label={t('energy')} classLabel={t('energyClass', { c: energy })} />
+        </section>
+      )}
+      {photos.length > 5 && (
+        <section aria-labelledby="h-photos" class="allph">
+          <h2 id="h-photos" class="sec-h">{t('photos')} <span class="num">({photos.length})</span></h2>
+          <ul>
+            {photos.map((p, i) => (
+              <li id={`photo-${i + 1}`}><RaImage src={p} alt={alt(i)} width={i === 0 ? 1200 : 600} height={i === 0 ? 800 : 400} sizes={i === 0 ? '(min-width: 1320px) 800px, (min-width: 1080px) 60vw, 100vw' : '(min-width: 1320px) 400px, (min-width: 1080px) 30vw, 50vw'} /></li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {x.address.lat != null && x.address.lng != null && (
+        <section aria-labelledby="h-loc">
+          <h2 id="h-loc" class="sec-h">{t('location')}</h2>
+          <p class="muted">{[city, t('approxLocation')].filter(Boolean).join(' · ')}</p>
+          <StaticMap lat={x.address.lat} lng={x.address.lng} zoom={14} area label={`${t('location')}: ${city}`} linkLabel={t('openMap')} />
+        </section>
+      )}
+      {showCalc && <Affordability l={l} price={x.price!} id="listing-calc" tone="paper" />}
+    </div>
+
+    <aside class="side" id="contact" aria-labelledby="h-enquiry">
+      <div class="side__card">
+        <h2 id="h-enquiry" class="side__h">{sold ? t('soldCta') : t('askViewing')}</h2>
+        {agent && (
+          <div class="adv">
+            <Portrait agent={agent} w={96} ratio="square" sizes="72px" class="adv__photo" />
+            <div>
+              <p class="adv__name"><a href={href('team', l, agentSlug(agent, agents))}>{agent.first_name} {agent.last_name}</a></p>
+              {team && <p class="adv__team"><a href={href('offices', l, teamSlug(team, teams))}>{t('officeOf', { city: cityName(team.address.city, l) || team.name })}</a></p>}
+              {phone && <p class="adv__tel"><a class="num" href={tel(phone)}>{phone}</a></p>}
+            </div>
+          </div>
+        )}
+        <EnquiryForm locale={locale} listingId={x.id} agentId={agent?.id} agentName={agent?.first_name}
+          message={kt('interested', { title: x.title, ref }, klang(locale))} submitLabel={t('askViewing')} />
+        <p class="ref">{t('reference')} {ref}</p>
+      </div>
+    </aside>
+  </div>
+
+  {similar.length > 0 && (
+    <section class="section section--paper" aria-labelledby="h-similar">
+      <div class="wrap">
+        <h2 id="h-similar" class="h2 sim-h">{t('similar', { city })}</h2>
+        <ul class="plain-list grid3">{similar.map((y) => <li><ListingCard listing={y} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <div class="mbar">
+    <a class="button" href="#contact">{t('enquiry')}</a>
+    {phone && <a class="button button--ghost" href={tel(phone)}>{t('call')}</a>}
+  </div>
+</Site>
+
+<style>
+  .top { padding-top: 24px; display: grid; gap: 20px; }
+  .intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 48px; padding-bottom: 28px; }
+  .intro__main { display: grid; gap: 10px; max-width: 820px; }
+  .title { font-size: clamp(1.875rem, 1.35rem + 2.1vw, 3rem); color: var(--green-ink); }
+  .where { color: var(--muted); }
+  .intro__figs { display: flex; gap: clamp(20px, 3vw, 48px); }
+  .intro__figs div { display: grid; gap: 4px; }
+  .intro__figs dt { font-size: 0.875rem; color: var(--muted); }
+  .intro__figs dd { font: 500 1.375rem/1.1 var(--font-sans); white-space: nowrap; color: var(--text); }
+
+  .gal { display: grid; gap: 6px; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); aspect-ratio: 2.4 / 1; }
+  .gal__item { position: relative; display: block; overflow: hidden; background: var(--paper-2); }
+  .gal__item:first-child { grid-row: 1 / 3; }
+  .gal__item :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .gal--1 { grid-template-columns: 1fr; }
+  .gal--2, .gal--3 { grid-template-columns: 2fr 1fr; }
+  .gal--4 .gal__item:nth-child(4) { grid-column: 2 / 4; }
+  .gal__more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(16 43 32 / 0.6); color: #fff; font-weight: 600; }
+  .gal__n { display: none; }
+  .nophoto { aspect-ratio: 3 / 1; display: grid; place-items: center; background: var(--paper); color: var(--muted); font-family: var(--font-display); }
+
+  .chips { padding-top: 18px; }
+  .chips ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--paper); color: var(--green-ink); text-decoration: none; font-size: 0.9375rem; font-weight: 500; }
+  .chips a:hover { background: var(--mint-soft); }
+
+  .body { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: clamp(40px, 5vw, 88px); padding-block: clamp(32px, 4vw, 56px) var(--section); align-items: start; }
+  .main { display: grid; gap: 52px; min-width: 0; }
+  .main section { display: grid; gap: 20px; }
+  .devnote { background: var(--mint-soft); padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; }
+  .sec-h { font-size: var(--step-2); color: var(--green-ink); padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .facts div { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column-reverse; gap: 2px; }
+  .facts dt { font-size: 0.875rem; color: var(--muted); }
+  .facts dd { font: 500 1.1875rem/1.2 var(--font-sans); }
+  .feats { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px 24px; }
+  .feats li { display: flex; align-items: center; gap: 10px; }
+  .feats li::before { content: ''; width: 8px; height: 8px; background: var(--green); flex: none; }
+  .allph ul { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .allph li:first-child { grid-column: 1 / -1; }
+  .allph li { scroll-margin-top: calc(var(--header-h) + 16px); background: var(--paper); }
+  .allph :global(img) { width: 100%; height: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+
+  .side { position: sticky; top: calc(var(--header-h) + 20px); }
+  .side__card { background: var(--paper); padding: 28px; display: grid; gap: 20px; }
+  .side__h { font-size: var(--step-2); color: var(--green-ink); padding-bottom: 16px; border-bottom: 1px solid var(--line-strong); }
+  .adv { display: flex; gap: 16px; align-items: center; }
+  .adv :global(.adv__photo) { width: 72px; height: 72px; border-radius: 50%; flex: none; }
+  .adv__name { font: 500 1.125rem/1.3 var(--font-sans); }
+  .adv__name a, .adv__team a { text-decoration: none; }
+  .adv__name a { display: inline-flex; min-height: 32px; align-items: center; }
+  .adv__name a:hover, .adv__team a:hover { text-decoration: underline; }
+  .adv__team, .adv__tel { font-size: 0.9375rem; color: var(--muted); }
+  .adv__team a, .adv__tel a { display: inline-flex; min-height: 28px; align-items: center; }
+  .adv__tel a { color: var(--green); }
+  .ref { font-size: 0.8125rem; color: var(--muted); }
+  .sim-h { color: var(--green-ink); margin-bottom: 28px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .mbar { display: none; }
+
+  @media (max-width: 1080px) {
+    .body { grid-template-columns: minmax(0, 1fr); }
+    .side { position: static; }
+  }
+  @media (max-width: 900px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 760px) {
+    .intro__figs { gap: 24px; }
+    .intro__figs dd { font-size: 1.125rem; }
+    .gal, .gal--1, .gal--2, .gal--3, .gal--4 { display: grid; grid-template: none; grid-auto-flow: column; grid-auto-columns: 88%; aspect-ratio: auto; gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+    .gal__item, .gal__item:first-child, .gal--4 .gal__item:nth-child(4) { grid-row: auto; grid-column: auto; aspect-ratio: 3 / 2; scroll-snap-align: start; }
+    .gal__n { display: block; position: absolute; right: 10px; bottom: 10px; background: rgb(16 43 32 / 0.75); color: #fff; font-size: 0.8125rem; padding: 4px 9px; }
+    .chips ul { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+    .chips li { flex: none; }
+    .side__card { padding: 22px 18px; margin-inline: calc(-1 * var(--gutter)); }
+    .grid3 { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .mbar { position: sticky; bottom: 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--line); }
+    .mbar .button:only-child { grid-column: 1 / -1; }
+  }
+</style>

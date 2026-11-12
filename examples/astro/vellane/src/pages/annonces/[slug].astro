@@ -1,0 +1,330 @@
+---
+export const prerender = false;
+/**
+ * Listing page. Gallery (1 + 4, a strip on phones), sticky section tabs
+ * (aperçu, caractéristiques, quartier, contact), fact tiles, an indicative
+ * monthly payment for sales, DPE, the area, and the enquiry form with the
+ * listing's agent. On desktop a sticky card keeps price and agent in view;
+ * on phones a bottom bar keeps "Appeler" and "Écrire" in reach.
+ */
+import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import { featureLabel } from '@realadvisor/sites-kit/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import ListingsMap from '@realadvisor/sites-kit/components/ListingsMap.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../../layouts/Site.astro';
+import Gallery from '../../components/Gallery.astro';
+import Icon, { type IconName } from '../../components/Icon.astro';
+import ListingCard from '../../components/ListingCard.astro';
+import SaveButton from '../../components/SaveButton.astro';
+import AgentBlock from '../../components/AgentBlock.astro';
+import EnergyScale from '../../components/EnergyScale.astro';
+import PaymentEstimate from '../../components/PaymentEstimate.astro';
+import { extraNum, extraStr, siteData, sites } from '../../lib/data';
+import {
+  agentName, bathrooms, bedrooms, cityHref, cityLine, citySlug, floor, hasPrice, listingHref, price, R, rooms,
+  searchUrl, surface, teamHref, teamShortName, tel, typeLabel, date,
+} from '../../lib/site';
+import { placeFor } from '../../content/places';
+import { CITY_TEXT } from '../../content/cities';
+
+const slug = Astro.params.slug!;
+const listing = await sites.listing(slug);
+if (!listing) {
+  // A slug ending in a listing id was ours (sold, removed): 410 Gone with "no longer available".
+  const gone = !!listingIdFromSlug(slug);
+  (Astro.locals as { listingGone?: boolean }).listingGone = gone;
+  const page = await Astro.rewrite('/404');
+  return gone ? new Response(page.body, { status: 410, headers: page.headers }) : page;
+}
+const l = listing;
+const [{ teams, agents }, sameCity] = await Promise.all([
+  siteData(),
+  l.address.city ? sites.allListings({ city: l.address.city }) : Promise.resolve([]),
+]);
+const kit = l;
+const sold = l.status === 'sold';
+const agent = l.agent ? agents.find((a) => a.id === l.agent!.id) ?? l.agent : undefined;
+const team = teams.find((t) => l.team_ids.includes(t.id) || agent?.team_ids.includes(t.id));
+const ref = listingRef(kit);
+const typ = typeLabel(l.property_type);
+const place = cityLine(l);
+
+// fixture only: energy class, year built, floor, outdoor surfaces and monthly charges are not in the API yet.
+const energy = extraStr(l.id, 'energy_class'); // fixture only:
+const yearBuilt = extraNum(l.id, 'year_built'); // fixture only:
+const level = extraNum(l.id, 'floor'); // fixture only:
+const balcony = extraNum(l.id, 'balcony_surface'); // fixture only:
+const terrace = extraNum(l.id, 'terrace_surface'); // fixture only:
+const charges = extraNum(l.id, 'charges'); // fixture only:
+
+const tiles = [
+  { icon: 'home', label: 'Type', value: typ },
+  l.living_surface && { icon: 'area', label: 'Surface habitable', value: surface(l.living_surface) },
+  l.rooms && { icon: 'door', label: 'Pièces', value: rooms(l.rooms) },
+  l.bedrooms && { icon: 'bed', label: 'Chambres', value: bedrooms(l.bedrooms) },
+  l.bathrooms && { icon: 'bath', label: 'Salles de bains', value: bathrooms(l.bathrooms) },
+  level != null && { icon: 'stairs', label: 'Étage', value: floor(level) },
+  l.land_surface && { icon: 'tree', label: 'Terrain', value: surface(l.land_surface) },
+  (terrace || balcony) && { icon: 'sun', label: terrace ? 'Terrasse' : 'Balcon', value: surface(terrace ?? balcony) },
+  yearBuilt && { icon: 'calendar', label: 'Construction', value: String(yearBuilt) },
+].filter(Boolean) as { icon: IconName; label: string; value: string }[];
+
+const specs = [
+  ['Référence', ref],
+  ['Type de bien', typ],
+  ['Offre', l.offer_type === 'rent' ? 'Location' : 'Vente'],
+  ['Prix', price(l)],
+  l.offer_type === 'rent' && charges != null && ['Charges', `${charges} € / mois`],
+  l.living_surface && ['Surface habitable', surface(l.living_surface)],
+  l.land_surface && ['Terrain', surface(l.land_surface)],
+  terrace && ['Terrasse', surface(terrace)],
+  balcony && ['Balcon', surface(balcony)],
+  l.rooms && ['Pièces', String(l.rooms)],
+  l.bedrooms && ['Chambres', String(l.bedrooms)],
+  l.bathrooms && ['Salles de bains', String(l.bathrooms)],
+  level != null && ['Étage', floor(level)],
+  yearBuilt && ['Année de construction', String(yearBuilt)],
+  ['Adresse', [l.address.street, place].filter(Boolean).join(', ')],
+  ['Publiée', date(l.published_at)],
+].filter(Boolean) as [string, string][];
+
+const nearby = sameCity.filter((x) => x.id !== l.id && x.status === 'available').sort((a, b) => (a.offer_type === l.offer_type ? -1 : 1) - (b.offer_type === l.offer_type ? -1 : 1)).slice(0, 3);
+const cityKey = l.address.city ? citySlug(l.address.city) : '';
+const areaPhoto = placeFor(cityKey)[0];
+const areaText = CITY_TEXT[cityKey];
+const hasMap = l.address.lat != null && l.address.lng != null;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const descr = (l.description_text ?? '').replace(/\s+/g, ' ').trim();
+const first = l.photos[0];
+const agentFirst = agent?.first_name;
+const enquiryMsg = `Bonjour, je suis intéressé(e) par « ${l.title} » (réf. ${ref}). Pouvez-vous me recontacter ?`;
+const tabs = [
+  ['apercu', 'Aperçu'],
+  ['caracteristiques', 'Caractéristiques'],
+  ['quartier', 'Quartier'],
+  ['contact', 'Contact'],
+];
+const back = sold ? R.sold : searchUrl(l.offer_type, { city: l.address.city });
+---
+<Site nav={sold ? 'none' : l.offer_type} stickyBar={!sold}
+  title={`${listingTitle(kit, sameCity)} | ${price(l)}`}
+  description={descr.slice(0, 155) || `${l.title}, ${place}`}
+  image={first && img(first.url, { w: 1200, h: 630 })}
+  jsonLd={listingJsonLd(kit, pageUrl)} noindex={sold}>
+
+  <div class="wrap lp-top">
+    <a class="lp-back" href={back}><Icon name="back" size={18} />{sold ? 'Biens vendus' : l.address.city ? `${l.offer_type === 'rent' ? 'Locations' : 'Ventes'} à ${l.address.city}` : 'Toutes les annonces'}</a>
+    {!sold && (
+      <SaveButton variant="label" id={l.id} href={listingHref(l)} title={l.title} price={price(l)} place={place}
+        facts={[rooms(l.rooms), surface(l.living_surface)].filter(Boolean).join(' · ')} img={first ? img(first.url, { w: 320, h: 240 }) : ''} alt={first?.alt ?? ''} />
+    )}
+  </div>
+
+  <div class="wrap">
+    <Gallery photos={l.photos} label={l.title} noPhotoText={`${typ}, photos à venir`} />
+  </div>
+
+  <nav class="tabs" aria-label="Sections de l'annonce" data-tabs>
+    <div class="wrap tabs__in">
+      <ul>
+        {tabs.map(([id, label]) => <li><a href={`#${id}`} data-tab={id}>{label}</a></li>)}
+      </ul>
+      <p class="tabs__price num">{price(l)}</p>
+    </div>
+  </nav>
+
+  <div class="wrap lp">
+    <div class="lp__main">
+      <section id="apercu" class="lp__sec lp__intro" aria-labelledby="lp-h1">
+        {sold && <p class="lp__sold">{l.offer_type === 'rent' ? 'Ce bien est loué.' : 'Ce bien a été vendu par notre agence.'}</p>}
+        <p class="lp__price num">{price(l)}</p>
+        <h1 id="lp-h1" class="lp__h1">{l.title}</h1>
+        <p class="lp__where"><Icon name="pin" size={18} />{[l.address.street, place].filter(Boolean).join(', ')}</p>
+
+        <ul class="tiles">
+          {tiles.map((x) => (
+            <li class="tile"><Icon name={x.icon} size={22} /><span class="tile__v">{x.value}</span><span class="tile__l">{x.label}</span></li>
+          ))}
+        </ul>
+
+        {l.description && <div class="prose lp__desc" set:html={sanitizeHtml(l.description)} />}
+
+        {l.features.length > 0 && (
+          <div class="lp__feat">
+            <h2 class="lp__h2">Équipements</h2>
+            <ul class="feat">{l.features.map((f) => <li>{featureLabel(f, 'fr-FR')}</li>)}</ul>
+          </div>
+        )}
+
+        {!sold && l.offer_type === 'buy' && hasPrice(l) && <PaymentEstimate price={l.price!} />}
+      </section>
+
+      <section id="caracteristiques" class="lp__sec" aria-labelledby="spec-h">
+        <h2 id="spec-h" class="lp__h2">Caractéristiques</h2>
+        <dl class="specs">
+          {specs.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+        {energy && <EnergyScale grade={energy} />}
+      </section>
+
+      <section id="quartier" class="lp__sec" aria-labelledby="area-h">
+        <h2 id="area-h" class="lp__h2">Le quartier{l.address.city && <Fragment> : {l.address.city}</Fragment>}</h2>
+        {areaText && <p class="lp__area-lede">{areaText.lede}</p>}
+        {hasMap && (
+          <div class="lp__map">
+            <ListingsMap listings={[kit]} href={() => listingHref(l)} price={() => price(l)} />
+            <p class="lp__map-note muted">Emplacement approximatif. L'adresse exacte est communiquée lors de la visite.</p>
+          </div>
+        )}
+        {!hasMap && areaPhoto && (
+          <RaImage class="lp__area-photo" src={areaPhoto} alt={areaPhoto.alt} width={1200} height={600} sizes="(min-width: 960px) 760px, 100vw" />
+        )}
+        {l.address.city && <p><a class="link" href={cityHref(l.address.city)}>Tout savoir sur nos biens à {l.address.city}</a></p>}
+      </section>
+
+      <section id="contact" class="lp__sec lp__contact" aria-labelledby="contact-h">
+        <h2 id="contact-h" class="lp__h2">{sold ? 'Un bien similaire à vendre ?' : agentFirst ? `Écrire à ${agentFirst}` : 'Nous écrire'}</h2>
+        {agent && <AgentBlock agent={agent} team={team} layout="row" as="p" />}
+        {sold ? (
+          <EnquiryForm contactReason="valuation" message={`Bonjour, je possède un bien comparable à « ${l.title} » (réf. ${ref}) et souhaite une estimation.`} submitLabel="Demander une estimation" />
+        ) : (
+          <EnquiryForm listingId={l.id} agentId={agent?.id} agentName={agentFirst} message={enquiryMsg} submitLabel="Envoyer ma demande" />
+        )}
+        <p class="lp__ref muted">Réf. {ref}</p>
+      </section>
+    </div>
+
+    <aside class="lp__aside" aria-label="Résumé et contact">
+      <div class="side">
+        <p class="side__price num">{price(l)}</p>
+        <p class="side__facts">{[rooms(l.rooms), bedrooms(l.bedrooms), surface(l.living_surface)].filter(Boolean).join(' · ')}</p>
+        {!sold && l.offer_type === 'buy' && hasPrice(l) && <a class="side__pay" href="#pay">Voir la mensualité estimée</a>}
+        {agent && (
+          <div class="side__agent">
+            {agent.photo && <RaImage class="side__photo" src={agent.photo} alt={agent.photo.alt || agentName(agent)} width={128} height={160} sizes="64px" />}
+            <div>
+              <p class="side__name">{agentName(agent)}</p>
+              {team && <p class="side__team"><a href={teamHref(team)}>Vellane {teamShortName(team)}</a></p>}
+            </div>
+          </div>
+        )}
+        <a class="vb side__btn" href="#contact">{sold ? 'Demander une estimation' : 'Écrire à l’agent'}</a>
+        {(agent?.phone ?? team?.phone) && <a class="vb vb--ghost side__btn" href={tel((agent?.phone ?? team?.phone)!)}><Icon name="phone" size={18} />{agent?.phone ?? team?.phone}</a>}
+      </div>
+    </aside>
+  </div>
+
+  {nearby.length > 0 && (
+    <section class="wrap near" aria-labelledby="near-h">
+      <h2 id="near-h" class="lp__h2">Autres biens à {l.address.city}</h2>
+      <ul class="cards">{nearby.map((x) => <li><ListingCard listing={x} /></li>)}</ul>
+    </section>
+  )}
+
+  {!sold && (
+    <div class="bar" aria-label="Contacter l'agence">
+      {(agent?.phone ?? team?.phone) && <a class="vb vb--ghost" href={tel((agent?.phone ?? team?.phone)!)}><Icon name="phone" size={18} />Appeler</a>}
+      <a class="vb" href="#contact"><Icon name="mail" size={18} />Écrire</a>
+    </div>
+  )}
+</Site>
+
+<script>
+  // Section tabs: the link of the section in view is marked current.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-tab]')];
+  const secs = links.map((a) => document.getElementById(a.dataset.tab!)).filter(Boolean) as HTMLElement[];
+  if (links.length && 'IntersectionObserver' in window) {
+    const set = (id: string) => links.forEach((a) => (a.dataset.tab === id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+    const io = new IntersectionObserver(
+      (es) => {
+        const vis = es.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (vis) set(vis.target.id);
+      },
+      { rootMargin: '-35% 0px -55% 0px' },
+    );
+    secs.forEach((s) => io.observe(s));
+    set(secs[0]?.id ?? '');
+  }
+</script>
+
+<style>
+  .lp-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 16px; }
+  .lp-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; font-weight: 550; }
+  .lp-back:hover { text-decoration: underline; }
+
+  .tabs { position: sticky; top: var(--header-h); z-index: 30; margin-top: 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .tabs__in { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .tabs ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs a {
+    display: inline-flex; align-items: center; min-height: 52px; padding: 0 14px; text-decoration: none; font-weight: 550; color: var(--muted);
+    box-shadow: inset 0 -2px 0 transparent; white-space: nowrap;
+  }
+  .tabs a:hover { color: var(--text); }
+  .tabs a[aria-current] { color: var(--text); box-shadow: inset 0 -3px 0 var(--accent); }
+  .tabs__price { font-weight: 650; font-size: 1.0625rem; }
+  @media (max-width: 639px) { .tabs__price { display: none; } .tabs a { padding: 0 8px; font-size: 0.875rem; } .tabs__in { padding-inline: 8px; } .tabs ul { gap: 0; } }
+
+  .lp { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 32px; }
+  @media (min-width: 1024px) { .lp { grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; } }
+  .lp__main { min-width: 0; display: grid; gap: 0; }
+  .lp__sec { padding-block: 32px; border-top: 1px solid var(--line); display: grid; gap: 20px; align-content: start; scroll-margin-top: calc(var(--header-h) + 64px); }
+  .lp__sec:first-child { border-top: 0; padding-top: 0; }
+  .lp__intro { gap: 16px; }
+  .lp__sold { justify-self: start; padding: 6px 14px; border-radius: 999px; background: var(--surface-2); font-weight: 600; }
+  .lp__price { font-size: var(--step-3); font-weight: 650; letter-spacing: -0.03em; }
+  .lp__h1 { font-size: var(--step-2); font-weight: 600; letter-spacing: -0.02em; }
+  .lp__where { display: flex; gap: 8px; align-items: center; color: var(--muted); }
+  .lp__h2 { font-size: var(--step-2); }
+
+  .tiles { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .tile { display: grid; gap: 2px; padding: 16px; border-radius: 14px; background: var(--surface); }
+  .tile :global(svg) { color: var(--accent); margin-bottom: 8px; }
+  .tile__v { font-weight: 650; font-size: 1.0625rem; }
+  .tile__l { color: var(--muted); font-size: 0.875rem; }
+
+  .lp__desc { margin-top: 8px; }
+  .lp__feat { display: grid; gap: 12px; }
+  .lp__feat .lp__h2 { font-size: 1.125rem; }
+  .feat { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .feat li { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.9375rem; }
+
+  .specs { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); column-gap: 40px; }
+  .specs div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .specs dt { color: var(--muted); }
+  .specs dd { margin: 0; font-weight: 550; text-align: right; }
+
+  .lp__area-lede { font-size: var(--step-1); max-width: 62ch; }
+  .lp__map { --map-h: 360px; display: grid; gap: 8px; }
+  .lp__map :global(.ra-map) { border-radius: var(--radius-card); overflow: hidden; }
+  .lp__map-note { font-size: 0.875rem; }
+  :global(.lp__area-photo) { width: 100%; height: auto; border-radius: var(--radius-card); }
+
+  .lp__contact :global(.enquiry) { max-width: 720px; }
+  .lp__ref { font-size: 0.875rem; }
+
+  .lp__aside { display: none; }
+  @media (min-width: 1024px) {
+    .lp__aside { display: block; }
+    .side { position: sticky; top: calc(var(--header-h) + 76px); display: grid; gap: 12px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow); }
+  }
+  .side__price { font-size: 1.75rem; font-weight: 650; letter-spacing: -0.03em; }
+  .side__facts { color: var(--muted); }
+  .side__pay { color: var(--accent-strong); font-weight: 600; font-size: 0.9375rem; }
+  .side__agent { display: flex; gap: 12px; align-items: center; padding: 14px 0; margin: 4px 0; border-block: 1px solid var(--line); }
+  :global(.side__photo) { width: 64px; height: 80px; object-fit: cover; border-radius: 10px; }
+  .side__name { font-weight: 650; }
+  .side__team { font-size: 0.9375rem; color: var(--muted); }
+  .side__team a { color: inherit; }
+  .side__btn { width: 100%; }
+
+  .near { margin-top: var(--section); display: grid; gap: 24px; }
+
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px;
+    padding: 12px var(--gutter) max(12px, env(safe-area-inset-bottom)); background: var(--bg); border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgb(0 0 0 / 0.06);
+  }
+  @media (min-width: 1024px) { .bar { display: none; } }
+</style>

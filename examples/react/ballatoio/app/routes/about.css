@@ -1,0 +1,19 @@
+  .story { display: grid; grid-template-columns: 5fr 6fr; gap: 40px clamp(40px, 6vw, 120px); align-items: start; }
+  .story-photo { aspect-ratio: 4 / 5; }
+  .story-text { display: grid; gap: 1.2em; max-width: 38rem; }
+  .story-text .big { font-size: var(--fs-s); line-height: 1.35; font-weight: 500; }
+  .now { border-top: 1px solid var(--text); padding-top: 18px; margin-top: 24px; display: grid; gap: 10px; }
+  .now-links { display: flex; gap: 28px; flex-wrap: wrap; }
+  @media (max-width: 900px) { .story { grid-template-columns: 1fr; } .story-photo { aspect-ratio: 8 / 7; } }
+  .wide { padding-top: var(--section); }
+  .wide-photo { aspect-ratio: 16 / 9; }
+  .how { display: grid; grid-template-columns: 1fr 2fr; gap: 24px clamp(32px, 6vw, 120px); padding-top: var(--section); }
+  .how-list { border-top: 1px solid var(--text); }
+  .how-list div { display: grid; grid-template-columns: minmax(10rem, 1fr) 2fr; gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  @media (max-width: 900px) { .how { grid-template-columns: 1fr; } .how-list div { grid-template-columns: 1fr; } }
+  .people { padding-top: var(--section); display: grid; gap: clamp(24px, 3vw, 40px); }
+  .people h2 a { text-decoration: none; }
+  .people h2 a:hover { text-decoration: underline; }
+  .people-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px clamp(24px, 4vw, 64px); }
+  .people-list li { border-top: 1px solid var(--text); padding-top: 16px; }
+    @media (max-width: 560px) { .people-list { grid-template-columns: 1fr; } }

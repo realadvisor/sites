@@ -1,0 +1,17 @@
+  .sp { display: grid; gap: 20px; }
+  .sp__tabs { border: 0; margin: 0; padding: 0; display: flex; gap: 10px; min-width: 0; }
+  .sp__tab { position: relative; display: inline-flex; cursor: pointer; }
+  .sp__tab input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .sp__tab span { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 18px; border: 1px solid rgb(255 255 255 / 0.55); border-radius: 999px; font: 600 0.9375rem/1 var(--font-sans); color: #fff; }
+  .sp__tab:hover span { border-color: #fff; }
+  .sp__tab:has(input:checked) span { background: #fff; color: var(--green); border-color: #fff; }
+  .sp__tab:has(input:checked) span::before { content: ''; width: 10px; height: 6px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg) translateY(-2px); }
+  .sp__tab:has(input:focus-visible) span { outline: 2px solid #fff; outline-offset: 3px; }
+
+  .sp__panel { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: end; }
+  .sp__panel--only, .sp:has(#sp-buy:checked) .sp__panel--buy, .sp:has(#sp-rent:checked) .sp__panel--rent { display: grid; }
+  .sp__panel:not(:has(select[name='maxPrice'])) .sp__go { grid-column: 1 / -1; }
+  .sp__panel .field-label { color: var(--on-green-muted); font-weight: 500; }
+  .sp__panel .control { --control-border: transparent; background: #fff; }
+  .sp__go { min-height: var(--control-h); }
+  @media (max-width: 900px) { .sp__panel { grid-template-columns: minmax(0, 1fr); } .sp__go { width: 100%; } }

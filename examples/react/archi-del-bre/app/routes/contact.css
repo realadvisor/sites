@@ -1,0 +1,11 @@
+  .v-contact .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-areas: 'intro form' 'info form'; grid-template-rows: auto 1fr; gap: 40px clamp(40px, 6vw, 112px); padding-block: clamp(40px, 6vw, 88px) var(--section); align-items: start; }
+  .v-contact .intro { grid-area: intro; display: grid; gap: 22px; }
+  .v-contact .info { grid-area: info; display: grid; gap: 28px; align-content: start; }
+  .v-contact .form { grid-area: form; }
+  .v-contact .office, .v-contact .people { display: grid; gap: 8px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .v-contact .people { gap: 32px; }
+  .v-contact .office h2, .v-contact .people h2 { margin-bottom: 6px; }
+  .v-contact .office a { display: inline-block; padding-block: 6px; }
+  .v-contact .big { font: 400 var(--step-2)/1.1 var(--serif); text-decoration: none; }
+  .v-contact .form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-frame); padding: clamp(22px, 3.5vw, 48px); display: grid; gap: 24px; position: sticky; top: calc(var(--header-h) + 24px); }
+  @media (max-width: 960px) { .v-contact .grid { grid-template-columns: 1fr; grid-template-areas: 'intro' 'form' 'info'; } .v-contact .form { position: static; } }

@@ -1,0 +1,12 @@
+.head { padding-top: 16px; display: grid; gap: 18px; padding-bottom: 40px; }
+.head__title { font-size: clamp(2.2rem, 1.5rem + 2.6vw, 3.6rem); margin-top: 16px; }
+.cover img { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; }
+.body { padding-block: 56px var(--section); }
+.dest { margin-top: 40px; }
+.author { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 16px; }
+.more { padding-block: 64px; border-top: 1px solid var(--line); }
+.more ul { margin-top: 20px; border-top: 1px solid var(--line); }
+.more a { display: flex; justify-content: space-between; gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--line); text-decoration: none; font: 420 1.25rem/1.3 var(--font-display); }
+.more a:hover span { text-decoration: underline; text-decoration-color: var(--accent); }
+.more time { font-family: var(--font-sans); white-space: nowrap; }
+@media (max-width: 639px) { .more a { flex-direction: column; gap: 4px; } .cover { padding-inline: 0; } }

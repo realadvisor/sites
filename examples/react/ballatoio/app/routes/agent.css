@@ -1,0 +1,11 @@
+  .head .agent-name { font-size: var(--fs-xl); }
+  .head .agent.has-photo { grid-template-columns: minmax(0, 400px) 1fr; gap: clamp(24px, 4vw, 64px); align-items: end; }
+  .head .agent-photo { max-width: none; }
+  @media (max-width: 700px) { .head .agent.has-photo { grid-template-columns: 1fr; } .head .agent-photo { max-width: 320px; } }
+  .homes { display: grid; gap: clamp(24px, 3vw, 40px); border-top: 1px solid var(--text); padding-top: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 72px) clamp(24px, 3.5vw, 56px); }
+  .sold-h { margin-top: 24px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .form { background: var(--paper); margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); }
+  .form-in { display: grid; grid-template-columns: 1fr 1fr; gap: 40px clamp(40px, 6vw, 120px); }
+  @media (max-width: 900px) { .form-in { grid-template-columns: 1fr; } }

@@ -1,0 +1,34 @@
+---
+/** The lightbox dialog for [data-lightbox] links on the page (src/scripts/lightbox.ts). */
+import type { L } from '../lib/routes';
+import { c } from '../lib/copy';
+interface Props { l: L }
+const { l } = Astro.props;
+---
+<dialog class="lightbox" data-dialog aria-label={c('gallery', l)}>
+  <div class="lb-bar">
+    <span data-count class="num"></span>
+    <button type="button" data-close>{c('close', l)}</button>
+  </div>
+  <figure>
+    <img data-img alt="" />
+    <figcaption data-cap></figcaption>
+  </figure>
+  <button type="button" class="nav prev" data-prev aria-label={c('prev', l)}>‹</button>
+  <button type="button" class="nav next" data-next aria-label={c('next', l)}>›</button>
+</dialog>
+<script>
+  import '../scripts/lightbox';
+</script>
+<style>
+  .lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgb(24 20 15 / 0.96); color: #fff; }
+  .lightbox::backdrop { background: rgb(24 20 15 / 0.9); }
+  .lb-bar { position: absolute; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; z-index: 2; }
+  .lb-bar button, .nav { min-width: 44px; min-height: 44px; padding: 0 16px; background: rgb(255 255 255 / 0.1); color: #fff; border: 1px solid rgb(255 255 255 / 0.3); border-radius: 999px; cursor: pointer; font: 600 0.9375rem/1 var(--sans); }
+  figure { margin: 0; height: 100%; display: grid; grid-template-rows: 1fr auto; padding: 72px 72px 20px; gap: 12px; }
+  figure img { width: 100%; height: 100%; object-fit: contain; min-height: 0; }
+  figcaption { text-align: center; font-size: 0.9375rem; color: rgb(255 255 255 / 0.8); }
+  .nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 1.75rem; padding: 0; width: 48px; height: 48px; }
+  .prev { left: 12px; } .next { right: 12px; }
+  @media (max-width: 640px) { figure { padding: 64px 8px 16px; } .nav { top: auto; bottom: 56px; transform: none; } }
+</style>

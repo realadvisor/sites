@@ -1,0 +1,301 @@
+---
+// Home: the development. Colour-block hero with the three buildings and their
+// move-in dates, facts, unit types, photos, location, construction, enquiry.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import BucketPicture from '../components/BucketPicture.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import BuildingTiles from '../components/BuildingTiles.astro';
+import TypeStrip from '../components/TypeStrip.astro';
+import StaticMap from '../components/StaticMap.astro';
+import ContactCard from '../components/ContactCard.astro';
+import Icon from '../components/Icon.astro';
+import { devExtra, site as load } from '../lib/data';
+import { news, newsMonth } from '../lib/news';
+import { buildings, chf, monthYear, rowsOf, types, unitOptions } from '../lib/units';
+import { distances } from '../lib/place';
+
+const site = await load();
+const { dev } = site;
+const rows = rowsOf(dev);
+const houses = buildings(rows);
+const typeList = types(rows);
+const x = devExtra(dev.id);
+const entries = await news(dev.id);
+const done = entries.filter((e) => !e.data.planned);
+const latest = done.slice(-2).reverse();
+const rents = typeList.map((t) => t.from).filter((n): n is number => n != null);
+const sizes = dev.stats.living_surface;
+const roomRange = dev.stats.rooms;
+const moveIns = houses.map((h) => h.moveIn).filter((d): d is string => !!d).sort();
+const [lead, ...more] = (dev.description ?? '').split('</p>').filter((s) => s.trim()).map((s) => `${s}</p>`);
+const WORDS = ['', 'Ein', 'Zwei', 'Drei', 'Vier', 'Fünf', 'Sechs'];
+const houseWord = WORDS[houses.length] ?? String(houses.length);
+const donePct = entries.length ? Math.round(((done.length - 0.5) / (entries.length - 1)) * 100) : 0;
+const rest = more.join('');
+const hero = dev.photos[6] ?? dev.photos[0];
+const pics = [dev.photos[8], dev.photos[5], dev.photos[9]].filter(Boolean);
+// Location: distances computed from the address coordinates (src/lib/place.ts).
+const near = distances(dev.address);
+const homeNear = ['Bushaltestelle Gaswerk', 'Bahnhof Winterthur-Töss', 'Schule Tössfeld', 'Lokstadt, Dialogplatz', 'Winterthur Hauptbahnhof']
+  .map((l) => near.find((d) => d.label === l))
+  .filter((d): d is (typeof near)[number] => !!d);
+const street = dev.address.street?.replace(/\s+\d+\w*$/, '') ?? dev.address.city ?? '';
+const station = near.find((d) => d.label === 'Bahnhof Winterthur-Töss');
+const place = [dev.address.street, [dev.address.postcode, dev.address.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ApartmentComplex',
+  name: dev.title,
+  description: dev.description_text,
+  numberOfAccommodationUnits: dev.stats.units,
+  numberOfAvailableAccommodationUnits: dev.stats.available,
+  address: { '@type': 'PostalAddress', streetAddress: dev.address.street, postalCode: dev.address.postcode, addressLocality: dev.address.city, addressCountry: 'CH' },
+  geo: dev.address.lat != null ? { '@type': 'GeoCoordinates', latitude: dev.address.lat, longitude: dev.address.lng } : undefined,
+  image: dev.photos.slice(0, 3).map((p) => img(p.url, { w: 1200, h: 800 })),
+  url: Astro.site?.href ?? Astro.url.origin,
+};
+---
+<Site
+  site={site}
+  title={`${dev.title}: ${dev.stats.units} Mietwohnungen in ${dev.address.city ?? ''} | Erstvermietung`}
+  description={(dev.description_text ?? '').replace(/\s+/g, ' ').slice(0, 155)}
+  image={hero && img(hero.url, { w: 1200, h: 630 })}
+  jsonLd={jsonLd}
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-head">
+          <h1 id="hero-title"><span><span class="num">{dev.stats.units}</span> Mietwohnungen</span> <span class="z">im Tössfeld</span></h1>
+          <p class="hero-sub">Erstvermietung in {houseWord.toLowerCase()} Neubauten am {street} in {dev.address.city}{station ? `, ${station.distance} vom Bahnhof Winterthur-Töss` : ''}.</p>
+        </div>
+        <dl class="figs">
+          {roomRange && <div><dt>Zimmer</dt><dd class="num">{String(roomRange.min)}–{String(roomRange.max)}</dd></div>}
+          {sizes && <div><dt>Wohnfläche</dt><dd class="num">{sizes.min}–{sizes.max} m²</dd></div>}
+          {rents.length > 0 && <div><dt>Miete netto</dt><dd class="num">ab {chf(Math.min(...rents))}</dd></div>}
+        </dl>
+        <div class="hero-cta">
+          <a class="cta cta--zinnober" href="/wohnungen">Wohnungen ansehen <Icon name="arrow" /></a>
+          <a class="cta cta--outline-light" href="/kontakt">Interesse anmelden</a>
+        </div>
+      </div>
+      <div class="hero-photo" data-hero>
+        {hero && <RaImage src={hero} alt={`${dev.title}, Wohnhaus mit farbigen Loggien`} width={1200} height={900} priority sizes="(min-width: 1100px) 58vw, 100vw" />}
+      </div>
+    </div>
+    <BuildingTiles houses={houses} />
+  </section>
+
+  <section class="intro band" aria-labelledby="intro-title">
+    <div class="wrap intro-grid">
+      <div>
+        <h2 id="intro-title" class="intro-title">Neubau am {street}</h2>
+        {lead && <div class="lead-text" set:html={sanitizeHtml(lead)} />}
+        {more.length > 0 && <div class="prose" set:html={sanitizeHtml(rest)} />}
+      </div>
+      <dl class="facts">
+        <div><dt>Wohnungen</dt><dd class="num">{dev.stats.units}, davon {dev.stats.available} frei</dd></div>
+        {houses.length > 0 && <div><dt>Häuser</dt><dd>{houses.map((h) => h.name).join(', ')}</dd></div>}
+        {moveIns.length > 0 && <div><dt>Bezug</dt><dd>{[...new Set(moveIns.map(monthYear))].join(', ')}</dd></div>}
+        {/* fixture only: developer, architect, general contractor */}
+        {x.developer && <div><dt>Bauherrschaft</dt><dd>{x.developer}</dd></div>}
+        {x.architect && <div><dt>Architektur</dt><dd>{x.architect}</dd></div>}
+        {x.contractor && <div><dt>Totalunternehmung</dt><dd>{x.contractor}</dd></div>}
+        {place && <div><dt>Adresse</dt><dd>{place}</dd></div>}
+      </dl>
+    </div>
+  </section>
+
+  <section class="types-band band band--sand" aria-labelledby="types-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="types-title" class="sec-title">Vier Wohnungstypen</h2>
+        <a class="arrow-link" href="/wohnungen">Zum Stockwerkplan <Icon name="arrow" /></a>
+      </div>
+      <TypeStrip list={typeList} />
+    </div>
+  </section>
+
+  {pics.length === 3 && (
+    <section class="pics band" aria-labelledby="pics-title">
+      <div class="wrap">
+        <div class="collage">
+          <figure class="c1"><RaImage src={pics[0]} alt={pics[0]!.alt} width={900} height={600} sizes="(min-width: 900px) 50vw, 100vw" /></figure>
+          <figure class="c2"><RaImage src={pics[1]} alt={pics[1]!.alt} width={800} height={600} sizes="(min-width: 900px) 33vw, 100vw" /></figure>
+          <figure class="c3"><RaImage src={pics[2]} alt={pics[2]!.alt} width={900} height={600} sizes="(min-width: 900px) 40vw, 100vw" /></figure>
+          <div class="c4">
+            <h2 id="pics-title" class="c4-title">Ausbau und Hof</h2>
+            <p>Offene Küchen, Parkett, eigener Waschturm in jeder Wohnung. Im Hof: Spielplatz, Gemeinschaftsgärten und Velohalle.</p>
+            <a class="arrow-link" href="/galerie">Alle Bilder <Icon name="arrow" /></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="place band band--lilac" aria-labelledby="place-title">
+    <div class="wrap place-grid">
+      <div class="place-text">
+        <h2 id="place-title" class="sec-title">Im Tössfeld, zwischen Lokstadt und Töss</h2>
+        <ul class="dist">
+          {homeNear.map((d) => (
+            <li><Icon name={d.icon} size={22} /><span>{d.label}</span><strong class="num">{d.distance}</strong></li>
+          ))}
+        </ul>
+        <p class="dist-note">Luftlinie ab {dev.address.street ?? 'der Adresse'}, berechnet aus Koordinaten.</p>
+        <a class="arrow-link" href="/lage">Mehr zur Lage <Icon name="arrow" /></a>
+      </div>
+      {dev.address.lat != null && dev.address.lng != null && <StaticMap lat={dev.address.lat} lng={dev.address.lng} label={dev.title} cols={5} rows={3} />}
+    </div>
+  </section>
+
+  {latest.length > 0 && (
+    <section class="build band" aria-labelledby="build-title">
+      <div class="wrap">
+        <h2 id="build-title" class="sec-title build-title">Stand der Bauarbeiten</h2>
+        <ol class="mini-timeline" aria-label="Etappen" style={`--done:${donePct}%`}>
+          {entries.map((e) => (
+            <li class:list={{ planned: e.data.planned }}>
+              <span class="dot" aria-hidden="true"></span>
+              <span class="ph">{e.data.phase}</span>
+              <span class="mo">{newsMonth(e.data.date)}</span>
+            </li>
+          ))}
+        </ol>
+        <div class="news-cards">
+          {latest.map((e) => (
+            <article class="news-card">
+              {e.photoLocal ? (
+                <BucketPicture name={e.photoLocal} alt={e.data.photoAlt ?? e.data.title} ratio={3 / 2} sizes="(min-width: 900px) 40vw, 100vw" />
+              ) : e.photoUrl && <RaImage src={e.photoUrl} alt={e.data.photoAlt ?? e.data.title} width={800} height={533} sizes="(min-width: 900px) 40vw, 100vw" />}
+              <div>
+                <p class="eyebrow muted"><time datetime={e.data.date.toISOString().slice(0, 10)}>{newsMonth(e.data.date)}</time></p>
+                <h3><a href={`/news#${e.id}`}>{e.data.title}</a></h3>
+              </div>
+            </article>
+          ))}
+        </div>
+        <a class="arrow-link build-more" href="/news">Alle Etappen <Icon name="arrow" /></a>
+      </div>
+    </section>
+  )}
+
+  <section class="ask band band--zinnober" id="interesse" aria-labelledby="ask-title">
+    <div class="wrap ask-grid">
+      <div class="ask-text">
+        <h2 id="ask-title" class="ask-title">Wohnung anfragen</h2>
+        <p class="lead">Wählen Sie eine Wohnung und schreiben Sie uns. Wir melden uns mit den Bewerbungsunterlagen und einem Termin für die Besichtigung der Musterwohnung.</p>
+        {site.contact && <ContactCard agent={site.contact} team={site.team} />}
+      </div>
+      <div class="form-card">
+        <EnquiryForm
+          id="interesse-form"
+          developmentId={dev.id}
+          agentId={site.contact?.id}
+          agentName={site.contact?.first_name}
+          units={unitOptions(rows)}
+          message={`Guten Tag, ich interessiere mich für eine Wohnung im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`}
+          submitLabel="Interesse senden"
+        />
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .hero { border-bottom: 2px solid var(--ink); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); border-bottom: 2px solid var(--ink); }
+  .hero-text { background: var(--ink); color: #fff; padding: clamp(28px, 4vw, 64px) clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: clamp(20px, 3vw, 36px); justify-content: space-between; }
+  .hero-head { display: grid; gap: 20px; }
+  .hero-sub { font-size: var(--step-1); line-height: 1.4; color: #e8e4f5; max-width: 34ch; }
+  .hero h1 { font-size: clamp(2.5rem, 1rem + 3.4vw, 4.5rem); line-height: 0.95; letter-spacing: -0.045em; font-weight: 800; }
+  .hero h1 > span { display: block; }
+  .hero h1 .z { color: var(--zinnober); }
+  .figs { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 8px 28px; margin: 0; }
+  .figs div { display: grid; }
+  .figs dt { order: 2; font-size: 0.875rem; color: #d9d4ee; }
+  .figs dd { margin: 0; font: 750 clamp(1.25rem, 1rem + 0.9vw, 1.75rem)/1.1 var(--display); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-photo { position: relative; min-height: 100%; border-left: 2px solid var(--ink); background: var(--sand); }
+  .hero-photo :global(img) { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; }
+
+  .intro-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .intro-title { font-size: var(--step-4); margin-bottom: 28px; max-width: 14ch; }
+  .lead-text { font: 600 var(--step-2)/1.25 var(--display); letter-spacing: -0.01em; margin-bottom: 20px; max-width: 30ch; }
+  .facts { margin: 0; border-top: 2px solid var(--ink); }
+  .facts div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; font-weight: 600; }
+
+  .sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; margin-bottom: clamp(24px, 3vw, 40px); }
+  .sec-title { font-size: var(--step-4); max-width: 18ch; }
+
+  .collage { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); }
+  .collage figure { margin: 0; border-radius: var(--radius-card); overflow: hidden; border: 2px solid var(--ink); }
+  .collage :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .c1 { grid-column: 1 / 8; grid-row: 1 / 3; }
+  .c2 { grid-column: 8 / 13; grid-row: 1; aspect-ratio: 4 / 3; }
+  .c3 { grid-column: 8 / 13; grid-row: 2; aspect-ratio: 3 / 2; }
+  .c4 { grid-column: 1 / 8; display: grid; gap: 12px; justify-items: start; max-width: 52ch; }
+  .c4-title { font-size: var(--step-3); }
+  .c4 p { font: 600 var(--step-1)/1.4 var(--body); }
+  .build-title { margin-bottom: clamp(24px, 3vw, 40px); }
+  .build-more { margin-top: 28px; }
+
+  .place-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .place-text { display: grid; gap: 24px; justify-items: start; }
+  .dist { list-style: none; margin: 0; padding: 0; width: 100%; border-top: 2px solid var(--ink); }
+  .dist li { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgb(20 15 58 / 0.25); }
+  .dist strong { font: 750 1.125rem/1 var(--display); }
+  .dist-note { margin-top: -12px; font-size: 0.8125rem; color: var(--ink); opacity: 0.8; }
+
+  .mini-timeline { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); position: relative; }
+  .mini-timeline::before { content: ''; position: absolute; left: 0; right: 0; top: 9px; height: 4px; background: linear-gradient(90deg, var(--ink) var(--done, 62%), #d8cfc2 var(--done, 62%)); border-radius: 2px; }
+  .mini-timeline li { position: relative; display: grid; gap: 4px; padding-right: 10px; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--zinnober); border: 3px solid var(--ink); position: relative; }
+  .planned .dot { background: var(--bg); border-style: dashed; }
+  .ph { font-weight: 700; margin-top: 8px; padding-right: 12px; font-size: 0.9375rem; line-height: 1.25; text-wrap: balance; }
+  .mo { font-size: 0.875rem; color: var(--muted); }
+  .news-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
+  .news-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: center; background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-card); overflow: hidden; }
+  .news-card :global(picture) { height: 100%; }
+  .news-card :global(img) { width: 100%; height: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .news-card > div { padding: 20px 20px 20px 0; display: grid; gap: 8px; }
+  .news-card h3 { font-size: var(--step-2); }
+  .news-card h3 a { text-decoration: none; }
+  .news-card h3 a::after { content: ''; position: absolute; inset: 0; }
+  .news-card { position: relative; }
+  .news-card:hover h3 a { text-decoration: underline; }
+
+  .ask-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .ask-text { display: grid; gap: 24px; }
+  .ask-title { overflow-wrap: anywhere; hyphens: auto; font-size: var(--step-5); letter-spacing: -0.045em; line-height: 0.92; }
+  .form-card { background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-card); padding: clamp(20px, 3vw, 40px); box-shadow: 10px 10px 0 var(--ink); }
+
+  @media (max-width: 1100px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-photo { border-left: 0; border-top: 2px solid var(--ink); }
+    .intro-grid, .place-grid, .ask-grid { grid-template-columns: 1fr; }
+    .news-cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .figs { grid-template-columns: repeat(2, auto); }
+    .collage { grid-template-columns: 1fr 1fr; }
+    .c1 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 3 / 2; }
+    .c2, .c3 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+    .c4 { grid-column: 1 / -1; }
+    .mini-timeline { grid-template-columns: 1fr; gap: 14px; }
+    .mini-timeline::before { left: 9px; right: auto; top: 0; bottom: 0; width: 4px; height: auto; background: linear-gradient(180deg, var(--ink) var(--done, 62%), #d8cfc2 var(--done, 62%)); }
+    .mini-timeline li { grid-template-columns: 22px 1fr; column-gap: 14px; }
+    .mini-timeline .ph { margin: 0; grid-column: 2; grid-row: 1; align-self: center; }
+    .mini-timeline .mo { grid-column: 2; }
+    .news-card { grid-template-columns: 1fr; }
+    .news-card > div { padding: 0 18px 20px; }
+    .form-card { box-shadow: 6px 6px 0 var(--ink); }
+  }
+</style>

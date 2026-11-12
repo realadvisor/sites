@@ -1,0 +1,65 @@
+---
+/** Quartieri / Neighbourhoods: every Milan district with listings, as large alternating photo rows. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import { agency, brandName, byNewest, sites } from '../lib/data';
+import { districtsWithListings } from '../lib/districts';
+import { placePhoto } from '../lib/places';
+import { districtText } from '../lib/journal';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, all] = await Promise.all([agency(), sites.allListings()]);
+const districts = await Promise.all(districtsWithListings(all).map(async (d) => {
+  const listings = [...d.listings].sort(byNewest);
+  const live = listings.filter((l) => l.status === 'available');
+  const photo = (d.place && placePhoto(d.place, lang, 0)) || (() => {
+    const p = (live[0] ?? listings[0])?.photos[0];
+    return p && { url: p.url, alt: p.alt };
+  })();
+  return { ...d, live: live.length, photo, text: await districtText(d.slug, lang) };
+}));
+const homes = (n: number) => (n === 1 ? ui.homeOne : fill(ui.homesN, { n }));
+---
+<Site lang={lang} current="areas" title={`${ui.areasH1} | ${brandName(ag)}`} description={ui.areasLead}
+  image={districts[0]?.photo && img(districts[0].photo.url, { w: 1200, h: 630 })} alternates={alternates('areas')}>
+  <header class="wrap phead">
+    <h1 class="d-xl">{ui.areasH1}</h1>
+    <p class="lead">{ui.areasLead}</p>
+  </header>
+  <ul class="wrap list">
+    {districts.map((d, i) => (
+      <li class="item">
+        <div class="frame item-photo">
+          {d.photo && <RaImage src={d.photo} alt={d.photo.alt} width={1000} height={700} priority={i === 0} sizes="(min-width: 900px) 52vw, 100vw" />}
+        </div>
+        <div class="item-text">
+          <h2 class="d-xl"><a href={href('areas', lang, d.slug)}>{d.name}</a></h2>
+          {d.text && <p class="lead">{d.text.data.lead}</p>}
+          <p class="muted num">{homes(d.live)}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</Site>
+
+<style>
+  .list { display: grid; gap: clamp(56px, 7vw, 120px); }
+  .item { position: relative; display: grid; grid-template-columns: 7fr 5fr; gap: 28px clamp(32px, 5vw, 96px); align-items: end; }
+  .item:nth-child(even) { grid-template-columns: 5fr 7fr; }
+  .item:nth-child(even) .item-photo { order: 2; }
+  .item-photo { aspect-ratio: 10 / 7; }
+  .item-text { display: grid; gap: 16px; border-top: 1px solid var(--text); padding-top: 18px; }
+  .item h2 a { text-decoration: none; }
+  .item h2 a::after { content: ''; position: absolute; inset: 0; }
+  .item:hover h2 a { text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 0.06em; }
+  .item:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 8px; }
+  .item h2 a:focus-visible { outline: none; }
+  @media (max-width: 900px) {
+    .item, .item:nth-child(even) { grid-template-columns: 1fr; }
+    .item:nth-child(even) .item-photo { order: 0; }
+  }
+</style>

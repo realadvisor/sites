@@ -1,0 +1,68 @@
+---
+/**
+ * Listing card: 4:3 photo with one badge, type and place in a muted line,
+ * serif title, facts in a hairline row, price. Sold listings show "Vendu"
+ * and no price. Used by the search (kit ListingsSearch slot), carousels and
+ * every grid.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import { listingHref, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { formatSurface, price, rooms, typeLabel } from '../lib/format';
+
+interface Props {
+  listing: Listing;
+  l: L;
+  priority?: boolean;
+  sizes?: string;
+  /** Heading level of the title inside the page outline. */
+  as?: 'h2' | 'h3';
+  variant?: 'default' | 'large';
+}
+const { listing: x, l, priority = false, sizes = '(min-width: 1360px) 420px, (min-width: 1024px) 31vw, (min-width: 640px) 46vw, calc(100vw - 32px)', as: H = 'h3', variant = 'default' } = Astro.props;
+const t = tx(l);
+const photo = x.photos[0];
+const badge = x.status === 'sold' ? t('sold') : x.offer_type === 'rent' ? t('forRent') : undefined;
+const facts = [rooms(x.rooms, l), x.living_surface ? formatSurface(x.living_surface) : '', x.land_surface ? `${t('landArea')} ${formatSurface(x.land_surface)}` : ''].filter(Boolean);
+const place = cityName(x.address.city, l);
+---
+<article class:list={['card', `card--${variant}`, { 'card--sold': x.status === 'sold' }]} data-listing-id={x.id}>
+  <a class="card__link" href={listingHref(x, l)}>
+    <div class="card__media">
+      {photo
+        ? <RaImage src={photo} alt={photo.alt || x.title} width={800} height={600} sizes={sizes} priority={priority} widths={priority ? [480, 800, 1000] : undefined} />
+        : <span class="card__nophoto">{typeLabel(x.property_type, l)}</span>}
+      {badge && <span class="card__badge">{badge}</span>}
+    </div>
+    <div class="card__body">
+      <p class="card__eyebrow">{typeLabel(x.property_type, l)}{place && <> · {place}</>}</p>
+      <H class="card__title">{x.title}</H>
+      {facts.length > 0 && <p class="card__facts num">{facts.map((f) => <span>{f}</span>)}</p>}
+      {x.status !== 'sold' && <p class="card__price num">{price(x, l)}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .card { height: 100%; }
+  .card__link { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
+  .card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2); }
+  .card__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .card__link:hover .card__media :global(img) { transform: scale(1.03); }
+  .card__nophoto { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 500 1rem var(--font-display); }
+  .card__badge {
+    position: absolute; left: 0; top: 18px; padding: 7px 12px; background: var(--navy); color: #fff;
+    font: 600 0.6875rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .card--sold .card__badge { background: #fff; color: var(--navy); }
+  .card__body { display: grid; gap: 8px; padding-top: 18px; }
+  .card__eyebrow { font-size: 0.875rem; line-height: 1.3; color: var(--muted); }
+  .card__title { font-size: 1.375rem; line-height: 1.2; font-weight: 450; }
+  .card__link:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  .card__facts { display: flex; flex-wrap: wrap; gap: 4px 0; color: var(--muted); font-size: 0.9375rem; }
+  .card__facts span + span::before { content: ''; display: inline-block; width: 1px; height: 0.85em; background: var(--line-strong); margin: 0 12px; vertical-align: -1px; }
+  .card__price { font-weight: 600; font-size: 1.0625rem; color: var(--navy); white-space: nowrap; margin-top: 2px; }
+  .card--sold .card__price { color: var(--muted); font-weight: 500; }
+  .card--large .card__title { font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem); }
+</style>

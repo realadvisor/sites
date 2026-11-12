@@ -1,0 +1,36 @@
+---
+/** A collection: heading, three-up grid, "view all" link. */
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import ListingCard from './ListingCard.astro';
+
+interface Props { id: string; label: string; title?: string; listings: Listing[]; href?: string; linkLabel?: string; tone?: 'plain' | 'tint' }
+const { id, label, title, listings, href, linkLabel = 'Alle ansehen', tone = 'plain' } = Astro.props;
+---
+{listings.length > 0 && (
+  <section class:list={['coll', `coll--${tone}`, tone === 'plain' && 'flow']} aria-labelledby={id}>
+    <div class="wrap">
+      <header class="coll-head">
+        <div>
+          {title && <h2 class="coll-title h2" id={id}>{title}</h2>}
+          {!title && <h2 class="sr-only" id={id}>{label}</h2>}
+        </div>
+        {href && <a class="more" href={href}>{linkLabel}</a>}
+      </header>
+      <ul class="coll-grid">
+        {listings.map((l) => <li><ListingCard listing={l} /></li>)}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .coll { padding-block: clamp(64px, 7.5vw, 112px); }
+  .coll--tint { background: var(--surface); }
+  .coll-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: clamp(28px, 3vw, 44px); }
+  .coll-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  @media (max-width: 1023px) { .coll-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 639px) {
+    .coll-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .coll-head { flex-direction: column; align-items: start; gap: 12px; }
+  }
+</style>

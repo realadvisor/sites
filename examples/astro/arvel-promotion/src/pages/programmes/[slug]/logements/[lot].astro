@@ -1,0 +1,188 @@
+---
+// One unit: plan first, then its figures and facts, its place in the
+// building, photos when it is a live listing, and the enquiry with this
+// unit preselected. Sold units stay reachable (noindex) and say so.
+export const prerender = false;
+
+import Site from '../../../../layouts/Site.astro';
+import FloorPlan from '../../../../components/FloorPlan.astro';
+import StackingPlan from '../../../../components/StackingPlan.astro';
+import EnquiryBlock from '../../../../components/EnquiryBlock.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { featureLabel } from '@realadvisor/sites-kit/i18n';
+import { LOCALE } from '@realadvisor/sites-kit/format';
+import { sites, unitExtra } from '../../../../lib/data';
+import { documentsFor, formatBytes } from '../../../../content/documents';
+import {
+  bedroomsText, deliveryText, floorName, formatSurface, orientationLabel, plural, programmeUrl, roomsText, statusLabel, typeCode, typeName,
+  unitIdFromPath, unitLabel, unitPrice, unitUrl,
+} from '../../../../lib/fr';
+import { ogImage } from '../../../../lib/seo';
+
+const d = await sites.development(Astro.params.slug!);
+const id = unitIdFromPath(Astro.params.lot ?? '');
+const u = d && id ? d.units.find((x) => x.id === id) : undefined;
+if (!d || !u) return Astro.rewrite('/404');
+const x = unitExtra(u);
+// fixture only: terrace_surface (ground floor), unit_number, orientation
+const terrace = x.terrace_surface;
+const outdoor = terrace ?? u.balcony_surface;
+const facts = [
+  { label: 'Type', value: `${typeCode(u)} · ${typeName(u)}` },
+  { label: 'Étage', value: floorName(u) },
+  { label: 'Surface habitable', value: u.living_surface ? formatSurface(u.living_surface) : '' },
+  { label: terrace ? 'Terrasse' : 'Balcon', value: outdoor ? formatSurface(outdoor) : '' },
+  { label: 'Pièces', value: roomsText(u) },
+  { label: 'Chambres', value: bedroomsText(u) },
+  { label: 'Salles de bains', value: u.bathrooms ? String(u.bathrooms) : '' },
+  { label: 'Orientation', value: orientationLabel(x.orientation) },
+  { label: d.status === 'delivered' ? 'Livraison' : 'Livraison prévue', value: deliveryText(d).replace(/^Livraison |^Livré en /, '') },
+].filter((f) => f.value);
+const photos = u.photos ?? [];
+const sameType = d.units.filter((o) => o.id !== u.id && o.status === 'available' && typeCode(o) === typeCode(u)).slice(0, 4);
+const docs = documentsFor(d.slug).filter((doc) => doc.kind !== 'brochure');
+const label = unitLabel(u);
+const title = `${typeCode(u)} ${typeName(u).toLowerCase()}${u.living_surface ? ` de ${u.living_surface} m²` : ''}, ${floorName(u).toLowerCase()} · ${d.title}`;
+const price = unitPrice(u);
+---
+<Site
+  title={`${title} | ${u.status === 'available' ? price : statusLabel(u)}`}
+  description={`${label} à ${d.address.city ?? ''}, ${d.title}${outdoor ? `, ${terrace ? 'terrasse' : 'balcon'} de ${outdoor} m²` : ''}. ${u.status === 'available' ? price : statusLabel(u)}. Plan, surfaces et demande d’information.`}
+  image={ogImage(photos[0]?.url ?? d.photos[0]?.url)}
+  programme={d}
+  section="units"
+  current="programmes"
+  noindex={u.status === 'sold'}
+>
+  <section class="lot section section--tight">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d’Ariane">
+        <a href={programmeUrl(d)}>{d.title}</a><span aria-hidden="true">/</span><a href={programmeUrl(d, 'logements')}>Logements</a><span aria-hidden="true">/</span><span aria-current="page">{typeCode(u)} · {floorName(u)}</span>
+      </nav>
+      <div class="grid">
+        <figure class="plan paper">
+          <FloorPlan unit={u} orientation={x.orientation} terrace={terrace} />
+          <figcaption>Plan indicatif, non contractuel. Surfaces des pièces indicatives, calculées sur la surface habitable du logement.</figcaption>
+        </figure>
+        <div class="info">
+          <p class="kicker">{d.title}, {d.address.city}</p>
+          <h1 class="h1">
+            <span class="code">{typeCode(u)}</span>
+            <span class="where">{typeName(u)}, {floorName(u).toLowerCase()}</span>
+          </h1>
+          {x.unit_number && <p class="ref num">Lot {x.unit_number}</p>}
+          <div class="big">
+            {u.living_surface && <div><span class="v num">{u.living_surface}</span><span class="u">m² habitables</span></div>}
+            {outdoor && <div><span class="v num">{outdoor}</span><span class="u">m² de {terrace ? 'terrasse' : 'balcon'}</span></div>}
+          </div>
+          <p class="price">
+            {u.status === 'available' ? <span class="num">{price}</span> : <span class="pill" data-st={u.status}>{statusLabel(u)}</span>}
+          </p>
+          {u.status === 'sold' && <p class="muted soldnote">Ce logement est vendu. Les logements encore disponibles de {d.title} sont sur le plan de la résidence ci-dessous.</p>}
+          {u.status === 'reserved' && <p class="muted soldnote">Ce logement fait l’objet d’une réservation. Laissez vos coordonnées : nous vous prévenons s’il redevient disponible.</p>}
+          <dl class="facts">
+            {facts.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+          </dl>
+          {u.features.length > 0 && (
+            <ul class="features" aria-label="Équipements">
+              {u.features.map((k) => <li>{featureLabel(k, LOCALE)}</li>)}
+            </ul>
+          )}
+          <div class="actions">
+            {u.status !== 'sold' && <a class="button button--solid" href="#contact">Se renseigner sur ce logement</a>}
+            {docs.map((doc) => <a class="link" href={doc.href} download>{doc.title} <span class="muted">(PDF, {formatBytes(doc.bytes)})</span></a>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {u.description && (
+    <section class="section section--tight desc-s">
+      <div class="wrap desc-grid">
+        <h2 class="h3">Le logement</h2>
+        <div class="prose" set:html={sanitizeHtml(u.description)} />
+      </div>
+    </section>
+  )}
+
+  {photos.length > 0 && (
+    <section class="section section--tight photos-s" aria-labelledby="h-photos">
+      <div class="wrap">
+        <h2 id="h-photos" class="h3">Photos</h2>
+        <ul class="photos">
+          {photos.slice(0, 5).map((p, i) => (
+            <li class:list={['frame', i === 0 && 'wide']}>
+              <RaImage src={p} alt={p.alt || `${label}, photo ${i + 1}`} width={i === 0 ? 1200 : 720} height={i === 0 ? 800 : 540} sizes={i === 0 ? '(min-width: 900px) 66vw, 100vw' : '(min-width: 900px) 33vw, 50vw'} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--tight section--deep" aria-labelledby="h-where">
+    <div class="wrap">
+      <div class="where-head">
+        <h2 id="h-where" class="h3">Sa place dans la résidence</h2>
+        {sameType.length > 0 && (
+          <p class="muted">Autres {typeCode(u)} disponibles : {sameType.map((o, i) => <>{i > 0 && ', '}<a href={unitUrl(d, o)}>{floorName(o).toLowerCase()}</a></>)}</p>
+        )}
+      </div>
+      <StackingPlan programme={d} compact current={u.id} labelledby="h-where" />
+      <p class="more"><a class="link" href={programmeUrl(d, 'logements')}>{plural(d.stats.available, 'logement disponible', 'logements disponibles')}</a></p>
+    </div>
+  </section>
+
+  <EnquiryBlock programme={d} selectedUnit={u.status !== 'sold' ? u.id : undefined} title={u.status === 'sold' ? `Un autre logement de ${d.title} vous intéresse ?` : 'Ce logement vous intéresse ?'} />
+</Site>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.8125rem; color: var(--muted); margin-bottom: 28px; }
+  .crumbs a { color: var(--text); text-decoration: none; }
+  .crumbs a:hover { text-decoration: underline; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px clamp(32px, 5vw, 88px); align-items: start; }
+  .plan { margin: 0; padding: clamp(16px, 3vw, 40px); position: sticky; top: calc(var(--header-h) + var(--subnav-h) + 24px); }
+  .plan :global(svg) { width: 100%; height: auto; }
+  .plan figcaption { font-size: 0.8125rem; color: var(--on-paper-muted); margin-top: 16px; }
+  .info { display: grid; gap: 24px; align-content: start; }
+  .info > * { margin: 0; }
+  .h1 { display: grid; gap: 6px; font-family: var(--serif); font-weight: 500; }
+  .code { font-size: clamp(4.5rem, 9vw, 8rem); line-height: 0.85; }
+  .where { font-size: clamp(1.6rem, 2.6vw, 2.25rem); line-height: 1.1; color: var(--muted); }
+  .kicker { margin: 0 0 14px; font-size: var(--fs-small); color: var(--muted); }
+  .ref { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .big { display: flex; gap: 40px; padding-block: 22px; border-block: 1px solid var(--line); }
+  .big div { display: grid; gap: 6px; }
+  .big .v { font: 500 clamp(2.6rem, 4vw, 3.6rem) / 1 var(--serif); }
+  .big .u { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .price { font: 500 clamp(1.8rem, 3vw, 2.4rem) / 1 var(--serif); }
+  .soldnote { font-size: var(--fs-small); }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin: 0; }
+  .facts div { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .facts div:nth-child(odd) { padding-right: 16px; }
+  .facts dt { font: 500 0.6875rem / 1.3 var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { margin: 0; }
+  .features { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
+  .features li { padding: 8px 14px; border: 1px solid var(--line-strong); font-size: 0.8125rem; letter-spacing: 0.06em; }
+  .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .actions .button { margin-bottom: 10px; }
+  .desc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px 64px; border-top: 1px solid var(--line); padding-top: 48px; }
+  .desc-s .prose :global(p) { color: var(--muted); }
+  .photos { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .photos li { aspect-ratio: 4 / 3; }
+  .photos .wide { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .where-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 40px; margin-bottom: 28px; }
+  .where-head p { margin: 0; }
+  .more { margin: 24px 0 0; }
+  @media (max-width: 960px) {
+    .grid, .desc-grid { grid-template-columns: 1fr; }
+    .plan { position: static; }
+  }
+  @media (max-width: 560px) {
+    .photos { grid-template-columns: 1fr 1fr; }
+    .photos .wide { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+    .big { gap: 28px; }
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+import { getCollection, render } from 'astro:content';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import Photo from '../components/Photo.astro';
+import { PHOTOS, photoOg } from '../lib/photos';
+import { agency, type Listing } from '../lib/data';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang; town: { name: string; slug: string; listings: Listing[] }; others: { name: string; slug: string }[] }
+const { lang, town, others } = Astro.props;
+const ui = UI[lang];
+const ag = await agency();
+const name = ag.team?.name ?? ag.org.name;
+const text = (await getCollection('areas', (e) => e.id === `${lang}/${town.slug}`))[0];
+const { Content } = text ? await render(text) : { Content: null };
+const hero = PHOTOS[text?.data.photo ?? 'home'];
+const second = text?.data.photo2 ? PHOTOS[text.data.photo2] : undefined;
+const forSale = town.listings.filter((l) => l.status === 'available' && l.offer_type === 'buy');
+const toRent = town.listings.filter((l) => l.status === 'available' && l.offer_type === 'rent');
+const sold = town.listings.filter((l) => l.status === 'sold');
+const h1 = fill(ui.areaH1, { town: town.name });
+const searchHref = `${href(forSale.length || !toRent.length ? 'buy' : 'rent', lang)}?city=${encodeURIComponent(town.name)}`;
+---
+<Site lang={lang} overlay current="areas" title={`${h1} | ${name}`} description={(text?.data.tagline ? `${h1}: ${text.data.tagline}.` : h1)}
+  image={photoOg(hero, Astro.url)} alternates={alternates('areas', town.slug)}>
+  <section class="ahero" data-hero>
+    <Photo photo={hero} lang={lang} priority cover landscapeAt="(min-width: 768px)" />
+    <div class="wrap ahero-in">
+      <p class="ahero-crumb"><a href={href('areas', lang)}>{ui.nav.areas}</a></p>
+      <h1 class="display-xl">{h1}</h1>
+      {text && <p class="ahero-tag">{text.data.tagline}</p>}
+    </div>
+  </section>
+
+  <section class="wrap intro">
+    {Content && <div class="prose intro-text"><Content /></div>}
+    <aside class="intro-facts">
+      <dl>
+        {forSale.length > 0 && <div><dt>{ui.forSale}</dt><dd class="num">{forSale.length}</dd></div>}
+        {toRent.length > 0 && <div><dt>{ui.toRent}</dt><dd class="num">{toRent.length}</dd></div>}
+        {sold.length > 0 && <div><dt>{ui.nav.sold}</dt><dd class="num">{sold.length}</dd></div>}
+      </dl>
+      <a class="cta cta-sea" href={searchHref}>{fill(ui.areaSearch, { town: town.name })}</a>
+    </aside>
+  </section>
+
+  {second && (
+    <figure class="scenery wrap">
+      <div class="sc"><Photo photo={second} lang={lang} landscapeAt="(min-width: 761px)" sizes="(min-width: 1360px) 1232px, 100vw" /></div>
+      <figcaption>{second.alt[lang]}</figcaption>
+    </figure>
+  )}
+
+  {forSale.length + toRent.length > 0 && (
+    <section class="section wrap">
+      <div class="section-head">
+        <div><h2 class="display-m">{fill(ui.areaHouses, { town: town.name })}</h2></div>
+        <a class="link" href={searchHref}>{fill(ui.areaSearch, { town: town.name })} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <ul class="grid3">{[...forSale, ...toRent].map((l) => <li><ListingCard listing={l} lang={lang} /></li>)}</ul>
+    </section>
+  )}
+  {sold.length > 0 && (
+    <section class="section wrap rest">
+      <div class="section-head"><div><h2 class="display-m">{fill(ui.areaSold, { town: town.name })}</h2></div></div>
+      <ul class="grid3">{sold.map((l) => <li><ListingCard listing={l} lang={lang} /></li>)}</ul>
+    </section>
+  )}
+  {!forSale.length && !toRent.length && <p class="wrap lead none">{fill(ui.areaNone, { town: town.name })}</p>}
+
+  {others.length > 0 && (
+    <nav class="others" aria-label={ui.otherAreas}>
+      <div class="wrap others-in">
+        <h2 class="display-m">{ui.otherAreas}</h2>
+        <ul>{others.map((o) => <li><a href={href('areas', lang, o.slug)}>{o.name}</a></li>)}</ul>
+      </div>
+    </nav>
+  )}
+</Site>
+<style>
+  .ahero { position: relative; min-height: min(86svh, 820px); display: grid; align-items: end; color: #fff; isolation: isolate; overflow: hidden; }
+  .ahero :global(img), .ahero :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .ahero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(18 16 13 / .3), rgb(18 16 13 / 0) 26%, rgb(18 16 13 / .32) 52%, rgb(18 16 13 / .72)); }
+  .ahero-in { padding-block: calc(var(--header-h) + 80px) clamp(48px, 6vw, 88px); display: grid; gap: 18px; }
+  .ahero-crumb { font-size: .9375rem; }
+  .ahero-crumb a { text-decoration: none; border-bottom: 1px solid rgb(255 255 255 / .6); padding-block: 6px; }
+  .ahero-tag { font-size: clamp(1.0625rem, 1.4vw, 1.25rem); max-width: 48ch; }
+  .intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(40px, 7vw, 120px); padding-block: var(--section) clamp(48px, 6vw, 88px); }
+  .intro-text :global(p:first-child) { font: 300 clamp(1.375rem, 2.1vw, 1.875rem)/1.4 var(--font-display); }
+  .intro-facts { display: grid; gap: 28px; align-content: start; }
+  .intro-facts dl { margin: 0; border-top: 1px solid var(--text); }
+  .intro-facts dl div { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .intro-facts dt { font: 500 .75rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .intro-facts dd { margin: 0; font: 300 2rem/1 var(--font-display); }
+  .intro-facts .cta { justify-self: start; }
+  @media (max-width: 900px) { .intro { grid-template-columns: 1fr; } }
+  .scenery { margin: 0 auto; display: grid; gap: 14px; }
+  .sc { overflow: hidden; aspect-ratio: 21 / 9; background: var(--stone); }
+  .sc :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .scenery figcaption { font-size: .875rem; color: var(--muted); }
+  @media (max-width: 760px) { .sc { aspect-ratio: 4 / 5; } .scenery { padding-inline: 0; } .scenery figcaption { padding-inline: var(--gutter, 20px); } }
+  .rest { padding-top: 0; }
+  .none { padding-block: var(--section); }
+  .others { background: var(--surface); }
+  .others-in { padding-block: clamp(48px, 6vw, 80px); display: grid; gap: 20px; }
+  .others ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 40px; }
+  .others a { font: 300 clamp(1.75rem, 3vw, 2.5rem)/1.2 var(--font-display); text-decoration: none; }
+  .others a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+</style>

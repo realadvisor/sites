@@ -1,0 +1,58 @@
+/* ListingsMap: part of kit.css (import it alone for a site without the other parts). */
+  /* overflow-anchor: tiles and markers come and go; the browser must not anchor the page scroll on them (the page jumped on zoom). */
+  .ra-map { position: relative; overflow: hidden; height: var(--map-h, 60vh); min-height: 320px; background: #f2f0ec; touch-action: none; overflow-anchor: none; }
+  .ra-map-viewport { position: absolute; inset: 0; cursor: grab; outline-offset: -3px; }
+  .ra-map-viewport:active { cursor: grabbing; }
+  .ra-map-tiles { position: absolute; inset: 0; filter: grayscale(1) sepia(.18) contrast(.92) brightness(1.06); }
+  .ra-map-tiles img { position: absolute; left: 0; top: 0; width: 256px; height: 256px; max-width: none; user-select: none; -webkit-user-drag: none; opacity: 0; transition: opacity .2s; }
+  .ra-map-tiles img.is-loaded { opacity: 1; }
+  .ra-map-markers { position: absolute; inset: 0; pointer-events: none; }
+  .ra-map-markers button {
+    position: absolute; left: 0; top: 0; pointer-events: auto; cursor: pointer; border: 2px solid var(--paper, #fff);
+    background: var(--accent, #134266); color: var(--paper, #fff); font: 600 14px/1 system-ui, sans-serif;
+    box-shadow: 0 2px 6px rgb(0 0 0 / .3); transition: background .15s, scale .15s; will-change: translate;
+  }
+  /* A 22px dot inside a 44px (invisible) touch target. */
+  .ra-map-markers .ra-map-pin { width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: 0; border-radius: 50%; background: none; box-shadow: none; }
+  .ra-map-markers .ra-map-pin::after { content: ''; position: absolute; inset: 11px; border: 2px solid var(--paper, #fff); border-radius: 50%; background: var(--accent, #134266); box-shadow: 0 2px 6px rgb(0 0 0 / .3); transition: background .15s; }
+  /* Clusters grow with their count and carry a soft halo (as on most portals). */
+  .ra-map-markers .ra-map-cluster {
+    --d: 36px; min-width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); border-radius: 999px; padding: 0 8px;
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent, #134266) 22%, transparent), 0 2px 6px rgb(0 0 0 / .3);
+  }
+  .ra-map-markers .ra-map-cluster.is-m { --d: 44px; }
+  .ra-map-markers .ra-map-cluster.is-l { --d: 52px; font-size: 15px; }
+  .ra-map-markers button:hover, .ra-map-markers button.is-active, .ra-map-markers button.is-selected, .ra-map-markers button:focus-visible { scale: 1.15; z-index: 1; }
+  .ra-map-markers .ra-map-cluster:hover, .ra-map-markers .ra-map-cluster.is-active, .ra-map-markers .ra-map-cluster:focus-visible,
+  .ra-map-markers .ra-map-pin:hover::after, .ra-map-markers .ra-map-pin.is-active::after, .ra-map-markers .ra-map-pin.is-selected::after, .ra-map-markers .ra-map-pin:focus-visible::after { background: var(--text, #1c1b19); }
+  /* Placed by the script: above or below its marker, clear of the edges and the zoom buttons. */
+  .ra-map-popup {
+    position: absolute; left: 0; top: 0; z-index: 4; width: min(260px, calc(100% - 16px)); max-height: min(340px, calc(100% - 16px)); overflow: auto;
+    background: var(--paper, #fff); color: var(--text, #1c1b19); box-shadow: 0 6px 20px rgb(0 0 0 / .25); cursor: auto;
+    visibility: hidden; pointer-events: none; opacity: 0;
+  }
+  .ra-map-popup.is-open { visibility: visible; pointer-events: auto; opacity: 1; }
+  .ra-map-popup .ra-map-card { display: grid; gap: 4px; padding: 0 0 12px; color: inherit; text-decoration: none; }
+  .ra-map-popup .ra-map-card + .ra-map-card { border-top: 1px solid var(--line, #d6d3cf); padding-top: 12px; }
+  .ra-map-popup .ra-map-card img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+  .ra-map-popup .ra-map-card-type, .ra-map-popup .ra-map-card-title, .ra-map-popup .ra-map-card-price { padding: 0 12px; }
+  .ra-map-popup .ra-map-card-type { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; opacity: .75; }
+  .ra-map-popup .ra-map-card-price { font-weight: 600; }
+  .ra-map-popup .ra-map-close { position: sticky; top: 4px; float: right; margin: 4px 4px -48px 0; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgb(255 255 255 / .9); color: #1c1b19; font-size: 22px; cursor: pointer; z-index: 1; }
+  .ra-map-status {
+    position: absolute; left: 12px; top: 12px; z-index: 3; display: flex; gap: 12px; align-items: center; padding: 6px 6px 6px 14px;
+    background: var(--paper, #fff); box-shadow: 0 2px 8px rgb(0 0 0 / .2); visibility: hidden; pointer-events: none; opacity: 0;
+  }
+  /* Only its button takes clicks: the markers under the pill stay reachable. */
+  .ra-map-status.is-open { visibility: visible; opacity: 1; }
+  .ra-map-status.is-open button { pointer-events: auto; }
+  .ra-map-status button, .ra-map-zoom button { min-height: 44px; min-width: 44px; border: 0; background: var(--paper, #fff); color: var(--text, #1c1b19); font: inherit; cursor: pointer; }
+  .ra-map-status button { text-decoration: underline; }
+  .ra-map-zoom { position: absolute; right: 12px; top: 12px; z-index: 3; display: grid; box-shadow: 0 2px 8px rgb(0 0 0 / .2); }
+  .ra-map-zoom button { font-size: 22px; }
+  .ra-map-zoom button:disabled { color: #999; cursor: default; }
+  .ra-map-zoom button + button { border-top: 1px solid var(--line, #d6d3cf); }
+  .ra-map-attr { position: absolute; right: 0; bottom: 0; z-index: 3; margin: 0; padding: 2px 6px; font-size: 11px; color: #444; background: rgb(255 255 255 / .8); }
+  .ra-map-attr a { color: inherit; }
+  @media (prefers-reduced-motion: reduce) { .ra-map-markers button, .ra-map-markers .ra-map-pin::after, .ra-map-tiles img { transition: none; } }
+

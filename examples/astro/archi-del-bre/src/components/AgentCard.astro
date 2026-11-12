@@ -1,0 +1,45 @@
+---
+/**
+ * One agent: a real portrait (square crop through the image helper) when the
+ * API has `photo`, else name, role, languages, phone and e-mail in plain type.
+ * No initials, no stock portrait.
+ */
+import type { Agent } from '@realadvisor/sites-sdk/types';
+import Photo from './Photo.astro';
+import { tel, type L } from '../lib/routes';
+import { c, languageNames } from '../lib/copy';
+
+interface Props { agent: Agent; l: L; role?: string; class?: string }
+const { agent: a, l, role, class: cls } = Astro.props;
+const name = `${a.first_name} ${a.last_name}`.trim();
+const langs = languageNames(a.languages, l);
+---
+<div class:list={['agent', cls, { 'has-photo': !!a.photo?.url }]}>
+  {a.photo?.url && (
+    <Photo class="portrait" src={a.photo.url} alt={a.photo.alt || name} width={400} height={400} sizes="(max-width: 640px) 30vw, 160px" widths={[240, 400, 600]} />
+  )}
+  <div class="body">
+    <p class="name">{name}</p>
+    {(a.title || role) && <p class="role">{a.title || role}</p>}
+    <dl>
+      {langs && <div><dt>{c('languages', l)}</dt><dd>{langs}</dd></div>}
+      {a.phone && <div><dt>{c('phone', l)}</dt><dd><a href={tel(a.phone)} class="num">{a.phone}</a></dd></div>}
+      {a.email && <div><dt>{c('email', l)}</dt><dd><a href={`mailto:${a.email}`}>{a.email}</a></dd></div>}
+    </dl>
+  </div>
+</div>
+<style>
+  .agent { display: grid; gap: 18px; align-content: start; }
+  .agent.has-photo { grid-template-columns: minmax(96px, 160px) minmax(0, 1fr); align-items: start; }
+  .portrait { display: block; aspect-ratio: 1; border-radius: var(--radius-card); overflow: hidden; background: var(--sand); }
+  .name { font: 400 var(--step-2)/1.05 var(--serif); }
+  .role { color: var(--muted); margin-top: 4px; }
+  dl { display: grid; gap: 2px; margin: 14px 0 0; font-size: 0.9375rem; }
+  dl div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 12px; }
+  dt { color: var(--muted); }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  dd a { display: inline-block; padding-block: 6px; }
+  .has-photo dl div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .has-photo dl div + div { margin-top: 6px; }
+  @media (max-width: 560px) { .agent.has-photo { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; } }
+</style>

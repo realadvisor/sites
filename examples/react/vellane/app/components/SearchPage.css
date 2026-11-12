@@ -1,0 +1,34 @@
+.sv { width: 100%; max-width: var(--max); margin-inline: auto; padding: 24px var(--gutter) 0; }
+.sv--map { max-width: none; }
+.sv__head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 20px; }
+.sv__switch { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--surface); }
+.sv__switch a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 600; color: var(--muted); }
+.sv__switch a[aria-current] { background: var(--bg); color: var(--text); box-shadow: 0 1px 3px rgb(0 0 0 / 0.12); }
+.sv__h1 { font-size: var(--step-2); letter-spacing: -0.025em; flex: 1 1 320px; }
+.sv__save {
+  display: inline-flex; gap: 8px; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); font-weight: 600; font-size: 0.9375rem; cursor: pointer;
+}
+.sv__save:hover { border-color: var(--text); }
+.sv__save[aria-pressed='true'] { border-color: var(--accent); color: var(--accent-strong); }
+.sv__save[aria-pressed='true'] svg { fill: currentColor; }
+
+/* ListingsSearch, through its hooks: rounded controls, pill filters, airy split view. */
+.sv .rs-form { padding: 12px; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); background: var(--bg); }
+.sv .rs-bar { margin: 16px 0 0; }
+.sv .rs-chips { margin: 16px 0 0; }
+.sv .rs-region { margin-top: 20px; }
+.sv .rs-status a, .sv .rs-views a { min-height: 42px; }
+.sv .rs-views, .sv .rs-status { border-radius: 999px; }
+.sv .rs-grid { row-gap: 40px; }
+/* 24 cards per page: render them all (the kit skips off-screen ones, which leaves blank gaps in captures). */
+.sv .rs-list > li { content-visibility: visible; }
+.sv .rs-split .rs-map { border-radius: var(--radius-card); overflow: hidden; }
+.sv .ra-map { border-radius: var(--radius-card); }
+@media (min-width: 960px) {
+  .sv--map .rs-split { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+}
+@media (max-width: 959px) {
+  .sv .rs-form { padding: 0; border: 0; box-shadow: none; }
+  .sv .rs-filters-btn { border-radius: 999px; }
+}

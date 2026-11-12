@@ -1,0 +1,102 @@
+---
+/**
+ * Home search band: Buy / Rent / New / Sell tabs over the search. The tabs
+ * are a radio group (arrow keys move between them) and the panels follow
+ * in CSS (:has), so it works with zero JavaScript. Buy and Rent are GET
+ * forms to the search pages with the kit's search params; options and
+ * counts come from the listings.
+ */
+import Select from '@realadvisor/sites-kit/components/form/Select.astro';
+import type { Development, Listing } from '@realadvisor/sites-sdk/types';
+import { href, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { formatAmount, typeLabel } from '../lib/format';
+
+interface Props {
+  l: L;
+  buy: Listing[];
+  rent: Listing[];
+  developments: Development[];
+}
+const { l, buy, rent, developments } = Astro.props;
+const t = tx(l);
+
+const cityOpts = (xs: Listing[]) => {
+  const m = new Map<string, number>();
+  for (const x of xs) if (x.address.city) m.set(x.address.city, (m.get(x.address.city) ?? 0) + 1);
+  return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([c, n]) => ({ value: c, label: `${cityName(c, l)} (${n})` }));
+};
+const typeOpts = (xs: Listing[]) => {
+  const groups = [...new Set(xs.map((x) => x.property_type.split('_')[0]!))];
+  return groups.map((g) => ({ value: g, label: typeLabel(g, l) }));
+};
+const steps = (xs: Listing[], candidates: number[]) => {
+  const max = Math.max(0, ...xs.map((x) => x.price ?? 0));
+  const min = Math.min(Infinity, ...xs.map((x) => x.price ?? Infinity));
+  return candidates.filter((c) => c > min && c < max).map((c) => ({ value: String(c), label: formatAmount(c) }));
+};
+const panels = [
+  { id: 'buy', label: t('tabBuy'), list: buy, action: href('buy', l), prices: steps(buy, [1_000_000, 1_500_000, 2_000_000, 3_000_000, 4_000_000, 5_000_000]) },
+  { id: 'rent', label: t('tabRent'), list: rent, action: href('rent', l), prices: steps(rent, [2_500, 3_000, 3_500, 4_000, 5_000]) },
+].filter((p) => p.list.length > 0);
+const unitsAvailable = developments.reduce((a, d) => a + d.stats.available, 0);
+const first = panels[0]?.id ?? (developments.length ? 'new' : 'sell');
+---
+<div class="sb">
+  <fieldset class="sb__tabs">
+    <legend class="sr-only">{t('searchIntent')}</legend>
+    {panels.map((p) => (
+      <label class="sb__tab"><input type="radio" name="sb-intent" value={p.id} id={`sb-${p.id}`} checked={p.id === first} /><span>{p.label}</span></label>
+    ))}
+    {developments.length > 0 && <label class="sb__tab"><input type="radio" name="sb-intent" value="new" id="sb-new" checked={first === 'new'} /><span>{t('tabNew')}</span></label>}
+    <label class="sb__tab"><input type="radio" name="sb-intent" value="sell" id="sb-sell" checked={first === 'sell'} /><span>{t('tabSell')}</span></label>
+  </fieldset>
+
+  {panels.map((p) => (
+    <form class={`sb__panel sb__panel--${p.id}`} method="get" action={p.action} role="search" aria-label={p.label}>
+      <Select id={`sb-${p.id}-city`} label={t('where')} name="city" placeholder={t('allPlaces')} options={cityOpts(p.list)} />
+      <Select id={`sb-${p.id}-type`} label={t('type')} name="propertyType" placeholder={t('allTypes')} options={typeOpts(p.list)} />
+      {p.prices.length > 0 && <Select id={`sb-${p.id}-price`} label={t('budget')} name="maxPrice" placeholder={t('anyBudget')} options={p.prices} />}
+      <button class="button button--light sb__go" type="submit">{t('searchN', { n: p.list.length })}</button>
+    </form>
+  ))}
+  {developments.length > 0 && (
+    <div class="sb__panel sb__panel--new sb__panel--text">
+      <p>{t(developments.length === 1 ? 'newPanel' : 'newPanelPlural', { n: developments.length, units: unitsAvailable })}</p>
+      <a class="button button--light" href={developments.length === 1 ? href('developments', l, developments[0]!.slug) : href('developments', l)}>{t('seeDevelopments')}</a>
+    </div>
+  )}
+  <div class="sb__panel sb__panel--sell sb__panel--text">
+    <p>{t('sellPanel')}</p>
+    <a class="button button--light" href={href('sell', l)}>{t('valuationCta')}</a>
+  </div>
+</div>
+
+<style>
+  .sb { display: grid; gap: 26px; }
+  .sb__tabs { border: 0; margin: 0; padding: 0; display: flex; gap: clamp(18px, 2.6vw, 36px); border-bottom: 1px solid var(--line-on-navy); min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .sb__tab { position: relative; display: inline-flex; align-items: center; min-height: 48px; cursor: pointer; white-space: nowrap; }
+  .sb__tab input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .sb__tab span { font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-navy-muted); padding-bottom: 2px; }
+  .sb__tab:hover span { color: #fff; }
+  .sb__tab:has(input:checked) span { color: #fff; }
+  .sb__tab:has(input:checked)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--brass); }
+  .sb__tab:has(input:focus-visible) { outline: 2px solid var(--brass-on-navy); outline-offset: 2px; }
+
+  .sb__panel { display: none; }
+  .sb:has(#sb-buy:checked) .sb__panel--buy,
+  .sb:has(#sb-rent:checked) .sb__panel--rent { display: grid; }
+  .sb:has(#sb-new:checked) .sb__panel--new,
+  .sb:has(#sb-sell:checked) .sb__panel--sell { display: flex; }
+  form.sb__panel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: end; }
+  .sb__panel:not(:has(select[name='maxPrice'])) .sb__go { grid-column: 1 / -1; }
+  .sb__panel :global(.field-label) { color: var(--on-navy-muted); font-weight: 500; letter-spacing: 0.04em; }
+  .sb__panel :global(.control) { --control-border: transparent; background: #fff; }
+  .sb__go { min-height: var(--control-h); }
+  .sb__panel--text { flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; min-height: calc(var(--control-h) + 27px); }
+  .sb__panel--text p { color: #fff; font: 400 var(--step-1)/1.4 var(--font-display); max-width: 46ch; }
+  @media (max-width: 900px) {
+    form.sb__panel { grid-template-columns: minmax(0, 1fr); }
+    .sb__go { width: 100%; }
+  }
+</style>

@@ -1,0 +1,284 @@
+---
+// One unit: plan first, rent (net + charges), move-in date, facts, its place
+// in the building, photos, and the application / enquiry form with the unit
+// preselected. Unknown unit: 404. A let unit stays reachable (noindex) with
+// similar free units and a register-interest form.
+export const prerender = false;
+
+import Site from '../../layouts/Site.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { featureLabel } from '@realadvisor/sites-kit/i18n';
+import { img } from '@realadvisor/sites-kit/image';
+import StackingPlan from '../../components/StackingPlan.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import Icon from '../../components/Icon.astro';
+import { site as load } from '../../lib/data';
+import {
+  buildings, chf, floorShort, longDate, freeRent, netRent, orientationLabel, planUrl, rooms, rowsOf, statusLabel, surface, unitIdFromSlug, unitTitle, unitOptions, unitUrl,
+} from '../../lib/units';
+
+const site = await load();
+const { dev } = site;
+const id = unitIdFromSlug(Astro.params.slug ?? '');
+const rows = rowsOf(dev);
+const row = rows.find((r) => r.u.id === id);
+if (!row) return Astro.rewrite('/404');
+const { u, x } = row;
+// Canonical slug: redirect an outdated name to the current one.
+if (unitUrl(u) !== Astro.url.pathname) return Astro.redirect(unitUrl(u), 301);
+
+const house = buildings(rows).find((b) => b.key === x.building);
+const rent = netRent(u);
+// fixture only: charges (Nebenkosten) and the gross sum computed from them
+const charges = rent ? x.charges : undefined;
+const gross = rent && charges ? rent + charges : undefined;
+const plan = planUrl(u, x.orientation);
+const isLet = u.status === 'sold';
+const similar = rows
+  .filter((r) => r.u.id !== u.id && r.u.rooms === u.rooms && r.u.status === 'available')
+  .sort((a, b) => (freeRent(a.u) ?? 0) - (freeRent(b.u) ?? 0))
+  .slice(0, 3);
+const outdoor = u.floor === 0 ? 'Gartensitzplatz' : 'Loggia';
+const facts: [string, string][] = [
+  ['Zimmer', rooms(u)],
+  ['Wohnfläche', surface(u.living_surface)],
+  [outdoor, u.balcony_surface ? surface(u.balcony_surface) : ''],
+  ['Geschoss', u.floor_label ?? floorShort(u)],
+  // fixture only: building, unit number, orientation, move-in date
+  ['Haus', x.building ? `Haus ${x.building}` : ''],
+  ['Wohnungsnummer', x.number ?? ''],
+  ['Ausrichtung', orientationLabel(x.orientation)],
+  ['Bad / Dusche', u.bathrooms ? String(u.bathrooms) : ''],
+  ['Bezug ab', longDate(x.moveIn)],
+].filter((f): f is [string, string] => !!f[1]);
+// Ground-floor units have a garden seat, not a balcony: drop that CRM feature there.
+const features = (u.features ?? []).filter((k) => !(u.floor === 0 && k === 'balcony')).map((k) => featureLabel(k, 'de-CH')).filter(Boolean);
+const photos = u.photos ?? [];
+const name = unitTitle(row);
+const desc = [name, x.number, statusLabel(u), rent ? `${chf(rent)} netto pro Monat` : '', x.moveIn ? `Bezug ab ${longDate(x.moveIn)}` : ''].filter(Boolean).join(' · ');
+const message = isLet
+  ? `Guten Tag, die Wohnung ${x.number ?? name} ist vermietet. Bitte informieren Sie mich über ähnliche Wohnungen im ${dev.title}.`
+  : `Guten Tag, ich interessiere mich für die Wohnung ${x.number ? `${x.number} (${name})` : name} im ${dev.title}. Bitte senden Sie mir die Bewerbungsunterlagen.`;
+---
+<Site
+  site={site}
+  title={`${name}${x.number ? ` (${x.number})` : ''} | ${rent ? `${chf(rent)} netto` : statusLabel(u)} | ${dev.title}`}
+  description={desc}
+  image={photos[0] ? img(photos[0].url, { w: 1200, h: 630 }) : dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+  noindex={isLet}
+>
+  <nav class="crumbs wrap" aria-label="Brotkrumen">
+    <a href="/wohnungen"><Icon name="back" size={18} /> Alle Wohnungen</a>
+    {house && <a href={`/wohnungen?haus=${house.key}`}>{house.name}</a>}
+  </nav>
+
+  <section class="unit wrap">
+    <header class="u-head">
+      <div class="u-title">
+        <p class="badges">
+          {x.number && <span class={`no tone-${(x.building ?? 'a').toLowerCase()} num`}>{x.number}</span>}
+          <span class={`pill pill--${u.status}`}>{statusLabel(u)}</span>
+        </p>
+        <h1>{name}</h1>
+      </div>
+      <dl class="big">
+        <div><dt>Zimmer</dt><dd class="num">{String(u.rooms ?? '')}</dd></div>
+        {u.living_surface && <div><dt>Wohnfläche</dt><dd class="num">{u.living_surface}<small> m²</small></dd></div>}
+        {u.balcony_surface && <div><dt>{outdoor}</dt><dd class="num">{u.balcony_surface}<small> m²</small></dd></div>}
+      </dl>
+    </header>
+
+    <div class="u-grid">
+      <div class="left">
+      <figure class="plan">
+        {plan ? (
+          <img src={plan} width="600" height="470" alt={`Grundriss indikativ ${name}${x.orientation ? `, Loggia nach ${orientationLabel(x.orientation)}` : ''}`} fetchpriority="high" decoding="async" />
+        ) : (
+          <p class="plan-none">Grundriss auf Anfrage</p>
+        )}
+        <figcaption>Grundriss indikativ, nicht massgebend. Möblierung als Beispiel. <a href="/dokumente">Alle Grundrisse als PDF</a></figcaption>
+      </figure>
+        {house && (
+          <div class="where">
+            <h2 class="where-title">Lage im Haus</h2>
+            <p class="muted">{name}{x.orientation ? `, Ausrichtung ${orientationLabel(x.orientation)}` : ''}. Markiert im Stockwerkplan von {house.name}.</p>
+            <StackingPlan building={house} current={u.id} compact headingLevel={3} />
+          </div>
+        )}
+      </div>
+
+      <aside class="panel" aria-label="Miete und Bezug">
+        {rent ? (
+          <div class="rent">
+            <p class="rent-gross num">{chf(gross ?? rent)}<span> / Monat</span></p>
+            <dl class="rent-parts">
+              <div><dt>Nettomiete</dt><dd class="num">{chf(rent)}</dd></div>
+              {charges && <div><dt>Nebenkosten (Akonto)</dt><dd class="num">{chf(charges)}</dd></div>}
+              {gross && <div class="sum"><dt>Bruttomiete</dt><dd class="num">{chf(gross)}</dd></div>}
+            </dl>
+          </div>
+        ) : (
+          <p class="rent-none">Diese Wohnung ist vermietet.</p>
+        )}
+        {u.status === 'reserved' && (
+          <p class="rent-note">Diese Wohnung ist reserviert. Setzen Sie sich auf die Warteliste: Springt die Reservation ab, melden wir uns bei Ihnen.</p>
+        )}
+        {x.moveIn && (
+          <p class="move"><Icon name="calendar" size={22} /><span>Bezug ab <strong>{longDate(x.moveIn)}</strong></span></p>
+        )}
+        <div class="panel-cta">
+          <a class="cta cta--zinnober" href="#bewerben">{isLet ? 'Ähnliche Wohnung anfragen' : u.status === 'reserved' ? 'Auf die Warteliste' : 'Jetzt bewerben'} <Icon name="arrow" /></a>
+          {site.team?.phone && <a class="cta cta--ghost" href={`tel:${site.team.phone.replace(/[^\d+]/g, '')}`}><Icon name="phone" /> <span class="num">{site.team.phone}</span></a>}
+        </div>
+        <dl class="facts">
+          {facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+        {features.length > 0 && <ul class="feat">{features.map((f) => <li><Icon name="check" size={16} />{f}</li>)}</ul>}
+      </aside>
+    </div>
+  </section>
+
+  {(photos.length > 0 || u.description) && (
+    <section class="more band wrap" aria-labelledby="more-title">
+      <h2 id="more-title" class="sec">Die Wohnung</h2>
+      {u.description && <div class="prose" set:html={sanitizeHtml(u.description)} />}
+      {photos.length > 0 && (
+        <ul class="photos">
+          {photos.slice(0, 5).map((p, i) => (
+            <li class={i === 0 ? 'p-lead' : ''}><RaImage src={p} alt={p.alt || `${name}, Bild ${i + 1}`} width={i === 0 ? 1200 : 800} height={i === 0 ? 800 : 533} sizes={i === 0 ? '(min-width: 900px) 60vw, 100vw' : '(min-width: 900px) 30vw, 50vw'} /></li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )}
+
+  {similar.length > 0 && (
+    <section class="similar band band--lilac" aria-labelledby="similar-title">
+      <div class="wrap">
+        <h2 id="similar-title" class="sec">{isLet ? 'Diese Wohnungen sind noch frei' : `Weitere ${String(u.rooms)}-Zimmer-Wohnungen`}</h2>
+        <ul class="sim">
+          {similar.map((r) => (
+            <li>
+              <a href={unitUrl(r.u)}>
+                <span class="no num">{r.x.number}</span>
+                <span class="nm">{unitTitle(r)}</span>
+                <span class="num">{surface(r.u.living_surface)} · {chf(freeRent(r.u)!)} netto</span>
+                <span class="mv">Bezug ab {longDate(r.x.moveIn)}</span>
+                <Icon name="arrow" class="go" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="apply band band--zinnober" id="bewerben" aria-labelledby="apply-title">
+    <div class="wrap apply-grid">
+      <div class="apply-text">
+        <h2 id="apply-title" class="apply-title">{isLet ? 'Interesse anmelden' : u.status === 'reserved' ? 'Warteliste' : 'Für diese Wohnung bewerben'}</h2>
+        <p class="lead">{isLet ? 'Wählen Sie eine freie Wohnung, wir melden uns bei Ihnen.' : 'Senden Sie uns Ihre Anfrage. Sie erhalten das Bewerbungsformular und einen Termin für die Besichtigung der Musterwohnung.'}</p>
+        {site.contact && <ContactCard agent={site.contact} team={site.team} />}
+      </div>
+      <div class="form-card">
+        {isLet ? (
+          <EnquiryForm id="bewerben-form" developmentId={dev.id} units={unitOptions(rows)} selectedUnit={similar[0]?.u.id} agentId={site.contact?.id} agentName={site.contact?.first_name} message={message} submitLabel="Interesse senden" />
+        ) : (
+          <>
+            <p class="chosen"><span>Ihre Wohnung</span><strong>{name}{x.number ? ` · ${x.number}` : ''}</strong></p>
+            <EnquiryForm id="bewerben-form" developmentId={dev.id} lotId={u.id} agentId={site.contact?.id} agentName={site.contact?.first_name} message={message} submitLabel={u.status === 'reserved' ? 'Auf die Warteliste' : 'Bewerbung anfragen'} />
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; gap: 4px 20px; padding-block: 18px 0; font-weight: 600; font-size: 0.9375rem; }
+  .crumbs a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; text-decoration: none; }
+  .crumbs a + a::before { content: '/'; margin-right: 14px; color: var(--muted); }
+  .crumbs a:hover { text-decoration: underline; }
+
+  .unit { padding-block: 8px clamp(48px, 6vw, 88px); }
+  .u-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 40px; padding-bottom: 24px; margin-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .u-title { display: grid; gap: 14px; }
+  .badges { display: flex; align-items: center; gap: 10px; }
+  .no { font: 800 1.125rem/1 var(--display); padding: 8px 12px; border: 2px solid var(--ink); border-radius: 10px; background: var(--haus-a); }
+  .no.tone-b { background: var(--haus-b); }
+  .no.tone-c { background: var(--haus-c); }
+  .u-head h1 { font-size: var(--step-4); letter-spacing: -0.035em; }
+  .big { display: flex; gap: clamp(20px, 3vw, 44px); margin: 0; }
+  .big div { display: grid; }
+  .big dt { order: 2; font-size: 0.9375rem; color: var(--muted); }
+  .big dd { margin: 0; font: 800 clamp(2.5rem, 1.6rem + 3vw, 4.5rem)/0.9 var(--display); letter-spacing: -0.045em; }
+  .big small { font-size: 0.45em; letter-spacing: 0; }
+
+  .u-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .plan { margin: 0; display: grid; gap: 12px; }
+  .plan img { width: 100%; border: 2px solid var(--ink); border-radius: var(--radius-card); background: #fff; }
+  .plan figcaption { font-size: 0.875rem; color: var(--muted); }
+  .plan-none { display: grid; place-items: center; aspect-ratio: 600 / 470; border: 2px dashed var(--ink); border-radius: var(--radius-card); font-weight: 650; }
+
+  .panel { position: sticky; top: calc(var(--header-h) + 20px); display: grid; gap: 20px; padding: clamp(20px, 2.4vw, 32px); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--paper); box-shadow: 8px 8px 0 var(--ink); }
+  .rent-gross { font: 800 clamp(2.25rem, 1.8rem + 1.6vw, 3.25rem)/1 var(--display); letter-spacing: -0.04em; }
+  .rent-gross span { font: 600 1rem/1 var(--body); letter-spacing: 0; color: var(--muted); }
+  .rent-parts { margin: 14px 0 0; display: grid; gap: 6px; }
+  .rent-parts div { display: flex; justify-content: space-between; gap: 12px; }
+  .rent-parts dt { color: var(--muted); }
+  .rent-parts dd { margin: 0; font-weight: 600; }
+  .rent-parts .sum { border-top: 2px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 700; }
+  .rent-parts .sum dt { color: var(--ink); }
+  .rent-none { font: 700 var(--step-1)/1.3 var(--display); }
+  .rent-note { margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--butter-soft); color: #4a3400; font-size: 0.9375rem; line-height: 1.45; }
+  .move { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--butter); border-radius: 12px; border: 2px solid var(--ink); }
+  .move strong { font-weight: 750; }
+  .panel-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .facts { margin: 0; border-top: 1px solid var(--line); }
+  .facts div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; font-weight: 600; text-align: right; }
+  .feat { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .feat li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--sand); font-size: 0.9375rem; font-weight: 600; }
+
+  .sec { font-size: var(--step-3); margin-bottom: 20px; }
+  .where { margin-top: 28px; padding: clamp(18px, 2vw, 28px); background: var(--sand); border-radius: var(--radius-card); display: grid; gap: 10px; }
+  .where-title { font-size: var(--step-2); }
+
+  .more { display: grid; gap: 24px; }
+  .photos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .photos li { border-radius: 14px; overflow: hidden; border: 2px solid var(--ink); }
+  .photos .p-lead { grid-column: span 2; grid-row: span 2; }
+  .photos :global(img) { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3 / 2; }
+  .small { font-size: 0.875rem; }
+
+  .sim { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .sim a { position: relative; display: grid; gap: 6px; padding: 22px; border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--paper); text-decoration: none; height: 100%; }
+  .sim a:hover { background: var(--chalk); }
+  .sim .no { justify-self: start; font-size: 1rem; padding: 6px 10px; background: var(--butter); }
+  .sim .nm { font: 750 var(--step-1)/1.15 var(--display); }
+  .sim .mv { color: var(--muted); font-size: 0.9375rem; }
+  .sim :global(.go) { position: absolute; right: 20px; top: 22px; }
+
+  .apply-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .apply-text { display: grid; gap: 22px; }
+  .apply-title { font-size: var(--step-4); letter-spacing: -0.04em; }
+  .form-card { background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-card); padding: clamp(20px, 3vw, 40px); box-shadow: 10px 10px 0 var(--ink); display: grid; gap: 18px; }
+  .chosen { display: grid; gap: 2px; padding: 14px 16px; background: var(--sand); border-radius: 12px; }
+  .chosen span { font-size: 0.875rem; color: var(--muted); font-weight: 600; }
+  .chosen strong { font: 750 1.125rem/1.2 var(--display); }
+
+  @media (max-width: 1000px) {
+    .u-grid, .apply-grid { grid-template-columns: 1fr; }
+    .panel { position: static; }
+    .sim { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .photos { grid-template-columns: 1fr 1fr; }
+    .photos .p-lead { grid-column: 1 / -1; grid-row: auto; }
+    .panel { box-shadow: 5px 5px 0 var(--ink); }
+    .form-card { box-shadow: 6px 6px 0 var(--ink); }
+  }
+</style>

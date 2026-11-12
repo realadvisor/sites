@@ -1,0 +1,949 @@
+{
+ "id": "3894f0bf-4a44-49b0-b26b-d286b4bda70b",
+ "slug": "residenza-archi-del-bre",
+ "title": "Residenza Archi del Brè",
+ "description": "<p>Ventidue appartamenti in due piccole palazzine sul pendio di Castagnola, ai piedi del Monte Brè, con vista aperta sul lago di Lugano e sul San Salvatore.</p><p>Dal 2.5 al 5.5 locali: al piano terreno appartamenti con giardino privato, ai piani superiori logge profonde, in cima quattro attici con grande terrazza. Pavimenti in rovere chiaro, serramenti a tutta altezza, riscaldamento con pompa di calore e pannelli fotovoltaici, autorimessa sotterranea con cantine.</p><p>Il centro di Lugano è a dieci minuti, il sentiero dell’olivo verso Gandria parte poco sotto la residenza. Cantiere in corso, consegna prevista per giugno 2028.</p>",
+ "descriptionText": "Ventidue appartamenti in due piccole palazzine sul pendio di Castagnola, ai piedi del Monte Brè, con vista aperta sul lago di Lugano e sul San Salvatore.\n\nDal 2.5 al 5.5 locali: al piano terreno appartamenti con giardino privato, ai piani superiori logge profonde, in cima quattro attici con grande terrazza. Pavimenti in rovere chiaro, serramenti a tutta altezza, riscaldamento con pompa di calore e pannelli fotovoltaici, autorimessa sotterranea con cantine.\n\nIl centro di Lugano è a dieci minuti, il sentiero dell’olivo verso Gandria parte poco sotto la residenza. Cantiere in corso, consegna prevista per giugno 2028.",
+ "status": "construction",
+ "deliveryDate": "2028-06-30",
+ "address": {
+  "street": "Via San Giorgio 21",
+  "postcode": "6976",
+  "city": "Lugano",
+  "country": "Switzerland",
+  "lat": 46.003,
+  "lng": 8.976
+ },
+ "photos": [
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925316.jpg",
+   "alt": "Residenza Archi del Brè"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+   "alt": "Residenza Archi del Brè, photo 2"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+   "alt": "Residenza Archi del Brè, photo 3"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747981.jpg",
+   "alt": "Residenza Archi del Brè, photo 4"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+   "alt": "Residenza Archi del Brè, photo 5"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747979.jpg",
+   "alt": "Residenza Archi del Brè, photo 6"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+   "alt": "Residenza Archi del Brè, photo 7"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925302.jpg",
+   "alt": "Residenza Archi del Brè, photo 8"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925317.jpg",
+   "alt": "Residenza Archi del Brè, photo 9"
+  },
+  {
+   "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747983.jpg",
+   "alt": "Residenza Archi del Brè, photo 10"
+  }
+ ],
+ "stats": {
+  "units": 22,
+  "available": 15,
+  "reserved": 4,
+  "sold": 3,
+  "price": {
+   "min": 1050000,
+   "max": 3800000
+  },
+  "rooms": {
+   "min": 2.5,
+   "max": 5.5
+  },
+  "livingSurface": {
+   "min": 72,
+   "max": 196
+  }
+ },
+ "currency": "CHF",
+ "agents": [
+  {
+   "id": "ccfa4490-0c43-46f5-84c8-6e53fceb530c",
+   "firstName": "Chiara",
+   "lastName": "Bernasconi",
+   "phone": "+41 00 000 00 02",
+   "email": "chiara.bernasconi@sasso-chiaro.example.com",
+   "languages": [
+    "it",
+    "en"
+   ],
+   "teamIds": [
+    "06bc66be-9fe2-45af-848b-e66dec877929"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496660-sq.jpg",
+    "alt": "Chiara Bernasconi"
+   }
+  }
+ ],
+ "units": [
+  {
+   "id": "027573e3-1748-4462-8c4f-00deec8037a8",
+   "name": "2.5 locali con giardino, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "livingSurface": 72,
+   "balconySurface": 25,
+   "floor": 0,
+   "floorLabel": "Piano terra",
+   "price": 1050000,
+   "currency": "CHF",
+   "description": "<p>Un 2.5 locali di 72 m² al piano terreno della Casa A, con giardino privato di 110 m² e terrazza coperta davanti al soggiorno.</p><p>Soggiorno con cucina aperta, 1 camera da letto, 1 bagno, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.</p>",
+   "descriptionText": "Un 2.5 locali di 72 m² al piano terreno della Casa A, con giardino privato di 110 m² e terrazza coperta davanti al soggiorno.\n\nSoggiorno con cucina aperta, 1 camera da letto, 1 bagno, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925316.jpg",
+     "alt": "2.5 locali con giardino, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "2.5 locali con giardino, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925317.jpg",
+     "alt": "2.5 locali con giardino, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "2.5 locali con giardino, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "2.5 locali con giardino, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "2-5-locali-con-giardino-casa-a-3c2d6473-d1e4-4a76-aa7a-06edf3f02616",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "be561739-fa92-46e5-8b48-298d973b18c2",
+   "name": "3.5 locali con giardino, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "livingSurface": 104,
+   "balconySurface": 25,
+   "floor": 0,
+   "floorLabel": "Piano terra",
+   "price": 1490000,
+   "currency": "CHF",
+   "description": "<p>Un 3.5 locali di 104 m² al piano terreno della Casa A, con giardino privato di 160 m² e terrazza coperta davanti al soggiorno.</p><p>Soggiorno con cucina aperta, 2 camere da letto, 2 bagni, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.</p>",
+   "descriptionText": "Un 3.5 locali di 104 m² al piano terreno della Casa A, con giardino privato di 160 m² e terrazza coperta davanti al soggiorno.\n\nSoggiorno con cucina aperta, 2 camere da letto, 2 bagni, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925316.jpg",
+     "alt": "3.5 locali con giardino, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "3.5 locali con giardino, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925317.jpg",
+     "alt": "3.5 locali con giardino, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "3.5 locali con giardino, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "3.5 locali con giardino, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "3-5-locali-con-giardino-casa-a-5f3fb794-d0c4-4a97-8009-205707023057",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "5030454a-b2cb-4ffc-89e3-c9ba7081f865",
+   "name": "4.5 locali con giardino, Casa A",
+   "status": "reserved",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 132,
+   "balconySurface": 25,
+   "floor": 0,
+   "floorLabel": "Piano terra",
+   "price": 1890000,
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "d1100613-b92d-4a0e-975a-f4c3e79abe6c",
+   "name": "2.5 locali, 1° piano, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "livingSurface": 72,
+   "balconySurface": 18,
+   "floor": 1,
+   "floorLabel": "1° piano",
+   "price": 1120000,
+   "currency": "CHF",
+   "description": "<p>Un 2.5 locali di 72 m² al 1° piano della Casa A, con loggia di 18 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 1 camera da letto, 1 bagno, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 2.5 locali di 72 m² al 1° piano della Casa A, con loggia di 18 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 1 camera da letto, 1 bagno, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "2.5 locali, 1° piano, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "2.5 locali, 1° piano, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "2.5 locali, 1° piano, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "2.5 locali, 1° piano, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "2.5 locali, 1° piano, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "2-5-locali-1-piano-casa-a-48dc267a-949f-4d0b-9a47-77cf6d67b6ed",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "84d09977-7264-45d2-a92d-188d5d958f1b",
+   "name": "3.5 locali, 1° piano, Casa A",
+   "status": "sold",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "livingSurface": 105,
+   "balconySurface": 28,
+   "floor": 1,
+   "floorLabel": "1° piano",
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "192cfaf8-0c47-40a2-b0ca-c4b1e79f31de",
+   "name": "4.5 locali, 1° piano, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 134,
+   "balconySurface": 32,
+   "floor": 1,
+   "floorLabel": "1° piano",
+   "price": 2050000,
+   "currency": "CHF",
+   "description": "<p>Un 4.5 locali di 134 m² al 1° piano della Casa A, con loggia di 32 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 3 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 4.5 locali di 134 m² al 1° piano della Casa A, con loggia di 32 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 3 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "4.5 locali, 1° piano, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "4.5 locali, 1° piano, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "4.5 locali, 1° piano, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "4.5 locali, 1° piano, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "4.5 locali, 1° piano, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "4-5-locali-1-piano-casa-a-ad6a8f7f-faee-4b7c-8a59-2b0023bb67bd",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "d98d5baf-808a-4d38-9f46-e4c69e93acbe",
+   "name": "2.5 locali, 2° piano, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "livingSurface": 73,
+   "balconySurface": 18,
+   "floor": 2,
+   "floorLabel": "2° piano",
+   "price": 1180000,
+   "currency": "CHF",
+   "description": "<p>Un 2.5 locali di 73 m² al 2° piano della Casa A, con loggia di 18 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 1 camera da letto, 1 bagno, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 2.5 locali di 73 m² al 2° piano della Casa A, con loggia di 18 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 1 camera da letto, 1 bagno, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "2.5 locali, 2° piano, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "2.5 locali, 2° piano, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "2.5 locali, 2° piano, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "2.5 locali, 2° piano, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "2.5 locali, 2° piano, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "2-5-locali-2-piano-casa-a-4d949c41-baad-4ae3-8d94-2360a5f28446",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "3efb0f28-da81-4849-b790-b548f7c5077c",
+   "name": "3.5 locali, 2° piano, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "livingSurface": 106,
+   "balconySurface": 28,
+   "floor": 2,
+   "floorLabel": "2° piano",
+   "price": 1680000,
+   "currency": "CHF",
+   "description": "<p>Un 3.5 locali di 106 m² al 2° piano della Casa A, con loggia di 28 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 2 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 3.5 locali di 106 m² al 2° piano della Casa A, con loggia di 28 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 2 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "3.5 locali, 2° piano, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "3.5 locali, 2° piano, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "3.5 locali, 2° piano, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "3.5 locali, 2° piano, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "3.5 locali, 2° piano, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "3-5-locali-2-piano-casa-a-e509cf07-c035-4802-a3e1-ca1221787e12",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "d2c1fad8-06df-4252-be65-7989c7071f6b",
+   "name": "4.5 locali, 2° piano, Casa A",
+   "status": "reserved",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 135,
+   "balconySurface": 32,
+   "floor": 2,
+   "floorLabel": "2° piano",
+   "price": 2160000,
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "74310bf7-2b02-48cd-810a-52c036661375",
+   "name": "Attico 4.5 locali con terrazza, Casa A",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment_penthouse",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 158,
+   "balconySurface": 95,
+   "floor": 3,
+   "floorLabel": "3° piano",
+   "price": 2890000,
+   "currency": "CHF",
+   "description": "<p>Attico di 158 m² all’ultimo piano della Casa A, con terrazza di 95 m² su tre lati e vista libera sul lago e sul San Salvatore.</p><p>Soggiorno a tutta altezza con vetrate scorrevoli, 3 camere da letto, 2 bagni, lavanderia propria. Ascensore diretto dall’autorimessa, due posti auto e cantina.</p>",
+   "descriptionText": "Attico di 158 m² all’ultimo piano della Casa A, con terrazza di 95 m² su tre lati e vista libera sul lago e sul San Salvatore.\n\nSoggiorno a tutta altezza con vetrate scorrevoli, 3 camere da letto, 2 bagni, lavanderia propria. Ascensore diretto dall’autorimessa, due posti auto e cantina.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747981.jpg",
+     "alt": "Attico 4.5 locali con terrazza, Casa A"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747979.jpg",
+     "alt": "Attico 4.5 locali con terrazza, Casa A, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747982.jpg",
+     "alt": "Attico 4.5 locali con terrazza, Casa A, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747984.jpg",
+     "alt": "Attico 4.5 locali con terrazza, Casa A, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747980.jpg",
+     "alt": "Attico 4.5 locali con terrazza, Casa A, photo 5"
+    }
+   ],
+   "listingSlug": "attico-4-5-locali-con-terrazza-casa-a-b11d7f49-c38f-4cca-b8b0-53a010acdbdc",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "5782425e-1346-41f3-b817-7432698515c2",
+   "name": "Attico 5.5 locali con terrazza, Casa A",
+   "status": "sold",
+   "offerType": "buy",
+   "propertyType": "apartment_penthouse",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "livingSurface": 196,
+   "balconySurface": 140,
+   "floor": 3,
+   "floorLabel": "3° piano",
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "8c5f1fea-763e-4648-ae42-1dd5644ea385",
+   "name": "2.5 locali con giardino, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "livingSurface": 72,
+   "balconySurface": 25,
+   "floor": 0,
+   "floorLabel": "Piano terra",
+   "price": 1090000,
+   "currency": "CHF",
+   "description": "<p>Un 2.5 locali di 72 m² al piano terreno della Casa B, con giardino privato di 110 m² e terrazza coperta davanti al soggiorno.</p><p>Soggiorno con cucina aperta, 1 camera da letto, 1 bagno, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.</p>",
+   "descriptionText": "Un 2.5 locali di 72 m² al piano terreno della Casa B, con giardino privato di 110 m² e terrazza coperta davanti al soggiorno.\n\nSoggiorno con cucina aperta, 1 camera da letto, 1 bagno, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925316.jpg",
+     "alt": "2.5 locali con giardino, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "2.5 locali con giardino, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925317.jpg",
+     "alt": "2.5 locali con giardino, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "2.5 locali con giardino, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "2.5 locali con giardino, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "2-5-locali-con-giardino-casa-b-f1dab33b-1b23-4271-ac49-5c8993cb6444",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "1188ea4c-af90-4db6-a2bd-3db05299d9da",
+   "name": "3.5 locali con giardino, Casa B",
+   "status": "sold",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "livingSurface": 104,
+   "balconySurface": 25,
+   "floor": 0,
+   "floorLabel": "Piano terra",
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "de7ed1c4-528f-4c48-aad2-c0d0dcb3bb09",
+   "name": "4.5 locali con giardino, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 132,
+   "balconySurface": 25,
+   "floor": 0,
+   "floorLabel": "Piano terra",
+   "price": 1970000,
+   "currency": "CHF",
+   "description": "<p>Un 4.5 locali di 132 m² al piano terreno della Casa B, con giardino privato di 210 m² e terrazza coperta davanti al soggiorno.</p><p>Soggiorno con cucina aperta, 3 camere da letto, 2 bagni, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.</p>",
+   "descriptionText": "Un 4.5 locali di 132 m² al piano terreno della Casa B, con giardino privato di 210 m² e terrazza coperta davanti al soggiorno.\n\nSoggiorno con cucina aperta, 3 camere da letto, 2 bagni, pavimenti in rovere chiaro. Cantina e posto auto nell’autorimessa compresi nel prezzo.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925316.jpg",
+     "alt": "4.5 locali con giardino, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "4.5 locali con giardino, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925317.jpg",
+     "alt": "4.5 locali con giardino, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "4.5 locali con giardino, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "4.5 locali con giardino, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "4-5-locali-con-giardino-casa-b-f9eeb526-685e-401c-b666-ea73c9f2b34d",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "a52f7850-ff6f-4bbe-b964-90987d045299",
+   "name": "2.5 locali, 1° piano, Casa B",
+   "status": "reserved",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "livingSurface": 72,
+   "balconySurface": 18,
+   "floor": 1,
+   "floorLabel": "1° piano",
+   "price": 1160000,
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "675d8409-5788-45fc-8294-e345ee4ca4f6",
+   "name": "3.5 locali, 1° piano, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "livingSurface": 105,
+   "balconySurface": 28,
+   "floor": 1,
+   "floorLabel": "1° piano",
+   "price": 1650000,
+   "currency": "CHF",
+   "description": "<p>Un 3.5 locali di 105 m² al 1° piano della Casa B, con loggia di 28 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 2 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 3.5 locali di 105 m² al 1° piano della Casa B, con loggia di 28 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 2 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "3.5 locali, 1° piano, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "3.5 locali, 1° piano, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "3.5 locali, 1° piano, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "3.5 locali, 1° piano, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "3.5 locali, 1° piano, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "3-5-locali-1-piano-casa-b-5bfe8b9d-1970-449d-bafd-8134afe62240",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "4aee48c3-77f9-445e-b6d1-4b57a7746320",
+   "name": "4.5 locali, 1° piano, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 134,
+   "balconySurface": 32,
+   "floor": 1,
+   "floorLabel": "1° piano",
+   "price": 2130000,
+   "currency": "CHF",
+   "description": "<p>Un 4.5 locali di 134 m² al 1° piano della Casa B, con loggia di 32 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 3 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 4.5 locali di 134 m² al 1° piano della Casa B, con loggia di 32 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 3 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "4.5 locali, 1° piano, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "4.5 locali, 1° piano, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "4.5 locali, 1° piano, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "4.5 locali, 1° piano, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "4.5 locali, 1° piano, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "4-5-locali-1-piano-casa-b-668202e2-7d54-4f0f-8e3c-b0b1a75139fe",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "7a5d0997-4717-4fa5-9ff3-afe4e78650f9",
+   "name": "2.5 locali, 2° piano, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "livingSurface": 73,
+   "balconySurface": 18,
+   "floor": 2,
+   "floorLabel": "2° piano",
+   "price": 1230000,
+   "currency": "CHF",
+   "description": "<p>Un 2.5 locali di 73 m² al 2° piano della Casa B, con loggia di 18 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 1 camera da letto, 1 bagno, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 2.5 locali di 73 m² al 2° piano della Casa B, con loggia di 18 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 1 camera da letto, 1 bagno, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "2.5 locali, 2° piano, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "2.5 locali, 2° piano, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "2.5 locali, 2° piano, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "2.5 locali, 2° piano, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "2.5 locali, 2° piano, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "2-5-locali-2-piano-casa-b-ded4cd90-13c8-4f41-b87f-762700ffbde1",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "0c76f47d-607d-4669-93bb-467aa8732186",
+   "name": "3.5 locali, 2° piano, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "livingSurface": 106,
+   "balconySurface": 28,
+   "floor": 2,
+   "floorLabel": "2° piano",
+   "price": 1750000,
+   "currency": "CHF",
+   "description": "<p>Un 3.5 locali di 106 m² al 2° piano della Casa B, con loggia di 28 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 2 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 3.5 locali di 106 m² al 2° piano della Casa B, con loggia di 28 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 2 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "3.5 locali, 2° piano, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "3.5 locali, 2° piano, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "3.5 locali, 2° piano, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "3.5 locali, 2° piano, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "3.5 locali, 2° piano, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "3-5-locali-2-piano-casa-b-2707a3e0-ba3d-4e39-acf7-23f44fedf9da",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "ecd81cf4-3c35-4104-a52f-983ab1bd3247",
+   "name": "4.5 locali, 2° piano, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 135,
+   "balconySurface": 32,
+   "floor": 2,
+   "floorLabel": "2° piano",
+   "price": 2250000,
+   "currency": "CHF",
+   "description": "<p>Un 4.5 locali di 135 m² al 2° piano della Casa B, con loggia di 32 m² rivolta verso il lago.</p><p>Soggiorno con cucina aperta, 3 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.</p>",
+   "descriptionText": "Un 4.5 locali di 135 m² al 2° piano della Casa B, con loggia di 32 m² rivolta verso il lago.\n\nSoggiorno con cucina aperta, 3 camere da letto, 2 bagni, serramenti a tutta altezza e pavimenti in rovere chiaro. Cantina e posto auto compresi.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925305.jpg",
+     "alt": "4.5 locali, 2° piano, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925304.jpg",
+     "alt": "4.5 locali, 2° piano, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925314.jpg",
+     "alt": "4.5 locali, 2° piano, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925315.jpg",
+     "alt": "4.5 locali, 2° piano, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26925303.jpg",
+     "alt": "4.5 locali, 2° piano, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "4-5-locali-2-piano-casa-b-4f53fb80-c131-47c7-807c-07109a971e1f",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "643f793c-4a2d-4c67-9d59-28191686b42d",
+   "name": "Attico 4.5 locali con terrazza, Casa B",
+   "status": "reserved",
+   "offerType": "buy",
+   "propertyType": "apartment_penthouse",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "livingSurface": 158,
+   "balconySurface": 95,
+   "floor": 3,
+   "floorLabel": "3° piano",
+   "price": 3010000,
+   "currency": "CHF",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  },
+  {
+   "id": "18ec0412-f97c-4f62-9e62-91438bbd2def",
+   "name": "Attico 5.5 locali con terrazza, Casa B",
+   "status": "available",
+   "offerType": "buy",
+   "propertyType": "apartment_penthouse",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "livingSurface": 196,
+   "balconySurface": 140,
+   "floor": 3,
+   "floorLabel": "3° piano",
+   "price": 3800000,
+   "currency": "CHF",
+   "description": "<p>Attico di 196 m² all’ultimo piano della Casa B, con terrazza di 140 m² su tre lati e vista libera sul lago e sul San Salvatore.</p><p>Soggiorno a tutta altezza con vetrate scorrevoli, 4 camere da letto, 3 bagni, lavanderia propria. Ascensore diretto dall’autorimessa, due posti auto e cantina.</p>",
+   "descriptionText": "Attico di 196 m² all’ultimo piano della Casa B, con terrazza di 140 m² su tre lati e vista libera sul lago e sul San Salvatore.\n\nSoggiorno a tutta altezza con vetrate scorrevoli, 4 camere da letto, 3 bagni, lavanderia propria. Ascensore diretto dall’autorimessa, due posti auto e cantina.",
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747981.jpg",
+     "alt": "Attico 5.5 locali con terrazza, Casa B"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747979.jpg",
+     "alt": "Attico 5.5 locali con terrazza, Casa B, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747982.jpg",
+     "alt": "Attico 5.5 locali con terrazza, Casa B, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747984.jpg",
+     "alt": "Attico 5.5 locali con terrazza, Casa B, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26747980.jpg",
+     "alt": "Attico 5.5 locali con terrazza, Casa B, photo 5"
+    }
+   ],
+   "listingSlug": "attico-5-5-locali-con-terrazza-casa-b-681fb002-f26c-402d-9b61-ea97d628446e",
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ]
+  }
+ ],
+ "agency": {
+  "id": "cd30ff4b-06f5-497d-a518-6d13ef3ab276",
+  "name": "Sasso Chiaro Sviluppi SA",
+  "address": {
+   "street": "Via Pretorio 9",
+   "postcode": "6900",
+   "city": "Lugano",
+   "country": "Switzerland",
+   "lat": 46.006,
+   "lng": 8.952
+  },
+  "phone": "+41 00 000 00 01",
+  "email": "vendite@sasso-chiaro.example.com",
+  "website": "https://sasso-chiaro.example.com"
+ }
+}

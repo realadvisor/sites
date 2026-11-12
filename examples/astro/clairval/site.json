@@ -1,0 +1,7 @@
+{
+  "country": "CH",
+  "locale": "en-CH",
+  "locales": ["en-CH", "fr-CH"],
+  "developmentsPath": "/developments",
+  "redirects": {}
+}

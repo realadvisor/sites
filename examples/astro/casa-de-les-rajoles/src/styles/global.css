@@ -1,0 +1,81 @@
+/* Casa de les Rajoles: heritage serif, clean sans, coral used sparingly on ivory. */
+:root {
+  --bg: #f7f2e9;
+  --paper: #fffdf8;
+  --surface: #efe7da;
+  --text: #2b2420;
+  --muted: #675c53;
+  --line: #e2d7c6;
+  --line-strong: #c9baa4;
+  --accent: #d9654b; /* brand coral: lines, motif, selection; never small text on ivory */
+  --accent-strong: #a9432d; /* coral for text and white-on-coral buttons (AA) */
+  --ink: #2b2420;
+  --danger: #a3271b;
+  --st-av: #dfe8d8; --st-av-ink: #2e4a2c; --st-av-line: #93ad87;
+  --st-re: #f3e1bf; --st-re-ink: #6a4510; --st-re-line: #d3ad69;
+  --st-so: #ebe5dc; --st-so-ink: #675c53; --st-so-line: #cfc5b7;
+  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --sans: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  --radius-card: 2px;
+  --radius-btn: 2px;
+  --control-radius: 2px;
+  --control-h: 48px;
+  --header-h: 72px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1280px;
+  --space-section: clamp(72px, 9vw, 136px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 24px; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 400 1rem/1.6 var(--sans); font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img, svg { max-width: 100%; }
+img { display: block; height: auto; }
+picture { display: block; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.12; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem); }
+h2 { font-size: clamp(1.875rem, 1.4rem + 1.8vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); }
+p { margin: 0; }
+p + p { margin-top: 0.9em; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; }
+::selection { background: #f3cfc4; }
+
+.wrap { width: 100%; max-width: calc(var(--max) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.lede { font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem); line-height: 1.55; max-width: 60ch; color: var(--text); }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+.num { font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px;
+  font: 600 0.9375rem/1 var(--sans); letter-spacing: 0.01em; text-decoration: none; border-radius: var(--radius-btn);
+  border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; white-space: nowrap;
+}
+.cta:hover { background: #463b34; color: var(--paper); }
+.cta.coral { background: var(--accent-strong); border-color: var(--accent-strong); }
+.cta.coral:hover { background: #8f3624; }
+.cta.ghost { background: transparent; color: var(--ink); }
+.cta.ghost:hover { background: var(--paper); color: var(--ink); }
+.cta.light { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.link { font-weight: 600; color: var(--accent-strong); text-decoration: underline; text-decoration-color: rgb(169 67 45 / 0.35); display: inline-block; padding-block: 8px; }
+.link:hover { text-decoration-color: currentColor; }
+
+.pill { display: inline-block; font: 600 0.75rem/1 var(--sans); letter-spacing: 0.04em; padding: 6px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.available { background: var(--st-av); color: var(--st-av-ink); }
+.pill.reserved { background: var(--st-re); color: var(--st-re-ink); }
+.pill.sold { background: var(--st-so); color: var(--st-so-ink); }
+
+/* The kit's enquiry form, themed with tokens. */
+/* Kit gap: form.css resolves its control tokens on :root, so they are set again here. */
+.enquiry { --control-focus: var(--accent-strong); --control-bg: #fffdf8; --control-border: var(--line-strong); --control-radius: 2px; }
+
+.prose p + p { margin-top: 0.9em; }
+.prose { max-width: 62ch; }

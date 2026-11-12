@@ -1,0 +1,49 @@
+---
+/**
+ * One adviser: portrait (when the data has one), name linking to the agent
+ * page, role or office, languages, direct line and e-mail in plain type.
+ */
+import type { Agent, Team } from '@realadvisor/sites-sdk/types';
+import Portrait from './Portrait.astro';
+import { agentSlug, href, type L } from '../lib/routes';
+import { cityName, langNames, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { agent: Agent; agents: Agent[]; teams: Team[]; l: L; as?: 'h2' | 'h3'; compact?: boolean }
+const { agent: a, agents, teams, l, as: H = 'h3', compact = false } = Astro.props;
+const t = tx(l);
+const team = teams.find((x) => a.team_ids.includes(x.id));
+const role = a.title ?? (team ? t('adviserAt', { city: cityName(team.address.city, l) || team.name }) : undefined);
+const langs = langNames(a.languages, l);
+---
+<article class:list={['ag', { 'ag--compact': compact }]}>
+  {a.photo?.url && (
+    <a class="ag__photo" href={href('team', l, agentSlug(a, agents))} tabindex="-1" aria-hidden="true">
+      <Portrait agent={a} w={compact ? 160 : 480} sizes={compact ? '80px' : '(min-width: 1320px) 300px, (min-width: 760px) 23vw, 46vw'} />
+    </a>
+  )}
+  <div class="ag__body">
+    <H class="ag__name"><a href={href('team', l, agentSlug(a, agents))}>{a.first_name} {a.last_name}</a></H>
+    {role && <p class="ag__role">{role}</p>}
+    {langs && <p class="ag__langs"><span class="sr-only">{t('languages')}: </span>{langs}</p>}
+    <ul class="ag__contact plain-list">
+      {a.phone && <li><a class="num" href={tel(a.phone)}>{a.phone}</a></li>}
+      {a.email && <li><a href={`mailto:${a.email}`}>{a.email}</a></li>}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .ag { display: grid; gap: 14px; align-content: start; }
+  .ag__photo { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper-2); }
+  .ag__photo :global(img) { width: 100%; height: 100%; }
+  .ag__body { display: grid; gap: 2px; min-width: 0; }
+  .ag__name { font-size: 1.3125rem; line-height: 1.2; color: var(--green-ink); }
+  .ag__name a { text-decoration: none; }
+  .ag__name a:hover { text-decoration: underline; }
+  .ag__role, .ag__langs { font-size: 0.9375rem; color: var(--muted); }
+  .ag__contact { margin-top: 6px; font-size: 0.9375rem; }
+  .ag__contact a { display: inline-flex; min-height: 32px; align-items: center; color: var(--green); overflow-wrap: anywhere; }
+  .ag--compact:has(.ag__photo) { grid-template-columns: 80px minmax(0, 1fr); align-items: start; gap: 16px; }
+  .ag--compact .ag__photo { width: 80px; }
+</style>

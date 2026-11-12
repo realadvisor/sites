@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import View from '../../../views/DestinationView.astro';
+import { findTeam } from '../../../lib/resolve';
+const team = await findTeam(Astro.params.slug!);
+if (!team) return Astro.rewrite('/404');
+---
+<View l="fr" slug={Astro.params.slug!} />

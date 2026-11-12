@@ -1,0 +1,14 @@
+/* Scoped to the card (.c-agent on its root): the Astro component's <style>. */
+.agent.c-agent { display: grid; gap: 18px; align-content: start; }
+.agent.c-agent.has-photo { grid-template-columns: minmax(96px, 160px) minmax(0, 1fr); align-items: start; }
+.c-agent .portrait { display: block; aspect-ratio: 1; border-radius: var(--radius-card); overflow: hidden; background: var(--sand); }
+.c-agent .name { font: 400 var(--step-2)/1.05 var(--serif); }
+.c-agent .role { color: var(--muted); margin-top: 4px; }
+.c-agent dl { display: grid; gap: 2px; margin: 14px 0 0; font-size: 0.9375rem; }
+.c-agent dl div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 12px; }
+.c-agent dt { color: var(--muted); }
+.c-agent dd { margin: 0; overflow-wrap: anywhere; }
+.c-agent dd a { display: inline-block; padding-block: 6px; }
+.c-agent.has-photo dl div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.c-agent.has-photo dl div + div { margin-top: 6px; }
+@media (max-width: 560px) { .agent.c-agent.has-photo { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; } }

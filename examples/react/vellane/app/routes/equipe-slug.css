@@ -1,0 +1,18 @@
+.top { padding-top: 16px; }
+.back { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; text-decoration: none; font-weight: 550; }
+.back:hover { text-decoration: underline; }
+.who { display: grid; gap: 32px; padding-top: 16px; align-items: start; }
+@media (min-width: 960px) { .who:has(.who__photo) { grid-template-columns: 320px minmax(0, 1fr); gap: 56px; } }
+.who__photo { width: 100%; max-width: 320px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-card); }
+.who__text { display: grid; gap: 12px; max-width: 720px; }
+.who__h1 { font-size: var(--step-4); letter-spacing: -0.035em; }
+.who__role { font-size: var(--step-1); color: var(--muted); }
+.who__bio { font-size: 1.0625rem; max-width: 62ch; }
+.who__facts { margin: 16px 0 0; border-top: 1px solid var(--line); }
+.who__facts div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.who__facts dt { color: var(--muted); }
+.who__facts dd { margin: 0; font-weight: 550; overflow-wrap: anywhere; }
+.who__facts a { text-decoration: none; }
+.who__facts a:hover { text-decoration: underline; }
+.sec { margin-top: var(--section); display: grid; gap: 28px; }
+.form .enquiry { max-width: 760px; }

@@ -1,0 +1,44 @@
+---
+/** Towns of a region: counts for sale and to rent, asking-price span, each linking to the filtered search. */
+import type { Town } from '../lib/regions';
+import { priceSpan } from '../lib/regions';
+import { href, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { formatAmount } from '../lib/format';
+
+interface Props { l: L; towns: Town[]; caption: string }
+const { l, towns, caption } = Astro.props;
+const t = tx(l);
+const rows = towns.filter((x) => x.buy.length + x.rent.length > 0);
+---
+{rows.length > 0 && (
+  <table class="tt">
+    <caption class="sr-only">{caption}</caption>
+    <thead><tr><th scope="col">{t('colPlace')}</th><th scope="col" class="n">{t('colBuy')}</th><th scope="col" class="n">{t('colRent')}</th><th scope="col" class="p">{t('colPrices')}</th></tr></thead>
+    <tbody>
+      {rows.map((x) => {
+        const span = priceSpan(x.buy);
+        const q = `?city=${encodeURIComponent(x.city)}`;
+        return (
+          <tr>
+            <th scope="row">{cityName(x.city, l)}</th>
+            <td class="n num">{x.buy.length ? <a href={`${href('buy', l)}${q}`}>{x.buy.length}</a> : '–'}</td>
+            <td class="n num">{x.rent.length ? <a href={`${href('rent', l)}${q}`}>{x.rent.length}</a> : '–'}</td>
+            <td class="p num">{span ? t('pricesFromTo', { from: formatAmount(span.min), to: formatAmount(span.max) }) : x.buy[0]?.price ? formatAmount(x.buy[0].price) : '–'}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+)}
+
+<style>
+  .tt { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .tt th, .tt td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  .tt thead th { font-weight: 500; color: var(--muted); font-size: 0.875rem; border-bottom-color: var(--line-strong); }
+  .tt tbody th { font-weight: 600; }
+  .tt .n { text-align: right; width: 5.5rem; }
+  .tt .p { text-align: right; white-space: nowrap; }
+  .tt a { color: var(--green); font-weight: 600; display: inline-flex; min-width: 32px; min-height: 32px; align-items: center; justify-content: flex-end; }
+  @media (max-width: 560px) { .tt .p { white-space: normal; } .tt .n { width: auto; } }
+</style>

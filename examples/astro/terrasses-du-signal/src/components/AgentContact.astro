@@ -1,0 +1,38 @@
+---
+/**
+ * A broker: portrait (4:5, square corners like the site's cards, only when the
+ * agent has a photo), then name, role, languages, phone, e-mail in plain type.
+ */
+import type { Agent } from '@realadvisor/sites-sdk/types';
+import BucketPhoto from './BucketPhoto.astro';
+import { tel } from '../lib/nav';
+
+interface Props { agent: Agent; org?: string; tone?: 'light' | 'dark' }
+const { agent, org, tone = 'light' } = Astro.props;
+const LANG: Record<string, string> = { fr: 'français', en: 'anglais', de: 'allemand', it: 'italien', es: 'espagnol' };
+const langs = (agent.languages ?? []).map((l) => LANG[l] ?? l);
+const languages = langs.length ? `Parle ${langs.length > 1 ? `${langs.slice(0, -1).join(', ')} et ${langs.at(-1)}` : langs[0]}` : '';
+const name = `${agent.first_name} ${agent.last_name}`;
+const role = [agent.title ?? 'Commercialisation', org].filter(Boolean).join(', ');
+---
+<div class:list={['agent', tone]}>
+  {agent.photo && <div class="face"><BucketPhoto src={agent.photo.url} alt={name} width={1000} height={1000} widths={[120, 240, 360]} fallbackWidth={240} sizes="120px" position="50% 25%" /></div>}
+  <p class="n">{name}</p>
+  <p class="r">{role}</p>
+  {languages && <p class="r">{languages}</p>}
+  <p class="links">
+    {agent.phone && <a href={tel(agent.phone)}>{agent.phone}</a>}
+    {agent.email && <a href={`mailto:${agent.email}`}>{agent.email}</a>}
+  </p>
+</div>
+
+<style>
+  .face { display: block; width: 120px; margin-bottom: 16px; }
+  .face :global(picture), .face :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-card); background: var(--line); }
+  .n { font: 500 1.375rem/1.2 var(--serif); }
+  .r { color: var(--muted); font-size: 0.9375rem; }
+  .dark .r { color: var(--on-dark-muted); }
+  .links { display: flex; flex-direction: column; align-items: start; margin-top: 6px; font-size: 0.9375rem; }
+  .links a { display: inline-block; padding-block: 6px; overflow-wrap: anywhere; }
+  .dark .links a { color: var(--on-dark); }
+</style>

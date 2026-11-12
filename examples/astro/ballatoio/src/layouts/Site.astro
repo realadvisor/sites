@@ -1,0 +1,247 @@
+---
+/**
+ * Every page: skip link, the three-zone header (links, wordmark, links), the
+ * phone menu, the footer with legal links in the page language.
+ */
+// Archivo, subset by scripts/font-subset.sh (@font-face in styles/global.css).
+import archivo from '../fonts/archivo-wdth62-100-wght400-850-latin.woff2?url';
+import '../styles/global.css';
+import { t } from '@realadvisor/sites-kit/i18n';
+import Base from './Base.astro';
+import { agency, brandName } from '../lib/data';
+import { LANGS, LOCALE_OF, UI, href, type Lang, type Route } from '../lib/i18n';
+import { telHref } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  alternates?: { lang: string; href: string }[];
+  /** The section this page belongs to (marks the nav link). */
+  current?: Route;
+  /** Language links go to the other home page (legal pages: check:deploy refuses a link to another language's legal page). */
+  switchToHome?: boolean;
+}
+const { lang, title, description, image, jsonLd, noindex, alternates, current, switchToHome = false } = Astro.props;
+const ui = UI[lang];
+const locale = LOCALE_OF[lang];
+const ag = await agency();
+const name = brandName(ag);
+const team = ag.team;
+const left: Route[] = ['buy', 'rent', 'sell'];
+const right: Route[] = ['areas', 'journal', 'contact'];
+const menu: Route[] = ['buy', 'rent', 'sell', 'sold', 'areas', 'team', 'about', 'journal', 'contact'];
+const other = (l: Lang) => switchToHome && l !== lang ? href('home', l) : alternates?.find((a) => a.lang === LOCALE_OF[l])?.href ?? href('home', l);
+const addr = team?.address ?? ag.org.address;
+const year = new Date().getFullYear();
+---
+<Base title={title} description={description} image={image} jsonLd={jsonLd} noindex={noindex} alternates={alternates} locale={locale}>
+  <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={archivo} />
+  <a class="skip" href="#main">{ui.skip}</a>
+  <header class="hd">
+    <div class="hd-in">
+      <nav class="hd-nav hd-left" aria-label={ui.mainNav}>
+        {left.map((r) => <a href={href(r, lang)} aria-current={current === r ? 'page' : undefined}>{ui.nav[r as keyof typeof ui.nav]}</a>)}
+      </nav>
+      <a class="wordmark" href={href('home', lang)} aria-label={`${name}, ${ui.nav.home}`}>{name}</a>
+      <div class="hd-right">
+        <nav class="hd-nav" aria-label={ui.nav.areas}>
+          {right.map((r) => <a href={href(r, lang)} aria-current={current === r ? 'page' : undefined}>{ui.nav[r as keyof typeof ui.nav]}</a>)}
+        </nav>
+        <p class="langs" aria-label={ui.langSwitch}>
+          {LANGS.map((l) => (
+            <a href={other(l)} hreflang={LOCALE_OF[l]} lang={l} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>
+          ))}
+        </p>
+        <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu" data-menu-open>
+          <span>{ui.menu}</span>
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 8h18M3 16h18" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="menu" class="menu" data-menu role="dialog" aria-modal="true" aria-label={ui.menu}>
+    <div class="menu-top">
+      <a class="wordmark" href={href('home', lang)}>{name}</a>
+      <button type="button" class="menu-btn is-close" data-menu-close>
+        <span>{ui.close}</span>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 5l14 14M19 5L5 19" /></svg>
+      </button>
+    </div>
+    <nav class="menu-nav" aria-label={ui.mainNav}>
+      {menu.map((r) => <a href={href(r, lang)} aria-current={current === r ? 'page' : undefined}>{ui.nav[r as keyof typeof ui.nav]}</a>)}
+    </nav>
+    <div class="menu-foot">
+      {team?.phone && <a href={telHref(team.phone)}>{team.phone}</a>}
+      {team?.email && <a href={`mailto:${team.email}`}>{team.email}</a>}
+      <p class="langs">
+        {LANGS.map((l) => <a href={other(l)} hreflang={LOCALE_OF[l]} lang={l} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>)}
+      </p>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+
+  <footer class="ft on-dark">
+    <div class="wrap ft-grid">
+      <div class="ft-office">
+        <p class="ft-name">{name}</p>
+        {team?.description_text && <p class="ft-desc">{team.description_text.split('. ')[0]}.</p>}
+      </div>
+      <div>
+        <h2 class="ft-h">{ui.footerOffice}</h2>
+        {addr && (
+          <p>{addr.street}<br />{[addr.postcode, addr.city].filter(Boolean).join(' ')}</p>
+        )}
+        <p class="ft-contacts">
+          {team?.phone && <a href={telHref(team.phone)}>{team.phone}</a>}
+          {team?.email && <a href={`mailto:${team.email}`}>{team.email}</a>}
+        </p>
+      </div>
+      <nav aria-label={ui.footerHomes}>
+        <h2 class="ft-h">{ui.footerHomes}</h2>
+        <ul>
+          {(['buy', 'rent', 'sold', 'sell', 'areas'] as Route[]).map((r) => <li><a href={href(r, lang)}>{ui.nav[r as keyof typeof ui.nav]}</a></li>)}
+        </ul>
+      </nav>
+      <nav aria-label={ui.footerAgency}>
+        <h2 class="ft-h">{ui.footerAgency}</h2>
+        <ul>
+          {(['about', 'team', 'journal', 'contact'] as Route[]).map((r) => <li><a href={href(r, lang)}>{ui.nav[r as keyof typeof ui.nav]}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+    <div class="wrap ft-base">
+      <p>© {year} {ag.org.name}</p>
+      <p class="ft-legal">
+        <a href={href('legal', lang)}>{t('legalNotice', {}, lang)}</a>
+        <a href={href('privacy', lang)}>{t('privacyPolicy', {}, lang)}</a>
+        <span class="langs">
+          {LANGS.map((l) => <a href={other(l)} hreflang={LOCALE_OF[l]} lang={l} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>)}
+        </span>
+      </p>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const open = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const close = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+  const set = (on: boolean) => {
+    if (!menu || !open) return;
+    menu.classList.toggle('is-open', on);
+    open.setAttribute('aria-expanded', String(on));
+    document.documentElement.classList.toggle('no-scroll', on);
+    if (on) close?.focus();
+    else open.focus();
+  };
+  open?.addEventListener('click', () => set(true));
+  close?.addEventListener('click', () => set(false));
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('a')) set(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('is-open')) set(false);
+    // Keep Tab inside the open menu.
+    if (e.key === 'Tab' && menu?.classList.contains('is-open')) {
+      const items = [...menu.querySelectorAll<HTMLElement>('a, button')];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    }
+  });
+</script>
+
+<style>
+  .skip {
+    position: absolute; left: 12px; top: -60px; z-index: 100;
+    background: var(--text); color: var(--bg); padding: 12px 18px; text-decoration: none; font-weight: 600;
+  }
+  .skip:focus { top: 12px; }
+  main:focus { outline: none; }
+
+  .hd { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .hd-in {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    height: var(--header-h); max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter);
+  }
+  .wordmark {
+    font-stretch: 62%; font-weight: 850; text-transform: uppercase; text-decoration: none;
+    font-size: 2.125rem; line-height: 1; letter-spacing: 0.005em;
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .hd-nav { display: flex; gap: clamp(16px, 2vw, 32px); }
+  .hd-nav a, .langs a {
+    font-size: 0.9375rem; font-weight: 500; text-decoration: none;
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .hd-nav a:hover, .hd-nav a[aria-current='page'] { text-decoration: underline; }
+  .hd-right { display: flex; justify-content: flex-end; align-items: center; gap: clamp(16px, 2vw, 32px); }
+  .langs { display: flex; gap: 12px; }
+  .langs a { color: var(--muted); }
+  .langs a[aria-current='true'] { color: var(--text); font-weight: 650; }
+  .menu-btn {
+    display: none; align-items: center; gap: 10px; min-height: 44px; min-width: 44px; padding: 0;
+    background: none; border: 0; cursor: pointer; font-size: 0.9375rem; font-weight: 600;
+  }
+  @media (max-width: 1080px) {
+    .hd-in { grid-template-columns: auto 1fr; }
+    .hd-left, .hd-right .hd-nav, .hd-right .langs { display: none; }
+    .menu-btn { display: inline-flex; }
+    .wordmark { font-size: 1.875rem; }
+  }
+
+  .menu {
+    position: fixed; inset: 0; z-index: 60; background: var(--bg);
+    display: flex; flex-direction: column; padding: 0 var(--gutter) 32px; overflow-y: auto;
+    visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.18s, visibility 0s 0.18s;
+  }
+  .menu.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.18s; }
+  .menu-top { display: flex; justify-content: space-between; align-items: center; height: var(--header-h); border-bottom: 1px solid var(--line); }
+  .menu-top .menu-btn { display: inline-flex; }
+  .menu-nav { display: grid; padding-block: 24px; }
+  .menu-nav a {
+    font-stretch: 62%; font-weight: 800; text-transform: uppercase; text-decoration: none;
+    font-size: clamp(2.5rem, 11vw, 4rem); line-height: 1.05;
+  }
+  .menu-nav a[aria-current='page'] { color: var(--muted); }
+  .menu-foot { margin-top: auto; display: grid; gap: 4px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .menu-foot > a { min-height: 40px; display: inline-flex; align-items: center; text-decoration: none; }
+
+  .ft { background: var(--accent); color: var(--on-accent); margin-top: var(--section); }
+  .ft a { color: inherit; text-decoration: none; }
+  .ft a:hover { text-decoration: underline; }
+  .ft-grid {
+    display: grid; grid-template-columns: 1.6fr 1fr 0.7fr 0.7fr; gap: 40px;
+    padding-top: clamp(56px, 7vw, 96px); padding-bottom: 56px;
+  }
+  .ft-name { font-stretch: 62%; font-weight: 850; text-transform: uppercase; font-size: 3rem; line-height: 0.9; }
+  .ft-desc { margin-top: 16px; max-width: 26em; color: rgb(255 255 255 / 0.82); }
+  .ft-h { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(255 255 255 / 0.75); margin-bottom: 14px; }
+  .ft-contacts { display: grid; margin-top: 12px; }
+  .ft-contacts a, .ft ul a { display: inline-flex; min-height: 36px; align-items: center; }
+  .ft-base {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
+    padding-top: 20px; padding-bottom: 28px; border-top: 1px solid rgb(255 255 255 / 0.22);
+    font-size: 0.875rem; color: rgb(255 255 255 / 0.82);
+  }
+  .ft-legal { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; }
+  .ft-legal a { min-height: 32px; display: inline-flex; align-items: center; }
+  .ft .langs a { color: rgb(255 255 255 / 0.75); min-height: 32px; }
+  .ft .langs a[aria-current='true'] { color: #fff; }
+  @media (max-width: 900px) {
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+    .ft-office { grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .ft-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

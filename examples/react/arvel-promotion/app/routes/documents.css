@@ -1,0 +1,15 @@
+.dc-docs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.dc-docs a { display: grid; gap: 12px; align-content: start; height: 100%; padding: 32px 28px; border: 1px solid var(--line-strong); text-decoration: none; transition: background 0.3s var(--ease); }
+.dc-docs a:hover { background: var(--surface); }
+.dc-docs .dc-kind { font: 500 0.6875rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); }
+.dc-docs .dc-t { font: 500 2rem / 1.05 var(--serif); }
+.dc-docs .dc-desc { font-size: var(--fs-small); }
+.dc-docs .dc-meta { font-size: 0.8125rem; color: var(--muted); white-space: normal; }
+.dc-docs .dc-dl { margin-top: 12px; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.dc-phead { display: grid; gap: 12px; margin-bottom: 32px; max-width: 720px; }
+.dc-phead p { margin: 0; }
+.dc-plans { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.dc-plans a { display: grid; gap: 12px; text-decoration: none; }
+.dc-plans img { width: 100%; height: 220px; object-fit: contain; background: var(--paper); padding: 14px; }
+.dc-pc b { font: 500 1.375rem / 1 var(--serif); margin-right: 6px; }
+@media (max-width: 900px) { .dc-docs { grid-template-columns: 1fr; } }

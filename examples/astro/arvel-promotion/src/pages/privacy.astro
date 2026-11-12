@@ -1,0 +1,19 @@
+---
+// Privacy policy: text from the kit's legal builder and the organisation's data only.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import { t } from '@realadvisor/sites-kit/i18n';
+import { legalIdentity } from '../lib/data';
+
+const agency = await legalIdentity();
+const title = t('privacyPolicy');
+---
+<Site title={`${title} | ${agency.name}`} description={`${title} du site de ${agency.name}.`}>
+  <PageHead title={title} />
+  <section class="section section--tight"><div class="wrap"><LegalContent sections={privacyPolicy(agency, { analytics: !!analyticsId() })} class="legal-body" /></div></section>
+</Site>

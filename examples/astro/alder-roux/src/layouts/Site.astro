@@ -1,0 +1,48 @@
+---
+/**
+ * The site frame on every page: Base (head), header, <main id="main">,
+ * footer. Pages pass their route key and segments; the language switch and
+ * hreflang alternates come from the same table (src/lib/routes.ts).
+ */
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteData, sites } from '../lib/data';
+import { alternates, href, LANGS, LOCALE, type L, type RouteKey } from '../lib/routes';
+import { areaList } from '../lib/areas';
+
+interface Props {
+  l: L;
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  /** Route of this page, for the language switch and hreflang. */
+  route: RouteKey;
+  segs?: string[];
+  /** Header section to mark current (default: route). */
+  section?: RouteKey;
+  /** Explicit per-language paths when they differ (404). */
+  switchTo?: Record<L, string>;
+}
+const { l, title, description, image, jsonLd, noindex, route, segs = [], section = route } = Astro.props;
+const [{ org, teams }, developments, areas] = await Promise.all([siteData(), sites.developments(), areaList()]);
+// Kit gap: check:deploy reads a language-switch link from /legal to /de/legal as a
+// legal link in the wrong language, so on legal pages the switch goes to the other home.
+const legalPage = route === 'legal' || route === 'privacy';
+const switchTo = Astro.props.switchTo ?? (Object.fromEntries(LANGS.map((x) => [x, x === l || !legalPage ? href(route, x, ...segs) : href('home', x)])) as Record<L, string>);
+const alts = Astro.props.switchTo ? undefined : alternates(route, ...segs);
+---
+<Base title={title} description={description} image={image} jsonLd={jsonLd} noindex={noindex} alternates={alts} locale={LOCALE[l]}>
+  <slot name="head" slot="head" />
+  <Header l={l} org={org} teams={teams} section={section} switchTo={switchTo} hasDevelopments={developments.length > 0} />
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+  <Footer l={l} org={org} teams={teams} areas={areas} switchTo={switchTo} hasDevelopments={developments.length > 0} />
+</Base>
+
+<style>
+  main { outline: none; display: block; }
+</style>

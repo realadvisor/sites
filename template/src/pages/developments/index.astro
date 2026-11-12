@@ -1,0 +1,58 @@
+---
+// Wiring example only. Replace the markup with the real design.
+// Every published development of the agency (ra.developments()), one card
+// each, linking to its page. No developments: a 404 (do not link the page).
+// A replica keeps the source's path (rockwell.ch: /project-neuf/): rename
+// this file's folder and DEVELOPMENTS_PATH (src/lib/developments.ts).
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { img } from '@realadvisor/sites-kit/image';
+import { count, t } from '@realadvisor/sites-kit/i18n';
+import { developmentStatus, developmentUrl, priceFrom } from '@realadvisor/sites-kit/developments';
+
+const [agency, developments] = await Promise.all([ra.agency(), ra.developments()]);
+if (!developments.length) return Astro.rewrite('/404');
+const title = t('developments');
+const cover = developments.find((d) => d.photos[0])?.photos[0];
+---
+<Base
+  title={`${title} | ${agency.name}`}
+  description={`${title} ${agency.name}: ${developments.map((d) => [d.title, d.address.city].filter(Boolean).join(', ')).join(' · ')}`.slice(0, 160)}
+  image={cover && img(cover.url, { w: 1200, h: 630 })}
+>
+  <main>
+    <h1>{title}</h1>
+    <ul class="devs">
+      {developments.map((d, i) => (
+        <li>
+          <a href={developmentUrl(d)}>
+            {d.photos[0] ? (
+              <RaImage src={d.photos[0]} width={720} height={480} sizes="(min-width: 960px) 33vw, 100vw" priority={i === 0} alt={d.photos[0].alt ?? d.title} />
+            ) : (
+              <span class="no-photo" aria-hidden="true">{d.title}</span>
+            )}
+            <h2>{d.title}</h2>
+          </a>
+          {d.address.city && <p>{d.address.city}</p>}
+          <p>
+            {[developmentStatus(d), d.stats.units ? `${count('unitsAvailable', d.stats.available)} / ${count('unitsTotal', d.stats.units)}` : '', priceFrom(d)]
+              .filter(Boolean)
+              .join(' · ')}
+          </p>
+          {/* Card excerpt: descriptionText (plain, no markdown), clamped in CSS. */}
+          {d.description_text && <p class="excerpt">{d.description_text}</p>}
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .devs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 32px; padding: 0; list-style: none; }
+  .devs :global(img) { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+  .no-photo { display: grid; place-items: center; aspect-ratio: 3 / 2; background: #eee; color: #666; }
+  .excerpt { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+</style>

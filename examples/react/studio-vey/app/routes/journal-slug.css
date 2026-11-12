@@ -1,0 +1,26 @@
+/* From pages/journal/[slug].astro (scoped there). */
+  .ah { display: grid; gap: 22px; justify-items: start; padding-block: clamp(48px, 6vw, 96px) clamp(32px, 4vw, 56px); max-width: calc(980px + 2 * var(--gutter)); }
+  .ah a { text-decoration: none; }
+  .ah .lede { color: var(--muted); max-width: 54ch; }
+  .ah-media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface); }
+  .ah-media picture { display: contents; }
+  .ah-media img { width: 100%; height: 100%; object-fit: cover; }
+  .body { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 7fr); gap: 40px clamp(40px, 6vw, 112px); padding-block: clamp(48px, 6vw, 88px) var(--section); }
+  .body-side { display: grid; gap: 20px; align-content: start; position: sticky; top: calc(var(--header-h) + 32px); }
+  .body-places a { color: var(--text); }
+  .body-text { font: 400 1.1875rem/1.7 var(--serif); }
+  .body-text h2 { font-size: 1.625rem; }
+  .more-posts { background: var(--surface); }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(28px, 3vw, 44px); }
+  .grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  @media (max-width: 1023px) {
+    .body { grid-template-columns: minmax(0, 1fr); }
+    .body-side { position: static; order: 2; padding-top: 32px; border-top: 1px solid var(--line); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid > li:nth-child(3) { display: none; }
+  }
+  @media (max-width: 639px) {
+    .ah-media { aspect-ratio: 4 / 3; }
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .grid > li:nth-child(3) { display: block; }
+  }

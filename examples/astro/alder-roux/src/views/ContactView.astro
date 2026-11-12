@@ -1,0 +1,67 @@
+---
+/** Contact: enquiry form and every office with address, phone, email and map link. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { siteData } from '../lib/data';
+import { href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, primary } = await siteData();
+const siteUrl = new URL(href('home', l), Astro.site ?? Astro.url).href;
+---
+<Site l={l} route="contact" title={`${t('contactTitle')} | ${org.name}`} description={t('contactLede')}
+  jsonLd={agencyJsonLd({ id: org.id, name: org.name, phone: primary?.phone, email: primary?.email, address: org.address }, siteUrl)}>
+  <section class="band on-navy">
+    <div class="wrap band__inner">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navContact') }]} />
+      <h1 class="h1">{t('contactTitle')}</h1>
+      <p class="lede">{t('contactLede')}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap cols">
+      <div class="form">
+        <h2 class="h2">{t('writeUs')}</h2>
+        <EnquiryForm locale={LOCALE[l]} contactReason="other" />
+      </div>
+      <ul class="plain-list offices" aria-label={t('navOffices')}>
+        {teams.map((x) => {
+          const osm = x.address.lat != null ? `https://www.openstreetmap.org/?mlat=${x.address.lat}&mlon=${x.address.lng}#map=17/${x.address.lat}/${x.address.lng}` : undefined;
+          return (
+            <li>
+              <h2 class="h3"><a href={href('offices', l, teamSlug(x, teams))}>{t('officeOf', { city: cityName(x.address.city, l) || x.name })}</a></h2>
+              <address>
+                {x.address.street && <span>{x.address.street}</span>}
+                <span>{[x.address.postcode, cityName(x.address.city, l)].filter(Boolean).join(' ')}</span>
+              </address>
+              <dl class="kv">
+                {x.phone && <div><dt>{t('phone')}</dt><dd><a href={tel(x.phone)}>{x.phone}</a></dd></div>}
+                {x.email && <div><dt>{t('email')}</dt><dd><a href={`mailto:${x.email}`}>{x.email}</a></dd></div>}
+              </dl>
+              {osm && <a class="link" href={osm} rel="noopener">{t('directions')}</a>}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+  .form { display: grid; gap: 28px; }
+  .offices { display: grid; gap: 40px; }
+  .offices li { display: grid; gap: 12px; padding-top: 24px; border-top: 2px solid var(--navy); }
+  .offices h2 a { text-decoration: none; }
+  .offices h2 a:hover { text-decoration: underline; }
+  address { font-style: normal; display: grid; color: var(--muted); }
+  .kv dd a { color: var(--navy); font-weight: 600; overflow-wrap: anywhere; }
+  .kv dd { white-space: normal; }
+  @media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+</style>

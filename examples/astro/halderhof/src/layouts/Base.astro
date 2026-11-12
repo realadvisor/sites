@@ -1,0 +1,71 @@
+---
+/**
+ * Document shell: <head> SEO tags, fonts, global styles, consent banner.
+ * The visible frame (header, footer) is Site.astro.
+ */
+import '@fontsource-variable/literata/wght.css';
+import '@fontsource-variable/public-sans/wght.css';
+import '../styles/global.css';
+import serifUrl from '@fontsource-variable/literata/files/literata-latin-wght-normal.woff2?url';
+import sansUrl from '@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import { img } from '@realadvisor/sites-kit/image';
+import { canonicalUrl, safeJsonLd } from '@realadvisor/sites-kit/seo';
+import ConsentBanner from '@realadvisor/sites-kit/components/ConsentBanner.astro';
+import { sites } from '../lib/data';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute URL, ~1200x630: the page's main photo. */
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  alternates?: { lang: string; href: string }[];
+  locale: string;
+}
+const { title, description, jsonLd, noindex, alternates, locale } = Astro.props;
+const ogFallback = async () => {
+  const photo = (await sites.listings({ limit: 1, status: 'available' })).data[0]?.photos[0]?.url;
+  return photo ? img(photo, { w: 1200, h: 630 }) : undefined;
+};
+const image = Astro.props.image || (await ogFallback().catch(() => undefined));
+const base = Astro.site ?? Astro.url;
+const canonical = canonicalUrl(Astro.url, base);
+const gaId = analyticsId();
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates?.map((a) => <link rel="alternate" hreflang={a.lang} href={new URL(a.href, base).href} />)}
+    {alternates?.[0] && <link rel="alternate" hreflang="x-default" href={new URL(alternates[0].href, base).href} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale.replace('-', '_')} />
+    {image && <meta property="og:image" content={image} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta name="theme-color" content="#1f4d3a" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={serifUrl} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={sansUrl} />
+    {/* Guard: nothing may undo `hidden` (an invisible open menu layer blocks every click). Never remove. */}
+    <style is:inline>[hidden]{display:none!important}</style>
+    {jsonLd && <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />}
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    {gaId && <ConsentBanner analyticsId={gaId} locale={locale} />}
+  </body>
+</html>

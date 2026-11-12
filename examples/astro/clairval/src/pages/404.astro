@@ -1,0 +1,35 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. A listing
+// that left the portal shows "no longer available" (410, set by the listing page).
+export const prerender = false;
+
+import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import { siteData } from '../lib/data';
+import { href, langOfPath, LOCALE } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+const path = Astro.originPathname ?? Astro.url.pathname;
+const l = langOfPath(path);
+const lg = klang(LOCALE[l]);
+const t = tx(l);
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? kt('listingGone', {}, lg) : kt('notFound', {}, lg);
+const { org } = await siteData();
+---
+<Site l={l} route="home" switchTo={{ en: '/', fr: '/fr' }} title={`${title} | ${org.name}`} description={title} noindex>
+  <section class="nf wrap">
+    <h1 class="h1">{title}</h1>
+    <p class="lede">{gone ? kt('listingGoneText', {}, lg) : kt('notFoundText', {}, lg)}</p>
+    <ul class="plain nf__links">
+      <li><a class="cta" href={href('buy', l)}>{t('navBuy')}</a></li>
+      <li><a class="cta cta--ghost" href={href('rent', l)}>{t('navRent')}</a></li>
+      <li><a class="cta cta--ghost" href={href('home', l)}>{t('home')}</a></li>
+    </ul>
+  </section>
+</Site>
+
+<style>
+  .nf { min-height: 60vh; display: grid; align-content: center; gap: 20px; padding-block: var(--section); }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+</style>

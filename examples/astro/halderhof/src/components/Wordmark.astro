@@ -1,0 +1,34 @@
+---
+/**
+ * Text wordmark: the organisation has no logo file in the data. The name is
+ * split at its legal part ("Immobilien AG") into a serif name and a small
+ * second line. A logo in the data replaces it.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import type { Organisation } from '@realadvisor/sites-sdk/types';
+
+interface Props { org: Organisation; href: string; label: string }
+const { org, href, label } = Astro.props;
+const m = org.name.match(/^(.*?)\s+((?:Immobilier|Immobilien|Real Estate)\b.*)$/i);
+const name = m?.[1] ?? org.name;
+const sub = m?.[2];
+---
+<a class="wm" href={href} aria-label={label}>
+  {org.logo?.url
+    ? <img data-logo src={img(org.logo.url, { w: 360, fit: 'fit', quality: 90 })} alt={org.name} height="40" />
+    : (
+      <span class="wm__text" aria-hidden="true">
+        <span class="wm__name">{name}</span>
+        {sub && <span class="wm__sub">{sub}</span>}
+      </span>
+    )}
+</a>
+
+<style>
+  .wm { display: inline-flex; align-items: center; text-decoration: none; min-height: 44px; color: inherit; }
+  .wm img { height: 40px; width: auto; }
+  .wm__text { display: flex; align-items: baseline; gap: 10px; line-height: 1; white-space: nowrap; }
+  .wm__name { font: 500 1.625rem/1 var(--font-display); letter-spacing: -0.015em; }
+  .wm__sub { font: 400 0.875rem/1 var(--font-sans); opacity: 0.78; }
+  @media (max-width: 640px) { .wm__name { font-size: 1.4375rem; } .wm__sub { font-size: 0.8125rem; } }
+</style>

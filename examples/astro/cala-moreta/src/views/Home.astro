@@ -1,0 +1,296 @@
+---
+import { getCollection } from 'astro:content';
+import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import AgentPortrait from '../components/AgentPortrait.astro';
+import ListingCard from '../components/ListingCard.astro';
+import Photo from '../components/Photo.astro';
+import { PHOTOS, photoOg } from '../lib/photos';
+import { agency, agentSlug, sites, towns } from '../lib/data';
+import { CONTENT_LANG, UI, alternates, fill, href, listingHref, type Lang } from '../lib/i18n';
+import { formatDate, languageList, price, surface } from '../lib/format';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, all, agents, areaTexts, posts] = await Promise.all([
+  agency(),
+  sites.allListings(),
+  sites.agents(),
+  getCollection('areas', (e) => e.id.startsWith(`${lang}/`)),
+  getCollection('blog', (e) => e.id.startsWith(`${lang}/`)),
+]);
+const name = ag.team?.name ?? ag.org.name;
+const forSale = all.filter((l) => l.status === 'available' && l.offer_type === 'buy');
+const toRent = all.filter((l) => l.status === 'available' && l.offer_type === 'rent');
+const available = all.filter((l) => l.status === 'available');
+const areaList = towns(all).map((t) => ({ ...t, text: areaTexts.find((a) => a.id === `${lang}/${t.slug}`) }));
+const latest = forSale.slice(0, 6);
+const journal = posts.sort((a, b) => +b.data.date - +a.data.date).slice(0, 3);
+const hero = PHOTOS.home;
+// Search: towns of the available listings per offer, with counts (the button shows the count).
+const townCounts = (offer: 'buy' | 'rent') => {
+  const m = new Map<string, number>();
+  for (const l of available) if (l.offer_type === offer && l.address.city) m.set(l.address.city, (m.get(l.address.city) ?? 0) + 1);
+  return [...m].sort((a, b) => a[0].localeCompare(b[0], 'es'));
+};
+const buyTowns = townCounts('buy');
+const rentTowns = townCounts('rent');
+const houses = lang === 'es' ? (n: number) => (n === 1 ? '1 casa' : `${n} casas`) : (n: number) => (n === 1 ? '1 house' : `${n} houses`);
+const description = `${name}: ${ui.heroLead}`.slice(0, 158);
+---
+<Site lang={lang} overlay title={`${name} · ${ui.heroTitle}`} description={description}
+  image={photoOg(hero, Astro.url)} alternates={alternates('home')}
+  jsonLd={agencyJsonLd(agencyOf(ag.org, ag.team), new URL(href('home', lang), Astro.site ?? Astro.url).href)}>
+  <section class="hero" data-hero>
+    <Photo photo={hero} lang={lang} priority decorative cover class="hero-img" />
+    <div class="hero-in wrap">
+      <h1 class="hero-title">{ui.heroTitle}</h1>
+      <p class="hero-lead">{ui.heroLead}</p>
+    </div>
+  </section>
+
+  {forSale.length + toRent.length > 0 && (
+    <div class="search-band">
+      <form class="search wrap" method="get" action={href(forSale.length ? 'buy' : 'rent', lang)} data-home-search
+        data-buy={href('buy', lang)} data-rent={href('rent', lang)}>
+        <fieldset class="search-offer">
+          <legend>{ui.searchWhat}</legend>
+          <div class="seg">
+            {forSale.length > 0 && <label><input type="radio" name="offerType" value="buy" checked data-count={forSale.length} /><span>{ui.forSale}</span></label>}
+            {toRent.length > 0 && <label><input type="radio" name="offerType" value="rent" checked={!forSale.length} data-count={toRent.length} /><span>{ui.toRent}</span></label>}
+          </div>
+        </fieldset>
+        <label class="search-where">
+          <span>{ui.searchWhere}</span>
+          <span class="select">
+            <select name="city" class="control" data-town>
+              <option value="">{ui.anyTown}</option>
+              {buyTowns.map(([t, n]) => <option value={t} data-offer="buy" data-count={n}>{t}</option>)}
+              {rentTowns.map(([t, n]) => <option value={t} data-offer="rent" data-count={n} hidden={forSale.length > 0} disabled={forSale.length > 0}>{t}</option>)}
+            </select>
+          </span>
+        </label>
+        <button type="submit" class="cta cta-accent search-go" data-go data-label={ui.searchGo} data-houses={lang}>
+          {fill(ui.searchGo, { n: houses(forSale.length || toRent.length) })}
+        </button>
+      </form>
+    </div>
+  )}
+
+  {latest.length > 0 && (
+    <section class="section wrap latest">
+      <div class="section-head">
+        <h2 class="display-l">{ui.latestForSale}</h2>
+        <a class="link" href={href('buy', lang)}>{fill(ui.seeAllSale, { n: forSale.length })} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <ul class="grid3">
+        {latest.map((l) => <li><ListingCard listing={l} lang={lang} /></li>)}
+      </ul>
+    </section>
+  )}
+
+  {areaList.length > 0 && (
+    <section class="areas wrap" aria-labelledby="areas-h">
+      <h2 id="areas-h" class="display-m">{ui.areasTitle}</h2>
+      <ul class="area-tiles">
+        {areaList.slice(0, 4).map((a) => (
+          <li class="area-tile">
+            <div class="area-photo"><Photo photo={PHOTOS[a.text?.data.photo ?? 'home']} lang={lang} decorative sizes="(min-width: 1360px) 310px, (min-width: 760px) 23vw, 46vw" /></div>
+            <h3 class="area-name"><a href={href('areas', lang, a.slug)}>{a.name}</a></h3>
+            <p class="area-n num">{fill(ui.areaCount, { n: a.listings.length })}</p>
+          </li>
+        ))}
+      </ul>
+      {areaList.length > 4 && <a class="link" href={href('areas', lang)}>{fill(ui.allAreas, { n: areaList.length })} <span class="arrow" aria-hidden="true">→</span></a>}
+    </section>
+  )}
+
+  {toRent.length > 0 && (
+    <section class="section wrap rent" aria-labelledby="rent-h">
+      <div class="rent-head">
+        <h2 id="rent-h" class="display-m">{ui.rentTitle}</h2>
+        <a class="link" href={href('rent', lang)}>{ui.seeAllRent} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <ul class="rent-list">
+        {toRent.slice(0, 5).map((l) => (
+          <li>
+            <span class="rent-town">{l.address.city}</span>
+            <a class="rent-title" href={listingHref(l, lang)} lang={lang === CONTENT_LANG ? undefined : CONTENT_LANG}>{l.title}</a>
+            <span class="rent-facts">{[l.bedrooms ? `${l.bedrooms} ${lang === 'es' ? 'dorm.' : 'bed'}` : '', surface(l.living_surface)].filter(Boolean).join(' · ')}</span>
+            <span class="rent-price num">{price(l, lang)}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="sell">
+    <div class="wrap sell-in">
+      <h2 class="display-l">{ui.sellTitle}</h2>
+      <p class="sell-lead">{ui.sellLead}</p>
+      <a class="cta cta-light" href={href('sell', lang)}>{ui.sellCta}</a>
+    </div>
+  </section>
+
+  <div class="section wrap closing">
+    {journal.length > 0 && (
+      <section aria-labelledby="journal-h">
+        <div class="mini-head">
+          <h2 id="journal-h" class="display-m">{ui.journalTitle}</h2>
+          <a class="link" href={href('blog', lang)}>{ui.journalAll} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <ul class="notes">
+          {journal.map((p) => (
+            <li>
+              <time class="num" datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date, lang)}</time>
+              <a href={href('blog', lang, p.data.path)}>{p.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {agents.length > 0 && (
+      <section aria-labelledby="team-h">
+        <div class="mini-head">
+          <h2 id="team-h" class="display-m">{ui.teamTitle}</h2>
+          <a class="link" href={href('team', lang)}>{ui.teamAll} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <ul class="people">
+          {agents.map((a) => (
+            <li>
+              <AgentPortrait agent={a} sizes="(min-width: 961px) 22vw, (min-width: 561px) 40vw, 70vw" class="person-photo" />
+              <h3 class="person-name"><a href={href('team', lang, agentSlug(a))}>{a.first_name} {a.last_name}</a></h3>
+              {a.title && <p>{a.title}</p>}
+              {a.languages?.length ? <p class="muted">{ui.speaks} {languageList(a.languages, lang)}</p> : null}
+              {a.phone && <p><a class="num" href={`tel:${a.phone.replace(/[^\d+]/g, '')}`}>{a.phone}</a></p>}
+              {a.email && <p><a href={`mailto:${a.email}`}>{a.email}</a></p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</Site>
+
+<script>
+  // Home search: the offer switch changes the target page and the towns;
+  // the button counts the matching houses. Without JS the buy page forwards
+  // ?offerType=rent to the rent page.
+  const form = document.querySelector<HTMLFormElement>('[data-home-search]');
+  if (form) {
+    const town = form.querySelector<HTMLSelectElement>('[data-town]')!;
+    const go = form.querySelector<HTMLButtonElement>('[data-go]')!;
+    const houses = (n: number) => (go.dataset.houses === 'es' ? (n === 1 ? '1 casa' : `${n} casas`) : n === 1 ? '1 house' : `${n} houses`);
+    const sync = () => {
+      const offer = form.querySelector<HTMLInputElement>('input[name="offerType"]:checked');
+      if (!offer) return;
+      form.action = offer.value === 'rent' ? form.dataset.rent! : form.dataset.buy!;
+      for (const o of town.options) {
+        if (!o.dataset.offer) continue;
+        const off = o.dataset.offer !== offer.value;
+        o.hidden = off;
+        o.disabled = off;
+      }
+      if (town.selectedOptions[0]?.disabled) town.value = '';
+      const n = Number(town.selectedOptions[0]?.dataset.count ?? offer.dataset.count ?? 0);
+      go.textContent = (go.dataset.label ?? '{n}').replace('{n}', houses(n));
+    };
+    form.addEventListener('change', sync);
+    form.addEventListener('submit', () => {
+      // The target page already is the offer: keep the URL clean.
+      for (const r of form.querySelectorAll<HTMLInputElement>('input[name="offerType"]')) r.disabled = true;
+      if (!town.value) town.disabled = true;
+    });
+    sync();
+  }
+</script>
+
+<style>
+  .hero { position: relative; min-height: min(100svh, 940px); display: grid; align-items: end; color: #fff; isolation: isolate; overflow: hidden; }
+  .hero :global(.hero-img), .hero :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .hero :global(picture img) { width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(18 16 13 / .5) 0%, rgb(18 16 13 / .18) 55%, rgb(18 16 13 / 0) 80%), linear-gradient(180deg, rgb(18 16 13 / .3) 0%, rgb(18 16 13 / 0) 28%, rgb(18 16 13 / .15) 55%, rgb(18 16 13 / .7) 100%); }
+  .hero-in { padding-top: calc(var(--header-h) + 80px); padding-bottom: clamp(120px, 14vw, 170px); display: grid; gap: 22px; }
+  .hero-title { font-size: clamp(2.75rem, 6.4vw, 6.25rem); line-height: 1; letter-spacing: -.025em; max-width: 16ch; text-shadow: 0 2px 30px rgb(0 0 0 / .18); }
+  .hero-lead { max-width: 46ch; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.55; text-shadow: 0 1px 14px rgb(0 0 0 / .35); }
+
+  .search-band { position: relative; z-index: 2; margin-top: clamp(-88px, -7vw, -64px); }
+  .search { display: grid; grid-template-columns: auto minmax(220px, 1fr) auto; align-items: end; gap: 20px 28px; background: var(--surface); padding-block: 28px; box-shadow: 0 30px 60px -40px rgb(42 35 29 / .5); max-width: calc(var(--max) - 2 * var(--gutter)); }
+  .search-offer { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .search-offer legend, .search-where > span:first-child { font: 500 .6875rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 8px; }
+  .search-where { display: grid; }
+  .seg { display: flex; height: var(--control-h); border: 1px solid var(--stone); background: var(--paper); }
+  .seg label { position: relative; display: grid; }
+  .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .seg span { display: grid; place-items: center; padding: 0 26px; font-size: .9375rem; }
+  .seg label + label { border-left: 1px solid var(--stone); }
+  .seg input:checked + span { background: var(--sea); color: var(--paper); }
+  .seg input:focus-visible + span { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+  .search-go { height: var(--control-h); min-width: 200px; }
+  @media (max-width: 760px) {
+    .search { grid-template-columns: 1fr; margin-inline: 16px; width: auto; padding: 22px 20px; }
+    .seg label { flex: 1; }
+    .search-go { width: 100%; }
+  }
+
+  .section-head { align-items: baseline; }
+
+  /* Phones: three houses, then the link to all of them. */
+  @media (max-width: 640px) { .latest li:nth-child(n + 4) { display: none; } }
+
+  .areas { display: grid; gap: clamp(28px, 3vw, 40px); justify-items: start; }
+  .area-tiles { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+  .area-tile { position: relative; display: grid; gap: 4px; align-content: start; }
+  .area-photo { aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); margin-bottom: 12px; }
+  .area-photo :global(img), .area-photo :global(picture) { width: 100%; height: 100%; object-fit: cover; }
+  .area-photo :global(img) { transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  .area-tile:hover .area-photo :global(img) { transform: scale(1.03); }
+  .area-name { font-size: clamp(1.5rem, 2.2vw, 2rem); }
+  .area-name a { text-decoration: none; }
+  .area-name a::after { content: ''; position: absolute; inset: 0; }
+  .area-name a:focus-visible { outline: none; }
+  .area-tile:has(a:focus-visible) { outline: 2px solid var(--accent-strong); outline-offset: 6px; }
+  .area-n { color: var(--muted); font-size: .9375rem; }
+  @media (max-width: 760px) { .area-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; } }
+
+  .rent { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 32px clamp(40px, 6vw, 112px); }
+  .rent-head { display: grid; gap: 20px; align-content: start; justify-items: start; }
+  .rent-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--text); }
+  .rent-list li { position: relative; display: grid; grid-template-columns: 11rem minmax(0, 1fr) auto auto; gap: 8px 28px; align-items: baseline; padding-block: 20px; border-bottom: 1px solid var(--line); }
+  .rent-town { color: var(--muted); font-size: .9375rem; }
+  .rent-title { font: 300 1.375rem/1.25 var(--font-display); text-decoration: none; }
+  .rent-title::after { content: ''; position: absolute; inset: 0; }
+  .rent-list li:hover .rent-title { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  .rent-facts { color: var(--muted); font-size: .9375rem; white-space: nowrap; }
+  .rent-price { font-size: 1.0625rem; }
+  @media (max-width: 900px) {
+    .rent { grid-template-columns: 1fr; }
+    .rent-list li { grid-template-columns: minmax(0, 1fr) auto; }
+    .rent-town { grid-column: 1 / -1; }
+    .rent-title { grid-column: 1 / -1; }
+  }
+
+  .sell { background: var(--accent); color: #fff; }
+  .sell-in { padding-block: clamp(80px, 10vw, 140px); display: grid; justify-items: center; text-align: center; gap: 22px; }
+  .sell-in h2 { max-width: 18ch; }
+  .sell-lead { max-width: 52ch; font-size: 1.125rem; }
+
+  .closing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px clamp(40px, 6vw, 112px); }
+  .mini-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; padding-bottom: 20px; border-bottom: 1px solid var(--text); }
+  .notes { list-style: none; margin: 0; padding: 0; }
+  .notes li { display: grid; gap: 6px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+  .notes time { color: var(--muted); font-size: .875rem; }
+  .notes a { font: 300 1.375rem/1.25 var(--font-display); text-decoration: none; }
+  .notes a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  .people { list-style: none; margin: 0; padding: 0; }
+  .people li { display: grid; gap: 2px; padding-block: 20px; border-bottom: 1px solid var(--line); font-size: .9375rem; }
+  .people :global(.person-photo) { margin-bottom: 14px; max-width: 240px; }
+  .person-name { font: 300 1.375rem/1.25 var(--font-display); margin-bottom: 4px; }
+  .people a { text-decoration: none; overflow-wrap: anywhere; }
+  .people a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .muted { color: var(--muted); }
+  @media (max-width: 900px) { .closing { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,9 @@
+.wm { display: inline-flex; align-items: center; text-decoration: none; min-height: 44px; color: var(--navy); }
+.wm--light { color: #fff; }
+.wm img { height: 40px; width: auto; }
+.wm__text { display: grid; gap: 3px; line-height: 1; }
+.wm__name { font: 500 1.625rem/1 var(--font-display); letter-spacing: -0.01em; white-space: nowrap; font-variation-settings: 'opsz' 40; }
+.wm__amp { font-style: italic; font-weight: 400; color: var(--brass-ink); margin: 0 0.16em; }
+.wm--light .wm__amp { color: var(--brass-on-navy); }
+.wm__sub { font: 600 0.5625rem/1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.8; padding-left: 1px; }
+@media (max-width: 640px) { .wm__name { font-size: 1.375rem; } }

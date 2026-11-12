@@ -1,0 +1,38 @@
+/* Scoped to the header (.site-header): the Astro component's <style>. */
+.site-header.site-header { position: sticky; top: 0; z-index: 40; background: rgb(246 241 232 / 0.97); border-bottom: 1px solid var(--line); }
+.site-header .bar { display: flex; align-items: center; gap: 24px; height: var(--header-h); }
+.site-header ul { list-style: none; }
+.site-header .mark { display: grid; gap: 4px; text-decoration: none; margin-right: auto; }
+.site-header .name { font: 400 clamp(1.5rem, 1.3rem + 0.6vw, 1.875rem)/1 var(--serif); white-space: nowrap; }
+.site-header .place { font: 500 0.75rem/1 var(--sans); letter-spacing: 0.04em; color: var(--muted); }
+.site-header .nav ul { display: flex; gap: clamp(16px, 2vw, 30px); }
+.site-header .nav a { display: block; padding: 12px 0; font: 500 0.9375rem/1 var(--sans); text-decoration: none; border-bottom: 1px solid transparent; }
+.site-header .nav a:hover, .site-header .nav a[aria-current] { border-bottom-color: currentColor; }
+.site-header .tools { display: flex; align-items: center; gap: 18px; }
+.site-header .langs { display: flex; gap: 2px; font: 600 0.8125rem/1 var(--sans); letter-spacing: 0.06em; }
+.site-header .langs a { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; min-height: 44px; text-decoration: none; color: var(--muted); }
+.site-header .langs a[aria-current] { color: var(--text); text-decoration: underline; }
+.site-header .langs li + li::before { content: '·'; color: var(--line-strong); margin-right: 2px; }
+.site-header .langs li { display: flex; align-items: center; }
+.site-header .brochure { min-height: 44px; padding: 0 18px; }
+.site-header .fav { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font: 500 0.9375rem/1 var(--sans); text-decoration: none; }
+.site-header .fav .count { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font-size: 0.8125rem; font-weight: 700; }
+.site-header .menu-btn { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; margin-right: -10px; background: none; border: 0; cursor: pointer; }
+.site-header .menu {
+  position: fixed; inset: var(--header-h) 0 0 0; z-index: 39; background: var(--bg); padding: 24px var(--gutter) 40px; overflow-y: auto;
+  visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.3s var(--ease), visibility 0s 0.3s;
+}
+.site-header .menu.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.3s var(--ease); }
+.site-header .menu-list li { border-bottom: 1px solid var(--line); }
+.site-header .menu-list a { display: block; padding: 16px 0; font: 400 2rem/1.1 var(--serif); text-decoration: none; }
+.site-header .menu-list a[aria-current] { color: var(--accent-strong); }
+.site-header .menu-foot { margin-top: 28px; }
+html.menu-open { overflow: hidden; }
+
+@media (max-width: 1080px) {
+  .site-header .nav, .site-header .brochure { display: none; }
+  .site-header .menu-btn { display: inline-flex; }
+  .site-header .tools { gap: 8px; }
+}
+@media (max-width: 420px) { .site-header .fav { font-size: 0; gap: 0; } .site-header .fav .count { font-size: 0.8125rem; } }
+@media (min-width: 1081px) { .site-header .menu { display: none; } }

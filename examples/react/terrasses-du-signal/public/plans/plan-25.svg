@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 18" width="1000" height="720" role="img" aria-label="Plan indicatif, 2.5 pièces">
+<title>Plan indicatif, 2.5 pièces</title>
+<defs>
+<pattern id="deck" width="0.35" height="0.35" patternUnits="userSpaceOnUse"><rect width="0.35" height="0.35" fill="#e9e2d4"/><path d="M0,0.35 h0.35" stroke="#d6ccb9" stroke-width="0.03"/></pattern>
+<pattern id="garden" width="0.5" height="0.5" patternUnits="userSpaceOnUse"><rect width="0.5" height="0.5" fill="#e4e6d6"/><circle cx="0.25" cy="0.25" r="0.035" fill="#b9bea0"/></pattern>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#2e2922;text-anchor:middle}.n{font-size:0.36px;font-weight:600;letter-spacing:0.01em}.a{font-size:0.3px;fill:#7a6f60}.o{font-size:0.36px;font-style:italic;fill:#7a6f60}.s{font-size:0.3px;fill:#7a6f60}.st{text-anchor:start}.en{text-anchor:end}.sm.n{font-size:0.27px}.sm.a{font-size:0.24px}</style>
+</defs>
+<rect x="0" y="0" width="25" height="18" fill="#ffffff"/>
+<rect x="8.1" y="11.45" width="8.8" height="2.5" fill="url(#deck)" stroke="#7a6f60" stroke-width="0.05" stroke-dasharray="0"/>
+<text x="12.5" y="12.86" class="o">Terrasse</text>
+<rect x="7.5" y="4.05" width="4" height="3.2" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="11.5" y="4.05" width="2.4" height="3.2" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="13.9" y="4.05" width="3.6" height="3.2" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="7.5" y="7.25" width="6.2" height="4.2" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="13.7" y="7.25" width="3.8" height="4.2" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="7.5" y="4.05" width="10" height="7.4" fill="none" stroke="#2e2922" stroke-width="0.28"/>
+<line x1="8.6" y1="4.05" x2="10.4" y2="4.05" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="8.6" y1="3.98" x2="10.4" y2="3.98" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="8.6" y1="4.12" x2="10.4" y2="4.12" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="7.5" y1="4.85" x2="7.5" y2="6.45" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="7.43" y1="4.85" x2="7.43" y2="6.45" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="7.57" y1="4.85" x2="7.57" y2="6.45" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="8.275" y1="11.45" x2="12.925" y2="11.45" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="8.275" y1="11.38" x2="12.925" y2="11.38" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="8.275" y1="11.52" x2="12.925" y2="11.52" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="7.5" y1="8.55" x2="7.5" y2="10.15" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="7.43" y1="8.55" x2="7.43" y2="10.15" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="7.57" y1="8.55" x2="7.57" y2="10.15" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="14.175" y1="11.45" x2="17.025" y2="11.45" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="14.175" y1="11.38" x2="17.025" y2="11.38" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="14.175" y1="11.52" x2="17.025" y2="11.52" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="17.5" y1="8.55" x2="17.5" y2="10.15" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="17.43" y1="8.55" x2="17.43" y2="10.15" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="17.57" y1="8.55" x2="17.57" y2="10.15" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="10.1" y1="7.25" x2="10.95" y2="7.25" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="10.1" y1="7.25" x2="10.1" y2="6.4" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M10.1,6.4 A0.85,0.85 0 0 1 10.95,7.25" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="12.3" y1="7.25" x2="13.15" y2="7.25" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="12.3" y1="7.25" x2="12.3" y2="6.4" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M12.3,6.4 A0.85,0.85 0 0 1 13.15,7.25" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="14.3" y1="7.25" x2="15.15" y2="7.25" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="14.3" y1="7.25" x2="14.3" y2="6.4" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M14.3,6.4 A0.85,0.85 0 0 1 15.15,7.25" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="15.5" y1="4.05" x2="16.35" y2="4.05" stroke="#fbf9f5" stroke-width="0.32"/>
+<line x1="15.5" y1="4.05" x2="15.5" y2="4.9" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M15.5,4.9 A0.85,0.85 0 0 0 16.35,4.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<path d="M15.925,3 l0,0.55 m-0.22,-0.24 l0.22,0.24 l0.22,-0.24" fill="none" stroke="#2e2922" stroke-width="0.05"/>
+<text x="15.925" y="2.85" class="s">Entrée</text>
+<text x="9.5" y="5.6" class="n">Chambre</text>
+<text x="9.5" y="6.2" class="a">12,8 m²</text>
+<text x="12.7" y="5.6" class="n">Bains</text>
+<text x="12.7" y="6.2" class="a">7,7 m²</text>
+<text x="15.7" y="5.6" class="n">Hall</text>
+<text x="15.7" y="6.2" class="a">11,5 m²</text>
+<text x="10.6" y="9.3" class="n">Séjour</text>
+<text x="10.6" y="9.9" class="a">26 m²</text>
+<text x="15.6" y="9.3" class="n">Cuisine</text>
+<text x="15.6" y="9.9" class="a">16 m²</text>
+<g transform="translate(23.8,1.5)">
+<circle r="0.62" fill="none" stroke="#7a6f60" stroke-width="0.04"/><path d="M0,-0.5 L0.24,0.32 L0,0.18 L-0.24,0.32 Z" fill="#2e2922"/><text y="-0.78" class="s">N</text></g>
+<g><path d="M0.8,17.2 h5" stroke="#2e2922" stroke-width="0.06"/><path d="M0.8,17 v0.4" stroke="#2e2922" stroke-width="0.04"/><path d="M1.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M2.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M3.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M4.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M5.8,17 v0.4" stroke="#2e2922" stroke-width="0.04"/><text x="0.8" y="17.8" class="s st">0</text><text x="5.8" y="17.8" class="s">5 m</text></g>
+<text x="24.2" y="17.8" class="s en">Plan indicatif, non contractuel</text>
+</svg>

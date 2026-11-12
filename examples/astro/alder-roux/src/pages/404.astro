@@ -1,0 +1,39 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. A listing
+// that left the portal shows "no longer available" (410, set by the listing page).
+export const prerender = false;
+
+import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import { siteData } from '../lib/data';
+import { href, LOCALE, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+const path = Astro.originPathname ?? Astro.url.pathname;
+const l: L = path === '/de' || path.startsWith('/de/') ? 'de' : 'fr';
+const lg = klang(LOCALE[l]);
+const t = tx(l);
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? kt('listingGone', {}, lg) : kt('notFound', {}, lg);
+const { org } = await siteData();
+---
+<Site l={l} route="home" switchTo={{ fr: '/', de: '/de' }} title={`${title} | ${org.name}`} description={title} noindex>
+  <section class="band on-navy nf">
+    <div class="wrap band__inner">
+      <span class="eyebrow">{t('notFoundEyebrow')}</span>
+      <h1 class="h1">{title}</h1>
+      <p class="lede">{gone ? kt('listingGoneText', {}, lg) : kt('notFoundText', {}, lg)}</p>
+      <ul class="plain-list nf__links">
+        <li><a class="button button--light" href={href('buy', l)}>{t('navBuy')}</a></li>
+        <li><a class="button button--outline-light" href={href('rent', l)}>{t('navRent')}</a></li>
+        <li><a class="button button--outline-light" href={href('offices', l)}>{t('navOffices')}</a></li>
+        <li><a class="button button--outline-light" href={href('home', l)}>{t('home')}</a></li>
+      </ul>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .nf .band__inner { min-height: 56vh; align-content: center; }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+</style>

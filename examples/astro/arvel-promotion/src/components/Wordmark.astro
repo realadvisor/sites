@@ -1,0 +1,21 @@
+---
+/**
+ * Typographic wordmark: the organisation has no logo in the data, so the
+ * name is set in the display serif (first word) over spaced caps (the rest).
+ * With `agency.logo` a site uses the logo instead (DESIGN.md 4).
+ */
+interface Props { name: string; size?: 'md' | 'lg' }
+const { name, size = 'md' } = Astro.props;
+const [first, ...rest] = name.replace(/\s+(SAS|SA|SARL|SNC)$/i, '').split(/\s+/);
+---
+<span class:list={['wm', `wm--${size}`]}>
+  <span class="wm-a">{first}</span>
+  {rest.length > 0 && <span class="wm-b">{rest.join(' ')}</span>}
+</span>
+<style>
+  .wm { display: inline-grid; justify-items: center; line-height: 1; gap: 5px; }
+  .wm-a { font: 500 1.5rem / 0.9 var(--serif); letter-spacing: 0.34em; margin-right: -0.34em; text-transform: uppercase; }
+  .wm-b { font: 500 0.5625rem / 1 var(--sans); letter-spacing: 0.52em; margin-right: -0.52em; text-transform: uppercase; opacity: 0.85; }
+  .wm--lg .wm-a { font-size: clamp(2.6rem, 6vw, 4.6rem); }
+  .wm--lg .wm-b { font-size: clamp(0.6875rem, 1vw, 0.875rem); }
+</style>

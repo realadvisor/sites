@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2 1.85 20 16.65" width="800" height="666" role="img" aria-label="Indikativer Grundriss, 4.5 Zimmer, Attika">
+<title>Indikativer Grundriss, 4.5 Zimmer, Attika</title>
+<defs>
+<pattern id="deck" width="0.35" height="0.35" patternUnits="userSpaceOnUse"><rect width="0.35" height="0.35" fill="#eee6d7"/><path d="M0,0.35 h0.35" stroke="#d9cdb8" stroke-width="0.03"/></pattern>
+<pattern id="garden" width="0.5" height="0.5" patternUnits="userSpaceOnUse"><rect width="0.5" height="0.5" fill="#e3e6d3"/><circle cx="0.25" cy="0.25" r="0.035" fill="#a9b08c"/></pattern>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#2e2922;text-anchor:middle}.n{font-size:0.514px;font-weight:600;letter-spacing:0.01em}.a{font-size:0.429px;fill:#6f6558}.o{font-size:0.514px;font-style:italic;fill:#6f6558}.s{font-size:0.429px;fill:#6f6558}.st{text-anchor:start}.en{text-anchor:end}.sm.n{font-size:0.386px}.sm.a{font-size:0.343px}</style>
+</defs>
+<rect x="2" y="1.85" width="20" height="16.65" fill="#ffffff"/>
+<rect x="2.7" y="13.5" width="18.6" height="4.4" fill="url(#deck)" stroke="#6f6558" stroke-width="0.05" stroke-dasharray="0"/>
+<rect x="18.7" y="6" width="2.6" height="7.5" fill="url(#deck)" stroke="#6f6558" stroke-width="0.05" stroke-dasharray="0"/>
+<text x="12" y="15.86" class="o">Terrasse</text>
+<rect x="2.7" y="3.6" width="4.6" height="4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="7.3" y="3.6" width="2.6" height="4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="9.9" y="3.6" width="2.4" height="4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="12.3" y="3.6" width="1.8" height="4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="14.1" y="3.6" width="4.6" height="4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="2.7" y="7.6" width="3.8" height="5.9" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="6.5" y="7.6" width="8" height="5.9" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="14.5" y="7.6" width="4.2" height="5.9" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="2.7" y="3.6" width="16" height="9.9" fill="none" stroke="#2e2922" stroke-width="0.28"/>
+<line x1="4.1" y1="3.6" x2="5.9" y2="3.6" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="4.1" y1="3.53" x2="5.9" y2="3.53" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="4.1" y1="3.67" x2="5.9" y2="3.67" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.7" y1="4.8" x2="2.7" y2="6.4" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="2.63" y1="4.8" x2="2.63" y2="6.4" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.77" y1="4.8" x2="2.77" y2="6.4" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="15.5" y1="3.6" x2="17.3" y2="3.6" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="15.5" y1="3.53" x2="17.3" y2="3.53" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="15.5" y1="3.67" x2="17.3" y2="3.67" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.7" y1="4.8" x2="18.7" y2="6.4" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="18.63" y1="4.8" x2="18.63" y2="6.4" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.77" y1="4.8" x2="18.77" y2="6.4" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="3.7" y1="13.5" x2="5.5" y2="13.5" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="3.7" y1="13.43" x2="5.5" y2="13.43" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="3.7" y1="13.57" x2="5.5" y2="13.57" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.7" y1="9.75" x2="2.7" y2="11.35" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="2.63" y1="9.75" x2="2.63" y2="11.35" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.77" y1="9.75" x2="2.77" y2="11.35" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="7.5" y1="13.5" x2="13.5" y2="13.5" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="7.5" y1="13.43" x2="13.5" y2="13.43" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="7.5" y1="13.57" x2="13.5" y2="13.57" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="15.025" y1="13.5" x2="18.175" y2="13.5" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="15.025" y1="13.43" x2="18.175" y2="13.43" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="15.025" y1="13.57" x2="18.175" y2="13.57" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.7" y1="9.75" x2="18.7" y2="11.35" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="18.63" y1="9.75" x2="18.63" y2="11.35" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.77" y1="9.75" x2="18.77" y2="11.35" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="6.2" y1="7.6" x2="7.05" y2="7.6" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="6.2" y1="7.6" x2="6.2" y2="6.75" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M6.2,6.75 A0.85,0.85 0 0 1 7.05,7.6" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="8.2" y1="7.6" x2="9.05" y2="7.6" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="8.2" y1="7.6" x2="8.2" y2="6.75" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M8.2,6.75 A0.85,0.85 0 0 1 9.05,7.6" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.7" y1="7.6" x2="11.55" y2="7.6" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="10.7" y1="7.6" x2="10.7" y2="6.75" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M10.7,6.75 A0.85,0.85 0 0 1 11.55,7.6" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.7" y1="3.6" x2="11.55" y2="3.6" stroke="#fffdf9" stroke-width="0.32"/>
+<line x1="10.7" y1="3.6" x2="10.7" y2="4.45" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M10.7,4.45 A0.85,0.85 0 0 0 11.55,3.6" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="12.8" y1="7.6" x2="13.65" y2="7.6" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="12.8" y1="7.6" x2="12.8" y2="6.75" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M12.8,6.75 A0.85,0.85 0 0 1 13.65,7.6" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="14.5" y1="7.6" x2="15.35" y2="7.6" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="14.5" y1="7.6" x2="14.5" y2="6.75" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M14.5,6.75 A0.85,0.85 0 0 1 15.35,7.6" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="6.5" y1="8" x2="6.5" y2="8.85" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="6.5" y1="8" x2="5.65" y2="8" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M5.65,8 A0.85,0.85 0 0 0 6.5,8.85" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<path d="M11.125,2.55 l0,0.55 m-0.22,-0.24 l0.22,0.24 l0.22,-0.24" fill="none" stroke="#2e2922" stroke-width="0.05"/>
+<text x="11.125" y="2.4" class="s">Eingang</text>
+<text x="5" y="5.55" class="n">Elternzimmer</text>
+<text x="5" y="6.386" class="a">18.4 m²</text>
+<text x="8.6" y="5.55" class="n">Bad</text>
+<text x="8.6" y="6.386" class="a">10.4 m²</text>
+<text x="11.1" y="5.55" class="n">Eingang</text>
+<text x="11.1" y="6.386" class="a">9.6 m²</text>
+<text x="13.2" y="5.55" class="n sm">Dusche</text>
+<text x="13.2" y="6.2" class="a sm">7.2 m²</text>
+<text x="16.4" y="5.55" class="n">Zimmer 2</text>
+<text x="16.4" y="6.386" class="a">18.4 m²</text>
+<text x="4.6" y="10.5" class="n">Zimmer 3</text>
+<text x="4.6" y="11.336" class="a">22.4 m²</text>
+<text x="10.5" y="10.5" class="n">Wohnen</text>
+<text x="10.5" y="11.336" class="a">47.2 m²</text>
+<text x="16.6" y="10.5" class="n">Küche</text>
+<text x="16.6" y="11.336" class="a">24.8 m²</text>
+<g transform="translate(21.25,2.85) scale(0.8)">
+<circle r="0.62" fill="none" stroke="#6f6558" stroke-width="0.04"/><path d="M0,-0.5 L0.24,0.32 L0,0.18 L-0.24,0.32 Z" fill="#2e2922"/><text y="-0.78" class="s">N</text></g>
+</svg>

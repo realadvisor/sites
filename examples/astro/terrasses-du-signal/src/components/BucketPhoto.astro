@@ -1,0 +1,21 @@
+---
+/**
+ * A site photo from the RealAdvisor image bucket (Pexels, see
+ * src/content/photo-credits.md), through the kit's imgproxy helper: AVIF + WebP
+ * at 480–1600w. Same contract as RaImage: CSS sets the rendered box,
+ * width/height give the ratio, `priority` for the page's one LCP image.
+ * Kit gap: RaImage serves AVIF only to its priority image and has no object
+ * position, hence this small wrapper (AvifImage does the same for the gallery).
+ */
+import { img, srcset } from '@realadvisor/sites-kit/image';
+
+interface Props { src: string; alt: string; width: number; height: number; sizes?: string; priority?: boolean; class?: string; position?: string; widths?: number[]; fallbackWidth?: number }
+const { src, alt, width, height, sizes = '100vw', priority = false, class: cls, position, widths = [480, 640, 960, 1280, 1600], fallbackWidth = 960 } = Astro.props;
+const avif = srcset(src, widths, undefined, { format: 'avif', quality: 58 });
+const webp = srcset(src, widths, undefined, { quality: 72 });
+const fallback = img(src, { w: fallbackWidth, fit: 'fit', quality: 72 });
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={avif} sizes={sizes} />
+  <img src={fallback} srcset={webp} sizes={sizes} width={width} height={height} alt={alt} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async" style={position ? `object-position:${position}` : undefined} />
+</picture>

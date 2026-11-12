@@ -1,0 +1,10 @@
+.cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+.form { display: grid; gap: 28px; }
+.offices { display: grid; gap: 40px; }
+.offices li { display: grid; gap: 12px; padding-top: 24px; border-top: 2px solid var(--navy); }
+.offices h2 a { text-decoration: none; }
+.offices h2 a:hover { text-decoration: underline; }
+.offices address { font-style: normal; display: grid; color: var(--muted); }
+.kv dd a { color: var(--navy); font-weight: 600; overflow-wrap: anywhere; }
+.kv dd { white-space: normal; }
+@media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } }

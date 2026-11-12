@@ -1,0 +1,90 @@
+---
+/** One advisor: contact, office, languages, their listings and sales, enquiry form addressed to them. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites, type Agent } from '../lib/data';
+import { agentSlug, href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, langName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L; agent: Agent }
+const { l, agent } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const slug = agentSlug(agent, agents);
+const all = await sites.allListings();
+const mine = all.filter((x) => x.agent?.id === agent.id);
+const active = mine.filter((x) => x.status === 'available');
+const sold = mine.filter((x) => x.status === 'sold');
+const team = teams.find((tm) => agent.team_ids.includes(tm.id));
+const name = `${agent.first_name} ${agent.last_name}`;
+const langs = (agent.languages ?? []).map((x) => langName(x, l));
+const desc = [name, team && t('officeOf', { city: cityName(team.address.city, l) || team.name }), org.name].filter(Boolean).join(' · ');
+---
+<Site l={l} route="team" segs={[slug]} title={`${name} · ${team ? t('officeOf', { city: cityName(team.address.city, l) || team.name }) : ''} | ${org.name}`} description={desc}>
+  <section class="band on-navy">
+    <div class="wrap ag">
+      <div class="ag__id">
+        <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navTeam'), href: href('team', l) }, { label: name }]} />
+        <div class="ag__row">
+          {agent.photo?.url && <RaImage class="ag__photo" src={agent.photo} alt={name} width={320} height={400} sizes="(min-width: 521px) 160px, 128px" priority />}
+          <div class="ag__txt">
+            {team && <span class="eyebrow">{agent.title ? `${agent.title} · ` : ''}{t('officeOf', { city: cityName(team.address.city, l) || team.name })}</span>}
+            <h1 class="h1">{name}</h1>
+            {langs.length > 0 && <p class="lede">{t('speaks', { langs: langs.join(', ') })}</p>}
+          </div>
+        </div>
+        {agent.bio && <p class="ag__bio">{agent.bio}</p>}
+      </div>
+      <dl class="ag__contact">
+        {agent.phone && <div><dt>{t('phone')}</dt><dd><a class="num" href={tel(agent.phone)}>{agent.phone}</a></dd></div>}
+        {agent.email && <div><dt>{t('email')}</dt><dd><a href={`mailto:${agent.email}`}>{agent.email}</a></dd></div>}
+        {team && <div><dt>{t('navOffices')}</dt><dd><a href={href('offices', l, teamSlug(team, teams))}>{[team.address.street, [team.address.postcode, cityName(team.address.city, l)].filter(Boolean).join(' ')].filter(Boolean).join(', ')}</a></dd></div>}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head"><div><h2 class="h2">{t('agentListings', { name: agent.first_name })}</h2></div></div>
+      {active.length > 0
+        ? <ul class="plain-list grid grid--3">{active.map((x, i) => <li><ListingCard listing={x} l={l} priority={i === 0} /></li>)}</ul>
+        : <p class="lede">{t('noAgentListings', { name: agent.first_name })}</p>}
+    </div>
+  </section>
+
+  {sold.length > 0 && (
+    <section class="section section--paper">
+      <div class="wrap">
+        <div class="head"><div><h2 class="h2">{t('agentSold')}</h2></div></div>
+        <ul class="plain-list grid grid--3">{sold.map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section" id="contact">
+    <div class="wrap form">
+      <h2 class="h2">{t('contactAgent', { name: agent.first_name })}</h2>
+      <EnquiryForm locale={LOCALE[l]} agentId={agent.id} agentName={agent.first_name} contactReason="other" message={t('agentMessage', { name: agent.first_name })} />
+    </div>
+  </section>
+</Site>
+
+<style>
+  .ag { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 48px; padding-block: clamp(40px, 5vw, 72px); align-items: end; }
+  .ag__id { display: grid; gap: 32px; }
+  .ag__row { display: flex; gap: 32px; align-items: center; }
+  .ag__row :global(.ag__photo) { width: 160px; height: 200px; object-fit: cover; flex: none; }
+  .ag__txt { display: grid; gap: 14px; }
+  .ag__bio { color: var(--on-navy-muted); max-width: 60ch; }
+  .ag__contact { display: grid; border-top: 1px solid var(--line-on-navy); }
+  .ag__contact div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-on-navy); }
+  .ag__contact dt { color: var(--on-navy-muted); font-size: 0.875rem; }
+  .ag__contact a { color: #fff; overflow-wrap: anywhere; }
+  .form { max-width: 760px; display: grid; gap: 28px; }
+  @media (max-width: 900px) { .ag { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 520px) { .ag__row { flex-direction: column; align-items: start; gap: 20px; } .ag__row :global(.ag__photo) { width: 128px; height: 160px; } }
+</style>

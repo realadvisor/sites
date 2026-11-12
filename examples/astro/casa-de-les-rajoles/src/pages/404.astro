@@ -1,0 +1,25 @@
+---
+// Not found, rendered on request so routes can rewrite to it. Keep prerender = false.
+export const prerender = false;
+import Site from '../layouts/Site.astro';
+import Tiles from '../components/Tiles.astro';
+import { loadSite } from '../lib/data';
+import { alternates, href, langOfPath, tr } from '../lib/i18n';
+
+const lang = langOfPath(Astro.originPathname ?? Astro.url.pathname);
+const t = tr(lang);
+const site = await loadSite();
+Astro.response.status = 404;
+---
+<Site site={site} lang={lang} title={`${t.notFound} | ${site.dev.title}`} description={t.notFoundText} noindex alternates={alternates('home')}>
+  <div class="wrap nf">
+    <h1>{t.notFound}</h1>
+    <p class="lede">{t.notFoundText}</p>
+    <p class="links"><a class="cta" href={href('units', lang)}>{t.nav.units}</a> <a class="cta ghost" href={href('home', lang)}>{t.backHome}</a></p>
+  </div>
+  <Tiles id="tiles-404" size={32} />
+</Site>
+<style>
+  .nf { padding-block: clamp(72px, 10vw, 160px); display: grid; gap: 20px; justify-items: start; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px !important; }
+</style>

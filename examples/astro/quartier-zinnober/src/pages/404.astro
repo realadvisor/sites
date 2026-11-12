@@ -1,0 +1,38 @@
+---
+// Not found, rendered on request so routes can rewrite to it (keep prerender = false).
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import Icon from '../components/Icon.astro';
+import { t } from '@realadvisor/sites-kit/i18n';
+import { site as load } from '../lib/data';
+
+const site = await load();
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? t('listingGone', {}, 'de') : 'Seite nicht gefunden';
+Astro.response.status = gone ? 410 : 404;
+---
+<Site site={site} title={`${title} | ${site.dev.title}`} description={title} noindex>
+  <section class="nf">
+    <div class="wrap nf-in">
+      <p class="code num" aria-hidden="true">404</p>
+      <div class="txt">
+        <h1>{title}</h1>
+        <p class="lead">{gone ? t('listingGoneText', {}, 'de') : 'Diese Adresse gibt es nicht oder nicht mehr. Die freien Wohnungen finden Sie im Stockwerkplan.'}</p>
+        <div class="acts">
+          <a class="cta" href="/wohnungen">Freie Wohnungen <Icon name="arrow" /></a>
+          <a class="cta cta--ghost" href="/">Zur Startseite</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Site>
+<style>
+  .nf { background: var(--butter); border-bottom: 2px solid var(--ink); }
+  .nf-in { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; padding-block: clamp(56px, 10vw, 140px); }
+  .code { font: 800 clamp(6rem, 3rem + 14vw, 16rem)/0.8 var(--display); letter-spacing: -0.06em; color: var(--zinnober); -webkit-text-stroke: 3px var(--ink); }
+  .txt { display: grid; gap: 20px; justify-items: start; }
+  h1 { font-size: var(--step-4); }
+  .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 760px) { .nf-in { grid-template-columns: 1fr; } }
+</style>

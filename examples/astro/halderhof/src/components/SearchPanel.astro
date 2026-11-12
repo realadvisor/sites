@@ -1,0 +1,73 @@
+---
+/**
+ * Hero search on the dark green panel: Kaufen / Mieten as two pills (a radio
+ * group; the matching form shows through CSS :has, no JavaScript), then town,
+ * type and budget as GET filters to the kit search pages. Options and the
+ * count on the button come from the listings.
+ */
+import Select from '@realadvisor/sites-kit/components/form/Select.astro';
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import { href, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { formatAmount, typeLabel } from '../lib/format';
+
+interface Props { l: L; buy: Listing[]; rent: Listing[] }
+const { l, buy, rent } = Astro.props;
+const t = tx(l);
+
+const cityOpts = (xs: Listing[]) => {
+  const m = new Map<string, number>();
+  for (const x of xs) if (x.address.city) m.set(x.address.city, (m.get(x.address.city) ?? 0) + 1);
+  return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([c, n]) => ({ value: c, label: `${cityName(c, l)} (${n})` }));
+};
+const typeOpts = (xs: Listing[]) => [...new Set(xs.map((x) => x.property_type.split('_')[0]!))].map((g) => ({ value: g, label: typeLabel(g, l) }));
+const steps = (xs: Listing[], candidates: number[]) => {
+  const p = xs.map((x) => x.price ?? 0).filter((n) => n > 0);
+  const min = Math.min(...p), max = Math.max(...p);
+  return candidates.filter((c) => c > min && c < max).map((c) => ({ value: String(c), label: formatAmount(c) }));
+};
+const panels = [
+  { id: 'buy', label: t('navBuy'), list: buy, action: href('buy', l), prices: steps(buy, [1_000_000, 1_500_000, 2_000_000, 3_000_000, 5_000_000]) },
+  { id: 'rent', label: t('navRent'), list: rent, action: href('rent', l), prices: steps(rent, [2_000, 3_000, 4_000]) },
+].filter((p) => p.list.length > 0);
+---
+{panels.length > 0 && (
+  <div class="sp">
+    {panels.length > 1 && (
+      <fieldset class="sp__tabs">
+        <legend class="sr-only">{t('searchIntent')}</legend>
+        {panels.map((p, i) => (
+          <label class="sp__tab"><input type="radio" name="sp-intent" value={p.id} id={`sp-${p.id}`} checked={i === 0} /><span>{p.label}</span></label>
+        ))}
+      </fieldset>
+    )}
+    {panels.map((p) => (
+      <form class:list={['sp__panel', `sp__panel--${p.id}`, { 'sp__panel--only': panels.length === 1 }]} method="get" action={p.action} role="search" aria-label={p.label}>
+        <Select id={`sp-${p.id}-city`} label={t('where')} name="city" placeholder={t('allPlaces')} options={cityOpts(p.list)} />
+        <Select id={`sp-${p.id}-type`} label={t('type')} name="propertyType" placeholder={t('allTypes')} options={typeOpts(p.list)} />
+        {p.prices.length > 0 && <Select id={`sp-${p.id}-price`} label={t('budget')} name="maxPrice" placeholder={t('anyBudget')} options={p.prices} />}
+        <button class="button button--light sp__go" type="submit">{t('showN', { n: p.list.length })}</button>
+      </form>
+    ))}
+  </div>
+)}
+
+<style>
+  .sp { display: grid; gap: 20px; }
+  .sp__tabs { border: 0; margin: 0; padding: 0; display: flex; gap: 10px; min-width: 0; }
+  .sp__tab { position: relative; display: inline-flex; cursor: pointer; }
+  .sp__tab input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .sp__tab span { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 18px; border: 1px solid rgb(255 255 255 / 0.55); border-radius: 999px; font: 600 0.9375rem/1 var(--font-sans); color: #fff; }
+  .sp__tab:hover span { border-color: #fff; }
+  .sp__tab:has(input:checked) span { background: #fff; color: var(--green); border-color: #fff; }
+  .sp__tab:has(input:checked) span::before { content: ''; width: 10px; height: 6px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg) translateY(-2px); }
+  .sp__tab:has(input:focus-visible) span { outline: 2px solid #fff; outline-offset: 3px; }
+
+  .sp__panel { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: end; }
+  .sp__panel--only, .sp:has(#sp-buy:checked) .sp__panel--buy, .sp:has(#sp-rent:checked) .sp__panel--rent { display: grid; }
+  .sp__panel:not(:has(select[name='maxPrice'])) .sp__go { grid-column: 1 / -1; }
+  .sp__panel :global(.field-label) { color: var(--on-green-muted); font-weight: 500; }
+  .sp__panel :global(.control) { --control-border: transparent; background: #fff; }
+  .sp__go { min-height: var(--control-h); }
+  @media (max-width: 900px) { .sp__panel { grid-template-columns: minmax(0, 1fr); } .sp__go { width: 100%; } }
+</style>

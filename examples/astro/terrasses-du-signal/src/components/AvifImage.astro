@@ -1,0 +1,19 @@
+---
+/**
+ * A lazy RealAdvisor photo with an AVIF source first (RaImage serves AVIF
+ * only to its priority image). For long galleries where every byte counts;
+ * same imgproxy URLs and CSP as RaImage. Kit candidate: a `format` prop.
+ */
+import { img, srcset } from '@realadvisor/sites-kit/image';
+
+interface Props { src: string; alt: string; width: number; height: number; sizes: string; widths?: number[]; quality?: number }
+const { src, alt, width, height, sizes, widths = [360, 480, 720, 1080, 1440], quality = 58 } = Astro.props;
+const ratio = width / height;
+const avif = srcset(src, widths, ratio, { quality, format: 'avif' });
+const webp = srcset(src, widths, ratio, { quality });
+const fallback = img(src, { w: 720, h: Math.round(720 / ratio), quality });
+---
+<picture>
+  <source type="image/avif" srcset={avif} sizes={sizes} />
+  <img src={fallback} srcset={webp} sizes={sizes} width={width} height={height} alt={alt} loading="lazy" decoding="async" />
+</picture>

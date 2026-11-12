@@ -1,0 +1,18 @@
+.talk { background: var(--sea); color: var(--on-sea); }
+.talk-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr); }
+.talk a { display: grid; gap: 10px; padding: clamp(28px, 3.4vw, 48px) 28px clamp(28px, 3.4vw, 48px) 0; text-decoration: none; min-width: 0; }
+.talk a + a { padding-left: 28px; border-left: 1px solid rgb(255 255 255 / .18); }
+.talk-k { font-size: .9375rem; color: var(--on-sea-muted); }
+.talk-v { font: 300 clamp(1.25rem, 1.8vw, 1.625rem)/1.2 var(--font-display); overflow-wrap: anywhere; border-bottom: 1px solid transparent; justify-self: start; }
+.talk a:hover .talk-v { border-bottom-color: currentColor; }
+@media (max-width: 860px) { .talk-in { grid-template-columns: 1fr; } .talk a, .talk a + a { padding: 24px 0; border-left: 0; } .talk a + a { border-top: 1px solid rgb(255 255 255 / .18); } }
+.office { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 88px); align-items: center; padding-block: var(--section); }
+.office-photo { aspect-ratio: 3 / 2; overflow: hidden; }
+.office-photo img { width: 100%; height: 100%; object-fit: cover; }
+.office-text { display: grid; gap: 18px; justify-items: start; }
+.office address { font-style: normal; font-size: 1.125rem; }
+@media (max-width: 900px) { .office { grid-template-columns: 1fr; } }
+.ask { background: var(--surface); }
+.ask-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); padding-block: var(--section); }
+.ask-in > div:first-child { display: grid; gap: 20px; align-content: start; }
+@media (max-width: 860px) { .ask-in { grid-template-columns: 1fr; } }

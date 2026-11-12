@@ -1,0 +1,47 @@
+---
+import type { BuildingInfo } from '../lib/units';
+import { chf, monthYear, freeRent } from '../lib/units';
+import Icon from './Icon.astro';
+
+interface Props { houses: BuildingInfo[] }
+const { houses } = Astro.props;
+---
+<ul class="tiles">
+  {houses.map((h) => {
+    const rents = h.rows.map((r) => freeRent(r.u)).filter((n): n is number => n != null);
+    return (
+      <li class={`tile tile--${h.key.toLowerCase()}`}>
+        <a href={`/wohnungen?haus=${h.key}`}>
+          <span class="name">{h.name}</span>
+          {h.moveIn && <span class="move">Bezug ab<br /><strong>{monthYear(h.moveIn)}</strong></span>}
+          <span class="meta">
+            <span class="num">{h.available > 0 ? `${h.available} von ${h.rows.length} frei` : 'Alle vergeben'}</span>
+            {rents.length > 0 && <span class="num">ab {chf(Math.min(...rents))}</span>}
+          </span>
+          <span class="go" aria-hidden="true"><Icon name="arrow" size={22} /></span>
+        </a>
+      </li>
+    );
+  })}
+</ul>
+<style>
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tile a { position: relative; display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'name move' 'meta meta'; gap: 18px 12px; padding: clamp(20px, 2.4vw, 32px); min-height: 100%; text-decoration: none; color: var(--ink); border-right: 2px solid var(--ink); }
+  .tile:last-child a { border-right: 0; }
+  .tile--a a { background: var(--haus-a); }
+  .tile--b a { background: var(--haus-b); }
+  .tile--c a { background: var(--haus-c); }
+  .name { grid-area: name; font: 800 clamp(2rem, 1.2rem + 2.6vw, 3.5rem)/0.9 var(--display); letter-spacing: -0.04em; }
+  .move { grid-area: move; text-align: right; font-size: 0.875rem; line-height: 1.25; }
+  .move strong { font: 750 1.125rem/1.2 var(--display); }
+  .meta { grid-area: meta; display: flex; flex-wrap: wrap; gap: 6px 16px; font-weight: 600; padding-right: 48px; }
+  .go { position: absolute; right: clamp(16px, 2vw, 28px); bottom: clamp(16px, 2vw, 28px); width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: #fff; transition: transform 0.15s; }
+  .tile a:hover .go { transform: translateX(4px); }
+  .tile a:hover { text-decoration: none; }
+  .tile a:focus-visible { outline-offset: -6px; }
+  @media (max-width: 760px) {
+    .tiles { grid-template-columns: 1fr; }
+    .tile a { border-right: 0; border-bottom: 2px solid var(--ink); }
+    .tile:last-child a { border-bottom: 0; }
+  }
+</style>

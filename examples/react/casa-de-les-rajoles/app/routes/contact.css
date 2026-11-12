@@ -1,0 +1,19 @@
+.pg-contact .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 580px); gap: clamp(40px, 7vw, 112px); padding-top: clamp(48px, 6vw, 88px); align-items: start; }
+.pg-contact h1 { margin-bottom: 20px; }
+.pg-contact .left .people { margin-top: 48px; }
+.pg-contact .office { margin: 48px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; padding-top: 32px; border-top: 1px solid var(--line); }
+.pg-contact:not(._) .office dt { font-size: 0.875rem; color: var(--muted); margin-bottom: 4px; }
+.pg-contact:not(._) .office dd { margin: 0; }
+.pg-contact:not(._) .office a { display: inline-block; padding-block: 4px; overflow-wrap: anywhere; }
+.pg-contact .right { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: clamp(24px, 3.2vw, 44px); scroll-margin-top: 16px; }
+.pg-contact:not(._) .right h2 { font-size: 2rem; margin-bottom: 20px; }
+.pg-contact .note { margin-bottom: 18px; padding: 12px 14px; background: var(--st-re); color: var(--st-re-ink); font-size: 0.9375rem; }
+.pg-contact .map { margin-top: var(--space-section); }
+.pg-contact:not(._) .map h2 { margin-bottom: 20px; }
+.pg-contact .map { --ratio: 21 / 9; }
+@media (max-width: 1000px) {
+  .pg-contact .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .pg-contact .office { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,241 @@
+---
+/**
+ * One development: hero with key figures, description and credits,
+ * documents, gallery, unit types with indicative plans, stacking plan and
+ * unit table, location, broker and the development enquiry form (unit
+ * select required, ?lot= preselects one).
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { img } from '@realadvisor/sites-kit/image';
+import { developmentStatus } from '@realadvisor/sites-kit/developments';
+import { lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import StackingPlan from '../components/StackingPlan.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { extraStr, live, siteData, type DevelopmentWithUnits } from '../lib/data';
+import { agentSlug, href, LOCALE, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { formatAmount, formatSurface, monthYear, range, rooms, roomsRange, tel } from '../lib/format';
+import { unitHref, unitInSentence, unitSelect, unitTypes } from '../lib/dev';
+import { devDocs } from '../content/documents';
+
+interface Props { l: L; dev: DevelopmentWithUnits }
+const { l, dev } = Astro.props;
+const t = tx(l);
+const locale = LOCALE[l];
+const { org, agents, primary } = await siteData();
+const types = unitTypes(dev.units);
+const status = developmentStatus({ status: dev.status }, klang(locale));
+const city = cityName(dev.address.city, l);
+const agent = dev.agents[0] ? (agents.find((a) => a.id === dev.agents[0]!.id) ?? dev.agents[0]) : undefined;
+const lot = Astro.url.searchParams.get('lot');
+const chosen = dev.units.find((u) => u.id === lot && u.status !== 'sold');
+const options = unitSelect(dev.units, l);
+// fixture only: developer, architect, general contractor
+const credits = [
+  { k: t('developer'), v: extraStr('developments', dev.id, 'developer') },
+  { k: t('architect'), v: extraStr('developments', dev.id, 'architect') },
+  { k: t('contractor'), v: extraStr('developments', dev.id, 'general_contractor') },
+].filter((c) => c.v);
+const docs = devDocs(dev.slug, l, live); // fixture only: documents
+const figures = [
+  dev.stats.units > 0 && { k: t('units'), v: t('unitsAvailable', { n: dev.stats.available, t: dev.stats.units }) },
+  dev.stats.price?.min && { k: t('price'), v: t('priceFrom', { p: formatAmount(dev.stats.price.min) }) },
+  dev.stats.rooms && { k: t('rooms'), v: roomsRange(dev.stats.rooms, l) },
+  dev.stats.living_surface && { k: t('livingArea'), v: range(dev.stats.living_surface, (n) => formatSurface(n)) },
+  dev.delivery_date && { k: t('delivery'), v: monthYear(dev.delivery_date, l) },
+].filter(Boolean) as { k: string; v: string }[];
+const place = [dev.address.street, [dev.address.postcode, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const message = chosen
+  ? kt('unitInterested', { unit: unitInSentence(chosen, l), title: dev.title }, klang(locale))
+  : kt('devInterested', { title: dev.title }, klang(locale));
+---
+<Site l={l} route="developments" segs={[dev.slug]}
+  title={`${dev.title} · ${city} | ${org.name}`}
+  description={(dev.description_text ?? dev.title).replace(/\s+/g, ' ').slice(0, 155)}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}>
+
+  <section class="hero">
+    {dev.photos[0] && <RaImage src={dev.photos[0]} alt={dev.photos[0].alt || dev.title} width={1600} height={800} priority sizes="100vw" mobile={{ width: 800, height: 900 }} data-hero />}
+    <div class="hero__shade"></div>
+    <div class="wrap hero__copy on-navy">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navNew'), href: href('developments', l) }, { label: dev.title }]} />
+      <span class="eyebrow">{[t('newBuild'), city, status].filter(Boolean).join(' · ')}</span>
+      <h1 class="h1">{dev.title}</h1>
+      <a class="button button--light" href="#disponibilites">{t('availability')}</a>
+    </div>
+  </section>
+
+  {figures.length > 0 && (
+    <section class="figbar">
+      <dl class="wrap figbar__in">{figures.map((f) => <div><dt>{f.k}</dt><dd class="num">{f.v}</dd></div>)}</dl>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap intro">
+      <div class="intro__main">
+        {dev.description && <div class="prose lead" set:html={sanitizeHtml(dev.description)} />}
+      </div>
+      <div class="intro__side">
+        {credits.length > 0 && (
+          <div>
+            <h2 class="side-h">{t('credits')}</h2>
+            <dl class="kv">{credits.map((c) => <div><dt>{c.k}</dt><dd>{c.v}</dd></div>)}</dl>
+          </div>
+        )}
+        {docs.length > 0 && (
+          <div>
+            <h2 class="side-h">{t('documents')}</h2>
+            <ul class="docs">
+              {docs.map((d) => (
+                <li><a href={d.href} download><span>{d.kind === 'brochure' ? t('brochure') : t('priceList')}</span><span class="docs__t">{t('pdf')} · {d.size} ↓</span></a></li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  {dev.photos.length > 1 && (
+    <section class:list={['wrap', 'gal', { 'gal--2': dev.photos.length === 3 }]} aria-label={t('photos')}>
+      {dev.photos.slice(1, 4).map((p, i) => (
+        <RaImage src={p} alt={p.alt || `${dev.title}, ${t('photo', { n: i + 2 })}`} width={900} height={600} sizes="(min-width: 900px) 46vw, 100vw" />
+      ))}
+    </section>
+  )}
+
+  {types.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="head"><h2 class="h2">{t('unitTypes')}</h2></div>
+        <ul class="plain-list types">
+          {types.map((ty) => {
+            const avail = ty.units.filter((u) => u.status === 'available');
+            const prices = avail.map((u) => u.price).filter((p): p is number => !!p);
+            const surf = ty.units.map((u) => u.living_surface).filter((s): s is number => !!s);
+            const target = avail[0] ?? ty.units[0]!;
+            return (
+              <li class="type">
+                <a href={unitHref(dev, target, l)}>
+                  <span class="type__k">{t('typeName', { k: ty.letter })}</span>
+                  <span class="type__plan">{ty.plan ? <img src={ty.plan(l)} alt={`${t('plan')} ${t('typeName', { k: ty.letter })}`} width="560" height="460" loading="lazy" /> : <span class="type__noplan">{rooms(target.rooms, l)}</span>}</span>
+                  <span class="type__name">{rooms(target.rooms, l)}</span>
+                  {surf.length > 0 && <span class="type__m num">{range({ min: Math.min(...surf), max: Math.max(...surf) }, (n) => formatSurface(n))}</span>}
+                  <span class="type__p num">{prices.length ? t('priceFrom', { p: formatAmount(Math.min(...prices)) }) : t('sold')}</span>
+                  <span class="type__n">{t('unitsAvailable', { n: avail.length, t: ty.units.length })}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <p class="note">{t('planIndicative')}</p>
+      </div>
+    </section>
+  )}
+
+  {dev.units.length > 0 && (
+    <section class="section section--paper" id="disponibilites">
+      <div class="wrap">
+        <div class="head"><div><h2 class="h2">{t('availability')}</h2><p class="lede">{t('availabilityLede')}</p></div></div>
+        <StackingPlan dev={dev} l={l} />
+      </div>
+    </section>
+  )}
+
+  {dev.address.lat != null && dev.address.lng != null && (
+    <section class="section">
+      <div class="wrap loc">
+        <div class="loc__txt">
+          <span class="eyebrow">{t('location')}</span>
+          <h2 class="h2">{city}</h2>
+          {place && <p class="lede">{place}</p>}
+        </div>
+        <StaticMap lat={dev.address.lat} lng={dev.address.lng} zoom={14} height={420} area label={`${dev.title}, ${place}`} linkLabel={t('openMap')} />
+      </div>
+    </section>
+  )}
+
+  <section class="section section--paper" id="contact">
+    <div class="wrap contact">
+      <div class="contact__who">
+        <h2 class="h2">{t('devContact')}</h2>
+        {agent && (
+          <div class="adv">
+            {agent.photo?.url && <RaImage class="adv__photo" src={agent.photo} alt={`${agent.first_name} ${agent.last_name}`} width={128} height={160} sizes="64px" />}
+            <div>
+              <p class="adv__name"><a href={href('team', l, agentSlug(agent, agents))}>{agent.first_name} {agent.last_name}</a></p>
+              {(agent.phone ?? primary?.phone) && <a class="num" href={tel((agent.phone ?? primary?.phone)!)}>{agent.phone ?? primary?.phone}</a>}
+            </div>
+          </div>
+        )}
+      </div>
+      <div class="contact__form">
+        <EnquiryForm locale={locale} developmentId={dev.id} units={options} selectedUnit={chosen?.id} agentName={agent?.first_name} message={message} />
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .hero { position: relative; min-height: clamp(480px, 68vh, 760px); display: grid; align-items: end; background: var(--navy); overflow: hidden; }
+  .hero > :global(img), .hero > :global(picture), .hero > :global(picture img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero__shade { position: absolute; inset: 0; background: linear-gradient(to top, rgb(10 20 34 / 0.9) 10%, rgb(10 20 34 / 0.5) 50%, rgb(10 20 34 / 0.1)); }
+  .hero__copy { position: relative; display: grid; gap: 20px; justify-items: start; padding-block: 56px; color: #fff; }
+  .hero__copy .h1 { font-size: clamp(2.5rem, 1.6rem + 3.6vw, 5rem); }
+  .figbar { background: var(--navy); color: #fff; }
+  .figbar__in { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .figbar__in div { padding: 26px 24px 26px 0; border-right: 1px solid var(--line-on-navy); display: flex; flex-direction: column-reverse; gap: 6px; }
+  .figbar__in div + div { padding-left: 24px; }
+  .figbar__in div:last-child { border-right: 0; }
+  .figbar dt { font: 600 0.6875rem/1.3 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-navy-muted); }
+  .figbar dd { font: 400 1.375rem/1.2 var(--font-display); }
+  .intro { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); }
+  .lead { font: 400 var(--step-2)/1.45 var(--font-display); max-width: 34ch; }
+  .intro__side { display: grid; gap: 40px; align-content: start; }
+  .side-h { font: 600 0.75rem/1.2 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass-ink); margin-bottom: 8px; }
+  .intro__side .kv dd { text-align: right; white-space: normal; }
+  .docs { list-style: none; border-top: 1px solid var(--line); }
+  .docs a { display: flex; justify-content: space-between; align-items: center; min-height: 56px; border-bottom: 1px solid var(--line); text-decoration: none; font-weight: 600; color: var(--navy); }
+  .docs a:hover { text-decoration: underline; }
+  .docs__t { font-size: 0.8125rem; letter-spacing: 0.1em; color: var(--muted); }
+  .gal { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: auto auto; gap: 12px; }
+  .gal :global(img) { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3 / 2; }
+  .gal > :global(img:first-child) { grid-row: span 2; aspect-ratio: auto; }
+  .gal--2 { grid-template-columns: 1fr 1fr; }
+  .gal--2 > :global(img:first-child) { grid-row: auto; aspect-ratio: 3 / 2; }
+  .types { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+  .type { min-width: 0; }
+  .type a { grid-template-columns: minmax(0, 1fr); }
+  .type a { display: grid; gap: 6px; padding: 22px; border: 1px solid var(--line); text-decoration: none; height: 100%; transition: border-color .15s, box-shadow .15s; }
+  .type a:hover { border-color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
+  .type__k { font: 600 0.75rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass-ink); }
+  .type__plan { display: grid; place-items: center; aspect-ratio: 56 / 46; margin: 10px 0 8px; background: #fff; }
+  .type__plan img { width: 100%; height: 100%; object-fit: contain; }
+  .type__noplan { color: var(--muted); }
+  .type__name { font: 400 1.5rem/1.1 var(--font-display); }
+  .type__m { color: var(--muted); }
+  .type__p { font-weight: 600; color: var(--navy); margin-top: 6px; }
+  .type__n { font-size: 0.875rem; color: var(--muted); }
+  .note { margin-top: 16px; font-size: 0.8125rem; color: var(--muted); }
+  .loc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .loc__txt { display: grid; gap: 14px; }
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .contact__who { display: grid; gap: 20px; }
+  .adv :global(.adv__photo) { width: 64px; height: 80px; object-fit: cover; flex: none; }
+  .adv { display: flex; gap: 16px; align-items: center; margin-top: 8px; }
+  .adv__name { font: 400 1.375rem/1.2 var(--font-display); }
+  .adv__name a { text-decoration: none; }
+  .adv a.num { color: var(--navy); min-height: 32px; display: inline-flex; align-items: center; }
+  .contact__form { background: #fff; padding: clamp(22px, 3vw, 40px); }
+  @media (max-width: 960px) {
+    .intro, .loc, .contact { grid-template-columns: minmax(0, 1fr); }
+    .gal { grid-template-columns: minmax(0, 1fr); }
+    .gal > :global(img:first-child) { grid-row: auto; aspect-ratio: 3 / 2; }
+    .figbar__in div { border-right: 0; border-bottom: 1px solid var(--line-on-navy); padding-left: 0 !important; }
+  }
+</style>

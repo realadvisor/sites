@@ -1,0 +1,35 @@
+---
+/** Team: every agent in plain type, with phone, e-mail and their homes. */
+import Site from '../layouts/Site.astro';
+import AgentBlock from '../components/AgentBlock.astro';
+import { agency, brandName, sites } from '../lib/data';
+import { UI, alternates, fill, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, agents, live] = await Promise.all([agency(), sites.agents(), sites.allListings({ status: 'available' })]);
+const homes = (id: string) => live.filter((l) => l.agent?.id === id).length;
+const note = (n: number) => (n === 0 ? undefined : n === 1 ? ui.homesOfOne : fill(ui.homesOf, { n }));
+---
+<Site lang={lang} current="team" title={`${ui.teamH1} | ${brandName(ag)}`} description={fill(ui.teamLead, { n: agents.length })} alternates={alternates('team')}>
+  <header class="wrap phead">
+    <h1 class="d-xl">{ui.teamH1}</h1>
+    <p class="lead">{fill(ui.teamLead, { n: agents.length })}</p>
+  </header>
+  <ul class="wrap team">
+    {agents.map((a) => (
+      <li><AgentBlock agent={a} lang={lang} heading="h2" size="l" sizes="(min-width: 1080px) 340px, (min-width: 520px) 46vw, 300px" note={note(homes(a.id))} /></li>
+    ))}
+  </ul>
+</Site>
+
+<style>
+  .team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 clamp(20px, 2.5vw, 40px); }
+  .team li { border-top: 1px solid var(--text); padding: 18px 0 56px; }
+  .team li :global(.agent-name) { font-size: var(--fs-m); }
+  .team li :global(.agent.has-photo) { grid-template-columns: 1fr; align-items: start; gap: 20px; }
+  .team li :global(.agent-photo) { max-width: none; }
+  @media (max-width: 1080px) { .team { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .team { grid-template-columns: 1fr; } .team li :global(.agent-photo) { max-width: 300px; } }
+</style>

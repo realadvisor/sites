@@ -1,0 +1,65 @@
+---
+/**
+ * One agent: a 4:5 portrait when the data has a photo (no initials
+ * fallback), name, role or office, languages, phone and e-mail in plain
+ * type. `compact`: square portrait beside the text (listing sidebar).
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Agent, Team } from '@realadvisor/sites-sdk/types';
+import { agentSlug, href, type L } from '../lib/routes';
+import { cityName, languages, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props {
+  agent: Agent;
+  all: Agent[];
+  teams: Team[];
+  l: L;
+  compact?: boolean;
+  as?: 'h2' | 'h3';
+  /** Link the name to the agent page (default true). */
+  link?: boolean;
+}
+const { agent: a, all, teams, l, compact = false, as: H = 'h3', link = true } = Astro.props;
+const t = tx(l);
+const team = teams.find((x) => a.team_ids.includes(x.id));
+const role = a.title ?? (team ? `${l === 'fr' ? 'Bureau de' : ''} ${cityName(team.address.city, l) || team.name}${l === 'en' ? ' office' : ''}`.trim() : undefined);
+const langs = languages(a.languages, l);
+const name = `${a.first_name} ${a.last_name}`;
+const url = href('team', l, agentSlug(a, all));
+---
+<article class:list={['agent', { 'agent--compact': compact }]}>
+  {a.photo && (
+    <a class="agent__photo" href={link ? url : undefined} tabindex={link ? -1 : undefined} aria-hidden={link ? 'true' : undefined}>
+      {compact
+        ? <RaImage src={a.photo} alt={a.photo.alt || name} width={240} height={240} sizes="88px" widths={[180, 240]} />
+        : <RaImage src={a.photo} alt={a.photo.alt || name} width={640} height={800} sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 100vw" widths={[400, 640, 900]} />}
+    </a>
+  )}
+  <div class="agent__body">
+    <H class="agent__name">{link ? <a href={url}>{name}</a> : name}</H>
+    {role && <p class="agent__role">{role}</p>}
+    {langs && <p class="agent__langs"><span class="sr-only">{t('speaks')}: </span>{langs}</p>}
+    <ul class="agent__contact plain">
+      {a.phone && <li><a class="num" href={tel(a.phone)}>{a.phone}</a></li>}
+      {a.email && <li><a href={`mailto:${a.email}`}>{a.email}</a></li>}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .agent { display: grid; gap: 18px; align-content: start; }
+  .agent__photo { display: block; overflow: hidden; background: var(--line); aspect-ratio: 4 / 5; }
+  .agent__photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+  .agent__body { display: grid; gap: 4px; min-width: 0; }
+  .agent__name { font-size: 1.375rem; }
+  .agent__name a { text-decoration: none; }
+  .agent__name a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+  .agent__role { color: var(--muted); font-size: 0.9375rem; }
+  .agent__langs { font-size: 0.9375rem; }
+  .agent__contact { margin-top: 6px; display: grid; }
+  .agent__contact a { display: inline-flex; align-items: center; min-height: 34px; font-size: 0.9375rem; overflow-wrap: anywhere; }
+  .agent--compact { grid-template-columns: 88px minmax(0, 1fr); gap: 16px; align-items: center; }
+  .agent--compact .agent__photo { aspect-ratio: 1; border-radius: 50%; }
+  .agent--compact .agent__name { font-size: 1.25rem; }
+</style>

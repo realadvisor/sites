@@ -1,0 +1,59 @@
+---
+/** Contact: the form, then every office with address, phone, e-mail and a map link. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { siteData } from '../lib/data';
+import { href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, primary } = await siteData();
+const C = {
+  en: { title: 'Contact', lede: 'Write to us and the office of the area you are interested in will answer. Or call an office directly.', form: 'Send a message', map: 'Map' },
+  fr: { title: 'Contact', lede: 'Écrivez-nous : le bureau du secteur qui vous intéresse vous répondra. Ou appelez directement un bureau.', form: 'Envoyer un message', map: 'Plan' },
+}[l];
+const siteUrl = new URL('/', Astro.site ?? Astro.url).href;
+---
+<Site l={l} route="contact" title={`${C.title} | ${org.name}`} description={C.lede}
+  jsonLd={agencyJsonLd({ id: org.id, name: org.name, phone: primary?.phone, email: primary?.email, address: org.address }, siteUrl)}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navContact') }]} title={C.title} lede={C.lede} />
+  <section class="wrap grid">
+    <div class="form">
+      <h2 class="h3">{C.form}</h2>
+      <EnquiryForm contactReason="other" locale={LOCALE[l]} />
+    </div>
+    <ul class="plain offices">
+      {teams.map((x) => (
+        <li>
+          <h2 class="h3"><a href={href('offices', l, teamSlug(x, teams))}>{cityName(x.address.city, l) || x.name}</a></h2>
+          <address>
+            {x.address.street && <span>{x.address.street}</span>}
+            <span>{[x.address.postcode, x.address.city].filter(Boolean).join(' ')}</span>
+          </address>
+          <ul class="plain c">
+            {x.phone && <li><a class="num" href={tel(x.phone)}>{x.phone}</a></li>}
+            {x.email && <li><a href={`mailto:${x.email}`}>{x.email}</a></li>}
+            {x.address.lat != null && x.address.lng != null && <li><a href={`https://www.openstreetmap.org/?mlat=${x.address.lat}&mlon=${x.address.lng}#map=17/${x.address.lat}/${x.address.lng}`} rel="noopener">{C.map} ↗</a></li>}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Site>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(40px, 7vw, 112px); padding-bottom: var(--section); align-items: start; }
+  .form { background: var(--paper); border: 1px solid var(--line); padding: clamp(24px, 3vw, 40px); display: grid; gap: 24px; }
+  .offices { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .offices > li { padding-block: 24px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+  .offices h2 a { text-decoration: none; }
+  .offices h2 a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+  address { font-style: normal; display: grid; color: var(--muted); }
+  .c a { display: inline-flex; align-items: center; min-height: 34px; overflow-wrap: anywhere; }
+  @media (max-width: 899px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,1906 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "fr"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "bcf6d8ae-0b28-4236-bd59-ddd8424b8486",
+  "name": "Atelier Belvédère SA",
+  "website": "https://atelier-belvedere.example.com",
+  "address": {
+   "street": "Route de Lavaux 128",
+   "postcode": "1095",
+   "city": "Lutry",
+   "country": "Switzerland",
+   "lat": 46.503,
+   "lng": 6.691
+  },
+  "brand": {
+   "primary": "#6B5E4B"
+  }
+ },
+ "teams": [
+  {
+   "id": "84194a7b-fa32-4f82-9b7b-be6a04e2821d",
+   "name": "Les Terrasses du Signal",
+   "primary": true,
+   "website": "https://atelier-belvedere.example.com",
+   "phone": "+41 00 000 00 01",
+   "email": "contact@atelier-belvedere.example.com",
+   "address": {
+    "street": "Route de Lavaux 128",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.503,
+    "lng": 6.691
+   },
+   "socials": {},
+   "description": "<p>Commercialisation des Terrasses du Signal, dix-huit appartements au-dessus du Léman.</p>",
+   "description_text": "Commercialisation des Terrasses du Signal, dix-huit appartements au-dessus du Léman."
+  }
+ ],
+ "agents": [
+  {
+   "id": "718b085f-9a5e-4406-95a3-c066abe0e51c",
+   "first_name": "Claire",
+   "last_name": "Dufour",
+   "phone": "+41 00 000 00 02",
+   "email": "claire.dufour@atelier-belvedere.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496907-sq.jpg",
+    "alt": "Claire Dufour"
+   }
+  },
+  {
+   "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+   "first_name": "Mathieu",
+   "last_name": "Pasche",
+   "phone": "+41 00 000 00 03",
+   "email": "mathieu.pasche@atelier-belvedere.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+    "alt": "Mathieu Pasche"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "cbeb9fc7-0ee5-4b4f-a3b6-8bb3736090c7",
+   "slug": "4-5-pieces-rez-de-jardin-cbeb9fc7-0ee5-4b4f-a3b6-8bb3736090c7",
+   "title": "4,5 pièces, rez-de-jardin",
+   "description": "<p>Un 4,5 pièces de 124 m² avec jardin privatif, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 4,5 pièces de 124 m² avec jardin privatif, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1460000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 124,
+   "address": {
+    "street": "Chemin du Signal 4",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "4,5 pièces, rez-de-jardin"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "4,5 pièces, rez-de-jardin, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "4,5 pièces, rez-de-jardin, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "4,5 pièces, rez-de-jardin, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "4,5 pièces, rez-de-jardin, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "Q8J8-N94T",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "b457c592-13a6-47dc-a200-e2ef70821feb",
+   "slug": "5-5-pieces-rez-de-jardin-b457c592-13a6-47dc-a200-e2ef70821feb",
+   "title": "5,5 pièces, rez-de-jardin",
+   "description": "<p>Un 5,5 pièces de 152 m² avec jardin privatif, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 5,5 pièces de 152 m² avec jardin privatif, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1790000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 152,
+   "address": {
+    "street": "Chemin du Signal 8",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "5,5 pièces, rez-de-jardin"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "5,5 pièces, rez-de-jardin, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "5,5 pièces, rez-de-jardin, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "5,5 pièces, rez-de-jardin, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "5,5 pièces, rez-de-jardin, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "5,5 pièces, rez-de-jardin, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "JZLN-LKE5",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "85c1c4b6-027d-4ae9-9632-52d31cc61540",
+   "slug": "3-5-pieces-1er-etage-85c1c4b6-027d-4ae9-9632-52d31cc61540",
+   "title": "3,5 pièces, 1er étage",
+   "description": "<p>Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1270000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 102,
+   "address": {
+    "street": "Chemin du Signal 4",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "3,5 pièces, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "3,5 pièces, 1er étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "3,5 pièces, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "3,5 pièces, 1er étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "3,5 pièces, 1er étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "3,5 pièces, 1er étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "DJDS-9QZ5",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "792b2cdc-58db-4b5a-8526-273b97b3da7c",
+   "slug": "4-5-pieces-1er-etage-792b2cdc-58db-4b5a-8526-273b97b3da7c",
+   "title": "4,5 pièces, 1er étage",
+   "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1590000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Chemin du Signal 6",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "4,5 pièces, 1er étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "4,5 pièces, 1er étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "4,5 pièces, 1er étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "4,5 pièces, 1er étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "4,5 pièces, 1er étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "718b085f-9a5e-4406-95a3-c066abe0e51c",
+    "first_name": "Claire",
+    "last_name": "Dufour",
+    "phone": "+41 00 000 00 02",
+    "email": "claire.dufour@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496907-sq.jpg",
+     "alt": "Claire Dufour"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "RF96-U4PX",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "65a766c2-b109-42f1-92bc-75006f17a409",
+   "slug": "3-5-pieces-2e-etage-65a766c2-b109-42f1-92bc-75006f17a409",
+   "title": "3,5 pièces, 2e étage",
+   "description": "<p>Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1340000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 102,
+   "address": {
+    "street": "Chemin du Signal 2",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "3,5 pièces, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "3,5 pièces, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "3,5 pièces, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "3,5 pièces, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "3,5 pièces, 2e étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "3,5 pièces, 2e étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "718b085f-9a5e-4406-95a3-c066abe0e51c",
+    "first_name": "Claire",
+    "last_name": "Dufour",
+    "phone": "+41 00 000 00 02",
+    "email": "claire.dufour@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496907-sq.jpg",
+     "alt": "Claire Dufour"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "3SZG-T6VM",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "fa11fcba-7c3d-4179-a8a3-d487978f5479",
+   "slug": "4-5-pieces-2e-etage-fa11fcba-7c3d-4179-a8a3-d487978f5479",
+   "title": "4,5 pièces, 2e étage",
+   "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1680000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Chemin du Signal 4",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "4,5 pièces, 2e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "4,5 pièces, 2e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "4,5 pièces, 2e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "4,5 pièces, 2e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "4,5 pièces, 2e étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "4,5 pièces, 2e étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "PA7Z-ZYT8",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "32e7fe14-1ebd-4166-9f97-9dfe9024797d",
+   "slug": "3-5-pieces-3e-etage-32e7fe14-1ebd-4166-9f97-9dfe9024797d",
+   "title": "3,5 pièces, 3e étage",
+   "description": "<p>Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1400000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 102,
+   "address": {
+    "street": "Chemin du Signal 8",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "3,5 pièces, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "3,5 pièces, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "3,5 pièces, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "3,5 pièces, 3e étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "3,5 pièces, 3e étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "PDKQ-KV3N",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "e4242efe-3564-4031-9173-ee2f1d0d2990",
+   "slug": "4-5-pieces-3e-etage-e4242efe-3564-4031-9173-ee2f1d0d2990",
+   "title": "4,5 pièces, 3e étage",
+   "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1760000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Chemin du Signal 2",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "4,5 pièces, 3e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "4,5 pièces, 3e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "4,5 pièces, 3e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "4,5 pièces, 3e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "4,5 pièces, 3e étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "4,5 pièces, 3e étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "718b085f-9a5e-4406-95a3-c066abe0e51c",
+    "first_name": "Claire",
+    "last_name": "Dufour",
+    "phone": "+41 00 000 00 02",
+    "email": "claire.dufour@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496907-sq.jpg",
+     "alt": "Claire Dufour"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "5F5N-TJDT",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "64eef6b7-28d8-46f7-9228-ddc5cf4d8243",
+   "slug": "2-5-pieces-4e-etage-64eef6b7-28d8-46f7-9228-ddc5cf4d8243",
+   "title": "2,5 pièces, 4e étage",
+   "description": "<p>Un 2,5 pièces de 72 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 2,5 pièces de 72 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1040000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 72,
+   "address": {
+    "street": "Chemin du Signal 4",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "2,5 pièces, 4e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+     "alt": "2,5 pièces, 4e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+     "alt": "2,5 pièces, 4e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "2,5 pièces, 4e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "2,5 pièces, 4e étage, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "2,5 pièces, 4e étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "R2MP-XASC",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "9dfc9c93-13e3-4f69-80f8-61f8717e55d4",
+   "slug": "4-5-pieces-4e-etage-9dfc9c93-13e3-4f69-80f8-61f8717e55d4",
+   "title": "4,5 pièces, 4e étage",
+   "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1840000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Chemin du Signal 8",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "4,5 pièces, 4e étage"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "4,5 pièces, 4e étage, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "4,5 pièces, 4e étage, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "4,5 pièces, 4e étage, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "4,5 pièces, 4e étage, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "b83f7e68-982b-438c-a417-db02fc925b1f",
+    "first_name": "Mathieu",
+    "last_name": "Pasche",
+    "phone": "+41 00 000 00 03",
+    "email": "mathieu.pasche@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496901-sq.jpg",
+     "alt": "Mathieu Pasche"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "NKC3-2RMZ",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  },
+  {
+   "id": "ba880863-9a92-46a5-932d-7d2bb3cda1d1",
+   "slug": "5-5-pieces-attique-ba880863-9a92-46a5-932d-7d2bb3cda1d1",
+   "title": "5,5 pièces, Attique",
+   "description": "<p>Un 5,5 pièces de 188 m² sous le toit, avec une terrasse panoramique, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+   "description_text": "Un 5,5 pièces de 188 m² sous le toit, avec une terrasse panoramique, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 3300000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 188,
+   "address": {
+    "street": "Chemin du Signal 2",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "5,5 pièces, Attique"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "5,5 pièces, Attique, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "5,5 pièces, Attique, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+     "alt": "5,5 pièces, Attique, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+     "alt": "5,5 pièces, Attique, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "718b085f-9a5e-4406-95a3-c066abe0e51c",
+    "first_name": "Claire",
+    "last_name": "Dufour",
+    "phone": "+41 00 000 00 02",
+    "email": "claire.dufour@atelier-belvedere.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496907-sq.jpg",
+     "alt": "Claire Dufour"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "XXWU-NK69",
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ]
+  }
+ ],
+ "developments": [
+  {
+   "id": "5418826d-128c-452c-8479-605681362db5",
+   "slug": "les-terrasses-du-signal",
+   "title": "Les Terrasses du Signal",
+   "description": "<p>Dix-huit appartements sur six niveaux, posés dans la pente au-dessus de Lutry, face au Léman et aux Alpes de Savoie.</p><p>Des pièces de vie traversantes, des terrasses profondes, des façades en pierre claire et en bois. Chauffage par pompe à chaleur, panneaux photovoltaïques en toiture, deux places de parc par appartement.</p><p>Livraison prévue en décembre 2027.</p>",
+   "description_text": "Dix-huit appartements sur six niveaux, posés dans la pente au-dessus de Lutry, face au Léman et aux Alpes de Savoie.\n\nDes pièces de vie traversantes, des terrasses profondes, des façades en pierre claire et en bois. Chauffage par pompe à chaleur, panneaux photovoltaïques en toiture, deux places de parc par appartement.\n\nLivraison prévue en décembre 2027.",
+   "status": "marketing",
+   "delivery_date": "2027-12-15",
+   "address": {
+    "street": "Chemin du Signal 2",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.507,
+    "lng": 6.686
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27075286.jpg",
+     "alt": "Les Terrasses du Signal"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27459716.jpg",
+     "alt": "Les Terrasses du Signal, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7347152.jpg",
+     "alt": "Les Terrasses du Signal, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7347168.jpg",
+     "alt": "Les Terrasses du Signal, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7347170.jpg",
+     "alt": "Les Terrasses du Signal, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12956558.jpg",
+     "alt": "Les Terrasses du Signal, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+     "alt": "Les Terrasses du Signal, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+     "alt": "Les Terrasses du Signal, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+     "alt": "Les Terrasses du Signal, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+     "alt": "Les Terrasses du Signal, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+     "alt": "Les Terrasses du Signal, photo 11"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+     "alt": "Les Terrasses du Signal, photo 12"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+     "alt": "Les Terrasses du Signal, photo 13"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+     "alt": "Les Terrasses du Signal, photo 15"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+     "alt": "Les Terrasses du Signal, photo 16"
+    }
+   ],
+   "stats": {
+    "units": 18,
+    "available": 11,
+    "reserved": 3,
+    "sold": 4,
+    "price": {
+     "min": 940000,
+     "max": 3300000
+    },
+    "rooms": {
+     "min": 2.5,
+     "max": 6.5
+    },
+    "living_surface": {
+     "min": 72,
+     "max": 214
+    }
+   },
+   "currency": "CHF",
+   "agents": [
+    {
+     "id": "718b085f-9a5e-4406-95a3-c066abe0e51c",
+     "first_name": "Claire",
+     "last_name": "Dufour",
+     "phone": "+41 00 000 00 02",
+     "email": "claire.dufour@atelier-belvedere.example.com",
+     "languages": [
+      "fr",
+      "en"
+     ],
+     "team_ids": [
+      "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-23496907-sq.jpg",
+      "alt": "Claire Dufour"
+     }
+    }
+   ],
+   "team_ids": [
+    "84194a7b-fa32-4f82-9b7b-be6a04e2821d"
+   ],
+   "units": [
+    {
+     "id": "e50c71f0-9ba0-4cc6-9750-e0d047463772",
+     "name": "3,5 pièces, rez-de-jardin",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 98,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "4198742c-6626-47bb-8512-cedd362a0dbe",
+     "name": "4,5 pièces, rez-de-jardin",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 124,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 1460000,
+     "currency": "CHF",
+     "description": "<p>Un 4,5 pièces de 124 m² avec jardin privatif, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 4,5 pièces de 124 m² avec jardin privatif, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "4,5 pièces, rez-de-jardin"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "4,5 pièces, rez-de-jardin, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "4,5 pièces, rez-de-jardin, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "4,5 pièces, rez-de-jardin, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "4,5 pièces, rez-de-jardin, photo 6"
+      }
+     ],
+     "listing_slug": "4-5-pieces-rez-de-jardin-cbeb9fc7-0ee5-4b4f-a3b6-8bb3736090c7",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "40b06571-f10e-4749-8061-643095a6912e",
+     "name": "4,5 pièces, rez-de-jardin",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 126,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 1490000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "0574a55d-20ca-43a5-976b-9ca089515766",
+     "name": "5,5 pièces, rez-de-jardin",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5.5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 152,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 1790000,
+     "currency": "CHF",
+     "description": "<p>Un 5,5 pièces de 152 m² avec jardin privatif, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 5,5 pièces de 152 m² avec jardin privatif, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "5,5 pièces, rez-de-jardin"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "5,5 pièces, rez-de-jardin, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "5,5 pièces, rez-de-jardin, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "5,5 pièces, rez-de-jardin, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "5,5 pièces, rez-de-jardin, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "5,5 pièces, rez-de-jardin, photo 6"
+      }
+     ],
+     "listing_slug": "5-5-pieces-rez-de-jardin-b457c592-13a6-47dc-a200-e2ef70821feb",
+     "features": [
+      "elevator",
+      "parking"
+     ]
+    },
+    {
+     "id": "62ba3763-3f24-4236-9f5a-c7ce58e09dab",
+     "name": "2,5 pièces, 1er étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 72,
+     "balcony_surface": 22,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "0ed67858-70eb-4c52-85ab-2f05a05a7d9d",
+     "name": "3,5 pièces, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 102,
+     "balcony_surface": 26,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 1270000,
+     "currency": "CHF",
+     "description": "<p>Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "3,5 pièces, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "3,5 pièces, 1er étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "3,5 pièces, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "3,5 pièces, 1er étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "3,5 pièces, 1er étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "3,5 pièces, 1er étage, photo 6"
+      }
+     ],
+     "listing_slug": "3-5-pieces-1er-etage-85c1c4b6-027d-4ae9-9632-52d31cc61540",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "6e9c8938-09d5-4743-b96a-ecd02ac7ca4d",
+     "name": "4,5 pièces, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 128,
+     "balcony_surface": 18,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 1590000,
+     "currency": "CHF",
+     "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "4,5 pièces, 1er étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "4,5 pièces, 1er étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "4,5 pièces, 1er étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "4,5 pièces, 1er étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "4,5 pièces, 1er étage, photo 6"
+      }
+     ],
+     "listing_slug": "4-5-pieces-1er-etage-792b2cdc-58db-4b5a-8526-273b97b3da7c",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "6cd9a0cf-b271-4423-99a7-bdc644f47461",
+     "name": "2,5 pièces, 2e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 72,
+     "balcony_surface": 22,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 940000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "bb97afe7-4cd5-4f2f-bafe-4113f0e11777",
+     "name": "3,5 pièces, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 102,
+     "balcony_surface": 26,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 1340000,
+     "currency": "CHF",
+     "description": "<p>Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "3,5 pièces, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "3,5 pièces, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "3,5 pièces, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "3,5 pièces, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "3,5 pièces, 2e étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "3,5 pièces, 2e étage, photo 6"
+      }
+     ],
+     "listing_slug": "3-5-pieces-2e-etage-65a766c2-b109-42f1-92bc-75006f17a409",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "b16cac5c-1fec-48c6-b625-37ae6e38311b",
+     "name": "4,5 pièces, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 128,
+     "balcony_surface": 18,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 1680000,
+     "currency": "CHF",
+     "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "4,5 pièces, 2e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "4,5 pièces, 2e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "4,5 pièces, 2e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "4,5 pièces, 2e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "4,5 pièces, 2e étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "4,5 pièces, 2e étage, photo 6"
+      }
+     ],
+     "listing_slug": "4-5-pieces-2e-etage-fa11fcba-7c3d-4179-a8a3-d487978f5479",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "95a4de09-e6a0-4dd4-bc59-68417ca4ded8",
+     "name": "2,5 pièces, 3e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 72,
+     "balcony_surface": 22,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "b485d6af-ae55-4e57-96dc-51551015ab36",
+     "name": "3,5 pièces, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 102,
+     "balcony_surface": 26,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 1400000,
+     "currency": "CHF",
+     "description": "<p>Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 3,5 pièces de 102 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "3,5 pièces, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "3,5 pièces, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "3,5 pièces, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "3,5 pièces, 3e étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "3,5 pièces, 3e étage, photo 6"
+      }
+     ],
+     "listing_slug": "3-5-pieces-3e-etage-32e7fe14-1ebd-4166-9f97-9dfe9024797d",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "c1612a16-d9cb-4455-b01c-3b400da8f0be",
+     "name": "4,5 pièces, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 128,
+     "balcony_surface": 18,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 1760000,
+     "currency": "CHF",
+     "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "4,5 pièces, 3e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "4,5 pièces, 3e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "4,5 pièces, 3e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "4,5 pièces, 3e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "4,5 pièces, 3e étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "4,5 pièces, 3e étage, photo 6"
+      }
+     ],
+     "listing_slug": "4-5-pieces-3e-etage-e4242efe-3564-4031-9173-ee2f1d0d2990",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "4d5086a5-3f1b-4a33-88b1-a2d21413c0a3",
+     "name": "2,5 pièces, 4e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 2.5,
+     "bedrooms": 1,
+     "bathrooms": 1,
+     "living_surface": 72,
+     "balcony_surface": 22,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 1040000,
+     "currency": "CHF",
+     "description": "<p>Un 2,5 pièces de 72 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 2,5 pièces de 72 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "2,5 pièces, 4e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189672.jpg",
+       "alt": "2,5 pièces, 4e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35203561.jpg",
+       "alt": "2,5 pièces, 4e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27059631.jpg",
+       "alt": "2,5 pièces, 4e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164969.jpg",
+       "alt": "2,5 pièces, 4e étage, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164976.jpg",
+       "alt": "2,5 pièces, 4e étage, photo 6"
+      }
+     ],
+     "listing_slug": "2-5-pieces-4e-etage-64eef6b7-28d8-46f7-9228-ddc5cf4d8243",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "5b2e72ca-b0c3-43fc-ada9-fb3ca0d15f06",
+     "name": "3,5 pièces, 4e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3.5,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 102,
+     "balcony_surface": 26,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 1470000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "bd403055-48ee-421e-a2ad-2babfe02d3e7",
+     "name": "4,5 pièces, 4e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4.5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 128,
+     "balcony_surface": 18,
+     "floor": 4,
+     "floor_label": "4e étage",
+     "price": 1840000,
+     "currency": "CHF",
+     "description": "<p>Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 4,5 pièces de 128 m² avec une terrasse face au lac, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27164979.jpg",
+       "alt": "4,5 pièces, 4e étage"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27543248.jpg",
+       "alt": "4,5 pièces, 4e étage, photo 2"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28853343.jpg",
+       "alt": "4,5 pièces, 4e étage, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "4,5 pièces, 4e étage, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "4,5 pièces, 4e étage, photo 6"
+      }
+     ],
+     "listing_slug": "4-5-pieces-4e-etage-9dfc9c93-13e3-4f69-80f8-61f8717e55d4",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "5e5febff-ae0d-4dd2-9e88-a0368bc6fc62",
+     "name": "5,5 pièces, Attique",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_attic",
+     "rooms": 5.5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 188,
+     "balcony_surface": 85,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "price": 3300000,
+     "currency": "CHF",
+     "description": "<p>Un 5,5 pièces de 188 m² sous le toit, avec une terrasse panoramique, aux Terrasses du Signal.</p><p>Cuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.</p>",
+     "description_text": "Un 5,5 pièces de 188 m² sous le toit, avec une terrasse panoramique, aux Terrasses du Signal.\n\nCuisine ouverte, parquet en chêne, baies vitrées toute hauteur. Livraison prévue en décembre 2027.",
+     "photos": [
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-26886812.jpg",
+       "alt": "5,5 pièces, Attique"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531870.jpg",
+       "alt": "5,5 pièces, Attique, photo 3"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531872.jpg",
+       "alt": "5,5 pièces, Attique, photo 4"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27531873.jpg",
+       "alt": "5,5 pièces, Attique, photo 5"
+      },
+      {
+       "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35189671.jpg",
+       "alt": "5,5 pièces, Attique, photo 6"
+      }
+     ],
+     "listing_slug": "5-5-pieces-attique-ba880863-9a92-46a5-932d-7d2bb3cda1d1",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "ecbf8ec5-328b-4549-a871-58bee6185391",
+     "name": "6,5 pièces, Attique",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment_attic",
+     "rooms": 6.5,
+     "bedrooms": 5,
+     "bathrooms": 2,
+     "living_surface": 214,
+     "balcony_surface": 85,
+     "floor": 5,
+     "floor_label": "5e étage",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  }
+ ],
+ "fixture_only": {
+  "listings": {
+   "cbeb9fc7-0ee5-4b4f-a3b6-8bb3736090c7": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 0
+   },
+   "b457c592-13a6-47dc-a200-e2ef70821feb": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 0
+   },
+   "85c1c4b6-027d-4ae9-9632-52d31cc61540": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 1,
+    "terrace_surface": 26
+   },
+   "792b2cdc-58db-4b5a-8526-273b97b3da7c": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 1,
+    "terrace_surface": 18
+   },
+   "65a766c2-b109-42f1-92bc-75006f17a409": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 2,
+    "terrace_surface": 26
+   },
+   "fa11fcba-7c3d-4179-a8a3-d487978f5479": {
+    "energy_class": "B",
+    "year_built": 2027,
+    "floor": 2,
+    "terrace_surface": 18
+   },
+   "32e7fe14-1ebd-4166-9f97-9dfe9024797d": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 3,
+    "terrace_surface": 26
+   },
+   "e4242efe-3564-4031-9173-ee2f1d0d2990": {
+    "energy_class": "A",
+    "year_built": 2027,
+    "floor": 3,
+    "terrace_surface": 18
+   },
+   "64eef6b7-28d8-46f7-9228-ddc5cf4d8243": {
+    "energy_class": "D",
+    "year_built": 2027,
+    "floor": 4,
+    "terrace_surface": 22
+   },
+   "9dfc9c93-13e3-4f69-80f8-61f8717e55d4": {
+    "energy_class": "E",
+    "year_built": 2027,
+    "floor": 4,
+    "terrace_surface": 18
+   },
+   "ba880863-9a92-46a5-932d-7d2bb3cda1d1": {
+    "energy_class": "C",
+    "year_built": 2027,
+    "floor": 5,
+    "terrace_surface": 85
+   }
+  },
+  "units": {
+   "e50c71f0-9ba0-4cc6-9750-e0d047463772": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "garden_surface": 120
+   },
+   "4198742c-6626-47bb-8512-cedd362a0dbe": {
+    "unit_number": "0.2",
+    "position": 2,
+    "orientation": "SW",
+    "garden_surface": 135
+   },
+   "40b06571-f10e-4749-8061-643095a6912e": {
+    "unit_number": "0.3",
+    "position": 3,
+    "orientation": "W",
+    "garden_surface": 150
+   },
+   "0574a55d-20ca-43a5-976b-9ca089515766": {
+    "unit_number": "0.4",
+    "position": 4,
+    "orientation": "SE",
+    "garden_surface": 165
+   },
+   "62ba3763-3f24-4236-9f5a-c7ce58e09dab": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW",
+    "terrace_surface": 22
+   },
+   "0ed67858-70eb-4c52-85ab-2f05a05a7d9d": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W",
+    "terrace_surface": 26
+   },
+   "6e9c8938-09d5-4743-b96a-ecd02ac7ca4d": {
+    "unit_number": "1.3",
+    "position": 3,
+    "orientation": "SE",
+    "terrace_surface": 18
+   },
+   "6cd9a0cf-b271-4423-99a7-bdc644f47461": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W",
+    "terrace_surface": 22
+   },
+   "bb97afe7-4cd5-4f2f-bafe-4113f0e11777": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE",
+    "terrace_surface": 26
+   },
+   "b16cac5c-1fec-48c6-b625-37ae6e38311b": {
+    "unit_number": "2.3",
+    "position": 3,
+    "orientation": "E",
+    "terrace_surface": 18
+   },
+   "95a4de09-e6a0-4dd4-bc59-68417ca4ded8": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE",
+    "terrace_surface": 22
+   },
+   "b485d6af-ae55-4e57-96dc-51551015ab36": {
+    "unit_number": "3.2",
+    "position": 2,
+    "orientation": "E",
+    "terrace_surface": 26
+   },
+   "c1612a16-d9cb-4455-b01c-3b400da8f0be": {
+    "unit_number": "3.3",
+    "position": 3,
+    "orientation": "NW",
+    "terrace_surface": 18
+   },
+   "4d5086a5-3f1b-4a33-88b1-a2d21413c0a3": {
+    "unit_number": "4.1",
+    "position": 1,
+    "orientation": "E",
+    "terrace_surface": 22
+   },
+   "5b2e72ca-b0c3-43fc-ada9-fb3ca0d15f06": {
+    "unit_number": "4.2",
+    "position": 2,
+    "orientation": "NW",
+    "terrace_surface": 26
+   },
+   "bd403055-48ee-421e-a2ad-2babfe02d3e7": {
+    "unit_number": "4.3",
+    "position": 3,
+    "orientation": "S",
+    "terrace_surface": 18
+   },
+   "5e5febff-ae0d-4dd2-9e88-a0368bc6fc62": {
+    "unit_number": "5.1",
+    "position": 1,
+    "orientation": "NW",
+    "terrace_surface": 85
+   },
+   "ecbf8ec5-328b-4549-a871-58bee6185391": {
+    "unit_number": "5.2",
+    "position": 2,
+    "orientation": "S",
+    "terrace_surface": 85
+   }
+  },
+  "developments": {
+   "5418826d-128c-452c-8479-605681362db5": {
+    "developer": "Atelier Belvédère SA",
+    "architect": "Bureau Morand Architectes",
+    "general_contractor": "Constructions Lavaux SA",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": [
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27075286.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-27459716.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37196531.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31114873.jpg",
+     "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31114878.jpg"
+    ]
+   }
+  }
+ }
+}

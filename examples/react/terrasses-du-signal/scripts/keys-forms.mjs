@@ -1,0 +1,22 @@
+// Keyboard: the contact form (Tab order, focus ring, unit select, validation without submit).
+import { chromium } from 'playwright';
+const base = process.argv[2] ?? 'http://127.0.0.1:4512';
+const ok = (c, m) => console.log(`${c ? 'PASS' : 'FAIL'} ${m}`);
+const b = await chromium.launch();
+const d = await b.newPage({ viewport: { width: 1440, height: 900 } });
+await d.goto(base + '/contact');
+await d.focus('#contact-name');
+await d.waitForTimeout(300);
+const ring = await d.evaluate(() => getComputedStyle(document.activeElement).outlineStyle + '/' + getComputedStyle(document.activeElement).boxShadow);
+ok(ring !== 'none/none', `name field shows a focus ring (${ring})`);
+await d.keyboard.type('Test');
+await d.keyboard.press('Tab');
+ok(await d.evaluate(() => document.activeElement?.id === 'contact-email'), 'Tab goes name -> e-mail');
+await d.keyboard.press('Tab');
+ok(await d.evaluate(() => document.activeElement?.id === 'contact-phone'), 'Tab goes e-mail -> phone');
+await d.keyboard.press('Tab');
+ok(await d.evaluate(() => document.activeElement?.id === 'contact-lot'), 'Tab goes phone -> unit select');
+ok(!(await d.evaluate(() => document.querySelector('#contact-email').closest('form').checkValidity())), 'form is invalid without e-mail/unit (nothing submitted)');
+await d.goto(base + '/contact?lot=0574a55d-20ca-43a5-976b-9ca089515766');
+ok((await d.inputValue('#contact-lot')) === '0574a55d-20ca-43a5-976b-9ca089515766', '?lot= preselects the unit');
+await b.close();

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.astro/
+.wrangler/
+.react-router/
+tsconfig.tsbuildinfo
+.env
+.env.*
+.dev.vars
+.DS_Store
+
+# Written by `sites-kit fixture --if-empty` when the template is checked
+/template/src/data/demo-agency.json

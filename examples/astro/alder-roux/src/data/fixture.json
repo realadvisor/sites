@@ -1,0 +1,3193 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "fr",
+  "de"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "1d05591a-a5d5-4a25-aa14-b90a679e4bb6",
+  "name": "Alder & Roux Immobilier SA",
+  "website": "https://alder-roux.example.com",
+  "address": {
+   "street": "Rue du Rhône 48",
+   "postcode": "1204",
+   "city": "Genève",
+   "country": "Switzerland",
+   "lat": 46.203,
+   "lng": 6.147
+  },
+  "brand": {
+   "primary": "#1F3A5F"
+  }
+ },
+ "teams": [
+  {
+   "id": "648b4732-f587-4957-ae94-00fabe80c9ff",
+   "name": "Alder & Roux Genève",
+   "primary": true,
+   "website": "https://alder-roux.example.com",
+   "phone": "+41 00 000 00 01",
+   "email": "geneve@alder-roux.example.com",
+   "address": {
+    "street": "Rue du Rhône 48",
+    "postcode": "1204",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.203,
+    "lng": 6.147
+   },
+   "socials": {},
+   "description": "<p>Notre bureau historique, au cœur de Genève. Vente et location d’appartements et de maisons sur la rive gauche et la rive droite.</p>",
+   "description_text": "Notre bureau historique, au cœur de Genève. Vente et location d’appartements et de maisons sur la rive gauche et la rive droite."
+  },
+  {
+   "id": "da13fc07-b4ab-48d2-a13a-7bef27316ccf",
+   "name": "Alder & Roux Lausanne",
+   "website": "https://alder-roux.example.com",
+   "phone": "+41 00 000 00 02",
+   "email": "lausanne@alder-roux.example.com",
+   "address": {
+    "street": "Avenue de Rumine 12",
+    "postcode": "1005",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "lat": 46.518,
+    "lng": 6.641
+   },
+   "socials": {},
+   "description": "<p>Lausanne, Pully, Lutry et la Riviera : une équipe qui connaît chaque quartier entre le lac et les hauts.</p>",
+   "description_text": "Lausanne, Pully, Lutry et la Riviera : une équipe qui connaît chaque quartier entre le lac et les hauts."
+  },
+  {
+   "id": "a53740c4-7841-4592-8a08-3f810577c3f5",
+   "name": "Alder & Roux Zürich",
+   "website": "https://alder-roux.example.com",
+   "phone": "+41 00 000 00 03",
+   "email": "zuerich@alder-roux.example.com",
+   "address": {
+    "street": "Bahnhofstrasse 62",
+    "postcode": "8001",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.372,
+    "lng": 8.539
+   },
+   "socials": {},
+   "description": "<p>Unser Büro in Zürich begleitet Käufer, Verkäufer und Mieter in der Stadt und an der Goldküste.</p>",
+   "description_text": "Unser Büro in Zürich begleitet Käufer, Verkäufer und Mieter in der Stadt und an der Goldküste."
+  }
+ ],
+ "agents": [
+  {
+   "id": "a550cffc-2f17-45b3-8f11-b9f13a578bd6",
+   "first_name": "Camille",
+   "last_name": "Roux",
+   "phone": "+41 00 000 00 04",
+   "email": "camille.roux@alder-roux.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204881-sq.jpg",
+    "alt": "Camille Roux"
+   }
+  },
+  {
+   "id": "7bce7e1d-f065-4d9d-935a-7a1415afdb05",
+   "first_name": "Thomas",
+   "last_name": "Berset",
+   "phone": "+41 00 000 00 05",
+   "email": "thomas.berset@alder-roux.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204885-sq.jpg",
+    "alt": "Thomas Berset"
+   }
+  },
+  {
+   "id": "b89dc019-a756-40b7-ab90-13e49dc9d3f8",
+   "first_name": "Ines",
+   "last_name": "Moreau",
+   "phone": "+41 00 000 00 06",
+   "email": "ines.moreau@alder-roux.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204883-sq.jpg",
+    "alt": "Ines Moreau"
+   }
+  },
+  {
+   "id": "59d3f8fc-7f32-4ab0-b56e-764d07ef48fd",
+   "first_name": "Julien",
+   "last_name": "Alder",
+   "phone": "+41 00 000 00 07",
+   "email": "julien.alder@alder-roux.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733308-sq.jpg",
+    "alt": "Julien Alder"
+   }
+  },
+  {
+   "id": "8f3cfd65-8c68-4532-87d7-39ae4f1e4535",
+   "first_name": "Sophie",
+   "last_name": "Rochat",
+   "phone": "+41 00 000 00 08",
+   "email": "sophie.rochat@alder-roux.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733301-sq.jpg",
+    "alt": "Sophie Rochat"
+   }
+  },
+  {
+   "id": "6af99d88-4150-488c-b581-17ad7ceb9b01",
+   "first_name": "Luca",
+   "last_name": "Bernasconi",
+   "phone": "+41 00 000 00 09",
+   "email": "luca.bernasconi@alder-roux.example.com",
+   "languages": [
+    "it",
+    "en"
+   ],
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733295-sq.jpg",
+    "alt": "Luca Bernasconi"
+   }
+  },
+  {
+   "id": "410cddbb-fe23-47a2-b5fc-c314f21dc119",
+   "first_name": "Anna",
+   "last_name": "Keller",
+   "phone": "+41 00 000 00 10",
+   "email": "anna.keller@alder-roux.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713166-sq.jpg",
+    "alt": "Anna Keller"
+   }
+  },
+  {
+   "id": "074786fd-fa94-4c49-9f1f-35f06d67872c",
+   "first_name": "David",
+   "last_name": "Meier",
+   "phone": "+41 00 000 00 11",
+   "email": "david.meier@alder-roux.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204886-sq.jpg",
+    "alt": "David Meier"
+   }
+  },
+  {
+   "id": "522e7958-0e02-410c-b11d-f6d885cec7d0",
+   "first_name": "Selin",
+   "last_name": "Aydin",
+   "phone": "+41 00 000 00 12",
+   "email": "selin.aydin@alder-roux.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733311-sq.jpg",
+    "alt": "Selin Aydin"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "7aac7566-47ec-4f8b-87e8-e5c33a222cb4",
+   "slug": "maison-contemporaine-a-cologny-7aac7566-47ec-4f8b-87e8-e5c33a222cb4",
+   "title": "Maison contemporaine à Cologny",
+   "description": "<p>Une maison contemporaine sur les hauts de Cologny, entre bois et verre, avec vue sur le lac et le Jura.</p><p>Cinq chambres, un séjour traversant ouvert sur le jardin et une cuisine en îlot. Garage pour trois voitures, piscine extérieure.</p>",
+   "description_text": "Une maison contemporaine sur les hauts de Cologny, entre bois et verre, avec vue sur le lac et le Jura.\n\nCinq chambres, un séjour traversant ouvert sur le jardin et une cuisine en îlot. Garage pour trois voitures, piscine extérieure.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 6800000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 380,
+   "land_surface": 1900,
+   "address": {
+    "street": "Chemin de Ruth 9",
+    "postcode": "1223",
+    "city": "Cologny",
+    "country": "Switzerland",
+    "lat": 46.211,
+    "lng": 6.188
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587877.jpg",
+     "alt": "Maison contemporaine à Cologny"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587878.jpg",
+     "alt": "Maison contemporaine à Cologny, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7614614.jpg",
+     "alt": "Maison contemporaine à Cologny, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7614615.jpg",
+     "alt": "Maison contemporaine à Cologny, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "a550cffc-2f17-45b3-8f11-b9f13a578bd6",
+    "first_name": "Camille",
+    "last_name": "Roux",
+    "phone": "+41 00 000 00 04",
+    "email": "camille.roux@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204881-sq.jpg",
+     "alt": "Camille Roux"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "NJFT-DVSX",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "ef2c6472-eed5-4b24-9c7a-52db48f0ffea",
+   "slug": "appartement-familial-a-champel-ef2c6472-eed5-4b24-9c7a-52db48f0ffea",
+   "title": "Appartement familial à Champel",
+   "description": "<p>Un appartement traversant dans un immeuble soigné de Champel, à deux pas du parc Bertrand.</p><p>Trois chambres, deux salles d’eau, un grand séjour avec loggia et une cuisine récente. Cave et place de parking.</p>",
+   "description_text": "Un appartement traversant dans un immeuble soigné de Champel, à deux pas du parc Bertrand.\n\nTrois chambres, deux salles d’eau, un grand séjour avec loggia et une cuisine récente. Cave et place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2350000,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 158,
+   "address": {
+    "street": "Avenue de Champel 16",
+    "postcode": "1206",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.193,
+    "lng": 6.16
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527068.jpg",
+     "alt": "Appartement familial à Champel"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527069.jpg",
+     "alt": "Appartement familial à Champel, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580230.jpg",
+     "alt": "Appartement familial à Champel, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580241.jpg",
+     "alt": "Appartement familial à Champel, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6077368.jpg",
+     "alt": "Appartement familial à Champel, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6180674.jpg",
+     "alt": "Appartement familial à Champel, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6207825.jpg",
+     "alt": "Appartement familial à Champel, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "7bce7e1d-f065-4d9d-935a-7a1415afdb05",
+    "first_name": "Thomas",
+    "last_name": "Berset",
+    "phone": "+41 00 000 00 05",
+    "email": "thomas.berset@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204885-sq.jpg",
+     "alt": "Thomas Berset"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "BUUS-FWHH",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "1bdcd029-eb64-45d7-bf50-ac0ac54c1786",
+   "slug": "penthouse-aux-eaux-vives-1bdcd029-eb64-45d7-bf50-ac0ac54c1786",
+   "title": "Penthouse aux Eaux-Vives",
+   "description": "<p>Le dernier étage d’un immeuble récent, avec une terrasse de 120 m² et la rade de Genève en face.</p><p>Trois suites, une cheminée, des baies vitrées sur trois côtés. Ascenseur privatif jusqu’à l’appartement.</p>",
+   "description_text": "Le dernier étage d’un immeuble récent, avec une terrasse de 120 m² et la rade de Genève en face.\n\nTrois suites, une cheminée, des baies vitrées sur trois côtés. Ascenseur privatif jusqu’à l’appartement.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 4900000,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 210,
+   "address": {
+    "street": "Rue des Eaux-Vives 23",
+    "postcode": "1207",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.202,
+    "lng": 6.16
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7157060.jpg",
+     "alt": "Penthouse aux Eaux-Vives"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7164751.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7236154.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7236156.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7339157.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7377669.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9993958.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-10267196.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-11884001.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12002390.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12062119.jpg",
+     "alt": "Penthouse aux Eaux-Vives, photo 11"
+    }
+   ],
+   "agent": {
+    "id": "a550cffc-2f17-45b3-8f11-b9f13a578bd6",
+    "first_name": "Camille",
+    "last_name": "Roux",
+    "phone": "+41 00 000 00 04",
+    "email": "camille.roux@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204881-sq.jpg",
+     "alt": "Camille Roux"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "ZCMR-9G7M",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "af747ad9-bdcb-4e46-bfef-b13a17228232",
+   "slug": "loft-industriel-a-carouge-af747ad9-bdcb-4e46-bfef-b13a17228232",
+   "title": "Loft industriel à Carouge",
+   "description": "<p>Un ancien atelier transformé en loft, dans une ruelle calme du vieux Carouge.</p><p>Briques apparentes, grande hauteur sous plafond et une cuisine ouverte. Deux chambres et une mezzanine.</p>",
+   "description_text": "Un ancien atelier transformé en loft, dans une ruelle calme du vieux Carouge.\n\nBriques apparentes, grande hauteur sous plafond et une cuisine ouverte. Deux chambres et une mezzanine.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "available",
+   "price": 1690000,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 136,
+   "address": {
+    "street": "Rue Ancienne 30",
+    "postcode": "1227",
+    "city": "Carouge",
+    "country": "Switzerland",
+    "lat": 46.187,
+    "lng": 6.135
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018246.jpg",
+     "alt": "Loft industriel à Carouge"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018247.jpg",
+     "alt": "Loft industriel à Carouge, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018252.jpg",
+     "alt": "Loft industriel à Carouge, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018253.jpg",
+     "alt": "Loft industriel à Carouge, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018256.jpg",
+     "alt": "Loft industriel à Carouge, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "b89dc019-a756-40b7-ab90-13e49dc9d3f8",
+    "first_name": "Ines",
+    "last_name": "Moreau",
+    "phone": "+41 00 000 00 06",
+    "email": "ines.moreau@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204883-sq.jpg",
+     "alt": "Ines Moreau"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "CXHJ-53S8",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "97b35bc0-8e47-4337-9f78-f0f9321d6482",
+   "slug": "maison-familiale-a-vand-uvres-97b35bc0-8e47-4337-9f78-f0f9321d6482",
+   "title": "Maison familiale à Vandœuvres",
+   "description": "<p>Une maison chaleureuse au milieu d’un jardin arboré, dans un quartier résidentiel très calme.</p><p>Cinq chambres, un bureau, un séjour avec cheminée et une véranda. À dix minutes du centre-ville.</p>",
+   "description_text": "Une maison chaleureuse au milieu d’un jardin arboré, dans un quartier résidentiel très calme.\n\nCinq chambres, un bureau, un séjour avec cheminée et une véranda. À dix minutes du centre-ville.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 4250000,
+   "currency": "CHF",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 290,
+   "land_surface": 1500,
+   "address": {
+    "street": "Chemin de Pressy 37",
+    "postcode": "1253",
+    "city": "Vandœuvres",
+    "country": "Switzerland",
+    "lat": 46.227,
+    "lng": 6.193
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174108.jpg",
+     "alt": "Maison familiale à Vandœuvres"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174110.jpg",
+     "alt": "Maison familiale à Vandœuvres, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174113.jpg",
+     "alt": "Maison familiale à Vandœuvres, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174114.jpg",
+     "alt": "Maison familiale à Vandœuvres, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174115.jpg",
+     "alt": "Maison familiale à Vandœuvres, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174386.jpg",
+     "alt": "Maison familiale à Vandœuvres, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "7bce7e1d-f065-4d9d-935a-7a1415afdb05",
+    "first_name": "Thomas",
+    "last_name": "Berset",
+    "phone": "+41 00 000 00 05",
+    "email": "thomas.berset@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204885-sq.jpg",
+     "alt": "Thomas Berset"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "ZA43-YE6P",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "a54b3daf-7f42-4249-85bc-4b3928839b78",
+   "slug": "appartement-lumineux-en-vieille-ville-a54b3daf-7f42-4249-85bc-4b3928839b78",
+   "title": "Appartement lumineux en Vieille-Ville",
+   "description": "<p>Moulures, parquet et hauts plafonds dans un immeuble ancien rénové avec goût.</p><p>Deux chambres, un séjour en enfilade et une cuisine équipée. Les commerces et le lac à pied.</p>",
+   "description_text": "Moulures, parquet et hauts plafonds dans un immeuble ancien rénové avec goût.\n\nDeux chambres, un séjour en enfilade et une cuisine équipée. Les commerces et le lac à pied.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1980000,
+   "currency": "CHF",
+   "rooms": 5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Grand-Rue 14",
+    "postcode": "1204",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.205,
+    "lng": 6.151
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195743.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195720.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195729.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195867.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195882.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195888.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214163.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214456.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214467.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214474.jpg",
+     "alt": "Appartement lumineux en Vieille-Ville, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "b89dc019-a756-40b7-ab90-13e49dc9d3f8",
+    "first_name": "Ines",
+    "last_name": "Moreau",
+    "phone": "+41 00 000 00 06",
+    "email": "ines.moreau@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204883-sq.jpg",
+     "alt": "Ines Moreau"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "7XD4-LXQS",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "73e90913-02e1-44bf-80f4-4d466cb38e6e",
+   "slug": "appartement-meuble-a-louer-73e90913-02e1-44bf-80f4-4d466cb38e6e",
+   "title": "Appartement meublé à louer",
+   "description": "<p>Un appartement meublé avec goût, prêt à vivre, près du parc La Grange.</p><p>Deux chambres, balcon, buanderie dans l’appartement. Bail d’un an minimum.</p>",
+   "description_text": "Un appartement meublé avec goût, prêt à vivre, près du parc La Grange.\n\nDeux chambres, balcon, buanderie dans l’appartement. Bail d’un an minimum.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 4200,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 92,
+   "address": {
+    "street": "Boulevard Helvétique 3",
+    "postcode": "1207",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.199,
+    "lng": 6.164
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19836805.jpg",
+     "alt": "Appartement meublé à louer"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857226.jpg",
+     "alt": "Appartement meublé à louer, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857269.jpg",
+     "alt": "Appartement meublé à louer, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866396.jpg",
+     "alt": "Appartement meublé à louer, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866404.jpg",
+     "alt": "Appartement meublé à louer, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866410.jpg",
+     "alt": "Appartement meublé à louer, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866414.jpg",
+     "alt": "Appartement meublé à louer, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "b89dc019-a756-40b7-ab90-13e49dc9d3f8",
+    "first_name": "Ines",
+    "last_name": "Moreau",
+    "phone": "+41 00 000 00 06",
+    "email": "ines.moreau@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204883-sq.jpg",
+     "alt": "Ines Moreau"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "JVYF-YAD6",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "f3738324-11dd-4012-96f5-5aa362e0e49b",
+   "slug": "appartement-de-4-pieces-a-louer-f3738324-11dd-4012-96f5-5aa362e0e49b",
+   "title": "Appartement de 4 pièces à louer",
+   "description": "<p>Un appartement récent et lumineux, cuisine ouverte et balcon sur cour.</p><p>Trois chambres, une salle de bains, cave. Libre dès le 1er février.</p>",
+   "description_text": "Un appartement récent et lumineux, cuisine ouverte et balcon sur cour.\n\nTrois chambres, une salle de bains, cave. Libre dès le 1er février.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3650,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 98,
+   "address": {
+    "street": "Rue de Carouge 10",
+    "postcode": "1205",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.196,
+    "lng": 6.156
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19827228.jpg",
+     "alt": "Appartement de 4 pièces à louer"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19846379.jpg",
+     "alt": "Appartement de 4 pièces à louer, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857240.jpg",
+     "alt": "Appartement de 4 pièces à louer, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19857262.jpg",
+     "alt": "Appartement de 4 pièces à louer, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866406.jpg",
+     "alt": "Appartement de 4 pièces à louer, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19878504.jpg",
+     "alt": "Appartement de 4 pièces à louer, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19878539.jpg",
+     "alt": "Appartement de 4 pièces à louer, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "7bce7e1d-f065-4d9d-935a-7a1415afdb05",
+    "first_name": "Thomas",
+    "last_name": "Berset",
+    "phone": "+41 00 000 00 05",
+    "email": "thomas.berset@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204885-sq.jpg",
+     "alt": "Thomas Berset"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "VR4M-EBB4",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "c685a4aa-5c6b-41d2-9b61-4b943d011bd0",
+   "slug": "duplex-a-champel-c685a4aa-5c6b-41d2-9b61-4b943d011bd0",
+   "title": "Duplex à Champel",
+   "description": "<p>Vendu : un duplex avec terrasse, cédé en six semaines.</p>",
+   "description_text": "Vendu : un duplex avec terrasse, cédé en six semaines.",
+   "offer_type": "buy",
+   "property_type": "apartment_duplex",
+   "status": "sold",
+   "price": 2780000,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 170,
+   "address": {
+    "street": "Avenue Krieg 17",
+    "postcode": "1206",
+    "city": "Genève",
+    "country": "Switzerland",
+    "lat": 46.199,
+    "lng": 6.152
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6538889.jpg",
+     "alt": "Duplex à Champel"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6538934.jpg",
+     "alt": "Duplex à Champel, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6538945.jpg",
+     "alt": "Duplex à Champel, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580231.jpg",
+     "alt": "Duplex à Champel, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585598.jpg",
+     "alt": "Duplex à Champel, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585602.jpg",
+     "alt": "Duplex à Champel, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "a550cffc-2f17-45b3-8f11-b9f13a578bd6",
+    "first_name": "Camille",
+    "last_name": "Roux",
+    "phone": "+41 00 000 00 04",
+    "email": "camille.roux@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204881-sq.jpg",
+     "alt": "Camille Roux"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "FPA3-Q47C",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "91fe7b02-f6eb-43e9-9bea-dfa55fc12ba9",
+   "slug": "villa-a-cologny-91fe7b02-f6eb-43e9-9bea-dfa55fc12ba9",
+   "title": "Villa à Cologny",
+   "description": "<p>Vendue : une villa avec vue sur le lac, sur une parcelle de 2600 m².</p>",
+   "description_text": "Vendue : une villa avec vue sur le lac, sur une parcelle de 2600 m².",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "sold",
+   "price": 7400000,
+   "currency": "CHF",
+   "rooms": 9,
+   "bedrooms": 6,
+   "bathrooms": 5,
+   "living_surface": 420,
+   "land_surface": 2600,
+   "address": {
+    "street": "Chemin du Righi 24",
+    "postcode": "1223",
+    "city": "Cologny",
+    "country": "Switzerland",
+    "lat": 46.223,
+    "lng": 6.172
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092395.jpg",
+     "alt": "Villa à Cologny"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089275.jpg",
+     "alt": "Villa à Cologny, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092188.jpg",
+     "alt": "Villa à Cologny, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092192.jpg",
+     "alt": "Villa à Cologny, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "a550cffc-2f17-45b3-8f11-b9f13a578bd6",
+    "first_name": "Camille",
+    "last_name": "Roux",
+    "phone": "+41 00 000 00 04",
+    "email": "camille.roux@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "648b4732-f587-4957-ae94-00fabe80c9ff"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204881-sq.jpg",
+     "alt": "Camille Roux"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "2Y3S-W8M6",
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ]
+  },
+  {
+   "id": "637ef89a-5df1-42d0-b509-1496256c3f36",
+   "slug": "villa-a-pully-637ef89a-5df1-42d0-b509-1496256c3f36",
+   "title": "Villa à Pully",
+   "description": "<p>Une villa en briques, entièrement rénovée, sur les hauts de Pully avec vue sur le lac et les Alpes.</p><p>Cinq chambres, un séjour avec cheminée, un jardin plat et une terrasse plein sud.</p>",
+   "description_text": "Une villa en briques, entièrement rénovée, sur les hauts de Pully avec vue sur le lac et les Alpes.\n\nCinq chambres, un séjour avec cheminée, un jardin plat et une terrasse plein sud.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 3950000,
+   "currency": "CHF",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 310,
+   "land_surface": 1100,
+   "address": {
+    "street": "Avenue de Lavaux 31",
+    "postcode": "1009",
+    "city": "Pully",
+    "country": "Switzerland",
+    "lat": 46.504,
+    "lng": 6.67
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587467.jpg",
+     "alt": "Villa à Pully"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587470.jpg",
+     "alt": "Villa à Pully, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587749.jpg",
+     "alt": "Villa à Pully, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587772.jpg",
+     "alt": "Villa à Pully, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587775.jpg",
+     "alt": "Villa à Pully, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587777.jpg",
+     "alt": "Villa à Pully, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "59d3f8fc-7f32-4ab0-b56e-764d07ef48fd",
+    "first_name": "Julien",
+    "last_name": "Alder",
+    "phone": "+41 00 000 00 07",
+    "email": "julien.alder@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733308-sq.jpg",
+     "alt": "Julien Alder"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "UV88-GBBY",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "07099c53-9ff5-4e94-ae08-9f7c332c951a",
+   "slug": "appartement-a-ouchy-07099c53-9ff5-4e94-ae08-9f7c332c951a",
+   "title": "Appartement à Ouchy",
+   "description": "<p>À deux minutes des quais d’Ouchy, un appartement calme et lumineux avec balcon.</p><p>Trois chambres, deux salles d’eau, cuisine ouverte. Garage souterrain.</p>",
+   "description_text": "À deux minutes des quais d’Ouchy, un appartement calme et lumineux avec balcon.\n\nTrois chambres, deux salles d’eau, cuisine ouverte. Garage souterrain.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1850000,
+   "currency": "CHF",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 132,
+   "address": {
+    "street": "Avenue d’Ouchy 38",
+    "postcode": "1006",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "lat": 46.506,
+    "lng": 6.636
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782567.jpg",
+     "alt": "Appartement à Ouchy"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587821.jpg",
+     "alt": "Appartement à Ouchy, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587906.jpg",
+     "alt": "Appartement à Ouchy, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782578.jpg",
+     "alt": "Appartement à Ouchy, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+     "alt": "Appartement à Ouchy, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+     "alt": "Appartement à Ouchy, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+     "alt": "Appartement à Ouchy, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "8f3cfd65-8c68-4532-87d7-39ae4f1e4535",
+    "first_name": "Sophie",
+    "last_name": "Rochat",
+    "phone": "+41 00 000 00 08",
+    "email": "sophie.rochat@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733301-sq.jpg",
+     "alt": "Sophie Rochat"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "JXC3-QC63",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "86039138-5971-4725-ba63-c57ebf18dbda",
+   "slug": "attique-avec-terrasse-panoramique-86039138-5971-4725-ba63-c57ebf18dbda",
+   "title": "Attique avec terrasse panoramique",
+   "description": "<p>Un attique d’exception au sommet d’un immeuble contemporain, avec terrasse panoramique.</p><p>Grand séjour vitré, trois suites, cuisine de chef. Deux places de parc et une cave.</p>",
+   "description_text": "Un attique d’exception au sommet d’un immeuble contemporain, avec terrasse panoramique.\n\nGrand séjour vitré, trois suites, cuisine de chef. Deux places de parc et une cave.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 3450000,
+   "currency": "CHF",
+   "rooms": 6,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 196,
+   "address": {
+    "street": "Avenue de Morges 45",
+    "postcode": "1004",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "lat": 46.525,
+    "lng": 6.623
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045915.jpg",
+     "alt": "Attique avec terrasse panoramique"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045918.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045919.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045920.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045921.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045922.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045924.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045939.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045941.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045945.jpg",
+     "alt": "Attique avec terrasse panoramique, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "59d3f8fc-7f32-4ab0-b56e-764d07ef48fd",
+    "first_name": "Julien",
+    "last_name": "Alder",
+    "phone": "+41 00 000 00 07",
+    "email": "julien.alder@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733308-sq.jpg",
+     "alt": "Julien Alder"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "PUAZ-PZ9Q",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "8b4e1f68-483f-4b1a-b83d-610e5a32706d",
+   "slug": "maison-de-maitre-a-lutry-8b4e1f68-483f-4b1a-b83d-610e5a32706d",
+   "title": "Maison de maître à Lutry",
+   "description": "<p>Une maison de maître sur les hauts de Lutry, entourée d’un jardin arboré, à quelques minutes des vignes de Lavaux.</p><p>Quatre chambres, de grandes pièces de réception et une salle à manger ouverte sur le jardin. Le lac est à dix minutes à pied.</p>",
+   "description_text": "Une maison de maître sur les hauts de Lutry, entourée d’un jardin arboré, à quelques minutes des vignes de Lavaux.\n\nQuatre chambres, de grandes pièces de réception et une salle à manger ouverte sur le jardin. Le lac est à dix minutes à pied.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 2950000,
+   "currency": "CHF",
+   "rooms": 7,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 240,
+   "land_surface": 600,
+   "address": {
+    "street": "Grand-Rue 4",
+    "postcode": "1095",
+    "city": "Lutry",
+    "country": "Switzerland",
+    "lat": 46.506,
+    "lng": 6.682
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082323.jpg",
+     "alt": "Maison de maître à Lutry"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082328.jpg",
+     "alt": "Maison de maître à Lutry, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082199.jpg",
+     "alt": "Maison de maître à Lutry, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082200.jpg",
+     "alt": "Maison de maître à Lutry, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082230.jpg",
+     "alt": "Maison de maître à Lutry, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082297.jpg",
+     "alt": "Maison de maître à Lutry, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "6af99d88-4150-488c-b581-17ad7ceb9b01",
+    "first_name": "Luca",
+    "last_name": "Bernasconi",
+    "phone": "+41 00 000 00 09",
+    "email": "luca.bernasconi@alder-roux.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733295-sq.jpg",
+     "alt": "Luca Bernasconi"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "K489-PQBK",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "322ddbc7-9e03-4540-9c30-ec15fa75b8db",
+   "slug": "maison-a-epalinges-322ddbc7-9e03-4540-9c30-ec15fa75b8db",
+   "title": "Maison à Épalinges",
+   "description": "<p>Une maison récente dans un quartier calme, entre forêt et ville, avec un grand jardin.</p><p>Cinq chambres, deux salons, un garage double. Écoles et métro à proximité.</p>",
+   "description_text": "Une maison récente dans un quartier calme, entre forêt et ville, avec un grand jardin.\n\nCinq chambres, deux salons, un garage double. Écoles et métro à proximité.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 2480000,
+   "currency": "CHF",
+   "rooms": 7,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 260,
+   "land_surface": 950,
+   "address": {
+    "street": "Route de la Croix-Blanche 11",
+    "postcode": "1066",
+    "city": "Épalinges",
+    "country": "Switzerland",
+    "lat": 46.554,
+    "lng": 6.661
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031405.jpg",
+     "alt": "Maison à Épalinges"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031406.jpg",
+     "alt": "Maison à Épalinges, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031407.jpg",
+     "alt": "Maison à Épalinges, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031408.jpg",
+     "alt": "Maison à Épalinges, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031411.jpg",
+     "alt": "Maison à Épalinges, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031412.jpg",
+     "alt": "Maison à Épalinges, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031414.jpg",
+     "alt": "Maison à Épalinges, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031708.jpg",
+     "alt": "Maison à Épalinges, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031712.jpg",
+     "alt": "Maison à Épalinges, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031834.jpg",
+     "alt": "Maison à Épalinges, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "8f3cfd65-8c68-4532-87d7-39ae4f1e4535",
+    "first_name": "Sophie",
+    "last_name": "Rochat",
+    "phone": "+41 00 000 00 08",
+    "email": "sophie.rochat@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733301-sq.jpg",
+     "alt": "Sophie Rochat"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "S84H-EVJJ",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "facc45a4-304f-46e7-9e7d-07ac89197b0d",
+   "slug": "appartement-a-pully-facc45a4-304f-46e7-9e7d-07ac89197b0d",
+   "title": "Appartement à Pully",
+   "description": "<p>Un appartement soigné dans une petite résidence près du centre de Pully.</p><p>Deux chambres, séjour avec balcon, cuisine fermée. Place de parc intérieure.</p>",
+   "description_text": "Un appartement soigné dans une petite résidence près du centre de Pully.\n\nDeux chambres, séjour avec balcon, cuisine fermée. Place de parc intérieure.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1390000,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 104,
+   "address": {
+    "street": "Avenue du Prieuré 18",
+    "postcode": "1009",
+    "city": "Pully",
+    "country": "Switzerland",
+    "lat": 46.504,
+    "lng": 6.67
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061395.jpg",
+     "alt": "Appartement à Pully"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+     "alt": "Appartement à Pully, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061420.jpg",
+     "alt": "Appartement à Pully, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+     "alt": "Appartement à Pully, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+     "alt": "Appartement à Pully, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "6af99d88-4150-488c-b581-17ad7ceb9b01",
+    "first_name": "Luca",
+    "last_name": "Bernasconi",
+    "phone": "+41 00 000 00 09",
+    "email": "luca.bernasconi@alder-roux.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733295-sq.jpg",
+     "alt": "Luca Bernasconi"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "9799-ZLK3",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "0b01a34f-901f-4d47-9b8b-8e064278d303",
+   "slug": "appartement-a-louer-sous-gare-0b01a34f-901f-4d47-9b8b-8e064278d303",
+   "title": "Appartement à louer sous-gare",
+   "description": "<p>Un appartement rénové dans un immeuble ancien du quartier sous-gare.</p><p>Deux chambres, parquet, cuisine équipée. Proche des transports.</p>",
+   "description_text": "Un appartement rénové dans un immeuble ancien du quartier sous-gare.\n\nDeux chambres, parquet, cuisine équipée. Proche des transports.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2950,
+   "currency": "CHF",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 78,
+   "address": {
+    "street": "Avenue de la Harpe 25",
+    "postcode": "1006",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "lat": 46.506,
+    "lng": 6.636
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19878519.jpg",
+     "alt": "Appartement à louer sous-gare"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899067.jpg",
+     "alt": "Appartement à louer sous-gare, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899084.jpg",
+     "alt": "Appartement à louer sous-gare, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19966782.jpg",
+     "alt": "Appartement à louer sous-gare, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19966789.jpg",
+     "alt": "Appartement à louer sous-gare, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19980215.jpg",
+     "alt": "Appartement à louer sous-gare, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "8f3cfd65-8c68-4532-87d7-39ae4f1e4535",
+    "first_name": "Sophie",
+    "last_name": "Rochat",
+    "phone": "+41 00 000 00 08",
+    "email": "sophie.rochat@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733301-sq.jpg",
+     "alt": "Sophie Rochat"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "X5AH-F75S",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "4f84161f-01a7-4af1-a0b1-dc6967d8e4f2",
+   "slug": "appartement-de-5-pieces-a-louer-4f84161f-01a7-4af1-a0b1-dc6967d8e4f2",
+   "title": "Appartement de 5 pièces à louer",
+   "description": "<p>Un grand appartement familial avec balcon, dans un quartier vert.</p><p>Trois chambres, deux salles d’eau, buanderie privative.</p>",
+   "description_text": "Un grand appartement familial avec balcon, dans un quartier vert.\n\nTrois chambres, deux salles d’eau, buanderie privative.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3900,
+   "currency": "CHF",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 118,
+   "address": {
+    "street": "Avenue de Morges 32",
+    "postcode": "1004",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "lat": 46.525,
+    "lng": 6.623
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899054.jpg",
+     "alt": "Appartement de 5 pièces à louer"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899056.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899057.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899058.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19899087.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19966790.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19966795.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19980198.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19980206.jpg",
+     "alt": "Appartement de 5 pièces à louer, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "6af99d88-4150-488c-b581-17ad7ceb9b01",
+    "first_name": "Luca",
+    "last_name": "Bernasconi",
+    "phone": "+41 00 000 00 09",
+    "email": "luca.bernasconi@alder-roux.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733295-sq.jpg",
+     "alt": "Luca Bernasconi"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "TWXX-CFHK",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "ed321845-b2db-4cfc-81b9-fc97ac9019c2",
+   "slug": "appartement-a-lausanne-ed321845-b2db-4cfc-81b9-fc97ac9019c2",
+   "title": "Appartement à Lausanne",
+   "description": "<p>Vendu : un appartement lumineux près d’Ouchy.</p>",
+   "description_text": "Vendu : un appartement lumineux près d’Ouchy.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1480000,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 110,
+   "address": {
+    "street": "Avenue de Cour 39",
+    "postcode": "1006",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "lat": 46.512,
+    "lng": 6.628
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061403.jpg",
+     "alt": "Appartement à Lausanne"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061405.jpg",
+     "alt": "Appartement à Lausanne, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061410.jpg",
+     "alt": "Appartement à Lausanne, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061661.jpg",
+     "alt": "Appartement à Lausanne, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "59d3f8fc-7f32-4ab0-b56e-764d07ef48fd",
+    "first_name": "Julien",
+    "last_name": "Alder",
+    "phone": "+41 00 000 00 07",
+    "email": "julien.alder@alder-roux.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733308-sq.jpg",
+     "alt": "Julien Alder"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "93VJ-36CC",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "031e48ee-d88d-456d-911b-5d7d9f051a92",
+   "slug": "appartement-a-pully-031e48ee-d88d-456d-911b-5d7d9f051a92",
+   "title": "Appartement à Pully",
+   "description": "<p>Vendu : un appartement avec balcon proche du lac.</p>",
+   "description_text": "Vendu : un appartement avec balcon proche du lac.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1260000,
+   "currency": "CHF",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 96,
+   "address": {
+    "street": "Chemin de Chamblandes 46",
+    "postcode": "1009",
+    "city": "Pully",
+    "country": "Switzerland",
+    "lat": 46.516,
+    "lng": 6.654
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782471.jpg",
+     "alt": "Appartement à Pully"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782475.jpg",
+     "alt": "Appartement à Pully, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782479.jpg",
+     "alt": "Appartement à Pully, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782581.jpg",
+     "alt": "Appartement à Pully, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "6af99d88-4150-488c-b581-17ad7ceb9b01",
+    "first_name": "Luca",
+    "last_name": "Bernasconi",
+    "phone": "+41 00 000 00 09",
+    "email": "luca.bernasconi@alder-roux.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733295-sq.jpg",
+     "alt": "Luca Bernasconi"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "HT23-MXSW",
+   "team_ids": [
+    "da13fc07-b4ab-48d2-a13a-7bef27316ccf"
+   ]
+  },
+  {
+   "id": "4c64d6a0-a556-454e-9aaf-c31ab9f8b4fc",
+   "slug": "wohnung-in-der-enge-4c64d6a0-a556-454e-9aaf-c31ab9f8b4fc",
+   "title": "Wohnung in der Enge",
+   "description": "<p>Eine sorgfältig renovierte Altbauwohnung in der Enge, wenige Schritte vom See.</p><p>Drei Schlafzimmer, zwei Bäder und eine Küche mit Natursteinplatte. Balkon zum ruhigen Hof.</p>",
+   "description_text": "Eine sorgfältig renovierte Altbauwohnung in der Enge, wenige Schritte vom See.\n\nDrei Schlafzimmer, zwei Bäder und eine Küche mit Natursteinplatte. Balkon zum ruhigen Hof.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 2150000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 124,
+   "address": {
+    "street": "Bederstrasse 5",
+    "postcode": "8002",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.357,
+    "lng": 8.539
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585748.jpg",
+     "alt": "Wohnung in der Enge"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585757.jpg",
+     "alt": "Wohnung in der Enge, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585765.jpg",
+     "alt": "Wohnung in der Enge, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587824.jpg",
+     "alt": "Wohnung in der Enge, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587829.jpg",
+     "alt": "Wohnung in der Enge, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587852.jpg",
+     "alt": "Wohnung in der Enge, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "410cddbb-fe23-47a2-b5fc-c314f21dc119",
+    "first_name": "Anna",
+    "last_name": "Keller",
+    "phone": "+41 00 000 00 10",
+    "email": "anna.keller@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713166-sq.jpg",
+     "alt": "Anna Keller"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "BKUK-YPT2",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "762ca957-fc25-4e97-a56a-0d1a534cb5cc",
+   "slug": "wohnung-im-kreis-5-762ca957-fc25-4e97-a56a-0d1a534cb5cc",
+   "title": "Wohnung im Kreis 5",
+   "description": "<p>Eine helle, moderne Wohnung im Kreis 5, offen geschnitten und hochwertig ausgebaut.</p><p>Wohnküche, Holzböden, ein Schwedenofen im Wohnbereich und zwei Schlafzimmer.</p>",
+   "description_text": "Eine helle, moderne Wohnung im Kreis 5, offen geschnitten und hochwertig ausgebaut.\n\nWohnküche, Holzböden, ein Schwedenofen im Wohnbereich und zwei Schlafzimmer.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1790000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 126,
+   "address": {
+    "street": "Limmatstrasse 12",
+    "postcode": "8005",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.384,
+    "lng": 8.524
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018401.jpg",
+     "alt": "Wohnung im Kreis 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018820.jpg",
+     "alt": "Wohnung im Kreis 5, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018822.jpg",
+     "alt": "Wohnung im Kreis 5, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7019016.jpg",
+     "alt": "Wohnung im Kreis 5, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7019027.jpg",
+     "alt": "Wohnung im Kreis 5, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031207.jpg",
+     "alt": "Wohnung im Kreis 5, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031402.jpg",
+     "alt": "Wohnung im Kreis 5, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031403.jpg",
+     "alt": "Wohnung im Kreis 5, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "522e7958-0e02-410c-b11d-f6d885cec7d0",
+    "first_name": "Selin",
+    "last_name": "Aydin",
+    "phone": "+41 00 000 00 12",
+    "email": "selin.aydin@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733311-sq.jpg",
+     "alt": "Selin Aydin"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "MEAJ-LRUG",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "5705db43-9c1b-4bec-abf5-818c00f6494e",
+   "slug": "attika-mit-dachterrasse-5705db43-9c1b-4bec-abf5-818c00f6494e",
+   "title": "Attika mit Dachterrasse",
+   "description": "<p>Eine Attikawohnung über Hottingen, mit Dachterrasse und Blick über die Stadt.</p><p>Drei Suiten, ein offener Wohn- und Essraum und ein Lift bis in die Wohnung.</p>",
+   "description_text": "Eine Attikawohnung über Hottingen, mit Dachterrasse und Blick über die Stadt.\n\nDrei Suiten, ein offener Wohn- und Essraum und ein Lift bis in die Wohnung.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 3250000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 178,
+   "address": {
+    "street": "Hofstrasse 19",
+    "postcode": "8032",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.364,
+    "lng": 8.565
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587854.jpg",
+     "alt": "Attika mit Dachterrasse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587859.jpg",
+     "alt": "Attika mit Dachterrasse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587865.jpg",
+     "alt": "Attika mit Dachterrasse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587904.jpg",
+     "alt": "Attika mit Dachterrasse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588571.jpg",
+     "alt": "Attika mit Dachterrasse, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588572.jpg",
+     "alt": "Attika mit Dachterrasse, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588580.jpg",
+     "alt": "Attika mit Dachterrasse, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588581.jpg",
+     "alt": "Attika mit Dachterrasse, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588585.jpg",
+     "alt": "Attika mit Dachterrasse, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6636254.jpg",
+     "alt": "Attika mit Dachterrasse, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "410cddbb-fe23-47a2-b5fc-c314f21dc119",
+    "first_name": "Anna",
+    "last_name": "Keller",
+    "phone": "+41 00 000 00 10",
+    "email": "anna.keller@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713166-sq.jpg",
+     "alt": "Anna Keller"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-08T09:00:00.000Z",
+   "reference": "CF39-6B37",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "e32a517e-80ba-4963-8bbc-cffe1fd3389f",
+   "slug": "haus-in-kilchberg-e32a517e-80ba-4963-8bbc-cffe1fd3389f",
+   "title": "Haus in Kilchberg",
+   "description": "<p>Ein zeitgenössisches Haus mit Pool, in ruhiger Lage über dem Zürichsee.</p><p>Vier Schlafzimmer, Wohnen mit Seesicht und ein Garten mit Terrasse.</p>",
+   "description_text": "Ein zeitgenössisches Haus mit Pool, in ruhiger Lage über dem Zürichsee.\n\nVier Schlafzimmer, Wohnen mit Seesicht und ein Garten mit Terrasse.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 3850000,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 230,
+   "land_surface": 800,
+   "address": {
+    "street": "Seestrasse 26",
+    "postcode": "8802",
+    "city": "Kilchberg",
+    "country": "Switzerland",
+    "lat": 47.327,
+    "lng": 8.544
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134821.jpg",
+     "alt": "Haus in Kilchberg"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134845.jpg",
+     "alt": "Haus in Kilchberg, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134847.jpg",
+     "alt": "Haus in Kilchberg, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134848.jpg",
+     "alt": "Haus in Kilchberg, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134849.jpg",
+     "alt": "Haus in Kilchberg, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134808.jpg",
+     "alt": "Haus in Kilchberg, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134819.jpg",
+     "alt": "Haus in Kilchberg, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "074786fd-fa94-4c49-9f1f-35f06d67872c",
+    "first_name": "David",
+    "last_name": "Meier",
+    "phone": "+41 00 000 00 11",
+    "email": "david.meier@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204886-sq.jpg",
+     "alt": "David Meier"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-04T09:00:00.000Z",
+   "reference": "GXTP-JSLY",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "8624291e-8932-4ba1-a0fc-eddac1b668ea",
+   "slug": "villa-in-zollikon-8624291e-8932-4ba1-a0fc-eddac1b668ea",
+   "title": "Villa in Zollikon",
+   "description": "<p>Eine grosszügige Villa mit Park, Pool und viel Privatsphäre.</p><p>Fünf Schlafzimmer, Salon mit Kamin, Bibliothek und Doppelgarage.</p>",
+   "description_text": "Eine grosszügige Villa mit Park, Pool und viel Privatsphäre.\n\nFünf Schlafzimmer, Salon mit Kamin, Bibliothek und Doppelgarage.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 5600000,
+   "currency": "CHF",
+   "rooms": 8.5,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 340,
+   "land_surface": 1600,
+   "address": {
+    "street": "Rietstrasse 33",
+    "postcode": "8702",
+    "city": "Zollikon",
+    "country": "Switzerland",
+    "lat": 47.346,
+    "lng": 8.57
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135491.jpg",
+     "alt": "Villa in Zollikon"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135492.jpg",
+     "alt": "Villa in Zollikon, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135496.jpg",
+     "alt": "Villa in Zollikon, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135502.jpg",
+     "alt": "Villa in Zollikon, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135503.jpg",
+     "alt": "Villa in Zollikon, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135507.jpg",
+     "alt": "Villa in Zollikon, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "074786fd-fa94-4c49-9f1f-35f06d67872c",
+    "first_name": "David",
+    "last_name": "Meier",
+    "phone": "+41 00 000 00 11",
+    "email": "david.meier@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204886-sq.jpg",
+     "alt": "David Meier"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-31T09:00:00.000Z",
+   "reference": "E35Y-Q2LL",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "3dadea33-9c95-4e9b-a8a0-a76e65198e73",
+   "slug": "stadtwohnung-in-wiedikon-3dadea33-9c95-4e9b-a8a0-a76e65198e73",
+   "title": "Stadtwohnung in Wiedikon",
+   "description": "<p>Eine moderne Stadtwohnung mit Balkon, nahe Bahnhof Wiedikon.</p><p>Zwei Schlafzimmer, offene Küche und ein Bad mit Dusche.</p>",
+   "description_text": "Eine moderne Stadtwohnung mit Balkon, nahe Bahnhof Wiedikon.\n\nZwei Schlafzimmer, offene Küche und ein Bad mit Dusche.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1290000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 86,
+   "address": {
+    "street": "Birmensdorferstrasse 40",
+    "postcode": "8003",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.369,
+    "lng": 8.517
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6444265.jpg",
+     "alt": "Stadtwohnung in Wiedikon"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6444266.jpg",
+     "alt": "Stadtwohnung in Wiedikon, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6444268.jpg",
+     "alt": "Stadtwohnung in Wiedikon, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6480198.jpg",
+     "alt": "Stadtwohnung in Wiedikon, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6480210.jpg",
+     "alt": "Stadtwohnung in Wiedikon, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6492399.jpg",
+     "alt": "Stadtwohnung in Wiedikon, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "522e7958-0e02-410c-b11d-f6d885cec7d0",
+    "first_name": "Selin",
+    "last_name": "Aydin",
+    "phone": "+41 00 000 00 12",
+    "email": "selin.aydin@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733311-sq.jpg",
+     "alt": "Selin Aydin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-27T09:00:00.000Z",
+   "reference": "85ZH-Q28X",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "15ee8a06-55d9-46e9-952d-009cd69305bd",
+   "slug": "moblierte-wohnung-zur-miete-15ee8a06-55d9-46e9-952d-009cd69305bd",
+   "title": "Möblierte Wohnung zur Miete",
+   "description": "<p>Möbliert und sofort bezugsbereit, in einem ruhigen Quartier nahe dem Kunsthaus.</p><p>Zwei Schlafzimmer, zwei Bäder, Balkon. Mindestmietdauer sechs Monate.</p>",
+   "description_text": "Möbliert und sofort bezugsbereit, in einem ruhigen Quartier nahe dem Kunsthaus.\n\nZwei Schlafzimmer, zwei Bäder, Balkon. Mindestmietdauer sechs Monate.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 4100,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 98,
+   "address": {
+    "street": "Seefeldstrasse 47",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.361,
+    "lng": 8.569
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899345.jpg",
+     "alt": "Möblierte Wohnung zur Miete"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899354.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6903153.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6903157.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920610.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933770.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933772.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933775.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933779.jpg",
+     "alt": "Möblierte Wohnung zur Miete, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "522e7958-0e02-410c-b11d-f6d885cec7d0",
+    "first_name": "Selin",
+    "last_name": "Aydin",
+    "phone": "+41 00 000 00 12",
+    "email": "selin.aydin@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36733311-sq.jpg",
+     "alt": "Selin Aydin"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-23T09:00:00.000Z",
+   "reference": "H3D6-KVPZ",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "65213e10-e038-4d73-8c1d-13efdd3a4ef0",
+   "slug": "familienwohnung-zur-miete-65213e10-e038-4d73-8c1d-13efdd3a4ef0",
+   "title": "Familienwohnung zur Miete",
+   "description": "<p>Eine helle Familienwohnung mit Balkon, Schulen und Tram in der Nähe.</p><p>Drei Schlafzimmer, Reduit, Waschturm in der Wohnung.</p>",
+   "description_text": "Eine helle Familienwohnung mit Balkon, Schulen und Tram in der Nähe.\n\nDrei Schlafzimmer, Reduit, Waschturm in der Wohnung.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3850,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 112,
+   "address": {
+    "street": "Klosbachstrasse 6",
+    "postcode": "8002",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.363,
+    "lng": 8.531
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6636314.jpg",
+     "alt": "Familienwohnung zur Miete"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6758512.jpg",
+     "alt": "Familienwohnung zur Miete, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6758771.jpg",
+     "alt": "Familienwohnung zur Miete, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6758776.jpg",
+     "alt": "Familienwohnung zur Miete, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6758782.jpg",
+     "alt": "Familienwohnung zur Miete, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6758786.jpg",
+     "alt": "Familienwohnung zur Miete, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "074786fd-fa94-4c49-9f1f-35f06d67872c",
+    "first_name": "David",
+    "last_name": "Meier",
+    "phone": "+41 00 000 00 11",
+    "email": "david.meier@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204886-sq.jpg",
+     "alt": "David Meier"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-19T09:00:00.000Z",
+   "reference": "CDXS-PULB",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "2827deae-cc2f-4973-a3d7-662c052ff5d3",
+   "slug": "wohnung-in-zurich-2827deae-cc2f-4973-a3d7-662c052ff5d3",
+   "title": "Wohnung in Zürich",
+   "description": "<p>Verkauft: eine Wohnung mit Balkon im Kreis 5.</p>",
+   "description_text": "Verkauft: eine Wohnung mit Balkon im Kreis 5.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1580000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 108,
+   "address": {
+    "street": "Gladbachstrasse 13",
+    "postcode": "8044",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.39,
+    "lng": 8.516
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6538934.jpg",
+     "alt": "Wohnung in Zürich"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6538945.jpg",
+     "alt": "Wohnung in Zürich, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580231.jpg",
+     "alt": "Wohnung in Zürich, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585598.jpg",
+     "alt": "Wohnung in Zürich, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585602.jpg",
+     "alt": "Wohnung in Zürich, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "410cddbb-fe23-47a2-b5fc-c314f21dc119",
+    "first_name": "Anna",
+    "last_name": "Keller",
+    "phone": "+41 00 000 00 10",
+    "email": "anna.keller@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36713166-sq.jpg",
+     "alt": "Anna Keller"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-15T09:00:00.000Z",
+   "reference": "7FZR-T36J",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  },
+  {
+   "id": "7f85e721-87e1-43bc-a80a-9494ecf65fd8",
+   "slug": "haus-in-kusnacht-7f85e721-87e1-43bc-a80a-9494ecf65fd8",
+   "title": "Haus in Küsnacht",
+   "description": "<p>Verkauft: ein Haus mit Garten in Küsnacht.</p>",
+   "description_text": "Verkauft: ein Haus mit Garten in Küsnacht.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "sold",
+   "price": 3150000,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 220,
+   "land_surface": 700,
+   "address": {
+    "street": "Alte Landstrasse 20",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.325,
+    "lng": 8.574
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061665.jpg",
+     "alt": "Haus in Küsnacht"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061666.jpg",
+     "alt": "Haus in Küsnacht, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061669.jpg",
+     "alt": "Haus in Küsnacht, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061728.jpg",
+     "alt": "Haus in Küsnacht, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "074786fd-fa94-4c49-9f1f-35f06d67872c",
+    "first_name": "David",
+    "last_name": "Meier",
+    "phone": "+41 00 000 00 11",
+    "email": "david.meier@alder-roux.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "a53740c4-7841-4592-8a08-3f810577c3f5"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204886-sq.jpg",
+     "alt": "David Meier"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-07-11T09:00:00.000Z",
+   "reference": "W3XC-AGL2",
+   "team_ids": [
+    "a53740c4-7841-4592-8a08-3f810577c3f5"
+   ]
+  }
+ ],
+ "developments": [
+  {
+   "id": "a3f926f6-579f-4898-8140-c858008965c6",
+   "slug": "les-rives-de-bellerive",
+   "title": "Les Rives de Bellerive",
+   "description": "<p>Dix appartements au bord du lac, à Collonge-Bellerive, dans un parc arboré avec accès à la rive.</p><p>Des appartements de 3 à 6 pièces, chacun avec une terrasse ou un jardin, des matériaux durables et une chaudière à pellets partagée.</p>",
+   "description_text": "Dix appartements au bord du lac, à Collonge-Bellerive, dans un parc arboré avec accès à la rive.\n\nDes appartements de 3 à 6 pièces, chacun avec une terrasse ou un jardin, des matériaux durables et une chaudière à pellets partagée.",
+   "status": "construction",
+   "delivery_date": "2027-09-30",
+   "address": {
+    "street": "Chemin de la Gabiule 2",
+    "postcode": "1245",
+    "city": "Collonge-Bellerive",
+    "country": "Switzerland",
+    "lat": 46.253,
+    "lng": 6.204
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38449886.jpg",
+     "alt": "Les Rives de Bellerive"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35548971.jpg",
+     "alt": "Les Rives de Bellerive, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37520395.jpg",
+     "alt": "Les Rives de Bellerive, photo 3"
+    }
+   ],
+   "stats": {
+    "units": 10,
+    "available": 6,
+    "reserved": 2,
+    "sold": 2,
+    "price": {
+     "min": 1780000,
+     "max": 4200000
+    },
+    "rooms": {
+     "min": 3,
+     "max": 6
+    },
+    "living_surface": {
+     "min": 86,
+     "max": 186
+    }
+   },
+   "currency": "CHF",
+   "agents": [
+    {
+     "id": "a550cffc-2f17-45b3-8f11-b9f13a578bd6",
+     "first_name": "Camille",
+     "last_name": "Roux",
+     "phone": "+41 00 000 00 04",
+     "email": "camille.roux@alder-roux.example.com",
+     "languages": [
+      "fr",
+      "en"
+     ],
+     "team_ids": [
+      "648b4732-f587-4957-ae94-00fabe80c9ff"
+     ],
+     "photo": {
+      "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39204881-sq.jpg",
+      "alt": "Camille Roux"
+     }
+    }
+   ],
+   "team_ids": [
+    "648b4732-f587-4957-ae94-00fabe80c9ff"
+   ],
+   "units": [
+    {
+     "id": "2cf729a2-190b-4fcb-b011-136e4df5a874",
+     "name": "4 pièces, rez-de-jardin",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 118,
+     "balcony_surface": 60,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 2450000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "43d005d0-c2fc-47a1-9e4b-8cda30203dd7",
+     "name": "5 pièces, rez-de-jardin",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 142,
+     "balcony_surface": 80,
+     "floor": 0,
+     "floor_label": "Rez-de-chaussée",
+     "price": 2950000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "d1066797-06e1-4a5b-9ff4-3cf90891507a",
+     "name": "3 pièces, 1er étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 86,
+     "balcony_surface": 14,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "2ea29d25-a2b4-41ae-a80f-d123526b2b9b",
+     "name": "4 pièces, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 116,
+     "balcony_surface": 18,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 2290000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "9a396e4c-ba14-41c9-91e6-f4cbcf659d0a",
+     "name": "5 pièces, 1er étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 138,
+     "balcony_surface": 22,
+     "floor": 1,
+     "floor_label": "1er étage",
+     "price": 2790000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "de5e1294-1e30-4a33-b4a4-ad6ed2847f00",
+     "name": "3 pièces, 2e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 3,
+     "bedrooms": 2,
+     "bathrooms": 1,
+     "living_surface": 88,
+     "balcony_surface": 14,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 1780000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "06223ed1-2dfc-4dc8-9162-ba6504396e54",
+     "name": "4 pièces, 2e étage",
+     "status": "reserved",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 4,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 118,
+     "balcony_surface": 18,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "price": 2390000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "a417289c-ad39-4e5b-bf2c-c1841c582cd1",
+     "name": "5 pièces, 2e étage",
+     "status": "sold",
+     "offer_type": "buy",
+     "property_type": "apartment",
+     "rooms": 5,
+     "bedrooms": 4,
+     "bathrooms": 2,
+     "living_surface": 140,
+     "balcony_surface": 22,
+     "floor": 2,
+     "floor_label": "2e étage",
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "dcf3496b-6508-4466-8834-989a8adbd458",
+     "name": "6 pièces, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_attic",
+     "rooms": 6,
+     "bedrooms": 4,
+     "bathrooms": 3,
+     "living_surface": 186,
+     "balcony_surface": 95,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 4200000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    },
+    {
+     "id": "515c218a-bccc-4b25-aec3-5d230b25c0a0",
+     "name": "5 pièces, 3e étage",
+     "status": "available",
+     "offer_type": "buy",
+     "property_type": "apartment_attic",
+     "rooms": 5,
+     "bedrooms": 3,
+     "bathrooms": 2,
+     "living_surface": 152,
+     "balcony_surface": 70,
+     "floor": 3,
+     "floor_label": "3e étage",
+     "price": 3550000,
+     "currency": "CHF",
+     "features": [
+      "elevator",
+      "balcony",
+      "parking"
+     ]
+    }
+   ]
+  }
+ ],
+ "fixture_only": {
+  "listings": {
+   "7aac7566-47ec-4f8b-87e8-e5c33a222cb4": {
+    "energy_class": "A",
+    "year_built": 2019,
+    "terrace_surface": 90
+   },
+   "ef2c6472-eed5-4b24-9c7a-52db48f0ffea": {
+    "energy_class": "E",
+    "year_built": 1964,
+    "floor": 4,
+    "balcony_surface": 14
+   },
+   "1bdcd029-eb64-45d7-bf50-ac0ac54c1786": {
+    "energy_class": "C",
+    "year_built": 2017,
+    "floor": 7,
+    "terrace_surface": 120
+   },
+   "af747ad9-bdcb-4e46-bfef-b13a17228232": {
+    "energy_class": "C",
+    "year_built": 1928,
+    "floor": 2
+   },
+   "97b35bc0-8e47-4337-9f78-f0f9321d6482": {
+    "energy_class": "A",
+    "year_built": 1988
+   },
+   "a54b3daf-7f42-4249-85bc-4b3928839b78": {
+    "energy_class": "B",
+    "year_built": 1910,
+    "floor": 3
+   },
+   "73e90913-02e1-44bf-80f4-4d466cb38e6e": {
+    "energy_class": "C",
+    "year_built": 1975,
+    "floor": 3,
+    "balcony_surface": 8,
+    "charges": 300
+   },
+   "f3738324-11dd-4012-96f5-5aa362e0e49b": {
+    "energy_class": "A",
+    "year_built": 2012,
+    "floor": 2,
+    "balcony_surface": 10,
+    "charges": 280
+   },
+   "c685a4aa-5c6b-41d2-9b61-4b943d011bd0": {
+    "energy_class": "D",
+    "year_built": 2008,
+    "floor": 5,
+    "terrace_surface": 30
+   },
+   "91fe7b02-f6eb-43e9-9bea-dfa55fc12ba9": {
+    "energy_class": "C",
+    "year_built": 1972,
+    "terrace_surface": 120
+   },
+   "637ef89a-5df1-42d0-b509-1496256c3f36": {
+    "energy_class": "C",
+    "year_built": 1961,
+    "terrace_surface": 60
+   },
+   "07099c53-9ff5-4e94-ae08-9f7c332c951a": {
+    "energy_class": "C",
+    "year_built": 1998,
+    "floor": 3,
+    "balcony_surface": 18
+   },
+   "86039138-5971-4725-ba63-c57ebf18dbda": {
+    "energy_class": "A",
+    "year_built": 2020,
+    "floor": 6,
+    "terrace_surface": 85
+   },
+   "8b4e1f68-483f-4b1a-b83d-610e5a32706d": {
+    "energy_class": "A",
+    "year_built": 2006,
+    "terrace_surface": 40
+   },
+   "322ddbc7-9e03-4540-9c30-ec15fa75b8db": {
+    "energy_class": "C",
+    "year_built": 2015,
+    "terrace_surface": 40
+   },
+   "facc45a4-304f-46e7-9e7d-07ac89197b0d": {
+    "energy_class": "C",
+    "year_built": 2011,
+    "floor": 2,
+    "balcony_surface": 12
+   },
+   "0b01a34f-901f-4d47-9b8b-8e064278d303": {
+    "energy_class": "C",
+    "year_built": 1932,
+    "floor": 3,
+    "balcony_surface": 6,
+    "charges": 250
+   },
+   "4f84161f-01a7-4af1-a0b1-dc6967d8e4f2": {
+    "energy_class": "C",
+    "year_built": 2004,
+    "floor": 4,
+    "balcony_surface": 12,
+    "charges": 320
+   },
+   "ed321845-b2db-4cfc-81b9-fc97ac9019c2": {
+    "energy_class": "B",
+    "year_built": 2001,
+    "floor": 4,
+    "balcony_surface": 10
+   },
+   "031e48ee-d88d-456d-911b-5d7d9f051a92": {
+    "energy_class": "A",
+    "year_built": 1995,
+    "floor": 1,
+    "balcony_surface": 8
+   },
+   "4c64d6a0-a556-454e-9aaf-c31ab9f8b4fc": {
+    "energy_class": "C",
+    "year_built": 1931,
+    "floor": 3,
+    "balcony_surface": 12
+   },
+   "762ca957-fc25-4e97-a56a-0d1a534cb5cc": {
+    "energy_class": "B",
+    "year_built": 1912,
+    "floor": 4
+   },
+   "5705db43-9c1b-4bec-abf5-818c00f6494e": {
+    "energy_class": "B",
+    "year_built": 2018,
+    "floor": 5,
+    "terrace_surface": 70
+   },
+   "e32a517e-80ba-4963-8bbc-cffe1fd3389f": {
+    "energy_class": "B",
+    "year_built": 2014,
+    "terrace_surface": 40
+   },
+   "8624291e-8932-4ba1-a0fc-eddac1b668ea": {
+    "energy_class": "B",
+    "year_built": 1998,
+    "terrace_surface": 80
+   },
+   "3dadea33-9c95-4e9b-a8a0-a76e65198e73": {
+    "energy_class": "E",
+    "year_built": 2016,
+    "floor": 2,
+    "balcony_surface": 8
+   },
+   "15ee8a06-55d9-46e9-952d-009cd69305bd": {
+    "energy_class": "B",
+    "year_built": 2013,
+    "floor": 3,
+    "balcony_surface": 10,
+    "charges": 300
+   },
+   "65213e10-e038-4d73-8c1d-13efdd3a4ef0": {
+    "energy_class": "B",
+    "year_built": 2009,
+    "floor": 1,
+    "balcony_surface": 12,
+    "charges": 280
+   },
+   "2827deae-cc2f-4973-a3d7-662c052ff5d3": {
+    "energy_class": "A",
+    "year_built": 2010,
+    "floor": 3,
+    "balcony_surface": 10
+   },
+   "7f85e721-87e1-43bc-a80a-9494ecf65fd8": {
+    "energy_class": "C",
+    "year_built": 2001
+   }
+  },
+  "units": {
+   "2cf729a2-190b-4fcb-b011-136e4df5a874": {
+    "unit_number": "0.1",
+    "position": 1,
+    "orientation": "S",
+    "terrace_surface": 60
+   },
+   "43d005d0-c2fc-47a1-9e4b-8cda30203dd7": {
+    "unit_number": "0.2",
+    "position": 2,
+    "orientation": "SW",
+    "terrace_surface": 80
+   },
+   "d1066797-06e1-4a5b-9ff4-3cf90891507a": {
+    "unit_number": "1.1",
+    "position": 1,
+    "orientation": "SW"
+   },
+   "2ea29d25-a2b4-41ae-a80f-d123526b2b9b": {
+    "unit_number": "1.2",
+    "position": 2,
+    "orientation": "W"
+   },
+   "9a396e4c-ba14-41c9-91e6-f4cbcf659d0a": {
+    "unit_number": "1.3",
+    "position": 3,
+    "orientation": "SE"
+   },
+   "de5e1294-1e30-4a33-b4a4-ad6ed2847f00": {
+    "unit_number": "2.1",
+    "position": 1,
+    "orientation": "W"
+   },
+   "06223ed1-2dfc-4dc8-9162-ba6504396e54": {
+    "unit_number": "2.2",
+    "position": 2,
+    "orientation": "SE"
+   },
+   "a417289c-ad39-4e5b-bf2c-c1841c582cd1": {
+    "unit_number": "2.3",
+    "position": 3,
+    "orientation": "E"
+   },
+   "dcf3496b-6508-4466-8834-989a8adbd458": {
+    "unit_number": "3.1",
+    "position": 1,
+    "orientation": "SE",
+    "terrace_surface": 95
+   },
+   "515c218a-bccc-4b25-aec3-5d230b25c0a0": {
+    "unit_number": "3.2",
+    "position": 2,
+    "orientation": "E",
+    "terrace_surface": 70
+   }
+  },
+  "developments": {
+   "a3f926f6-579f-4898-8140-c858008965c6": {
+    "developer": "Alder & Roux Développement SA",
+    "architect": "Atelier Pâquis Architectes",
+    "general_contractor": "Léman Bâtiment SA",
+    "buildings": [],
+    "documents": [],
+    "construction_photos": []
+   }
+  }
+ }
+}

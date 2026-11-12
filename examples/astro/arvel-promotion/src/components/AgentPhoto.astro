@@ -1,0 +1,34 @@
+---
+/**
+ * Portrait of an adviser (agent.photo, a square head-and-shoulders file in
+ * the image bucket), cropped 4:5 by imgproxy like every portrait of the site.
+ * Renders nothing without a photo, so the text layout stays as it was.
+ * `size="card"` fills its container (team page); `size="thumb"` is the small
+ * fixed portrait beside the adviser's details.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Agent } from '@realadvisor/sites-sdk/types';
+
+interface Props { agent: Pick<Agent, 'first_name' | 'last_name' | 'photo'>; size?: 'card' | 'thumb' }
+const { agent, size = 'thumb' } = Astro.props;
+const name = `${agent.first_name} ${agent.last_name}`.trim();
+const card = size === 'card';
+---
+{agent.photo?.url && (
+  <div class:list={['agent-photo', size]}>
+    <RaImage
+      src={agent.photo}
+      alt={name}
+      width={card ? 480 : 192}
+      height={card ? 600 : 240}
+      widths={card ? [320, 480, 640, 960] : [96, 192, 288]}
+      sizes={card ? '(min-width: 1000px) 340px, (min-width: 600px) 45vw, 100vw' : '96px'}
+    />
+  </div>
+)}
+<style>
+  .agent-photo { overflow: hidden; background: var(--line); }
+  .agent-photo :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .card { width: 100%; aspect-ratio: 4 / 5; }
+  .thumb { width: 96px; aspect-ratio: 4 / 5; flex: none; }
+</style>

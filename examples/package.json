@@ -1,0 +1,11 @@
+{
+  "name": "@realadvisor/sites-examples",
+  "private": true,
+  "description": "Twelve example sites built with the sites kit, each in Astro (astro/) and React Router (react/).",
+  "packageManager": "pnpm@10.11.1",
+  "scripts": {
+    "documents": "node _tools/documents.mjs",
+    "check": "pnpm -r --workspace-concurrency=2 check",
+    "check:deploy": "pnpm -r --workspace-concurrency=1 check:deploy"
+  }
+}

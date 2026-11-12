@@ -1,0 +1,38 @@
+.card { position: relative; display: grid; gap: 0; }
+.card-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); margin-bottom: 22px; }
+.card-photo img, .ocard > img, .ocard > picture img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.card:hover .card-photo img { transform: scale(1.03); }
+.card-nophoto { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 4 / 3; background: var(--surface); color: var(--muted); font: 300 1.5rem var(--font-display); }
+.card-badge { position: absolute; left: 0; top: 18px; background: var(--paper); color: var(--text); padding: 8px 14px; font: 500 .6875rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; }
+.card-kicker { font-size: .9375rem; color: var(--muted); margin-bottom: 6px; }
+.card-title { font: 300 clamp(1.375rem, 1.8vw, 1.75rem)/1.15 var(--font-display); margin-bottom: 18px; }
+.card-title a { text-decoration: none; }
+.card-title a::after { content: ''; position: absolute; inset: 0; }
+.card-title a:focus-visible { outline: none; }
+.card:has(a:focus-visible) { outline: 2px solid var(--accent-strong); outline-offset: 6px; }
+.spec { margin: 0; border-top: 1px solid var(--line); }
+.spec div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .9375rem; }
+.spec dt { color: var(--muted); }
+.spec dd { margin: 0; text-align: right; }
+.spec div:first-child dd { font-weight: 500; }
+
+.ocard { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--sea); color: #fff; isolation: isolate; }
+.ocard > img, .ocard > picture { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.ocard > picture img { display: block; }
+.ocard::after { content: ''; position: absolute; inset: 35% 0 0; z-index: -1; background: linear-gradient(rgb(16 14 12 / 0), rgb(16 14 12 / .72)); pointer-events: none; }
+.ocard:hover > img, .ocard:hover > picture img { transform: scale(1.03); }
+.ocard-body { position: absolute; inset: auto 0 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: clamp(18px, 2.4vw, 32px); text-shadow: 0 1px 12px rgb(0 0 0 / .3); }
+.ocard-main { min-width: 0; }
+.ocard-kicker { font-size: .875rem; margin-bottom: 6px; }
+.ocard-title { font: 300 clamp(1.375rem, 2.2vw, 2.125rem)/1.08 var(--font-display); margin-bottom: 10px; }
+.ocard-title a { text-decoration: none; }
+.ocard-title a::after { content: ''; position: absolute; inset: 0; }
+.ocard-title a:focus-visible { outline: none; }
+.ocard:has(a:focus-visible) { outline: 2px solid var(--accent-strong); outline-offset: 4px; }
+.ocard-price { font-size: 1.0625rem; font-weight: 500; letter-spacing: .02em; }
+.ocard-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; justify-items: end; font-size: .875rem; flex: none; }
+@media (max-width: 520px) {
+  .ocard { aspect-ratio: 4 / 4.2; }
+  .ocard-body { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .ocard-facts { display: flex; gap: 14px; justify-items: start; }
+}

@@ -1,0 +1,14 @@
+  .head { display: grid; gap: 20px; }
+  .head h1 { max-width: 18ch; }
+  .back { color: var(--muted); text-decoration: none; display: inline-flex; min-height: 32px; align-items: center; }
+  .back:hover { color: var(--text); text-decoration: underline; }
+  .cover { aspect-ratio: 2 / 1; }
+  @media (max-width: 760px) { .cover { aspect-ratio: 4 / 3; } }
+  .body { display: grid; grid-template-columns: 1fr minmax(0, var(--text-w)) 1fr; padding-top: clamp(48px, 6vw, 96px); }
+  .body .prose { grid-column: 2; }
+  @media (max-width: 900px) { .body { grid-template-columns: 1fr; } .body .prose { grid-column: 1; } }
+  .others { padding-top: var(--section); display: grid; gap: clamp(20px, 3vw, 32px); }
+  .others ul { border-top: 1px solid var(--text); }
+  .others a { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .others a:hover .d-s { text-decoration: underline; }
+  @media (max-width: 600px) { .others a { flex-direction: column; gap: 6px; } }

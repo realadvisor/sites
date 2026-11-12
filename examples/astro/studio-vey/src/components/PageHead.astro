@@ -1,0 +1,16 @@
+---
+/** Page opening: h1, lede. */
+interface Props { title: string; lede?: string; sync?: boolean }
+const { title, lede, sync = false } = Astro.props;
+---
+<header class="ph wrap">
+  <h1 class="h1 ph-title" data-rs-sync={sync ? 'h1' : undefined}>{title}</h1>
+  {lede && <p class="lede ph-lede">{lede}</p>}
+  <slot />
+</header>
+
+<style>
+  .ph { padding-block: clamp(48px, 6vw, 96px) clamp(32px, 4vw, 56px); }
+  .ph-title { max-width: 20ch; }
+  .ph-lede { margin-top: 20px; max-width: 46ch; color: var(--muted); }
+</style>

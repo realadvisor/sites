@@ -1,0 +1,86 @@
+---
+/** Vendere / Sell: how a sale works with the agency, the valuation form, recent sales. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, brandName, byNewest, sites } from '../lib/data';
+import { placePhoto } from '../lib/places';
+import { LOCALE_OF, UI, alternates, href, type Lang } from '../lib/i18n';
+import { telHref } from '../lib/format';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, sold] = await Promise.all([agency(), sites.allListings({ status: 'sold' })]);
+const recent = sold.sort(byNewest).slice(0, 3);
+const photo = placePhoto('milano', lang, 4);
+const team = ag.team;
+---
+<Site lang={lang} current="sell" title={`${ui.sellH1} | ${brandName(ag)}`} description={ui.sellIntro}
+  image={photo && img(photo.url, { w: 1200, h: 630 })} alternates={alternates('sell')}>
+  <header class="wrap phead sell-head">
+    <h1 class="d-xl">{ui.sellH1}</h1>
+    <p class="lead">{ui.sellIntro}</p>
+  </header>
+
+  {photo && (
+    <div class="wrap">
+      <div class="frame sell-photo">
+        <RaImage src={photo} alt={photo.alt} width={1600} height={800} priority widths={[640, 960, 1280, 1600, 1920]} sizes="(min-width: 1520px) 1424px, 100vw" mobile={{ width: 800, height: 900 }} />
+      </div>
+    </div>
+  )}
+
+  <section class="wrap steps" aria-labelledby="steps-h">
+    <h2 id="steps-h" class="d-l">{ui.howTitle}</h2>
+    <dl class="steps-list">
+      {ui.steps.map(([k, v]) => <div><dt class="d-m">{k}</dt><dd>{v}</dd></div>)}
+    </dl>
+  </section>
+
+  <section id="valuation" class="valuation" aria-labelledby="val-h">
+    <div class="wrap val-in">
+      <div class="val-text">
+        <h2 id="val-h" class="d-l">{ui.sellFormTitle}</h2>
+        <p class="lead">{ui.sellFormLead}</p>
+        {team?.phone && <p><a class="arrow-link num" href={telHref(team.phone)}>{ui.call} {team.phone}</a></p>}
+      </div>
+      <EnquiryForm id="valuation-form" contactReason="valuation" locale={LOCALE_OF[lang]} message={ui.sellMessage} submitLabel={ui.sellSubmit} />
+    </div>
+  </section>
+
+  {recent.length > 0 && (
+    <section class="wrap recent" aria-labelledby="recent-h">
+      <div class="recent-head">
+        <h2 id="recent-h" class="d-l">{ui.recentSales}</h2>
+        <a class="arrow-link" href={href('sold', lang)}>{ui.soldLink} <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="recent-grid">
+        {recent.map((l) => <ListingCard listing={l} lang={lang} showPrice={false} sizes="(min-width: 900px) 31vw, 100vw" />)}
+      </div>
+    </section>
+  )}
+</Site>
+
+<style>
+  .sell-photo { aspect-ratio: 2 / 1; }
+  @media (max-width: 760px) { .sell-photo { aspect-ratio: 8 / 9; } }
+  .steps { display: grid; grid-template-columns: 1fr 2fr; gap: 24px clamp(32px, 6vw, 120px); padding-top: var(--section); }
+  .steps-list { border-top: 1px solid var(--text); }
+  .steps-list div { display: grid; grid-template-columns: minmax(10rem, 1fr) 2fr; gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .steps-list dd { max-width: 34em; }
+  @media (max-width: 900px) {
+    .steps { grid-template-columns: 1fr; }
+    .steps-list div { grid-template-columns: 1fr; }
+  }
+  .valuation { background: var(--paper); margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); }
+  .val-in { display: grid; grid-template-columns: 1fr 1fr; gap: 40px clamp(40px, 6vw, 120px); }
+  .val-text { display: grid; gap: 24px; align-content: start; }
+  @media (max-width: 900px) { .val-in { grid-template-columns: 1fr; } }
+  .recent { padding-top: var(--section); }
+  .recent-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: clamp(24px, 3vw, 40px); }
+  .recent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); }
+  @media (max-width: 900px) { .recent-grid { grid-template-columns: 1fr; } }
+</style>

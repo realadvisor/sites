@@ -1,0 +1,162 @@
+/* ListingsSearch: part of kit.css (import it alone for a site without the other parts). */
+  .rs {
+    --rs-ink: var(--text, #1c1b19);
+    --rs-bg: var(--paper, var(--bg, #fff));
+    --rs-line: var(--line, #e2dfda);
+    --rs-muted: var(--muted, #6b6b6b);
+    --rs-accent: var(--accent, #134266);
+    --rs-gap-x: var(--rs-gap, 32px);
+    --rs-top: calc(var(--header-h, 0px) + 16px);
+    --rs-on: var(--rs-active, var(--rs-ink));
+    --rs-on-ink: var(--rs-on-active, var(--rs-bg));
+    position: relative;
+  }
+  .rs[aria-busy='true'] .rs-region { opacity: .55; transition: opacity .2s .1s; }
+
+  /* Filters: one inline row at >= 960px, a bottom sheet (popover) on phones. */
+  .rs-top { display: flex; gap: 12px; align-items: end; }
+  .rs-filters-btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: var(--control-h, 48px); padding: 0 18px;
+    border: 1px solid var(--rs-line); border-radius: var(--control-radius, 8px); background: var(--rs-bg); color: var(--rs-ink); font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .rs-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--rs-accent); color: #fff; font-size: 12px; }
+  .rs-badge[hidden] { display: none; }
+  .rs-sheet { color: var(--rs-ink); }
+  .rs-sheet-head { display: flex; justify-content: space-between; align-items: center; }
+  .rs-sheet-title { margin: 0; font-weight: 600; font-size: 1.125rem; }
+  .rs-sheet-close { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; }
+  .rs-sheet:popover-open {
+    position: fixed; inset: auto 0 0 0; width: 100%; max-width: none; max-height: 88svh; margin: 0; overflow: auto; box-sizing: border-box;
+    display: grid; gap: 20px; padding: 8px 20px max(20px, env(safe-area-inset-bottom)); border: 0; border-radius: var(--rs-sheet-radius, 16px) var(--rs-sheet-radius, 16px) 0 0;
+    background: var(--rs-bg); box-shadow: 0 -8px 32px rgb(0 0 0 / .18);
+  }
+  .rs-sheet::backdrop { background: rgb(0 0 0 / .4); }
+  .rs-sheet .rs-apply { width: 100%; position: sticky; bottom: 0; }
+  @supports not selector(:popover-open) {
+    .rs-filters-btn { display: none; }
+    .rs-sheet { display: grid; gap: 16px; }
+    .rs-sheet-head { display: none; }
+  }
+
+  .rs-offer { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .rs-offer legend { padding: 0; margin-bottom: 6px; }
+  .rs-seg { display: flex; border: 1px solid var(--rs-line); border-radius: var(--control-radius, 8px); overflow: hidden; height: var(--control-h, 48px); background: var(--rs-bg); }
+  .rs-seg label { position: relative; flex: 1; display: flex; }
+  .rs-seg label + label { border-left: 1px solid var(--rs-line); }
+  .rs-seg input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .rs-seg span { flex: 1; display: grid; place-items: center; padding: 0 16px; white-space: nowrap; font-size: .9375rem; transition: background .15s, color .15s; }
+  .rs-seg input:checked + span { background: var(--rs-on); color: var(--rs-on-ink); }
+  .rs-seg input:focus-visible + span { outline: 2px solid var(--rs-accent); outline-offset: -4px; }
+
+  @media (min-width: 960px) {
+    .rs-filters-btn, .rs-sheet-head { display: none; }
+    .rs-top { display: block; }
+    /* The popover, shown inline: author styles beat the UA's [popover] display:none. */
+    .rs-sheet, .rs-sheet:popover-open {
+      position: static; inset: auto; width: auto; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; overflow: visible; background: none;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: end;
+    }
+    .rs-sheet > .field { flex: 1 1 160px; min-width: 0; }
+    .rs-sheet > .rs-offer { flex: 0 0 auto; }
+    .rs-sheet > .rs-city { flex: 1.4 1 200px; }
+    .rs-sheet .rs-apply { width: auto; position: static; }
+    .rs.is-js .rs-sheet .rs-apply { display: none; }
+  }
+
+  .rs-bar { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; margin: 24px 0 16px; }
+  .rs-count { margin: 0; font-weight: 600; outline: none; }
+  .rs-tools { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+  .rs-tools .rs-sort { width: auto; }
+  .rs-status, .rs-views { display: flex; border: 1px solid var(--rs-line); border-radius: var(--control-radius, 8px); overflow: hidden; }
+  .rs-status a, .rs-views a {
+    display: inline-flex; gap: 8px; align-items: center; min-height: calc(var(--control-h, 48px) - 2px); padding: 0 16px;
+    color: var(--rs-ink); text-decoration: none; font-size: .9375rem; white-space: nowrap;
+  }
+  .rs-status a + a, .rs-views a + a { border-left: 1px solid var(--rs-line); }
+  .rs-status a[aria-current], .rs-views a[aria-current] { background: var(--rs-on); color: var(--rs-on-ink); }
+  .rs-n { opacity: .7; font-variant-numeric: tabular-nums; }
+
+  .rs-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 24px; }
+  .rs-chips[hidden] { display: none; }
+  .rs-chip {
+    display: inline-flex; gap: 6px; align-items: center; min-height: 36px; padding: 0 10px 0 14px; border-radius: 999px;
+    background: color-mix(in srgb, var(--rs-accent) 10%, var(--rs-bg)); color: var(--rs-ink); text-decoration: none; font-size: .875rem;
+  }
+  .rs-chip:hover { background: color-mix(in srgb, var(--rs-accent) 18%, var(--rs-bg)); }
+  .rs-reset { color: var(--rs-accent); font-size: .875rem; padding: 8px 4px; }
+
+  /* Results: list view grid; map view split (cards | sticky map) at >= 960px. */
+  .rs-grid { --rs-cols: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--rs-cols), minmax(0, 1fr)); gap: 40px var(--rs-gap-x); }
+  .rs-grid > li { min-width: 0; }
+  @media (min-width: 640px) { .rs-grid { --rs-cols: 2; } }
+  @media (min-width: 1024px) { .rs-grid { --rs-cols: var(--rs-columns, 3); } }
+  /* Map view renders up to 300 cards: skip the off-screen ones' layout. */
+  .rs-list > li { content-visibility: auto; contain-intrinsic-size: auto var(--rs-card-h, 420px); }
+  .rs-grid > li.is-map-hover, .rs-grid > li.is-selected { outline: 2px solid var(--rs-accent); outline-offset: 6px; border-radius: 2px; }
+
+  .rs-map { --map-h: min(70svh, 560px); margin-bottom: 24px; }
+  .rs-split { display: flex; flex-direction: column; }
+  .rs-split .rs-map { order: -1; }
+  @media (min-width: 960px) {
+    .rs-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--rs-gap-x); align-items: start; }
+    .rs-split .rs-map { order: 2; position: sticky; top: var(--rs-top); margin: 0; --map-h: calc(100svh - var(--rs-top) - 16px); }
+    .rs-list { --rs-cols: 1; }
+  }
+  @media (min-width: 1280px) { .rs-list { --rs-cols: 2; gap: 32px 20px; } }
+  /* Map view: "search as I move the map" over the map; with it off, a "search this area" button. */
+  .rs-map { position: relative; }
+  .rs-follow { position: absolute; z-index: 5; top: 12px; left: 50%; translate: -50% 0; max-width: calc(100% - 136px); display: flex; justify-content: center; pointer-events: none; }
+  .rs-follow > * { pointer-events: auto; }
+  .rs:not(.is-js) .rs-follow { display: none; }
+  /* An open popup owns the top of the map (its close button sits there on a phone). */
+  .rs-map:has(.ra-map-popup.is-open) .rs-follow { visibility: hidden; }
+  .rs-follow-toggle, .rs-search-area {
+    display: inline-flex; gap: 8px; align-items: center; min-height: 40px; padding: 0 14px; border: 0; border-radius: var(--rs-pill-radius, 999px);
+    background: var(--rs-bg); color: var(--rs-ink); box-shadow: 0 2px 8px rgb(0 0 0 / .2); font: inherit; font-size: .875rem; white-space: nowrap; cursor: pointer;
+  }
+  .rs-follow-toggle input { width: 18px; height: 18px; margin: 0; accent-color: var(--rs-on); }
+  .rs-follow-toggle span { overflow: hidden; text-overflow: ellipsis; }
+  .rs-search-area { background: var(--rs-on); color: var(--rs-on-ink); font-weight: 600; }
+  .rs-follow:has(.rs-search-area:not([hidden])) .rs-follow-toggle { display: none; }
+  .rs-empty-area { padding: 24px 0; }
+  .rs-note { margin: 0 0 16px; color: var(--rs-muted); font-size: .9375rem; }
+
+  /* Plain card: only when the page passes none. */
+  .rs-card { display: grid; gap: 4px; color: inherit; text-decoration: none; }
+  .rs-card img, .rs-card-nophoto { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 8px; border-radius: var(--radius-img, 0); }
+  .rs-card-nophoto { display: grid; place-items: center; background: var(--surface, #f2f0ec); color: var(--rs-muted); }
+  .rs-card-type { font-size: .8125rem; letter-spacing: .04em; text-transform: uppercase; color: var(--rs-muted); }
+  .rs-card-title { font-weight: 600; }
+  .rs-card-price { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rs-card-facts { color: var(--rs-muted); font-size: .9375rem; }
+  .rs-card:focus-visible { outline: 2px solid var(--rs-accent); outline-offset: 3px; }
+
+  .rs-empty { display: grid; gap: 12px; justify-items: start; max-width: 60ch; padding: 48px 0; }
+  .rs-empty-title { margin: 0; font-size: var(--rs-heading-size, clamp(1.25rem, 1rem + 1vw, 1.75rem)); font-weight: var(--rs-heading-weight, 600); line-height: 1.2; }
+  .rs-empty-text { margin: 0; color: var(--rs-muted); }
+  .rs-empty-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0 0; }
+  .rs-relax { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; }
+  .rs-relax a { display: inline-flex; align-items: center; min-height: 44px; color: var(--rs-accent); }
+
+
+  /* Phone: List / Map always in reach. */
+  .rs-pill {
+    position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); z-index: 20; translate: -50% 0;
+    display: inline-flex; gap: 8px; align-items: center; min-height: 48px; padding: 0 22px; border-radius: var(--rs-pill-radius, 999px);
+    background: var(--rs-on); color: var(--rs-on-ink); font-weight: 600; text-decoration: none; box-shadow: 0 6px 20px rgb(0 0 0 / .25);
+  }
+  @media (min-width: 960px) { .rs-pill { display: none; } }
+  /* Phone: [Filters (n)] [Sort] on one row, then the status switch and the count. */
+  @media (max-width: 959px) {
+    .rs-form { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'f s' 'st st' 'c c'; gap: 12px; margin-bottom: 16px; }
+    .rs-top, .rs-bar, .rs-tools { display: contents; }
+    .rs-filters-btn { grid-area: f; }
+    .rs-tools .rs-sort { grid-area: s; }
+    .rs-status { grid-area: st; }
+    .rs-status a { flex: 1; justify-content: center; }
+    .rs-count { grid-area: c; }
+    .rs-views { display: none; }
+    .rs:has(.rs-pill) .rs-region { padding-bottom: 72px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .rs * { transition: none !important; } }
+

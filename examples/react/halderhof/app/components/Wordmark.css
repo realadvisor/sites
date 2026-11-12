@@ -1,0 +1,6 @@
+  .wm { display: inline-flex; align-items: center; text-decoration: none; min-height: 44px; color: inherit; }
+  .wm img { height: 40px; width: auto; }
+  .wm__text { display: flex; align-items: baseline; gap: 10px; line-height: 1; white-space: nowrap; }
+  .wm__name { font: 500 1.625rem/1 var(--font-display); letter-spacing: -0.015em; }
+  .wm__sub { font: 400 0.875rem/1 var(--font-sans); opacity: 0.78; }
+  @media (max-width: 640px) { .wm__name { font-size: 1.4375rem; } .wm__sub { font-size: 0.8125rem; } }

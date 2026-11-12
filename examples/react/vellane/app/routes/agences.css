@@ -1,0 +1,15 @@
+.ags { list-style: none; margin-block: 0; display: grid; gap: 40px 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); }
+.agc { position: relative; display: grid; gap: 16px; align-content: start; }
+.agc__img { width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border-radius: var(--radius-card); }
+.agc__body { display: grid; gap: 6px; }
+.agc__name { font-size: var(--step-2); }
+.agc__name a { text-decoration: none; }
+.agc__name a::after { content: ''; position: absolute; inset: 0; }
+.agc__name a:hover { color: var(--accent-strong); }
+.agc__name a:focus-visible { outline: none; }
+.agc__name a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: var(--radius-card); }
+.ags address { font-style: normal; display: grid; color: var(--muted); }
+.agc__meta { font-weight: 550; }
+.agc__contact { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 0 20px; }
+.agc__contact a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; }
+.agc__contact a:hover { text-decoration: underline; }

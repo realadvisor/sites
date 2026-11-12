@@ -1,0 +1,69 @@
+---
+/** Footer: a strip of the tile motif, address, sales office, pages, legal links. */
+import { t as kt, lang as kitLang } from '@realadvisor/sites-kit/i18n';
+import type { Site } from '../lib/data';
+import { developmentExtra } from '../lib/data';
+import { LANGS, LOCALE_OF, href, tr, type Lang, type Route } from '../lib/i18n';
+import { tel } from '../lib/docs';
+import Tiles from './Tiles.astro';
+
+interface Props { site: Site; lang: Lang; alternates: { lang: string; href: string }[] }
+const { site, lang, alternates } = Astro.props;
+const { dev, org, team } = site;
+const t = tr(lang);
+const kl = kitLang(LOCALE_OF[lang]);
+const extra = developmentExtra(dev); // fixture only: developer name
+const PAGES: Route[] = ['units', 'plans', 'area', 'gallery', 'docs', 'contact'];
+const altOf = (l: Lang) => alternates.find((a) => a.lang === LOCALE_OF[l])?.href ?? href('home', l);
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <Tiles id="tiles-footer" size={24} />
+  <div class="wrap grid">
+    <div class="brand">
+      <p class="name">{dev.title}</p>
+      <p class="muted">{dev.address.street}<br />{dev.address.postcode} {dev.address.city}</p>
+    </div>
+    <div>
+      <h2>{t.footerSales}</h2>
+      <p>{org.name}</p>
+      {org.address?.street && <p class="muted">{org.address.street}<br />{org.address.postcode} {org.address.city}</p>}
+      <p class="contacts">
+        {team?.phone && <a href={tel(team.phone)}>{team.phone}</a>}
+        {team?.email && <a href={`mailto:${team.email}`}>{team.email}</a>}
+      </p>
+    </div>
+    <nav aria-label={t.footerPages}>
+      <h2>{t.footerPages}</h2>
+      <ul>{PAGES.map((r) => <li><a href={href(r, lang)}>{t.nav[r as keyof typeof t.nav]}</a></li>)}</ul>
+    </nav>
+  </div>
+  <div class="wrap base">
+    <p>© {year} {extra.developer ?? org.name}</p>
+    <p class="links">
+      <a href={href('legal', lang)}>{kt('legalNotice', {}, kl)}</a>
+      <a href={href('privacy', lang)}>{kt('privacyPolicy', {}, kl)}</a>
+      <span class="langs">{LANGS.map((l) => <a href={altOf(l)} hreflang={LOCALE_OF[l]} lang={LOCALE_OF[l]} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>)}</span>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .ftr { margin-top: var(--space-section); background: var(--paper); border-top: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; padding-block: 56px 40px; }
+  .name { font: 400 1.75rem/1.1 var(--serif); margin-bottom: 14px; }
+  h2 { font: 600 0.75rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  p + p { margin-top: 6px; }
+  .contacts { display: grid; margin-top: 10px !important; }
+  .contacts a, ul a { display: inline-block; padding-block: 5px; text-decoration: none; }
+  .contacts a:hover, ul a:hover { text-decoration: underline; }
+  ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 24px; }
+  .base { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-block: 20px 28px; border-top: 1px solid var(--line); font-size: 0.875rem; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0 !important; }
+  .links a { color: var(--muted); display: inline-block; padding-block: 8px; }
+  .langs { display: inline-flex; gap: 12px; }
+  .langs a[aria-current] { color: var(--text); font-weight: 600; }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 32px; padding-block: 40px 28px; }
+  }
+</style>

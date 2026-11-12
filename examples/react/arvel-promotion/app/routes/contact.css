@@ -1,0 +1,20 @@
+.ct-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px clamp(32px, 6vw, 112px); align-items: start; }
+.ct-grid .ct-side { display: grid; gap: 56px; }
+.ct-grid .ct-office { display: grid; gap: 20px; }
+.ct-grid address { font-style: normal; display: grid; gap: 6px; }
+.ct-grid address p { margin: 0; color: var(--muted); }
+.ct-grid address a { color: var(--text); display: inline-flex; min-height: 40px; align-items: center; }
+.ct-grid .ct-big { font: 500 clamp(1.8rem, 3vw, 2.4rem) / 1.1 var(--serif); text-decoration: none; }
+.ct-advisers ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.ct-grid .ct-adv-h { margin-bottom: 20px; }
+.ct-advisers li { display: flex; gap: 20px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.ct-advisers p { margin: 0; }
+.ct-grid .ct-an { font: 500 1.5rem / 1.1 var(--serif); }
+.ct-grid .ct-ap { font-size: 0.8125rem; color: var(--muted); margin-top: 4px !important; }
+.ct-grid .ct-ap a { display: inline-flex; min-height: 28px; align-items: center; }
+.ct-grid .ct-ac { display: flex; flex-wrap: wrap; gap: 0 18px; font-size: var(--fs-small); }
+.ct-grid .ct-ac a { display: inline-flex; min-height: 40px; align-items: center; overflow-wrap: anywhere; }
+.ct-grid .ct-card { padding: clamp(24px, 4vw, 52px); }
+.ct-grid .ct-fh { margin-bottom: 10px; }
+.ct-grid .ct-fl { color: var(--on-paper-muted); font-size: var(--fs-small); margin-bottom: 28px; }
+@media (max-width: 900px) { .ct-grid { grid-template-columns: 1fr; } }

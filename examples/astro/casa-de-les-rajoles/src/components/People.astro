@@ -1,0 +1,41 @@
+---
+/**
+ * The sales team in plain type: name, role, languages, phone, e-mail. A 4:5
+ * portrait through the image helper when the agent has a photo; no initials.
+ */
+import type { Site } from '../lib/data';
+import { tel } from '../lib/docs';
+import { tr, type Lang } from '../lib/i18n';
+import Photo from './Photo.astro';
+
+interface Props { site: Site; lang: Lang; class?: string }
+const { site, lang, class: cls } = Astro.props;
+const t = tr(lang);
+const langs = (codes?: string[]) => (codes ?? []).map((c) => t.langNames[c] ?? c).join(', ');
+---
+<ul class:list={['people', cls]}>
+  {site.people.map((a) => (
+    <li class:list={{ 'has-photo': !!a.photo }}>
+      {a.photo && <Photo src={a.photo.url} alt={a.photo.alt || `${a.first_name} ${a.last_name}`} width={400} height={500} sizes="120px" class="portrait" />}
+      <div>
+        <p class="nm">{a.first_name} {a.last_name}</p>
+        {a.title && <p class="role">{a.title}</p>}
+        {a.languages?.length ? <p class="role">{t.languages}: {langs(a.languages)}</p> : null}
+        <p class="ct">
+          {a.phone && <a href={tel(a.phone)}>{a.phone}</a>}
+          {a.email && <a href={`mailto:${a.email}`}>{a.email}</a>}
+        </p>
+      </div>
+    </li>
+  ))}
+</ul>
+<style>
+  .people { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 32px; }
+  li { display: grid; gap: 16px; align-content: start; }
+  li.has-photo { grid-template-columns: 120px 1fr; }
+  .portrait :global(img) { width: 120px; background: var(--surface); aspect-ratio: 4 / 5; object-fit: cover; }
+  .nm { font: 400 1.5rem/1.2 var(--serif); margin: 0 0 6px; }
+  .role { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+  .ct { display: grid; margin: 10px 0 0 !important; }
+  .ct a { display: inline-block; padding-block: 6px; overflow-wrap: break-word; }
+</style>

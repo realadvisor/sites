@@ -1,0 +1,87 @@
+---
+export const prerender = false;
+
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import JournalCard from '../../components/JournalCard.astro';
+import AgentCard from '../../components/AgentCard.astro';
+import { areas, areaUrl, brandName, site } from '../../lib/data';
+import { formatDate, fullName } from '../../lib/format';
+
+const post = await getEntry('journal', Astro.params.slug!);
+if (!post) return Astro.rewrite('/404');
+const { Content } = await render(post);
+const s = await site();
+const d = post.data;
+const author = s.agents.find((a) => fullName(a) === d.author);
+const places = await areas();
+const linked = d.cities.map((c) => places.find((p) => p.city === c)).filter(Boolean) as typeof places;
+const more = (await getCollection('journal')).filter((p) => p.id !== post.id).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.excerpt,
+  datePublished: d.date.toISOString(),
+  image: img(d.cover, { w: 1200, h: 630 }),
+  author: { '@type': 'Person', name: d.author },
+  publisher: { '@type': 'Organization', name: s.org.name },
+  mainEntityOfPage: pageUrl,
+};
+---
+<Layout title={`${d.title} | ${brandName(s)}`} description={d.excerpt} image={img(d.cover, { w: 1200, h: 630 })} jsonLd={jsonLd}>
+  <article>
+    <header class="ah wrap">
+      <p class="caps muted"><a href="/journal">Journal</a> · {d.topic} · <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time></p>
+      <h1 class="h1">{d.title}</h1>
+      <p class="lede">{d.excerpt}</p>
+    </header>
+    <div class="wrap"><div class="ah-media"><RaImage src={d.cover} alt={d.coverAlt} width={1600} height={900} priority sizes="(min-width: 1360px) 1248px, 100vw" mobile={{ width: 800, height: 600 }} /></div></div>
+    <div class="wrap body">
+      <aside class="body-side">
+        {author ? <AgentCard agent={author} layout="row" as="p" /> : <p>{d.author}</p>}
+        {linked.length > 0 && <p class="body-places caps muted">Orte: {linked.map((p, i) => <>{i > 0 && ', '}<a href={areaUrl(p.city)}>{p.city}</a></>)}</p>}
+      </aside>
+      <div class="prose body-text"><Content /></div>
+    </div>
+  </article>
+  {more.length > 0 && (
+    <section class="more-posts section" aria-labelledby="h-more">
+      <div class="wrap">
+        <header class="sec"><h2 class="h2" id="h-more">Weiterlesen</h2></header>
+        <ul class="grid">{more.map((p) => <li><JournalCard post={p} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  .ah { display: grid; gap: 22px; justify-items: start; padding-block: clamp(48px, 6vw, 96px) clamp(32px, 4vw, 56px); max-width: calc(980px + 2 * var(--gutter)); }
+  .ah a { text-decoration: none; }
+  .ah .lede { color: var(--muted); max-width: 54ch; }
+  .ah-media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface); }
+  .ah-media :global(picture) { display: contents; }
+  .ah-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .body { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 7fr); gap: 40px clamp(40px, 6vw, 112px); padding-block: clamp(48px, 6vw, 88px) var(--section); }
+  .body-side { display: grid; gap: 20px; align-content: start; position: sticky; top: calc(var(--header-h) + 32px); }
+  .body-places a { color: var(--text); }
+  .body-text { font: 400 1.1875rem/1.7 var(--serif); }
+  .body-text :global(h2) { font-size: 1.625rem; }
+  .more-posts { background: var(--surface); }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(28px, 3vw, 44px); }
+  .grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  @media (max-width: 1023px) {
+    .body { grid-template-columns: minmax(0, 1fr); }
+    .body-side { position: static; order: 2; padding-top: 32px; border-top: 1px solid var(--line); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid > li:nth-child(3) { display: none; }
+  }
+  @media (max-width: 639px) {
+    .ah-media { aspect-ratio: 4 / 3; }
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .grid > li:nth-child(3) { display: block; }
+  }
+</style>

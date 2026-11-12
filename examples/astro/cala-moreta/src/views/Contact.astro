@@ -1,0 +1,79 @@
+---
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { agencyOf } from '@realadvisor/sites-kit/agency';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import { PHOTOS, photoOg } from '../lib/photos';
+import { agency, sites } from '../lib/data';
+import { LOCALE_OF, UI, alternates, fill, href, type Lang } from '../lib/i18n';
+import { languageList } from '../lib/format';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, agents] = await Promise.all([agency(), sites.agents()]);
+const { team, org } = ag;
+const name = team?.name ?? org.name;
+const addr = team?.address ?? org.address;
+const langs = languageList([...new Set(agents.flatMap((a) => a.languages ?? []))], lang);
+const tel = team?.phone?.replace(/[^\d+]/g, '');
+const osm = addr?.lat != null && addr?.lng != null ? `https://www.openstreetmap.org/?mlat=${addr.lat}&mlon=${addr.lng}#map=16/${addr.lat}/${addr.lng}` : undefined;
+const photo = PHOTOS.contact;
+const lead = langs ? fill(ui.contactLead, { langs }) : '';
+---
+<Site lang={lang} current="contact" title={`${ui.contactH1} | ${name}`} description={lead || `${ui.contactH1} ${name}`}
+  image={photoOg(photo, Astro.url)} alternates={alternates('contact')}
+  jsonLd={agencyJsonLd(agencyOf(ag.org, ag.team), new URL(href('home', lang), Astro.site ?? Astro.url).href)}>
+  <header class="phead wrap">
+    <h1 class="display-xl">{ui.contactH1}</h1>
+    {lead && <p class="lead">{lead}</p>}
+  </header>
+
+  <section class="talk">
+    <div class="wrap talk-in">
+      <h2 class="visually-hidden">{ui.contactH1}</h2>
+      {team?.phone && <a href={`tel:${tel}`}><span class="talk-k">{ui.phoneL}</span><span class="talk-v num">{team.phone}</span></a>}
+      {team?.email && <a href={`mailto:${team.email}`}><span class="talk-k">{ui.emailL}</span><span class="talk-v">{team.email}</span></a>}
+      <a href="#enquiry"><span class="talk-k">{ui.writeUs}</span><span class="talk-v">{ui.bookVisit}</span></a>
+    </div>
+  </section>
+
+  <section class="office wrap" aria-labelledby="office-h">
+    <div class="office-photo">
+      <Photo photo={photo} lang={lang} decorative sizes="(min-width: 900px) 55vw, 100vw" priority />
+    </div>
+    <div class="office-text">
+      <h2 id="office-h" class="display-m">{fill(ui.officeIn, { town: addr?.city ?? name })}</h2>
+      {addr && <address>{addr.street && <>{addr.street}<br /></>}{[addr.postcode, addr.city].filter(Boolean).join(' ')}</address>}
+      {osm && <a class="link" href={osm} target="_blank" rel="noopener">{ui.openMap} <span aria-hidden="true">↗</span></a>}
+    </div>
+  </section>
+
+  <section class="ask">
+    <div class="wrap ask-in">
+      <div><h2 class="display-m">{ui.writeUs}</h2></div>
+      <EnquiryForm contactReason="other" locale={LOCALE_OF[lang]} />
+    </div>
+  </section>
+</Site>
+<style>
+  .talk { background: var(--sea); color: var(--on-sea); }
+  .talk-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr); }
+  .talk a { display: grid; gap: 10px; padding: clamp(28px, 3.4vw, 48px) 28px clamp(28px, 3.4vw, 48px) 0; text-decoration: none; min-width: 0; }
+  .talk a + a { padding-left: 28px; border-left: 1px solid rgb(255 255 255 / .18); }
+  .talk-k { font-size: .9375rem; color: var(--on-sea-muted); }
+  .talk-v { font: 300 clamp(1.25rem, 1.8vw, 1.625rem)/1.2 var(--font-display); overflow-wrap: anywhere; border-bottom: 1px solid transparent; justify-self: start; }
+  .talk a:hover .talk-v { border-bottom-color: currentColor; }
+  @media (max-width: 860px) { .talk-in { grid-template-columns: 1fr; } .talk a, .talk a + a { padding: 24px 0; border-left: 0; } .talk a + a { border-top: 1px solid rgb(255 255 255 / .18); } }
+  .office { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 88px); align-items: center; padding-block: var(--section); }
+  .office-photo { aspect-ratio: 3 / 2; overflow: hidden; }
+  .office-photo :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .office-text { display: grid; gap: 18px; justify-items: start; }
+  .office address { font-style: normal; font-size: 1.125rem; }
+  @media (max-width: 900px) { .office { grid-template-columns: 1fr; } }
+  .ask { background: var(--surface); }
+  .ask-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); padding-block: var(--section); }
+  .ask-in > div:first-child { display: grid; gap: 20px; align-content: start; }
+  @media (max-width: 860px) { .ask-in { grid-template-columns: 1fr; } }
+</style>

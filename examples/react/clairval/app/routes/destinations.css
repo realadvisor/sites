@@ -1,0 +1,10 @@
+.bands { display: grid; gap: 4px; padding-bottom: 4px; }
+.band { position: relative; display: flex; align-items: flex-end; min-height: clamp(420px, 60vh, 640px); overflow: hidden; text-decoration: none; }
+.band img, .band picture { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.band:hover img { transform: scale(1.02); }
+.band__scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(10 9 8 / 0.75), rgb(10 9 8 / 0.1) 60%); }
+.band__text { position: relative; display: grid; gap: 10px; padding-bottom: clamp(32px, 5vw, 64px); }
+.band__name { font: 420 clamp(2.6rem, 1.6rem + 4vw, 5rem)/1 var(--font-display); }
+.band__line { font-size: var(--step-1); max-width: 52ch; }
+.band__count { color: var(--on-ink-muted); }
+.band:hover .band__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }

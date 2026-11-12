@@ -1,0 +1,11 @@
+---
+export const prerender = false;
+import AreaPage from '../../views/AreaPage.astro';
+import { sites, towns } from '../../lib/data';
+
+// Area pages exist for every town with 3+ listings (any offer, any status).
+const all = towns(await sites.allListings());
+const town = all.find((t) => t.slug === Astro.params.town);
+if (!town) return Astro.rewrite('/404');
+---
+<AreaPage lang="es" town={town} others={all.filter((t) => t !== town)} />

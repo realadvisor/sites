@@ -1,0 +1,27 @@
+---
+export const prerender = false;
+/** Sold: what the agencies sold and let, same cards, no price. */
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { R } from '../lib/site';
+
+const [{ org }, sold] = await Promise.all([siteData(), sites.allListings({ status: 'sold' })]);
+const n = sold.length;
+---
+<Site title={`Biens vendus | ${org.name.replace(/\s+SAS$/, '')}`} description={`${n} biens vendus ou loués récemment par les agences ${org.name.replace(/\s+SAS$/, '')}.`}>
+  <PageHead title="Biens vendus" lede={n ? `${n} ${n > 1 ? 'biens vendus' : 'bien vendu'} récemment par nos agences. Le prix de vente reste confidentiel.` : undefined} />
+  <div class="wrap">
+    {n > 0 ? (
+      <ul class="cards">{sold.map((l, i) => <li><ListingCard listing={l} priority={i === 0} as="h2" /></li>)}</ul>
+    ) : (
+      <p class="lede">Aucune vente à afficher pour le moment.</p>
+    )}
+    <p class="more"><a class="vb" href={R.sell}>Faire estimer mon bien</a></p>
+  </div>
+</Site>
+
+<style>
+  .more { margin-top: 48px; }
+</style>

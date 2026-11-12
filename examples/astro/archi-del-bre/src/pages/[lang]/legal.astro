@@ -1,0 +1,7 @@
+---
+// Legal notice in the other languages (/de/legal): the kit's legalPath() points here.
+export const prerender = false;
+import Legal from '../../views/Legal.astro';
+if (Astro.params.lang !== 'de') return Astro.rewrite('/404');
+---
+<Legal l="de" kind="legal" />

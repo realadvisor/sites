@@ -1,0 +1,84 @@
+---
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import Photo from '../components/Photo.astro';
+import { PHOTOS, photoOg } from '../lib/photos';
+import { agency, sites } from '../lib/data';
+import { LOCALE_OF, UI, alternates, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, sold] = await Promise.all([agency(), sites.allListings({ status: 'sold' })]);
+const name = ag.team?.name ?? ag.org.name;
+const photo = PHOTOS.sell;
+---
+<Site lang={lang} current="sell" title={`${ui.sellH1} | ${name}`} description={ui.sellIntro}
+  image={photoOg(photo, Astro.url)} alternates={alternates('sell')}>
+  <section class="split">
+    <div class="split-text">
+      <h1 class="display-l">{ui.sellH1}</h1>
+      <p class="lead">{ui.sellIntro}</p>
+      <a class="cta cta-accent" href="#valuation">{ui.sellCta}</a>
+    </div>
+    <div class="split-photo">
+      <Photo photo={photo} lang={lang} decorative priority landscapeAt="(max-width: 900px)" sizes="(min-width: 900px) 50vw, 100vw" />
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="steps-h">
+    <h2 id="steps-h" class="display-m steps-h">{ui.sellStepsTitle}</h2>
+    <ol class="process">
+      {ui.sellSteps.map(([word, line]) => (
+        <li><span class="p-word">{word}</span><span class="p-line">{line}</span></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="val" id="valuation-section" aria-labelledby="val-h">
+    <div class="wrap val-in">
+      <div class="val-intro">
+        <h2 id="val-h" class="display-m">{ui.sellFormTitle}</h2>
+        <p class="lead">{ui.sellFormLead}</p>
+        {ag.team?.phone && <p class="val-phone"><a class="num" href={`tel:${ag.team.phone.replace(/[^\d+]/g, '')}`}>{ag.team.phone}</a></p>}
+      </div>
+      <EnquiryForm id="valuation" contactReason="valuation" locale={LOCALE_OF[lang]} message={ui.sellMessage} submitLabel={ui.sellSubmit} />
+    </div>
+  </section>
+
+  {sold.length > 0 && (
+    <section class="section wrap">
+      <div class="section-head">
+        <h2 class="display-m">{ui.recentSales}</h2>
+        <a class="link" href={href('sold', lang)}>{ui.nav.sold} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <ul class="grid3">{sold.slice(0, 3).map((l) => <li><ListingCard listing={l} lang={lang} /></li>)}</ul>
+    </section>
+  )}
+</Site>
+
+<style>
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: min(calc(100svh - var(--header-h)), 820px); }
+  .split-text { display: grid; align-content: center; gap: 24px; padding: clamp(48px, 7vw, 112px) clamp(20px, 6vw, 96px) clamp(48px, 7vw, 112px) max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); background: var(--surface); }
+  .split-text .cta { justify-self: start; margin-top: 8px; }
+  .split-photo { position: relative; min-height: 360px; }
+  .split-photo :global(img), .split-photo :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); min-height: 0; } .split-photo { order: -1; aspect-ratio: 4 / 3; min-height: 0; } }
+
+  .steps-h { margin-bottom: clamp(28px, 3vw, 40px); }
+  .process { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--text); }
+  .process li { padding-block: 20px; border-bottom: 1px solid var(--line); }
+  .process li > span { display: inline; }
+  .p-word { font: 300 1.375rem/1.3 var(--font-display); margin-right: .6em; }
+  .p-line { color: var(--muted); font-size: 1.0625rem; }
+  .process li { max-width: 72ch; }
+  @media (min-width: 900px) { .process li { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 24px; align-items: baseline; max-width: none; } }
+
+  .val { background: var(--surface); }
+  .val-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); padding-block: var(--section); }
+  .val-intro { display: grid; gap: 20px; align-content: start; }
+  .val-phone a { font: 300 1.75rem/1 var(--font-display); text-decoration: none; }
+  @media (max-width: 860px) { .val-in { grid-template-columns: 1fr; } }
+
+</style>

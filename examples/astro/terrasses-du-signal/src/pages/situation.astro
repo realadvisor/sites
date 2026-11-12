@@ -1,0 +1,110 @@
+---
+// Location: Lavaux, the lake, transport, schools and daily life (written
+// site content, src/content/place.ts), photos of the region and a map.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import StaticMap from '../components/StaticMap.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { loadSite } from '../lib/data';
+import BucketPhoto from '../components/BucketPhoto.astro';
+import { PLACES, sections } from '../content/place';
+
+const site = await loadSite();
+const { dev } = site;
+const addr = [dev.address.street, [dev.address.postcode, dev.address.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const photos = PLACES.photos;
+const SECTIONS = sections(dev.address);
+---
+<Site
+  site={site}
+  title={`Situation : ${dev.address.city}, Lavaux et le Léman | ${dev.title}`}
+  description={`${dev.title} à ${dev.address.city} : les vignes de Lavaux, le Léman, la gare CFF, Lausanne et le plan de situation.`}
+  image={img(PLACES.hero.url, { w: 1200, h: 630 })}
+>
+  <section class="hero">
+    <RaImage src={PLACES.hero.url} alt={PLACES.hero.alt} width={1600} height={800} priority sizes="100vw" mobile={{ width: 800, height: 900 }} class="hero-img" />
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <h1 data-rise>Situation à {dev.address.city}</h1>
+    </div>
+  </section>
+
+  <nav class="wrap toc" aria-label="Sur cette page">
+    <ul>
+      {SECTIONS.map((s) => <li><a href={`#${s.id}`}>{s.eyebrow}</a></li>)}
+      <li><a href="#plan">Plan</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrap sections">
+    {SECTIONS.map((s, i) => (
+      <section id={s.id} class:list={['sec', { flip: i % 2 === 1, solo: !photos[i] }]} aria-labelledby={`${s.id}-h`}>
+        <div class="txt">
+          <h2 id={`${s.id}-h`}>{s.title}</h2>
+          {s.body.map((p) => <p>{p}</p>)}
+        </div>
+        {(() => {
+          const p = photos[i];
+          if (!p) return null;
+          return p.position
+            ? <BucketPhoto src={p.url} width={2400} height={1600} alt={p.alt} position={p.position} sizes="(min-width: 1000px) 40vw, 100vw" class="ph local" />
+            : <RaImage src={p.url} alt={p.alt} width={900} height={1100} sizes="(min-width: 1000px) 40vw, 100vw" mobile={{ width: 800, height: 600 }} class="ph" />;
+        })()}
+      </section>
+    ))}
+  </div>
+
+  {dev.address.lat != null && dev.address.lng != null && (
+    <section class="wrap map-sec" id="plan" aria-labelledby="plan-h">
+      <div class="map-head">
+        <h2 id="plan-h">Plan de situation</h2>
+        <p class="muted">{addr}</p>
+      </div>
+      <StaticMap lat={dev.address.lat} lng={dev.address.lng} zoom={14} label={`${dev.title}, ${addr}`} cols={6} rows={4} />
+    </section>
+  )}
+
+  <ContactBand site={site} heading="Visiter le terrain et l’espace de vente" />
+</Site>
+
+<style>
+  .hero { position: relative; isolation: isolate; min-height: min(78svh, 760px); display: grid; align-items: end; color: #fff; overflow: hidden; background: var(--dark); }
+  .hero :global(.hero-img), .hero :global(picture) { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
+  .hero :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .scrim { position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgb(20 17 13 / 0.7), rgb(20 17 13 / 0.05) 65%); }
+  .hero-inner { padding-block: 120px clamp(48px, 6vw, 88px); }
+  .hero h1 { color: #fff; max-width: 14ch; }
+
+  .toc { border-bottom: 1px solid var(--line); }
+  .toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 32px; }
+  .toc a { display: inline-block; padding: 20px 0; font: 600 0.75rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid transparent; }
+  .toc a:hover { border-bottom-color: currentColor; }
+
+  .sections { display: grid; gap: clamp(72px, 9vw, 140px); padding-block: var(--space-section); }
+  .sec { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 120px); align-items: center; }
+  .sec.flip .txt { order: 2; }
+  .txt h2 { margin: 0 0 28px; max-width: 18ch; }
+  .txt p:not(.eyebrow) { max-width: 52ch; font-size: 1.0625rem; }
+  .txt p:not(.eyebrow) + p { margin-top: 1em; }
+  .sec :global(.ph) { width: 100%; height: auto; }
+  .sec :global(.ph.local) { display: block; aspect-ratio: 9 / 11; overflow: hidden; }
+  .sec :global(.ph.local img) { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 1000px) { .sec :global(.ph.local) { aspect-ratio: 4 / 3; } }
+  .sec.solo { grid-template-columns: 1fr; padding-top: clamp(48px, 6vw, 88px); border-top: 1px solid var(--line); }
+  .sec.solo .txt { order: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(40px, 7vw, 120px); }
+  .sec.solo .txt h2 { grid-column: 1; }
+  .sec.solo .txt p:not(.eyebrow) { grid-column: 2; }
+  .sec.solo .txt h2 { grid-row: 1 / span 2; }
+
+  .map-sec { padding-bottom: var(--space-section); }
+  .map-head h2 { margin: 0 0 8px; font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); }
+
+  @media (max-width: 1000px) {
+    .sec { grid-template-columns: 1fr; }
+    .sec.flip .txt { order: 0; }
+    .sec.solo .txt { display: block; }
+  }
+</style>

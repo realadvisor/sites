@@ -1,0 +1,66 @@
+---
+import { render } from 'astro:content';
+import Photo from '../components/Photo.astro';
+import { PHOTOS, photoOg } from '../lib/photos';
+import Site from '../layouts/Site.astro';
+import PostCard from '../components/PostCard.astro';
+import { agency, agentSlug, sites } from '../lib/data';
+import { postSlugs, postsOf, type Post } from '../lib/blog';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props { lang: Lang; post: Post }
+const { lang, post } = Astro.props;
+const ui = UI[lang];
+const d = post.data;
+const [ag, agents, slugs, posts] = await Promise.all([agency(), sites.agents(), postSlugs(post), postsOf(lang)]);
+const { Content } = await render(post);
+const author = agents.find((a) => a.id === d.author);
+const name = ag.team?.name ?? ag.org.name;
+const more = posts.filter((p) => p.id !== post.id).slice(0, 3);
+const words = (post.body ?? '').split(/\s+/).length;
+---
+<Site lang={lang} current="blog" title={`${d.title} | ${name}`} description={d.excerpt}
+  image={photoOg(PHOTOS[d.cover], Astro.url)} alternates={alternates('blog', slugs)}
+  jsonLd={{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: d.title, datePublished: d.date.toISOString(), image: photoOg(PHOTOS[d.cover], Astro.url), author: author ? { '@type': 'Person', name: `${author.first_name} ${author.last_name}` } : undefined, publisher: { '@type': 'Organization', name: ag.org.name } }}>
+  <article>
+    <header class="wrap post-head">
+      <nav class="crumbs" aria-label={ui.blogH1}><a href={href('blog', lang)}><span aria-hidden="true">←</span> {ui.blogH1}</a></nav>
+      <h1 class="display-l">{d.title}</h1>
+      <p class="post-lead">{d.excerpt}</p>
+      <div class="byline">
+        <p>
+          {author && <a href={href('team', lang, agentSlug(author))}>{fill(ui.by, { name: `${author.first_name} ${author.last_name}` })}</a>}
+          <span>{d.tag} · <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date, lang)}</time> · {fill(ui.minutes, { n: Math.max(1, Math.round(words / 200)) })}</span>
+        </p>
+      </div>
+    </header>
+    <div class="wrap cover"><Photo photo={PHOTOS[d.cover]} lang={lang} priority landscapeAt sizes="(min-width: 1360px) 1232px, 100vw" /></div>
+    <div class="wrap body"><div class="prose"><Content /></div></div>
+  </article>
+  {more.length > 0 && (
+    <section class="section more">
+      <div class="wrap">
+        <div class="section-head"><div><h2 class="display-m">{ui.morePosts}</h2></div><a class="link" href={href('blog', lang)}>{ui.journalAll} <span class="arrow" aria-hidden="true">→</span></a></div>
+        <ul class="grid3">{more.map((p) => <li><PostCard post={p} lang={lang} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</Site>
+<style>
+  .post-head { display: grid; gap: 20px; justify-items: center; text-align: center; padding-block: 28px clamp(40px, 5vw, 64px); }
+  .crumbs { justify-self: start; }
+  .crumbs a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+  .post-head h1 { max-width: 22ch; margin-top: clamp(16px, 3vw, 40px); }
+  .post-lead { font: 300 italic clamp(1.25rem, 1.8vw, 1.5rem)/1.45 var(--font-display); color: var(--muted); max-width: 46ch; }
+  .byline { text-align: center; font-size: .9375rem; }
+  .byline p { display: grid; }
+  .byline a { text-decoration: none; font-weight: 500; }
+  .byline span { color: var(--muted); }
+  .cover { aspect-ratio: 16 / 9; }
+  .cover :global(img), .cover :global(picture) { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 760px) { .cover { aspect-ratio: 4 / 3; padding-inline: 0; } }
+  .body { display: grid; justify-items: center; padding-block: clamp(48px, 6vw, 88px) var(--section); }
+  .body .prose { font-size: 1.1875rem; }
+  .more { background: var(--surface); }
+</style>

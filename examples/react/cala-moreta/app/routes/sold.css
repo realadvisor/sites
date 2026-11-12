@@ -1,0 +1,2 @@
+.sold { padding-bottom: var(--section); }
+.sold-cta { margin-top: clamp(48px, 6vw, 88px); display: flex; justify-content: center; }

@@ -1,0 +1,12 @@
+  .v-documents .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); padding-block: clamp(40px, 6vw, 88px) var(--section); align-items: start; }
+  .v-documents .head { display: grid; gap: 20px; }
+  .v-documents .docs { list-style: none; border-top: 1px solid var(--line-strong); }
+  .v-documents .docs li { border-bottom: 1px solid var(--line); }
+  .v-documents .docs a { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 't icon' 'd icon' 'm icon'; gap: 4px 24px; align-items: center; padding: 26px 4px; text-decoration: none; }
+  .v-documents .docs a:hover .t { text-decoration: underline; text-underline-offset: 0.15em; }
+  .v-documents .t { grid-area: t; font: 400 var(--step-2)/1.1 var(--serif); }
+  .v-documents .d { grid-area: d; }
+  .v-documents .m { grid-area: m; font-size: 0.875rem; color: var(--muted); }
+  .v-documents .docs svg { grid-area: icon; color: var(--accent-strong); }
+  .v-documents .ask .t { font-size: var(--step-1); }
+  @media (max-width: 860px) { .v-documents .grid { grid-template-columns: 1fr; } }

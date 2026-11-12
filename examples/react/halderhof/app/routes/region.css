@@ -1,0 +1,17 @@
+  .hero { position: relative; display: grid; min-height: 600px; background: var(--green-ink); }
+  .hero > picture, .hero > img { position: absolute; inset: 0; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; }
+  .hero__panel { position: relative; align-self: end; background: rgb(31 77 58 / 0.94); }
+  .hero__in { display: grid; gap: 12px; padding-block: 28px 36px; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .sec-h { color: var(--green-ink); margin-bottom: 24px; }
+  .office { background: var(--paper); padding: 28px; display: grid; gap: 10px; }
+  .office h2 { color: var(--green-ink); }
+  .office h2 a { text-decoration: none; }
+  .office h2 a:hover { text-decoration: underline; }
+  .office address { font-style: normal; color: var(--muted); }
+  .office li a { display: inline-flex; min-height: 34px; align-items: center; color: var(--green); }
+  .office .button { justify-self: start; margin-top: 8px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+  @media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .grid3 { grid-template-columns: minmax(0, 1fr); } .hero { min-height: 520px; } }

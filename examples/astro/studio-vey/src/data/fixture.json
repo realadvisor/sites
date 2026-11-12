@@ -1,0 +1,2024 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "de"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "a9865569-60e2-41d8-aff0-7c33b2970e87",
+  "name": "Studio Vey Immobilien AG",
+  "website": "https://studio-vey.example.com",
+  "address": {
+   "street": "Seefeldstrasse 61",
+   "postcode": "8008",
+   "city": "Zürich",
+   "country": "Switzerland",
+   "lat": 47.355,
+   "lng": 8.553
+  },
+  "brand": {
+   "primary": "#2F3A36"
+  }
+ },
+ "teams": [
+  {
+   "id": "31e63cdf-964e-471b-8533-52d53f4b6b0c",
+   "name": "Studio Vey",
+   "primary": true,
+   "website": "https://studio-vey.example.com",
+   "phone": "+41 00 000 00 01",
+   "email": "kontakt@studio-vey.example.com",
+   "address": {
+    "street": "Seefeldstrasse 61",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.355,
+    "lng": 8.553
+   },
+   "socials": {},
+   "description": "<p>Unabhängige Immobilienagentur in Zürich. Wohnungen und Häuser am See, in der Stadt und in Zug, verkauft und vermietet mit wenigen, gut gewählten Mandaten.</p>",
+   "description_text": "Unabhängige Immobilienagentur in Zürich. Wohnungen und Häuser am See, in der Stadt und in Zug, verkauft und vermietet mit wenigen, gut gewählten Mandaten."
+  }
+ ],
+ "agents": [
+  {
+   "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+   "first_name": "Nora",
+   "last_name": "Vey",
+   "phone": "+41 00 000 00 02",
+   "email": "nora.vey@studio-vey.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+    "alt": "Nora Vey"
+   }
+  },
+  {
+   "id": "bf404614-450b-4def-96dd-c0721a0ef0d3",
+   "first_name": "Jonas",
+   "last_name": "Amsler",
+   "phone": "+41 00 000 00 03",
+   "email": "jonas.amsler@studio-vey.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219514-sq.jpg",
+    "alt": "Jonas Amsler"
+   }
+  },
+  {
+   "id": "1e51b2a4-262e-44ba-a493-2a81caf2c85b",
+   "first_name": "Lea",
+   "last_name": "Brandt",
+   "phone": "+41 00 000 00 04",
+   "email": "lea.brandt@studio-vey.example.com",
+   "languages": [
+    "de",
+    "en"
+   ],
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853315-sq.jpg",
+    "alt": "Lea Brandt"
+   }
+  },
+  {
+   "id": "776f174b-26d4-49af-ae09-dbecafeb25f0",
+   "first_name": "Mattia",
+   "last_name": "Ferrer",
+   "phone": "+41 00 000 00 05",
+   "email": "mattia.ferrer@studio-vey.example.com",
+   "languages": [
+    "it",
+    "en"
+   ],
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219969-sq.jpg",
+    "alt": "Mattia Ferrer"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "fa3c035e-94a3-4e55-b8d0-ec43f0951d0b",
+   "slug": "attika-uber-dem-zurichsee-fa3c035e-94a3-4e55-b8d0-ec43f0951d0b",
+   "title": "Attika über dem Zürichsee",
+   "description": "<p>Ganz oben, mit dem See vor jedem Fenster: Die Attikawohnung öffnet sich auf eine umlaufende Terrasse, die vom Morgen bis zum Abend Sonne hat.</p><p>Wohnen, Kochen und Essen liegen in einem hellen Raum mit Eichenparkett. Drei Schlafzimmer und zwei Bäder sind ruhig zum Garten hin orientiert. Lift bis in die Wohnung, zwei Plätze in der Tiefgarage.</p>",
+   "description_text": "Ganz oben, mit dem See vor jedem Fenster: Die Attikawohnung öffnet sich auf eine umlaufende Terrasse, die vom Morgen bis zum Abend Sonne hat.\n\nWohnen, Kochen und Essen liegen in einem hellen Raum mit Eichenparkett. Drei Schlafzimmer und zwei Bäder sind ruhig zum Garten hin orientiert. Lift bis in die Wohnung, zwei Plätze in der Tiefgarage.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 2850000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 148,
+   "address": {
+    "street": "Seestrasse 10",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.313,
+    "lng": 8.591
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045920.jpg",
+     "alt": "Attika über dem Zürichsee"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045921.jpg",
+     "alt": "Attika über dem Zürichsee, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045922.jpg",
+     "alt": "Attika über dem Zürichsee, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045924.jpg",
+     "alt": "Attika über dem Zürichsee, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045939.jpg",
+     "alt": "Attika über dem Zürichsee, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045941.jpg",
+     "alt": "Attika über dem Zürichsee, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045945.jpg",
+     "alt": "Attika über dem Zürichsee, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045915.jpg",
+     "alt": "Attika über dem Zürichsee, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045918.jpg",
+     "alt": "Attika über dem Zürichsee, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045919.jpg",
+     "alt": "Attika über dem Zürichsee, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "7KEG-FQWL",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "9505dc81-aa32-45e6-81ad-43a7f4ffc596",
+   "slug": "stadtvilla-mit-garten-9505dc81-aa32-45e6-81ad-43a7f4ffc596",
+   "title": "Stadtvilla mit Garten",
+   "description": "<p>Eine Villa aus den Dreissigerjahren, sorgfältig erneuert: hohe Räume, Fischgratparkett, Kassettentüren und eine Küche, die zum Garten hin offen ist.</p><p>Der alte Baumbestand schirmt das Grundstück ab. Fünf Zimmer im Obergeschoss, ein Atelier unter dem Dach, ein gewölbter Weinkeller.</p>",
+   "description_text": "Eine Villa aus den Dreissigerjahren, sorgfältig erneuert: hohe Räume, Fischgratparkett, Kassettentüren und eine Küche, die zum Garten hin offen ist.\n\nDer alte Baumbestand schirmt das Grundstück ab. Fünf Zimmer im Obergeschoss, ein Atelier unter dem Dach, ein gewölbter Weinkeller.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 4650000,
+   "currency": "CHF",
+   "rooms": 7.5,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 260,
+   "land_surface": 820,
+   "address": {
+    "street": "Bergstrasse 17",
+    "postcode": "8702",
+    "city": "Zollikon",
+    "country": "Switzerland",
+    "lat": 47.337,
+    "lng": 8.582
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143668.jpg",
+     "alt": "Stadtvilla mit Garten"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143671.jpg",
+     "alt": "Stadtvilla mit Garten, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143677.jpg",
+     "alt": "Stadtvilla mit Garten, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143683.jpg",
+     "alt": "Stadtvilla mit Garten, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8143707.jpg",
+     "alt": "Stadtvilla mit Garten, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135491.jpg",
+     "alt": "Stadtvilla mit Garten, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135492.jpg",
+     "alt": "Stadtvilla mit Garten, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135496.jpg",
+     "alt": "Stadtvilla mit Garten, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135502.jpg",
+     "alt": "Stadtvilla mit Garten, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135503.jpg",
+     "alt": "Stadtvilla mit Garten, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135507.jpg",
+     "alt": "Stadtvilla mit Garten, photo 11"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "BEUA-TFX4",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "3b871f17-956e-4913-9dbf-80a8e8aa966d",
+   "slug": "helle-wohnung-im-seefeld-3b871f17-956e-4913-9dbf-80a8e8aa966d",
+   "title": "Helle Wohnung im Seefeld",
+   "description": "<p>Eine hell renovierte Wohnung, zwei Gehminuten vom See. Weisse Wände, Eichenboden und grosse Fenster: das Licht kommt von zwei Seiten.</p><p>Eine offene Küche, ein Bad in Marmor mit Dusche und Wanne, ein kleiner Balkon zum Hof. Ein Kellerabteil gehört dazu.</p>",
+   "description_text": "Eine hell renovierte Wohnung, zwei Gehminuten vom See. Weisse Wände, Eichenboden und grosse Fenster: das Licht kommt von zwei Seiten.\n\nEine offene Küche, ein Bad in Marmor mit Dusche und Wanne, ein kleiner Balkon zum Hof. Ein Kellerabteil gehört dazu.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1890000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 104,
+   "address": {
+    "street": "Dorfstrasse 24",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.355,
+    "lng": 8.553
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195882.jpg",
+     "alt": "Altbauwohnung im Seefeld"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195888.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214163.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214456.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214467.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214474.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195720.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195729.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195743.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195867.jpg",
+     "alt": "Altbauwohnung im Seefeld, photo 10"
+    }
+   ],
+   "agent": {
+    "id": "bf404614-450b-4def-96dd-c0721a0ef0d3",
+    "first_name": "Jonas",
+    "last_name": "Amsler",
+    "phone": "+41 00 000 00 03",
+    "email": "jonas.amsler@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219514-sq.jpg",
+     "alt": "Jonas Amsler"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "8KM3-BRW7",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "3f0cf1c7-3460-4524-a692-9bdcdf745db7",
+   "slug": "loft-am-kreis-5-3f0cf1c7-3460-4524-a692-9bdcdf745db7",
+   "title": "Loft am Kreis 5",
+   "description": "<p>Ein ehemaliger Gewerberaum, offen und hell: Sichtbeton, Stahlfenster und eine Raumhöhe von 3,6 Metern.</p><p>Die Küche ist ein langer Block in der Mitte, das Schlafzimmer liegt hinter einer Glaswand. Ideal für alle, die Platz statt Zimmer suchen.</p>",
+   "description_text": "Ein ehemaliger Gewerberaum, offen und hell: Sichtbeton, Stahlfenster und eine Raumhöhe von 3,6 Metern.\n\nDie Küche ist ein langer Block in der Mitte, das Schlafzimmer liegt hinter einer Glaswand. Ideal für alle, die Platz statt Zimmer suchen.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "available",
+   "price": 1650000,
+   "currency": "CHF",
+   "rooms": 2.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 118,
+   "address": {
+    "street": "Alte Landstrasse 31",
+    "postcode": "8002",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.363,
+    "lng": 8.526
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018252.jpg",
+     "alt": "Loft am Kreis 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018253.jpg",
+     "alt": "Loft am Kreis 5, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018256.jpg",
+     "alt": "Loft am Kreis 5, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018246.jpg",
+     "alt": "Loft am Kreis 5, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018247.jpg",
+     "alt": "Loft am Kreis 5, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "bf404614-450b-4def-96dd-c0721a0ef0d3",
+    "first_name": "Jonas",
+    "last_name": "Amsler",
+    "phone": "+41 00 000 00 03",
+    "email": "jonas.amsler@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219514-sq.jpg",
+     "alt": "Jonas Amsler"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "7MHJ-CDDC",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "7677f7ad-dca7-4d49-9cf7-9bc79615fb1b",
+   "slug": "haus-am-rebhang-7677f7ad-dca7-4d49-9cf7-9bc79615fb1b",
+   "title": "Haus am Rebhang",
+   "description": "<p>Ein zeitgenössisches Haus in den Reben über Erlenbach. Holz, Glas und Sichtbeton, die Wohnräume fliessen auf eine Terrasse über dem See.</p><p>Vier Schlafzimmer, davon eines mit eigenem Bad. Wärmepumpe, Photovoltaik und eine Doppelgarage.</p>",
+   "description_text": "Ein zeitgenössisches Haus in den Reben über Erlenbach. Holz, Glas und Sichtbeton, die Wohnräume fliessen auf eine Terrasse über dem See.\n\nVier Schlafzimmer, davon eines mit eigenem Bad. Wärmepumpe, Photovoltaik und eine Doppelgarage.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 3250000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 198,
+   "land_surface": 640,
+   "address": {
+    "street": "Rosenweg 38",
+    "postcode": "8703",
+    "city": "Erlenbach",
+    "country": "Switzerland",
+    "lat": 47.311,
+    "lng": 8.588
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134745.jpg",
+     "alt": "Haus am Rebhang"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134748.jpg",
+     "alt": "Haus am Rebhang, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134750.jpg",
+     "alt": "Haus am Rebhang, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134820.jpg",
+     "alt": "Haus am Rebhang, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134821.jpg",
+     "alt": "Haus am Rebhang, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134845.jpg",
+     "alt": "Haus am Rebhang, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134847.jpg",
+     "alt": "Haus am Rebhang, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134848.jpg",
+     "alt": "Haus am Rebhang, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134849.jpg",
+     "alt": "Haus am Rebhang, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134808.jpg",
+     "alt": "Haus am Rebhang, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134819.jpg",
+     "alt": "Haus am Rebhang, photo 11"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "WBEW-D3Z7",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "63e208b4-28bc-4be2-90cb-e705fecbc27d",
+   "slug": "familienwohnung-mit-garten-63e208b4-28bc-4be2-90cb-e705fecbc27d",
+   "title": "Familienwohnung mit Garten",
+   "description": "<p>Gartenwohnung in einem ruhigen Quartier, Schule und Bahn zu Fuss erreichbar. Der Garten ist eingewachsen und von der Strasse nicht einsehbar.</p><p>Offene Küche mit Insel, drei Schlafzimmer, zwei Bäder und ein Reduit. Zwei Einstellplätze.</p>",
+   "description_text": "Gartenwohnung in einem ruhigen Quartier, Schule und Bahn zu Fuss erreichbar. Der Garten ist eingewachsen und von der Strasse nicht einsehbar.\n\nOffene Küche mit Insel, drei Schlafzimmer, zwei Bäder und ein Reduit. Zwei Einstellplätze.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1480000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 122,
+   "address": {
+    "street": "Lindenstrasse 5",
+    "postcode": "8802",
+    "city": "Kilchberg",
+    "country": "Switzerland",
+    "lat": 47.318,
+    "lng": 8.556
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580241.jpg",
+     "alt": "Familienwohnung mit Garten"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6077368.jpg",
+     "alt": "Familienwohnung mit Garten, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6180674.jpg",
+     "alt": "Familienwohnung mit Garten, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6207825.jpg",
+     "alt": "Familienwohnung mit Garten, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527068.jpg",
+     "alt": "Familienwohnung mit Garten, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6527069.jpg",
+     "alt": "Familienwohnung mit Garten, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6580230.jpg",
+     "alt": "Familienwohnung mit Garten, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "1e51b2a4-262e-44ba-a493-2a81caf2c85b",
+    "first_name": "Lea",
+    "last_name": "Brandt",
+    "phone": "+41 00 000 00 04",
+    "email": "lea.brandt@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853315-sq.jpg",
+     "alt": "Lea Brandt"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "ECRA-XFE9",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "f0f9576b-20f9-4d96-8ff5-a97cc2d5f36f",
+   "slug": "penthouse-mit-dachgarten-f0f9576b-20f9-4d96-8ff5-a97cc2d5f36f",
+   "title": "Penthouse mit Dachgarten",
+   "description": "<p>Ein Penthouse über den Dächern von Hottingen, mit privatem Dachgarten und Blick bis zu den Glarner Alpen.</p><p>Der Lift öffnet direkt in die Wohnung. Drei Suiten, eine Bibliothek, ein Kamin und eine Küche aus Naturstein.</p>",
+   "description_text": "Ein Penthouse über den Dächern von Hottingen, mit privatem Dachgarten und Blick bis zu den Glarner Alpen.\n\nDer Lift öffnet direkt in die Wohnung. Drei Suiten, eine Bibliothek, ein Kamin und eine Küche aus Naturstein.",
+   "offer_type": "buy",
+   "property_type": "apartment_penthouse",
+   "status": "available",
+   "price": 3950000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 3,
+   "bathrooms": 3,
+   "living_surface": 196,
+   "address": {
+    "street": "Hohe Promenade 12",
+    "postcode": "8032",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.361,
+    "lng": 8.569
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7377669.jpg",
+     "alt": "Penthouse mit Dachgarten"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9993958.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-10267196.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-11884001.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12002390.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-12062119.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7157060.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7164751.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7236154.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 9"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7236156.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 10"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7339157.jpg",
+     "alt": "Penthouse mit Dachgarten, photo 11"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "MLQ6-4CHC",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "d1942590-59ac-426f-abd6-a618828d431c",
+   "slug": "chalet-uber-dem-zugersee-d1942590-59ac-426f-abd6-a618828d431c",
+   "title": "Chalet über dem Zugersee",
+   "description": "<p>Holzhaus am Waldrand, mit Weitblick über den Zugersee. Innen warmes Lärchenholz, ein Specksteinofen und grosse Fenster nach Westen.</p><p>Vier Schlafzimmer, ein Spielzimmer im Untergeschoss und ein Garten mit Obstbäumen.</p>",
+   "description_text": "Holzhaus am Waldrand, mit Weitblick über den Zugersee. Innen warmes Lärchenholz, ein Specksteinofen und grosse Fenster nach Westen.\n\nVier Schlafzimmer, ein Spielzimmer im Untergeschoss und ein Garten mit Obstbäumen.",
+   "offer_type": "buy",
+   "property_type": "house_chalet",
+   "status": "available",
+   "price": 2950000,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 210,
+   "land_surface": 1100,
+   "address": {
+    "street": "Sonnenbergstrasse 19",
+    "postcode": "6300",
+    "city": "Zug",
+    "country": "Switzerland",
+    "lat": 47.166,
+    "lng": 8.515
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746560.jpg",
+     "alt": "Chalet über dem Zugersee"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746911.jpg",
+     "alt": "Chalet über dem Zugersee, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746940.jpg",
+     "alt": "Chalet über dem Zugersee, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7746646.jpg",
+     "alt": "Chalet über dem Zugersee, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7745989.jpg",
+     "alt": "Chalet über dem Zugersee, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082195.jpg",
+     "alt": "Chalet über dem Zugersee, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "776f174b-26d4-49af-ae09-dbecafeb25f0",
+    "first_name": "Mattia",
+    "last_name": "Ferrer",
+    "phone": "+41 00 000 00 05",
+    "email": "mattia.ferrer@studio-vey.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219969-sq.jpg",
+     "alt": "Mattia Ferrer"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "76ZQ-GNEV",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "62c89025-fe4a-44dd-86cc-141e89a09197",
+   "slug": "maisonette-mit-seesicht-62c89025-fe4a-44dd-86cc-141e89a09197",
+   "title": "Maisonette mit Seesicht",
+   "description": "<p>Zwei Geschosse, ein Treppenraum aus Eiche, und auf beiden Ebenen der See im Fenster.</p><p>Unten Wohnen mit Loggia, oben drei Schlafzimmer und ein Bad mit Tageslicht. Waschturm in der Wohnung.</p>",
+   "description_text": "Zwei Geschosse, ein Treppenraum aus Eiche, und auf beiden Ebenen der See im Fenster.\n\nUnten Wohnen mit Loggia, oben drei Schlafzimmer und ein Bad mit Tageslicht. Waschturm in der Wohnung.",
+   "offer_type": "buy",
+   "property_type": "apartment_duplex",
+   "status": "available",
+   "price": 2150000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 158,
+   "address": {
+    "street": "Wiesenstrasse 26",
+    "postcode": "8706",
+    "city": "Meilen",
+    "country": "Switzerland",
+    "lat": 47.273,
+    "lng": 8.639
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061392.jpg",
+     "alt": "Maisonette mit Seesicht"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061397.jpg",
+     "alt": "Maisonette mit Seesicht, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061403.jpg",
+     "alt": "Maisonette mit Seesicht, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061405.jpg",
+     "alt": "Maisonette mit Seesicht, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061410.jpg",
+     "alt": "Maisonette mit Seesicht, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061661.jpg",
+     "alt": "Maisonette mit Seesicht, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "1e51b2a4-262e-44ba-a493-2a81caf2c85b",
+    "first_name": "Lea",
+    "last_name": "Brandt",
+    "phone": "+41 00 000 00 04",
+    "email": "lea.brandt@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853315-sq.jpg",
+     "alt": "Lea Brandt"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "GV35-2K8K",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "6223957b-18c8-472f-8aa6-d0d304dfb76e",
+   "slug": "gartenhaus-im-grunen-6223957b-18c8-472f-8aa6-d0d304dfb76e",
+   "title": "Gartenhaus im Grünen",
+   "description": "<p>Ein helles Einfamilienhaus am Ende einer Sackgasse. Der Garten ist flach, sonnig und gross genug für Gemüsebeete und Spiel.</p><p>Wohnzimmer mit Cheminée, vier Schlafzimmer, Hobbyraum und Doppelgarage. Schulen in Gehdistanz.</p>",
+   "description_text": "Ein helles Einfamilienhaus am Ende einer Sackgasse. Der Garten ist flach, sonnig und gross genug für Gemüsebeete und Spiel.\n\nWohnzimmer mit Cheminée, vier Schlafzimmer, Hobbyraum und Doppelgarage. Schulen in Gehdistanz.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "available",
+   "price": 2380000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 176,
+   "land_surface": 560,
+   "address": {
+    "street": "Kirchweg 33",
+    "postcode": "8800",
+    "city": "Thalwil",
+    "country": "Switzerland",
+    "lat": 47.301,
+    "lng": 8.556
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061662.jpg",
+     "alt": "Gartenhaus im Grünen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061676.jpg",
+     "alt": "Gartenhaus im Grünen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061664.jpg",
+     "alt": "Gartenhaus im Grünen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061665.jpg",
+     "alt": "Gartenhaus im Grünen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061666.jpg",
+     "alt": "Gartenhaus im Grünen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061669.jpg",
+     "alt": "Gartenhaus im Grünen, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061728.jpg",
+     "alt": "Gartenhaus im Grünen, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "bf404614-450b-4def-96dd-c0721a0ef0d3",
+    "first_name": "Jonas",
+    "last_name": "Amsler",
+    "phone": "+41 00 000 00 03",
+    "email": "jonas.amsler@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219514-sq.jpg",
+     "alt": "Jonas Amsler"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "NRMV-C8LR",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "1ba20f4f-d665-4d0b-ac0f-3434b5c71e18",
+   "slug": "studio-in-der-altstadt-1ba20f4f-d665-4d0b-ac0f-3434b5c71e18",
+   "title": "Studio in der Altstadt",
+   "description": "<p>Ein Studio unter dem Dach, mit Balkenwerk und Blick über die Altstadtdächer.</p><p>Kompakte Küche, Bad mit Dusche, viel Stauraum unter der Schräge. Ideal als Stadtwohnung.</p>",
+   "description_text": "Ein Studio unter dem Dach, mit Balkenwerk und Blick über die Altstadtdächer.\n\nKompakte Küche, Bad mit Dusche, viel Stauraum unter der Schräge. Ideal als Stadtwohnung.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 690000,
+   "currency": "CHF",
+   "rooms": 1.5,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 42,
+   "address": {
+    "street": "Spiegelgasse 4",
+    "postcode": "8001",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.3716,
+    "lng": 8.5436
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587824.jpg",
+     "alt": "Stadtwohnung in Hottingen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587829.jpg",
+     "alt": "Stadtwohnung in Hottingen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6587852.jpg",
+     "alt": "Stadtwohnung in Hottingen, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585748.jpg",
+     "alt": "Stadtwohnung in Hottingen, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585757.jpg",
+     "alt": "Stadtwohnung in Hottingen, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6585765.jpg",
+     "alt": "Stadtwohnung in Hottingen, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "776f174b-26d4-49af-ae09-dbecafeb25f0",
+    "first_name": "Mattia",
+    "last_name": "Ferrer",
+    "phone": "+41 00 000 00 05",
+    "email": "mattia.ferrer@studio-vey.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219969-sq.jpg",
+     "alt": "Mattia Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "TXHQ-WMXW",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "88e60c87-6f8e-4227-80ab-9fbf0ca6e4cf",
+   "slug": "villa-mit-pool-am-hang-88e60c87-6f8e-4227-80ab-9fbf0ca6e4cf",
+   "title": "Villa mit Pool am Hang",
+   "description": "<p>Eine Villa auf drei Ebenen, nach Süden zum See ausgerichtet, mit Infinity-Pool und Poolhaus.</p><p>Fünf Suiten, ein Wellnessbereich, ein Weinkeller und Garagen für vier Autos. Absolute Ruhe und Privatsphäre.</p>",
+   "description_text": "Eine Villa auf drei Ebenen, nach Süden zum See ausgerichtet, mit Infinity-Pool und Poolhaus.\n\nFünf Suiten, ein Wellnessbereich, ein Weinkeller und Garagen für vier Autos. Absolute Ruhe und Privatsphäre.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 6900000,
+   "currency": "CHF",
+   "rooms": 8.5,
+   "bedrooms": 5,
+   "bathrooms": 5,
+   "living_surface": 340,
+   "land_surface": 1450,
+   "address": {
+    "street": "Bergstrasse 7",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.316,
+    "lng": 8.587
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031593.jpg",
+     "alt": "Villa mit Pool am Hang"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031594.jpg",
+     "alt": "Villa mit Pool am Hang, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031595.jpg",
+     "alt": "Villa mit Pool am Hang, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031596.jpg",
+     "alt": "Villa mit Pool am Hang, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031604.jpg",
+     "alt": "Villa mit Pool am Hang, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031569.jpg",
+     "alt": "Villa mit Pool am Hang, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031580.jpg",
+     "alt": "Villa mit Pool am Hang, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031597.jpg",
+     "alt": "Villa mit Pool am Hang, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031622.jpg",
+     "alt": "Villa mit Pool am Hang, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "VKRK-Z5FL",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "2138f498-5e26-4cc4-b43b-61b9d9c7b665",
+   "slug": "moblierte-wohnung-am-see-2138f498-5e26-4cc4-b43b-61b9d9c7b665",
+   "title": "Möblierte Wohnung am See",
+   "description": "<p>Möbliert und sofort bezugsbereit: eine ruhige Wohnung mit Balkon, zwei Minuten von der Seepromenade.</p><p>Mindestmietdauer sechs Monate. Waschmaschine und Tumbler in der Wohnung.</p>",
+   "description_text": "Möbliert und sofort bezugsbereit: eine ruhige Wohnung mit Balkon, zwei Minuten von der Seepromenade.\n\nMindestmietdauer sechs Monate. Waschmaschine und Tumbler in der Wohnung.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 4200,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 96,
+   "address": {
+    "street": "Dorfstrasse 14",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.355,
+    "lng": 8.553
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6903157.jpg",
+     "alt": "Möblierte Wohnung am See"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920610.jpg",
+     "alt": "Möblierte Wohnung am See, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933770.jpg",
+     "alt": "Möblierte Wohnung am See, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933772.jpg",
+     "alt": "Möblierte Wohnung am See, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933775.jpg",
+     "alt": "Möblierte Wohnung am See, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6933779.jpg",
+     "alt": "Möblierte Wohnung am See, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899345.jpg",
+     "alt": "Möblierte Wohnung am See, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899354.jpg",
+     "alt": "Möblierte Wohnung am See, photo 8"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6903153.jpg",
+     "alt": "Möblierte Wohnung am See, photo 9"
+    }
+   ],
+   "agent": {
+    "id": "776f174b-26d4-49af-ae09-dbecafeb25f0",
+    "first_name": "Mattia",
+    "last_name": "Ferrer",
+    "phone": "+41 00 000 00 05",
+    "email": "mattia.ferrer@studio-vey.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219969-sq.jpg",
+     "alt": "Mattia Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "DHPQ-5XS6",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "d6de24d2-b54a-4928-af7a-0cb745a15687",
+   "slug": "familienhaus-zur-miete-d6de24d2-b54a-4928-af7a-0cb745a15687",
+   "title": "Familienhaus zur Miete",
+   "description": "<p>Ein grosszügiges Haus für Familien, mit Garten, Spielwiese und Blick auf den See.</p><p>Vier Schlafzimmer, zwei Wohnräume, Doppelgarage. Bezug nach Vereinbarung.</p>",
+   "description_text": "Ein grosszügiges Haus für Familien, mit Garten, Spielwiese und Blick auf den See.\n\nVier Schlafzimmer, zwei Wohnräume, Doppelgarage. Bezug nach Vereinbarung.",
+   "offer_type": "rent",
+   "property_type": "house",
+   "status": "available",
+   "price": 7800,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 220,
+   "land_surface": 600,
+   "address": {
+    "street": "Alte Landstrasse 21",
+    "postcode": "8702",
+    "city": "Zollikon",
+    "country": "Switzerland",
+    "lat": 47.343,
+    "lng": 8.574
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092383.jpg",
+     "alt": "Familienhaus zur Miete"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092387.jpg",
+     "alt": "Familienhaus zur Miete, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092395.jpg",
+     "alt": "Familienhaus zur Miete, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089275.jpg",
+     "alt": "Familienhaus zur Miete, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092188.jpg",
+     "alt": "Familienhaus zur Miete, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092192.jpg",
+     "alt": "Familienhaus zur Miete, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "1e51b2a4-262e-44ba-a493-2a81caf2c85b",
+    "first_name": "Lea",
+    "last_name": "Brandt",
+    "phone": "+41 00 000 00 04",
+    "email": "lea.brandt@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853315-sq.jpg",
+     "alt": "Lea Brandt"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "SNWG-F698",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "3dc58fd5-5a9a-44e7-bbac-de9ebe6816ee",
+   "slug": "wohnung-mit-weitblick-3dc58fd5-5a9a-44e7-bbac-de9ebe6816ee",
+   "title": "Wohnung mit Weitblick",
+   "description": "<p>Helle Eckwohnung im obersten Stock, mit Balkon und Fernsicht über den See.</p><p>Offene Küche, drei Schlafzimmer, Reduit. Ein Einstellplatz kann dazu gemietet werden.</p>",
+   "description_text": "Helle Eckwohnung im obersten Stock, mit Balkon und Fernsicht über den See.\n\nOffene Küche, drei Schlafzimmer, Reduit. Ein Einstellplatz kann dazu gemietet werden.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3650,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 115,
+   "address": {
+    "street": "Rosenweg 28",
+    "postcode": "8802",
+    "city": "Kilchberg",
+    "country": "Switzerland",
+    "lat": 47.33,
+    "lng": 8.54
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061420.jpg",
+     "alt": "Wohnung mit Weitblick"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061426.jpg",
+     "alt": "Wohnung mit Weitblick, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061670.jpg",
+     "alt": "Wohnung mit Weitblick, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061395.jpg",
+     "alt": "Wohnung mit Weitblick, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061418.jpg",
+     "alt": "Wohnung mit Weitblick, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "bf404614-450b-4def-96dd-c0721a0ef0d3",
+    "first_name": "Jonas",
+    "last_name": "Amsler",
+    "phone": "+41 00 000 00 03",
+    "email": "jonas.amsler@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219514-sq.jpg",
+     "alt": "Jonas Amsler"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "FFNP-2Q22",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "62405508-233d-4e9e-904d-5d46d81215d5",
+   "slug": "stadtwohnung-in-hottingen-62405508-233d-4e9e-904d-5d46d81215d5",
+   "title": "Stadtwohnung in Hottingen",
+   "description": "<p>Charmante Altbauwohnung mit Parkett und Erker, nahe Kunsthaus und Universität.</p><p>Renovierte Küche und Bad, Balkon zum Garten.</p>",
+   "description_text": "Charmante Altbauwohnung mit Parkett und Erker, nahe Kunsthaus und Universität.\n\nRenovierte Küche und Bad, Balkon zum Garten.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 3200,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 88,
+   "address": {
+    "street": "Lindenstrasse 35",
+    "postcode": "8032",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.358,
+    "lng": 8.573
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018822.jpg",
+     "alt": "Studio in der Altstadt"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7019016.jpg",
+     "alt": "Studio in der Altstadt, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7019027.jpg",
+     "alt": "Studio in der Altstadt, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031207.jpg",
+     "alt": "Studio in der Altstadt, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031402.jpg",
+     "alt": "Studio in der Altstadt, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031403.jpg",
+     "alt": "Studio in der Altstadt, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018401.jpg",
+     "alt": "Studio in der Altstadt, photo 7"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018820.jpg",
+     "alt": "Studio in der Altstadt, photo 8"
+    }
+   ],
+   "agent": {
+    "id": "776f174b-26d4-49af-ae09-dbecafeb25f0",
+    "first_name": "Mattia",
+    "last_name": "Ferrer",
+    "phone": "+41 00 000 00 05",
+    "email": "mattia.ferrer@studio-vey.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219969-sq.jpg",
+     "alt": "Mattia Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "BSS6-LVQQ",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "00fe32a0-9043-434e-b38b-e445a9932a4b",
+   "slug": "seevilla-in-kusnacht-00fe32a0-9043-434e-b38b-e445a9932a4b",
+   "title": "Seevilla in Küsnacht",
+   "description": "<p>Verkauft: eine Villa aus den Sechzigerjahren mit direktem Seeanstoss und eigenem Bootssteg.</p>",
+   "description_text": "Verkauft: eine Villa aus den Sechzigerjahren mit direktem Seeanstoss und eigenem Bootssteg.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "sold",
+   "price": 5200000,
+   "currency": "CHF",
+   "rooms": 7.5,
+   "bedrooms": 5,
+   "bathrooms": 4,
+   "living_surface": 290,
+   "land_surface": 1200,
+   "address": {
+    "street": "Hohe Promenade 42",
+    "postcode": "8700",
+    "city": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.316,
+    "lng": 8.587
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031412.jpg",
+     "alt": "Seevilla in Küsnacht"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031414.jpg",
+     "alt": "Seevilla in Küsnacht, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031708.jpg",
+     "alt": "Seevilla in Küsnacht, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031712.jpg",
+     "alt": "Seevilla in Küsnacht, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7031834.jpg",
+     "alt": "Seevilla in Küsnacht, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "B23V-EYWU",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "f69cf358-3732-4f71-8e0f-60da4e4a5867",
+   "slug": "dachwohnung-im-seefeld-f69cf358-3732-4f71-8e0f-60da4e4a5867",
+   "title": "Dachwohnung im Seefeld",
+   "description": "<p>Verkauft: eine Dachwohnung mit zwei Terrassen, wenige Schritte vom See.</p>",
+   "description_text": "Verkauft: eine Dachwohnung mit zwei Terrassen, wenige Schritte vom See.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "sold",
+   "price": 2240000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 132,
+   "address": {
+    "street": "Sonnenbergstrasse 9",
+    "postcode": "8008",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.355,
+    "lng": 8.553
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588572.jpg",
+     "alt": "Dachwohnung im Seefeld"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588580.jpg",
+     "alt": "Dachwohnung im Seefeld, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588581.jpg",
+     "alt": "Dachwohnung im Seefeld, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6588585.jpg",
+     "alt": "Dachwohnung im Seefeld, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6636254.jpg",
+     "alt": "Dachwohnung im Seefeld, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "bf404614-450b-4def-96dd-c0721a0ef0d3",
+    "first_name": "Jonas",
+    "last_name": "Amsler",
+    "phone": "+41 00 000 00 03",
+    "email": "jonas.amsler@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219514-sq.jpg",
+     "alt": "Jonas Amsler"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "Q7L9-Q3CA",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "e735949f-52d3-4d05-8eb6-772604bd52e6",
+   "slug": "reihenhaus-in-thalwil-e735949f-52d3-4d05-8eb6-772604bd52e6",
+   "title": "Reihenhaus in Thalwil",
+   "description": "<p>Verkauft: ein helles Reiheneckhaus mit Garten, nahe Bahnhof und Schulen.</p>",
+   "description_text": "Verkauft: ein helles Reiheneckhaus mit Garten, nahe Bahnhof und Schulen.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "sold",
+   "price": 1750000,
+   "currency": "CHF",
+   "rooms": 5.5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 154,
+   "land_surface": 220,
+   "address": {
+    "street": "Wiesenstrasse 16",
+    "postcode": "8800",
+    "city": "Thalwil",
+    "country": "Switzerland",
+    "lat": 47.298,
+    "lng": 8.56
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587772.jpg",
+     "alt": "Reihenhaus in Thalwil"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587775.jpg",
+     "alt": "Reihenhaus in Thalwil, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587777.jpg",
+     "alt": "Reihenhaus in Thalwil, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "1e51b2a4-262e-44ba-a493-2a81caf2c85b",
+    "first_name": "Lea",
+    "last_name": "Brandt",
+    "phone": "+41 00 000 00 04",
+    "email": "lea.brandt@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853315-sq.jpg",
+     "alt": "Lea Brandt"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "DJYE-TX3Y",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "5446975c-f099-40e0-9485-9c3cba2bfc3c",
+   "slug": "wohnung-mit-loggia-in-zug-5446975c-f099-40e0-9485-9c3cba2bfc3c",
+   "title": "Wohnung mit Loggia in Zug",
+   "description": "<p>Verkauft: eine Wohnung mit Loggia und Seesicht, in fünf Wochen an eine Familie aus der Region.</p>",
+   "description_text": "Verkauft: eine Wohnung mit Loggia und Seesicht, in fünf Wochen an eine Familie aus der Region.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1580000,
+   "currency": "CHF",
+   "rooms": 4.5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 120,
+   "address": {
+    "street": "Kirchweg 23",
+    "postcode": "6300",
+    "city": "Zug",
+    "country": "Switzerland",
+    "lat": 47.172,
+    "lng": 8.508
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6890395.jpg",
+     "alt": "Wohnung mit Loggia in Zug"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920600.jpg",
+     "alt": "Wohnung mit Loggia in Zug, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6920603.jpg",
+     "alt": "Wohnung mit Loggia in Zug, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "776f174b-26d4-49af-ae09-dbecafeb25f0",
+    "first_name": "Mattia",
+    "last_name": "Ferrer",
+    "phone": "+41 00 000 00 05",
+    "email": "mattia.ferrer@studio-vey.example.com",
+    "languages": [
+     "it",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219969-sq.jpg",
+     "alt": "Mattia Ferrer"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "JD8G-HW3L",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "b012539e-92c5-48e1-b72d-96fd49c1ba08",
+   "slug": "gartenwohnung-in-meilen-b012539e-92c5-48e1-b72d-96fd49c1ba08",
+   "title": "Gartenwohnung in Meilen",
+   "description": "<p>Verkauft: eine Gartenwohnung mit Seesicht und eigenem Sitzplatz.</p>",
+   "description_text": "Verkauft: eine Gartenwohnung mit Seesicht und eigenem Sitzplatz.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1390000,
+   "currency": "CHF",
+   "rooms": 3.5,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 102,
+   "address": {
+    "street": "Seestrasse 30",
+    "postcode": "8706",
+    "city": "Meilen",
+    "country": "Switzerland",
+    "lat": 47.264,
+    "lng": 8.651
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866404.jpg",
+     "alt": "Gartenwohnung in Meilen"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866410.jpg",
+     "alt": "Gartenwohnung in Meilen, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19866414.jpg",
+     "alt": "Gartenwohnung in Meilen, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "1e51b2a4-262e-44ba-a493-2a81caf2c85b",
+    "first_name": "Lea",
+    "last_name": "Brandt",
+    "phone": "+41 00 000 00 04",
+    "email": "lea.brandt@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39853315-sq.jpg",
+     "alt": "Lea Brandt"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "J3WB-YW9M",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  },
+  {
+   "id": "aa0b6af8-21b6-4849-b6e1-f52e788d8076",
+   "slug": "landhaus-in-erlenbach-aa0b6af8-21b6-4849-b6e1-f52e788d8076",
+   "title": "Landhaus in Erlenbach",
+   "description": "<p>Verkauft: ein Landhaus mit Obstgarten über dem Dorf.</p>",
+   "description_text": "Verkauft: ein Landhaus mit Obstgarten über dem Dorf.",
+   "offer_type": "buy",
+   "property_type": "house",
+   "status": "sold",
+   "price": 3680000,
+   "currency": "CHF",
+   "rooms": 6.5,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 230,
+   "land_surface": 900,
+   "address": {
+    "street": "Bergstrasse 37",
+    "postcode": "8703",
+    "city": "Erlenbach",
+    "country": "Switzerland",
+    "lat": 47.302,
+    "lng": 8.6
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082200.jpg",
+     "alt": "Landhaus in Erlenbach"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082230.jpg",
+     "alt": "Landhaus in Erlenbach, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8082297.jpg",
+     "alt": "Landhaus in Erlenbach, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "ab16fd83-34cd-4d24-b4e8-657faae683ef",
+    "first_name": "Nora",
+    "last_name": "Vey",
+    "phone": "+41 00 000 00 02",
+    "email": "nora.vey@studio-vey.example.com",
+    "languages": [
+     "de",
+     "en"
+    ],
+    "team_ids": [
+     "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-39219735-sq.jpg",
+     "alt": "Nora Vey"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "SJ2L-PD87",
+   "team_ids": [
+    "31e63cdf-964e-471b-8533-52d53f4b6b0c"
+   ]
+  }
+ ],
+ "developments": [],
+ "fixture_only": {
+  "listings": {
+   "fa3c035e-94a3-4e55-b8d0-ec43f0951d0b": {
+    "energy_class": "C",
+    "year_built": 2019,
+    "floor": 4,
+    "terrace_surface": 42
+   },
+   "9505dc81-aa32-45e6-81ad-43a7f4ffc596": {
+    "energy_class": "C",
+    "year_built": 1931
+   },
+   "3b871f17-956e-4913-9dbf-80a8e8aa966d": {
+    "energy_class": "E",
+    "year_built": 1908,
+    "floor": 2,
+    "balcony_surface": 8
+   },
+   "3f0cf1c7-3460-4524-a692-9bdcdf745db7": {
+    "energy_class": "B",
+    "year_built": 1924,
+    "floor": 3
+   },
+   "7677f7ad-dca7-4d49-9cf7-9bc79615fb1b": {
+    "energy_class": "C",
+    "year_built": 2016,
+    "terrace_surface": 30
+   },
+   "63e208b4-28bc-4be2-90cb-e705fecbc27d": {
+    "energy_class": "E",
+    "year_built": 2012,
+    "floor": 0,
+    "terrace_surface": 60
+   },
+   "f0f9576b-20f9-4d96-8ff5-a97cc2d5f36f": {
+    "energy_class": "B",
+    "year_built": 2021,
+    "floor": 6,
+    "terrace_surface": 95
+   },
+   "d1942590-59ac-426f-abd6-a618828d431c": {
+    "energy_class": "E",
+    "year_built": 2008,
+    "terrace_surface": 40
+   },
+   "62c89025-fe4a-44dd-86cc-141e89a09197": {
+    "energy_class": "D",
+    "year_built": 2015,
+    "floor": 2,
+    "terrace_surface": 24
+   },
+   "6223957b-18c8-472f-8aa6-d0d304dfb76e": {
+    "energy_class": "E",
+    "year_built": 1998
+   },
+   "1ba20f4f-d665-4d0b-ac0f-3434b5c71e18": {
+    "energy_class": "C",
+    "year_built": 1895,
+    "floor": 3
+   },
+   "88e60c87-6f8e-4227-80ab-9fbf0ca6e4cf": {
+    "energy_class": "E",
+    "year_built": 2018,
+    "terrace_surface": 120
+   },
+   "2138f498-5e26-4cc4-b43b-61b9d9c7b665": {
+    "energy_class": "C",
+    "year_built": 2010,
+    "floor": 3,
+    "balcony_surface": 10,
+    "charges": 350
+   },
+   "d6de24d2-b54a-4928-af7a-0cb745a15687": {
+    "energy_class": "E",
+    "year_built": 2005,
+    "charges": 450
+   },
+   "3dc58fd5-5a9a-44e7-bbac-de9ebe6816ee": {
+    "energy_class": "C",
+    "year_built": 2017,
+    "floor": 4,
+    "balcony_surface": 14,
+    "charges": 300
+   },
+   "62405508-233d-4e9e-904d-5d46d81215d5": {
+    "energy_class": "C",
+    "year_built": 1930,
+    "floor": 2,
+    "balcony_surface": 6,
+    "charges": 280
+   },
+   "00fe32a0-9043-434e-b38b-e445a9932a4b": {
+    "energy_class": "B",
+    "year_built": 1965,
+    "terrace_surface": 60
+   },
+   "f69cf358-3732-4f71-8e0f-60da4e4a5867": {
+    "energy_class": "A",
+    "year_built": 2014,
+    "floor": 5,
+    "terrace_surface": 28
+   },
+   "e735949f-52d3-4d05-8eb6-772604bd52e6": {
+    "energy_class": "C",
+    "year_built": 2002
+   },
+   "5446975c-f099-40e0-9485-9c3cba2bfc3c": {
+    "energy_class": "C",
+    "year_built": 2019,
+    "floor": 3,
+    "balcony_surface": 18
+   },
+   "b012539e-92c5-48e1-b72d-96fd49c1ba08": {
+    "energy_class": "C",
+    "year_built": 2011,
+    "floor": 0,
+    "terrace_surface": 75
+   },
+   "aa0b6af8-21b6-4849-b6e1-f52e788d8076": {
+    "energy_class": "C",
+    "year_built": 1952
+   }
+  },
+  "units": {},
+  "developments": {}
+ }
+}

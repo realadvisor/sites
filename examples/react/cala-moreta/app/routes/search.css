@@ -1,0 +1,8 @@
+.phead { padding-bottom: clamp(24px, 3vw, 36px); }
+.phead h1 { max-width: 22ch; }
+.results { padding-bottom: var(--section); }
+.results .rs-grid { row-gap: var(--rs-gap); }
+.results .rs-bar { border-bottom: 1px solid var(--line); }
+.results .rs-count { font: 300 1.375rem/1.2 var(--font-display); }
+.results .rs-chip { border-radius: 999px; }
+.results .rs.is-map .rs-list { --rs-cols: 1; gap: 20px; }

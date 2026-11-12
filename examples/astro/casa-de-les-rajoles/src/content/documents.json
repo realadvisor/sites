@@ -1,0 +1,59 @@
+{
+  "updated": "2026-11-12",
+  "files": [
+    {
+      "id": "dossier",
+      "lang": "es",
+      "href": "/documents/dossier-casa-de-les-rajoles-es.pdf",
+      "title": "Dossier",
+      "description": "El proyecto, los dos edificios, las tipologías y la oficina de ventas.",
+      "pages": 4,
+      "bytes": 593862
+    },
+    {
+      "id": "precios",
+      "lang": "es",
+      "href": "/documents/precios-casa-de-les-rajoles-es.pdf",
+      "title": "Lista de precios",
+      "description": "Las 28 viviendas con superficies, planta, precio y disponibilidad.",
+      "pages": 1,
+      "bytes": 64155
+    },
+    {
+      "id": "planos",
+      "lang": "es",
+      "href": "/documents/planos-casa-de-les-rajoles-es.pdf",
+      "title": "Planos",
+      "description": "Un plano indicativo por tipología y edificio.",
+      "pages": 14,
+      "bytes": 239755
+    },
+    {
+      "id": "dossier",
+      "lang": "en",
+      "href": "/documents/dossier-casa-de-les-rajoles-en.pdf",
+      "title": "Brochure",
+      "description": "The project, the two buildings, the home types and the sales office.",
+      "pages": 4,
+      "bytes": 594128
+    },
+    {
+      "id": "precios",
+      "lang": "en",
+      "href": "/documents/precios-casa-de-les-rajoles-en.pdf",
+      "title": "Price list",
+      "description": "All 28 homes with areas, floor, price and availability.",
+      "pages": 1,
+      "bytes": 65019
+    },
+    {
+      "id": "planos",
+      "lang": "en",
+      "href": "/documents/planos-casa-de-les-rajoles-en.pdf",
+      "title": "Floor plans",
+      "description": "One indicative plan per home type and building.",
+      "pages": 14,
+      "bytes": 237989
+    }
+  ]
+}

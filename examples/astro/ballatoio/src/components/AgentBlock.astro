@@ -1,0 +1,64 @@
+---
+/**
+ * One agent in plain type: name, role, languages, phone, e-mail. A real
+ * portrait (4:5 crop through the image helper) only when the data has one;
+ * never initials.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Agent } from '@realadvisor/sites-sdk/types';
+import { UI, fill, href, type Lang } from '../lib/i18n';
+import { languageList, telHref } from '../lib/format';
+import { agentName, agentSlug } from '../lib/data';
+
+interface Props {
+  agent: Agent;
+  lang: Lang;
+  /** Name as a heading of this level. */
+  heading?: 'h1' | 'h2' | 'h3';
+  /** Link the name to the agent page. */
+  link?: boolean;
+  /** Extra line under the contacts (e.g. number of homes). */
+  note?: string;
+  size?: 'l' | 'm';
+  /** The page's LCP image (agent page). */
+  priority?: boolean;
+  /** Portrait sizes attribute when the layout differs from the default. */
+  sizes?: string;
+}
+const { agent: a, lang, heading: H = 'h3', link = true, note, size = 'm', priority = false, sizes } = Astro.props;
+const ui = UI[lang];
+const name = agentName(a);
+const langs = languageList(a.languages, lang);
+---
+<div class:list={['agent', `agent-${size}`, { 'has-photo': !!a.photo }]}>
+  {a.photo && (
+    <div class="frame agent-photo">
+      <RaImage src={a.photo} alt={a.photo.alt || name} width={480} height={600} priority={priority} sizes={sizes ?? (size === 'l' ? '(min-width: 600px) 220px, 80vw' : '120px')} />
+    </div>
+  )}
+  <div class="agent-text">
+    <H class="agent-name d-m">{link ? <a href={href('team', lang, agentSlug(a))}>{name}</a> : name}</H>
+    {a.title && <p class="agent-role">{a.title}</p>}
+    {langs && <p class="agent-langs muted">{ui.speaks} {langs}</p>}
+    <p class="agent-contacts">
+      {a.phone && <a class="num" href={telHref(a.phone)}>{a.phone}</a>}
+      {a.email && <a href={`mailto:${a.email}`} aria-label={fill(ui.writeTo, { name: a.first_name })}>{a.email}</a>}
+    </p>
+    {note && <p class="agent-note small">{note}</p>}
+  </div>
+</div>
+
+<style>
+  .agent { display: grid; gap: 20px; align-content: start; }
+  .agent.has-photo.agent-m { grid-template-columns: 120px 1fr; align-items: start; }
+  .agent-photo { aspect-ratio: 4 / 5; }
+  .agent-l .agent-photo { max-width: 320px; }
+  @media (min-width: 600px) { .agent-l.has-photo { grid-template-columns: minmax(0, 220px) 1fr; gap: 28px; align-items: end; } }
+  .agent-text { display: grid; gap: 6px; }
+  .agent-m .agent-name { font-size: var(--fs-s); }
+  .agent-name a { text-decoration: none; }
+  .agent-name a:hover { text-decoration: underline; }
+  .agent-contacts { display: grid; margin-top: 8px; }
+  .agent-contacts a { display: inline-flex; align-items: center; min-height: 36px; overflow-wrap: anywhere; }
+  .agent-note { margin-top: 4px; }
+</style>

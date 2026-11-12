@@ -1,0 +1,76 @@
+---
+/** One journal post: title, byline, cover, text, other posts. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { render } from 'astro:content';
+import Site from '../layouts/Site.astro';
+import { agency, agentName, agentSlug, brandName, sites } from '../lib/data';
+import { minutes, postSlugs, postsOf, type Post } from '../lib/journal';
+import { placePhoto } from '../lib/places';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props { lang: Lang; post: Post }
+const { lang, post } = Astro.props;
+const ui = UI[lang];
+const [ag, agents, posts, slugs] = await Promise.all([agency(), sites.agents(), postsOf(lang), postSlugs(post)]);
+const { Content } = await render(post);
+const a = agents.find((x) => x.id === post.data.author);
+const cover = placePhoto(post.data.cover, lang, post.data.coverIndex);
+const others = posts.filter((p) => p.id !== post.id).slice(0, 3);
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  datePublished: post.data.date.toISOString().slice(0, 10),
+  inLanguage: lang,
+  url: pageUrl,
+  ...(a ? { author: { '@type': 'Person', name: agentName(a) } } : {}),
+  publisher: { '@type': 'RealEstateAgent', name: brandName(ag) },
+};
+---
+<Site lang={lang} current="journal" title={`${post.data.title} | ${brandName(ag)}`} description={post.data.excerpt}
+  image={cover && img(cover.url, { w: 1200, h: 630 })} alternates={alternates('journal', slugs)} jsonLd={jsonLd}>
+  <article>
+    <header class="wrap phead head">
+      <p class="small"><a class="back" href={href('journal', lang)}><span aria-hidden="true">←</span> {ui.journalH1}</a></p>
+      <h1 class="d-xl">{post.data.title}</h1>
+      <p class="lead">{post.data.excerpt}</p>
+      <p class="small muted">
+        <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date, lang)}</time>
+        {a && <> · <a href={href('team', lang, agentSlug(a))}>{fill(ui.by, { name: agentName(a) })}</a></>}
+        {' · '}{fill(ui.minutes, { n: minutes(post) })}
+      </p>
+    </header>
+    {cover && <div class="wrap"><div class="frame cover"><RaImage src={cover} alt={cover.alt} width={1600} height={800} priority widths={[640, 960, 1280, 1600, 1920]} sizes="(min-width: 1520px) 1424px, 100vw" mobile={{ width: 800, height: 600 }} /></div></div>}
+    <div class="wrap body"><div class="prose"><Content /></div></div>
+  </article>
+  {others.length > 0 && (
+    <nav class="wrap others" aria-labelledby="others-h">
+      <h2 id="others-h" class="d-l">{ui.morePosts}</h2>
+      <ul>
+        {others.map((p) => (
+          <li><a href={href('journal', lang, p.data.path)}><span class="d-s">{p.data.title}</span><span class="small muted">{formatDate(p.data.date, lang)}</span></a></li>
+        ))}
+      </ul>
+    </nav>
+  )}
+</Site>
+
+<style>
+  .head { display: grid; gap: 20px; }
+  .head h1 { max-width: 18ch; }
+  .back { color: var(--muted); text-decoration: none; display: inline-flex; min-height: 32px; align-items: center; }
+  .back:hover { color: var(--text); text-decoration: underline; }
+  .cover { aspect-ratio: 2 / 1; }
+  @media (max-width: 760px) { .cover { aspect-ratio: 4 / 3; } }
+  .body { display: grid; grid-template-columns: 1fr minmax(0, var(--text-w)) 1fr; padding-top: clamp(48px, 6vw, 96px); }
+  .body .prose { grid-column: 2; }
+  @media (max-width: 900px) { .body { grid-template-columns: 1fr; } .body .prose { grid-column: 1; } }
+  .others { padding-top: var(--section); display: grid; gap: clamp(20px, 3vw, 32px); }
+  .others ul { border-top: 1px solid var(--text); }
+  .others a { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .others a:hover .d-s { text-decoration: underline; }
+  @media (max-width: 600px) { .others a { flex-direction: column; gap: 6px; } }
+</style>

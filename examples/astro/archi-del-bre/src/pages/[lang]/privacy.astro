@@ -1,0 +1,7 @@
+---
+// Privacy policy in the other languages (/de/privacy).
+export const prerender = false;
+import Legal from '../../views/Legal.astro';
+if (Astro.params.lang !== 'de') return Astro.rewrite('/404');
+---
+<Legal l="de" kind="privacy" />

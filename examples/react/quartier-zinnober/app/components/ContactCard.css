@@ -1,0 +1,9 @@
+/* From components/ContactCard.astro (scoped there: div.card, not the /lage article cards). */
+div.card { display: flex; gap: 18px; align-items: flex-start; }
+@media (max-width: 420px) { div.card { flex-direction: column; } }
+div.card .who { display: grid; gap: 4px; min-width: 0; }
+div.card .name { font: 750 var(--step-1)/1.1 var(--display); }
+div.card .role { font-size: 0.9375rem; }
+div.card ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; }
+div.card a { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 600; text-decoration: none; overflow-wrap: normal; }
+div.card a:hover span { text-decoration: underline; }

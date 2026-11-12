@@ -1,0 +1,339 @@
+---
+/**
+ * Units page: wing switch, a vertical floor rail for the wing, the selected
+ * floor drawn as a plate (FloorPlate) with its units listed beside it, then
+ * every unit in one table. State lives in the URL (?ala=, ?planta=, ?solo=,
+ * ?tipo=): every control is a link and works without JavaScript; the script
+ * only swaps the floor in place.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import FloorPlate from '../components/FloorPlate.astro';
+import { loadSite } from '../lib/data';
+import { alternates, availCount, fill, href, longDate, tr, type Lang } from '../lib/i18n';
+import {
+  KINDS, WINGS, floorOf, floorsOf, kindLabel, kindOf, m2, orientation, outdoor, outdoorLabel, sortUnits, statusLabel,
+  unitNumber, unitPrice, unitSlug, unitTitle, wingOf, type Kind, type Wing,
+} from '../lib/units';
+import { WING_ADDRESS } from '../content/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = tr(lang);
+const site = await loadSite();
+const { dev } = site;
+const units = sortUnits(dev.units);
+const q = Astro.url.searchParams;
+
+const wing: Wing = q.get('ala') === 'nueva' ? 'nueva' : '1908';
+const avail = (us: typeof units) => us.filter((u) => u.status === 'available').length;
+const onFloor = (w: Wing, f: number) => units.filter((u) => wingOf(u) === w && (u.floor ?? 0) === f);
+/** Default floor of a wing: the one with most available units, the lower one on a tie. */
+const defaultFloor = (w: Wing) => {
+  const fs = floorsOf(units, w);
+  return [...fs].reverse().reduce((best, f) => (avail(onFloor(w, f)) > avail(onFloor(w, best)) ? f : best), fs[fs.length - 1] ?? 0);
+};
+const asked = Number(q.get('planta'));
+const floor = q.has('planta') && floorsOf(units, wing).includes(asked) ? asked : defaultFloor(wing);
+const scale = Object.fromEntries(
+  WINGS.map((w) => [w, Math.max(...floorsOf(units, w).map((f) => onFloor(w, f).reduce((s, u) => s + (u.living_surface ?? 0), 0)))]),
+) as Record<Wing, number>;
+const floorUrl = (w: Wing, f: number) => `${href('units', lang)}?ala=${w}&planta=${f}#planta`;
+const wingUrl = (w: Wing) => `${href('units', lang)}?ala=${w}#planta`;
+
+// All-units table filters.
+const solo = q.get('solo') === '1';
+const tipo = (KINDS as readonly string[]).includes(q.get('tipo') ?? '') ? (q.get('tipo') as Kind) : null;
+const tableUnits = units.filter((u) => (!solo || u.status === 'available') && (!tipo || kindOf(u) === tipo));
+const tableUrl = (o: { solo?: boolean; tipo?: Kind | null }) => {
+  const p = new URLSearchParams();
+  if (q.get('ala')) p.set('ala', wing);
+  if (q.has('planta')) p.set('planta', String(floor));
+  if (o.solo ?? solo) p.set('solo', '1');
+  const tp = o.tipo === undefined ? tipo : o.tipo;
+  if (tp) p.set('tipo', tp);
+  const s = p.toString();
+  return `${href('units', lang)}${s ? `?${s}` : ''}#todas`;
+};
+const kindsPresent = KINDS.filter((k) => units.some((u) => kindOf(u) === k));
+const filtered = solo || !!tipo || q.has('ala') || q.has('planta');
+const today = new Date().toISOString().slice(0, 10);
+const title = lang === 'es' ? `Viviendas en venta en Russafa | ${dev.title}` : `Homes for sale in Russafa | ${dev.title}`;
+const description = fill(t.unitsLead, { n: dev.stats.units, a: dev.stats.available });
+---
+<Site
+  site={site}
+  lang={lang}
+  route="units"
+  title={title}
+  description={`${dev.title}, ${dev.address.street}, ${dev.address.city}. ${description}`}
+  image={dev.photos[0] && img(dev.photos[0].url, { w: 1200, h: 630 })}
+  alternates={alternates('units')}
+  noindex={filtered}
+>
+  <section class="wrap head">
+    <h1>{t.unitsTitle}</h1>
+    <p class="lede">{description}</p>
+  </section>
+
+  <section class="wrap explorer" id="planta" data-explorer aria-label={t.floorRail}>
+    <nav class="wings" aria-label={t.wingSwitch}>
+      {WINGS.map((w) => {
+        const us = units.filter((u) => wingOf(u) === w);
+        return (
+          <a href={wingUrl(w)} data-wing-link={w} aria-current={w === wing ? 'true' : undefined}>
+            <span class="w-name">{t.wings[w]}</span>
+            <span class="w-meta">{WING_ADDRESS[w]} · {fill(t.wingCount, { n: us.length, a: avail(us) })}</span>
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="stage">
+      {WINGS.map((w) => (
+        <nav class="rail" aria-label={`${t.floorRail}, ${t.wings[w]}`} data-rail={w} data-default={defaultFloor(w)} hidden={w !== wing}>
+          <ol>
+            {floorsOf(units, w).map((f) => {
+              const n = avail(onFloor(w, f));
+              return (
+                <li>
+                  <a href={floorUrl(w, f)} data-floor-link={`${w}:${f}`} aria-current={w === wing && f === floor ? 'true' : undefined} class:list={{ none: n === 0 }}>
+                    <span class="f">{floorOf(f, lang)}</span>
+                    <span class="n">{n ? availCount(n, lang) : t.floorNone}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+      ))}
+
+      <div class="panels">
+        {WINGS.flatMap((w) =>
+          floorsOf(units, w).map((f) => {
+            const us = onFloor(w, f);
+            return (
+              <div class="panel" data-panel={`${w}:${f}`} hidden={!(w === wing && f === floor)}>
+                <div class="plate-col">
+                  <h2>{fill(t.plateTitle, { f: floorOf(f, lang), w: t.wings[w] })}</h2>
+                  <FloorPlate units={us} lang={lang} wing={w} scaleArea={scale[w]} label={`${floorOf(f, lang)}, ${t.wings[w]}`} />
+                  <div class="legend">
+                    <span class="lg available">{t.status.available}</span>
+                    <span class="lg reserved">{t.status.reserved}</span>
+                    <span class="lg sold">{t.status.sold}</span>
+                    <span class="note">{t.plateNote}</span>
+                  </div>
+                </div>
+                <ul class="list">
+                  {us.map((u) => {
+                    const o = outdoor(u);
+                    return (
+                      <li class:list={[u.status]} data-unit-row={u.id}>
+                        <a href={href('units', lang, unitSlug(u))}>
+                          <span class="no">{unitNumber(u)}</span>
+                          <span class="what">
+                            <b>{kindOf(u) === 'atico' ? `${t.kinds.atico[0]}, ${kindLabel(`${Math.min(4, u.bedrooms ?? 1)}d` as Kind, lang)}` : kindLabel(kindOf(u), lang)}</b>
+                            <span class="facts num">{u.living_surface && m2(u.living_surface)}{o && ` · ${outdoorLabel(o, lang).toLowerCase()} ${m2(o.m2)}`}{orientation(u, lang) && ` · ${orientation(u, lang)}`}</span>
+                          </span>
+                          <span class:list={['price num', { st: u.status !== 'available' }]}>{u.status === 'available' ? unitPrice(u, lang) : <span class:list={['pill', u.status]}>{statusLabel(u, lang)}</span>}</span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          }),
+        )}
+      </div>
+    </div>
+  </section>
+
+
+  <section class="wrap table-sec" id="todas" aria-labelledby="todas-h">
+    <div class="t-head">
+      <h2 id="todas-h">{t.allUnits}</h2>
+      <p class="muted small">{fill(t.updated, { d: longDate(today, lang) })}</p>
+    </div>
+    <nav class="filters" aria-label={t.typeTabs}>
+      <a href={tableUrl({ solo: false })} aria-current={!solo ? 'true' : undefined}>{t.showAll}</a>
+      <a href={tableUrl({ solo: true })} aria-current={solo ? 'true' : undefined}>{t.onlyAvailable}</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href={tableUrl({ tipo: null })} aria-current={!tipo ? 'true' : undefined}>{lang === 'es' ? 'Todas las tipologías' : 'All types'}</a>
+      {kindsPresent.map((k) => <a href={tableUrl({ tipo: k })} aria-current={tipo === k ? 'true' : undefined}>{kindLabel(k, lang, 2)}</a>)}
+    </nav>
+    {tableUnits.length === 0 ? (
+      <p class="empty">{t.noneFilter} <a class="link" href={tableUrl({ solo: false, tipo: null })}>{t.showAll}</a></p>
+    ) : (
+      <table class="units">
+        <thead>
+          <tr>
+            <th scope="col">{t.colNumber}</th>
+            <th scope="col">{t.colType}</th>
+            <th scope="col">{t.colWing}</th>
+            <th scope="col">{t.colFloor}</th>
+            <th scope="col" class="r">{t.colSize}</th>
+            <th scope="col" class="r">{t.colOut}</th>
+            <th scope="col">{t.colOrient}</th>
+            <th scope="col" class="r">{t.colPrice}</th>
+            <th scope="col"><span class="visually-hidden">{t.view}</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableUnits.map((u) => {
+            const o = outdoor(u);
+            return (
+              <tr class={u.status}>
+                <td class="c-no num">{unitNumber(u)}</td>
+                <td class="c-type"><a href={href('units', lang, unitSlug(u))}>{unitTitle(u, lang)}</a></td>
+                <td class="c-wing">{t.wings[wingOf(u)]}</td>
+                <td class="c-floor">{floorOf(u.floor ?? 0, lang)}</td>
+                <td class="r num c-size">{u.living_surface ? m2(u.living_surface) : ''}</td>
+                <td class="r num c-out">{o ? `${m2(o.m2)}` : '–'}</td>
+                <td class="c-or">{orientation(u, lang)}</td>
+                <td class="r num c-price">{u.status === 'available' ? unitPrice(u, lang) : <span class:list={['pill', u.status]}>{statusLabel(u, lang)}</span>}</td>
+                <td class="c-go"><a href={href('units', lang, unitSlug(u))} aria-label={`${t.viewUnit} ${unitNumber(u)}`}>{t.view}</a></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    )}
+  </section>
+</Site>
+
+<script>
+  // Progressive enhancement: switch wing and floor in place and keep the URL in step.
+  const root = document.querySelector<HTMLElement>('[data-explorer]');
+  if (root) {
+    const show = (wing: string, floor: string, push = true) => {
+      root.querySelectorAll<HTMLElement>('[data-rail]').forEach((r) => (r.hidden = r.dataset.rail !== wing));
+      root.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== `${wing}:${floor}`));
+      root.querySelectorAll<HTMLAnchorElement>('[data-floor-link]').forEach((a) => {
+        if (a.dataset.floorLink === `${wing}:${floor}`) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+      root.querySelectorAll<HTMLAnchorElement>('[data-wing-link]').forEach((a) => {
+        if (a.dataset.wingLink === wing) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+      if (push) {
+        const u = new URL(location.href);
+        u.searchParams.set('ala', wing);
+        u.searchParams.set('planta', floor);
+        u.hash = 'planta';
+        history.replaceState(null, '', u);
+      }
+    };
+    root.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest<HTMLAnchorElement>('[data-floor-link],[data-wing-link]');
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      if (a.dataset.floorLink) {
+        const [w, f] = a.dataset.floorLink.split(':');
+        show(w!, f!);
+      } else {
+        const w = a.dataset.wingLink!;
+        const rail = root.querySelector<HTMLElement>(`[data-rail="${w}"]`);
+        show(w, rail?.dataset.default ?? '1');
+      }
+    });
+    // Plate and list highlight each other.
+    root.addEventListener('pointerover', (e) => {
+      const el = (e.target as Element).closest<HTMLElement>('[data-unit],[data-unit-row]');
+      root.querySelectorAll('.hl').forEach((x) => x.classList.remove('hl'));
+      const id = el?.dataset.unit ?? el?.dataset.unitRow;
+      if (id) root.querySelectorAll(`[data-unit="${id}"],[data-unit-row="${id}"]`).forEach((x) => x.classList.add('hl'));
+    });
+  }
+</script>
+
+<style>
+  .head { padding-block: clamp(48px, 6vw, 88px) 32px; }
+  .head h1 { margin-bottom: 16px; }
+  .explorer { scroll-margin-top: 16px; }
+  .wings { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line-strong); background: var(--paper); }
+  .wings a { display: grid; gap: 6px; padding: 18px 24px 16px; text-decoration: none; color: var(--text); border-bottom: 3px solid transparent; }
+  .wings a + a { border-left: 1px solid var(--line-strong); }
+  .wings a[aria-current] { border-bottom-color: var(--accent); background: #fff; }
+  .wings a:not([aria-current]) .w-name { color: var(--muted); }
+  .w-name { font: 400 1.5rem/1.1 var(--serif); }
+  .w-meta { font-size: 0.875rem; color: var(--muted); }
+  .stage { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 0 clamp(24px, 3vw, 48px); margin-top: 32px; align-items: start; }
+  .stage > *, .panel > * { min-width: 0; }
+  .rail ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line-strong); }
+  .rail a { display: grid; gap: 2px; padding: 11px 0 11px 18px; margin-left: -1px; border-left: 3px solid transparent; text-decoration: none; color: var(--text); }
+  .rail a:hover { border-left-color: var(--line-strong); }
+  .rail a[aria-current] { border-left-color: var(--accent); }
+  .rail a[aria-current] .f { color: var(--accent-strong); }
+  .rail .f { font: 400 1.125rem/1.2 var(--serif); }
+  .rail .n { font-size: 0.8125rem; color: var(--st-av-ink); font-weight: 600; }
+  .rail .none .n { color: var(--muted); font-weight: 400; }
+  .panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 380px); gap: 32px; align-items: start; }
+  .plate-col h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem); margin-bottom: 16px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 0.8125rem; color: var(--muted); align-items: center; }
+  .lg::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; border: 1px solid; }
+  .lg.available::before { background: var(--st-av); border-color: var(--st-av-line); }
+  .lg.reserved::before { background: var(--st-re); border-color: var(--st-re-line); }
+  .lg.sold::before { background: var(--st-so); border-color: var(--st-so-line); }
+  .note { flex-basis: 100%; }
+  .list { list-style: none; margin: 58px 0 0; padding: 0; border-top: 1px solid var(--line-strong); }
+  .list li { border-bottom: 1px solid var(--line); }
+  .list a { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 14px 8px; text-decoration: none; color: var(--text); }
+  .list li.hl a, .list a:hover { background: var(--paper); }
+  .list .no { font: 400 1.25rem/1 var(--serif); }
+  .list .what { display: grid; gap: 4px; }
+  .list .what b { font-weight: 600; }
+  .list .facts { font-size: 0.875rem; color: var(--muted); white-space: normal; }
+  .list .price { font-weight: 600; }
+  .list li.sold .no, .list li.sold b { color: var(--muted); }
+  .table-sec { margin-top: var(--space-section); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line-strong); scroll-margin-top: 16px; }
+  .t-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 20px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; align-items: center; }
+  .filters a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 999px; text-decoration: none; font-size: 0.875rem; color: var(--text); background: var(--paper); }
+  .filters a[aria-current] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .filters .sep { width: 1px; height: 24px; background: var(--line-strong); margin-inline: 6px; }
+  .empty { padding: 24px 0; }
+  table.units { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .units th { text-align: left; font: 600 0.75rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 10px 10px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+  .units td { padding: 13px 10px; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  .units .r { text-align: right; }
+  .units .c-no { font: 400 1.125rem/1 var(--serif); }
+  .units .c-type a { text-decoration: none; font-weight: 600; }
+  .units .c-type a:hover { text-decoration: underline; }
+  .units .c-price { font-weight: 600; }
+  .units .c-go a { font-weight: 600; color: var(--accent-strong); display: inline-block; padding: 4px 0; }
+  .units tr.sold td { color: var(--muted); }
+  .units tr.sold .c-type a { color: var(--muted); font-weight: 400; }
+  @media (max-width: 1100px) {
+    .panel { grid-template-columns: 1fr; gap: 8px; }
+    .list { margin-top: 16px; }
+  }
+  @media (max-width: 860px) {
+    .stage { grid-template-columns: 1fr; margin-top: 20px; }
+    .rail ol { display: flex; gap: 0; overflow-x: auto; border-left: 0; border-bottom: 1px solid var(--line-strong); scrollbar-width: none; margin-bottom: 20px; }
+    .rail li { flex: none; }
+    .rail a { padding: 10px 14px 12px; margin: 0 0 -1px; border-left: 0; border-bottom: 3px solid transparent; }
+    .rail a:hover { border-bottom-color: var(--line-strong); }
+    .rail a[aria-current] { border-bottom-color: var(--accent); }
+    .rail .f { font-size: 1rem; white-space: nowrap; }
+    .rail .n { white-space: nowrap; }
+    .wings a { padding: 14px 14px 12px; }
+    .w-name { font-size: 1.25rem; }
+    .w-meta { font-size: 0.8125rem; }
+  }
+  @media (max-width: 760px) {
+    .units thead { display: none; }
+    .units, .units tbody, .units tr, .units td { display: block; }
+    .units tr { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .units td { padding: 0; border: 0; }
+    .units .c-no { grid-row: 1 / 3; }
+    .units .c-type { grid-column: 2; }
+    .units .c-price { grid-column: 3; grid-row: 1; text-align: right; }
+    .units .c-wing, .units .c-floor, .units .c-size, .units .c-out, .units .c-or { grid-column: 2; font-size: 0.875rem; color: var(--muted); display: inline; }
+    .units .c-wing { grid-row: 2; }
+    .units .c-floor, .units .c-out, .units .c-or { display: none; }
+    .units .c-size { grid-row: 2; grid-column: 3; text-align: right; }
+    .units .c-go { display: none; }
+  }
+</style>

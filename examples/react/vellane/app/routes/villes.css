@@ -1,0 +1,11 @@
+.tiles { list-style: none; margin-block: 0; display: grid; gap: 36px 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.tile { position: relative; display: grid; gap: 6px; }
+.tile img { width: 100%; height: auto; aspect-ratio: 10 / 7; object-fit: cover; border-radius: var(--radius-card); margin-bottom: 8px; }
+.tile__name { font-size: var(--step-2); }
+.tile__name a { text-decoration: none; }
+.tile__name a::after { content: ''; position: absolute; inset: 0; }
+.tile__name a:focus-visible { outline: none; }
+.tile__name a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: var(--radius-card); }
+.tile:hover .tile__name { color: var(--accent-strong); }
+.small { margin-top: 56px; display: grid; gap: 12px; }
+.small ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; }

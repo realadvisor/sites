@@ -1,0 +1,3725 @@
+{
+ "_about": "Fictional example data in the @realadvisor/sites-sdk shape. fixture_only holds fields the API does not have yet: never present them as API data.",
+ "languages": [
+  "fr"
+ ],
+ "portals": {
+  "main": "website"
+ },
+ "organisation": {
+  "id": "91ee835d-c4e9-44c5-842a-74b0049cc13e",
+  "name": "Vellane Immobilier SAS",
+  "website": "https://vellane.example.com",
+  "address": {
+   "street": "Rue Auguste Comte 21",
+   "postcode": "69002",
+   "city": "Lyon",
+   "country": "France",
+   "lat": 45.754,
+   "lng": 4.831
+  },
+  "brand": {
+   "primary": "#C2452D"
+  }
+ },
+ "teams": [
+  {
+   "id": "0775d2c0-85c9-477d-aa56-54555bf04ed6",
+   "name": "Vellane Presqu'île",
+   "primary": true,
+   "website": "https://vellane.example.com",
+   "phone": "+33 0 00 00 00 01",
+   "email": "presquile@vellane.example.com",
+   "address": {
+    "street": "Rue Auguste Comte 21",
+    "postcode": "69002",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.754,
+    "lng": 4.831
+   },
+   "socials": {},
+   "description": "<p>Notre agence entre Bellecour et Ainay. Appartements anciens de la Presqu'île, des Brotteaux et du 7e, et Villeurbanne.</p>",
+   "description_text": "Notre agence entre Bellecour et Ainay. Appartements anciens de la Presqu'île, des Brotteaux et du 7e, et Villeurbanne."
+  },
+  {
+   "id": "9f829fb2-ac5d-4398-abd3-a419c50ae630",
+   "name": "Vellane Croix-Rousse",
+   "website": "https://vellane.example.com",
+   "phone": "+33 0 00 00 00 02",
+   "email": "croix-rousse@vellane.example.com",
+   "address": {
+    "street": "Boulevard de la Croix-Rousse 104",
+    "postcode": "69004",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.774,
+    "lng": 4.827
+   },
+   "socials": {},
+   "description": "<p>Sur le boulevard de la Croix-Rousse. Canuts du plateau et des pentes, Vieux Lyon, Vaise et Caluire.</p>",
+   "description_text": "Sur le boulevard de la Croix-Rousse. Canuts du plateau et des pentes, Vieux Lyon, Vaise et Caluire."
+  },
+  {
+   "id": "1b880f0c-16ba-4eed-82a4-8b97b9176564",
+   "name": "Vellane Chartrons",
+   "website": "https://vellane.example.com",
+   "phone": "+33 0 00 00 00 03",
+   "email": "chartrons@vellane.example.com",
+   "address": {
+    "street": "Rue Notre-Dame 58",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.851,
+    "lng": -0.572
+   },
+   "socials": {},
+   "description": "<p>Rue Notre-Dame, aux Chartrons. Appartements en pierre du centre de Bordeaux, Bacalan, Bastide et Le Bouscat.</p>",
+   "description_text": "Rue Notre-Dame, aux Chartrons. Appartements en pierre du centre de Bordeaux, Bacalan, Bastide et Le Bouscat."
+  },
+  {
+   "id": "7239b61e-ddc0-44a5-90b4-916ad880be23",
+   "name": "Vellane Caudéran",
+   "website": "https://vellane.example.com",
+   "phone": "+33 0 00 00 00 04",
+   "email": "cauderan@vellane.example.com",
+   "address": {
+    "street": "Avenue Louis Barthou 85",
+    "postcode": "33200",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.852,
+    "lng": -0.615
+   },
+   "socials": {},
+   "description": "<p>Avenue Louis Barthou. Échoppes et maisons de Caudéran, Mérignac et Pessac.</p>",
+   "description_text": "Avenue Louis Barthou. Échoppes et maisons de Caudéran, Mérignac et Pessac."
+  }
+ ],
+ "agents": [
+  {
+   "id": "72220ac5-77be-4dc1-88f9-a70171d0c592",
+   "first_name": "Léa",
+   "last_name": "Morel",
+   "phone": "+33 0 00 00 00 05",
+   "email": "lea.morel@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171180-sq.jpg",
+    "alt": "Léa Morel"
+   }
+  },
+  {
+   "id": "d82e0537-c1a1-4800-a1d3-3ccb496b9c4e",
+   "first_name": "Antoine",
+   "last_name": "Ferrand",
+   "phone": "+33 0 00 00 00 06",
+   "email": "antoine.ferrand@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428097-sq.jpg",
+    "alt": "Antoine Ferrand"
+   }
+  },
+  {
+   "id": "9828074c-e262-41e5-b465-c26513876a1d",
+   "first_name": "Nadia",
+   "last_name": "Benali",
+   "phone": "+33 0 00 00 00 07",
+   "email": "nadia.benali@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171167-sq.jpg",
+    "alt": "Nadia Benali"
+   }
+  },
+  {
+   "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+   "first_name": "Julien",
+   "last_name": "Payet",
+   "phone": "+33 0 00 00 00 08",
+   "email": "julien.payet@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+    "alt": "Julien Payet"
+   }
+  },
+  {
+   "id": "63d48249-086d-47b4-899b-d9c132d9703a",
+   "first_name": "Margaux",
+   "last_name": "Delorme",
+   "phone": "+33 0 00 00 00 09",
+   "email": "margaux.delorme@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171192-sq.jpg",
+    "alt": "Margaux Delorme"
+   }
+  },
+  {
+   "id": "e513616e-2a9a-49bf-8e22-a6c4819c0d50",
+   "first_name": "Romain",
+   "last_name": "Chabert",
+   "phone": "+33 0 00 00 00 10",
+   "email": "romain.chabert@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428093-sq.jpg",
+    "alt": "Romain Chabert"
+   }
+  },
+  {
+   "id": "80596617-53e3-47db-8d28-83a7e2a58865",
+   "first_name": "Pauline",
+   "last_name": "Darrigade",
+   "phone": "+33 0 00 00 00 11",
+   "email": "pauline.darrigade@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171196-sq.jpg",
+    "alt": "Pauline Darrigade"
+   }
+  },
+  {
+   "id": "e400e184-3e1d-4a73-9947-4a17887150fc",
+   "first_name": "Maxime",
+   "last_name": "Lacoste",
+   "phone": "+33 0 00 00 00 12",
+   "email": "maxime.lacoste@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428101-sq.jpg",
+    "alt": "Maxime Lacoste"
+   }
+  },
+  {
+   "id": "d87945c0-8d81-491d-846b-1c3abfc5820c",
+   "first_name": "Elsa",
+   "last_name": "Duprat",
+   "phone": "+33 0 00 00 00 13",
+   "email": "elsa.duprat@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8636645-sq.jpg",
+    "alt": "Elsa Duprat"
+   }
+  },
+  {
+   "id": "84bf9c49-6730-4ca0-b806-6429e0ba34da",
+   "first_name": "Thibault",
+   "last_name": "Garat",
+   "phone": "+33 0 00 00 00 14",
+   "email": "thibault.garat@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463183-sq.jpg",
+    "alt": "Thibault Garat"
+   }
+  },
+  {
+   "id": "16dae26e-1327-48de-9c36-287b27f45e3f",
+   "first_name": "Sophie",
+   "last_name": "Lalanne",
+   "phone": "+33 0 00 00 00 15",
+   "email": "sophie.lalanne@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463168-sq.jpg",
+    "alt": "Sophie Lalanne"
+   }
+  },
+  {
+   "id": "18b4fa4f-2fa8-4c8f-9e13-ee8f3477471f",
+   "first_name": "Yanis",
+   "last_name": "Ferreira",
+   "phone": "+33 0 00 00 00 16",
+   "email": "yanis.ferreira@vellane.example.com",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ],
+   "photo": {
+    "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7580994-sq.jpg",
+    "alt": "Yanis Ferreira"
+   }
+  }
+ ],
+ "listings": [
+  {
+   "id": "9ca9f3b5-3420-43e7-95a6-de60c496177f",
+   "slug": "appartement-bourgeois-a-ainay-9ca9f3b5-3420-43e7-95a6-de60c496177f",
+   "title": "Appartement bourgeois à Ainay",
+   "description": "<p>Un grand appartement de 168 m² au troisième étage d'un immeuble en pierre de taille, entre la place Ampère et la basilique d'Ainay.</p><p>Double salon avec cheminée en marbre, moulures et parquet en chêne, cuisine équipée séparée, quatre chambres dont une suite avec dressing. Hauteur sous plafond de 3,40 m.</p><p>Ascenseur, cave et chambre de service au sixième. Métro Ampère à trois minutes à pied.</p>",
+   "description_text": "Un grand appartement de 168 m² au troisième étage d'un immeuble en pierre de taille, entre la place Ampère et la basilique d'Ainay.\n\nDouble salon avec cheminée en marbre, moulures et parquet en chêne, cuisine équipée séparée, quatre chambres dont une suite avec dressing. Hauteur sous plafond de 3,40 m.\n\nAscenseur, cave et chambre de service au sixième. Métro Ampère à trois minutes à pied.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "sold",
+   "price": 1160000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 168,
+   "address": {
+    "street": "Rue Sainte-Hélène 14",
+    "postcode": "69002",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.754,
+    "lng": 4.832
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598128.jpg",
+     "alt": "Appartement bourgeois à Ainay"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598117.jpg",
+     "alt": "Appartement bourgeois à Ainay, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598118.jpg",
+     "alt": "Appartement bourgeois à Ainay, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598130.jpg",
+     "alt": "Appartement bourgeois à Ainay, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598114.jpg",
+     "alt": "Appartement bourgeois à Ainay, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598125.jpg",
+     "alt": "Appartement bourgeois à Ainay, photo 6"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7598131.jpg",
+     "alt": "Appartement bourgeois à Ainay, photo 7"
+    }
+   ],
+   "agent": {
+    "id": "72220ac5-77be-4dc1-88f9-a70171d0c592",
+    "first_name": "Léa",
+    "last_name": "Morel",
+    "phone": "+33 0 00 00 00 05",
+    "email": "lea.morel@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171180-sq.jpg",
+     "alt": "Léa Morel"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-11-04T09:00:00.000Z",
+   "reference": "68HD-C5HN",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "259ea7ef-4be6-4133-a505-5ed1c893f9c3",
+   "slug": "t4-avec-cheminee-brotteaux-259ea7ef-4be6-4133-a505-5ed1c893f9c3",
+   "title": "T4 avec cheminée, Brotteaux",
+   "description": "<p>Un T4 de 112 m² au deuxième étage d'un immeuble 1900, près de la place Puvis de Chavannes et du parc de la Tête d'Or.</p><p>Salon avec cheminée, salle à manger, cuisine équipée, deux chambres et un bureau, deux salles de bains. Balcon sur rue.</p><p>Ascenseur, cave et place de parking en sous-sol.</p>",
+   "description_text": "Un T4 de 112 m² au deuxième étage d'un immeuble 1900, près de la place Puvis de Chavannes et du parc de la Tête d'Or.\n\nSalon avec cheminée, salle à manger, cuisine équipée, deux chambres et un bureau, deux salles de bains. Balcon sur rue.\n\nAscenseur, cave et place de parking en sous-sol.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 750000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 112,
+   "address": {
+    "street": "Rue Duquesne 31",
+    "postcode": "69006",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.773,
+    "lng": 4.845
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135112.jpg",
+     "alt": "T4 avec cheminée, Brotteaux"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135114.jpg",
+     "alt": "T4 avec cheminée, Brotteaux, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135113.jpg",
+     "alt": "T4 avec cheminée, Brotteaux, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135110.jpg",
+     "alt": "T4 avec cheminée, Brotteaux, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135118.jpg",
+     "alt": "T4 avec cheminée, Brotteaux, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8135108.jpg",
+     "alt": "T4 avec cheminée, Brotteaux, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "d82e0537-c1a1-4800-a1d3-3ccb496b9c4e",
+    "first_name": "Antoine",
+    "last_name": "Ferrand",
+    "phone": "+33 0 00 00 00 06",
+    "email": "antoine.ferrand@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428097-sq.jpg",
+     "alt": "Antoine Ferrand"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-31T09:00:00.000Z",
+   "reference": "LU8R-KNF7",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "0532712d-f5b8-4e93-9f6c-9e7ab5ee0efa",
+   "slug": "appartement-avec-cheminee-quai-saint-antoine-0532712d-f5b8-4e93-9f6c-9e7ab5ee0efa",
+   "title": "Appartement avec cheminée, quai Saint-Antoine",
+   "description": "<p>Un appartement de 128 m² au cinquième étage, face à la Saône et à la colline de Fourvière.</p><p>Grand séjour avec cheminée à foyer fermé, cuisine ouverte, trois chambres dont une suite, deux salles de bains. Rénovation complète en 2021, finitions sombres.</p><p>Ascenseur. Marché du quai Saint-Antoine au pied de l'immeuble.</p>",
+   "description_text": "Un appartement de 128 m² au cinquième étage, face à la Saône et à la colline de Fourvière.\n\nGrand séjour avec cheminée à foyer fermé, cuisine ouverte, trois chambres dont une suite, deux salles de bains. Rénovation complète en 2021, finitions sombres.\n\nAscenseur. Marché du quai Saint-Antoine au pied de l'immeuble.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 870000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 128,
+   "address": {
+    "street": "Quai Saint-Antoine 25",
+    "postcode": "69002",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.763,
+    "lng": 4.832
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6394518.jpg",
+     "alt": "Appartement avec cheminée, quai Saint-Antoine"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6394521.jpg",
+     "alt": "Appartement avec cheminée, quai Saint-Antoine, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6394514.jpg",
+     "alt": "Appartement avec cheminée, quai Saint-Antoine, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6394526.jpg",
+     "alt": "Appartement avec cheminée, quai Saint-Antoine, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6394517.jpg",
+     "alt": "Appartement avec cheminée, quai Saint-Antoine, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6394522.jpg",
+     "alt": "Appartement avec cheminée, quai Saint-Antoine, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "9828074c-e262-41e5-b465-c26513876a1d",
+    "first_name": "Nadia",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 07",
+    "email": "nadia.benali@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171167-sq.jpg",
+     "alt": "Nadia Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-10-27T09:00:00.000Z",
+   "reference": "SDBJ-TA3F",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "03179733-d99f-4c12-9e5f-c5460060b400",
+   "slug": "t2-lumineux-saxe-gambetta-03179733-d99f-4c12-9e5f-c5460060b400",
+   "title": "T2 lumineux, Saxe-Gambetta",
+   "description": "<p>Un T2 de 52 m² au troisième étage, à cinq minutes du métro Saxe-Gambetta.</p><p>Séjour avec coin repas, cuisine équipée ouverte, chambre avec placard, salle d'eau. Refait en 2023.</p><p>Balcon, cave. Charges modérées, chauffage individuel.</p>",
+   "description_text": "Un T2 de 52 m² au troisième étage, à cinq minutes du métro Saxe-Gambetta.\n\nSéjour avec coin repas, cuisine équipée ouverte, chambre avec placard, salle d'eau. Refait en 2023.\n\nBalcon, cave. Charges modérées, chauffage individuel.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 255000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 52,
+   "address": {
+    "street": "Rue Béchevelin 30",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.748,
+    "lng": 4.839
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6438757.jpg",
+     "alt": "T2 lumineux, Saxe-Gambetta"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6438759.jpg",
+     "alt": "T2 lumineux, Saxe-Gambetta, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6438758.jpg",
+     "alt": "T2 lumineux, Saxe-Gambetta, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6438756.jpg",
+     "alt": "T2 lumineux, Saxe-Gambetta, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6438755.jpg",
+     "alt": "T2 lumineux, Saxe-Gambetta, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "d82e0537-c1a1-4800-a1d3-3ccb496b9c4e",
+    "first_name": "Antoine",
+    "last_name": "Ferrand",
+    "phone": "+33 0 00 00 00 06",
+    "email": "antoine.ferrand@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428097-sq.jpg",
+     "alt": "Antoine Ferrand"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-23T09:00:00.000Z",
+   "reference": "3BLF-SGZV",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "2f20ec9b-eee1-4e3b-bc7c-4dbfc323cfbb",
+   "slug": "studio-meuble-guillotiere-2f20ec9b-eee1-4e3b-bc7c-4dbfc323cfbb",
+   "title": "Studio meublé, Guillotière",
+   "description": "<p>Un studio meublé de 28 m² au deuxième étage, près de la place Gabriel Péri.</p><p>Pièce de vie avec lit double, cuisine équipée (plaques, four, lave-linge), salle d'eau. Mur de briques et parquet clair.</p><p>Libre au 1er décembre 2026. Bail meublé d'un an.</p>",
+   "description_text": "Un studio meublé de 28 m² au deuxième étage, près de la place Gabriel Péri.\n\nPièce de vie avec lit double, cuisine équipée (plaques, four, lave-linge), salle d'eau. Mur de briques et parquet clair.\n\nLibre au 1er décembre 2026. Bail meublé d'un an.",
+   "offer_type": "rent",
+   "property_type": "apartment_studio",
+   "status": "available",
+   "price": 720,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 28,
+   "address": {
+    "street": "Grande Rue de la Guillotière 52",
+    "postcode": "69007",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.753,
+    "lng": 4.845
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6447384.jpg",
+     "alt": "Studio meublé, Guillotière"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6447377.jpg",
+     "alt": "Studio meublé, Guillotière, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6447383.jpg",
+     "alt": "Studio meublé, Guillotière, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6447385.jpg",
+     "alt": "Studio meublé, Guillotière, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6447382.jpg",
+     "alt": "Studio meublé, Guillotière, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "72220ac5-77be-4dc1-88f9-a70171d0c592",
+    "first_name": "Léa",
+    "last_name": "Morel",
+    "phone": "+33 0 00 00 00 05",
+    "email": "lea.morel@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171180-sq.jpg",
+     "alt": "Léa Morel"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-19T09:00:00.000Z",
+   "reference": "TJEA-V6FG",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "305a5baa-f9f8-4404-bb4c-3416ae2b3561",
+   "slug": "t2-a-louer-montchat-305a5baa-f9f8-4404-bb4c-3416ae2b3561",
+   "title": "T2 à louer, Montchat",
+   "description": "<p>Un T2 de 48 m² au premier étage, dans le quartier de Montchat.</p><p>Séjour avec cuisine ouverte équipée, chambre séparée par une claustra, salle d'eau avec lave-linge. Petit balcon.</p><p>Libre immédiatement. Tram T3 et commerces à proximité.</p>",
+   "description_text": "Un T2 de 48 m² au premier étage, dans le quartier de Montchat.\n\nSéjour avec cuisine ouverte équipée, chambre séparée par une claustra, salle d'eau avec lave-linge. Petit balcon.\n\nLibre immédiatement. Tram T3 et commerces à proximité.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 880,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 48,
+   "address": {
+    "street": "Cours Docteur Long 45",
+    "postcode": "69003",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.749,
+    "lng": 4.884
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782424.jpg",
+     "alt": "T2 à louer, Montchat"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782425.jpg",
+     "alt": "T2 à louer, Montchat, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782426.jpg",
+     "alt": "T2 à louer, Montchat, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782432.jpg",
+     "alt": "T2 à louer, Montchat, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6782429.jpg",
+     "alt": "T2 à louer, Montchat, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "d82e0537-c1a1-4800-a1d3-3ccb496b9c4e",
+    "first_name": "Antoine",
+    "last_name": "Ferrand",
+    "phone": "+33 0 00 00 00 06",
+    "email": "antoine.ferrand@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428097-sq.jpg",
+     "alt": "Antoine Ferrand"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-15T09:00:00.000Z",
+   "reference": "K8WN-7ADB",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "de4ba94e-d560-4add-ab83-a8a9fa666d2b",
+   "slug": "canut-avec-mezzanine-plateau-de-la-croix-rousse-de4ba94e-d560-4add-ab83-a8a9fa666d2b",
+   "title": "Canut avec mezzanine, plateau de la Croix-Rousse",
+   "description": "<p>Un appartement canut de 74 m² au troisième étage, à deux minutes de la Grande Rue de la Croix-Rousse.</p><p>Hauteur sous plafond de 3,90 m, grandes fenêtres, parquet à chevrons. Séjour, cuisine ouverte, chambre sur mezzanine et une pièce de travail.</p><p>Immeuble sans ascenseur, cave. Métro Croix-Rousse à cinq minutes.</p>",
+   "description_text": "Un appartement canut de 74 m² au troisième étage, à deux minutes de la Grande Rue de la Croix-Rousse.\n\nHauteur sous plafond de 3,90 m, grandes fenêtres, parquet à chevrons. Séjour, cuisine ouverte, chambre sur mezzanine et une pièce de travail.\n\nImmeuble sans ascenseur, cave. Métro Croix-Rousse à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 430000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 74,
+   "address": {
+    "street": "Rue d'Austerlitz 9",
+    "postcode": "69004",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.776,
+    "lng": 4.834
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5644711.jpg",
+     "alt": "Canut avec mezzanine, plateau de la Croix-Rousse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5644686.jpg",
+     "alt": "Canut avec mezzanine, plateau de la Croix-Rousse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5644702.jpg",
+     "alt": "Canut avec mezzanine, plateau de la Croix-Rousse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5644697.jpg",
+     "alt": "Canut avec mezzanine, plateau de la Croix-Rousse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-5644704.jpg",
+     "alt": "Canut avec mezzanine, plateau de la Croix-Rousse, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+    "first_name": "Julien",
+    "last_name": "Payet",
+    "phone": "+33 0 00 00 00 08",
+    "email": "julien.payet@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+     "alt": "Julien Payet"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-11T09:00:00.000Z",
+   "reference": "4JPJ-G4LU",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "c6c25f82-650d-4025-9460-64c08a267ae3",
+   "slug": "canut-traversant-pentes-de-la-croix-rousse-c6c25f82-650d-4025-9460-64c08a267ae3",
+   "title": "Canut traversant, pentes de la Croix-Rousse",
+   "description": "<p>Un canut traversant de 96 m² au quatrième étage, sur les pentes, entre l'amphithéâtre des Trois Gaules et la montée de la Grande Côte.</p><p>Grand séjour sous 4 m de plafond avec murs en pierre, cuisine ouverte, deux chambres, salle d'eau. Vue sur les toits de la Presqu'île.</p><p>Sans ascenseur. Cave voûtée.</p>",
+   "description_text": "Un canut traversant de 96 m² au quatrième étage, sur les pentes, entre l'amphithéâtre des Trois Gaules et la montée de la Grande Côte.\n\nGrand séjour sous 4 m de plafond avec murs en pierre, cuisine ouverte, deux chambres, salle d'eau. Vue sur les toits de la Presqu'île.\n\nSans ascenseur. Cave voûtée.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 540000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 96,
+   "address": {
+    "street": "Rue des Tables Claudiennes 15",
+    "postcode": "69001",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.771,
+    "lng": 4.83
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092193.jpg",
+     "alt": "Canut traversant, pentes de la Croix-Rousse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092195.jpg",
+     "alt": "Canut traversant, pentes de la Croix-Rousse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092199.jpg",
+     "alt": "Canut traversant, pentes de la Croix-Rousse, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "63d48249-086d-47b4-899b-d9c132d9703a",
+    "first_name": "Margaux",
+    "last_name": "Delorme",
+    "phone": "+33 0 00 00 00 09",
+    "email": "margaux.delorme@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171192-sq.jpg",
+     "alt": "Margaux Delorme"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-10-07T09:00:00.000Z",
+   "reference": "F53M-7MRX",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "b9cc745b-df76-447a-808d-1c2510db3527",
+   "slug": "duplex-avec-toit-terrasse-croix-rousse-b9cc745b-df76-447a-808d-1c2510db3527",
+   "title": "Duplex avec toit-terrasse, Croix-Rousse",
+   "description": "<p>Un duplex de 82 m² aux cinquième et sixième étages, avec une terrasse de 30 m² sur les toits de la Croix-Rousse.</p><p>Au premier niveau, séjour et cuisine ; un escalier en bois mène à deux chambres, une salle de bains et l'accès à la terrasse.</p><p>Ascenseur jusqu'au cinquième, cave. Marché de la Croix-Rousse à trois minutes.</p>",
+   "description_text": "Un duplex de 82 m² aux cinquième et sixième étages, avec une terrasse de 30 m² sur les toits de la Croix-Rousse.\n\nAu premier niveau, séjour et cuisine ; un escalier en bois mène à deux chambres, une salle de bains et l'accès à la terrasse.\n\nAscenseur jusqu'au cinquième, cave. Marché de la Croix-Rousse à trois minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment_duplex",
+   "status": "available",
+   "price": 510000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 82,
+   "address": {
+    "street": "Rue Dumenge 18",
+    "postcode": "69004",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.777,
+    "lng": 4.835
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6956617.jpg",
+     "alt": "Duplex avec toit-terrasse, Croix-Rousse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6956615.jpg",
+     "alt": "Duplex avec toit-terrasse, Croix-Rousse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6956622.jpg",
+     "alt": "Duplex avec toit-terrasse, Croix-Rousse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6956619.jpg",
+     "alt": "Duplex avec toit-terrasse, Croix-Rousse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6956620.jpg",
+     "alt": "Duplex avec toit-terrasse, Croix-Rousse, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "e513616e-2a9a-49bf-8e22-a6c4819c0d50",
+    "first_name": "Romain",
+    "last_name": "Chabert",
+    "phone": "+33 0 00 00 00 10",
+    "email": "romain.chabert@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428093-sq.jpg",
+     "alt": "Romain Chabert"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-10-03T09:00:00.000Z",
+   "reference": "5T75-RZY2",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "89cfc3fa-5555-4468-bc95-a2dadeb81114",
+   "slug": "t3-avec-balcon-gros-caillou-89cfc3fa-5555-4468-bc95-a2dadeb81114",
+   "title": "T3 avec balcon, Gros Caillou",
+   "description": "<p>Un T3 de 70 m² au troisième étage, côté Saône, près du parc de la Cerisaie.</p><p>Séjour avec coin repas et cheminée décorative, cuisine ouverte, deux chambres, salle de bains. Balcon de 7 m².</p><p>Ascenseur, parking en sous-sol.</p>",
+   "description_text": "Un T3 de 70 m² au troisième étage, côté Saône, près du parc de la Cerisaie.\n\nSéjour avec coin repas et cheminée décorative, cuisine ouverte, deux chambres, salle de bains. Balcon de 7 m².\n\nAscenseur, parking en sous-sol.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 385000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 70,
+   "address": {
+    "street": "Rue Philippe de Lassalle 60",
+    "postcode": "69004",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.782,
+    "lng": 4.821
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546645.jpg",
+     "alt": "T3 avec balcon, Gros Caillou"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546651.jpg",
+     "alt": "T3 avec balcon, Gros Caillou, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546652.jpg",
+     "alt": "T3 avec balcon, Gros Caillou, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546643.jpg",
+     "alt": "T3 avec balcon, Gros Caillou, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546641.jpg",
+     "alt": "T3 avec balcon, Gros Caillou, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546648.jpg",
+     "alt": "T3 avec balcon, Gros Caillou, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+    "first_name": "Julien",
+    "last_name": "Payet",
+    "phone": "+33 0 00 00 00 08",
+    "email": "julien.payet@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+     "alt": "Julien Payet"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-29T09:00:00.000Z",
+   "reference": "H3XW-M8HX",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "66d362df-51bb-462e-82c3-7d184a33747a",
+   "slug": "t2-sous-les-toits-croix-rousse-66d362df-51bb-462e-82c3-7d184a33747a",
+   "title": "T2 sous les toits, Croix-Rousse",
+   "description": "<p>Un T2 de 45 m² au dernier étage, sous les combles, près de la place de la Croix-Rousse.</p><p>Séjour mansardé, chambre, salle d'eau avec WC. Poutres apparentes et fenêtres de toit.</p><p>Sans ascenseur. Idéal premier achat ou investissement locatif.</p>",
+   "description_text": "Un T2 de 45 m² au dernier étage, sous les combles, près de la place de la Croix-Rousse.\n\nSéjour mansardé, chambre, salle d'eau avec WC. Poutres apparentes et fenêtres de toit.\n\nSans ascenseur. Idéal premier achat ou investissement locatif.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 245000,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 45,
+   "address": {
+    "street": "Rue Jacquard 22",
+    "postcode": "69004",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.776,
+    "lng": 4.828
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7745931.jpg",
+     "alt": "T2 sous les toits, Croix-Rousse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7745929.jpg",
+     "alt": "T2 sous les toits, Croix-Rousse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7745932.jpg",
+     "alt": "T2 sous les toits, Croix-Rousse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7745937.jpg",
+     "alt": "T2 sous les toits, Croix-Rousse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7745930.jpg",
+     "alt": "T2 sous les toits, Croix-Rousse, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "63d48249-086d-47b4-899b-d9c132d9703a",
+    "first_name": "Margaux",
+    "last_name": "Delorme",
+    "phone": "+33 0 00 00 00 09",
+    "email": "margaux.delorme@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171192-sq.jpg",
+     "alt": "Margaux Delorme"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-25T09:00:00.000Z",
+   "reference": "RHDH-AWW2",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "3dd173cc-a07e-4f93-a49e-42e461a45794",
+   "slug": "t4-dans-le-vieux-lyon-rue-juiverie-3dd173cc-a07e-4f93-a49e-42e461a45794",
+   "title": "T4 dans le Vieux Lyon, rue Juiverie",
+   "description": "<p>Un T4 de 98 m² au deuxième étage d'un immeuble Renaissance du quartier Saint-Paul.</p><p>Séjour avec boiseries, bureau, cuisine équipée, deux chambres, salle d'eau. Fenêtres à meneaux sur la rue.</p><p>Escalier à vis dans la cour, sans ascenseur. Gare Saint-Paul à deux minutes.</p>",
+   "description_text": "Un T4 de 98 m² au deuxième étage d'un immeuble Renaissance du quartier Saint-Paul.\n\nSéjour avec boiseries, bureau, cuisine équipée, deux chambres, salle d'eau. Fenêtres à meneaux sur la rue.\n\nEscalier à vis dans la cour, sans ascenseur. Gare Saint-Paul à deux minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 590000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 98,
+   "address": {
+    "street": "Rue Juiverie 8",
+    "postcode": "69005",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.765,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7166625.jpg",
+     "alt": "T4 dans le Vieux Lyon, rue Juiverie"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7166626.jpg",
+     "alt": "T4 dans le Vieux Lyon, rue Juiverie, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7166627.jpg",
+     "alt": "T4 dans le Vieux Lyon, rue Juiverie, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7166630.jpg",
+     "alt": "T4 dans le Vieux Lyon, rue Juiverie, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7166629.jpg",
+     "alt": "T4 dans le Vieux Lyon, rue Juiverie, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "e513616e-2a9a-49bf-8e22-a6c4819c0d50",
+    "first_name": "Romain",
+    "last_name": "Chabert",
+    "phone": "+33 0 00 00 00 10",
+    "email": "romain.chabert@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428093-sq.jpg",
+     "alt": "Romain Chabert"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-21T09:00:00.000Z",
+   "reference": "BSUA-679W",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "f55fe9bd-598f-4695-8057-04b04bb2420b",
+   "slug": "grand-duplex-sous-les-toits-quai-romain-rolland-f55fe9bd-598f-4695-8057-04b04bb2420b",
+   "title": "Grand duplex sous les toits, quai Romain Rolland",
+   "description": "<p>Un duplex de 160 m² aux deux derniers étages, au bord de la Saône, face à la Presqu'île.</p><p>Séjour avec cheminée en brique, cuisine ouverte et salle à manger sous charpente, quatre chambres, deux salles de bains.</p><p>Ascenseur jusqu'au cinquième, cave.</p>",
+   "description_text": "Un duplex de 160 m² aux deux derniers étages, au bord de la Saône, face à la Presqu'île.\n\nSéjour avec cheminée en brique, cuisine ouverte et salle à manger sous charpente, quatre chambres, deux salles de bains.\n\nAscenseur jusqu'au cinquième, cave.",
+   "offer_type": "buy",
+   "property_type": "apartment_duplex",
+   "status": "available",
+   "price": 990000,
+   "currency": "EUR",
+   "rooms": 6,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 160,
+   "address": {
+    "street": "Quai Romain Rolland 12",
+    "postcode": "69005",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.764,
+    "lng": 4.829
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174393.jpg",
+     "alt": "Grand duplex sous les toits, quai Romain Rolland"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174392.jpg",
+     "alt": "Grand duplex sous les toits, quai Romain Rolland, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174401.jpg",
+     "alt": "Grand duplex sous les toits, quai Romain Rolland, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174402.jpg",
+     "alt": "Grand duplex sous les toits, quai Romain Rolland, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174399.jpg",
+     "alt": "Grand duplex sous les toits, quai Romain Rolland, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7174405.jpg",
+     "alt": "Grand duplex sous les toits, quai Romain Rolland, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+    "first_name": "Julien",
+    "last_name": "Payet",
+    "phone": "+33 0 00 00 00 08",
+    "email": "julien.payet@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+     "alt": "Julien Payet"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-17T09:00:00.000Z",
+   "reference": "YMN7-9E38",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "272cb650-e57c-408b-80e5-61ad36e24ac5",
+   "slug": "studio-a-louer-montee-de-la-grande-cote-272cb650-e57c-408b-80e5-61ad36e24ac5",
+   "title": "Studio à louer, montée de la Grande Côte",
+   "description": "<p>Un studio meublé de 24 m² au troisième étage, sur les pentes de la Croix-Rousse.</p><p>Coin nuit séparé par une claustra en bois, cuisine équipée, salle d'eau.</p><p>Libre au 1er janvier 2027. Bail étudiant possible.</p>",
+   "description_text": "Un studio meublé de 24 m² au troisième étage, sur les pentes de la Croix-Rousse.\n\nCoin nuit séparé par une claustra en bois, cuisine équipée, salle d'eau.\n\nLibre au 1er janvier 2027. Bail étudiant possible.",
+   "offer_type": "rent",
+   "property_type": "apartment_studio",
+   "status": "available",
+   "price": 640,
+   "currency": "EUR",
+   "rooms": 1,
+   "bedrooms": 0,
+   "bathrooms": 1,
+   "living_surface": 24,
+   "address": {
+    "street": "Montée de la Grande Côte 30",
+    "postcode": "69001",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.771,
+    "lng": 4.832
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045996.jpg",
+     "alt": "Studio à louer, montée de la Grande Côte"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045991.jpg",
+     "alt": "Studio à louer, montée de la Grande Côte, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045995.jpg",
+     "alt": "Studio à louer, montée de la Grande Côte, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7045993.jpg",
+     "alt": "Studio à louer, montée de la Grande Côte, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7046002.jpg",
+     "alt": "Studio à louer, montée de la Grande Côte, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "63d48249-086d-47b4-899b-d9c132d9703a",
+    "first_name": "Margaux",
+    "last_name": "Delorme",
+    "phone": "+33 0 00 00 00 09",
+    "email": "margaux.delorme@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171192-sq.jpg",
+     "alt": "Margaux Delorme"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-13T09:00:00.000Z",
+   "reference": "YYZS-VFRZ",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "6a13fc7c-c2a5-44b0-b689-7adbd6b77351",
+   "slug": "t3-meuble-croix-rousse-6a13fc7c-c2a5-44b0-b689-7adbd6b77351",
+   "title": "T3 meublé, Croix-Rousse",
+   "description": "<p>Un T3 meublé de 64 m² au deuxième étage, près du boulevard de la Croix-Rousse.</p><p>Séjour avec cuisine ouverte, deux chambres, salle de bains. Entièrement rénové, mobilier neuf.</p><p>Libre immédiatement. Ascenseur, cave.</p>",
+   "description_text": "Un T3 meublé de 64 m² au deuxième étage, près du boulevard de la Croix-Rousse.\n\nSéjour avec cuisine ouverte, deux chambres, salle de bains. Entièrement rénové, mobilier neuf.\n\nLibre immédiatement. Ascenseur, cave.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1180,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 64,
+   "address": {
+    "street": "Rue Henri Gorjus 12",
+    "postcode": "69004",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.777,
+    "lng": 4.824
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061332.jpg",
+     "alt": "T3 meublé, Croix-Rousse"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061333.jpg",
+     "alt": "T3 meublé, Croix-Rousse, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061335.jpg",
+     "alt": "T3 meublé, Croix-Rousse, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061337.jpg",
+     "alt": "T3 meublé, Croix-Rousse, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061330.jpg",
+     "alt": "T3 meublé, Croix-Rousse, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "e513616e-2a9a-49bf-8e22-a6c4819c0d50",
+    "first_name": "Romain",
+    "last_name": "Chabert",
+    "phone": "+33 0 00 00 00 10",
+    "email": "romain.chabert@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428093-sq.jpg",
+     "alt": "Romain Chabert"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-09-09T09:00:00.000Z",
+   "reference": "Q87T-M4WS",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "e2bb9e7d-5930-4d21-8911-658498fe9c79",
+   "slug": "t2-a-louer-saint-jean-e2bb9e7d-5930-4d21-8911-658498fe9c79",
+   "title": "T2 à louer, Saint-Jean",
+   "description": "<p>Un T2 de 42 m² au premier étage, dans une rue piétonne du Vieux Lyon.</p><p>Séjour avec coin cuisine, chambre, salle d'eau. Rénové en 2024, parquet et rangements sur mesure.</p><p>Libre au 15 décembre 2026. Métro Vieux Lyon à quatre minutes.</p>",
+   "description_text": "Un T2 de 42 m² au premier étage, dans une rue piétonne du Vieux Lyon.\n\nSéjour avec coin cuisine, chambre, salle d'eau. Rénové en 2024, parquet et rangements sur mesure.\n\nLibre au 15 décembre 2026. Métro Vieux Lyon à quatre minutes.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 860,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 42,
+   "address": {
+    "street": "Rue du Bœuf 20",
+    "postcode": "69005",
+    "city": "Lyon",
+    "country": "France",
+    "lat": 45.763,
+    "lng": 4.827
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9877451.jpg",
+     "alt": "T2 à louer, Saint-Jean"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9877452.jpg",
+     "alt": "T2 à louer, Saint-Jean, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9877453.jpg",
+     "alt": "T2 à louer, Saint-Jean, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-9877456.jpg",
+     "alt": "T2 à louer, Saint-Jean, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+    "first_name": "Julien",
+    "last_name": "Payet",
+    "phone": "+33 0 00 00 00 08",
+    "email": "julien.payet@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+     "alt": "Julien Payet"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-09-05T09:00:00.000Z",
+   "reference": "BGRM-3ZKZ",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "9f066504-a095-4958-b8d6-cdd865769c39",
+   "slug": "t3-aux-gratte-ciel-9f066504-a095-4958-b8d6-cdd865769c39",
+   "title": "T3 aux Gratte-Ciel",
+   "description": "<p>Un T3 de 70 m² au cinquième étage des Gratte-Ciel, l'ensemble de 1934 du centre de Villeurbanne.</p><p>Séjour, cuisine ouverte refaite, deux chambres, salle de bains. Balcon sur l'avenue.</p><p>Ascenseur, cave. Métro Gratte-Ciel au pied de l'immeuble.</p>",
+   "description_text": "Un T3 de 70 m² au cinquième étage des Gratte-Ciel, l'ensemble de 1934 du centre de Villeurbanne.\n\nSéjour, cuisine ouverte refaite, deux chambres, salle de bains. Balcon sur l'avenue.\n\nAscenseur, cave. Métro Gratte-Ciel au pied de l'immeuble.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 315000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 70,
+   "address": {
+    "street": "Avenue Henri Barbusse 40",
+    "postcode": "69100",
+    "city": "Villeurbanne",
+    "country": "France",
+    "lat": 45.767,
+    "lng": 4.879
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7533847.jpg",
+     "alt": "T3 aux Gratte-Ciel"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7533845.jpg",
+     "alt": "T3 aux Gratte-Ciel, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7533846.jpg",
+     "alt": "T3 aux Gratte-Ciel, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7533839.jpg",
+     "alt": "T3 aux Gratte-Ciel, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7533840.jpg",
+     "alt": "T3 aux Gratte-Ciel, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7533838.jpg",
+     "alt": "T3 aux Gratte-Ciel, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "9828074c-e262-41e5-b465-c26513876a1d",
+    "first_name": "Nadia",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 07",
+    "email": "nadia.benali@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171167-sq.jpg",
+     "alt": "Nadia Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-09-01T09:00:00.000Z",
+   "reference": "7FRY-WQXB",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "96939578-7d9e-4541-baa6-65fd32aafa13",
+   "slug": "t4-avec-balcon-grandclement-96939578-7d9e-4541-baa6-65fd32aafa13",
+   "title": "T4 avec balcon, Grandclément",
+   "description": "<p>Un T4 de 82 m² au quatrième étage d'une résidence de 2008.</p><p>Séjour, cuisine ouverte, trois chambres, salle de bains. Balcon de 9 m², exposition sud.</p><p>Ascenseur, garage en sous-sol. Métro Flachet à quatre minutes.</p>",
+   "description_text": "Un T4 de 82 m² au quatrième étage d'une résidence de 2008.\n\nSéjour, cuisine ouverte, trois chambres, salle de bains. Balcon de 9 m², exposition sud.\n\nAscenseur, garage en sous-sol. Métro Flachet à quatre minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 345000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 82,
+   "address": {
+    "street": "Cours Émile Zola 210",
+    "postcode": "69100",
+    "city": "Villeurbanne",
+    "country": "France",
+    "lat": 45.768,
+    "lng": 4.885
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146336.jpg",
+     "alt": "T4 avec balcon, Grandclément"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146337.jpg",
+     "alt": "T4 avec balcon, Grandclément, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146332.jpg",
+     "alt": "T4 avec balcon, Grandclément, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146333.jpg",
+     "alt": "T4 avec balcon, Grandclément, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146335.jpg",
+     "alt": "T4 avec balcon, Grandclément, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146330.jpg",
+     "alt": "T4 avec balcon, Grandclément, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "72220ac5-77be-4dc1-88f9-a70171d0c592",
+    "first_name": "Léa",
+    "last_name": "Morel",
+    "phone": "+33 0 00 00 00 05",
+    "email": "lea.morel@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171180-sq.jpg",
+     "alt": "Léa Morel"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-28T09:00:00.000Z",
+   "reference": "ZLRW-A26E",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "e6f0590d-369b-442a-835e-a01d1dd63480",
+   "slug": "t3-recent-villeurbanne-e6f0590d-369b-442a-835e-a01d1dd63480",
+   "title": "T3 récent, Villeurbanne",
+   "description": "<p>Un T3 de 66 m² au troisième étage d'une résidence de 2012.</p><p>Séjour avec cuisine équipée en îlot, deux chambres, salle de bains. Balcon.</p><p>Ascenseur, place de parking. Proche du campus de la Doua.</p>",
+   "description_text": "Un T3 de 66 m² au troisième étage d'une résidence de 2012.\n\nSéjour avec cuisine équipée en îlot, deux chambres, salle de bains. Balcon.\n\nAscenseur, place de parking. Proche du campus de la Doua.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 285000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 66,
+   "address": {
+    "street": "Avenue Roger Salengro 60",
+    "postcode": "69100",
+    "city": "Villeurbanne",
+    "country": "France",
+    "lat": 45.776,
+    "lng": 4.874
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146326.jpg",
+     "alt": "T3 récent, Villeurbanne"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146316.jpg",
+     "alt": "T3 récent, Villeurbanne, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146317.jpg",
+     "alt": "T3 récent, Villeurbanne, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146319.jpg",
+     "alt": "T3 récent, Villeurbanne, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146327.jpg",
+     "alt": "T3 récent, Villeurbanne, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146322.jpg",
+     "alt": "T3 récent, Villeurbanne, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "d82e0537-c1a1-4800-a1d3-3ccb496b9c4e",
+    "first_name": "Antoine",
+    "last_name": "Ferrand",
+    "phone": "+33 0 00 00 00 06",
+    "email": "antoine.ferrand@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428097-sq.jpg",
+     "alt": "Antoine Ferrand"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-24T09:00:00.000Z",
+   "reference": "ZEWR-C4PX",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "fb1deefa-3d6a-4202-816b-b1db8f661ed7",
+   "slug": "t2-a-louer-villeurbanne-fb1deefa-3d6a-4202-816b-b1db8f661ed7",
+   "title": "T2 à louer, Villeurbanne",
+   "description": "<p>Un T2 de 46 m² au deuxième étage, près de la mairie de Villeurbanne.</p><p>Séjour avec coin repas, cuisine ouverte équipée, chambre, salle de bains.</p><p>Libre au 1er décembre 2026. Ascenseur.</p>",
+   "description_text": "Un T2 de 46 m² au deuxième étage, près de la mairie de Villeurbanne.\n\nSéjour avec coin repas, cuisine ouverte équipée, chambre, salle de bains.\n\nLibre au 1er décembre 2026. Ascenseur.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 820,
+   "currency": "EUR",
+   "rooms": 2,
+   "bedrooms": 1,
+   "bathrooms": 1,
+   "living_surface": 46,
+   "address": {
+    "street": "Rue Anatole France 30",
+    "postcode": "69100",
+    "city": "Villeurbanne",
+    "country": "France",
+    "lat": 45.767,
+    "lng": 4.871
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7040700.jpg",
+     "alt": "T2 à louer, Villeurbanne"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7040695.jpg",
+     "alt": "T2 à louer, Villeurbanne, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7040696.jpg",
+     "alt": "T2 à louer, Villeurbanne, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7040698.jpg",
+     "alt": "T2 à louer, Villeurbanne, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7040701.jpg",
+     "alt": "T2 à louer, Villeurbanne, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "9828074c-e262-41e5-b465-c26513876a1d",
+    "first_name": "Nadia",
+    "last_name": "Benali",
+    "phone": "+33 0 00 00 00 07",
+    "email": "nadia.benali@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171167-sq.jpg",
+     "alt": "Nadia Benali"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-08-20T09:00:00.000Z",
+   "reference": "XZQZ-H9AH",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "7f922605-30d4-4b36-8302-02998ed71e39",
+   "slug": "t3-meuble-flachet-7f922605-30d4-4b36-8302-02998ed71e39",
+   "title": "T3 meublé, Flachet",
+   "description": "<p>Un T3 meublé de 63 m² au quatrième étage, à deux minutes du métro Flachet.</p><p>Séjour avec cuisine équipée, deux chambres, salle de bains avec lave-linge.</p><p>Libre immédiatement. Place de parking incluse.</p>",
+   "description_text": "Un T3 meublé de 63 m² au quatrième étage, à deux minutes du métro Flachet.\n\nSéjour avec cuisine équipée, deux chambres, salle de bains avec lave-linge.\n\nLibre immédiatement. Place de parking incluse.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1050,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 63,
+   "address": {
+    "street": "Rue Flachet 15",
+    "postcode": "69100",
+    "city": "Villeurbanne",
+    "country": "France",
+    "lat": 45.769,
+    "lng": 4.89
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7511694.jpg",
+     "alt": "T3 meublé, Flachet"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7511693.jpg",
+     "alt": "T3 meublé, Flachet, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7511695.jpg",
+     "alt": "T3 meublé, Flachet, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7511698.jpg",
+     "alt": "T3 meublé, Flachet, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7511699.jpg",
+     "alt": "T3 meublé, Flachet, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "72220ac5-77be-4dc1-88f9-a70171d0c592",
+    "first_name": "Léa",
+    "last_name": "Morel",
+    "phone": "+33 0 00 00 00 05",
+    "email": "lea.morel@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171180-sq.jpg",
+     "alt": "Léa Morel"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-08-16T09:00:00.000Z",
+   "reference": "YGUH-RSBP",
+   "team_ids": [
+    "0775d2c0-85c9-477d-aa56-54555bf04ed6"
+   ]
+  },
+  {
+   "id": "d959f1de-64b2-4e39-a84a-e1a053d73500",
+   "slug": "maison-avec-veranda-caluire-d959f1de-64b2-4e39-a84a-e1a053d73500",
+   "title": "Maison avec véranda, Caluire",
+   "description": "<p>Une maison de 190 m² sur un terrain de 900 m², dans un quartier résidentiel de Caluire.</p><p>Séjour avec grandes baies, cuisine ouverte, véranda de 35 m² sur le jardin, quatre chambres dont une suite, trois salles de bains.</p><p>Garage double, arrosage automatique. Écoles et bus vers la Croix-Rousse à cinq minutes.</p>",
+   "description_text": "Une maison de 190 m² sur un terrain de 900 m², dans un quartier résidentiel de Caluire.\n\nSéjour avec grandes baies, cuisine ouverte, véranda de 35 m² sur le jardin, quatre chambres dont une suite, trois salles de bains.\n\nGarage double, arrosage automatique. Écoles et bus vers la Croix-Rousse à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "sold",
+   "price": 1050000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 190,
+   "land_surface": 900,
+   "address": {
+    "street": "Rue de Margnolles 40",
+    "postcode": "69300",
+    "city": "Caluire-et-Cuire",
+    "country": "France",
+    "lat": 45.786,
+    "lng": 4.84
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061674.jpg",
+     "alt": "Maison avec véranda, Caluire"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061668.jpg",
+     "alt": "Maison avec véranda, Caluire, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7061673.jpg",
+     "alt": "Maison avec véranda, Caluire, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+    "first_name": "Julien",
+    "last_name": "Payet",
+    "phone": "+33 0 00 00 00 08",
+    "email": "julien.payet@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+     "alt": "Julien Payet"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-12T09:00:00.000Z",
+   "reference": "WR8X-SZAB",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "f4774e61-0387-499e-8005-c284ec7cd4bb",
+   "slug": "villa-familiale-caluire-saint-clair-f4774e61-0387-499e-8005-c284ec7cd4bb",
+   "title": "Villa familiale, Caluire Saint-Clair",
+   "description": "<p>Une villa de 230 m² sur un terrain arboré de 1 200 m², au-dessus du Rhône.</p><p>Salon et salle à manger ouverts sur le jardin, cuisine, cinq chambres sur deux niveaux, trois salles de bains. Pergola et terrasse.</p><p>Garage, cave. Le centre de Lyon à quinze minutes.</p>",
+   "description_text": "Une villa de 230 m² sur un terrain arboré de 1 200 m², au-dessus du Rhône.\n\nSalon et salle à manger ouverts sur le jardin, cuisine, cinq chambres sur deux niveaux, trois salles de bains. Pergola et terrasse.\n\nGarage, cave. Le centre de Lyon à quinze minutes.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 1380000,
+   "currency": "EUR",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 230,
+   "land_surface": 1200,
+   "address": {
+    "street": "Grande Rue de Saint-Clair 80",
+    "postcode": "69300",
+    "city": "Caluire-et-Cuire",
+    "country": "France",
+    "lat": 45.791,
+    "lng": 4.859
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092389.jpg",
+     "alt": "Villa familiale, Caluire Saint-Clair"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092385.jpg",
+     "alt": "Villa familiale, Caluire Saint-Clair, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092390.jpg",
+     "alt": "Villa familiale, Caluire Saint-Clair, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092391.jpg",
+     "alt": "Villa familiale, Caluire Saint-Clair, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092386.jpg",
+     "alt": "Villa familiale, Caluire Saint-Clair, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8092393.jpg",
+     "alt": "Villa familiale, Caluire Saint-Clair, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "63d48249-086d-47b4-899b-d9c132d9703a",
+    "first_name": "Margaux",
+    "last_name": "Delorme",
+    "phone": "+33 0 00 00 00 09",
+    "email": "margaux.delorme@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171192-sq.jpg",
+     "alt": "Margaux Delorme"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-08T09:00:00.000Z",
+   "reference": "D9SL-SBZV",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "6146fdcf-6231-4355-8332-f2be56412251",
+   "slug": "t3-lumineux-caluire-6146fdcf-6231-4355-8332-f2be56412251",
+   "title": "T3 lumineux, Caluire",
+   "description": "<p>Un T3 de 68 m² au deuxième étage, dans le centre de Caluire, près du Bourg.</p><p>Séjour avec cuisine ouverte, deux chambres, salle de bains. Refait en couleurs en 2025.</p><p>Ascenseur, parking.</p>",
+   "description_text": "Un T3 de 68 m² au deuxième étage, dans le centre de Caluire, près du Bourg.\n\nSéjour avec cuisine ouverte, deux chambres, salle de bains. Refait en couleurs en 2025.\n\nAscenseur, parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 335000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 68,
+   "address": {
+    "street": "Rue Jean Moulin 10",
+    "postcode": "69300",
+    "city": "Caluire-et-Cuire",
+    "country": "France",
+    "lat": 45.798,
+    "lng": 4.845
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16056398.jpg",
+     "alt": "T3 lumineux, Caluire"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16056400.jpg",
+     "alt": "T3 lumineux, Caluire, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16056399.jpg",
+     "alt": "T3 lumineux, Caluire, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16056402.jpg",
+     "alt": "T3 lumineux, Caluire, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16056397.jpg",
+     "alt": "T3 lumineux, Caluire, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "1be65ef5-1dcc-44cd-810c-a34e5e02ec96",
+    "first_name": "Julien",
+    "last_name": "Payet",
+    "phone": "+33 0 00 00 00 08",
+    "email": "julien.payet@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463172-sq.jpg",
+     "alt": "Julien Payet"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-08-04T09:00:00.000Z",
+   "reference": "T9MT-W3JX",
+   "team_ids": [
+    "9f829fb2-ac5d-4398-abd3-a419c50ae630"
+   ]
+  },
+  {
+   "id": "821f4aff-5ebf-45d4-b5db-6b69143bba89",
+   "slug": "t4-avec-cheminee-chartrons-821f4aff-5ebf-45d4-b5db-6b69143bba89",
+   "title": "T4 avec cheminée, Chartrons",
+   "description": "<p>Un T4 de 98 m² au deuxième étage, dans la rue des antiquaires des Chartrons.</p><p>Salon avec cheminée, salle à manger, cuisine ouverte, deux chambres, salle de bains. Rénové en 2023.</p><p>Sans ascenseur. Les quais et le marché des Chartrons à deux minutes.</p>",
+   "description_text": "Un T4 de 98 m² au deuxième étage, dans la rue des antiquaires des Chartrons.\n\nSalon avec cheminée, salle à manger, cuisine ouverte, deux chambres, salle de bains. Rénové en 2023.\n\nSans ascenseur. Les quais et le marché des Chartrons à deux minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 520000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 98,
+   "address": {
+    "street": "Rue Notre-Dame 76",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.852,
+    "lng": -0.571
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546713.jpg",
+     "alt": "T4 avec cheminée, Chartrons"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546714.jpg",
+     "alt": "T4 avec cheminée, Chartrons, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546715.jpg",
+     "alt": "T4 avec cheminée, Chartrons, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546716.jpg",
+     "alt": "T4 avec cheminée, Chartrons, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546711.jpg",
+     "alt": "T4 avec cheminée, Chartrons, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7546709.jpg",
+     "alt": "T4 avec cheminée, Chartrons, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "e400e184-3e1d-4a73-9947-4a17887150fc",
+    "first_name": "Maxime",
+    "last_name": "Lacoste",
+    "phone": "+33 0 00 00 00 12",
+    "email": "maxime.lacoste@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428101-sq.jpg",
+     "alt": "Maxime Lacoste"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-07-31T09:00:00.000Z",
+   "reference": "N6MK-QY5V",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "1844f3f4-5d98-4c3b-9b28-ac920ff255a3",
+   "slug": "t3-sous-les-toits-jardin-public-1844f3f4-5d98-4c3b-9b28-ac920ff255a3",
+   "title": "T3 sous les toits, Jardin public",
+   "description": "<p>Un T3 de 70 m² au dernier étage, à cinquante mètres du Jardin public.</p><p>Séjour sous les toits avec fenêtres de toit, cuisine ouverte, deux chambres, salle d'eau.</p><p>Sans ascenseur. Cave.</p>",
+   "description_text": "Un T3 de 70 m² au dernier étage, à cinquante mètres du Jardin public.\n\nSéjour sous les toits avec fenêtres de toit, cuisine ouverte, deux chambres, salle d'eau.\n\nSans ascenseur. Cave.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 390000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 70,
+   "address": {
+    "street": "Rue d'Aviau 20",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.85,
+    "lng": -0.577
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20104252.jpg",
+     "alt": "T3 sous les toits, Jardin public"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20104254.jpg",
+     "alt": "T3 sous les toits, Jardin public, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20104255.jpg",
+     "alt": "T3 sous les toits, Jardin public, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20104250.jpg",
+     "alt": "T3 sous les toits, Jardin public, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "d87945c0-8d81-491d-846b-1c3abfc5820c",
+    "first_name": "Elsa",
+    "last_name": "Duprat",
+    "phone": "+33 0 00 00 00 13",
+    "email": "elsa.duprat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8636645-sq.jpg",
+     "alt": "Elsa Duprat"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-07-27T09:00:00.000Z",
+   "reference": "K8AB-CEYR",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "1c36345b-351f-4b4c-879b-d1e37fe8fef4",
+   "slug": "t5-au-parquet-marquete-tourny-1c36345b-351f-4b4c-879b-d1e37fe8fef4",
+   "title": "T5 au parquet marqueté, Tourny",
+   "description": "<p>Un T5 de 150 m² au deuxième étage d'un immeuble en pierre des allées de Tourny.</p><p>Salon au parquet marqueté, salle à manger, cuisine équipée, trois chambres, deux salles de bains, dressing.</p><p>Ascenseur, cave. Grand Théâtre à trois minutes.</p>",
+   "description_text": "Un T5 de 150 m² au deuxième étage d'un immeuble en pierre des allées de Tourny.\n\nSalon au parquet marqueté, salle à manger, cuisine équipée, trois chambres, deux salles de bains, dressing.\n\nAscenseur, cave. Grand Théâtre à trois minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 945000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 150,
+   "address": {
+    "street": "Allées de Tourny 30",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.844,
+    "lng": -0.577
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8141959.jpg",
+     "alt": "T5 au parquet marqueté, Tourny"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8141965.jpg",
+     "alt": "T5 au parquet marqueté, Tourny, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8141956.jpg",
+     "alt": "T5 au parquet marqueté, Tourny, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8141955.jpg",
+     "alt": "T5 au parquet marqueté, Tourny, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8141958.jpg",
+     "alt": "T5 au parquet marqueté, Tourny, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8141962.jpg",
+     "alt": "T5 au parquet marqueté, Tourny, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "80596617-53e3-47db-8d28-83a7e2a58865",
+    "first_name": "Pauline",
+    "last_name": "Darrigade",
+    "phone": "+33 0 00 00 00 11",
+    "email": "pauline.darrigade@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171196-sq.jpg",
+     "alt": "Pauline Darrigade"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-07-23T09:00:00.000Z",
+   "reference": "PRYW-35R7",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "5f8eafac-522e-46c8-8f9c-63b50d417198",
+   "slug": "t3-renove-rue-de-la-course-5f8eafac-522e-46c8-8f9c-63b50d417198",
+   "title": "T3 rénové, rue de la Course",
+   "description": "<p>Un T3 de 80 m² au premier étage d'un immeuble en pierre, entre le Jardin public et les Chartrons.</p><p>Séjour, cuisine ouverte avec coin repas, deux chambres, salle de bains.</p><p>Cave. Tram C à cinq minutes.</p>",
+   "description_text": "Un T3 de 80 m² au premier étage d'un immeuble en pierre, entre le Jardin public et les Chartrons.\n\nSéjour, cuisine ouverte avec coin repas, deux chambres, salle de bains.\n\nCave. Tram C à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 425000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 80,
+   "address": {
+    "street": "Rue de la Course 40",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.851,
+    "lng": -0.577
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195598.jpg",
+     "alt": "T3 rénové, rue de la Course"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195599.jpg",
+     "alt": "T3 rénové, rue de la Course, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195596.jpg",
+     "alt": "T3 rénové, rue de la Course, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195590.jpg",
+     "alt": "T3 rénové, rue de la Course, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7195592.jpg",
+     "alt": "T3 rénové, rue de la Course, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "e400e184-3e1d-4a73-9947-4a17887150fc",
+    "first_name": "Maxime",
+    "last_name": "Lacoste",
+    "phone": "+33 0 00 00 00 12",
+    "email": "maxime.lacoste@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428101-sq.jpg",
+     "alt": "Maxime Lacoste"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-07-19T09:00:00.000Z",
+   "reference": "XTPC-J6GK",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "5e166335-b0e0-4b06-a790-8ebccdcb8e82",
+   "slug": "loft-aux-bassins-a-flot-5e166335-b0e0-4b06-a790-8ebccdcb8e82",
+   "title": "Loft aux Bassins à flot",
+   "description": "<p>Un loft de 95 m² au troisième étage d'une résidence de 2016, face aux Bassins à flot.</p><p>Séjour avec mur de briques, cuisine ouverte, deux chambres dont une derrière une verrière, salle de bains. Balcon.</p><p>Ascenseur, parking. Tram B et Cité du Vin à proximité.</p>",
+   "description_text": "Un loft de 95 m² au troisième étage d'une résidence de 2016, face aux Bassins à flot.\n\nSéjour avec mur de briques, cuisine ouverte, deux chambres dont une derrière une verrière, salle de bains. Balcon.\n\nAscenseur, parking. Tram B et Cité du Vin à proximité.",
+   "offer_type": "buy",
+   "property_type": "apartment_loft",
+   "status": "available",
+   "price": 475000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 95,
+   "address": {
+    "street": "Rue Lucien Faure 30",
+    "postcode": "33300",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.868,
+    "lng": -0.563
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214736.jpg",
+     "alt": "Loft aux Bassins à flot"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214732.jpg",
+     "alt": "Loft aux Bassins à flot, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214727.jpg",
+     "alt": "Loft aux Bassins à flot, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214729.jpg",
+     "alt": "Loft aux Bassins à flot, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214730.jpg",
+     "alt": "Loft aux Bassins à flot, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7214733.jpg",
+     "alt": "Loft aux Bassins à flot, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "d87945c0-8d81-491d-846b-1c3abfc5820c",
+    "first_name": "Elsa",
+    "last_name": "Duprat",
+    "phone": "+33 0 00 00 00 13",
+    "email": "elsa.duprat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8636645-sq.jpg",
+     "alt": "Elsa Duprat"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-15T09:00:00.000Z",
+   "reference": "CMTW-RNXS",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "f1ee3c13-640c-4a15-b157-db0c4371a5fd",
+   "slug": "t3-avec-mur-de-briques-bacalan-f1ee3c13-640c-4a15-b157-db0c4371a5fd",
+   "title": "T3 avec mur de briques, Bacalan",
+   "description": "<p>Un T3 de 68 m² au deuxième étage, dans le quartier de Bacalan.</p><p>Séjour avec cuisine ouverte, salle à manger, deux chambres, salle d'eau. Parquet et mur de briques.</p><p>Ascenseur, place de parking.</p>",
+   "description_text": "Un T3 de 68 m² au deuxième étage, dans le quartier de Bacalan.\n\nSéjour avec cuisine ouverte, salle à manger, deux chambres, salle d'eau. Parquet et mur de briques.\n\nAscenseur, place de parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 315000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 68,
+   "address": {
+    "street": "Rue Achard 50",
+    "postcode": "33300",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.865,
+    "lng": -0.549
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018251.jpg",
+     "alt": "T3 avec mur de briques, Bacalan"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018250.jpg",
+     "alt": "T3 avec mur de briques, Bacalan, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7018248.jpg",
+     "alt": "T3 avec mur de briques, Bacalan, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "80596617-53e3-47db-8d28-83a7e2a58865",
+    "first_name": "Pauline",
+    "last_name": "Darrigade",
+    "phone": "+33 0 00 00 00 11",
+    "email": "pauline.darrigade@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171196-sq.jpg",
+     "alt": "Pauline Darrigade"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-07-11T09:00:00.000Z",
+   "reference": "V8G2-Z8E9",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "dd67c95d-1a66-4da1-9058-27ebaf410155",
+   "slug": "dernier-etage-avec-verrieres-saint-seurin-dd67c95d-1a66-4da1-9058-27ebaf410155",
+   "title": "Dernier étage avec verrières, Saint-Seurin",
+   "description": "<p>Un appartement de 115 m² au dernier étage, entièrement réaménagé sous les toits.</p><p>Grand séjour sous fenêtres de toit avec cuisine et îlot, deux chambres, deux salles d'eau, bureau.</p><p>Ascenseur. Place Gambetta à cinq minutes.</p>",
+   "description_text": "Un appartement de 115 m² au dernier étage, entièrement réaménagé sous les toits.\n\nGrand séjour sous fenêtres de toit avec cuisine et îlot, deux chambres, deux salles d'eau, bureau.\n\nAscenseur. Place Gambetta à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 630000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 2,
+   "bathrooms": 2,
+   "living_surface": 115,
+   "address": {
+    "street": "Rue Judaïque 120",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.841,
+    "lng": -0.588
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20290907.jpg",
+     "alt": "Dernier étage avec verrières, Saint-Seurin"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20290903.jpg",
+     "alt": "Dernier étage avec verrières, Saint-Seurin, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20290909.jpg",
+     "alt": "Dernier étage avec verrières, Saint-Seurin, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20290905.jpg",
+     "alt": "Dernier étage avec verrières, Saint-Seurin, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20290916.jpg",
+     "alt": "Dernier étage avec verrières, Saint-Seurin, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20290906.jpg",
+     "alt": "Dernier étage avec verrières, Saint-Seurin, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "e400e184-3e1d-4a73-9947-4a17887150fc",
+    "first_name": "Maxime",
+    "last_name": "Lacoste",
+    "phone": "+33 0 00 00 00 12",
+    "email": "maxime.lacoste@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8428101-sq.jpg",
+     "alt": "Maxime Lacoste"
+    }
+   },
+   "features": [
+    "elevator",
+    "parking"
+   ],
+   "published_at": "2026-07-07T09:00:00.000Z",
+   "reference": "U65Z-W875",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "263185f0-bf73-4e27-bd2d-d145ef216573",
+   "slug": "t3-meuble-chartrons-263185f0-bf73-4e27-bd2d-d145ef216573",
+   "title": "T3 meublé, Chartrons",
+   "description": "<p>Un T3 meublé de 65 m² au deuxième étage, dans le nord des Chartrons.</p><p>Séjour, cuisine équipée, deux chambres, salle de bains. Balcon.</p><p>Libre immédiatement. Place de parking incluse.</p>",
+   "description_text": "Un T3 meublé de 65 m² au deuxième étage, dans le nord des Chartrons.\n\nSéjour, cuisine équipée, deux chambres, salle de bains. Balcon.\n\nLibre immédiatement. Place de parking incluse.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1150,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 65,
+   "address": {
+    "street": "Rue Camille Godard 25",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.855,
+    "lng": -0.574
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7060823.jpg",
+     "alt": "T3 meublé, Chartrons"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7060820.jpg",
+     "alt": "T3 meublé, Chartrons, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7060821.jpg",
+     "alt": "T3 meublé, Chartrons, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7060822.jpg",
+     "alt": "T3 meublé, Chartrons, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7060824.jpg",
+     "alt": "T3 meublé, Chartrons, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7060825.jpg",
+     "alt": "T3 meublé, Chartrons, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "d87945c0-8d81-491d-846b-1c3abfc5820c",
+    "first_name": "Elsa",
+    "last_name": "Duprat",
+    "phone": "+33 0 00 00 00 13",
+    "email": "elsa.duprat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8636645-sq.jpg",
+     "alt": "Elsa Duprat"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-07-03T09:00:00.000Z",
+   "reference": "GJQL-T93T",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "b1a6d330-53b8-4c24-9fb7-578f8fe38f30",
+   "slug": "t4-a-louer-bastide-b1a6d330-53b8-4c24-9fb7-578f8fe38f30",
+   "title": "T4 à louer, Bastide",
+   "description": "<p>Un T4 de 85 m² au troisième étage, sur la rive droite.</p><p>Séjour avec cuisine ouverte, trois chambres, salle de bains. Balcon.</p><p>Libre au 1er janvier 2027. Tram A au pied de l'immeuble.</p>",
+   "description_text": "Un T4 de 85 m² au troisième étage, sur la rive droite.\n\nSéjour avec cuisine ouverte, trois chambres, salle de bains. Balcon.\n\nLibre au 1er janvier 2027. Tram A au pied de l'immeuble.",
+   "offer_type": "rent",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 1350,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 85,
+   "address": {
+    "street": "Avenue Thiers 60",
+    "postcode": "33100",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.842,
+    "lng": -0.557
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512039.jpg",
+     "alt": "T4 à louer, Bastide"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512040.jpg",
+     "alt": "T4 à louer, Bastide, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512041.jpg",
+     "alt": "T4 à louer, Bastide, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512044.jpg",
+     "alt": "T4 à louer, Bastide, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7512045.jpg",
+     "alt": "T4 à louer, Bastide, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "80596617-53e3-47db-8d28-83a7e2a58865",
+    "first_name": "Pauline",
+    "last_name": "Darrigade",
+    "phone": "+33 0 00 00 00 11",
+    "email": "pauline.darrigade@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171196-sq.jpg",
+     "alt": "Pauline Darrigade"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-29T09:00:00.000Z",
+   "reference": "A494-LN4J",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "c3419021-90e2-4c79-997b-88889a2fffbd",
+   "slug": "echoppe-en-pierre-saint-seurin-c3419021-90e2-4c79-997b-88889a2fffbd",
+   "title": "Échoppe en pierre, Saint-Seurin",
+   "description": "<p>Une échoppe en pierre de 105 m² avec un jardin de 150 m², entre Saint-Seurin et Caudéran.</p><p>Séjour et cuisine ouverts sur le jardin, trois chambres, salle de bains. Parquet et cheminées d'origine.</p><p>Une seule photo pour l'instant : visite sur rendez-vous.</p>",
+   "description_text": "Une échoppe en pierre de 105 m² avec un jardin de 150 m², entre Saint-Seurin et Caudéran.\n\nSéjour et cuisine ouverts sur le jardin, trois chambres, salle de bains. Parquet et cheminées d'origine.\n\nUne seule photo pour l'instant : visite sur rendez-vous.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 570000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 105,
+   "land_surface": 150,
+   "address": {
+    "street": "Rue Mondenard 30",
+    "postcode": "33000",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.846,
+    "lng": -0.587
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-11739098.jpg",
+     "alt": "Échoppe en pierre, Saint-Seurin"
+    }
+   ],
+   "agent": {
+    "id": "84bf9c49-6730-4ca0-b806-6429e0ba34da",
+    "first_name": "Thibault",
+    "last_name": "Garat",
+    "phone": "+33 0 00 00 00 14",
+    "email": "thibault.garat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463183-sq.jpg",
+     "alt": "Thibault Garat"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-25T09:00:00.000Z",
+   "reference": "T85X-AMEB",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "67a439ae-7e38-43eb-913c-51dab9c2393f",
+   "slug": "villa-contemporaine-avec-piscine-cauderan-67a439ae-7e38-43eb-913c-51dab9c2393f",
+   "title": "Villa contemporaine avec piscine, Caudéran",
+   "description": "<p>Une villa de 240 m² construite en 2015 sur un terrain de 1 100 m², à Caudéran.</p><p>Séjour double hauteur avec cheminée, cuisine ouverte, quatre chambres, trois salles de bains. Piscine de 10 x 4 m et terrasse en bois.</p><p>Garage double, alarme.</p>",
+   "description_text": "Une villa de 240 m² construite en 2015 sur un terrain de 1 100 m², à Caudéran.\n\nSéjour double hauteur avec cheminée, cuisine ouverte, quatre chambres, trois salles de bains. Piscine de 10 x 4 m et terrasse en bois.\n\nGarage double, alarme.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "available",
+   "price": 1450000,
+   "currency": "EUR",
+   "rooms": 7,
+   "bedrooms": 4,
+   "bathrooms": 3,
+   "living_surface": 240,
+   "land_surface": 1100,
+   "address": {
+    "street": "Avenue Charles de Gaulle 180",
+    "postcode": "33200",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.851,
+    "lng": -0.606
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134753.jpg",
+     "alt": "Villa contemporaine avec piscine, Caudéran"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134754.jpg",
+     "alt": "Villa contemporaine avec piscine, Caudéran, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134756.jpg",
+     "alt": "Villa contemporaine avec piscine, Caudéran, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8134759.jpg",
+     "alt": "Villa contemporaine avec piscine, Caudéran, photo 4"
+    }
+   ],
+   "agent": {
+    "id": "16dae26e-1327-48de-9c36-287b27f45e3f",
+    "first_name": "Sophie",
+    "last_name": "Lalanne",
+    "phone": "+33 0 00 00 00 15",
+    "email": "sophie.lalanne@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463168-sq.jpg",
+     "alt": "Sophie Lalanne"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-21T09:00:00.000Z",
+   "reference": "DDCJ-XE63",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "21f854d9-2f1c-4fc4-b11c-15836232dda4",
+   "slug": "t3-avec-balcon-cauderan-21f854d9-2f1c-4fc4-b11c-15836232dda4",
+   "title": "T3 avec balcon, Caudéran",
+   "description": "<p>Un T3 de 72 m² au deuxième étage, près du parc Bordelais.</p><p>Séjour avec cuisine ouverte, deux chambres, salle de bains. Balcon.</p><p>Ascenseur, parking.</p>",
+   "description_text": "Un T3 de 72 m² au deuxième étage, près du parc Bordelais.\n\nSéjour avec cuisine ouverte, deux chambres, salle de bains. Balcon.\n\nAscenseur, parking.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 340000,
+   "currency": "EUR",
+   "rooms": 3,
+   "bedrooms": 2,
+   "bathrooms": 1,
+   "living_surface": 72,
+   "address": {
+    "street": "Avenue Louis Barthou 120",
+    "postcode": "33200",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.852,
+    "lng": -0.614
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899439.jpg",
+     "alt": "T3 avec balcon, Caudéran"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899438.jpg",
+     "alt": "T3 avec balcon, Caudéran, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899443.jpg",
+     "alt": "T3 avec balcon, Caudéran, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899434.jpg",
+     "alt": "T3 avec balcon, Caudéran, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899440.jpg",
+     "alt": "T3 avec balcon, Caudéran, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-6899447.jpg",
+     "alt": "T3 avec balcon, Caudéran, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "18b4fa4f-2fa8-4c8f-9e13-ee8f3477471f",
+    "first_name": "Yanis",
+    "last_name": "Ferreira",
+    "phone": "+33 0 00 00 00 16",
+    "email": "yanis.ferreira@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7580994-sq.jpg",
+     "alt": "Yanis Ferreira"
+    }
+   },
+   "features": [
+    "elevator",
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-17T09:00:00.000Z",
+   "reference": "JA84-L4PH",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "520fc54b-3a5e-4897-8a4e-1b2f1d046a92",
+   "slug": "t4-au-calme-cauderan-520fc54b-3a5e-4897-8a4e-1b2f1d046a92",
+   "title": "T4 au calme, Caudéran",
+   "description": "<p>Un T4 de 88 m² au premier étage d'une petite résidence.</p><p>Séjour, cuisine ouverte, trois chambres, salle de bains. Balcon sur un jardin commun.</p><p>Garage, cave.</p>",
+   "description_text": "Un T4 de 88 m² au premier étage d'une petite résidence.\n\nSéjour, cuisine ouverte, trois chambres, salle de bains. Balcon sur un jardin commun.\n\nGarage, cave.",
+   "offer_type": "buy",
+   "property_type": "apartment",
+   "status": "available",
+   "price": 405000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 88,
+   "address": {
+    "street": "Rue Stéhelin 40",
+    "postcode": "33200",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.854,
+    "lng": -0.623
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089274.jpg",
+     "alt": "T4 au calme, Caudéran"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089269.jpg",
+     "alt": "T4 au calme, Caudéran, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089268.jpg",
+     "alt": "T4 au calme, Caudéran, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089273.jpg",
+     "alt": "T4 au calme, Caudéran, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8089270.jpg",
+     "alt": "T4 au calme, Caudéran, photo 5"
+    }
+   ],
+   "agent": {
+    "id": "84bf9c49-6730-4ca0-b806-6429e0ba34da",
+    "first_name": "Thibault",
+    "last_name": "Garat",
+    "phone": "+33 0 00 00 00 14",
+    "email": "thibault.garat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463183-sq.jpg",
+     "alt": "Thibault Garat"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-13T09:00:00.000Z",
+   "reference": "659D-X3FR",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "d8ab939b-f0e9-4d46-9539-2c10b02135c8",
+   "slug": "appartement-sous-les-toits-nansouty-d8ab939b-f0e9-4d46-9539-2c10b02135c8",
+   "title": "Appartement sous les toits, Nansouty",
+   "description": "<p>Un appartement de 90 m² au dernier étage, rénové en 2025.</p><p>Séjour sous fenêtres de toit, cuisine, trois chambres, salle de bains.</p><p>Sans ascenseur. Tram B à cinq minutes.</p>",
+   "description_text": "Un appartement de 90 m² au dernier étage, rénové en 2025.\n\nSéjour sous fenêtres de toit, cuisine, trois chambres, salle de bains.\n\nSans ascenseur. Tram B à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "apartment_attic",
+   "status": "available",
+   "price": 440000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 90,
+   "address": {
+    "street": "Cours de la Somme 90",
+    "postcode": "33800",
+    "city": "Bordeaux",
+    "country": "France",
+    "lat": 44.827,
+    "lng": -0.572
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146149.jpg",
+     "alt": "Appartement sous les toits, Nansouty"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146157.jpg",
+     "alt": "Appartement sous les toits, Nansouty, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146147.jpg",
+     "alt": "Appartement sous les toits, Nansouty, photo 3"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146154.jpg",
+     "alt": "Appartement sous les toits, Nansouty, photo 4"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146151.jpg",
+     "alt": "Appartement sous les toits, Nansouty, photo 5"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8146150.jpg",
+     "alt": "Appartement sous les toits, Nansouty, photo 6"
+    }
+   ],
+   "agent": {
+    "id": "16dae26e-1327-48de-9c36-287b27f45e3f",
+    "first_name": "Sophie",
+    "last_name": "Lalanne",
+    "phone": "+33 0 00 00 00 15",
+    "email": "sophie.lalanne@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463168-sq.jpg",
+     "alt": "Sophie Lalanne"
+    }
+   },
+   "features": [
+    "parking"
+   ],
+   "published_at": "2026-06-09T09:00:00.000Z",
+   "reference": "9U35-MMRL",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "15edc5dd-715a-49de-bf52-79c6ab48ff7c",
+   "slug": "maison-bourgeoise-en-pierre-le-bouscat-15edc5dd-715a-49de-bf52-79c6ab48ff7c",
+   "title": "Maison bourgeoise en pierre, Le Bouscat",
+   "description": "<p>Une maison bourgeoise en pierre de 260 m² sur un parc de 1 300 m², au Bouscat.</p><p>Salon avec cheminée et moulures, salle à manger, cuisine, cinq chambres, trois salles de bains. Terrasse en pierre sur le parc.</p><p>Garage, dépendance. Tram D à cinq minutes.</p>",
+   "description_text": "Une maison bourgeoise en pierre de 260 m² sur un parc de 1 300 m², au Bouscat.\n\nSalon avec cheminée et moulures, salle à manger, cuisine, cinq chambres, trois salles de bains. Terrasse en pierre sur le parc.\n\nGarage, dépendance. Tram D à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "house_villa",
+   "status": "sold",
+   "price": 1460000,
+   "currency": "EUR",
+   "rooms": 8,
+   "bedrooms": 5,
+   "bathrooms": 3,
+   "living_surface": 260,
+   "land_surface": 1300,
+   "address": {
+    "street": "Avenue de la Libération 300",
+    "postcode": "33110",
+    "city": "Le Bouscat",
+    "country": "France",
+    "lat": 44.859,
+    "lng": -0.599
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24205635.jpg",
+     "alt": "Maison bourgeoise en pierre, Le Bouscat"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-24205636.jpg",
+     "alt": "Maison bourgeoise en pierre, Le Bouscat, photo 2"
+    }
+   ],
+   "agent": {
+    "id": "80596617-53e3-47db-8d28-83a7e2a58865",
+    "first_name": "Pauline",
+    "last_name": "Darrigade",
+    "phone": "+33 0 00 00 00 11",
+    "email": "pauline.darrigade@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8171196-sq.jpg",
+     "alt": "Pauline Darrigade"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-05T09:00:00.000Z",
+   "reference": "8LE6-XGLA",
+   "team_ids": [
+    "1b880f0c-16ba-4eed-82a4-8b97b9176564"
+   ]
+  },
+  {
+   "id": "17ac85c6-73b2-4045-9c90-945ba0824579",
+   "slug": "maison-avec-garage-merignac-17ac85c6-73b2-4045-9c90-945ba0824579",
+   "title": "Maison avec garage, Mérignac",
+   "description": "<p>Une maison de 110 m² sur 500 m² de terrain, dans un quartier calme de Mérignac.</p><p>Séjour, cuisine, trois chambres à l'étage, salle de bains. Garage attenant.</p><p>Écoles et tram A à proximité.</p>",
+   "description_text": "Une maison de 110 m² sur 500 m² de terrain, dans un quartier calme de Mérignac.\n\nSéjour, cuisine, trois chambres à l'étage, salle de bains. Garage attenant.\n\nÉcoles et tram A à proximité.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 475000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 110,
+   "land_surface": 500,
+   "address": {
+    "street": "Avenue de Verdun 100",
+    "postcode": "33700",
+    "city": "Mérignac",
+    "country": "France",
+    "lat": 44.839,
+    "lng": -0.633
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31517287.jpg",
+     "alt": "Maison avec garage, Mérignac"
+    }
+   ],
+   "agent": {
+    "id": "18b4fa4f-2fa8-4c8f-9e13-ee8f3477471f",
+    "first_name": "Yanis",
+    "last_name": "Ferreira",
+    "phone": "+33 0 00 00 00 16",
+    "email": "yanis.ferreira@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7580994-sq.jpg",
+     "alt": "Yanis Ferreira"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-06-01T09:00:00.000Z",
+   "reference": "APBS-E2LD",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "3b70ac8c-90ac-4544-ab72-7148afb81251",
+   "slug": "maison-neuve-merignac-3b70ac8c-90ac-4544-ab72-7148afb81251",
+   "title": "Maison neuve, Mérignac",
+   "description": "<p>Une maison de 130 m² livrée en 2024, sur 450 m² de terrain.</p><p>Séjour avec cuisine ouverte, quatre chambres, deux salles d'eau. RE2020, pompe à chaleur.</p><p>Garage.</p>",
+   "description_text": "Une maison de 130 m² livrée en 2024, sur 450 m² de terrain.\n\nSéjour avec cuisine ouverte, quatre chambres, deux salles d'eau. RE2020, pompe à chaleur.\n\nGarage.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 585000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 4,
+   "bathrooms": 2,
+   "living_surface": 130,
+   "land_surface": 450,
+   "address": {
+    "street": "Avenue de la Forêt 50",
+    "postcode": "33700",
+    "city": "Mérignac",
+    "country": "France",
+    "lat": 44.857,
+    "lng": -0.647
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-30580640.jpg",
+     "alt": "Maison neuve, Mérignac"
+    }
+   ],
+   "agent": {
+    "id": "84bf9c49-6730-4ca0-b806-6429e0ba34da",
+    "first_name": "Thibault",
+    "last_name": "Garat",
+    "phone": "+33 0 00 00 00 14",
+    "email": "thibault.garat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463183-sq.jpg",
+     "alt": "Thibault Garat"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-28T09:00:00.000Z",
+   "reference": "39EJ-WVV3",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "6610c6ca-c16d-428b-a1fc-98ec1c1fe2d3",
+   "slug": "maison-de-plain-pied-dans-les-pins-pessac-6610c6ca-c16d-428b-a1fc-98ec1c1fe2d3",
+   "title": "Maison de plain-pied dans les pins, Pessac",
+   "description": "<p>Une maison contemporaine de plain-pied de 180 m², construite en 2019 sur un terrain boisé de pins de 1 400 m².</p><p>Séjour et cuisine ouverts sur la terrasse en bois, trois chambres dont une suite, deux salles de bains. Parquet en chevrons dans toutes les pièces.</p><p>Pergola, abri voiture. Campus et tram B à dix minutes.</p>",
+   "description_text": "Une maison contemporaine de plain-pied de 180 m², construite en 2019 sur un terrain boisé de pins de 1 400 m².\n\nSéjour et cuisine ouverts sur la terrasse en bois, trois chambres dont une suite, deux salles de bains. Parquet en chevrons dans toutes les pièces.\n\nPergola, abri voiture. Campus et tram B à dix minutes.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 865000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 2,
+   "living_surface": 180,
+   "land_surface": 1400,
+   "address": {
+    "street": "Avenue Pasteur 100",
+    "postcode": "33600",
+    "city": "Pessac",
+    "country": "France",
+    "lat": 44.806,
+    "lng": -0.632
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587858.jpg",
+     "alt": "Maison de plain-pied dans les pins, Pessac"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587867.jpg",
+     "alt": "Maison de plain-pied dans les pins, Pessac, photo 2"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7587884.jpg",
+     "alt": "Maison de plain-pied dans les pins, Pessac, photo 3"
+    }
+   ],
+   "agent": {
+    "id": "16dae26e-1327-48de-9c36-287b27f45e3f",
+    "first_name": "Sophie",
+    "last_name": "Lalanne",
+    "phone": "+33 0 00 00 00 15",
+    "email": "sophie.lalanne@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463168-sq.jpg",
+     "alt": "Sophie Lalanne"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-24T09:00:00.000Z",
+   "reference": "SLPS-EXS7",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "22b6053b-424d-459f-b8c6-d31b5094e5bf",
+   "slug": "maison-familiale-pessac-22b6053b-424d-459f-b8c6-d31b5094e5bf",
+   "title": "Maison familiale, Pessac",
+   "description": "<p>Une maison de 115 m² sur 450 m² de terrain.</p><p>Séjour, cuisine, trois chambres, salle de bains. Garage.</p><p>Écoles et commerces de Pessac centre à cinq minutes.</p>",
+   "description_text": "Une maison de 115 m² sur 450 m² de terrain.\n\nSéjour, cuisine, trois chambres, salle de bains. Garage.\n\nÉcoles et commerces de Pessac centre à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "house_detached",
+   "status": "available",
+   "price": 480000,
+   "currency": "EUR",
+   "rooms": 5,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 115,
+   "land_surface": 450,
+   "address": {
+    "street": "Avenue du Haut-Lévêque 50",
+    "postcode": "33600",
+    "city": "Pessac",
+    "country": "France",
+    "lat": 44.797,
+    "lng": -0.662
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-31406334.jpg",
+     "alt": "Maison familiale, Pessac"
+    }
+   ],
+   "agent": {
+    "id": "84bf9c49-6730-4ca0-b806-6429e0ba34da",
+    "first_name": "Thibault",
+    "last_name": "Garat",
+    "phone": "+33 0 00 00 00 14",
+    "email": "thibault.garat@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-8463183-sq.jpg",
+     "alt": "Thibault Garat"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-20T09:00:00.000Z",
+   "reference": "7C3G-QZ7U",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  },
+  {
+   "id": "46fd6ed6-0e0a-478b-af63-154fbdd970f0",
+   "slug": "maison-de-ville-recente-pessac-centre-46fd6ed6-0e0a-478b-af63-154fbdd970f0",
+   "title": "Maison de ville récente, Pessac centre",
+   "description": "<p>Une maison de ville de 95 m² construite en 2019, avec un petit jardin de 120 m².</p><p>Séjour avec cuisine ouverte, trois chambres à l'étage, salle de bains.</p><p>Place de parking. Gare de Pessac à cinq minutes.</p>",
+   "description_text": "Une maison de ville de 95 m² construite en 2019, avec un petit jardin de 120 m².\n\nSéjour avec cuisine ouverte, trois chambres à l'étage, salle de bains.\n\nPlace de parking. Gare de Pessac à cinq minutes.",
+   "offer_type": "buy",
+   "property_type": "house_terraced",
+   "status": "available",
+   "price": 410000,
+   "currency": "EUR",
+   "rooms": 4,
+   "bedrooms": 3,
+   "bathrooms": 1,
+   "living_surface": 95,
+   "land_surface": 120,
+   "address": {
+    "street": "Avenue Jean Jaurès 60",
+    "postcode": "33600",
+    "city": "Pessac",
+    "country": "France",
+    "lat": 44.808,
+    "lng": -0.626
+   },
+   "photos": [
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-32115995.jpg",
+     "alt": "Maison de ville récente, Pessac centre"
+    },
+    {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-32115998.jpg",
+     "alt": "Maison de ville récente, Pessac centre, photo 2"
+    }
+   ],
+   "agent": {
+    "id": "18b4fa4f-2fa8-4c8f-9e13-ee8f3477471f",
+    "first_name": "Yanis",
+    "last_name": "Ferreira",
+    "phone": "+33 0 00 00 00 16",
+    "email": "yanis.ferreira@vellane.example.com",
+    "languages": [
+     "fr",
+     "en"
+    ],
+    "team_ids": [
+     "7239b61e-ddc0-44a5-90b4-916ad880be23"
+    ],
+    "photo": {
+     "url": "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-7580994-sq.jpg",
+     "alt": "Yanis Ferreira"
+    }
+   },
+   "features": [
+    "balcony",
+    "parking"
+   ],
+   "published_at": "2026-05-16T09:00:00.000Z",
+   "reference": "YPKK-Q3BU",
+   "team_ids": [
+    "7239b61e-ddc0-44a5-90b4-916ad880be23"
+   ]
+  }
+ ],
+ "developments": [],
+ "fixture_only": {
+  "listings": {
+   "9ca9f3b5-3420-43e7-95a6-de60c496177f": {
+    "energy_class": "E",
+    "year_built": 1880,
+    "floor": 3
+   },
+   "259ea7ef-4be6-4133-a505-5ed1c893f9c3": {
+    "energy_class": "B",
+    "year_built": 1905,
+    "floor": 2,
+    "balcony_surface": 6
+   },
+   "0532712d-f5b8-4e93-9f6c-9e7ab5ee0efa": {
+    "energy_class": "D",
+    "year_built": 1850,
+    "floor": 5
+   },
+   "03179733-d99f-4c12-9e5f-c5460060b400": {
+    "energy_class": "B",
+    "year_built": 1965,
+    "floor": 3,
+    "balcony_surface": 5
+   },
+   "2f20ec9b-eee1-4e3b-bc7c-4dbfc323cfbb": {
+    "energy_class": "C",
+    "year_built": 1930,
+    "floor": 2,
+    "charges": 60
+   },
+   "305a5baa-f9f8-4404-bb4c-3416ae2b3561": {
+    "energy_class": "E",
+    "year_built": 1980,
+    "floor": 1,
+    "balcony_surface": 4,
+    "charges": 90
+   },
+   "de4ba94e-d560-4add-ab83-a8a9fa666d2b": {
+    "energy_class": "D",
+    "year_built": 1840,
+    "floor": 3
+   },
+   "c6c25f82-650d-4025-9460-64c08a267ae3": {
+    "energy_class": "A",
+    "year_built": 1830,
+    "floor": 4
+   },
+   "b9cc745b-df76-447a-808d-1c2510db3527": {
+    "energy_class": "B",
+    "year_built": 1962,
+    "floor": 5,
+    "terrace_surface": 30
+   },
+   "89cfc3fa-5555-4468-bc95-a2dadeb81114": {
+    "energy_class": "D",
+    "year_built": 1975,
+    "floor": 3,
+    "balcony_surface": 7
+   },
+   "66d362df-51bb-462e-82c3-7d184a33747a": {
+    "energy_class": "E",
+    "year_built": 1880,
+    "floor": 6
+   },
+   "3dd173cc-a07e-4f93-a49e-42e461a45794": {
+    "energy_class": "C",
+    "year_built": 1650,
+    "floor": 2
+   },
+   "f55fe9bd-598f-4695-8057-04b04bb2420b": {
+    "energy_class": "D",
+    "year_built": 1870,
+    "floor": 5
+   },
+   "272cb650-e57c-408b-80e5-61ad36e24ac5": {
+    "energy_class": "C",
+    "year_built": 1850,
+    "floor": 3,
+    "charges": 50
+   },
+   "6a13fc7c-c2a5-44b0-b689-7adbd6b77351": {
+    "energy_class": "A",
+    "year_built": 1970,
+    "floor": 2,
+    "charges": 120
+   },
+   "e2bb9e7d-5930-4d21-8911-658498fe9c79": {
+    "energy_class": "C",
+    "year_built": 1650,
+    "floor": 1,
+    "charges": 70
+   },
+   "9f066504-a095-4958-b8d6-cdd865769c39": {
+    "energy_class": "D",
+    "year_built": 1934,
+    "floor": 5,
+    "balcony_surface": 5
+   },
+   "96939578-7d9e-4541-baa6-65fd32aafa13": {
+    "energy_class": "E",
+    "year_built": 2008,
+    "floor": 4,
+    "balcony_surface": 9
+   },
+   "e6f0590d-369b-442a-835e-a01d1dd63480": {
+    "energy_class": "E",
+    "year_built": 2012,
+    "floor": 3,
+    "balcony_surface": 6
+   },
+   "fb1deefa-3d6a-4202-816b-b1db8f661ed7": {
+    "energy_class": "B",
+    "year_built": 2005,
+    "floor": 2,
+    "charges": 80
+   },
+   "7f922605-30d4-4b36-8302-02998ed71e39": {
+    "energy_class": "A",
+    "year_built": 2010,
+    "floor": 4,
+    "charges": 110
+   },
+   "d959f1de-64b2-4e39-a84a-e1a053d73500": {
+    "energy_class": "C",
+    "year_built": 2008,
+    "terrace_surface": 35
+   },
+   "f4774e61-0387-499e-8005-c284ec7cd4bb": {
+    "energy_class": "D",
+    "year_built": 2005,
+    "terrace_surface": 60
+   },
+   "6146fdcf-6231-4355-8332-f2be56412251": {
+    "energy_class": "A",
+    "year_built": 1990,
+    "floor": 2,
+    "balcony_surface": 6
+   },
+   "821f4aff-5ebf-45d4-b5db-6b69143bba89": {
+    "energy_class": "A",
+    "year_built": 1850,
+    "floor": 2
+   },
+   "1844f3f4-5d98-4c3b-9b28-ac920ff255a3": {
+    "energy_class": "C",
+    "year_built": 1860,
+    "floor": 4
+   },
+   "1c36345b-351f-4b4c-879b-d1e37fe8fef4": {
+    "energy_class": "D",
+    "year_built": 1760,
+    "floor": 2
+   },
+   "5f8eafac-522e-46c8-8f9c-63b50d417198": {
+    "energy_class": "C",
+    "year_built": 1870,
+    "floor": 1
+   },
+   "5e166335-b0e0-4b06-a790-8ebccdcb8e82": {
+    "energy_class": "D",
+    "year_built": 2016,
+    "floor": 3,
+    "balcony_surface": 10
+   },
+   "f1ee3c13-640c-4a15-b157-db0c4371a5fd": {
+    "energy_class": "E",
+    "year_built": 2015,
+    "floor": 2
+   },
+   "dd67c95d-1a66-4da1-9058-27ebaf410155": {
+    "energy_class": "C",
+    "year_built": 1880,
+    "floor": 4
+   },
+   "263185f0-bf73-4e27-bd2d-d145ef216573": {
+    "energy_class": "B",
+    "year_built": 2000,
+    "floor": 2,
+    "balcony_surface": 6,
+    "charges": 100
+   },
+   "b1a6d330-53b8-4c24-9fb7-578f8fe38f30": {
+    "energy_class": "B",
+    "year_built": 2012,
+    "floor": 3,
+    "balcony_surface": 8,
+    "charges": 130
+   },
+   "c3419021-90e2-4c79-997b-88889a2fffbd": {
+    "energy_class": "B",
+    "year_built": 1910,
+    "terrace_surface": 150
+   },
+   "67a439ae-7e38-43eb-913c-51dab9c2393f": {
+    "energy_class": "A",
+    "year_built": 2015,
+    "terrace_surface": 90
+   },
+   "21f854d9-2f1c-4fc4-b11c-15836232dda4": {
+    "energy_class": "A",
+    "year_built": 1985,
+    "floor": 2,
+    "balcony_surface": 6
+   },
+   "520fc54b-3a5e-4897-8a4e-1b2f1d046a92": {
+    "energy_class": "D",
+    "year_built": 1990,
+    "floor": 1,
+    "balcony_surface": 8
+   },
+   "d8ab939b-f0e9-4d46-9539-2c10b02135c8": {
+    "energy_class": "A",
+    "year_built": 1900,
+    "floor": 3
+   },
+   "15edc5dd-715a-49de-bf52-79c6ab48ff7c": {
+    "energy_class": "A",
+    "year_built": 1905,
+    "terrace_surface": 80
+   },
+   "17ac85c6-73b2-4045-9c90-945ba0824579": {
+    "energy_class": "D",
+    "year_built": 1985,
+    "terrace_surface": 15
+   },
+   "3b70ac8c-90ac-4544-ab72-7148afb81251": {
+    "energy_class": "C",
+    "year_built": 2024,
+    "terrace_surface": 20
+   },
+   "6610c6ca-c16d-428b-a1fc-98ec1c1fe2d3": {
+    "energy_class": "A",
+    "year_built": 2019,
+    "terrace_surface": 50
+   },
+   "22b6053b-424d-459f-b8c6-d31b5094e5bf": {
+    "energy_class": "A",
+    "year_built": 1990,
+    "terrace_surface": 15
+   },
+   "46fd6ed6-0e0a-478b-af63-154fbdd970f0": {
+    "energy_class": "A",
+    "year_built": 2019,
+    "terrace_surface": 120
+   }
+  },
+  "units": {},
+  "developments": {}
+ }
+}

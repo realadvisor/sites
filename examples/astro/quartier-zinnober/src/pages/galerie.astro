@@ -1,0 +1,107 @@
+---
+// Galerie: the development's photos as an editorial sequence (mixed sizes),
+// opened in a lightbox (native <dialog>, whole photo). Without JS each tile
+// links to the large photo.
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Icon from '../components/Icon.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { site as load } from '../lib/data';
+
+const site = await load();
+const { dev } = site;
+const photos = dev.photos;
+// Rhythm: one wide, a pair, three; repeat.
+const PATTERN = ['w', 'h', 'h', 't', 't', 't'];
+const shape = (i: number) => PATTERN[i % PATTERN.length];
+const SIZES = { w: '(min-width: 1360px) 1264px, 100vw', h: '(min-width: 900px) 50vw, 100vw', t: '(min-width: 900px) 33vw, 50vw' };
+---
+<Site
+  site={site}
+  title={`Galerie: ${photos.length} Bilder | ${dev.title}`}
+  description={`Bilder vom ${dev.title} in ${dev.address.city ?? ''}: Häuser, Hof und Wohnungen.`}
+  image={photos[0] && img(photos[0].url, { w: 1200, h: 630 })}
+>
+  <PageHead title="Galerie" tone="butter">
+    <p class="count"><span class="num">{photos.length}</span> Bilder</p>
+  </PageHead>
+
+  {photos.length > 0 ? (
+    <section class="wrap gal" aria-label="Bilder">
+      <ul class="grid" data-gallery>
+        {photos.map((p, i) => {
+          const s = shape(i)!;
+          return (
+            <li class={`g g--${s}`}>
+              <a href={img(p.url, { w: 1920, fit: 'fit', quality: 82 })} data-lightbox={i} data-alt={p.alt} aria-label={`${p.alt}: gross anzeigen`}>
+                <RaImage src={p} alt={p.alt} width={s === 'w' ? 1600 : 900} height={s === 'w' ? 800 : 600} sizes={SIZES[s as keyof typeof SIZES]} priority={i === 0} />
+                <span class="zoom" aria-hidden="true"><Icon name="expand" size={18} /></span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ) : (
+    <section class="wrap gal"><p class="lead">Bilder folgen in Kürze.</p></section>
+  )}
+
+  <dialog class="lb" data-lb aria-label="Bild gross">
+    <div class="lb-bar">
+      <p class="lb-count num" data-lb-count></p>
+      <button type="button" class="lb-btn" data-lb-close><Icon name="close" size={24} /><span class="visually-hidden">Schliessen</span></button>
+    </div>
+    <figure class="lb-fig">
+      <img data-lb-img alt="" />
+      <figcaption data-lb-cap></figcaption>
+    </figure>
+    <button type="button" class="lb-btn lb-prev" data-lb-prev><Icon name="left" size={28} /><span class="visually-hidden">Vorheriges Bild</span></button>
+    <button type="button" class="lb-btn lb-next" data-lb-next><Icon name="right" size={28} /><span class="visually-hidden">Nächstes Bild</span></button>
+  </dialog>
+</Site>
+
+<script>
+  import '../scripts/lightbox';
+</script>
+
+<style>
+  .count { font: 800 var(--step-3)/1 var(--display); }
+  .gal { padding-block: clamp(32px, 5vw, 72px); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 20px); }
+  .g a { position: relative; display: block; border-radius: var(--radius-card); overflow: hidden; border: 2px solid var(--ink); background: var(--sand); }
+  .g :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .g a:hover :global(img) { transform: scale(1.03); }
+  .g--w { grid-column: 1 / -1; }
+  .g--w :global(img) { aspect-ratio: 2 / 1; }
+  .g--h { grid-column: span 3; }
+  .g--h :global(img), .g--t :global(img) { aspect-ratio: 3 / 2; }
+  .g--t { grid-column: span 2; }
+  .zoom { position: absolute; right: 12px; bottom: 12px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); border: 2px solid var(--ink); color: var(--ink); }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .g--w { grid-column: 1 / -1; }
+    .g--w :global(img) { aspect-ratio: 3 / 2; }
+    .g--h { grid-column: 1 / -1; }
+    .g--t { grid-column: span 1; }
+    .g--t :global(img) { aspect-ratio: 1; }
+  }
+
+  .lb { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--ink); color: #fff; }
+  .lb::backdrop { background: rgb(20 15 58 / 0.9); }
+  .lb[open] { display: grid; grid-template-rows: auto 1fr; }
+  .lb-bar { display: flex; justify-content: space-between; align-items: center; padding: 12px var(--gutter); }
+  .lb-count { font-weight: 650; }
+  .lb-fig { margin: 0; display: grid; grid-template-rows: 1fr auto; gap: 12px; padding: 0 clamp(16px, 8vw, 120px) 24px; min-height: 0; }
+  .lb-fig img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+  .lb-fig figcaption { text-align: center; font-size: 0.9375rem; color: #e4e0f2; }
+  .lb-btn { width: 52px; height: 52px; display: inline-grid; place-items: center; border-radius: 50%; border: 2px solid #fff; background: transparent; color: #fff; cursor: pointer; }
+  .lb-btn:hover { background: rgb(255 255 255 / 0.12); }
+  .lb-btn:focus-visible { outline: 3px solid var(--butter); outline-offset: 3px; }
+  .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); }
+  .lb-prev { left: 16px; }
+  .lb-next { right: 16px; }
+  @media (max-width: 640px) { .lb-prev, .lb-next { top: auto; bottom: 18px; transform: none; } .lb-fig { padding-bottom: 88px; } }
+</style>

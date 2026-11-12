@@ -1,0 +1,83 @@
+  .v-units .head { display: grid; gap: 18px; padding-block: clamp(40px, 6vw, 88px) 28px; }
+  .v-units .head .lede { max-width: 52ch; }
+
+  .v-units .filters { display: flex; flex-wrap: wrap; align-items: end; gap: 14px 18px; padding: 20px 0; border-block: 1px solid var(--line); }
+  .v-units .field { display: grid; gap: 6px; font-size: 0.875rem; color: var(--muted); }
+  .v-units .field select {
+    min-height: var(--control-h); min-width: 150px; padding: 0 40px 0 14px; border: 1px solid var(--line-strong); border-radius: var(--control-radius);
+    background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232a251f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center;
+    appearance: none; color: var(--text); font-size: 1rem; cursor: pointer;
+  }
+  .v-units .check { display: inline-flex; align-items: center; gap: 10px; min-height: var(--control-h); cursor: pointer; font-weight: 500; }
+  .v-units .check input { width: 20px; height: 20px; accent-color: var(--accent-strong); }
+  .v-units .f-actions { display: flex; align-items: center; gap: 18px; margin-left: auto; min-height: var(--control-h); }
+  .v-units .reset { background: none; border: 0; padding: 12px 0; }
+
+  .v-units .shortlist { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; margin-top: 16px; padding: 14px 18px; background: var(--sand); border-radius: var(--radius-card); }
+  .v-units .sl-actions { display: flex; align-items: center; gap: 18px; }
+  .v-units .sl-actions .btn { min-height: 44px; }
+  .v-units .sl-actions .link { background: none; border: 0; padding: 10px 0; cursor: pointer; }
+
+  .v-units .layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 4vw, 64px); align-items: start; padding-block: 32px var(--section); }
+  .v-units .drawing { position: sticky; top: calc(var(--header-h) + 24px); }
+  .v-units .count { font: 400 var(--step-2)/1.1 var(--serif); margin-bottom: 14px; }
+  .v-units .count .muted { font-size: 0.6em; font-family: var(--sans); }
+  .v-units .hint { font-size: 0.875rem; margin: -6px 0 12px; }
+
+  .v-units .units { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .v-units .units th { text-align: left; font-weight: 600; font-size: 0.8125rem; color: var(--muted); padding: 10px 8px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+  .v-units .units td { padding: 0 8px; height: 54px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .v-units .units .r { text-align: right; }
+  .v-units .units tr.group th { padding: 22px 8px 8px; font: 400 1.375rem/1 var(--serif); color: var(--text); border-bottom: 1px solid var(--line-strong); }
+  .v-units .row { position: relative; transition: background-color 0.15s var(--ease); }
+  .v-units .row.is-hot, .v-units .row:hover { background: var(--paper); }
+  .v-units .row.is-hot td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+  .v-units .c-no a { font-weight: 700; text-decoration: none; }
+  .v-units .c-no a::after { content: ''; position: absolute; inset: 0; }
+  .v-units .c-no a:focus-visible { outline: none; }
+  .v-units .row:has(.c-no a:focus-visible) { outline: 2px solid var(--accent-strong); outline-offset: -2px; }
+  .v-units .c-fav { width: 44px; padding: 0 !important; }
+  .v-units .star { position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; color: var(--muted); }
+  .v-units .star svg { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+  .v-units .star[aria-pressed='true'] { color: var(--accent); }
+  .v-units .star[aria-pressed='true'] svg { fill: currentColor; }
+  .v-units .star:disabled { opacity: 0.35; cursor: not-allowed; }
+  .v-units .short { display: none; }
+  .v-units .o-kind { color: var(--muted); font-size: 0.875rem; }
+  .v-units .c-p { font-weight: 600; }
+  .v-units .row.sold td:not(.c-st) { color: var(--muted); }
+  .v-units .empty { padding: 28px 0; }
+  .v-units .note { font-size: 0.875rem; margin-top: 20px; max-width: 70ch; }
+
+  @media (max-width: 1480px) { .v-units .o-kind { display: none; } }
+  @media (max-width: 1240px) { .v-units .full { display: none; } .v-units .short { display: inline; } }
+  @media (max-width: 1000px) {
+    .v-units .layout { grid-template-columns: 1fr; }
+    .v-units .drawing { position: static; order: 2; }
+    .v-units .list { order: 1; }
+  }
+  @media (max-width: 760px) {
+    .v-units .filters { gap: 12px; }
+    .v-units .field { flex: 1 1 calc(50% - 6px); }
+    .v-units .field select { min-width: 0; width: 100%; }
+    .v-units .f-actions { margin-left: 0; }
+    .v-units .units thead { display: none; }
+    .v-units .units, .v-units .units tbody, .v-units .units tr, .v-units .units td, .v-units .units th { display: block; }
+    .v-units .units tbody { display: grid; gap: 10px; margin-bottom: 8px; }
+    .v-units .units tr.group th { padding: 18px 0 2px; border: 0; }
+    .v-units .units tr.row { display: grid; grid-template-columns: 3.2em auto minmax(0, 1fr) auto; grid-template-areas: 'no r fl st' 'no s o fav' 'no p p fav'; gap: 4px 12px; align-items: center; padding: 14px 4px 10px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); }
+    .v-units .units tr.row[hidden] { display: none; }
+    .v-units .units td { height: auto; border: 0; padding: 0; }
+    .v-units .units td.c-no { grid-area: no; align-self: start; font: 400 1.5rem/1 var(--serif); }
+    .v-units .c-no a { font-weight: 400; }
+    .v-units .units td.c-r { grid-area: r; font-weight: 600; }
+    .v-units .units td.c-fl { grid-area: fl; color: var(--muted); }
+    .v-units .units td.c-st { grid-area: st; justify-self: end; padding-right: 8px; }
+    .v-units .units td.c-s { grid-area: s; text-align: left; color: var(--muted); }
+    .v-units .units td.c-o { grid-area: o; text-align: left; color: var(--muted); }
+    .v-units .units td.c-p { grid-area: p; text-align: left; }
+    .v-units .units td.c-o .o-kind { display: inline; }
+    .v-units .units td.c-p:empty { display: none; }
+    .v-units .units td.c-fav { grid-area: fav; justify-self: end; align-self: end; width: auto; }
+    .v-units .row.is-hot td:first-child { box-shadow: none; }
+  }

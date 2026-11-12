@@ -1,0 +1,18 @@
+  .sell-photo { aspect-ratio: 2 / 1; }
+  @media (max-width: 760px) { .sell-photo { aspect-ratio: 8 / 9; } }
+  .steps { display: grid; grid-template-columns: 1fr 2fr; gap: 24px clamp(32px, 6vw, 120px); padding-top: var(--section); }
+  .steps-list { border-top: 1px solid var(--text); }
+  .steps-list div { display: grid; grid-template-columns: minmax(10rem, 1fr) 2fr; gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .steps-list dd { max-width: 34em; }
+  @media (max-width: 900px) {
+    .steps { grid-template-columns: 1fr; }
+    .steps-list div { grid-template-columns: 1fr; }
+  }
+  .valuation { background: var(--paper); margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); }
+  .val-in { display: grid; grid-template-columns: 1fr 1fr; gap: 40px clamp(40px, 6vw, 120px); }
+  .val-text { display: grid; gap: 24px; align-content: start; }
+  @media (max-width: 900px) { .val-in { grid-template-columns: 1fr; } }
+  .recent { padding-top: var(--section); }
+  .recent-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: clamp(24px, 3vw, 40px); }
+  .recent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); }
+  @media (max-width: 900px) { .recent-grid { grid-template-columns: 1fr; } }

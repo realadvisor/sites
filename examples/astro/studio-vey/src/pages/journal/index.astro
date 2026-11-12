@@ -1,0 +1,35 @@
+---
+export const prerender = false;
+
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { brandName, site } from '../../lib/data';
+
+const s = await site();
+const posts = (await getCollection('journal')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const [lead, ...rest] = posts;
+---
+<Layout title={`Journal | ${brandName(s)}`} description={`Notizen von ${brandName(s)} über Kaufen, Verkaufen und Mieten in Zürich, am See und in Zug.`} image={lead && img(lead.data.cover, { w: 1200, h: 630 })}>
+  <PageHead title="Journal" lede="Beiträge aus dem Büro zu Besichtigungen, Verkäufen, Mietbewerbungen und zu den Gemeinden, in denen unsere Objekte liegen." />
+  <section class="wrap jr" aria-label="Beiträge">
+    {lead && <div class="jr-lead"><JournalCard post={lead} as="h2" large priority /></div>}
+    {rest.length > 0 && <ul class="jr-grid">{rest.map((p) => <li><JournalCard post={p} as="h2" /></li>)}</ul>}
+  </section>
+</Layout>
+
+<style>
+  .jr { padding-bottom: var(--section); display: grid; gap: clamp(56px, 6vw, 96px); }
+  .jr-lead { padding-bottom: clamp(56px, 6vw, 96px); border-bottom: 1px solid var(--line); }
+  .jr-lead :global(.jc-link) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(32px, 5vw, 80px); align-items: end; }
+  .jr-lead :global(.jc-media) { grid-row: 1 / 5; margin: 0; }
+  .jr-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px var(--gap); }
+  @media (min-width: 1024px) { .jr-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 767px) {
+    .jr-lead :global(.jc-link) { grid-template-columns: minmax(0, 1fr); }
+    .jr-lead :global(.jc-media) { grid-row: auto; margin-bottom: 8px; }
+    .jr-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  }
+</style>

@@ -1,0 +1,186 @@
+---
+/**
+ * Floor plans by typology: tabs (links, ?tipo=), each tab a card per plan
+ * variant with the plan, two big area figures (interior, outdoor), "Ver
+ * plano" and the units of that variant, or "Avísame" when every unit of it is
+ * sold or reserved. The script switches tabs in place and opens a plan in a
+ * dialog; without it, links reload and open the SVG.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import { loadSite } from '../lib/data';
+import { alternates, availCount, fill, href, tr, type Lang } from '../lib/i18n';
+import { docHref } from '../lib/docs';
+import {
+  KINDS, fmtRange, formatAmount, kindLabel, planSrc, planVariants, unitNumber, unitSlug, floorName, statusLabel, type Kind,
+} from '../lib/units';
+import { WING_ADDRESS } from '../content/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = tr(lang);
+const site = await loadSite();
+const { dev } = site;
+const variants = planVariants(dev.units);
+const kinds = KINDS.filter((k) => variants.some((v) => v.kind === k));
+const asked = Astro.url.searchParams.get('tipo');
+const current: Kind = (kinds as readonly string[]).includes(asked ?? '') ? (asked as Kind) : kinds[0]!;
+const tabUrl = (k: Kind) => `${href('plans', lang)}?tipo=${k}#tipologias`;
+const variantTitle = (v: (typeof variants)[number]) =>
+  v.kind === 'atico'
+    ? `${t.kinds.atico[0]}, ${v.bedrooms === 1 ? t.bedroomsOne : fill(t.bedroomsN, { n: v.bedrooms })}`
+    : kindLabel(v.kind, lang);
+const outLabel = (v: (typeof variants)[number]) => (v.outdoorKind ? t.outdoor[v.outdoorKind].toLowerCase() : t.outdoor.none.toLowerCase());
+const bathLabel = (v: (typeof variants)[number]) =>
+  !v.bathrooms ? '' : v.bathrooms.max === 1 ? t.bathroomsOne : fill(t.bathroomsN, { n: fmtRange(v.bathrooms, String, lang === 'es' ? ' o ' : ' or ') });
+const cover = dev.photos.find((p) => p.url.includes('7851904')) ?? dev.photos[0];
+---
+<Site
+  site={site}
+  lang={lang}
+  route="plans"
+  title={`${t.plansTitle}: ${kindLabel(current, lang, 2)} | ${dev.title}`}
+  description={`${t.plansTitle} ${dev.title}, Russafa. ${t.plansLead}`}
+  image={cover && img(cover.url, { w: 1200, h: 630 })}
+  alternates={alternates('plans')}
+  noindex={!!asked && asked !== kinds[0]}
+>
+  <section class="head">
+    <div class="wrap">
+      <h1>{t.plansTitle}</h1>
+      <p class="lede">{t.plansLead}</p>
+      <a class="link dl" href={docHref('planos', lang)}>{t.plansPdf}</a>
+    </div>
+  </section>
+
+  <div class="wrap" id="tipologias" data-tabs>
+    <nav class="tabs" aria-label={t.typeTabs}>
+      {kinds.map((k) => {
+        const n = variants.filter((v) => v.kind === k).reduce((s, v) => s + v.available.length, 0);
+        return (
+          <a href={tabUrl(k)} data-tab={k} aria-current={k === current ? 'true' : undefined}>
+            <span class="k">{kindLabel(k, lang, 2)}</span>
+            <span class="n">{n ? availCount(n, lang) : t.soldOut}</span>
+          </a>
+        );
+      })}
+    </nav>
+
+    {kinds.map((k) => (
+      <section class="tab" data-tab-panel={k} hidden={k !== current} aria-label={kindLabel(k, lang, 2)}>
+        {variants.filter((v) => v.kind === k).map((v) => (
+          <article class="type">
+            <a class="thumb" href={planSrc(v.key, lang)} data-plan={planSrc(v.key, lang)} data-plan-title={`${variantTitle(v)} · ${t.wings[v.wing]}`}>
+              <img src={planSrc(v.key, lang, true)} alt={`${t.indicative} ${variantTitle(v)}, ${t.wings[v.wing]}`} width="640" height="480" loading="lazy" decoding="async" />
+            </a>
+            <div class="body">
+              <h2>{variantTitle(v)}</h2>
+              <p class="where">{t.wings[v.wing]} · {WING_ADDRESS[v.wing]}{bathLabel(v) && ` · ${bathLabel(v)}`}</p>
+              <div class="figs">
+                <div><b class="num">{fmtRange(v.interior)}<small>m²</small></b><span>{t.interior}</span></div>
+                <div><b class="num">{v.outdoor ? <>{fmtRange(v.outdoor)}<small>m²</small></> : '–'}</b><span>{outLabel(v)}</span></div>
+              </div>
+              <p class="avail">
+                {v.available.length
+                  ? <><b>{availCount(v.available.length, lang)}</b>{v.priceFrom && <> · {t.from}{' '}<b class="num">{formatAmount(v.priceFrom)}</b></>}</>
+                  : <span class="muted">{t.notifyText}</span>}
+              </p>
+              <div class="actions">
+                <a class="cta" href={planSrc(v.key, lang)} data-plan={planSrc(v.key, lang)} data-plan-title={`${variantTitle(v)} · ${t.wings[v.wing]}`}>{t.viewPlan}</a>
+                {v.available.length
+                  ? <a class="cta ghost" href={v.available.length === 1 ? href('units', lang, unitSlug(v.available[0]!)) : `${href('units', lang)}?tipo=${v.kind}#todas`}>{t.seeTypeUnits}</a>
+                  : <a class="cta coral" href={`${href('contact', lang)}?aviso=${v.key}#consulta`}>{t.notify}</a>}
+              </div>
+              <ul class="units">
+                {v.units.map((u) => (
+                  <li><a href={href('units', lang, unitSlug(u))}><span class="num">{unitNumber(u)}</span> {floorName(u, lang)}</a> <span class:list={['pill', u.status]}>{statusLabel(u, lang)}</span></li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </section>
+    ))}
+  </div>
+
+
+  <dialog class="viewer" data-viewer aria-label={t.viewPlan}>
+    <div class="bar"><p data-viewer-title></p><button type="button" data-viewer-close>{t.close}</button></div>
+    <img data-viewer-img alt="" width="960" height="700" />
+  </dialog>
+</Site>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-tabs]');
+  root?.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest<HTMLAnchorElement>('[data-tab]');
+    if (!a || e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
+    const k = a.dataset.tab!;
+    root.querySelectorAll<HTMLElement>('[data-tab-panel]').forEach((p) => (p.hidden = p.dataset.tabPanel !== k));
+    root.querySelectorAll<HTMLAnchorElement>('[data-tab]').forEach((x) => (x.dataset.tab === k ? x.setAttribute('aria-current', 'true') : x.removeAttribute('aria-current')));
+    const u = new URL(location.href);
+    u.searchParams.set('tipo', k);
+    history.replaceState(null, '', u);
+  });
+  const dlg = document.querySelector<HTMLDialogElement>('[data-viewer]');
+  const im = dlg?.querySelector<HTMLImageElement>('[data-viewer-img]');
+  const ttl = dlg?.querySelector<HTMLElement>('[data-viewer-title]');
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest<HTMLAnchorElement>('[data-plan]');
+    if (!a || !dlg || !im || e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
+    im.src = a.dataset.plan!;
+    im.alt = a.dataset.planTitle ?? '';
+    if (ttl) ttl.textContent = a.dataset.planTitle ?? '';
+    dlg.showModal();
+  });
+  dlg?.querySelector('[data-viewer-close]')?.addEventListener('click', () => dlg.close());
+  dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+</script>
+
+<style>
+  .head { padding-block: clamp(48px, 6vw, 88px) clamp(32px, 4vw, 48px); text-align: center; }
+  .head .wrap { display: grid; justify-items: center; gap: 16px; }
+  .head .lede { margin-inline: auto; }
+  .tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); background: var(--paper); border: 1px solid var(--line); position: relative; z-index: 1; }
+  .tabs a { display: grid; gap: 4px; justify-items: center; padding: 18px 10px 15px; text-decoration: none; color: var(--muted); border-bottom: 3px solid transparent; text-align: center; }
+  .tabs a + a { border-left: 1px solid var(--line); }
+  .tabs a[aria-current] { color: var(--text); border-bottom-color: var(--accent); background: #fff; }
+  .tabs .k { font: 600 0.875rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+  .tabs .n { font-size: 0.8125rem; }
+  .tab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: clamp(32px, 4vw, 56px); }
+  .type { background: var(--paper); border: 1px solid var(--line); display: grid; grid-template-rows: auto 1fr; }
+  .thumb { display: block; background: #fff; padding: clamp(16px, 2vw, 28px); border-bottom: 1px solid var(--line); }
+  .thumb img { width: 100%; height: 300px; object-fit: contain; }
+  .body { padding: clamp(20px, 2.6vw, 32px); display: grid; gap: 14px; align-content: start; }
+  .body h2 { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); }
+  .where { font-size: 0.875rem; color: var(--muted); margin: 0 !important; }
+  .figs { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--line); }
+  .figs div { padding: 16px 0; display: grid; gap: 4px; }
+  .figs div + div { border-left: 1px solid var(--line); padding-left: 20px; }
+  .figs b { font: 400 clamp(2.25rem, 1.8rem + 1.4vw, 3.25rem)/1 var(--serif); }
+  .figs small { font-size: 0.42em; margin-left: 4px; }
+  .figs span { font-size: 0.875rem; color: var(--muted); }
+  .avail { margin: 0 !important; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .units { list-style: none; margin: 4px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.875rem; }
+  .units li { display: inline-flex; gap: 6px; align-items: center; }
+  .units a { color: var(--text); display: inline-block; padding-block: 6px; }
+  .units .pill { font-size: 0.6875rem; padding: 4px 7px; }
+  .viewer { border: 0; padding: 0; width: min(1100px, 96vw); max-height: 94vh; background: #fff; color: var(--text); }
+  .viewer::backdrop { background: rgb(43 36 32 / 0.72); }
+  .viewer .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .viewer .bar p { font-weight: 600; }
+  .viewer button { font: 600 0.9375rem var(--sans); min-height: 44px; padding: 0 16px; background: var(--paper); border: 1px solid var(--line-strong); cursor: pointer; color: var(--text); }
+  .viewer img { display: block; width: 100%; height: auto; max-height: calc(94vh - 70px); object-fit: contain; }
+  @media (max-width: 900px) { .tab { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) {
+    .tabs { grid-template-columns: repeat(3, 1fr); }
+    .tabs a:nth-child(4) { border-left: 0; }
+    .tabs a:nth-child(n + 4) { border-top: 1px solid var(--line); }
+    .tabs a { padding: 12px 6px 10px; }
+    .tabs .k { font-size: 0.75rem; letter-spacing: 0.04em; }
+    .thumb img { height: 220px; }
+  }
+</style>

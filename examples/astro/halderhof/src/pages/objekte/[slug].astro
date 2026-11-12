@@ -1,0 +1,16 @@
+---
+export const prerender = false;
+import View from '../../views/ListingView.astro';
+import { listingIdFromSlug } from '@realadvisor/sites-kit';
+import { sites } from '../../lib/data';
+const slug = Astro.params.slug!;
+const listing = await sites.listing(slug);
+if (!listing) {
+  // A slug that ends with a listing id was a listing of this site: 410 Gone.
+  const gone = !!listingIdFromSlug(slug);
+  (Astro.locals as { listingGone?: boolean }).listingGone = gone;
+  const page = await Astro.rewrite('/404');
+  return gone ? new Response(page.body, { status: 410, headers: page.headers }) : page;
+}
+---
+<View l="de" listing={listing} />

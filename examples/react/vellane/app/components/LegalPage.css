@@ -1,0 +1,11 @@
+.lgp { max-width: 860px; padding-top: clamp(32px, 5vw, 64px); display: grid; gap: 32px; }
+.lgp .legal { display: grid; gap: 40px; }
+.lgp h2 { font-size: var(--step-1); margin-bottom: 12px; }
+.lgp dl { display: grid; margin: 0; border-top: 1px solid var(--line); }
+.lgp dl > div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.lgp dt { color: var(--muted); }
+.lgp dd { margin: 0; }
+.lgp dd a { color: var(--accent-strong); overflow-wrap: anywhere; }
+.lgp p { max-width: 68ch; }
+.lgp p + p { margin-top: 12px; }
+@media (max-width: 600px) { .lgp dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

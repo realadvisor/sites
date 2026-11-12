@@ -1,0 +1,3 @@
+# Copy to .dev.vars for live data locally. Without SITES_API_KEY the site uses the Astro site's src/data/fixture.json.
+SITES_API_URL=
+SITES_API_KEY=

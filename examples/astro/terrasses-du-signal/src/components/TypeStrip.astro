@@ -1,0 +1,74 @@
+---
+/**
+ * Unit types: one card per room count with a large, legible plan (the
+ * fitted drawing, cropped to the apartment), surfaces, and one price line:
+ * "from" price (available units only) and the number available. Links to the units page filtered on
+ * that type. Desktop: rows that always fill the width (5 types = 3 + 2,
+ * 4 = 2 + 2); phone: one card per row.
+ */
+import type { UnitType } from '../lib/units';
+import Arrow from './Arrow.astro';
+
+interface Props { types: UnitType[] }
+const { types } = Astro.props;
+const n = types.length;
+// Rows of 3 then 2 (6-column grid): 5 → 3+2, 4 → 2+2, 6 → 3+3. The larger
+// types come last, in the wider cards, so their plans stay as legible.
+const firstRow = n <= 3 ? n : n === 4 ? 2 : 3;
+const span = (i: number) => {
+  if (n <= 3) return 6 / n;
+  if (i < firstRow) return 6 / firstRow;
+  const rest = n - firstRow;
+  return rest % 3 === 0 || rest > 4 ? 2 : rest === 1 ? 6 : 3;
+};
+const fit = (plan: string) => plan.replace(/\.svg$/, '-fit.svg');
+---
+<ul class="types">
+  {types.map((t, i) => (
+    <li style={`--span:${span(i)}`}>
+      <a href={`/appartements?pieces=${t.rooms}#lots`}>
+        <span class="top">
+          <span class="name">{t.label}</span>
+        </span>
+        {t.plan && (
+          <span class="plan"><img src={fit(t.plan)} alt={`Plan indicatif, ${t.label}`} width="1000" height="750" loading="lazy" decoding="async" /></span>
+        )}
+        <span class="foot">
+          <span class="meta num">{t.surfaces}</span>
+          <span class="price">{t.available.length > 0 ? (
+            <>{t.priceFrom && <><span class="num">Dès {t.priceFrom}</span> · </>}<span class="num">{t.available.length} {t.available.length > 1 ? 'disponibles' : 'disponible'}</span></>
+          ) : t.units.some((u) => u.status === 'reserved') ? 'Réservé' : 'Vendu'}</span>
+          <span class="go" aria-hidden="true"><Arrow /></span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>
+<p class="note">Plans indicatifs, non contractuels. L’échelle varie d’une typologie à l’autre.</p>
+
+<style>
+  .types { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 24px); }
+  li { grid-column: span var(--span); min-width: 0; }
+  a { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; gap: 18px; height: 100%; padding: clamp(20px, 2vw, 28px); background: var(--surface); border: 1px solid var(--line); text-decoration: none; transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+  a:hover { border-color: var(--line-strong); box-shadow: 0 18px 40px -28px rgb(38 33 27 / 0.35); }
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .name { font: 500 clamp(1.75rem, 1.4rem + 1vw, 2.25rem)/1 var(--serif); }
+  .plan { position: relative; display: block; aspect-ratio: 4 / 3; min-width: 0; }
+  .plan img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .foot { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.9375rem; }
+  .price { font-weight: 600; min-width: 0; }
+  .go { color: var(--accent); transition: transform 0.4s var(--ease); }
+  a:hover .go { transform: translateX(4px); }
+  .note { margin-top: 18px; font-size: 0.8125rem; color: var(--muted); }
+  @media (max-width: 1000px) {
+    .types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    li { grid-column: span 1; }
+    li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    li:last-child:nth-child(odd) .plan { aspect-ratio: 16 / 9; }
+  }
+  @media (max-width: 640px) {
+    .types { grid-template-columns: minmax(0, 1fr); }
+    li:last-child:nth-child(odd) .plan { aspect-ratio: 4 / 3; }
+    a { padding: 18px 16px; }
+  }
+</style>

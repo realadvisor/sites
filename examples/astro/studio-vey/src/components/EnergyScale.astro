@@ -1,0 +1,33 @@
+---
+/**
+ * Energy class on the A–G scale (GEAK in Switzerland), the listing's class
+ * marked. Only rendered when the data has a class; never invented.
+ */
+interface Props { value: string; label?: string }
+const { value, label = 'GEAK Gesamtenergieeffizienz' } = Astro.props;
+const CLASSES = ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as const;
+const v = value.trim().toUpperCase();
+---
+{CLASSES.includes(v as (typeof CLASSES)[number]) && (
+  <figure class="en">
+    <figcaption class="caps muted">{label}</figcaption>
+    <ol class="en-scale" aria-label={`Energieklasse ${v} auf der Skala A bis G`}>
+      {CLASSES.map((c, i) => (
+        <li class:list={['en-step', { 'is-on': c === v }]} style={`--i:${i}`} aria-current={c === v ? 'true' : undefined}>
+          <span>{c}</span>
+        </li>
+      ))}
+    </ol>
+  </figure>
+)}
+
+<style>
+  .en { margin: 0; display: grid; gap: 14px; }
+  .en-scale { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; max-width: 460px; }
+  .en-step {
+    --c: color-mix(in oklab, #2f6b4f calc(100% - var(--i) * 16%), #b5502f);
+    display: grid; place-items: center; height: 40px; background: color-mix(in oklab, var(--c) 18%, var(--bg));
+    color: var(--muted); font: 500 0.875rem/1 var(--sans);
+  }
+  .en-step.is-on { background: var(--c); color: #fff; height: 52px; margin-top: -6px; font-size: 1.125rem; }
+</style>

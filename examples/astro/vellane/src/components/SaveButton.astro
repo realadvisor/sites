@@ -1,0 +1,44 @@
+---
+/**
+ * Save heart (shortlist in localStorage, scripts/saved.ts). Rendered hidden:
+ * the script shows it, so it never appears without JavaScript.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  id: string;
+  href: string;
+  title: string;
+  price: string;
+  place: string;
+  facts: string;
+  img: string;
+  alt: string;
+  class?: string;
+  /** "label": a pill with text (listing page); default: a round icon button. */
+  variant?: 'icon' | 'label';
+}
+const { id, href, title, price, place, facts, img, alt, class: cls, variant = 'icon' } = Astro.props;
+---
+<button type="button" class:list={['save', `save--${variant}`, cls]} hidden aria-pressed="false"
+  aria-label={variant === 'icon' ? `Enregistrer dans mes favoris : ${title}` : undefined}
+  data-save data-id={id} data-href={href} data-title={title} data-price={price} data-place={place} data-facts={facts} data-img={img} data-alt={alt}>
+  <Icon name="heart" size={variant === 'icon' ? 20 : 18} stroke={2} />
+  {variant === 'label' && <span class="save__text"><span class="save__off">Enregistrer</span><span class="save__on">Enregistré</span></span>}
+</button>
+
+<style>
+  .save { display: inline-grid; place-items: center; cursor: pointer; border: 0; color: var(--text); }
+  .save--icon { width: 44px; height: 44px; border-radius: 999px; background: rgb(255 255 255 / 0.92); box-shadow: 0 1px 4px rgb(0 0 0 / 0.18); }
+  .save--icon:hover { background: #fff; transform: scale(1.06); }
+  .save--label {
+    display: inline-flex; gap: 8px; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+    border: 1px solid var(--line-strong); background: var(--bg); font-weight: 600; font-size: 0.9375rem;
+  }
+  .save--label:hover { border-color: var(--text); }
+  .save :global(svg) { transition: fill 0.15s, color 0.15s; }
+  .save[aria-pressed='true'] :global(svg) { fill: var(--accent); color: var(--accent); }
+  .save__on { display: none; }
+  .save[aria-pressed='true'] .save__on { display: inline; }
+  .save[aria-pressed='true'] .save__off { display: none; }
+</style>

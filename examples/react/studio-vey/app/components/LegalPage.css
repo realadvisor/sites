@@ -1,0 +1,12 @@
+/* From components/LegalPage.astro (scoped there). */
+  .lg { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 40px clamp(40px, 6vw, 112px); padding-block: clamp(56px, 7vw, 112px) var(--section); }
+  .lg-head { display: grid; gap: 20px; align-content: start; justify-items: start; }
+  .lg-body .legal { display: grid; gap: 40px; max-width: 68ch; }
+  .lg-body .legal h2 { font-size: var(--fs-h3); margin-bottom: 14px; }
+  .lg-body .legal dl { margin: 0; display: grid; }
+  .lg-body .legal dl > div { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .lg-body .legal dt { color: var(--muted); }
+  .lg-body .legal dd { margin: 0; overflow-wrap: anywhere; }
+  .lg-body .legal p + p { margin-top: 12px; }
+  @media (max-width: 899px) { .lg { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 479px) { .lg-body .legal dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

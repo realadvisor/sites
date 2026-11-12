@@ -1,0 +1,8 @@
+  .crumbs { color: var(--muted); }
+  .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0 10px; font-size: 0.875rem; }
+  .crumbs li { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+  .crumbs li + li::before { content: '/'; color: var(--line-strong); }
+  .crumbs a { color: inherit; display: inline-flex; min-height: 32px; align-items: center; }
+  .crumbs span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 42ch; }
+  .on-green .crumbs { color: var(--on-green-muted); }
+  .on-green .crumbs li + li::before { color: rgb(255 255 255 / 0.35); }

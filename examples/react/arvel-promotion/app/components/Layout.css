@@ -1,0 +1,2 @@
+main:focus { outline: none; }
+.no-hero { padding-top: var(--header-h); }

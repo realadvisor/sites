@@ -1,0 +1,30 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. A listing
+// that left shows "no longer available" (the listing route answers 410).
+export const prerender = false;
+import { t } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import { UI, href, langOfPath } from '../lib/i18n';
+
+const lang = langOfPath(Astro.originPathname ?? Astro.url.pathname);
+const ui = UI[lang];
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? t('listingGone', {}, lang) : t('notFound', {}, lang);
+if (!gone) Astro.response.status = 404;
+---
+<Site lang={lang} title={title} description={title} noindex>
+  <section class="wrap nf">
+    <p class="nf-code" aria-hidden="true">{gone ? '410' : '404'}</p>
+    <h1 class="display-l">{title}</h1>
+    <p class="lead">{gone ? t('listingGoneText', {}, lang) : t('notFoundText', {}, lang)}</p>
+    <p class="nf-links">
+      <a class="cta cta-accent" href={href('buy', lang)}>{ui.allSale}</a>
+      <a class="cta cta-line" href={href('home', lang)}>{ui.backHome}</a>
+    </p>
+  </section>
+</Site>
+<style>
+  .nf { min-height: 62svh; display: grid; align-content: center; justify-items: center; text-align: center; gap: 22px; padding-block: var(--section); }
+  .nf-code { font: 300 italic clamp(5rem, 14vw, 11rem)/1 var(--font-display); color: var(--accent); opacity: .85; }
+  .nf-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 12px; }
+</style>

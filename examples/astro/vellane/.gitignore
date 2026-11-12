@@ -1,0 +1,12 @@
+node_modules/
+/dist/
+.astro/
+.wrangler/
+screenshots/
+.dev.vars
+.env
+/reference/
+/captures/
+/.ra-edge/
+.screenshots/*.tmp
+.lighthouse/

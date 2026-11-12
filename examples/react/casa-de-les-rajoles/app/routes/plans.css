@@ -1,0 +1,45 @@
+.pg-plans .head { padding-block: clamp(48px, 6vw, 88px) clamp(32px, 4vw, 48px); text-align: center; }
+.pg-plans:not(._) .head .wrap { display: grid; justify-items: center; gap: 16px; }
+.pg-plans:not(._) .head .lede { margin-inline: auto; }
+.pg-plans .tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); background: var(--paper); border: 1px solid var(--line); position: relative; z-index: 1; }
+.pg-plans:not(._) .tabs a { display: grid; gap: 4px; justify-items: center; padding: 18px 10px 15px; text-decoration: none; color: var(--muted); border-bottom: 3px solid transparent; text-align: center; }
+.pg-plans:not(._):not(._) .tabs a + a { border-left: 1px solid var(--line); }
+.pg-plans:not(._) .tabs a[aria-current] { color: var(--text); border-bottom-color: var(--accent); background: #fff; }
+.pg-plans:not(._) .tabs .k { font: 600 0.875rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+.pg-plans:not(._) .tabs .n { font-size: 0.8125rem; }
+.pg-plans .tab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: clamp(32px, 4vw, 56px); }
+.pg-plans .type { background: var(--paper); border: 1px solid var(--line); display: grid; grid-template-rows: auto 1fr; }
+.pg-plans .thumb { display: block; background: #fff; padding: clamp(16px, 2vw, 28px); border-bottom: 1px solid var(--line); }
+.pg-plans:not(._) .thumb img { width: 100%; height: 300px; object-fit: contain; }
+.pg-plans .body { padding: clamp(20px, 2.6vw, 32px); display: grid; gap: 14px; align-content: start; }
+.pg-plans:not(._) .body h2 { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); }
+.pg-plans .where { font-size: 0.875rem; color: var(--muted); margin: 0 !important; }
+.pg-plans .figs { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--line); }
+.pg-plans:not(._) .figs div { padding: 16px 0; display: grid; gap: 4px; }
+.pg-plans:not(._):not(._) .figs div + div { border-left: 1px solid var(--line); padding-left: 20px; }
+.pg-plans:not(._) .figs b { font: 400 clamp(2.25rem, 1.8rem + 1.4vw, 3.25rem)/1 var(--serif); }
+.pg-plans:not(._) .figs small { font-size: 0.42em; margin-left: 4px; }
+.pg-plans:not(._) .figs span { font-size: 0.875rem; color: var(--muted); }
+.pg-plans .avail { margin: 0 !important; }
+.pg-plans .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.pg-plans .units { list-style: none; margin: 4px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.875rem; }
+.pg-plans:not(._) .units li { display: inline-flex; gap: 6px; align-items: center; }
+.pg-plans:not(._) .units a { color: var(--text); display: inline-block; padding-block: 6px; }
+.pg-plans:not(._) .units .pill { font-size: 0.6875rem; padding: 4px 7px; }
+.pg-plans .viewer { border: 0; padding: 0; width: min(1100px, 96vw); max-height: 94vh; background: #fff; color: var(--text); }
+.pg-plans .viewer::backdrop { background: rgb(43 36 32 / 0.72); }
+.pg-plans:not(._) .viewer .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.pg-plans:not(._):not(._) .viewer .bar p { font-weight: 600; }
+.pg-plans:not(._) .viewer button { font: 600 0.9375rem var(--sans); min-height: 44px; padding: 0 16px; background: var(--paper); border: 1px solid var(--line-strong); cursor: pointer; color: var(--text); }
+.pg-plans:not(._) .viewer img { display: block; width: 100%; height: auto; max-height: calc(94vh - 70px); object-fit: contain; }
+@media (max-width: 900px) {
+  .pg-plans .tab { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .pg-plans .tabs { grid-template-columns: repeat(3, 1fr); }
+  .pg-plans:not(._) .tabs a:nth-child(4) { border-left: 0; }
+  .pg-plans:not(._) .tabs a:nth-child(n + 4) { border-top: 1px solid var(--line); }
+  .pg-plans:not(._) .tabs a { padding: 12px 6px 10px; }
+  .pg-plans:not(._) .tabs .k { font-size: 0.75rem; letter-spacing: 0.04em; }
+  .pg-plans:not(._) .thumb img { height: 220px; }
+}

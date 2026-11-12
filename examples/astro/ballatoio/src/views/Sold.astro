@@ -1,0 +1,36 @@
+---
+/** Venduti / Sold: every sold listing, no prices, a way to ask for something similar. */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, brandName, byNewest, firstPhoto, sites } from '../lib/data';
+import { UI, alternates, href, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, sold] = await Promise.all([agency(), sites.allListings({ status: 'sold' })]);
+const list = sold.sort(byNewest);
+const photo = firstPhoto(list);
+---
+<Site lang={lang} current="sold" title={`${ui.soldH1} | ${brandName(ag)}`} description={ui.soldLead}
+  image={photo && img(photo.url, { w: 1200, h: 630 })} alternates={alternates('sold')} noindex={list.length === 0}>
+  <header class="wrap phead">
+    <h1 class="d-xl">{ui.soldH1}</h1>
+    <p class="lead">{ui.soldLead}</p>
+  </header>
+  <div class="wrap">
+    {list.length ? (
+      <div class="grid">
+        {list.map((l, i) => <ListingCard listing={l} lang={lang} showPrice={false} priority={i === 0} heading="h2" />)}
+      </div>
+    ) : <p class="lead">{ui.soldEmpty}</p>}
+    <p class="after"><a class="cta cta-solid" href={href('contact', lang)}>{ui.soldCta}</a></p>
+  </div>
+</Site>
+
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 5vw, 80px) clamp(24px, 3.5vw, 56px); border-top: 1px solid var(--text); padding-top: clamp(28px, 3vw, 40px); }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .after { margin-top: clamp(48px, 6vw, 96px); }
+</style>

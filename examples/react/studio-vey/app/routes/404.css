@@ -1,0 +1,4 @@
+/* From pages/404.astro (scoped there). */
+  .nf { display: grid; gap: 24px; justify-items: start; padding-block: clamp(80px, 12vw, 180px); }
+  .nf .lede { max-width: 44ch; }
+  .nf-links { list-style: none; display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin-top: 12px; }

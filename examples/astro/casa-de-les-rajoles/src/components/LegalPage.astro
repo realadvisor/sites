@@ -1,0 +1,30 @@
+---
+/** Shell of the legal pages: the kit's text (LegalContent), our layout. Never edit the words. */
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import type { LegalSection } from '@realadvisor/sites-kit/legal';
+import Site from '../layouts/Site.astro';
+import type { Site as SiteData } from '../lib/data';
+import { alternates, type Lang } from '../lib/i18n';
+
+interface Props { site: SiteData; lang: Lang; title: string; sections: LegalSection[]; route: 'legal' | 'privacy' }
+const { site, lang, title, sections, route } = Astro.props;
+---
+<Site site={site} lang={lang} route={route} title={`${title} | ${site.dev.title}`} description={`${title}: ${site.org.name}, ${site.dev.title}.`} alternates={alternates(route)} langLinks={alternates('home')}>
+  <div class="wrap page">
+    <h1>{title}</h1>
+    <LegalContent sections={sections} class="legal-body" />
+  </div>
+</Site>
+<style>
+  .page { max-width: calc(820px + 2 * var(--gutter)); padding-top: clamp(48px, 6vw, 88px); }
+  h1 { font-size: clamp(2.25rem, 1.7rem + 2.2vw, 3.5rem); margin-bottom: 40px; }
+  .page :global(.legal-body section) { padding: 28px 0; border-top: 1px solid var(--line); }
+  .page :global(.legal-body h2) { font-size: 1.625rem; margin-bottom: 16px; }
+  .page :global(.legal-body dl) { margin: 0; display: grid; gap: 10px; }
+  .page :global(.legal-body dl div) { display: grid; grid-template-columns: 220px 1fr; gap: 16px; }
+  .page :global(.legal-body dt) { color: var(--muted); }
+  .page :global(.legal-body dd) { margin: 0; overflow-wrap: anywhere; }
+  .page :global(.legal-body p) { max-width: 64ch; }
+  .page :global(.legal-body p + p) { margin-top: 0.8em; }
+  @media (max-width: 560px) { .page :global(.legal-body dl div) { grid-template-columns: 1fr; gap: 2px; } }
+</style>

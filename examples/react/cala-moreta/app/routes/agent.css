@@ -1,0 +1,15 @@
+.crumbs { padding-top: 28px; }
+.crumbs a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+.ahead { display: grid; padding-block: clamp(40px, 5vw, 80px); border-bottom: 1px solid var(--line); }
+.ahead.has-photo { grid-template-columns: 360px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: end; }
+.ahead .ahead-photo { width: 100%; }
+@media (max-width: 860px) { .ahead.has-photo { grid-template-columns: 1fr; gap: 28px; } .ahead .ahead-photo { max-width: 280px; } }
+.ahead-text { display: grid; gap: 10px; }
+.ahead-role { color: var(--muted); font-size: 1.0625rem; }
+.ahead-contact { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+.ahead-contact .cta { letter-spacing: .04em; text-transform: none; font-size: .9375rem; }
+.bio { padding-top: 40px; }
+.ask { background: var(--surface); }
+.ask-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); padding-block: var(--section); }
+.ask-in > div:first-child { display: grid; gap: 20px; align-content: start; }
+@media (max-width: 860px) { .ask-in { grid-template-columns: 1fr; } }

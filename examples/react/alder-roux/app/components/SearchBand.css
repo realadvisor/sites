@@ -1,0 +1,26 @@
+.sb { display: grid; gap: 26px; }
+.sb__tabs { border: 0; margin: 0; padding: 0; display: flex; gap: clamp(18px, 2.6vw, 36px); border-bottom: 1px solid var(--line-on-navy); min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.sb__tab { position: relative; display: inline-flex; align-items: center; min-height: 48px; cursor: pointer; white-space: nowrap; }
+.sb__tab input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.sb__tab span { font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-navy-muted); padding-bottom: 2px; }
+.sb__tab:hover span { color: #fff; }
+.sb__tab:has(input:checked) span { color: #fff; }
+.sb__tab:has(input:checked)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--brass); }
+.sb__tab:has(input:focus-visible) { outline: 2px solid var(--brass-on-navy); outline-offset: 2px; }
+
+.sb__panel { display: none; }
+.sb:has(#sb-buy:checked) .sb__panel--buy,
+.sb:has(#sb-rent:checked) .sb__panel--rent { display: grid; }
+.sb:has(#sb-new:checked) .sb__panel--new,
+.sb:has(#sb-sell:checked) .sb__panel--sell { display: flex; }
+form.sb__panel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: end; }
+.sb__panel:not(:has(select[name='maxPrice'])) .sb__go { grid-column: 1 / -1; }
+.sb__panel .field-label { color: var(--on-navy-muted); font-weight: 500; letter-spacing: 0.04em; }
+.sb__panel .control { --control-border: transparent; background: #fff; }
+.sb__go { min-height: var(--control-h); }
+.sb__panel--text { flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; min-height: calc(var(--control-h) + 27px); }
+.sb__panel--text p { color: #fff; font: 400 var(--step-1)/1.4 var(--font-display); max-width: 46ch; }
+@media (max-width: 900px) {
+  form.sb__panel { grid-template-columns: minmax(0, 1fr); }
+  .sb__go { width: 100%; }
+}

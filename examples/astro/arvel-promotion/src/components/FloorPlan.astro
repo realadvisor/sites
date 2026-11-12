@@ -1,0 +1,39 @@
+---
+/**
+ * Indicative plan of one unit, drawn inline from src/lib/plans.ts (room areas
+ * scaled to the unit, north arrow turned to its orientation, balcony or
+ * terrace with its area), with the rooms as a list (readable on a phone and
+ * for screen readers). Labelled "plan indicatif".
+ */
+import type { Unit } from '@realadvisor/sites-sdk/types';
+import { planFor, planTree, roomAreas } from '../lib/plans';
+import { orientationBearing, typeCode } from '../lib/fr';
+import SvgNode from './SvgNode.astro';
+
+interface Props { unit: Unit; orientation?: string; terrace?: number }
+const { unit: u, orientation, terrace } = Astro.props;
+const plan = planFor(u.rooms);
+const outdoor = terrace ? { label: 'Terrasse', surface: terrace } : u.balcony_surface ? { label: 'Balcon', surface: u.balcony_surface } : undefined;
+const tree = plan
+  ? planTree(plan, {
+      surface: u.living_surface,
+      outdoor,
+      facadeBearing: orientationBearing(orientation),
+      title: `Plan indicatif du ${typeCode(u)}${u.living_surface ? `, ${u.living_surface} m²` : ''}`,
+    })
+  : null;
+const rooms = plan ? roomAreas(plan, u.living_surface) : [];
+const fmt = (n: number) => new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 }).format(n);
+---
+{tree && <SvgNode node={tree} />}
+{rooms.length > 0 && (
+  <ul class="rooms" aria-label="Pièces et surfaces indicatives">
+    {rooms.map((r) => <li><span>{r.name}</span><span class="num">{fmt(r.area)} m²</span></li>)}
+    {outdoor && <li><span>{outdoor.label}</span><span class="num">{fmt(outdoor.surface)} m²</span></li>}
+  </ul>
+)}
+<style>
+  .rooms { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); column-gap: 24px; border-top: 1px solid #CFC6B8; font-size: 0.875rem; color: var(--on-paper); }
+  .rooms li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #CFC6B8; }
+  .rooms li span:last-child { color: var(--on-paper-muted); }
+</style>

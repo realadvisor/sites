@@ -1,0 +1,52 @@
+{
+  "name": "@realadvisor/sites-kit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Everything a RealAdvisor agency site is built from: the data client (`@realadvisor/sites-sdk`, a peer), the Astro integration, the listings components, the legal, enquiry and image parts, the deploy check and tools, and the rules the coding agent follows. One version: the one crm-chat-api ships.",
+  "type": "module",
+  "keywords": [
+    "astro-component"
+  ],
+  "exports": {
+    ".": "./index.ts",
+    "./types": "./types.ts",
+    "./astro": {
+      "types": "./astro.d.mts",
+      "default": "./astro.mjs"
+    },
+    "./contract": "./contract/index.ts",
+    "./middleware": "./middleware.ts",
+    "./site-config": {
+      "types": "./site-config.d.mts",
+      "default": "./site-config.mjs"
+    },
+    "./security": "./lib/security.mjs",
+    "./components/*": "./components/*",
+    "./client/*": "./client/*.ts",
+    "./styles/*": "./styles/*",
+    "./fixtures/*": "./fixtures/*",
+    "./package.json": "./package.json",
+    "./tools/*": "./tools/*",
+    "./*": "./lib/*.ts"
+  },
+  "bin": {
+    "sites-kit": "./bin/sites-kit.mjs"
+  },
+  "scripts": {
+    "check": "pnpm test",
+    "test": "node --experimental-strip-types --no-warnings=ExperimentalWarning --test \"test/*.test.mjs\" \"test/*.test.ts\""
+  },
+  "peerDependencies": {
+    "@realadvisor/sites-sdk": "*",
+    "astro": "^5.18.2",
+    "playwright": "^1.64.1"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": true
+    },
+    "playwright": {
+      "optional": true
+    }
+  }
+}

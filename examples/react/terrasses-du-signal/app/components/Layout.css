@@ -1,0 +1,18 @@
+main { display: block; outline: none; }
+.phone-bar { display: none; }
+@media (max-width: 760px) {
+  .phone-bar {
+    position: fixed; inset: auto 0 0 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgb(246 242 235 / 0.96); border-top: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+  .phone-bar a {
+    display: flex; align-items: center; justify-content: center; min-height: 48px;
+    font: 600 0.75rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+    border: 1px solid var(--line-strong); color: var(--text);
+  }
+  .phone-bar a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  /* Every page, the contact page too (as in the Astro version). */
+  body { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
+}

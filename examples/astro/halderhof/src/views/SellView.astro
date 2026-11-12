@@ -1,0 +1,87 @@
+---
+/**
+ * Sell / valuation: the request form beside a short lede, how a valuation
+ * runs (plain text), recent sales from the data, and the office to call.
+ */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, LOCALE, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams }, sold] = await Promise.all([siteData(), sites.allListings({ status: 'sold' })]);
+const steps = [
+  [t('how1h'), t('how1')],
+  [t('how2h'), t('how2')],
+  [t('how3h'), t('how3')],
+];
+---
+<Site l={l} route="sell" title={`${t('sellTitle')} | ${org.name}`} description={t('sellLede')}>
+  <section class="top on-green">
+    <div class="wrap top__in">
+      <div class="top__text">
+        <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navSell') }]} />
+        <h1 class="h1">{t('sellTitle')}</h1>
+        <p class="lede">{t('sellLede')}</p>
+        <ul class="plain-list phones">
+          {teams.filter((x) => x.phone).map((x) => (
+            <li><span>{t('officeOf', { city: cityName(x.address.city, l) || x.name })}</span><a class="num" href={tel(x.phone!)}>{x.phone}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="top__form">
+        <h2 class="h3">{t('valuationForm')}</h2>
+        <EnquiryForm id="valuation" locale={LOCALE[l]} contactReason="valuation" message={t('valuationMessage')} submitLabel={t('valuationForm')} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap how" aria-labelledby="h-how">
+    <h2 id="h-how" class="h2">{t('howTitle')}</h2>
+    <dl>
+      {steps.map(([h, p]) => <div><dt>{h}</dt><dd>{p}</dd></div>)}
+    </dl>
+  </section>
+
+  {sold.length > 0 && (
+    <section class="section section--paper" aria-labelledby="h-sold">
+      <div class="wrap">
+        <div class="head">
+          <h2 id="h-sold" class="h2">{t('recentSales')}</h2>
+          <a class="more" href={href('sold', l)}>{t('allSold')}</a>
+        </div>
+        <ul class="plain-list grid3">{sold.slice(0, 3).map((x) => <li><ListingCard listing={x} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</Site>
+
+<style>
+  .top { padding-block: clamp(28px, 4vw, 56px) clamp(40px, 5vw, 80px); }
+  .top__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: clamp(32px, 5vw, 88px); align-items: start; }
+  .top__text { display: grid; gap: 18px; }
+  .phones { display: grid; margin-top: 12px; border-top: 1px solid var(--line-on-green); max-width: 460px; }
+  .phones li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line-on-green); }
+  .phones span { color: var(--on-green-muted); }
+  .phones a { color: #fff; font-weight: 600; text-decoration: none; min-height: 28px; display: inline-flex; align-items: center; }
+  .phones a:hover { text-decoration: underline; }
+  .top__form { background: #fff; color: var(--text); padding: clamp(22px, 3vw, 36px); display: grid; gap: 18px; }
+  .top__form h2 { color: var(--green-ink); }
+  .how { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 24px clamp(40px, 6vw, 96px); }
+  .how h2 { color: var(--green-ink); }
+  .how dl { display: grid; border-top: 1px solid var(--line); }
+  .how dl div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .how dt { font: 500 1.25rem/1.3 var(--font-display); color: var(--green-ink); }
+  .how dd { color: var(--muted); }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 8px 24px; margin-bottom: 28px; }
+  .head h2 { color: var(--green-ink); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  @media (max-width: 1000px) { .top__in, .how { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 760px) { .how dl div { grid-template-columns: minmax(0, 1fr); } .grid3 { grid-template-columns: minmax(0, 1fr); gap: 36px; } .top__form { margin-inline: calc(-1 * var(--gutter)); } }
+</style>

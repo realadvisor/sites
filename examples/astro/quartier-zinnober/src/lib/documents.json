@@ -1,0 +1,26 @@
+[
+  {
+    "file": "/documents/quartier-zinnober-broschuere.pdf",
+    "name": "Broschüre",
+    "text": "Das Quartier, die drei Häuser, die Wohnungstypen und der Kontakt.",
+    "pages": 4,
+    "bytes": 172031,
+    "date": "2026-11-11"
+  },
+  {
+    "file": "/documents/quartier-zinnober-mietzinsliste.pdf",
+    "name": "Mietzinsliste",
+    "text": "Alle 60 Wohnungen mit Nettomiete, Nebenkosten, Bezug und Status.",
+    "pages": 2,
+    "bytes": 57085,
+    "date": "2026-11-11"
+  },
+  {
+    "file": "/documents/quartier-zinnober-grundrisse.pdf",
+    "name": "Grundrisse",
+    "text": "Die vier Wohnungstypen als indikative Grundrisse.",
+    "pages": 4,
+    "bytes": 128012,
+    "date": "2026-11-11"
+  }
+]

@@ -1,0 +1,56 @@
+---
+/** Team: every advisor, grouped by office, with phone and email links. */
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import AgentCard from '../components/AgentCard.astro';
+import { siteData } from '../lib/data';
+import { agentSlug, href, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const groups = teams.map((tm) => ({ team: tm, agents: agents.filter((a) => a.team_ids.includes(tm.id)) })).filter((g) => g.agents.length);
+const loose = agents.filter((a) => !teams.some((tm) => a.team_ids.includes(tm.id)));
+---
+<Site l={l} route="team" title={`${t('teamTitle')} | ${org.name}`} description={t('teamLede', { n: agents.length, offices: teams.length })}>
+  <section class="band on-navy">
+    <div class="wrap band__inner">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navTeam') }]} />
+      <h1 class="h1">{t('teamTitle')}</h1>
+      <p class="lede">{t('teamLede', { n: agents.length, offices: teams.length })}</p>
+      {groups.length > 1 && (
+        <nav class="jump" aria-label={t('navOffices')}>
+          {groups.map((g) => <a href={`#${teamSlug(g.team, teams)}`}>{cityName(g.team.address.city, l) || g.team.name} <span class="num">{g.agents.length}</span></a>)}
+        </nav>
+      )}
+    </div>
+  </section>
+  <div class="wrap section groups">
+    {groups.map((g) => (
+      <section class="grp" id={teamSlug(g.team, teams)} aria-labelledby={`h-${g.team.id}`}>
+        <div class="grp__head">
+          <h2 class="h2" id={`h-${g.team.id}`}>{cityName(g.team.address.city, l) || g.team.name}</h2>
+          <a class="link" href={href('offices', l, teamSlug(g.team, teams))}>{t('visitOffice')}</a>
+        </div>
+        <ul class="plain-list grid grid--3">
+          {g.agents.map((a) => <li><AgentCard agent={a} slug={agentSlug(a, agents)} team={g.team} l={l} /></li>)}
+        </ul>
+      </section>
+    ))}
+    {loose.length > 0 && (
+      <ul class="plain-list grid grid--3">{loose.map((a) => <li><AgentCard agent={a} slug={agentSlug(a, agents)} l={l} as="h2" /></li>)}</ul>
+    )}
+  </div>
+</Site>
+
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .jump a { display: inline-flex; gap: 10px; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--line-on-navy); color: #fff; text-decoration: none; font-weight: 600; }
+  .jump a span { color: var(--brass-on-navy); }
+  .jump a:hover { background: #fff; color: var(--navy); }
+  .groups { display: grid; gap: clamp(56px, 6vw, 96px); }
+  .grp { display: grid; gap: 12px; scroll-margin-top: calc(var(--header-h) + 24px); }
+  .grp__head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; }
+</style>

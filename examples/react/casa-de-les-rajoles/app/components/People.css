@@ -1,0 +1,8 @@
+.people:not(._) { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 32px; }
+.people li { display: grid; gap: 16px; align-content: start; }
+.people li.has-photo { grid-template-columns: 120px 1fr; }
+.people .portrait img { width: 120px; background: var(--surface); aspect-ratio: 4 / 5; object-fit: cover; }
+.people .nm { font: 400 1.5rem/1.2 var(--serif); margin: 0 0 6px; }
+.people .role { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+.people .ct { display: grid; margin: 10px 0 0 !important; }
+.people:not(._) .ct a { display: inline-block; padding-block: 6px; overflow-wrap: break-word; }

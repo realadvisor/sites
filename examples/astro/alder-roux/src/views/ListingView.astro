@@ -1,0 +1,260 @@
+---
+/**
+ * Listing page: title and price, 1 + 4 gallery (a swipe strip with counters
+ * on the phone), facts, description, features, energy label, every photo,
+ * approximate location; the advisor card with the enquiry form sticks
+ * beside it. Unknown slug: the 404 page (410 for a listing that left).
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import { img } from '@realadvisor/sites-kit/image';
+import { featureLabel, lang as klang, t as kt } from '@realadvisor/sites-kit/i18n';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import ListingCard from '../components/ListingCard.astro';
+import StaticMap from '../components/StaticMap.astro';
+import EnergyScale from '../components/EnergyScale.astro';
+import { extraNum, extraStr, siteData, sites } from '../lib/data';
+import { agentSlug, href, LOCALE, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { floor, formatAmount, formatSurface, price, tel, typeLabel } from '../lib/format';
+
+interface Props { l: L; listing: Listing }
+const { l, listing } = Astro.props;
+const t = tx(l);
+const locale = LOCALE[l];
+const x = listing;
+const [{ teams, agents }, sameCity] = await Promise.all([
+  siteData(),
+  x.address.city ? sites.allListings({ city: x.address.city }) : Promise.resolve([]),
+]);
+const agent = x.agent ? (agents.find((a) => a.id === x.agent!.id) ?? x.agent) : undefined;
+const team = teams.find((tm) => x.team_ids.includes(tm.id)) ?? teams.find((tm) => agent?.team_ids.includes(tm.id));
+const similar = sameCity.filter((y) => y.id !== x.id && y.status === 'available').slice(0, 3);
+const isRent = x.offer_type === 'rent';
+const sold = x.status === 'sold';
+const city = cityName(x.address.city, l);
+
+// fixture only: energy class, year built, floor, terrace / balcony surface, monthly charges
+const energy = extraStr('listings', x.id, 'energy_class');
+const year = extraNum('listings', x.id, 'year_built');
+const fl = extraNum('listings', x.id, 'floor');
+const terrace = extraNum('listings', x.id, 'terrace_surface');
+const balcony = extraNum('listings', x.id, 'balcony_surface');
+const charges = extraNum('listings', x.id, 'charges');
+
+const facts = [
+  x.rooms != null && { k: t('rooms'), v: String(x.rooms) },
+  x.bedrooms != null && { k: t('bedrooms'), v: String(x.bedrooms) },
+  x.bathrooms != null && { k: t('bathrooms'), v: String(x.bathrooms) },
+  x.living_surface != null && { k: t('livingArea'), v: formatSurface(x.living_surface) },
+  x.land_surface != null && { k: t('landArea'), v: formatSurface(x.land_surface) },
+  terrace != null && { k: t('terrace'), v: formatSurface(terrace) },
+  balcony != null && { k: t('balcony'), v: formatSurface(balcony) },
+  fl != null && { k: t('floor'), v: floor(fl, l) },
+  year != null && { k: t('yearBuilt'), v: String(year) },
+].filter(Boolean) as { k: string; v: string }[];
+
+const photos = x.photos;
+const back = isRent ? { label: t('navRent'), href: href('rent', l) } : sold ? { label: t('navSold'), href: href('sold', l) } : { label: t('navBuy'), href: href('buy', l) };
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const where = [x.address.street, [x.address.postcode, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+const ref = listingRef({ id: x.id, reference: x.reference });
+const alt = (i: number) => photos[i]?.alt || `${typeLabel(x.property_type, l)} ${city}, ${t('photo', { n: i + 1 })}`;
+---
+<Site l={l} route="listing" segs={[x.slug]} section={isRent ? 'rent' : sold ? 'sold' : 'buy'}
+  title={`${listingTitle(x, sameCity)} | ${price(x, l)}`}
+  description={(x.description_text ?? x.title).replace(/\s+/g, ' ').slice(0, 155)}
+  image={photos[0] && img(photos[0].url, { w: 1200, h: 630 })}
+  jsonLd={listingJsonLd(x, pageUrl)}
+  noindex={sold}>
+
+  <div class="wrap top">
+    <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, back, { label: x.title }]} />
+    <div class="intro">
+      <div class="intro__main">
+        <p class="eyebrow">{isRent ? t('forRent') : sold ? t('sold') : t('forSale')} · {typeLabel(x.property_type, l)}</p>
+        <h1 class="h1 title">{x.title}</h1>
+        {where && <p class="where">{where}</p>}
+      </div>
+      <div class="intro__price">
+        {!sold && <p class="price num">{price(x, l)}</p>}
+        {isRent && charges != null && <p class="charges num">+ {t('charges')} {formatAmount(charges)} {t('perMonth')}</p>}
+        <p class="ref">{t('reference')} {ref}</p>
+      </div>
+    </div>
+  </div>
+
+  {photos.length > 0 ? (
+    <div class="wrap">
+      <div class:list={['gal', `gal--${Math.min(photos.length, 5)}`]}>
+        {photos.slice(0, 5).map((p, i) => (
+          <a class="gal__item" href={photos.length > 5 ? `#photo-${i + 1}` : undefined}>
+            <RaImage src={p} alt={alt(i)} width={i === 0 ? 1200 : 600} height={i === 0 ? 800 : 400} priority={i === 0}
+              sizes={i === 0 ? '(min-width: 1360px) 760px, (min-width: 761px) 56vw, 88vw' : '(min-width: 1360px) 300px, (min-width: 761px) 22vw, 88vw'} />
+            {i === 4 && photos.length > 5 && <span class="gal__more">{t('allPhotos', { n: photos.length })}</span>}
+            <span class="gal__n num" aria-hidden="true">{i + 1} / {photos.length}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <div class="wrap"><div class="nophoto">{t('noPhoto')}</div></div>
+  )}
+
+  <div class="wrap body">
+    <div class="main">
+      {facts.length > 0 && (
+        <section aria-labelledby="h-facts">
+          <h2 id="h-facts" class="sec-h">{t('facts')}</h2>
+          <dl class="facts">
+            {facts.map((f) => <div><dt>{f.k}</dt><dd class="num">{f.v}</dd></div>)}
+          </dl>
+        </section>
+      )}
+      {x.description && (
+        <section aria-labelledby="h-desc">
+          <h2 id="h-desc" class="sec-h">{t('description')}</h2>
+          <div class="prose" set:html={sanitizeHtml(x.description)} />
+        </section>
+      )}
+      {x.features.length > 0 && (
+        <section aria-labelledby="h-feat">
+          <h2 id="h-feat" class="sec-h">{t('features')}</h2>
+          <ul class="feats">{x.features.map((f) => <li>{featureLabel(f, locale)}</li>)}</ul>
+        </section>
+      )}
+      {energy && (
+        <section aria-labelledby="h-energy">
+          <h2 id="h-energy" class="sec-h">{t('energy')}</h2>
+          <EnergyScale value={energy} label={t('energy')} classLabel={t('energyClass', { c: energy })} />
+        </section>
+      )}
+      {photos.length > 5 && (
+        <section aria-labelledby="h-photos" class="allph">
+          <h2 id="h-photos" class="sec-h">{t('photos')} <span class="num">({photos.length})</span></h2>
+          <ul>
+            {photos.map((p, i) => (
+              <li id={`photo-${i + 1}`}><RaImage src={p} alt={alt(i)} width={1200} height={800} fit="fit" sizes="(min-width: 1360px) 820px, (min-width: 900px) 60vw, 100vw" /></li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {x.address.lat != null && x.address.lng != null && (
+        <section aria-labelledby="h-loc">
+          <h2 id="h-loc" class="sec-h">{t('location')}</h2>
+          <p class="muted">{[city, t('approxLocation')].filter(Boolean).join(' · ')}</p>
+          <StaticMap lat={x.address.lat} lng={x.address.lng} zoom={14} area label={`${t('location')}: ${city}`} linkLabel={t('openMap')} />
+        </section>
+      )}
+    </div>
+
+    <aside class="side" id="contact" aria-label={t('yourAdvisor')}>
+      <div class="side__card">
+        {agent && (
+          <div class="adv">
+            {agent.photo?.url && <RaImage class="adv__photo" src={agent.photo} alt={`${agent.first_name} ${agent.last_name}`} width={128} height={160} sizes="64px" />}
+            <div>
+              <p class="adv__k">{t('yourAdvisor')}</p>
+              <p class="adv__name"><a href={href('team', l, agentSlug(agent, agents))}>{agent.first_name} {agent.last_name}</a></p>
+              {team && <p class="adv__team"><a href={href('offices', l, teamSlug(team, teams))}>{t('officeOf', { city: cityName(team.address.city, l) || team.name })}</a></p>}
+            </div>
+          </div>
+        )}
+        {(agent?.phone || team?.phone) && (
+          <p class="adv__tel"><a class="button button--ghost" href={tel((agent?.phone ?? team?.phone)!)}>{t('call')} <span class="num">{agent?.phone ?? team?.phone}</span></a></p>
+        )}
+        <h2 class="side__h">{sold ? t('soldCta') : t('askAbout')}</h2>
+        <EnquiryForm locale={locale} listingId={x.id} agentId={agent?.id} agentName={agent?.first_name}
+          message={kt('interested', { title: x.title, ref }, klang(locale))} />
+      </div>
+    </aside>
+  </div>
+
+  {similar.length > 0 && (
+    <section class="section section--paper">
+      <div class="wrap">
+        <div class="head"><h2 class="h2">{t('similar')}</h2></div>
+        <ul class="plain-list grid grid--3">{similar.map((y) => <li><ListingCard listing={y} l={l} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <div class="mbar">
+    <a class="button" href="#contact">{t('askAbout')}</a>
+    {(agent?.phone || team?.phone) && <a class="button button--ghost" href={tel((agent?.phone ?? team?.phone)!)}>{t('call')}</a>}
+  </div>
+</Site>
+
+<style>
+  .top { padding-top: 28px; display: grid; gap: 24px; }
+  .intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 48px; padding-bottom: 28px; }
+  .intro__main { display: grid; gap: 14px; max-width: 860px; }
+  .title { font-size: clamp(2rem, 1.4rem + 2.4vw, 3.5rem); }
+  .where { color: var(--muted); }
+  .intro__price { display: grid; gap: 6px; justify-items: end; text-align: right; }
+  .price { font: 400 clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem)/1 var(--font-display); color: var(--navy); white-space: nowrap; }
+  .charges { color: var(--muted); font-size: 0.9375rem; }
+  .ref { font-size: 0.8125rem; color: var(--muted); letter-spacing: 0.04em; }
+
+  .gal { display: grid; gap: 8px; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); aspect-ratio: 2.25 / 1; }
+  .gal__item { position: relative; display: block; overflow: hidden; background: var(--paper-2); }
+  .gal__item:first-child { grid-row: 1 / 3; }
+  .gal__item :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .gal__item:hover :global(img) { transform: scale(1.03); }
+  .gal--1 { grid-template-columns: 1fr; aspect-ratio: 2.4 / 1; }
+  .gal--2, .gal--3 { grid-template-columns: 2fr 1fr; }
+  .gal--4 .gal__item:nth-child(4) { grid-column: 2 / 4; }
+  .gal__more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(12 24 40 / 0.55); color: #fff; font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; }
+  .gal__n { display: none; }
+  .nophoto { aspect-ratio: 3 / 1; display: grid; place-items: center; background: var(--paper); color: var(--muted); font-family: var(--font-display); }
+
+  .body { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: clamp(40px, 6vw, 96px); padding-block: clamp(40px, 5vw, 72px) var(--section); align-items: start; }
+  .main { display: grid; gap: 56px; min-width: 0; }
+  .main section { display: grid; gap: 22px; }
+  .sec-h { font-size: var(--step-2); padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0; }
+  .facts div { padding: 18px 20px 18px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column-reverse; gap: 4px; }
+  .facts dt { font: 600 0.6875rem/1.3 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { font: 400 1.5rem/1.1 var(--font-display); color: var(--navy); }
+  .feats { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px 24px; }
+  .feats li { display: flex; align-items: center; gap: 12px; }
+  .feats li::before { content: ''; width: 18px; height: 1px; background: var(--brass); }
+  .muted { color: var(--muted); }
+  .allph ul { list-style: none; display: grid; gap: 12px; }
+  .allph li { scroll-margin-top: calc(var(--header-h) + 16px); background: var(--paper); }
+  .allph :global(img) { width: 100%; height: auto; }
+
+  .side { position: sticky; top: calc(var(--header-h) + 24px); }
+  .side__card { border: 1px solid var(--line); padding: 28px; display: grid; gap: 20px; background: #fff; }
+  .adv :global(.adv__photo) { width: 64px; height: 80px; object-fit: cover; flex: none; }
+  .adv { display: flex; gap: 16px; align-items: center; }
+  .adv__k { font-size: 0.875rem; color: var(--muted); }
+  .adv__name { font: 400 1.375rem/1.2 var(--font-display); }
+  .adv__name a, .adv__team a { text-decoration: none; }
+  .adv__name a:hover, .adv__team a:hover { text-decoration: underline; }
+  .adv__team { font-size: 0.875rem; color: var(--muted); }
+  .adv__team a { display: inline-flex; min-height: 28px; align-items: center; }
+  .adv__tel .button { width: 100%; }
+  .side__h { font-size: var(--step-1); border-top: 1px solid var(--line); padding-top: 20px; }
+  .mbar { display: none; }
+
+  @media (max-width: 1024px) {
+    .body { grid-template-columns: minmax(0, 1fr); }
+    .side { position: static; }
+  }
+  @media (max-width: 760px) {
+    .intro__price { justify-items: start; text-align: left; }
+    .gal, .gal--1, .gal--2, .gal--3, .gal--4 { display: grid; grid-template: none; grid-auto-flow: column; grid-auto-columns: 88%; aspect-ratio: auto; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+    .gal__item, .gal__item:first-child, .gal--4 .gal__item:nth-child(4) { grid-row: auto; grid-column: auto; aspect-ratio: 4 / 3; scroll-snap-align: start; }
+    .gal__n { display: block; position: absolute; right: 10px; bottom: 10px; background: rgb(12 24 40 / 0.7); color: #fff; font-size: 0.8125rem; padding: 4px 9px; }
+    .gal__more { font-size: 0.75rem; }
+    .side__card { padding: 22px 18px; }
+    .mbar { position: sticky; bottom: 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--line); }
+    .mbar .button { padding: 0 12px; }
+    .mbar .button:only-child { grid-column: 1 / -1; }
+  }
+</style>

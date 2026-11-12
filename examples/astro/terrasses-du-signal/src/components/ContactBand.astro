@@ -1,0 +1,37 @@
+---
+/** Closing band on every page: the broker in plain type, the sales office, one action. */
+import AgentContact from './AgentContact.astro';
+import { tel } from '../lib/nav';
+import type { Site } from '../lib/data';
+
+interface Props { site: Site; heading?: string }
+const { site } = Astro.props;
+const { agent, team, org } = site;
+const city = org.address?.city;
+const heading = Astro.props.heading ?? (city ? `Rendez-vous à l’espace de vente, ${city}` : 'Rendez-vous à l’espace de vente');
+const office = [org.address?.street, [org.address?.postcode, org.address?.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+---
+<section class="band" aria-labelledby="band-h">
+  <div class="wrap inner">
+    <div class="lead">
+      <h2 id="band-h">{heading}</h2>
+      {office && <p class="addr">{org.name}, {office}</p>}
+      <a class="button" href="/contact">Prendre rendez-vous</a>
+    </div>
+    {agent ? <AgentContact agent={agent} org={org.name} /> : (
+      <p class="links">
+        {team?.phone && <a href={tel(team.phone)}>{team.phone}</a>}
+        {team?.email && <a href={`mailto:${team.email}`}>{team.email}</a>}
+      </p>
+    )}
+  </div>
+</section>
+
+<style>
+  .band { background: var(--paper); border-top: 1px solid var(--line); }
+  .inner { display: grid; grid-template-columns: 1.4fr 1fr; align-items: start; gap: 40px clamp(40px, 7vw, 120px); padding-block: clamp(56px, 7vw, 96px); }
+  h2 { font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); max-width: 22ch; }
+  .addr { margin: 14px 0 28px; color: var(--muted); }
+  .links { display: grid; gap: 4px; }
+  @media (max-width: 800px) { .inner { grid-template-columns: 1fr; } }
+</style>

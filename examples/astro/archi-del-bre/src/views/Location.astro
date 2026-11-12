@@ -1,0 +1,107 @@
+---
+/** Location: the lake and the hill, a static map with distances computed from the coordinates, then the quarter, the lake and the city. */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import StaticMap from '../components/StaticMap.astro';
+import { loadSite } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { c } from '../lib/copy';
+import { crowKm, km, PHOTOS, PLACES, SECTIONS } from '../content/place';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const site = await loadSite();
+const { dev } = site;
+const a = dev.address;
+const where = a.lat != null && a.lng != null ? { lat: a.lat, lng: a.lng } : null;
+const T = {
+  it: {
+    title: `Posizione: Castagnola, Lugano | ${dev.title}`,
+    h1: 'Castagnola, sopra il lago',
+    intro: `${dev.title} sorge in ${a.street ?? 'Castagnola'}, sul pendio del Monte Brè, nel quartiere luganese di Castagnola.`,
+    dist: 'Distanze in linea d’aria',
+    mapNote: 'Coordinate arrotondate: il punto indica la zona, non l’indirizzo esatto.',
+    units: 'Vedi gli appartamenti',
+  },
+  de: {
+    title: `Lage: Castagnola, Lugano | ${dev.title}`,
+    h1: 'Castagnola, über dem See',
+    intro: `${dev.title} liegt an der ${a.street ?? 'Castagnola'}, am Hang des Monte Brè, im Luganeser Quartier Castagnola.`,
+    dist: 'Distanzen in Luftlinie',
+    mapNote: 'Gerundete Koordinaten: der Punkt zeigt die Gegend, nicht die genaue Adresse.',
+    units: 'Wohnungen ansehen',
+  },
+}[l];
+---
+<Site site={site} l={l} route="location" title={T.title} description={T.intro} image={img(PHOTOS.front.url, { w: 1200, h: 630 })}>
+  <section class="hero">
+    <div class="frame">
+      <Photo src={PHOTOS.front.url} alt={PHOTOS.front.alt[l]} width={1600} height={900} sizes="(max-width: 640px) 100vw, calc(100vw - 32px)" priority mobile={{ width: 4, height: 3 }} />
+    </div>
+  </section>
+  <div class="wrap intro">
+    <h1 class="h1">{T.h1}</h1>
+    <p class="lede">{T.intro}</p>
+  </div>
+
+  {where && (
+    <section class="wrap mapgrid" aria-labelledby="dist-h">
+      <StaticMap lat={where.lat} lng={where.lng} zoom={14} l={l} label={`${dev.title}, ${a.postcode ?? ''} ${a.city ?? ''}`.trim()} cols={5} rows={3} />
+      <div class="dist">
+        <h2 id="dist-h" class="h3">{T.dist}</h2>
+        <ul>
+          {PLACES.map((p) => <li><span>{p.name[l]}</span><span class="num">{km(crowKm(where, p), l)}</span></li>)}
+        </ul>
+        <p class="muted small">{T.mapNote}</p>
+      </div>
+    </section>
+  )}
+
+  {SECTIONS.map((s, i) => (
+    <section class:list={['wrap', 'part', { flip: i % 2 === 1 }]} id={s.id}>
+      <div class="p-photo">
+        <Photo class={i === 1 ? 'arch' : 'rounded'} src={s.photo.url} alt={s.photo.alt[l]} width={i === 1 ? 800 : 1200} height={i === 1 ? 1000 : 860} sizes="(max-width: 860px) 100vw, 50vw" />
+      </div>
+      <div class="p-text">
+        <h2 class="h2">{s.title[l]}</h2>
+        <div class="prose">{s.body[l].map((p) => <p>{p}</p>)}</div>
+      </div>
+    </section>
+  ))}
+
+  <section class="wrap closing">
+    <Photo class="rounded" src={PHOTOS.salvatore.url} alt={PHOTOS.salvatore.alt[l]} width={1600} height={700} sizes="100vw" mobile={{ width: 4, height: 3 }} />
+    <p><a class="btn" href={href('units', l)}>{T.units}</a> <a class="link" href={href('contact', l)}>{c('writeUs', l)}</a></p>
+  </section>
+</Site>
+
+<style>
+  .hero { padding: 12px 16px 0; }
+  .frame { border-radius: var(--radius-frame); overflow: hidden; aspect-ratio: 1600 / 640; background: var(--stone); }
+  .frame :global(picture), .frame :global(img) { width: 100%; height: 100%; }
+  .intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px 64px; align-items: end; padding-block: clamp(40px, 6vw, 88px); }
+  .mapgrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 72px); align-items: start; padding-bottom: var(--section); }
+  .dist { display: grid; gap: 18px; }
+  .dist ul { list-style: none; border-top: 1px solid var(--line-strong); }
+  .dist li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .small { font-size: 0.875rem; }
+  .part { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 104px); align-items: center; padding-bottom: var(--section); }
+  .part.flip .p-photo { order: 2; }
+  .part.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 4fr); }
+  .p-text { display: grid; gap: 22px; }
+  .p-photo :global(.rounded) { display: block; aspect-ratio: 1200 / 860; border-radius: var(--radius-card); overflow: hidden; }
+  .p-photo :global(.arch) { display: block; aspect-ratio: 4 / 5; max-width: 440px; margin-inline: auto; }
+  .closing { display: grid; gap: 28px; padding-bottom: var(--section); }
+  .closing :global(.rounded) { display: block; aspect-ratio: 16 / 7; border-radius: var(--radius-card); overflow: hidden; }
+  .closing p { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
+  @media (max-width: 860px) {
+    .intro, .mapgrid, .part, .part.flip { grid-template-columns: 1fr; }
+    .part.flip .p-photo { order: 0; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 8px 8px 0; }
+    .frame { aspect-ratio: 4 / 3; border-radius: 16px; }
+    .closing :global(.rounded) { aspect-ratio: 4 / 3; }
+  }
+</style>

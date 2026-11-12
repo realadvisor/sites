@@ -1,0 +1,2 @@
+.nf .band__inner { min-height: 56vh; align-content: center; }
+.nf__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }

@@ -1,0 +1,116 @@
+---
+/**
+ * Header: language codes left, the development's name centred, the dossier
+ * right; the section nav on a second row (desktop). Phones: name and a menu
+ * button that opens a sheet (Escape and link clicks close it).
+ */
+import type { Site } from '../lib/data';
+import { LANGS, LOCALE_OF, href, tr, type Lang, type Route } from '../lib/i18n';
+import { docHref } from '../lib/docs';
+import Icon from './Icon.astro';
+
+interface Props { site: Site; lang: Lang; route?: Route; alternates: { lang: string; href: string }[] }
+const { site, lang, route, alternates } = Astro.props;
+const t = tr(lang);
+const NAV: Route[] = ['units', 'plans', 'area', 'gallery', 'docs', 'contact'];
+const altOf = (l: Lang) => alternates.find((a) => a.lang === LOCALE_OF[l])?.href ?? href('home', l);
+---
+<header class="hdr">
+  <div class="top wrap">
+    <nav class="langs" aria-label={t.langSwitch}>
+      {LANGS.map((l, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true">·</span>}
+          <a href={altOf(l)} hreflang={LOCALE_OF[l]} lang={LOCALE_OF[l]} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>
+        </>
+      ))}
+    </nav>
+    <a class="mark" href={href('home', lang)} aria-label={`${site.dev.title}, ${t.nav.home}`}>
+      <span class="name">{site.dev.title}</span>
+      <span class="place">{t.place}</span>
+    </a>
+    <div class="right">
+      <a class="cta ghost dossier" href={docHref('dossier', lang)}>{t.dossier} <span class="visually-hidden">(PDF)</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+        <Icon name="menu" size={24} /><span class="visually-hidden">{t.menu}</span>
+      </button>
+    </div>
+  </div>
+  <nav class="main wrap" aria-label={t.mainNav}>
+    <ul>
+      {NAV.map((r) => (
+        <li><a href={href(r, lang)} aria-current={r === route ? 'page' : undefined}>{t.nav[r as keyof typeof t.nav]}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <div class="sheet" id="menu" data-menu>
+    <div class="sheet-top">
+      <span class="name">{site.dev.title}</span>
+      <button class="burger" type="button" data-menu-close><Icon name="close" size={24} /><span class="visually-hidden">{t.close}</span></button>
+    </div>
+    <nav aria-label={t.mainNav}>
+      <ul>
+        <li><a href={href('home', lang)} aria-current={route === 'home' ? 'page' : undefined}>{t.nav.home}</a></li>
+        {NAV.map((r) => <li><a href={href(r, lang)} aria-current={r === route ? 'page' : undefined}>{t.nav[r as keyof typeof t.nav]}</a></li>)}
+      </ul>
+    </nav>
+    <div class="sheet-foot">
+      <a class="cta ghost" href={docHref('dossier', lang)}><Icon name="download" size={18} /> {t.dossierPdf}</a>
+      <p class="langs">
+        {LANGS.map((l) => <a href={altOf(l)} hreflang={LOCALE_OF[l]} lang={LOCALE_OF[l]} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>)}
+      </p>
+    </div>
+  </div>
+</header>
+
+<script>
+  const sheet = document.querySelector<HTMLElement>('[data-menu]');
+  const open = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const close = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+  const set = (on: boolean) => {
+    if (!sheet || !open) return;
+    sheet.classList.toggle('is-open', on);
+    open.setAttribute('aria-expanded', String(on));
+    document.documentElement.style.overflow = on ? 'hidden' : '';
+    (on ? close : open)?.focus();
+  };
+  open?.addEventListener('click', () => set(true));
+  close?.addEventListener('click', () => set(false));
+  sheet?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && sheet?.classList.contains('is-open')) set(false); });
+</script>
+
+<style>
+  .hdr { background: var(--bg); border-bottom: 1px solid var(--line); }
+  .top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 96px; }
+  .langs { display: flex; gap: 8px; align-items: center; font: 600 0.8125rem/1 var(--sans); letter-spacing: 0.06em; color: var(--muted); }
+  .langs a { text-decoration: none; padding: 12px 4px; color: var(--muted); }
+  .langs a[aria-current] { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .mark { display: grid; justify-items: center; text-decoration: none; color: var(--text); padding-block: 14px; }
+  .name { font: 400 clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem)/1 var(--serif); letter-spacing: -0.01em; }
+  .place { margin-top: 8px; font: 600 0.6875rem/1 var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .right { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+  .dossier { min-height: 42px; padding-inline: 18px; font-size: 0.875rem; }
+  .burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: none; border: 0; color: var(--text); cursor: pointer; padding: 0; }
+  .main ul { list-style: none; margin: 0; padding: 0 0 4px; display: flex; justify-content: center; gap: clamp(16px, 2.6vw, 40px); }
+  .main a { display: inline-block; padding: 12px 2px 14px; text-decoration: none; font-size: 0.9375rem; color: var(--text); border-bottom: 2px solid transparent; }
+  .main a:hover { color: var(--accent-strong); }
+  .main a[aria-current] { color: var(--accent-strong); border-bottom-color: var(--accent); }
+  .sheet { position: fixed; inset: 0; z-index: 60; background: var(--bg); display: flex; flex-direction: column; padding: 0 var(--gutter) 24px; visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.18s, visibility 0s 0.18s; overflow-y: auto; }
+  .sheet.is-open { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.18s; }
+  .sheet-top { display: flex; justify-content: space-between; align-items: center; min-height: 64px; border-bottom: 1px solid var(--line); }
+  .sheet-top .name { font-size: 1.375rem; }
+  .sheet nav ul { list-style: none; margin: 0; padding: 16px 0; }
+  .sheet nav a { display: block; padding: 12px 0; font: 400 1.75rem/1.2 var(--serif); text-decoration: none; }
+  .sheet nav a[aria-current] { color: var(--accent-strong); }
+  .sheet-foot { margin-top: auto; display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .sheet-foot .langs { gap: 16px; }
+  @media (max-width: 860px) {
+    .top { grid-template-columns: 1fr auto; min-height: 64px; }
+    .top > .langs, .dossier, .main { display: none; }
+    .mark { justify-items: start; padding-block: 10px; }
+    .place { margin-top: 6px; font-size: 0.625rem; }
+    .burger { display: inline-flex; }
+  }
+  @media (prefers-reduced-motion: reduce) { .sheet { transition: none; } }
+</style>

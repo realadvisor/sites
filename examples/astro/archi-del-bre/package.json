@@ -1,0 +1,36 @@
+{
+  "name": "archi-del-bre",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --port ${PORT:-4419}",
+    "build": "astro build",
+    "preview": "wrangler dev --port 4419",
+    "check": "astro check && astro build",
+    "plans": "node scripts/plans.mjs",
+    "documents": "node scripts/documents.mjs",
+    "shots": "node scripts/shots.mjs",
+    "screenshot": "sites-kit screenshot",
+    "check:quality": "sites-kit check quality",
+    "check:deploy": "sites-kit check deploy",
+    "kit": "sites-kit"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "12.6.13",
+    "@fontsource/instrument-serif": "5.3.0",
+    "@fontsource-variable/figtree": "5.3.0",
+    "@realadvisor/sites-kit": "file:../../../kit",
+    "@realadvisor/sites-sdk": "file:../../../sdk",
+    "astro": "5.18.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "22.20.5",
+    "lighthouse": "13.5.0",
+    "playwright": "1.64.1",
+    "typescript": "5.9.3",
+    "wrangler": "4.156.0"
+  },
+  "packageManager": "pnpm@10.11.1"
+}

@@ -1,0 +1,13 @@
+.pg-legal .page { max-width: calc(820px + 2 * var(--gutter)); padding-top: clamp(48px, 6vw, 88px); }
+.pg-legal h1 { font-size: clamp(2.25rem, 1.7rem + 2.2vw, 3.5rem); margin-bottom: 40px; }
+.pg-legal .page .legal-body section { padding: 28px 0; border-top: 1px solid var(--line); }
+.pg-legal .page .legal-body h2 { font-size: 1.625rem; margin-bottom: 16px; }
+.pg-legal .page .legal-body dl { margin: 0; display: grid; gap: 10px; }
+.pg-legal .page .legal-body dl div { display: grid; grid-template-columns: 220px 1fr; gap: 16px; }
+.pg-legal .page .legal-body dt { color: var(--muted); }
+.pg-legal .page .legal-body dd { margin: 0; overflow-wrap: anywhere; }
+.pg-legal .page .legal-body p { max-width: 64ch; }
+.pg-legal .page .legal-body p + p { margin-top: 0.8em; }
+@media (max-width: 560px) {
+  .pg-legal .page .legal-body dl div { grid-template-columns: 1fr; gap: 2px; }
+}

@@ -1,0 +1,34 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import ListingCard from '../components/ListingCard.astro';
+import ValuationBand from '../components/ValuationBand.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { brandName, site, sites } from '../lib/data';
+
+const s = await site();
+const sold = await sites.allListings({ status: 'sold' });
+const photo = sold.find((l) => l.photos[0])?.photos[0];
+const cities = [...new Set(sold.map((l) => l.address.city).filter(Boolean))] as string[];
+const n = sold.length;
+---
+<Layout title={`Verkaufte Objekte | ${brandName(s)}`} description={`${n} von ${brandName(s)} vermittelte Objekte${cities.length ? ` in ${cities.join(', ')}` : ''}.`} image={photo && img(photo.url, { w: 1200, h: 630 })}>
+  <PageHead title="Zuletzt vermittelt" lede={n ? `${n === 1 ? 'Ein Objekt' : `${n} Objekte`}${cities.length ? ` in ${cities.join(', ')}` : ''}, die neue Eigentümerinnen und Eigentümer gefunden haben.` : undefined} />
+  <section class="wrap sold" aria-label="Verkaufte Objekte">
+    {n > 0 ? (
+      <ul class="sold-grid">{sold.map((l, i) => <li><ListingCard listing={l} priority={i === 0} as="h2" /></li>)}</ul>
+    ) : (
+      <p class="lede muted">Sobald wir Objekte vermittelt haben, zeigen wir sie hier.</p>
+    )}
+  </section>
+  <ValuationBand sold={n} />
+</Layout>
+
+<style>
+  .sold { padding-bottom: var(--section); }
+  .sold-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px var(--gap); }
+  @media (max-width: 1023px) { .sold-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { .sold-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+</style>

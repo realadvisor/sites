@@ -1,0 +1,50 @@
+---
+/**
+ * Site layout: fonts, tokens, skip link, header, optional programme sub
+ * navigation, footer. Every page uses it.
+ */
+import '../styles/fonts.css';
+import '@fontsource-variable/jost/wght.css';
+import serif500 from '../fonts/cormorant-garamond-500-normal-lf.woff2?url';
+import sans from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import type { Development } from '@realadvisor/sites-sdk/types';
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProgrammeNav from '../components/ProgrammeNav.astro';
+import { primaryTeam, programmes as allProgrammes, sites } from '../lib/data';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  current?: string;
+  /** Programme pages: the sub navigation for this programme. */
+  programme?: Development;
+  section?: string;
+}
+const { title, description, image, jsonLd, noindex, current, programme, section } = Astro.props;
+const [org, team, programmes] = await Promise.all([sites.organisation(), primaryTeam(), allProgrammes()]);
+const name = team?.name ?? org.name;
+---
+<Base title={title} description={description} image={image} jsonLd={jsonLd} noindex={noindex}>
+  <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={serif500} />
+  {/* Body font too: without it the lot pages shift when Jost swaps in (CLS 0.22 on mobile). */}
+  <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={sans} />
+  <a class="skip" href="#main">Aller au contenu</a>
+  <Header name={name} programmes={programmes} current={current} />
+  <main id="main" tabindex="-1" class:list={[!Astro.slots.has('hero') && 'no-hero']}>
+    <slot name="hero" />
+    {programme && <ProgrammeNav programme={programme} section={section} />}
+    <slot />
+  </main>
+  <Footer name={name} legalName={org.name} team={team} programmes={programmes} />
+</Base>
+<style>
+  main:focus { outline: none; }
+  .no-hero { padding-top: var(--header-h); }
+</style>

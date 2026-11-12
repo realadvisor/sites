@@ -1,0 +1,65 @@
+---
+/** Journal: the newest post large, the others as a plain list. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import { agency, agentName, brandName, sites } from '../lib/data';
+import { postsOf, minutes } from '../lib/journal';
+import { placePhoto } from '../lib/places';
+import { UI, alternates, fill, href, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = UI[lang];
+const [ag, posts, agents] = await Promise.all([agency(), postsOf(lang), sites.agents()]);
+const author = (id?: string) => {
+  const a = agents.find((x) => x.id === id);
+  return a ? fill(ui.by, { name: agentName(a) }) : '';
+};
+const [first, ...rest] = posts;
+const cover = first && placePhoto(first.data.cover, lang, first.data.coverIndex);
+---
+<Site lang={lang} current="journal" title={`${ui.journalH1} | ${brandName(ag)}`} description={ui.journalLead}
+  image={cover && img(cover.url, { w: 1200, h: 630 })} alternates={alternates('journal')}>
+  <header class="wrap phead">
+    <h1 class="d-xl">{ui.journalH1}</h1>
+    <p class="lead">{ui.journalLead}</p>
+  </header>
+  {first && (
+    <article class="wrap first">
+      {cover && <div class="frame first-photo"><RaImage src={cover} alt={cover.alt} width={1200} height={800} priority sizes="(min-width: 900px) 58vw, 100vw" /></div>}
+      <div class="first-text">
+        <p class="small muted"><time datetime={first.data.date.toISOString().slice(0, 10)}>{formatDate(first.data.date, lang)}</time> · {fill(ui.minutes, { n: minutes(first) })}</p>
+        <h2 class="d-l"><a href={href('journal', lang, first.data.path)}>{first.data.title}</a></h2>
+        <p class="lead">{first.data.excerpt}</p>
+        {author(first.data.author) && <p class="small">{author(first.data.author)}</p>}
+      </div>
+    </article>
+  )}
+  {rest.length > 0 && (
+    <ol class="wrap list">
+      {rest.map((p) => (
+        <li>
+          <p class="small muted"><time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date, lang)}</time></p>
+          <h2 class="d-m"><a href={href('journal', lang, p.data.path)}>{p.data.title}</a></h2>
+          <p>{p.data.excerpt}</p>
+          <p class="small muted">{[author(p.data.author), fill(ui.minutes, { n: minutes(p) })].filter(Boolean).join(' · ')}</p>
+        </li>
+      ))}
+    </ol>
+  )}
+</Site>
+
+<style>
+  .first { position: relative; display: grid; grid-template-columns: 7fr 5fr; gap: 28px clamp(32px, 5vw, 96px); align-items: end; }
+  .first-photo { aspect-ratio: 3 / 2; }
+  .first-text { display: grid; gap: 16px; border-top: 1px solid var(--text); padding-top: 18px; }
+  .first h2 a, .list h2 a { text-decoration: none; }
+  .first h2 a:hover, .list h2 a:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .first { grid-template-columns: 1fr; } }
+  .list { padding-top: var(--section); }
+  .list li { display: grid; grid-template-columns: 10rem minmax(0, 1.3fr) minmax(0, 1fr) 12rem; gap: 10px 32px; align-items: baseline; padding: 24px 0; border-top: 1px solid var(--line); }
+  .list li:first-child { border-top-color: var(--text); }
+  @media (max-width: 900px) { .list li { grid-template-columns: 1fr; } }
+</style>

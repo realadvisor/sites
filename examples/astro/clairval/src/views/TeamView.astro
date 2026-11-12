@@ -1,0 +1,53 @@
+---
+/** Team: agents grouped by office, portraits when the data has them, plain contacts. */
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import AgentCard from '../components/AgentCard.astro';
+import { siteData } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const groups = teams.map((tm) => ({ team: tm, agents: agents.filter((a) => a.team_ids.includes(tm.id)) })).filter((g) => g.agents.length);
+const others = agents.filter((a) => !teams.some((tm) => a.team_ids.includes(tm.id)));
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const C = {
+  en: { title: 'Our team', lede: `${agents.length} agents in ${cities}. Write or call the office of the area you are looking at.`, office: 'Office page' },
+  fr: { title: 'Notre équipe', lede: `${agents.length} agents à ${cities}. Écrivez ou appelez le bureau du secteur qui vous intéresse.`, office: 'Page du bureau' },
+}[l];
+---
+<Site l={l} route="team" title={`${C.title} | ${org.name}`} description={C.lede}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navTeam') }]} title={C.title} lede={C.lede} />
+  {groups.map((g) => (
+    <section class="wrap grp">
+      <header class="grp__head">
+        <h2 class="h3">{cityName(g.team.address.city, l) || g.team.name}</h2>
+        <p class="grp__meta">
+          {g.team.phone && <a class="num" href={tel(g.team.phone)}>{g.team.phone}</a>}
+          <a href={href('offices', l, teamSlug(g.team, teams))}>{C.office}</a>
+        </p>
+      </header>
+      <ul class="plain agents">{g.agents.map((a) => <li><AgentCard agent={a} all={agents} teams={teams} l={l} /></li>)}</ul>
+    </section>
+  ))}
+  {others.length > 0 && (
+    <section class="wrap grp"><ul class="plain agents">{others.map((a) => <li><AgentCard agent={a} all={agents} teams={teams} l={l} /></li>)}</ul></section>
+  )}
+  <div class="pad"></div>
+</Site>
+
+<style>
+  .grp { padding-block: 40px; }
+  .grp__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; padding-bottom: 20px; margin-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .grp__meta { display: flex; gap: 24px; }
+  .grp__meta a { display: inline-flex; min-height: 40px; align-items: center; }
+  .agents { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 28px; }
+  @media (max-width: 1023px) { .agents { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 767px) { .agents { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 16px; } }
+  @media (max-width: 420px) { .agents { grid-template-columns: minmax(0, 1fr); } }
+  .pad { height: var(--section); }
+</style>

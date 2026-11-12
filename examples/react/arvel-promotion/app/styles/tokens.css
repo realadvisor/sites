@@ -1,0 +1,66 @@
+/*
+ * Arvel Promotion: cinematic, deep palette built on the brand colour #0E1A24
+ * (organisation.brand.primary). Ivory text on ink, ivory "paper" panels for
+ * forms and plans, a muted brass for small details. Contrast checked AA.
+ */
+:root {
+  --brand: #0E1A24;
+  --ink-0: #070E14;
+  --ink-1: #0A131B;
+  --bg: #0E1A24;
+  --surface: #13222E;
+  --surface-2: #1A2C3A;
+  --text: #EEE8DD;
+  --muted: #A8B1B7;
+  --line: rgb(238 232 221 / 0.16);
+  --line-strong: rgb(238 232 221 / 0.32);
+  --brass: #C9A675;
+
+  /* paper panels (forms, plans, documents) */
+  --paper: #F2EDE4;
+  --paper-2: #E8E1D5;
+  --on-paper: #0E1A24;
+  --on-paper-muted: #56606A;
+  --brass-on-paper: #7A5C30;
+
+  /* unit status on ink */
+  --st-available: #23443A;
+  --st-available-ink: #D3EBDD;
+  --st-reserved: #4D3D22;
+  --st-reserved-ink: #F3DDB0;
+  --st-sold: #15242F;
+  --st-sold-ink: #8C979F;
+
+  --accent: var(--brand); /* the brand in its role: buttons and focus on paper */
+  --accent-strong: #050B10;
+  --danger: #A3271B;
+
+  --serif: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
+  --sans: 'Jost Variable', 'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  --fs-hero: clamp(2.7rem, 7vw, 7rem);
+  --fs-h2: clamp(2.3rem, 4.6vw, 4.4rem);
+  --fs-h3: clamp(1.55rem, 2.3vw, 2.1rem);
+  --fs-lead: clamp(1.15rem, 1.5vw, 1.4rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-eyebrow: 0.75rem;
+
+  --gutter: clamp(16px, 4.2vw, 64px);
+  --max: 1360px;
+  --space-section: clamp(88px, 12vw, 184px);
+  --header-h: 80px;
+  --subnav-h: 56px;
+
+  --radius-card: 2px;
+  --radius-btn: 0;
+  --control-radius: 0;
+  --control-h: 52px;
+  --surface-input: #FFFFFF;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+@media (max-width: 760px) {
+  :root { --header-h: 64px; --subnav-h: 52px; }
+}

@@ -1,0 +1,50 @@
+---
+/** Unit types as columns (name, plan, sizes, rent from, availability), each linking to the filtered units. */
+import type { TypeInfo } from '../lib/units';
+import { chf, surface } from '../lib/units';
+import Icon from './Icon.astro';
+
+interface Props { list: TypeInfo[] }
+const { list } = Astro.props;
+---
+<ul class="types">
+  {list.map((t) => (
+    <li>
+      <a href={`/wohnungen?zimmer=${t.rooms}`} class="type">
+        <span class="t-name"><span class="n num">{String(t.rooms)}</span> Zimmer</span>
+        {t.plan && <img class="plan" src={t.plan} width="600" height="470" loading="lazy" decoding="async" alt={`Grundriss indikativ, ${String(t.rooms)} Zimmer`} />}
+        <dl>
+          {t.surface && <div><dt>Wohnfläche</dt><dd class="num">{surface(t.surface)}</dd></div>}
+          <div><dt>Miete netto</dt><dd class="num">{t.from ? `ab ${chf(t.from)}` : 'zurzeit vergeben'}</dd></div>
+        </dl>
+        <span class="avail"><span class="num">{t.available}</span> von {t.total} frei <Icon name="arrow" /></span>
+      </a>
+    </li>
+  ))}
+</ul>
+<style>
+  .types { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-radius: var(--radius-card); overflow: hidden; background: var(--paper); }
+  li + li { border-left: 2px solid var(--ink); }
+  .type { display: grid; gap: 16px; padding: 24px; height: 100%; text-decoration: none; color: var(--ink); align-content: start; }
+  .type:hover { background: var(--butter-soft); text-decoration: none; }
+  .type:focus-visible { outline-offset: -6px; }
+  .t-name { font: 700 1.25rem/1 var(--display); }
+  .n { font: 800 clamp(3rem, 2rem + 3vw, 4.75rem)/0.85 var(--display); letter-spacing: -0.05em; display: block; margin-bottom: 4px; }
+  .plan { width: 100%; aspect-ratio: 600 / 470; border-radius: 10px; border: 1px solid var(--line); }
+  dl { margin: 0; display: grid; gap: 6px; }
+  dl div { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  dt { color: var(--muted); font-size: 0.9375rem; }
+  dd { margin: 0; font-weight: 700; }
+  .avail { display: inline-flex; align-items: center; gap: 8px; font-weight: 650; }
+  @media (max-width: 1000px) { .types { grid-template-columns: 1fr 1fr; } li:nth-child(3) { border-left: 0; } li:nth-child(n + 3) { border-top: 2px solid var(--ink); } }
+  @media (max-width: 560px) {
+    .types { grid-template-columns: 1fr; }
+    li + li { border-left: 0; border-top: 2px solid var(--ink); }
+    .type { grid-template-columns: 1fr 1.1fr; grid-template-areas: 'name plan' 'dl plan' 'avail avail'; gap: 12px 16px; padding: 18px; }
+    .t-name { grid-area: name; }
+    .plan { grid-area: plan; align-self: center; }
+    dl { grid-area: dl; }
+    .avail { grid-area: avail; }
+    dl div { display: grid; border: 0; padding: 0; gap: 0; }
+  }
+</style>

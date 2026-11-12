@@ -1,0 +1,59 @@
+---
+/** New developments: one large card per development with its figures and prices per unit type. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import PageBand from '../components/PageBand.astro';
+import { siteData, sites } from '../lib/data';
+import { groupLine, groups } from '../lib/dev';
+import { href, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { formatAmount, monthYear, roomsRange } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org }, list] = await Promise.all([siteData(), sites.developments()]);
+const full = (await Promise.all(list.map((d) => sites.development(d.slug)))).filter((d) => d !== null);
+---
+<Site l={l} route="developments" title={`${t('devTitle')} | ${org.name}`} description={t('devLede')}>
+  <PageBand l={l} title={t('devTitle')} lede={t('devLede')} crumbs={[{ label: t('navNew') }]} />
+  <div class="wrap section list">
+    {full.map((d, i) => {
+      const gs = groups(d.units, l);
+      return (
+        <article class="dev">
+          <a class="dev__media" href={href('developments', l, d.slug)} tabindex="-1" aria-hidden="true">
+            {d.photos[0] && <RaImage src={d.photos[0]} alt="" width={1200} height={800} sizes="(min-width: 1000px) 55vw, 100vw" priority={i === 0} />}
+          </a>
+          <div class="dev__body">
+            <p class="kicker">{[cityName(d.address.city, l), d.delivery_date && t('deliveryFrom', { d: monthYear(d.delivery_date, l) })].filter(Boolean).join(' · ')}</p>
+            <h2 class="h2"><a href={href('developments', l, d.slug)}>{d.title}</a></h2>
+            <p class="muted">{[t('unitsAvailable', { n: d.stats.available, t: d.stats.units }), roomsRange(d.stats.rooms, l), d.stats.price && t('priceFrom', { p: formatAmount(d.stats.price.min) })].filter(Boolean).join(' · ')}</p>
+            <ul class="plain-list pa">
+              {gs.map((g) => { const x = groupLine(g, l); return <li><span class="pa__type">{g.label}</span><span class="num">{x.price}</span><span class="pa__status">{x.status}</span></li>; })}
+            </ul>
+            <a class="button" href={href('developments', l, d.slug)}>{t('toDevelopment')}</a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</Site>
+
+<style>
+  .list { display: grid; gap: 64px; }
+  .dev { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+  .dev__media { display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--paper-2); }
+  .dev__media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .dev__body { display: grid; gap: 12px; }
+  .dev__body h2 { color: var(--green-ink); }
+  .dev__body h2 a { text-decoration: none; }
+  .dev__body h2 a:hover { text-decoration: underline; }
+  .pa { border-top: 1px solid var(--line-strong); margin: 8px 0 12px; }
+  .pa li { display: grid; grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 1fr); gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .pa__type { font-weight: 600; }
+  .pa__status { color: var(--muted); text-align: right; font-size: 0.9375rem; }
+  .dev .button { justify-self: start; }
+  @media (max-width: 900px) { .dev { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) { .pa li { grid-template-columns: minmax(0, 1fr) auto; } .pa__status { grid-column: 1 / -1; text-align: left; } }
+</style>

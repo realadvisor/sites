@@ -1,0 +1,19 @@
+---
+/** The development's wordmark (the CRM has no logo): a zinnober tile and the name in the display face. */
+interface Props { tone?: 'ink' | 'light' }
+const { tone = 'ink' } = Astro.props;
+---
+<span class:list={['wm', `wm--${tone}`]}>
+  <span class="tile" aria-hidden="true">
+    <svg viewBox="0 0 32 32" width="40" height="40"><rect width="32" height="32" rx="7" fill="#E4572E" /><path d="M9 9h14v3L13.5 20H23v3H9v-3l9.5-8H9Z" fill="#140F3A" /></svg>
+  </span>
+  <span class="words"><span class="q">Quartier</span><span class="z">Zinnober</span></span>
+</span>
+<style>
+  .wm { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
+  .wm--light { color: #fff; }
+  .tile svg { width: 40px; height: 40px; }
+  .words { display: grid; line-height: 0.92; }
+  .q { font: 600 0.78rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; }
+  .z { font: 800 1.5rem/1 var(--display); letter-spacing: -0.03em; }
+</style>

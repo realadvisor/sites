@@ -1,0 +1,57 @@
+  .v-unit .crumbs { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; }
+  .v-unit .crumbs a { display: inline-block; padding-block: 10px; }
+  .v-unit .pager { display: flex; gap: 20px; font-weight: 600; }
+  .v-unit .pager a { text-decoration: none; padding: 10px 4px; }
+  .v-unit .top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 80px); align-items: start; padding-bottom: var(--section); }
+  .v-unit .plan { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-card); padding: clamp(12px, 2vw, 28px); }
+  .v-unit .plan img { width: 100%; height: auto; }
+  .v-unit .plan figcaption { font-size: 0.8125rem; color: var(--muted); margin-top: 8px; }
+  .v-unit .facts { display: grid; gap: 22px; position: sticky; top: calc(var(--header-h) + 24px); }
+  .v-unit .no { font: 700 0.9375rem/1 var(--sans); color: var(--accent-strong); letter-spacing: 0.04em; }
+  .v-unit .big { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-block: 1px solid var(--line); }
+  .v-unit .big div { padding: 18px 0; }
+  .v-unit .big div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .v-unit .big dt { font-size: 0.875rem; color: var(--muted); }
+  .v-unit .big dd { margin: 4px 0 0; font: 400 clamp(2rem, 1.5rem + 1.6vw, 3rem)/1 var(--serif); }
+  .v-unit .price { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .v-unit .amount { font: 600 1.625rem/1 var(--sans); }
+  .v-unit .list { margin: 0; display: grid; }
+  .v-unit .list div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .v-unit .list dt { color: var(--muted); }
+  .v-unit .list dd { margin: 0; text-align: right; }
+  .v-unit .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .v-unit .fav[aria-pressed='true'] svg { fill: currentColor; }
+  .v-unit .fav svg { fill: none; stroke: currentColor; stroke-width: 1.4; }
+
+  .v-unit .where { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; align-items: center; padding-bottom: var(--section); }
+  .v-unit .where-text { display: grid; gap: 12px; }
+
+  .v-unit .photos { padding-bottom: var(--section); display: grid; gap: 24px; }
+  .v-unit .grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 10px; }
+  .v-unit .ph { display: block; border-radius: 10px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand); }
+  .v-unit .ph.lead { grid-row: span 2; aspect-ratio: auto; }
+  .v-unit .ph picture { height: 100%; }
+  .v-unit .ph:hover img { transform: scale(1.02); }
+  .v-unit .ph img { transition: transform 0.5s var(--ease); }
+
+  .v-unit .about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; padding-bottom: var(--section); }
+  .v-unit .enquiry-band { background: var(--paper); border-block: 1px solid var(--line); }
+  .v-unit .e-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); }
+  .v-unit .e-text { display: grid; gap: 20px; align-content: start; }
+  .v-unit .similar { padding-block: var(--section); display: grid; gap: 20px; }
+  .v-unit .similar ul { list-style: none; border-top: 1px solid var(--line-strong); }
+  .v-unit .similar a { display: grid; grid-template-columns: 5em minmax(0, 1fr) auto 10em; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .v-unit .similar a:hover span:first-of-type { text-decoration: underline; }
+  .v-unit .similar .p { text-align: right; font-weight: 600; }
+
+  @media (max-width: 960px) {
+    .v-unit .top, .v-unit .where, .v-unit .about, .v-unit .e-grid { grid-template-columns: 1fr; }
+    .v-unit .facts { position: static; }
+  }
+  @media (max-width: 640px) {
+    .v-unit .grid { grid-template-columns: 1fr 1fr; }
+    .v-unit .ph.lead { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+    .v-unit .similar a { grid-template-columns: 4em minmax(0, 1fr); }
+    .v-unit .similar a .num { grid-column: 2; }
+    .v-unit .similar .p { text-align: left; }
+  }

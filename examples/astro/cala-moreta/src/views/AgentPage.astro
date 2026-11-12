@@ -1,0 +1,69 @@
+---
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import AgentPortrait from '../components/AgentPortrait.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, agentSlug, sites, type Agent } from '../lib/data';
+import { LOCALE_OF, UI, alternates, fill, href, type Lang } from '../lib/i18n';
+import { languageList } from '../lib/format';
+
+interface Props { lang: Lang; agent: Agent }
+const { lang, agent: a } = Astro.props;
+const ui = UI[lang];
+const [ag, all] = await Promise.all([agency(), sites.allListings({ status: 'available' })]);
+const name = `${a.first_name} ${a.last_name}`;
+const mine = all.filter((l) => l.agent?.id === a.id);
+const tel = a.phone?.replace(/[^\d+]/g, '');
+const agencyName = ag.team?.name ?? ag.org.name;
+---
+<Site lang={lang} current="team" title={`${name} | ${agencyName}`}
+  description={`${name}, ${agencyName}. ${a.languages?.length ? `${ui.speaks} ${languageList(a.languages, lang)}.` : ''}`}
+  alternates={alternates('team', agentSlug(a))}>
+  <div class="wrap">
+    <nav class="crumbs" aria-label={ui.nav.team}><a href={href('team', lang)}><span aria-hidden="true">←</span> {fill(ui.backTo, { page: ui.nav.team })}</a></nav>
+    <header class:list={['ahead', a.photo?.url && 'has-photo']}>
+      <AgentPortrait agent={a} sizes="(min-width: 861px) 360px, 80vw" priority class="ahead-photo" />
+      <div class="ahead-text">
+        <h1 class="display-l">{name}</h1>
+        <p class="ahead-role">{a.title ? `${a.title}, ${agencyName}` : agencyName}</p>
+        {a.languages?.length ? <p class="ahead-role">{ui.speaks} {languageList(a.languages, lang)}</p> : null}
+        <p class="ahead-contact">
+          {a.phone && <a class="cta cta-line num" href={`tel:${tel}`}>{a.phone}</a>}
+          {a.email && <a class="cta cta-line" href={`mailto:${a.email}`}>{a.email}</a>}
+        </p>
+      </div>
+    </header>
+    {a.bio && <div class="prose bio"><p>{a.bio}</p></div>}
+  </div>
+
+  <section class="section wrap">
+    <div class="section-head"><div><h2 class="display-m">{fill(ui.agentListings, { name: a.first_name })}</h2></div></div>
+    {mine.length > 0
+      ? <ul class="grid3">{mine.map((l, i) => <li><ListingCard listing={l} lang={lang} priority={i === 0} /></li>)}</ul>
+      : <p class="lead">{fill(ui.agentNoListings, { name: a.first_name })}</p>}
+  </section>
+
+  <section class="ask">
+    <div class="wrap ask-in">
+      <div><h2 class="display-m">{fill(ui.contactAgent, { name: a.first_name })}</h2></div>
+      <EnquiryForm agentId={a.id} agentName={a.first_name} contactReason="other" locale={LOCALE_OF[lang]} />
+    </div>
+  </section>
+</Site>
+<style>
+  .crumbs { padding-top: 28px; }
+  .crumbs a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+  .ahead { display: grid; padding-block: clamp(40px, 5vw, 80px); border-bottom: 1px solid var(--line); }
+  .ahead.has-photo { grid-template-columns: 360px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: end; }
+  .ahead :global(.ahead-photo) { width: 100%; }
+  @media (max-width: 860px) { .ahead.has-photo { grid-template-columns: 1fr; gap: 28px; } .ahead :global(.ahead-photo) { max-width: 280px; } }
+  .ahead-text { display: grid; gap: 10px; }
+  .ahead-role { color: var(--muted); font-size: 1.0625rem; }
+  .ahead-contact { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+  .ahead-contact .cta { letter-spacing: .04em; text-transform: none; font-size: .9375rem; }
+  .bio { padding-top: 40px; }
+  .ask { background: var(--surface); }
+  .ask-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 112px); padding-block: var(--section); }
+  .ask-in > div:first-child { display: grid; gap: 20px; align-content: start; }
+  @media (max-width: 860px) { .ask-in { grid-template-columns: 1fr; } }
+</style>

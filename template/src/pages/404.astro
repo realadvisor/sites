@@ -1,0 +1,24 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it
+// (`Astro.rewrite('/404')` cannot reach a prerendered page: it throws and the
+// visitor gets a 500). Wrap it in your site layout (header, footer); keep
+// `prerender = false`. A listing that left the portal shows the "no longer
+// available" text (src/pages/listings/[slug].astro sets `locals.listingGone` and
+// answers 410).
+export const prerender = false;
+
+import Base from '../layouts/Base.astro';
+import { lang, localeOfPath, localePath, t } from '@realadvisor/sites-kit/i18n';
+
+const locale = localeOfPath(Astro.originPathname ?? Astro.url.pathname);
+const l = lang(locale);
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? t('listingGone', {}, l) : t('notFound', {}, l);
+---
+<Base title={title} description={title} noindex locale={locale}>
+  <main>
+    <h1>{title}</h1>
+    <p>{gone ? t('listingGoneText', {}, l) : t('notFoundText', {}, l)}</p>
+    <p><a href={localePath('/listings', locale)}>{t('allListings', {}, l)}</a> · <a href={localePath('/', locale)}>{t('home', {}, l)}</a></p>
+  </main>
+</Base>

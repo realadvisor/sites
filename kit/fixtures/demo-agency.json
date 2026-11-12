@@ -1,0 +1,832 @@
+{
+  "organisation": {
+    "id": "ae0b71e7-fdb4-437e-a99f-75c8359fc64d",
+    "name": "Demo Agency",
+    "website": "https://www.example.com",
+    "address": {
+      "street": "Rue de l'Exemple 1",
+      "postcode": "1003",
+      "city": "Lausanne",
+      "country": "CH",
+      "lat": 46.5197,
+      "lng": 6.6323
+    },
+    "brand": {
+      "primary": "#1f4e5f"
+    }
+  },
+  "teams": [
+    {
+      "id": "cca1bc21-4cc4-4f79-9f21-8853c4661e14",
+      "name": "Demo Agency",
+      "primary": true,
+      "phone": "+41000000000",
+      "email": "info@example.com",
+      "address": {
+        "street": "Rue de l'Exemple 1",
+        "postcode": "1003",
+        "city": "Lausanne",
+        "country": "CH",
+        "lat": 46.5197,
+        "lng": 6.6323
+      },
+      "socials": {
+        "facebook": "https://www.example.com/facebook",
+        "instagram": "https://www.example.com/instagram",
+        "linkedin": "https://www.example.com/linkedin"
+      },
+      "description": "<p>Demo Agency est une agence immobilière fictive : ses biens, ses courtiers et ses coordonnées servent d'exemple quand les données réelles de l'agence ne sont pas disponibles.</p><p>Vente et location d'appartements et de maisons dans le canton de Vaud, estimation et accompagnement jusqu'à la signature chez le notaire.</p>",
+      "description_text": "Demo Agency est une agence immobilière fictive : ses biens, ses courtiers et ses coordonnées servent d'exemple quand les données réelles de l'agence ne sont pas disponibles.\nVente et location d'appartements et de maisons dans le canton de Vaud, estimation et accompagnement jusqu'à la signature chez le notaire."
+    }
+  ],
+  "agents": [
+    {
+      "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+      "first_name": "Léa",
+      "last_name": "Exemple",
+      "title": "Directrice",
+      "phone": "+41000000001",
+      "email": "lea.exemple@example.com",
+      "languages": [
+        "fr",
+        "en",
+        "de"
+      ],
+      "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "8a95ca14-d0b7-4c22-8cee-a7f100120a22",
+      "first_name": "Marc",
+      "last_name": "Démo",
+      "title": "Courtier",
+      "phone": "+41000000002",
+      "email": "marc.demo@example.com",
+      "languages": [
+        "fr",
+        "it"
+      ],
+      "bio": "Marc Démo conseille les propriétaires de la Riviera et du Lavaux, de la mise en valeur du bien aux visites.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "42303224-b5ff-4fdd-946a-d3411c01e69c",
+      "first_name": "Sofia",
+      "last_name": "Muster",
+      "title": "Courtière location",
+      "phone": "+41000000003",
+      "email": "sofia.muster@example.com",
+      "languages": [
+        "fr",
+        "de",
+        "en"
+      ],
+      "bio": "Sofia Muster gère les locations résidentielles et commerciales de Demo Agency, de la mise en location à la remise des clés.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    }
+  ],
+  "listings": [
+    {
+      "id": "106401a8-571f-48e6-bf1e-00eae0645e35",
+      "slug": "appartement-lumineux-avec-balcon-106401a8-571f-48e6-bf1e-00eae0645e35",
+      "title": "Appartement lumineux avec balcon",
+      "offer_type": "buy",
+      "property_type": "apartment",
+      "status": "available",
+      "price": 1290000,
+      "currency": "CHF",
+      "rooms": 4.5,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "living_surface": 112,
+      "address": {
+        "postcode": "1004",
+        "city": "Lausanne",
+        "country": "CH",
+        "lat": 46.5214,
+        "lng": 6.6234
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__9XnRe0yj8qU3Y47eY0TvS.jpg",
+          "alt": "Appartement lumineux avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__UO2NgHWuCZACrIwYDjvF-.jpg",
+          "alt": "Appartement lumineux avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__iVWn2paYrbbN_1PQ4hTmF.jpg",
+          "alt": "Appartement lumineux avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__WzteFNaMb73Lks25XU-Kf.jpg",
+          "alt": "Appartement lumineux avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__OeRBVO8nlKIWZXeJrHKVn.jpg",
+          "alt": "Appartement lumineux avec balcon"
+        }
+      ],
+      "agent": {
+        "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+        "first_name": "Léa",
+        "last_name": "Exemple",
+        "title": "Directrice",
+        "phone": "+41000000001",
+        "email": "lea.exemple@example.com",
+        "languages": [
+          "fr",
+          "en",
+          "de"
+        ],
+        "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "balcony",
+        "elevator"
+      ],
+      "published_at": "2026-10-28T00:00:00.000Z",
+      "reference": "DEMO-0001",
+      "description": "<p><strong>Appartement lumineux avec balcon</strong></p><p>Au troisième étage d’un immeuble récent, un séjour traversant ouvert sur un balcon orienté sud-ouest.</p><ul><li>4,5 pièces</li><li>112 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Balcon</li><li>Ascenseur</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Appartement lumineux avec balcon\nAu troisième étage d’un immeuble récent, un séjour traversant ouvert sur un balcon orienté sud-ouest.\n\n4,5 pièces\n\n112 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nBalcon\n\nAscenseur\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "0384cc75-9b5b-4a28-bbc8-a30f086135dd",
+      "slug": "maison-familiale-avec-jardin-0384cc75-9b5b-4a28-bbc8-a30f086135dd",
+      "title": "Maison familiale avec jardin",
+      "offer_type": "buy",
+      "property_type": "house_detached",
+      "status": "available",
+      "price": 1850000,
+      "currency": "CHF",
+      "rooms": 6.5,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "living_surface": 185,
+      "land_surface": 820,
+      "address": {
+        "street": "Rue du Modèle 3",
+        "postcode": "1066",
+        "city": "Epalinges",
+        "country": "CH",
+        "lat": 46.5464,
+        "lng": 6.6716
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260720062608_0357_D.jpg",
+          "alt": "Maison familiale avec jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260720062903_0359_D.jpg",
+          "alt": "Maison familiale avec jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260720063341_0367_D.jpg",
+          "alt": "Maison familiale avec jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260720063045_0364_D.jpg",
+          "alt": "Maison familiale avec jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0868.jpg",
+          "alt": "Maison familiale avec jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0842.jpg",
+          "alt": "Maison familiale avec jardin"
+        }
+      ],
+      "agent": {
+        "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+        "first_name": "Léa",
+        "last_name": "Exemple",
+        "title": "Directrice",
+        "phone": "+41000000001",
+        "email": "lea.exemple@example.com",
+        "languages": [
+          "fr",
+          "en",
+          "de"
+        ],
+        "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "garden",
+        "parking"
+      ],
+      "published_at": "2026-10-25T00:00:00.000Z",
+      "reference": "DEMO-0002",
+      "description": "<p><strong>Maison familiale avec jardin</strong></p><p>Maison individuelle dans un quartier calme, jardin arboré et garage double.</p><ul><li>6,5 pièces</li><li>185 m² habitables</li><li>Terrain de 820 m²</li><li>4 chambres</li><li>3 salles d'eau</li><li>Jardin</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Maison familiale avec jardin\nMaison individuelle dans un quartier calme, jardin arboré et garage double.\n\n6,5 pièces\n\n185 m² habitables\n\nTerrain de 820 m²\n\n4 chambres\n\n3 salles d'eau\n\nJardin\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "e2c98ce8-e5df-4948-88d6-31eaa81b56bb",
+      "slug": "immeuble-de-rendement-e2c98ce8-e5df-4948-88d6-31eaa81b56bb",
+      "title": "Immeuble de rendement",
+      "offer_type": "buy",
+      "property_type": "house_multiple_dwelling",
+      "status": "available",
+      "price_on_request": true,
+      "currency": "CHF",
+      "living_surface": 420,
+      "land_surface": 1100,
+      "address": {
+        "street": "Avenue de la Démo 4",
+        "postcode": "1260",
+        "city": "Nyon",
+        "country": "CH",
+        "lat": 46.3822,
+        "lng": 6.2409
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0495_retouche_sRGB_2000px.jpg",
+          "alt": "Immeuble de rendement"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0529_retouche_sRGB_2000px.jpg",
+          "alt": "Immeuble de rendement"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0420_retouche_sRGB_2000px.jpg",
+          "alt": "Immeuble de rendement"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0651_retouche_sRGB_2000px.jpg",
+          "alt": "Immeuble de rendement"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0666.jpg",
+          "alt": "Immeuble de rendement"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0679.jpg",
+          "alt": "Immeuble de rendement"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A0470_retouche_sRGB_2000px.jpg",
+          "alt": "Immeuble de rendement"
+        }
+      ],
+      "agent": {
+        "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+        "first_name": "Léa",
+        "last_name": "Exemple",
+        "title": "Directrice",
+        "phone": "+41000000001",
+        "email": "lea.exemple@example.com",
+        "languages": [
+          "fr",
+          "en",
+          "de"
+        ],
+        "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "parking"
+      ],
+      "published_at": "2026-10-22T00:00:00.000Z",
+      "reference": "DEMO-0003",
+      "description": "<p><strong>Immeuble de rendement</strong></p><p>Immeuble de six logements, entièrement loué. Dossier sur demande.</p><ul><li>420 m² habitables</li><li>Terrain de 1100 m²</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Immeuble de rendement\nImmeuble de six logements, entièrement loué. Dossier sur demande.\n\n420 m² habitables\n\nTerrain de 1100 m²\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "4a2c5262-705e-44f3-a423-77acddf3bd0d",
+      "slug": "attique-face-au-lac-4a2c5262-705e-44f3-a423-77acddf3bd0d",
+      "title": "Attique face au lac",
+      "offer_type": "buy",
+      "property_type": "apartment_penthouse",
+      "status": "sold",
+      "price": 1980000,
+      "currency": "CHF",
+      "rooms": 4.5,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "living_surface": 142,
+      "address": {
+        "postcode": "1820",
+        "city": "Montreux",
+        "country": "CH",
+        "lat": 46.4312,
+        "lng": 6.9107
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__xx4lLDpKjcmuI9EaZRpyP.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__4JFsl282b058cGWV7HpL1.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__mJSJBEKC_maqXss-tQ01q.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__TJHmAcCrfRBrG-1mu--0U.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__WQeCQ-LYRJkf69GGKsgKe.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__SPpYWlzvf5TllTiLD1ohF.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__E9TEEhwgnlxm8sg0R8PeJ.jpg",
+          "alt": "Attique face au lac"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/ai-enhanced__ozmf6O-bPeZIIFJy65NAW.jpg",
+          "alt": "Attique face au lac"
+        }
+      ],
+      "agent": {
+        "id": "8a95ca14-d0b7-4c22-8cee-a7f100120a22",
+        "first_name": "Marc",
+        "last_name": "Démo",
+        "title": "Courtier",
+        "phone": "+41000000002",
+        "email": "marc.demo@example.com",
+        "languages": [
+          "fr",
+          "it"
+        ],
+        "bio": "Marc Démo conseille les propriétaires de la Riviera et du Lavaux, de la mise en valeur du bien aux visites.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "elevator",
+        "balcony"
+      ],
+      "published_at": "2026-10-19T00:00:00.000Z",
+      "reference": "DEMO-0004",
+      "description": "<p><strong>Attique face au lac</strong></p><p>Attique avec terrasse continue et vue directe sur le lac et les montagnes.</p><ul><li>4,5 pièces</li><li>142 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Attique face au lac\nAttique avec terrasse continue et vue directe sur le lac et les montagnes.\n\n4,5 pièces\n\n142 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "d7131b99-eb19-4f69-bd87-bcf072e6beb5",
+      "slug": "appartement-a-louer-avec-balcon-d7131b99-eb19-4f69-bd87-bcf072e6beb5",
+      "title": "Appartement à louer avec balcon",
+      "offer_type": "rent",
+      "property_type": "apartment",
+      "status": "available",
+      "price": 2450,
+      "currency": "CHF",
+      "rooms": 3.5,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "living_surface": 82,
+      "address": {
+        "street": "Route du Prototype 6",
+        "postcode": "1004",
+        "city": "Lausanne",
+        "country": "CH",
+        "lat": 46.5258,
+        "lng": 6.619
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A8217.JPG",
+          "alt": "Appartement à louer avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A8280_OKI.jpg",
+          "alt": "Appartement à louer avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A8185__CRZTCgdtumVj0RRApx-zk.JPG",
+          "alt": "Appartement à louer avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A9402.JPG",
+          "alt": "Appartement à louer avec balcon"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A7068.JPG",
+          "alt": "Appartement à louer avec balcon"
+        }
+      ],
+      "agent": {
+        "id": "42303224-b5ff-4fdd-946a-d3411c01e69c",
+        "first_name": "Sofia",
+        "last_name": "Muster",
+        "title": "Courtière location",
+        "phone": "+41000000003",
+        "email": "sofia.muster@example.com",
+        "languages": [
+          "fr",
+          "de",
+          "en"
+        ],
+        "bio": "Sofia Muster gère les locations résidentielles et commerciales de Demo Agency, de la mise en location à la remise des clés.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "balcony",
+        "elevator"
+      ],
+      "published_at": "2026-10-16T00:00:00.000Z",
+      "reference": "DEMO-0005",
+      "description": "<p><strong>Appartement à louer avec balcon</strong></p><p>Appartement rénové, cuisine ouverte et balcon sur cour.</p><ul><li>3,5 pièces</li><li>82 m² habitables</li><li>2 chambres</li><li>1 salle d'eau</li><li>Balcon</li><li>Ascenseur</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Appartement à louer avec balcon\nAppartement rénové, cuisine ouverte et balcon sur cour.\n\n3,5 pièces\n\n82 m² habitables\n\n2 chambres\n\n1 salle d'eau\n\nBalcon\n\nAscenseur\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "1ee747a4-8be1-4c9a-8b87-1e2c04435c93",
+      "slug": "studio-meuble-1ee747a4-8be1-4c9a-8b87-1e2c04435c93",
+      "title": "Studio meublé",
+      "offer_type": "rent",
+      "property_type": "apartment_studio",
+      "status": "available",
+      "price": 1180,
+      "currency": "CHF",
+      "rooms": 1,
+      "bedrooms": 0,
+      "bathrooms": 1,
+      "living_surface": 31,
+      "address": {
+        "street": "Rue de l'Échantillon 7",
+        "postcode": "1020",
+        "city": "Renens",
+        "country": "CH",
+        "lat": 46.5421,
+        "lng": 6.5859
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/img_9926_2025-10-27-134943.jpg",
+          "alt": "Studio meublé"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/img_9928_2025-10-27-134943.jpg",
+          "alt": "Studio meublé"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/img_9932_2025-10-27-134943.jpg",
+          "alt": "Studio meublé"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/img_9933_2025-10-27-134943.jpg",
+          "alt": "Studio meublé"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/img_9934_2025-10-27-134943.jpg",
+          "alt": "Studio meublé"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/img_9935_2025-10-27-134943.jpg",
+          "alt": "Studio meublé"
+        }
+      ],
+      "agent": {
+        "id": "42303224-b5ff-4fdd-946a-d3411c01e69c",
+        "first_name": "Sofia",
+        "last_name": "Muster",
+        "title": "Courtière location",
+        "phone": "+41000000003",
+        "email": "sofia.muster@example.com",
+        "languages": [
+          "fr",
+          "de",
+          "en"
+        ],
+        "bio": "Sofia Muster gère les locations résidentielles et commerciales de Demo Agency, de la mise en location à la remise des clés.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "elevator"
+      ],
+      "published_at": "2026-10-13T00:00:00.000Z",
+      "reference": "DEMO-0006",
+      "description": "<p><strong>Studio meublé</strong></p><p>Studio meublé, idéal étudiant, à cinq minutes de la gare.</p><ul><li>1 pièces</li><li>31 m² habitables</li><li>0 chambre</li><li>1 salle d'eau</li><li>Ascenseur</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Studio meublé\nStudio meublé, idéal étudiant, à cinq minutes de la gare.\n\n1 pièces\n\n31 m² habitables\n\n0 chambre\n\n1 salle d'eau\n\nAscenseur\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "7de6ed93-cc62-42e1-8472-3eb548bbcdc0",
+      "slug": "bureaux-en-centre-ville-7de6ed93-cc62-42e1-8472-3eb548bbcdc0",
+      "title": "Bureaux en centre-ville",
+      "offer_type": "rent",
+      "property_type": "indus_office",
+      "status": "available",
+      "price_on_request": true,
+      "currency": "CHF",
+      "living_surface": 220,
+      "address": {
+        "postcode": "1004",
+        "city": "Lausanne",
+        "country": "CH",
+        "lat": 46.528,
+        "lng": 6.6168
+      },
+      "photos": [],
+      "agent": {
+        "id": "42303224-b5ff-4fdd-946a-d3411c01e69c",
+        "first_name": "Sofia",
+        "last_name": "Muster",
+        "title": "Courtière location",
+        "phone": "+41000000003",
+        "email": "sofia.muster@example.com",
+        "languages": [
+          "fr",
+          "de",
+          "en"
+        ],
+        "bio": "Sofia Muster gère les locations résidentielles et commerciales de Demo Agency, de la mise en location à la remise des clés.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "elevator"
+      ],
+      "published_at": "2026-10-10T00:00:00.000Z",
+      "reference": "DEMO-0007",
+      "description": "<p><strong>Bureaux en centre-ville</strong></p><p>Plateau de bureaux modulable, proche du métro. Loyer sur demande.</p><ul><li>220 m² habitables</li><li>Ascenseur</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Bureaux en centre-ville\nPlateau de bureaux modulable, proche du métro. Loyer sur demande.\n\n220 m² habitables\n\nAscenseur\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "3eaaf70d-5118-4983-b7ca-e4ad756f0b1a",
+      "slug": "residence-exemple-4-5-pieces-rez-de-jardin-3eaaf70d-5118-4983-b7ca-e4ad756f0b1a",
+      "title": "Résidence Exemple – 4,5 pièces · Rez-de-jardin",
+      "offer_type": "buy",
+      "property_type": "apartment",
+      "status": "available",
+      "price": 1395000,
+      "currency": "CHF",
+      "rooms": 4.5,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "living_surface": 98,
+      "address": {
+        "street": "Chemin de l'Exemple 4",
+        "postcode": "1110",
+        "city": "Morges",
+        "country": "CH",
+        "lat": 46.5131,
+        "lng": 6.4952
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260810104328_0425_D.jpg",
+          "alt": "4,5 pièces · Rez-de-jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6074.jpg",
+          "alt": "4,5 pièces · Rez-de-jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6105.jpg",
+          "alt": "4,5 pièces · Rez-de-jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6121_1.jpg",
+          "alt": "4,5 pièces · Rez-de-jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6164.jpg",
+          "alt": "4,5 pièces · Rez-de-jardin"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6170.jpg",
+          "alt": "4,5 pièces · Rez-de-jardin"
+        }
+      ],
+      "agent": {
+        "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+        "first_name": "Léa",
+        "last_name": "Exemple",
+        "title": "Directrice",
+        "phone": "+41000000001",
+        "email": "lea.exemple@example.com",
+        "languages": [
+          "fr",
+          "en",
+          "de"
+        ],
+        "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "balcony",
+        "garden",
+        "parking"
+      ],
+      "published_at": "2026-10-04T00:00:00.000Z",
+      "reference": "DEMO-0008",
+      "description": "<p><strong>Résidence Exemple – 4,5 pièces · Rez-de-jardin</strong></p><p>Appartement neuf de la Résidence Exemple, rez-de-jardin, balcon de 19 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>4,5 pièces</li><li>98 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Balcon</li><li>Jardin</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Résidence Exemple – 4,5 pièces · Rez-de-jardin\nAppartement neuf de la Résidence Exemple, rez-de-jardin, balcon de 19 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n4,5 pièces\n\n98 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nBalcon\n\nJardin\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "92527c6a-8804-4f60-a197-4a0b3e0cbf34",
+      "slug": "residence-exemple-4-5-pieces-2e-etage-92527c6a-8804-4f60-a197-4a0b3e0cbf34",
+      "title": "Résidence Exemple – 4,5 pièces · 2e étage",
+      "offer_type": "buy",
+      "property_type": "apartment",
+      "status": "available",
+      "price": 1425000,
+      "currency": "CHF",
+      "rooms": 4.5,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "living_surface": 108,
+      "address": {
+        "street": "Chemin de l'Exemple 4",
+        "postcode": "1110",
+        "city": "Morges",
+        "country": "CH",
+        "lat": 46.5131,
+        "lng": 6.4952
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6121_1.jpg",
+          "alt": "4,5 pièces · 2e étage"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6164.jpg",
+          "alt": "4,5 pièces · 2e étage"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6170.jpg",
+          "alt": "4,5 pièces · 2e étage"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6143.jpg",
+          "alt": "4,5 pièces · 2e étage"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6269.jpg",
+          "alt": "4,5 pièces · 2e étage"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260810104328_0425_D.jpg",
+          "alt": "4,5 pièces · 2e étage"
+        }
+      ],
+      "agent": {
+        "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+        "first_name": "Léa",
+        "last_name": "Exemple",
+        "title": "Directrice",
+        "phone": "+41000000001",
+        "email": "lea.exemple@example.com",
+        "languages": [
+          "fr",
+          "en",
+          "de"
+        ],
+        "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "elevator",
+        "balcony",
+        "parking"
+      ],
+      "published_at": "2026-09-25T00:00:00.000Z",
+      "reference": "DEMO-0009",
+      "description": "<p><strong>Résidence Exemple – 4,5 pièces · 2e étage</strong></p><p>Appartement neuf de la Résidence Exemple, 2e étage, balcon de 10 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>4,5 pièces</li><li>108 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Résidence Exemple – 4,5 pièces · 2e étage\nAppartement neuf de la Résidence Exemple, 2e étage, balcon de 10 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n4,5 pièces\n\n108 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    },
+    {
+      "id": "e9f9212b-01cd-4ffb-b452-9966dafb4711",
+      "slug": "residence-exemple-3-5-pieces-attique-e9f9212b-01cd-4ffb-b452-9966dafb4711",
+      "title": "Résidence Exemple – 3,5 pièces · Attique",
+      "offer_type": "buy",
+      "property_type": "apartment",
+      "status": "available",
+      "price": 1495000,
+      "currency": "CHF",
+      "rooms": 3.5,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "living_surface": 102,
+      "address": {
+        "street": "Chemin de l'Exemple 4",
+        "postcode": "1110",
+        "city": "Morges",
+        "country": "CH",
+        "lat": 46.5131,
+        "lng": 6.4952
+      },
+      "photos": [
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6143.jpg",
+          "alt": "3,5 pièces · Attique"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6269.jpg",
+          "alt": "3,5 pièces · Attique"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/DJI_20260810104328_0425_D.jpg",
+          "alt": "3,5 pièces · Attique"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6074.jpg",
+          "alt": "3,5 pièces · Attique"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6105.jpg",
+          "alt": "3,5 pièces · Attique"
+        },
+        {
+          "url": "https://storage.googleapis.com/img.realadvisor.ch/040A6121_1.jpg",
+          "alt": "3,5 pièces · Attique"
+        }
+      ],
+      "agent": {
+        "id": "16d72c72-d541-415f-9839-2b4572d0dfdc",
+        "first_name": "Léa",
+        "last_name": "Exemple",
+        "title": "Directrice",
+        "phone": "+41000000001",
+        "email": "lea.exemple@example.com",
+        "languages": [
+          "fr",
+          "en",
+          "de"
+        ],
+        "bio": "Léa Exemple dirige Demo Agency. Elle accompagne vendeurs et acheteurs de l'estimation à la signature, avec un suivi personnel à chaque étape.",
+        "team_ids": [
+          "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+        ]
+      },
+      "features": [
+        "elevator",
+        "balcony",
+        "parking"
+      ],
+      "published_at": "2026-09-16T00:00:00.000Z",
+      "reference": "DEMO-0010",
+      "description": "<p><strong>Résidence Exemple – 3,5 pièces · Attique</strong></p><p>Appartement neuf de la Résidence Exemple, attique, balcon de 32 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>3,5 pièces</li><li>102 m² habitables</li><li>2 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
+      "description_text": "Résidence Exemple – 3,5 pièces · Attique\nAppartement neuf de la Résidence Exemple, attique, balcon de 32 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n3,5 pièces\n\n102 m² habitables\n\n2 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
+      "team_ids": [
+        "cca1bc21-4cc4-4f79-9f21-8853c4661e14"
+      ]
+    }
+  ],
+  "legal": {
+    "company_name": "Demo Agency SA",
+    "registration_number": "CHE-000.000.000",
+    "representative": "Léa Exemple"
+  }
+}

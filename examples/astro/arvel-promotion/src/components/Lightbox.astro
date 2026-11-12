@@ -1,0 +1,32 @@
+---
+/** One lightbox dialog for every [data-lightbox] link of the page. */
+---
+<dialog class="lb" data-lightbox-dialog aria-label="Photo">
+  <div class="lb-inner">
+    <div class="lb-media" data-lb-media></div>
+    <p class="lb-cap" data-lb-cap></p>
+    <button type="button" class="lb-btn lb-close" data-lb-close>Fermer</button>
+    <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Photo précédente">←</button>
+    <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Photo suivante">→</button>
+  </div>
+</dialog>
+<script>
+  import '../scripts/lightbox';
+</script>
+<style>
+  .lb { border: 0; padding: 0; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; background: rgb(7 14 20 / 0.97); color: var(--text); }
+  .lb::backdrop { background: rgb(7 14 20 / 0.9); }
+  .lb-inner { position: relative; width: 100%; height: 100%; display: grid; grid-template-rows: 1fr auto; place-items: center; padding: 64px 72px 24px; }
+  .lb-media { width: 100%; height: 100%; min-height: 0; display: grid; place-items: center; }
+  .lb-media :global(img) { max-width: 100%; max-height: 100%; object-fit: contain; width: auto; height: auto; }
+  .lb-cap { margin: 14px 0 0; font-size: var(--fs-small); color: var(--muted); }
+  .lb-btn { position: absolute; min-width: 48px; height: 48px; padding: 0 16px; border: 1px solid var(--line-strong); background: rgb(7 14 20 / 0.6); color: var(--text); cursor: pointer; font-size: 0.8125rem; letter-spacing: 0.16em; text-transform: uppercase; }
+  .lb-btn:hover { background: var(--text); color: var(--brand); }
+  .lb-close { top: 12px; right: 12px; }
+  .lb-prev { left: 12px; top: 50%; transform: translateY(-50%); font-size: 1.25rem; }
+  .lb-next { right: 12px; top: 50%; transform: translateY(-50%); font-size: 1.25rem; }
+  @media (max-width: 640px) {
+    .lb-inner { padding: 64px 8px 80px; }
+    .lb-prev, .lb-next { top: auto; bottom: 16px; transform: none; }
+  }
+</style>

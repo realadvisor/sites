@@ -1,0 +1,58 @@
+.site-header {
+  position: fixed; inset: 0 0 auto; z-index: 40; color: var(--text);
+  background: linear-gradient(to bottom, rgb(7 14 20 / 0.62), rgb(7 14 20 / 0));
+}
+@supports not (animation-timeline: scroll()) {
+  .site-header { background: rgb(14 26 36 / 0.94); border-bottom: 1px solid var(--line); }
+}
+@supports (animation-timeline: scroll()) {
+  .site-header { animation: solidify linear both; animation-timeline: scroll(root); animation-range: 0 32vh; }
+  @keyframes solidify {
+    to { background-color: rgb(14 26 36 / 0.96); box-shadow: 0 1px 0 var(--line); }
+  }
+}
+.site-header .sh-bar {
+  height: var(--header-h); display: flex; align-items: center; gap: 40px;
+  max-width: none; padding-inline: var(--gutter);
+}
+.site-header .sh-home { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; margin-right: auto; }
+.site-header .sh-nav ul { display: flex; gap: 36px; list-style: none; margin: 0; padding: 0; }
+.site-header .sh-nav a, .site-header .sh-cta {
+  font: 500 0.75rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+  display: inline-flex; align-items: center; min-height: 44px; position: relative;
+}
+.site-header .sh-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease); }
+.site-header .sh-nav a:hover::after, .site-header .sh-nav a[aria-current='page']::after { transform: scaleX(1); }
+.site-header .sh-cta { padding: 0 20px; border: 1px solid var(--line-strong); min-height: 44px; transition: background 0.3s, color 0.3s; }
+.site-header .sh-cta:hover { background: var(--text); color: var(--brand); }
+.site-header .sh-burger { display: none; width: 48px; height: 48px; margin-right: -10px; border: 0; background: none; cursor: pointer; position: relative; z-index: 2; }
+.site-header .sh-lines, .site-header .sh-lines::before, .site-header .sh-lines::after { position: absolute; left: 12px; right: 12px; height: 1.5px; background: currentColor; transition: transform 0.35s var(--ease), opacity 0.2s; }
+.site-header .sh-lines { top: 50%; }
+.site-header .sh-lines::before { content: ''; left: 0; right: 0; transform: translateY(-7px); }
+.site-header .sh-lines::after { content: ''; left: 0; right: 0; transform: translateY(7px); }
+.site-header.is-open .sh-lines { background: transparent; }
+.site-header.is-open .sh-lines::before { transform: rotate(45deg); }
+.site-header.is-open .sh-lines::after { transform: rotate(-45deg); }
+
+.site-header .sh-menu {
+  position: fixed; inset: 0; z-index: 1; background: var(--ink-1);
+  visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.35s var(--ease), visibility 0s linear 0.35s;
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.site-header.is-open .sh-menu { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.35s var(--ease); }
+.site-header .sh-menu-inner { padding: calc(var(--header-h) + 32px) var(--gutter) 48px; display: grid; gap: 40px; }
+.site-header .sh-menu ul { list-style: none; margin: 0; padding: 0; }
+.site-header .sh-menu-programmes { display: grid; gap: 6px; }
+.site-header .sh-menu-programmes a { display: grid; gap: 4px; padding: 14px 0; text-decoration: none; border-bottom: 1px solid var(--line); }
+.site-header .sh-menu-h { margin: 0 0 12px; font-size: var(--fs-small); color: var(--muted); }
+.site-header .sh-mp-title { font: 500 2rem / 1.05 var(--serif); }
+.site-header .sh-mp-city { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.site-header .sh-menu-links { display: grid; gap: 4px; }
+.site-header .sh-menu-links a { display: inline-flex; min-height: 44px; align-items: center; font-size: 0.8125rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; }
+.site-header.is-open { background: transparent; animation: none; box-shadow: none; }
+
+@media (max-width: 960px) {
+  .site-header .sh-nav, .site-header .sh-cta { display: none; }
+  .site-header .sh-burger { display: block; }
+}
+html.menu-lock { overflow: hidden; }

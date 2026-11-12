@@ -1,0 +1,24 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. Language from the URL.
+export const prerender = false;
+import { localeOfPath, t } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import { loadSite } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { c } from '../lib/copy';
+
+const l: L = localeOfPath(Astro.originPathname ?? Astro.url.pathname).startsWith('de') ? 'de' : 'it';
+const site = await loadSite();
+const title = t('notFound', {}, l);
+---
+<Site site={site} l={l} route="404" title={`${title} | ${site.dev.title}`} description={title} noindex>
+  <div class="wrap nf">
+    <h1 class="h1">{title}</h1>
+    <p class="lede">{t('notFoundText', {}, l)}</p>
+    <p class="actions"><a class="btn" href={href('units', l)}>{c('units', l)}</a> <a class="link" href={href('home', l)}>{site.dev.title}</a></p>
+  </div>
+</Site>
+<style>
+  .nf { display: grid; gap: 24px; padding-block: clamp(64px, 10vw, 160px); }
+  .actions { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
+</style>

@@ -1,0 +1,318 @@
+---
+/**
+ * Home: full-bleed hero photo of the highest-priced house for sale (static,
+ * no carousel) with the offices' cities as the headline and live counts;
+ * new listings; one tall tile per destination; one listing full-bleed; the
+ * rentals as a plain list; selling on black with recent sales; the journal.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { siteData, sites } from '../lib/data';
+import { href, listingHref, type L } from '../lib/routes';
+import { cityName, joinList, tx } from '../lib/copy';
+import { dateLong, price } from '../lib/format';
+import { destinations } from '../lib/regions';
+import { placeOf } from '../content/places';
+import { POSTS } from '../content/journal';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams }, all] = await Promise.all([siteData(), sites.allListings()]);
+const available = all.filter((x) => x.status === 'available');
+const forSale = available.filter((x) => x.offer_type === 'buy');
+const toRent = available.filter((x) => x.offer_type === 'rent');
+const sold = all.filter((x) => x.status === 'sold');
+const byPrice = [...forSale].filter((x) => x.photos.length && x.price && !x.price_on_request).sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+const hero = byPrice[0] ?? available.find((x) => x.photos.length);
+const dests = destinations(teams, all);
+// The full-bleed feature: the most expensive house of another office than the hero's.
+const feature = byPrice.find((x) => hero && !x.team_ids.some((id) => hero.team_ids.includes(id)) && x.photos.length);
+// Newest first, taken in turn from each office so one destination does not fill the grid.
+const pool = forSale.filter((x) => x.id !== hero?.id && x.id !== feature?.id);
+const queues = teams.map((tm) => pool.filter((x) => x.team_ids.includes(tm.id)));
+const latest: typeof pool = [];
+for (let i = 0; latest.length < 6 && queues.some((q) => q.length > i); i++) for (const q of queues) if (q[i] && latest.length < 6) latest.push(q[i]!);
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+
+const C = {
+  en: {
+    title: `Houses and apartments in ${cities}`,
+    forSale: (n: number) => `${n} for sale`,
+    toRent: (n: number) => `${n} to rent`,
+    offices: (n: number) => `${n} ${n === 1 ? 'office' : 'offices'}`,
+    seeSale: 'Properties for sale',
+    newest: 'New to the market',
+    allSale: (n: number) => `All ${n} properties for sale`,
+    dest: 'Destinations',
+    props: (n: number) => `${n} ${n === 1 ? 'property' : 'properties'}`,
+    viewHouse: 'View the property',
+    rent: 'To rent',
+    rentLede: 'Furnished seasonal lets in Gstaad and on the peninsula, and apartments in Geneva on long leases. Prices are per month.',
+    allRent: 'All rentals',
+    sellTitle: `Selling a house in ${cities}`,
+    sellText: 'An agent from the office nearest to your house visits it, tells you what it would sell for and how we would market it. There is no charge for the valuation.',
+    recent: 'Recently sold',
+    journal: 'Journal',
+    allPosts: 'All articles',
+  },
+  fr: {
+    title: `Maisons et appartements à ${cities}`,
+    forSale: (n: number) => `${n} à vendre`,
+    toRent: (n: number) => `${n} à louer`,
+    offices: (n: number) => `${n} ${n === 1 ? 'bureau' : 'bureaux'}`,
+    seeSale: 'Biens à vendre',
+    newest: 'Nouveaux sur le marché',
+    allSale: (n: number) => `Les ${n} biens à vendre`,
+    dest: 'Destinations',
+    props: (n: number) => `${n} ${n === 1 ? 'bien' : 'biens'}`,
+    viewHouse: 'Voir le bien',
+    rent: 'À louer',
+    rentLede: 'Locations saisonnières meublées à Gstaad et sur la presqu’île, appartements à Genève en bail longue durée. Loyers mensuels.',
+    allRent: 'Toutes les locations',
+    sellTitle: `Vendre une maison à ${cities}`,
+    sellText: 'Un agent du bureau le plus proche visite votre maison, vous dit à quel prix elle se vendrait et comment nous la présenterions. L’estimation est gratuite.',
+    recent: 'Vendus récemment',
+    journal: 'Journal',
+    allPosts: 'Tous les articles',
+  },
+}[l];
+const heroPhoto = hero?.photos[0];
+const figures = [forSale.length ? C.forSale(forSale.length) : '', toRent.length ? C.toRent(toRent.length) : '', C.offices(teams.length)].filter(Boolean);
+---
+<Site l={l} route="home" overlay title={`${org.name} | ${C.title}`} description={`${org.name}: ${figures.join(', ')}. ${C.title}.`}
+  image={heroPhoto && img(heroPhoto.url, { w: 1200, h: 630 })} jsonLd={agencyJsonLd({ id: org.id, name: org.name, phone: teams[0]?.phone, email: teams[0]?.email, address: org.address }, new URL('/', Astro.site ?? Astro.url).href)}>
+  <section class="hero on-ink" data-hero>
+    {heroPhoto && (
+      <RaImage src={heroPhoto} alt={heroPhoto.alt || hero!.title} width={1600} height={900} priority sizes="100vw"
+        mobile={{ width: 800, height: 1100 }} class="hero__img" />
+    )}
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="wrap hero__in">
+      <div class="hero__text">
+        <h1 class="hero__title">{C.title}</h1>
+        <p class="hero__figures label">{figures.join(' · ')}</p>
+        <div class="hero__ctas">
+          {forSale.length > 0 && <a class="cta cta--light" href={href('buy', l)}>{C.seeSale}</a>}
+          <a class="cta cta--outline-light" href={href('sell', l)}>{t('valuation')}</a>
+        </div>
+      </div>
+      {hero && (
+        <a class="hero__cap" href={listingHref(hero, l)}>
+          <span>{hero.title}</span>
+          <span class="num">{price(hero, l)}</span>
+        </a>
+      )}
+    </div>
+  </section>
+
+  {latest.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="head">
+          <h2 class="h2">{C.newest}</h2>
+          <a class="link" href={href('buy', l)}>{C.allSale(forSale.length)}</a>
+        </div>
+        <ul class="plain grid3">
+          {latest.map((x) => <li><ListingCard listing={x} l={l} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {dests.length > 1 && (
+    <section class="dests section--tight" aria-labelledby="dest-h">
+      <div class="wrap">
+        <h2 id="dest-h" class="h2 dests__h">{C.dest}</h2>
+        <ul class="plain dests__grid" style={`--n:${dests.length}`}>
+          {dests.map((d) => {
+            const p = placeOf(d.slug);
+            const photo = p?.photos[0] ? { url: p.photos[0].url, alt: p.photos[0].alt[l] } : d.available[0]?.photos[0];
+            return (
+              <li>
+                <a class="dest" href={href('destinations', l, d.slug)}>
+                  {photo && <RaImage src={photo} alt={photo.alt} width={640} height={860} sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw" />}
+                  <span class="dest__text">
+                    <span class="dest__name">{cityName(d.team.address.city, l) || d.team.name}</span>
+                    <span class="dest__count">{C.props(d.available.length)}</span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {feature && (
+    <section class="feature on-ink">
+      <RaImage src={feature.photos[0]} alt={feature.photos[0]!.alt || feature.title} width={1600} height={800} sizes="100vw" mobile={{ width: 800, height: 1000 }} class="feature__img" />
+      <div class="feature__scrim" aria-hidden="true"></div>
+      <div class="wrap feature__in">
+        <p class="feature__place">{cityName(feature.address.city, l)}</p>
+        <h2 class="feature__title">{feature.title}</h2>
+        <p class="feature__price num">{price(feature, l)}</p>
+        <a class="cta cta--light" href={listingHref(feature, l)}>{C.viewHouse}</a>
+      </div>
+    </section>
+  )}
+
+  {toRent.length > 0 && (
+    <section class="section rent">
+      <div class="wrap rent__grid">
+        <div>
+          <h2 class="h2">{C.rent}</h2>
+          <p class="lede">{C.rentLede}</p>
+          <a class="link rent__all" href={href('rent', l)}>{C.allRent}</a>
+        </div>
+        <ul class="plain rent__list">
+          {toRent.slice(0, 4).map((x) => (
+            <li>
+              <a href={listingHref(x, l)} class="row">
+                {x.photos[0] && <RaImage src={x.photos[0]} alt="" width={300} height={225} sizes="150px" widths={[300, 450]} class="row__img" />}
+                <span class="row__text">
+                  <span class="row__place">{cityName(x.address.city, l)}</span>
+                  <span class="row__title">{x.title}</span>
+                </span>
+                <span class="row__price num">{price(x, l)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="sell on-ink section">
+    <div class="wrap sell__grid">
+      <div class="sell__text">
+        <h2 class="h2">{C.sellTitle}</h2>
+        <p class="lede">{C.sellText}</p>
+        <a class="cta cta--gold" href={href('sell', l)}>{t('valuation')}</a>
+      </div>
+      {sold.length > 0 && (
+        <div class="sell__sold">
+          <h3 class="sell__h label">{C.recent}</h3>
+          <ul class="plain">
+            {sold.slice(0, 4).map((x) => (
+              <li><a href={listingHref(x, l)}><span>{x.title}</span><span class="muted-ink">{cityName(x.address.city, l)}</span></a></li>
+            ))}
+          </ul>
+          <a class="link" href={href('sold', l)}>{t('navSold')}</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="h2">{C.journal}</h2>
+        <a class="link" href={href('journal', l)}>{C.allPosts}</a>
+      </div>
+      <ul class="plain posts">
+        {POSTS.map((p) => (
+          <li>
+            <a class="post" href={href('journal', l, p.slug)}>
+              <RaImage src={p.cover.url} alt={p.cover.alt[l]} width={720} height={480} sizes="(min-width: 1024px) 30vw, 100vw" />
+              <time datetime={p.date} class="post__date">{dateLong(p.date, l)}</time>
+              <h3 class="post__title">{p.title[l]}</h3>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .hero { position: relative; min-height: clamp(640px, 100svh, 940px); display: flex; align-items: flex-end; overflow: hidden; }
+  .hero :global(.hero__img), .hero :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero :global(.hero__img) { object-fit: cover; }
+  .hero__scrim { position: absolute; inset: 0; background:
+    linear-gradient(180deg, rgb(10 9 8 / 0.55) 0, rgb(10 9 8 / 0) 200px),
+    linear-gradient(0deg, rgb(10 9 8 / 0.78) 0, rgb(10 9 8 / 0.35) 45%, rgb(10 9 8 / 0) 75%); }
+  .hero__in { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding-bottom: clamp(36px, 6vw, 72px); }
+  .hero__text { max-width: 980px; }
+  .hero__title { font-size: clamp(2.5rem, 1.5rem + 3.6vw, 4.6rem); line-height: 1.04; letter-spacing: -0.015em; font-weight: 420; }
+  .hero__figures { margin-top: 22px; color: var(--on-ink); opacity: 0.92; }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .hero__cap { display: grid; gap: 2px; text-align: right; text-decoration: none; font-size: 0.875rem; max-width: 300px; padding-bottom: 6px; }
+  .hero__cap span:first-child { color: var(--on-ink-muted); }
+  .hero__cap span:last-child { font-weight: 600; }
+  .hero__cap:hover span:first-child { text-decoration: underline; }
+  @media (max-width: 767px) {
+    .hero { min-height: min(100svh, 760px); }
+    .hero__in { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .hero__cap { text-align: left; }
+    .hero__ctas .cta { flex: 1 1 auto; }
+  }
+
+  .head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px; margin-bottom: clamp(28px, 4vw, 48px); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+  @media (max-width: 1023px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+
+  .dests { padding-top: 0; }
+  .dests__h { margin-bottom: clamp(28px, 4vw, 48px); }
+  .dests__grid { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 12px; }
+  .dest { position: relative; display: block; aspect-ratio: 4 / 5.4; overflow: hidden; color: var(--on-ink); text-decoration: none; background: var(--ink); }
+  .dest :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  .dest:hover :global(img) { transform: scale(1.03); }
+  .dest::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(10 9 8 / 0.72), rgb(10 9 8 / 0) 50%); }
+  .dest__text { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 22px; display: grid; gap: 4px; }
+  .dest__name { font: 420 clamp(1.75rem, 1.2rem + 1.6vw, 2.6rem)/1.05 var(--font-display); }
+  .dest__count { font-size: 0.9375rem; }
+  @media (max-width: 767px) {
+    .dests__grid { grid-template-columns: minmax(0, 1fr); }
+    .dest { aspect-ratio: 4 / 3; }
+  }
+
+  .feature { position: relative; min-height: clamp(560px, 80vh, 820px); display: flex; align-items: flex-end; overflow: hidden; }
+  .feature :global(.feature__img), .feature :global(picture) { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .feature :global(.feature__img) { object-fit: cover; }
+  .feature__scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(10 9 8 / 0.78) 0, rgb(10 9 8 / 0.25) 50%, rgb(10 9 8 / 0) 75%); }
+  .feature__in { position: relative; padding-bottom: clamp(40px, 6vw, 72px); display: grid; justify-items: start; gap: 8px; }
+  .feature__place { font-size: 0.9375rem; color: var(--on-ink-muted); }
+  .feature__title { font-size: var(--step-3); max-width: 20ch; }
+  .feature__price { font-size: 1.125rem; font-weight: 600; margin-bottom: 18px; }
+
+  .rent__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); }
+  .rent .lede { margin-top: 18px; font-size: 1.0625rem; }
+  .rent__all { display: inline-block; margin-top: 24px; }
+  .rent__list { border-top: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; align-items: center; gap: 24px; padding-block: 18px; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .row :global(.row__img) { width: 150px; aspect-ratio: 4 / 3; object-fit: cover; }
+  .row__text { display: grid; gap: 4px; }
+  .row__place { font-size: 0.875rem; color: var(--muted); }
+  .row__title { font: 420 1.25rem/1.25 var(--font-display); }
+  .row:hover .row__title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; }
+  .row__price { font-weight: 600; }
+  @media (max-width: 899px) { .rent__grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 599px) {
+    .row { grid-template-columns: 104px minmax(0, 1fr); gap: 4px 16px; }
+    .row :global(.row__img) { width: 104px; grid-row: span 2; }
+    .row__price { grid-column: 2; font-size: 0.9375rem; }
+  }
+
+  .sell__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 7vw, 120px); align-items: start; }
+  .sell__text .lede { margin-block: 20px 32px; }
+  .sell__h { color: var(--accent-on-ink); margin-bottom: 12px; font-family: var(--font-sans); }
+  .sell__sold ul { border-top: 1px solid var(--line-on-ink); margin-bottom: 24px; }
+  .sell__sold a:not(.link) { display: flex; justify-content: space-between; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line-on-ink); text-decoration: none; }
+  .sell__sold a:not(.link):hover span:first-child { text-decoration: underline; }
+  .muted-ink { color: var(--on-ink-muted); white-space: nowrap; }
+  @media (max-width: 899px) { .sell__grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+  .post { display: grid; gap: 10px; text-decoration: none; }
+  .post :global(img) { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 8px; }
+  .post__date { font-size: 0.875rem; color: var(--muted); }
+  .post__title { font-size: 1.375rem; line-height: 1.25; }
+  .post:hover .post__title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; }
+  @media (max-width: 899px) { .posts { grid-template-columns: minmax(0, 1fr); } }
+</style>

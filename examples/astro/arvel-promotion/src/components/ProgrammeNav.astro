@@ -1,0 +1,52 @@
+---
+/** Sticky section bar of one programme: its pages and the enquiry. */
+import type { Development } from '@realadvisor/sites-sdk/types';
+import { programmeUrl } from '../lib/fr';
+
+interface Props { programme: Development; section?: string }
+const { programme: d, section } = Astro.props;
+const items = [
+  { key: 'home', href: programmeUrl(d), label: 'Présentation' },
+  { key: 'units', href: programmeUrl(d, 'logements'), label: 'Logements' },
+  { key: 'situation', href: programmeUrl(d, 'situation'), label: 'Situation' },
+  { key: 'gallery', href: programmeUrl(d, 'galerie'), label: 'Galerie' },
+  { key: 'documents', href: programmeUrl(d, 'documents'), label: 'Documents' },
+];
+---
+<nav class="pnav" aria-label={`${d.title} : sections`}>
+  <div class="inner">
+    <a class="pname" href={programmeUrl(d)}>{d.title}<span>{d.address.city}</span></a>
+    <ul>
+      {items.map((i) => (
+        <li><a href={i.href} aria-current={section === i.key ? 'page' : undefined}>{i.label}</a></li>
+      ))}
+    </ul>
+    <a class="pcta" href={`${programmeUrl(d)}#contact`}>Être rappelé</a>
+  </div>
+</nav>
+<style>
+  .pnav {
+    position: sticky; top: var(--header-h); z-index: 30;
+    background: rgb(10 19 27 / 0.97); border-block: 1px solid var(--line);
+  }
+  .inner { height: var(--subnav-h); display: flex; align-items: center; gap: 32px; padding-inline: var(--gutter); }
+  .pname { display: inline-flex; align-items: baseline; gap: 12px; font: 500 1.25rem / 1 var(--serif); text-decoration: none; white-space: nowrap; margin-right: auto; }
+  .pname span { font: 500 0.6875rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  ul a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none;
+    font: 500 0.75rem / 1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap;
+    box-shadow: inset 0 -1px 0 transparent; transition: color 0.2s;
+  }
+  ul a:hover { color: var(--text); }
+  ul a[aria-current='page'] { color: var(--text); box-shadow: inset 0 -2px 0 var(--brass); }
+  .pcta { font: 500 0.75rem / 1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; background: var(--text); color: var(--brand); white-space: nowrap; margin-left: auto; }
+  @media (max-width: 1100px) { .pname span { display: none; } }
+  @media (max-width: 860px) {
+    .pname, .pcta { display: none; }
+    .inner { padding-inline: 0; }
+    ul { overflow-x: auto; scrollbar-width: none; padding-inline: calc(var(--gutter) - 14px); width: 100%; scroll-snap-type: x proximity; }
+    ul::-webkit-scrollbar { display: none; }
+    ul li { scroll-snap-align: start; }
+  }
+</style>

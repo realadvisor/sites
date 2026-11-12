@@ -1,0 +1,11 @@
+{
+  // Cloudflare Worker for this site. `pnpm build` writes build/server (the Worker) and build/client (static files).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "casa-de-les-rajoles-react",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "observability": { "enabled": true },
+  // Non-secret config. SITES_API_KEY is a secret: `wrangler secret put SITES_API_KEY`, never here.
+  "vars": {}
+}

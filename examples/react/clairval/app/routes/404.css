@@ -1,0 +1,2 @@
+.nf { min-height: 60vh; display: grid; align-content: center; gap: 20px; padding-block: var(--section); }
+.nf__links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }

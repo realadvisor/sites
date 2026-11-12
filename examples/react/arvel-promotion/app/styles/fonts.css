@@ -1,0 +1,15 @@
+/* Cormorant Garamond 500 (SIL OFL, from @fontsource), digits frozen to lining figures: scripts/freeze-fonts.py */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-500-normal-lf.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-500-italic-lf.woff2') format('woff2');
+}

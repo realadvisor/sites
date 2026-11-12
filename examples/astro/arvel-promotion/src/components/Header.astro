@@ -1,0 +1,138 @@
+---
+/**
+ * Fixed header over the page: transparent with a scrim over the hero, solid
+ * once the page scrolls (CSS scroll timeline, no JS). Mobile: a full-screen
+ * menu (button with aria-expanded, Escape and link click close it, body
+ * scroll locked while open).
+ */
+import type { Development } from '@realadvisor/sites-sdk/types';
+import { programmeUrl, PROGRAMMES_PATH } from '../lib/fr';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  name: string;
+  programmes: Pick<Development, 'slug' | 'title' | 'address'>[];
+  current?: string;
+}
+const { name, programmes, current } = Astro.props;
+const links = [
+  { href: PROGRAMMES_PATH, label: 'Nos programmes', key: 'programmes' },
+  { href: '/a-propos', label: 'À propos', key: 'about' },
+];
+---
+<header class="site-header" data-header>
+  <div class="bar">
+    <a class="home" href="/" aria-label={`${name}, accueil`}><Wordmark name={name} /></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        {links.map((l) => <li><a href={l.href} aria-current={current === l.key ? 'page' : undefined}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="cta" href="/contact" aria-current={current === 'contact' ? 'page' : undefined}>Nous contacter</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+      <span class="sr-only">Menu</span>
+      <span class="lines" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="menu" id="menu" data-menu>
+    <nav aria-label="Menu" class="menu-inner">
+      <p class="menu-h">Nos programmes</p>
+      <ul class="menu-programmes">
+        {programmes.map((d) => (
+          <li><a href={programmeUrl(d)}><span class="mp-title">{d.title}</span><span class="mp-city">{d.address.city}</span></a></li>
+        ))}
+      </ul>
+      <ul class="menu-links">
+        <li><a href={PROGRAMMES_PATH}>Tous nos programmes</a></li>
+        <li><a href="/a-propos">À propos</a></li>
+        <li><a href="/contact">Nous contacter</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const button = header?.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const menu = header?.querySelector<HTMLElement>('[data-menu]');
+  if (header && button && menu) {
+    const set = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('is-open', open);
+      document.documentElement.classList.toggle('menu-lock', open);
+      if (open) menu.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+    button.addEventListener('click', () => set(button.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) set(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.classList.contains('is-open')) {
+        set(false);
+        button.focus();
+      }
+    });
+    matchMedia('(min-width: 961px)').addEventListener('change', (e) => e.matches && set(false));
+  }
+</script>
+
+<style>
+  .site-header {
+    position: fixed; inset: 0 0 auto; z-index: 40; color: var(--text);
+    background: linear-gradient(to bottom, rgb(7 14 20 / 0.62), rgb(7 14 20 / 0));
+  }
+  @supports not (animation-timeline: scroll()) {
+    .site-header { background: rgb(14 26 36 / 0.94); border-bottom: 1px solid var(--line); }
+  }
+  @supports (animation-timeline: scroll()) {
+    .site-header { animation: solidify linear both; animation-timeline: scroll(root); animation-range: 0 32vh; }
+    @keyframes solidify {
+      to { background-color: rgb(14 26 36 / 0.96); box-shadow: 0 1px 0 var(--line); }
+    }
+  }
+  .bar {
+    height: var(--header-h); display: flex; align-items: center; gap: 40px;
+    max-width: none; padding-inline: var(--gutter);
+  }
+  .home { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; margin-right: auto; }
+  .nav ul { display: flex; gap: 36px; list-style: none; margin: 0; padding: 0; }
+  .nav a, .cta {
+    font: 500 0.75rem / 1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; min-height: 44px; position: relative;
+  }
+  .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease); }
+  .nav a:hover::after, .nav a[aria-current='page']::after { transform: scaleX(1); }
+  .cta { padding: 0 20px; border: 1px solid var(--line-strong); min-height: 44px; transition: background 0.3s, color 0.3s; }
+  .cta:hover { background: var(--text); color: var(--brand); }
+  .burger { display: none; width: 48px; height: 48px; margin-right: -10px; border: 0; background: none; cursor: pointer; position: relative; z-index: 2; }
+  .lines, .lines::before, .lines::after { position: absolute; left: 12px; right: 12px; height: 1.5px; background: currentColor; transition: transform 0.35s var(--ease), opacity 0.2s; }
+  .lines { top: 50%; }
+  .lines::before { content: ''; left: 0; right: 0; transform: translateY(-7px); }
+  .lines::after { content: ''; left: 0; right: 0; transform: translateY(7px); }
+  .is-open .lines { background: transparent; }
+  .is-open .lines::before { transform: rotate(45deg); }
+  .is-open .lines::after { transform: rotate(-45deg); }
+
+  .menu {
+    position: fixed; inset: 0; z-index: 1; background: var(--ink-1);
+    visibility: hidden; pointer-events: none; opacity: 0; transition: opacity 0.35s var(--ease), visibility 0s linear 0.35s;
+    overflow-y: auto; overscroll-behavior: contain;
+  }
+  .is-open .menu { visibility: visible; pointer-events: auto; opacity: 1; transition: opacity 0.35s var(--ease); }
+  .menu-inner { padding: calc(var(--header-h) + 32px) var(--gutter) 48px; display: grid; gap: 40px; }
+  .menu ul { list-style: none; margin: 0; padding: 0; }
+  .menu-programmes { display: grid; gap: 6px; }
+  .menu-programmes a { display: grid; gap: 4px; padding: 14px 0; text-decoration: none; border-bottom: 1px solid var(--line); }
+  .menu-h { margin: 0 0 12px; font-size: var(--fs-small); color: var(--muted); }
+  .mp-title { font: 500 2rem / 1.05 var(--serif); }
+  .mp-city { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .menu-links { display: grid; gap: 4px; }
+  .menu-links a { display: inline-flex; min-height: 44px; align-items: center; font-size: 0.8125rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; }
+  .is-open { background: transparent; animation: none; box-shadow: none; }
+
+  @media (max-width: 960px) {
+    .nav, .cta { display: none; }
+    .burger { display: block; }
+  }
+  :global(html.menu-lock) { overflow: hidden; }
+</style>

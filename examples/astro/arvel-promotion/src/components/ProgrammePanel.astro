@@ -1,0 +1,81 @@
+---
+/**
+ * One programme as a full-bleed cinematic panel (home): photo, status tag,
+ * title, the first paragraph and three facts computed
+ * from the data.
+ */
+import type { Development } from '@realadvisor/sites-sdk/types';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { contentFor } from '../content/programmes';
+import { deliveryShort, plural, priceFrom, programmeStatus, programmeUrl, typeRange } from '../lib/fr';
+
+interface Props { programme: Development; index: number }
+const { programme: d, index } = Astro.props;
+const c = contentFor(d.slug);
+
+const photo = d.photos[c.hero ?? 0] ?? d.photos[0];
+const intro = d.description_text?.split(/\n\s*\n/)[0];
+const status = programmeStatus(d);
+const facts = [
+  { label: 'Typologies', value: typeRange(d.stats.rooms) },
+  { label: d.status === 'delivered' ? 'Livraison' : 'Livraison prévue', value: deliveryShort(d) },
+  { label: d.stats.available ? 'Disponibles' : 'Logements', value: d.stats.available ? `${d.stats.available} / ${d.stats.units}` : String(d.stats.units) },
+].filter((f) => f.value);
+const from = d.stats.available ? priceFrom(d) : '';
+---
+<article class:list={['panel', index % 2 ? 'panel--right' : 'panel--left']} aria-labelledby={`p-${d.slug}`}>
+  <div class="media parallax">
+    {photo && <RaImage src={photo} alt={photo.alt || d.title} width={1600} height={1000} mobile={{ width: 800, height: 800 }} sizes="100vw" />}
+  </div>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="body wrap">
+    <div class="card reveal">
+      <div class="meta">
+        {status && <span class="tag" data-status={d.status}>{status}</span>}
+        <span class="city">{d.address.city}</span>
+      </div>
+      <h3 id={`p-${d.slug}`} class="title">
+        <a href={programmeUrl(d)}>{d.title}</a>
+      </h3>
+      {intro && <p class="intro">{intro}</p>}
+      <dl class="facts">
+        {facts.map((f) => <div><dt>{f.label}</dt><dd class="num">{f.value}</dd></div>)}
+      </dl>
+      <div class="actions">
+        <a class="button button--solid" href={programmeUrl(d)} aria-label={`Découvrir ${d.title}`}>Découvrir</a>
+        {d.stats.units > 0 && <a class="link" href={programmeUrl(d, 'logements')}>{d.stats.available ? plural(d.stats.available, 'logement disponible', 'logements disponibles') : 'Voir les logements'}</a>}
+      </div>
+      {from && <p class="from num">{from}</p>}
+    </div>
+  </div>
+</article>
+<style>
+  .panel { position: relative; isolation: isolate; min-height: 112svh; display: grid; align-items: end; overflow: hidden; }
+  .media, .scrim { position: absolute; inset: 0; }
+  .media { z-index: -2; overflow: hidden; }
+  .media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .scrim { z-index: -1; background: linear-gradient(to top, rgb(7 14 20 / 0.94), rgb(7 14 20 / 0.35) 55%, rgb(7 14 20 / 0.25)); }
+  .panel--left .scrim { background: linear-gradient(to top, rgb(7 14 20 / 0.9), rgb(7 14 20 / 0.2) 60%), linear-gradient(to right, rgb(7 14 20 / 0.78), rgb(7 14 20 / 0) 62%); }
+  .panel--right .scrim { background: linear-gradient(to top, rgb(7 14 20 / 0.9), rgb(7 14 20 / 0.2) 60%), linear-gradient(to left, rgb(7 14 20 / 0.78), rgb(7 14 20 / 0) 62%); }
+  .body { padding-block: clamp(96px, 14vw, 180px) clamp(56px, 8vw, 112px); display: flex; }
+  .panel--right .body { justify-content: flex-end; }
+  .card { max-width: 620px; display: grid; gap: 22px; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .city { font-size: var(--fs-small); color: var(--text); }
+  .title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: 0.95; }
+  .title a { text-decoration: none; }
+  .title a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
+  .intro { font-size: var(--fs-lead); font-weight: 300; line-height: 1.5; margin: 0; max-width: 44ch; }
+  .facts { display: flex; flex-wrap: wrap; gap: 16px 40px; margin: 6px 0 0; padding-top: 20px; border-top: 1px solid var(--line-strong); }
+  .facts div { display: grid; gap: 6px; }
+  .facts dt { font: 500 0.6875rem / 1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { margin: 0; font: 500 1.5rem / 1.1 var(--serif); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 8px; }
+  .from { margin: 0; font-size: var(--fs-small); color: var(--muted); }
+  @media (max-width: 640px) {
+    .panel { min-height: 0; display: block; background: var(--ink-1); }
+    .media { position: relative; aspect-ratio: 1; }
+    .scrim, .panel--left .scrim, .panel--right .scrim { inset: auto 0 auto 0; top: 0; aspect-ratio: 1; height: auto; background: linear-gradient(to top, var(--ink-1) 0%, rgb(10 19 27 / 0) 45%); }
+    .body { padding-block: 0 72px; margin-top: -72px; position: relative; }
+  }
+</style>

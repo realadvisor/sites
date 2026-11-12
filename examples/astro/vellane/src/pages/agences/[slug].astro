@@ -1,0 +1,108 @@
+---
+export const prerender = false;
+/** One agency: address and contact, its own text, its agents (portraits when set) and its listings. */
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import { agencyJsonLd } from '@realadvisor/sites-kit/seo';
+import { img } from '@realadvisor/sites-kit/image';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../../layouts/Site.astro';
+import ListingCard from '../../components/ListingCard.astro';
+import AgentBlock from '../../components/AgentBlock.astro';
+import Icon from '../../components/Icon.astro';
+import { siteData, sites } from '../../lib/data';
+import { R, teamShortName, teamSlug, tel } from '../../lib/site';
+import { placeFor } from '../../content/places';
+
+const { org, teams, agents } = await siteData();
+const team = teams.find((t) => teamSlug(t) === Astro.params.slug);
+if (!team) return Astro.rewrite('/404');
+const [listings, sold] = await Promise.all([
+  sites.allListings({ team_id: team.id, status: 'available' }),
+  sites.allListings({ team_id: team.id, status: 'sold' }),
+]);
+const people = agents.filter((a) => a.team_ids.includes(team.id));
+const name = teamShortName(team);
+const brand = org.name.replace(/\s+SAS$/, '');
+const photo = placeFor(teamSlug(team))[0];
+const a = team.address;
+const mapsHref = a.lat != null && a.lng != null ? `https://www.openstreetmap.org/?mlat=${a.lat}&mlon=${a.lng}#map=17/${a.lat}/${a.lng}` : undefined;
+const jsonLd = agencyJsonLd({ id: team.id, name: team.name, phone: team.phone, email: team.email, address: a }, (Astro.site ?? Astro.url).origin);
+const buy = listings.filter((l) => l.offer_type === 'buy');
+const rent = listings.filter((l) => l.offer_type === 'rent');
+---
+<Site nav="agencies" title={`Agence ${brand} ${name}, ${a.city ?? ''} | ${brand}`}
+  description={`${team.description_text ?? `Agence ${brand} ${name}.`} ${[a.street, [a.postcode, a.city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}.`}
+  image={photo && img(photo.url, { w: 1200, h: 630 })} jsonLd={jsonLd}>
+  <div class="wrap top">
+    <a class="back" href={R.agencies}><Icon name="back" size={18} />Toutes les agences</a>
+  </div>
+  <section class="wrap office">
+    <div class="office__text">
+      <h1 class="office__h1">{brand} {name}</h1>
+      {team.description && <div class="prose office__desc" set:html={sanitizeHtml(team.description)} />}
+      <dl class="office__facts">
+        <div>
+          <dt>Adresse</dt>
+          <dd>
+            {a.street && <Fragment>{a.street}<br /></Fragment>}{[a.postcode, a.city].filter(Boolean).join(' ')}
+            {mapsHref && <Fragment><br /><a class="link" href={mapsHref} rel="noopener" target="_blank">Voir sur la carte<span class="visually-hidden"> (nouvel onglet)</span></a></Fragment>}
+          </dd>
+        </div>
+        {team.phone && <div><dt>Téléphone</dt><dd><a class="num" href={tel(team.phone)}>{team.phone}</a></dd></div>}
+        {team.email && <div><dt>E-mail</dt><dd><a href={`mailto:${team.email}`}>{team.email}</a></dd></div>}
+        {listings.length > 0 && <div><dt>Annonces</dt><dd>{buy.length > 0 && `${buy.length} à vendre`}{buy.length > 0 && rent.length > 0 && ', '}{rent.length > 0 && `${rent.length} à louer`}</dd></div>}
+      </dl>
+    </div>
+    {photo && <RaImage class="office__img" src={photo} alt={photo.alt} width={1000} height={1100} sizes="(min-width: 960px) 560px, 100vw" priority mobile={{ width: 800, height: 600 }} />}
+  </section>
+
+  {people.length > 0 && (
+    <section class="wrap sec" aria-labelledby="team-h">
+      <h2 id="team-h" class="h3">L'équipe</h2>
+      <ul class="people">{people.map((p) => <li><AgentBlock agent={p} /></li>)}</ul>
+    </section>
+  )}
+
+  {listings.length > 0 && (
+    <section class="wrap sec" aria-labelledby="ls-h">
+      <h2 id="ls-h" class="h3">Les annonces de l'agence</h2>
+      <ul class="cards">{listings.map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+    </section>
+  )}
+
+  {sold.length > 0 && (
+    <section class="wrap sec" aria-labelledby="sold-h">
+      <h2 id="sold-h" class="h3">Vendus par l'agence</h2>
+      <ul class="cards">{sold.map((l) => <li><ListingCard listing={l} /></li>)}</ul>
+    </section>
+  )}
+
+  <section class="wrap sec contact" aria-labelledby="c-h">
+    <h2 id="c-h" class="h3">Écrire à l'agence {name}</h2>
+    <EnquiryForm contactReason="other" message={`Bonjour, je souhaite être contacté(e) par l'agence ${name}.`} />
+  </section>
+</Site>
+
+<style>
+  .top { padding-top: 16px; }
+  .back { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; text-decoration: none; font-weight: 550; }
+  .back:hover { text-decoration: underline; }
+  .office { display: grid; gap: 32px; padding-top: 16px; align-items: start; }
+  @media (min-width: 960px) { .office { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 64px; } }
+  .office__text { display: grid; gap: 24px; }
+  .office__h1 { font-size: var(--step-4); letter-spacing: -0.035em; }
+  .office__desc { font-size: var(--step-1); }
+  .office__facts { margin: 0; border-top: 1px solid var(--line); }
+  .office__facts div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .office__facts dt { color: var(--muted); }
+  .office__facts dd { margin: 0; font-weight: 550; overflow-wrap: anywhere; }
+  .office__facts dd a:not(.link) { text-decoration: none; }
+  .office__facts dd a:not(.link):hover { text-decoration: underline; }
+  :global(.office__img) { width: 100%; height: auto; border-radius: var(--radius-card); aspect-ratio: 10 / 11; object-fit: cover; }
+  @media (max-width: 767px) { :global(.office__img) { aspect-ratio: 4 / 3; } .office__facts div { grid-template-columns: 110px minmax(0, 1fr); } }
+  .sec { margin-top: var(--section); display: grid; gap: 28px; }
+  .people { list-style: none; margin: 0; padding: 0; display: grid; gap: 32px 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+  .people > li { padding-top: 20px; border-top: 1px solid var(--line); }
+  .contact :global(.enquiry) { max-width: 760px; }
+</style>

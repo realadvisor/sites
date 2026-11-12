@@ -1,0 +1,9 @@
+# One pnpm root for all example sites (one lockfile). Each site still links the
+# kit, the SDK and the React kit with `file:` like a real site does.
+packages:
+  - astro/*
+  - react/*
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd

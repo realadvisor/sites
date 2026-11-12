@@ -1,0 +1,13 @@
+.grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); padding-bottom: var(--section); align-items: start; }
+.left { display: grid; gap: 24px; }
+.left img { width: 100%; aspect-ratio: 45 / 32; object-fit: cover; margin-bottom: 16px; }
+.list { border-top: 1px solid var(--line); margin-bottom: 24px; }
+.list li { padding-block: 14px; border-bottom: 1px solid var(--line); font-size: 1.0625rem; }
+.phones li { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.phones a { display: inline-flex; min-height: 32px; align-items: center; }
+.form { position: sticky; top: 24px; background: var(--paper); border: 1px solid var(--line); padding: clamp(24px, 3vw, 40px); display: grid; gap: 14px; }
+.form .enquiry-grid { grid-template-columns: minmax(0, 1fr); }
+.recent { padding-block: var(--section); border-top: 1px solid var(--line); }
+.grid3 { margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 28px; }
+@media (max-width: 1023px) { .grid { grid-template-columns: minmax(0, 1fr); } .form { position: static; } .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }

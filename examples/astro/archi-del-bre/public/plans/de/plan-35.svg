@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21.5" width="960" height="860" role="img" aria-label="Indikativer Grundriss, 3.5 Zimmer">
+<title>Indikativer Grundriss, 3.5 Zimmer</title>
+<defs>
+<pattern id="deck" width="0.35" height="0.35" patternUnits="userSpaceOnUse"><rect width="0.35" height="0.35" fill="#eee6d7"/><path d="M0,0.35 h0.35" stroke="#d9cdb8" stroke-width="0.03"/></pattern>
+<pattern id="garden" width="0.5" height="0.5" patternUnits="userSpaceOnUse"><rect width="0.5" height="0.5" fill="#e3e6d3"/><circle cx="0.25" cy="0.25" r="0.035" fill="#a9b08c"/></pattern>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#2e2922;text-anchor:middle}.n{font-size:0.36px;font-weight:600;letter-spacing:0.01em}.a{font-size:0.3px;fill:#6f6558}.o{font-size:0.36px;font-style:italic;fill:#6f6558}.s{font-size:0.3px;fill:#6f6558}.st{text-anchor:start}.en{text-anchor:end}.sm.n{font-size:0.27px}.sm.a{font-size:0.24px}</style>
+</defs>
+<rect x="0" y="0" width="24" height="21.5" fill="#ffffff"/>
+<rect x="6.7" y="13.9" width="10.6" height="2.1" fill="url(#deck)" stroke="#6f6558" stroke-width="0.05" stroke-dasharray="0"/>
+<text x="12" y="15.11" class="o">Loggia</text>
+<rect x="5.7" y="5.5" width="4.2" height="3.4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="9.9" y="5.5" width="2.4" height="3.4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="12.3" y="5.5" width="2.4" height="3.4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="14.7" y="5.5" width="3.6" height="3.4" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="5.7" y="8.9" width="8" height="5" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="13.7" y="8.9" width="4.6" height="5" fill="#fffdf9" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="5.7" y="5.5" width="12.6" height="8.4" fill="none" stroke="#2e2922" stroke-width="0.28"/>
+<line x1="6.9" y1="5.5" x2="8.7" y2="5.5" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="6.9" y1="5.43" x2="8.7" y2="5.43" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="6.9" y1="5.57" x2="8.7" y2="5.57" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="5.7" y1="6.4" x2="5.7" y2="8" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="5.63" y1="6.4" x2="5.63" y2="8" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="5.77" y1="6.4" x2="5.77" y2="8" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="15.6" y1="5.5" x2="17.4" y2="5.5" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="15.6" y1="5.43" x2="17.4" y2="5.43" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="15.6" y1="5.57" x2="17.4" y2="5.57" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.3" y1="6.4" x2="18.3" y2="8" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="18.23" y1="6.4" x2="18.23" y2="8" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.37" y1="6.4" x2="18.37" y2="8" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="6.7" y1="13.9" x2="12.7" y2="13.9" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="6.7" y1="13.83" x2="12.7" y2="13.83" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="6.7" y1="13.97" x2="12.7" y2="13.97" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="5.7" y1="10.6" x2="5.7" y2="12.2" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="5.63" y1="10.6" x2="5.63" y2="12.2" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="5.77" y1="10.6" x2="5.77" y2="12.2" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="14.275" y1="13.9" x2="17.725" y2="13.9" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="14.275" y1="13.83" x2="17.725" y2="13.83" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="14.275" y1="13.97" x2="17.725" y2="13.97" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.3" y1="10.6" x2="18.3" y2="12.2" stroke="#fffdf9" stroke-width="0.24000000000000002"/>
+<line x1="18.23" y1="10.6" x2="18.23" y2="12.2" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.37" y1="10.6" x2="18.37" y2="12.2" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="8.7" y1="8.9" x2="9.55" y2="8.9" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="8.7" y1="8.9" x2="8.7" y2="8.05" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M8.7,8.05 A0.85,0.85 0 0 1 9.55,8.9" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.7" y1="8.9" x2="11.55" y2="8.9" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="10.7" y1="8.9" x2="10.7" y2="8.05" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M10.7,8.05 A0.85,0.85 0 0 1 11.55,8.9" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="13" y1="8.9" x2="13.85" y2="8.9" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="13" y1="8.9" x2="13" y2="8.05" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M13,8.05 A0.85,0.85 0 0 1 13.85,8.9" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="13.1" y1="5.5" x2="13.95" y2="5.5" stroke="#fffdf9" stroke-width="0.32"/>
+<line x1="13.1" y1="5.5" x2="13.1" y2="6.35" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M13.1,6.35 A0.85,0.85 0 0 0 13.95,5.5" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="15" y1="8.9" x2="15.85" y2="8.9" stroke="#fffdf9" stroke-width="0.16"/>
+<line x1="15" y1="8.9" x2="15" y2="8.05" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M15,8.05 A0.85,0.85 0 0 1 15.85,8.9" fill="none" stroke="#6f6558" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<path d="M13.525,4.45 l0,0.55 m-0.22,-0.24 l0.22,0.24 l0.22,-0.24" fill="none" stroke="#2e2922" stroke-width="0.05"/>
+<text x="13.525" y="4.3" class="s">Eingang</text>
+<text x="7.8" y="7.15" class="n">Zimmer 1</text>
+<text x="7.8" y="7.75" class="a">14.3 m²</text>
+<text x="11.1" y="7.15" class="n">Bad</text>
+<text x="11.1" y="7.75" class="a">8.2 m²</text>
+<text x="13.5" y="7.15" class="n">Eingang</text>
+<text x="13.5" y="7.75" class="a">8.2 m²</text>
+<text x="16.5" y="7.15" class="n">Zimmer 2</text>
+<text x="16.5" y="7.75" class="a">12.2 m²</text>
+<text x="9.7" y="11.35" class="n">Wohnen</text>
+<text x="9.7" y="11.95" class="a">40 m²</text>
+<text x="16" y="11.35" class="n">Küche</text>
+<text x="16" y="11.95" class="a">23 m²</text>
+<g transform="translate(22.8,1.5)">
+<circle r="0.62" fill="none" stroke="#6f6558" stroke-width="0.04"/><path d="M0,-0.5 L0.24,0.32 L0,0.18 L-0.24,0.32 Z" fill="#2e2922"/><text y="-0.78" class="s">N</text></g>
+<g><path d="M0.8,20.7 h5" stroke="#2e2922" stroke-width="0.06"/><path d="M0.8,20.5 v0.4" stroke="#2e2922" stroke-width="0.04"/><path d="M1.8,20.58 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M2.8,20.58 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M3.8,20.58 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M4.8,20.58 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M5.8,20.5 v0.4" stroke="#2e2922" stroke-width="0.04"/><text x="0.8" y="21.3" class="s st">0</text><text x="5.8" y="21.3" class="s">5 m</text></g>
+<text x="23.2" y="21.3" class="s en">Indikativer Grundriss, unverbindlich</text>
+</svg>

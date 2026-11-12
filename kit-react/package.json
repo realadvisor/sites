@@ -1,0 +1,41 @@
+{
+  "name": "@realadvisor/sites-kit-react",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The React Router (framework mode, SSR on Cloudflare Workers) version of the RealAdvisor sites kit: Worker with a per-request CSP nonce, data through the SDK interface, images, legal, consent, enquiry, SEO, listings search and map, and the deploy check. Reuses @realadvisor/sites-kit for every rule, string and browser script it can.",
+  "type": "module",
+  "exports": {
+    "./vite": {
+      "types": "./vite.d.mts",
+      "default": "./vite.mjs"
+    },
+    "./worker": "./server/worker.ts",
+    "./entry.server": "./server/entry.server.tsx",
+    "./server/*": "./server/*.ts",
+    "./components": "./components/index.ts",
+    "./components/*": "./components/*.tsx",
+    "./client": "./client/index.ts",
+    "./client/*": "./client/*.ts",
+    "./styles/*": "./styles/*",
+    "./tools/*": "./tools/*",
+    "./package.json": "./package.json",
+    "./lib/*": "./lib/*.ts",
+    "./env.d.ts": "./env.d.ts"
+  },
+  "bin": {
+    "sites-kit-react": "./bin/sites-kit-react.mjs"
+  },
+  "peerDependencies": {
+    "@realadvisor/sites-kit": "*",
+    "@realadvisor/sites-sdk": "*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.18.0",
+    "playwright": "^1.64.1"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    }
+  }
+}

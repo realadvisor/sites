@@ -1,0 +1,32 @@
+---
+/**
+ * Renders legal sections from lib/legal.ts. Style it with your tokens;
+ * never edit the text here or in the pages (AGENTS.md: legal text comes only
+ * from the template and agency data).
+ */
+import type { LegalSection } from '../lib/legal';
+
+interface Props {
+  sections: LegalSection[];
+  class?: string;
+}
+const { sections, class: cls } = Astro.props;
+---
+<div class:list={['legal', cls]}>
+  {sections.map((s) => (
+    <section>
+      <h2>{s.heading}</h2>
+      {s.rows && (
+        <dl>
+          {s.rows.map((r) => (
+            <div>
+              <dt>{r.label}</dt>
+              <dd>{r.href ? <a href={r.href}>{r.value}</a> : r.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      {s.paragraphs?.map((p) => <p>{p}</p>)}
+    </section>
+  ))}
+</div>

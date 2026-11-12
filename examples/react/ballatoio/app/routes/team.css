@@ -1,0 +1,7 @@
+  .team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 clamp(20px, 2.5vw, 40px); }
+  .team li { border-top: 1px solid var(--text); padding: 18px 0 56px; }
+  .team li .agent-name { font-size: var(--fs-m); }
+  .team li .agent.has-photo { grid-template-columns: 1fr; align-items: start; gap: 20px; }
+  .team li .agent-photo { max-width: none; }
+  @media (max-width: 1080px) { .team { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .team { grid-template-columns: 1fr; } .team li .agent-photo { max-width: 300px; } }

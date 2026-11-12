@@ -1,0 +1,51 @@
+---
+/** Team: every adviser, grouped by office, with portrait, languages, direct line and e-mail. */
+import Site from '../layouts/Site.astro';
+import PageBand from '../components/PageBand.astro';
+import AgentCard from '../components/AgentCard.astro';
+import { siteData } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const groups = teams.map((x) => ({ team: x, agents: agents.filter((a) => a.team_ids[0] === x.id) })).filter((g) => g.agents.length);
+const placed = new Set(groups.flatMap((g) => g.agents.map((a) => a.id)));
+const rest = agents.filter((a) => !placed.has(a.id));
+const offices = groups.length;
+---
+<Site l={l} route="team" title={`${t('teamTitle')} | ${org.name}`} description={t('teamLede', { n: agents.length, offices })}>
+  <PageBand l={l} title={t('teamTitle')} lede={t('teamLede', { n: agents.length, offices })} crumbs={[{ label: t('navTeam') }]} />
+  <div class="wrap section groups">
+    {groups.map((g) => {
+      const city = cityName(g.team.address.city, l) || g.team.name;
+      return (
+        <section class="group" aria-labelledby={`h-${g.team.id}`}>
+          <div class="group__head">
+            <h2 id={`h-${g.team.id}`} class="h3"><a href={href('offices', l, teamSlug(g.team, teams))}>{t('officeOf', { city })}</a></h2>
+            <p class="muted">{g.team.address.street}<br />{[g.team.address.postcode, cityName(g.team.address.city, l)].filter(Boolean).join(' ')}</p>
+            {g.team.phone && <p><a class="num" href={tel(g.team.phone)}>{g.team.phone}</a></p>}
+          </div>
+          <ul class="plain-list cards">{g.agents.map((a) => <li><AgentCard agent={a} agents={agents} teams={teams} l={l} /></li>)}</ul>
+        </section>
+      );
+    })}
+    {rest.length > 0 && <ul class="plain-list cards">{rest.map((a) => <li><AgentCard agent={a} agents={agents} teams={teams} l={l} as="h2" /></li>)}</ul>}
+  </div>
+</Site>
+
+<style>
+  .groups { display: grid; gap: clamp(56px, 6vw, 88px); }
+  .group { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 28px clamp(28px, 4vw, 64px); padding-top: 24px; border-top: 1px solid var(--line-strong); }
+  .group__head { display: grid; gap: 8px; align-content: start; }
+  .group__head h2 { color: var(--green-ink); }
+  .group__head h2 a { text-decoration: none; }
+  .group__head h2 a:hover { text-decoration: underline; }
+  .group__head a { color: var(--green); }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+  @media (max-width: 1000px) { .group { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 700px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; } }
+</style>

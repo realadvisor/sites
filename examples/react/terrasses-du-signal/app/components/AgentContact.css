@@ -1,0 +1,8 @@
+.agent .face { display: block; width: 120px; margin-bottom: 16px; }
+.agent .face picture, .agent .face img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-card); background: var(--line); }
+.agent .n { font: 500 1.375rem/1.2 var(--serif); }
+.agent .r { color: var(--muted); font-size: 0.9375rem; }
+.agent.dark .r { color: var(--on-dark-muted); }
+.agent .links { display: flex; flex-direction: column; align-items: start; margin-top: 6px; font-size: 0.9375rem; }
+.agent .links a { display: inline-block; padding-block: 6px; overflow-wrap: anywhere; }
+.agent.dark .links a { color: var(--on-dark); }

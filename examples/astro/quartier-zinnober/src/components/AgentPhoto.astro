@@ -1,0 +1,43 @@
+---
+/**
+ * Square agent portrait through the kit helper (img()/srcset()): AVIF and WebP
+ * srcsets with a JPEG fallback. Renders nothing without a photo, so callers
+ * keep the plain-text layout. The frame matches the site's cards: 2px ink
+ * border and the card radius, no shadow, no filter.
+ */
+import { img, srcset } from '@realadvisor/sites-kit/image';
+import type { Agent } from '@realadvisor/sites-sdk/types';
+
+interface Props {
+  agent: Agent;
+  /** Rendered edge in CSS px (square). */
+  size?: number;
+  priority?: boolean;
+}
+const { agent, size = 96, priority = false } = Astro.props;
+const url = agent.photo?.url;
+const name = `${agent.first_name} ${agent.last_name}`;
+const widths = [size, size * 2, size * 3];
+const set = (format: 'avif' | 'webp' | 'jpg', quality: number) => srcset(url!, widths, 1, { format, quality });
+const sizes = `${size}px`;
+---
+{url && (
+  <picture class="portrait" style={`--size:${size}px`}>
+    <source type="image/avif" srcset={set('avif', 55)} sizes={sizes} />
+    <source type="image/webp" srcset={set('webp', 72)} sizes={sizes} />
+    <img
+      src={img(url, { w: size * 2, h: size * 2, format: 'jpg', quality: 74 })}
+      srcset={set('jpg', 74)}
+      sizes={sizes}
+      alt={name}
+      width={size}
+      height={size}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </picture>
+)}
+<style>
+  .portrait { display: block; flex: none; width: var(--size); height: var(--size); border: 2px solid var(--ink); border-radius: 14px; overflow: hidden; background: var(--butter); }
+  .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+</style>

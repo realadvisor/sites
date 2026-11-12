@@ -1,0 +1,7 @@
+  .es { margin: 0; display: grid; gap: 12px; }
+  .es figcaption { font-size: 0.875rem; color: var(--muted); }
+  .es ol { list-style: none; display: grid; gap: 4px; }
+  .es li { display: flex; align-items: center; gap: 12px; }
+  .es li span { width: var(--w); background: color-mix(in srgb, var(--c) 30%, #fff); color: #1b2430; font: 700 0.8125rem/1 var(--font-sans); padding: 5px 10px; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%); }
+  .es li.on span { background: var(--c); color: var(--on, #fff); padding-block: 9px; font-size: 0.9375rem; }
+  .es li b { font-size: 0.875rem; color: var(--text); }

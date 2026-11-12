@@ -1,0 +1,11 @@
+.ag { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; padding: 24px 0; border-top: 1px solid var(--line); height: 100%; }
+.ag--photo { grid-template-columns: 80px minmax(0, 1fr); }
+.ag .ag__photo { width: 80px; height: 100px; object-fit: cover; }
+.ag__body { display: grid; gap: 4px; min-width: 0; }
+.ag__name { font-size: 1.375rem; font-weight: 450; }
+.ag__name a { text-decoration: none; }
+.ag__name a:hover { text-decoration: underline; }
+.ag__role { font-size: 0.9375rem; color: var(--text); }
+.ag__langs { color: var(--muted); font-size: 0.9375rem; }
+.ag__contact { list-style: none; display: grid; margin-top: 6px; font-size: 0.9375rem; }
+.ag__contact a { color: var(--navy); min-height: 32px; display: inline-flex; align-items: center; overflow-wrap: anywhere; }

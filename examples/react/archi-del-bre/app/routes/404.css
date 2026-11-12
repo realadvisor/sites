@@ -1,0 +1,2 @@
+.v-404 .nf { display: grid; gap: 24px; padding-block: clamp(64px, 10vw, 160px); }
+.v-404 .actions { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }

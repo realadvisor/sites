@@ -1,0 +1,95 @@
+/* From src/pages/wohnungen/index.astro (scoped there: every selector under .p-wohnungen). */
+.p-wohnungen .head { background: var(--zinnober); border-bottom: 2px solid var(--ink); }
+.p-wohnungen .head-in { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; padding-block: clamp(40px, 6vw, 88px) clamp(28px, 4vw, 48px); }
+.p-wohnungen .head h1 { font-size: var(--step-5); letter-spacing: -0.045em; }
+.p-wohnungen .head .eyebrow { margin-bottom: 12px; }
+.p-wohnungen .tally { display: flex; gap: clamp(16px, 3vw, 40px); margin: 0; }
+.p-wohnungen .tally div { display: grid; }
+.p-wohnungen .tally dt { order: 2; font-weight: 600; }
+.p-wohnungen .tally dd { margin: 0; font: 800 var(--step-4)/0.9 var(--display); letter-spacing: -0.04em; }
+.p-wohnungen .filters { display: grid; gap: 18px; padding-block: 28px 8px; }
+.p-wohnungen .picker { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.p-wohnungen .seg { position: relative; }
+.p-wohnungen .seg input, .p-wohnungen .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.p-wohnungen .seg span { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 20px; border: 2px solid var(--ink); border-radius: 999px; font: 750 1.0625rem/1 var(--display); background: var(--paper); }
+.p-wohnungen .seg small { font: 600 0.8125rem/1 var(--body); padding: 5px 9px; border-radius: 999px; background: var(--sand); }
+.p-wohnungen .seg input:checked + span { background: var(--ink); color: #fff; }
+.p-wohnungen .seg--a input:checked + span { background: var(--haus-a); color: var(--ink); }
+.p-wohnungen .seg--b input:checked + span { background: var(--haus-b); color: var(--ink); }
+.p-wohnungen .seg--c input:checked + span { background: var(--haus-c); color: var(--ink); }
+.p-wohnungen .seg input:checked + span small { background: rgb(255 255 255 / 0.7); color: var(--ink); }
+.p-wohnungen .seg input:focus-visible + span, .p-wohnungen .chip input:focus-visible + span, .p-wohnungen .switch input:focus-visible + .track { outline: 3px solid var(--ink); outline-offset: 3px; }
+.p-wohnungen .row { display: flex; flex-wrap: wrap; align-items: end; gap: 14px 18px; }
+.p-wohnungen .flabel { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; padding: 0; }
+.p-wohnungen .chips { border: 0; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; }
+.p-wohnungen .chips legend { float: left; width: 100%; }
+.p-wohnungen .chip { position: relative; }
+.p-wohnungen .chip span { display: inline-grid; place-items: center; min-width: 52px; height: 48px; padding: 0 12px; border: 1.5px solid #cfc3b3; border-radius: 12px; background: var(--paper); font-weight: 650; }
+.p-wohnungen .chip input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+.p-wohnungen .sel select { height: 48px; min-width: 150px; padding: 0 36px 0 14px; border: 1.5px solid #cfc3b3; border-radius: 12px; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23140F3A' stroke-width='1.75' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center / 12px 8px; appearance: none; font: inherit; color: var(--ink); cursor: pointer; }
+.p-wohnungen .switch { position: relative; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; font-weight: 650; cursor: pointer; }
+.p-wohnungen .switch input { position: absolute; opacity: 0; width: 44px; height: 26px; margin: 0; cursor: pointer; }
+.p-wohnungen .track { width: 48px; height: 28px; border-radius: 999px; background: #d8cfc2; border: 2px solid var(--ink); position: relative; transition: background 0.15s; }
+.p-wohnungen .track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid var(--ink); transition: transform 0.15s; }
+.p-wohnungen .switch input:checked + .track { background: var(--zinnober); }
+.p-wohnungen .switch input:checked + .track::after { transform: translateX(20px); }
+.p-wohnungen .form-actions { display: flex; align-items: center; gap: 16px; }
+.p-wohnungen .form-actions .cta { min-height: 48px; }
+.p-wohnungen .reset { font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; }
+.p-wohnungen .result { font-size: 0.9375rem; color: var(--muted); }
+.p-wohnungen .result strong { color: var(--ink); font-size: 1.0625rem; }
+.p-wohnungen .plans { padding-block: 20px 8px; }
+.p-wohnungen .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 20px; font-size: 0.9375rem; }
+.p-wohnungen .lg::before { content: ''; display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 2px solid var(--ink); margin-right: 8px; vertical-align: -3px; }
+.p-wohnungen .lg--free::before { background: linear-gradient(90deg, var(--haus-a) 33%, var(--haus-b) 33% 66%, var(--haus-c) 66%); }
+.p-wohnungen .lg--res::before { background: repeating-linear-gradient(135deg, #fff 0 3px, #ccc 3px 6px); }
+.p-wohnungen .lg--let::before { background: #ebe6f0; border-color: #b9b1c9; }
+.p-wohnungen .hint { color: var(--muted); }
+.p-wohnungen .buildings { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: clamp(28px, 4vw, 48px); }
+.p-wohnungen .list { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 8vw, 120px); }
+.p-wohnungen .list-title { font-size: var(--step-3); margin-bottom: 24px; }
+.p-wohnungen .table { width: 100%; border-collapse: collapse; border-top: 2px solid var(--ink); }
+.p-wohnungen .table th { text-align: left; font-size: 0.8125rem; font-weight: 650; color: var(--muted); letter-spacing: 0.03em; padding: 12px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.p-wohnungen .table td { padding: 14px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.p-wohnungen .table tbody tr { position: relative; }
+.p-wohnungen .table tbody tr:hover { background: var(--paper); }
+.p-wohnungen .table tbody tr:hover .go { transform: translateX(3px); }
+.p-wohnungen .row-link { text-decoration: none; }
+.p-wohnungen .row-link::after { content: ''; position: absolute; inset: 0; }
+.p-wohnungen .row-link:focus-visible { outline: none; }
+.p-wohnungen .row-link:focus-visible::after { outline: 3px solid var(--ink); outline-offset: -3px; border-radius: 6px; }
+.p-wohnungen .r { text-align: right !important; }
+.p-wohnungen .c-name b { font: 800 1.125rem/1 var(--display); margin-right: 10px; }
+.p-wohnungen .c-house { font-size: 0.875rem; color: var(--muted); }
+.p-wohnungen .m-meta { display: none; }
+.p-wohnungen .c-rent { font-weight: 700; }
+.p-wohnungen .c-st { white-space: nowrap; }
+.p-wohnungen .c-st .go { display: inline-block; vertical-align: middle; margin-left: 10px; transition: transform 0.15s; }
+.p-wohnungen .st-sold { color: var(--muted); }
+.p-wohnungen .empty { margin-top: 24px; padding: 28px; border: 2px dashed var(--ink); border-radius: var(--radius-card); display: grid; gap: 18px; justify-items: start; }
+.p-wohnungen .empty-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.p-wohnungen .note { margin-top: 20px; font-size: 0.875rem; max-width: 80ch; }
+@media (max-width: 960px) {
+  .p-wohnungen .table thead { display: none; }
+  .p-wohnungen .table, .p-wohnungen .table tbody { display: block; }
+  .p-wohnungen .table tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'name st' 'name rent' 'rooms nk'; gap: 4px 12px; padding: 14px 4px; border-bottom: 1px solid var(--line); }
+  .p-wohnungen .table tbody tr[hidden] { display: none; }
+  .p-wohnungen .table td { padding: 0; border: 0; }
+  .p-wohnungen .c-name { grid-area: name; }
+  .p-wohnungen .m-meta { display: block; margin-top: 6px; font-size: 0.875rem; color: var(--muted); }
+  .p-wohnungen .c-st { grid-area: st; justify-self: end; }
+  .p-wohnungen .c-rooms { grid-area: rooms; font-weight: 650; }
+  .p-wohnungen .c-rent { grid-area: rent; justify-self: end; font-size: 1.0625rem; }
+  .p-wohnungen .c-nk { grid-area: nk; justify-self: end; font-size: 0.875rem; color: var(--muted); }
+  .p-wohnungen .c-nk:not(:empty)::before { content: '+ '; }
+  .p-wohnungen .c-nk:not(:empty)::after { content: ' NK'; }
+  .p-wohnungen .c-area, .p-wohnungen .c-out, .p-wohnungen .c-floor, .p-wohnungen .c-move { display: none; }
+  .p-wohnungen .c-st .go { display: none; }
+}
+@media (max-width: 640px) {
+  .p-wohnungen .row { gap: 12px; }
+  .p-wohnungen .sel { flex: 1 1 calc(50% - 6px); }
+  .p-wohnungen .sel select { width: 100%; min-width: 0; }
+  .p-wohnungen .chips { flex: 1 1 100%; }
+  .p-wohnungen .seg span { min-height: 46px; padding: 0 14px; font-size: 0.975rem; }
+}

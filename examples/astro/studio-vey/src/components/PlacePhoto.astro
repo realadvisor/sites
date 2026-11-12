@@ -1,0 +1,12 @@
+---
+/** A place photo: bucket photos through RaImage (imgproxy), cropped ones through CroppedPhoto. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import CroppedPhoto from './CroppedPhoto.astro';
+import type { PlacePhoto } from '../content/places';
+
+interface Props { photo: PlacePhoto; width: number; height: number; sizes?: string; priority?: boolean; mobile?: { width: number; height: number } }
+const { photo, width, height, sizes, priority, mobile } = Astro.props;
+---
+{photo.crop
+  ? <CroppedPhoto url={photo.url} crop={photo.crop} ratio={1} alt={photo.alt} position={photo.position} sizes={sizes} priority={priority} />
+  : <RaImage src={photo.url} alt={photo.alt} width={width} height={height} sizes={sizes} priority={priority} mobile={mobile} />}

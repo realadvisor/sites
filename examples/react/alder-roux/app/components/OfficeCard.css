@@ -1,0 +1,11 @@
+.oc { display: grid; gap: 22px; align-content: start; }
+.oc__media { display: block; aspect-ratio: 10 / 7; overflow: hidden; background: var(--paper-2); }
+.oc__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.oc:hover .oc__media img { transform: scale(1.03); }
+.oc__ph { display: grid; place-items: center; height: 100%; font: 400 2rem var(--font-display); color: var(--navy); }
+.oc__body { display: grid; gap: 6px; justify-items: start; }
+.oc__city { font-size: var(--step-2); }
+.oc__city a { text-decoration: none; }
+.oc address { font-style: normal; display: grid; color: var(--muted); }
+.oc__tel { color: var(--navy); min-height: 32px; display: inline-flex; align-items: center; font-weight: 600; }
+.oc__figs { display: flex; gap: 18px; font-size: 0.875rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 6px; width: 100%; }

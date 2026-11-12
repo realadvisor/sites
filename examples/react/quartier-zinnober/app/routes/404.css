@@ -1,0 +1,8 @@
+/* From pages/404.astro (scoped there). */
+.p-404 .nf { background: var(--butter); border-bottom: 2px solid var(--ink); }
+.p-404 .nf-in { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; padding-block: clamp(56px, 10vw, 140px); }
+.p-404 .code { font: 800 clamp(6rem, 3rem + 14vw, 16rem)/0.8 var(--display); letter-spacing: -0.06em; color: var(--zinnober); -webkit-text-stroke: 3px var(--ink); }
+.p-404 .txt { display: grid; gap: 20px; justify-items: start; }
+.p-404 h1 { font-size: var(--step-4); }
+.p-404 .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 760px) { .p-404 .nf-in { grid-template-columns: 1fr; } }

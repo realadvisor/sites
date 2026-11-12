@@ -1,0 +1,49 @@
+{
+ "places": {
+  "milano": [
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-32953088.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-15437517.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-17366888.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-33091784.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36407545.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-28295552.jpg"
+  ],
+  "brera": [
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16142575.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-17355546.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-16142560.jpg"
+  ],
+  "navigli": [
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34415561.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-35619151.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-34504989.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29841152.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37241087.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36372239.jpg"
+  ],
+  "isola": [
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36614157.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36871171.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37132656.jpg"
+  ],
+  "cernobbio": [
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-20412791.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19085371.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38303147.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38303164.jpg"
+  ],
+  "bellagio": [
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-19749514.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-37736425.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-29968304.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-14875484.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-36585422.jpg",
+   "https://storage.googleapis.com/img.realadvisor.ch/sites-demo-pexels-38856373.jpg"
+  ]
+ },
+ "_notes": {
+  "milano": "Generic Milan facades (Pexels titles name Milan).",
+  "isola": "Bosco Verticale / Porta Nuova towers next to Isola.",
+  "cernobbio": "Villa Erba and Cernobbio shore; marina shots tagged Lake Como."
+ }
+}

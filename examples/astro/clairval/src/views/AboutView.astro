@@ -1,0 +1,92 @@
+---
+/** About: who we are (from the data: offices, agents, languages), how a sale works, the offices. */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/PageHead.astro';
+import { siteData } from '../lib/data';
+import { href, teamSlug, type L } from '../lib/routes';
+import { cityName, joinList, languageName, tx } from '../lib/copy';
+import { placeOf } from '../content/places';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const { org, teams, agents } = await siteData();
+const hq = teams.find((x) => x.primary) ?? teams[0];
+const cities = joinList(teams.map((x) => cityName(x.address.city, l)).filter(Boolean), l);
+const langs = joinList([...new Set(agents.flatMap((a) => a.languages ?? []))].map((c) => languageName(c, l)), l);
+const photo = hq ? placeOf(teamSlug(hq, teams))?.photos[0] : undefined;
+const C = {
+  en: {
+    title: `About ${org.name}`,
+    lede: `${org.name} sells and lets houses and apartments from ${teams.length} offices: ${cities}.`,
+    who: [
+      `Our head office is in ${cityName(hq?.address.city, l)}, ${hq?.address.street ?? ''}. Each office works its own area with its own agents.`,
+      `The team is ${agents.length} agents. Between them they speak ${langs}.`,
+    ],
+    how: 'How we sell a house',
+    steps: [
+      ['Visit and valuation', 'An agent of the office visits the house, studies the land register and the documents, and gives you a price with the reasons for it.'],
+      ['Presentation', 'Photographs, a written description and the documents a buyer will ask for. Some houses are offered without photos or address, to a list of buyers we know.'],
+      ['Viewings', 'Every viewing is accompanied. We tell you who visited and what they said.'],
+      ['Offer and deed', 'We check the buyer’s financing, negotiate, and prepare the file for the notary up to the signing.'],
+    ],
+    offices: 'Our offices',
+  },
+  fr: {
+    title: `À propos de ${org.name}`,
+    lede: `${org.name} vend et loue des maisons et des appartements depuis ${teams.length} bureaux : ${cities}.`,
+    who: [
+      `Notre siège est à ${cityName(hq?.address.city, l)}, ${hq?.address.street ?? ''}. Chaque bureau travaille son secteur avec ses propres agents.`,
+      `L’équipe compte ${agents.length} agents. Ensemble, ils parlent ${langs}.`,
+    ],
+    how: 'Comment nous vendons une maison',
+    steps: [
+      ['Visite et estimation', 'Un agent du bureau visite la maison, étudie le registre foncier et les documents, et vous donne un prix avec ses raisons.'],
+      ['Présentation', 'Photographies, description écrite et documents qu’un acheteur demandera. Certaines maisons sont proposées sans photos ni adresse, à des acheteurs que nous connaissons.'],
+      ['Visites', 'Chaque visite est accompagnée. Nous vous disons qui est venu et ce qui a été dit.'],
+      ['Offre et acte', 'Nous vérifions le financement de l’acheteur, négocions et préparons le dossier du notaire jusqu’à la signature.'],
+    ],
+    offices: 'Nos bureaux',
+  },
+}[l];
+---
+<Site l={l} route="about" title={`${C.title}`} description={C.lede}>
+  <PageHead crumbLabel={t('breadcrumb')} crumbs={[{ label: t('home'), href: href('home', l) }, { label: t('navAbout') }]} title={C.title} lede={C.lede} />
+  {photo && <div class="wrap pic"><RaImage src={photo.url} alt={photo.alt[l]} width={1600} height={700} priority sizes="(min-width: 1440px) 1320px, 100vw" mobile={{ width: 800, height: 600 }} /></div>}
+  <section class="wrap two">
+    <div class="prose">{C.who.map((p) => <p>{p}</p>)}</div>
+  </section>
+  <section class="on-paper steps">
+    <div class="wrap">
+      <h2 class="h2">{C.how}</h2>
+      <ol class="plain steps__list">
+        {C.steps.map(([k, v]) => <li><h3>{k}</h3><p>{v}</p></li>)}
+      </ol>
+      <a class="cta" href={href('sell', l)}>{t('valuation')}</a>
+    </div>
+  </section>
+  <section class="wrap offices">
+    <h2 class="h3">{C.offices}</h2>
+    <ul class="plain">
+      {teams.map((x) => <li><a href={href('offices', l, teamSlug(x, teams))}><span>{cityName(x.address.city, l) || x.name}</span><span class="muted">{x.address.street}</span></a></li>)}
+    </ul>
+  </section>
+</Site>
+
+<style>
+  .pic :global(img) { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; }
+  .two { padding-block: var(--section); }
+  .two .prose { font-size: var(--step-1); max-width: 62ch; margin-left: auto; margin-right: 8%; }
+  .steps { padding-block: var(--section); border-block: 1px solid var(--line); }
+  .steps__list { margin-block: 40px; border-top: 1px solid var(--line); }
+  .steps__list li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 16px 48px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+  .steps__list h3 { font-size: var(--step-2); }
+  .steps__list p { max-width: 60ch; font-size: 1.0625rem; }
+  .offices { padding-block: var(--section); }
+  .offices ul { margin-top: 24px; border-top: 1px solid var(--line); }
+  .offices a { display: flex; justify-content: space-between; gap: 24px; padding-block: 18px; border-bottom: 1px solid var(--line); text-decoration: none; font: 420 1.5rem/1.2 var(--font-display); }
+  .offices a .muted { font: 400 1rem var(--font-sans); align-self: center; }
+  .offices a:hover span:first-child { text-decoration: underline; text-decoration-color: var(--accent); }
+  @media (max-width: 767px) { .steps__list li { grid-template-columns: minmax(0, 1fr); } .two .prose { margin: 0; } }
+</style>

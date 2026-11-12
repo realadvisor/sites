@@ -1,0 +1,46 @@
+---
+/**
+ * Editorial photo sequence (one wide, two side by side, repeat) with a
+ * lightbox. Each photo is a link to the large image, so it works without JS;
+ * scripts/lightbox.ts opens it in a <dialog> (Escape, arrows, focus return).
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import { PHOTOS } from '../content/photos';
+import BucketPhoto, { type PhotoName } from './BucketPhoto.astro';
+
+/** A data photo (`url`) or a site photo (`local`, src/content/photos.ts). */
+type GalleryPhoto = { url?: string; local?: PhotoName; alt: string };
+interface Props { photos: GalleryPhoto[]; id: string }
+const { photos, id } = Astro.props;
+// Pattern of the sequence: wide, pair, pair, wide, pair, pair ...
+// A half photo left alone on the last row goes wide.
+const kind = (i: number) => (i % 5 === 0 || (i === photos.length - 1 && i % 5 % 2 === 1) ? 'wide' : 'half');
+const sizesFor = (i: number) => (kind(i) === 'wide' ? '(min-width: 1360px) 1280px, 100vw' : '(min-width: 900px) 50vw, 100vw');
+const large = (p: GalleryPhoto) =>
+  p.local ? img(PHOTOS[p.local].url, { w: 2000, fit: 'fit', quality: 72 }) : img(p.url!, { w: 2000, fit: 'fit', quality: 82 });
+---
+<ul class="gallery" data-gallery={id}>
+  {photos.map((p, i) => (
+    <li class:list={[kind(i), 'frame', 'settle']}>
+      <a href={large(p)} data-lightbox data-alt={p.alt} data-i={i} aria-label={`Agrandir : ${p.alt}`}>
+        {p.local ? (
+          <BucketPhoto name={p.local} alt={p.alt} sizes={sizesFor(i)} />
+        ) : (
+          <RaImage src={p.url} alt={p.alt} width={kind(i) === 'wide' ? 1600 : 800} height={kind(i) === 'wide' ? 900 : 600} sizes={sizesFor(i)} />
+        )}
+      </a>
+    </li>
+  ))}
+</ul>
+<style>
+  .gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.4vw, 20px); }
+  .wide { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+  .half { aspect-ratio: 4 / 3; }
+  a { display: block; width: 100%; height: 100%; cursor: zoom-in; }
+  a:focus-visible { outline-offset: -4px; }
+  @media (max-width: 640px) {
+    .gallery { grid-template-columns: 1fr; }
+    .wide, .half { aspect-ratio: 3 / 2; }
+  }
+</style>

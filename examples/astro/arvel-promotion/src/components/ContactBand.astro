@@ -1,0 +1,36 @@
+---
+/** Closing band: where the office is, the phone, the e-mail and the contact page. */
+import type { Team } from '@realadvisor/sites-sdk/types';
+import { addressLine, telHref } from '../lib/fr';
+
+interface Props { team?: Team; title?: string }
+const { team, title } = Astro.props;
+const city = team?.address?.city;
+const heading = title ?? (city ? `Pour une visite ou la grille des prix, appelez-nous ou passez au bureau d’${city}.` : 'Pour une visite ou la grille des prix, appelez-nous.');
+const address = team ? addressLine(team.address) : '';
+---
+<section class="band" aria-labelledby="h-band">
+  <div class="wrap grid">
+    <h2 id="h-band" class="h2">{heading}</h2>
+    <dl class="actions">
+      {team?.phone && <div><dt>Téléphone</dt><dd><a href={telHref(team.phone)} class="num">{team.phone}</a></dd></div>}
+      {team?.email && <div><dt>E-mail</dt><dd><a href={`mailto:${team.email}`}>{team.email}</a></dd></div>}
+      {address && <div><dt>Bureau</dt><dd>{address}</dd></div>}
+      <div><dt>Formulaire</dt><dd><a href="/contact">Écrire à nos conseillers</a></dd></div>
+    </dl>
+  </div>
+</section>
+<style>
+  .band { background: var(--surface); border-top: 1px solid var(--line); padding-block: clamp(72px, 9vw, 128px); }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px clamp(32px, 6vw, 96px); align-items: start; }
+  .h2 { font: 500 clamp(1.9rem, 3.2vw, 2.9rem) / 1.12 var(--serif); max-width: 20ch; }
+  .actions { margin: 0; display: grid; }
+  .actions div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--line); }
+  .actions div:last-child { border-bottom: 1px solid var(--line); }
+  dt { font-size: var(--fs-small); color: var(--muted); }
+  dd { margin: 0; font: 500 clamp(1.2rem, 1.8vw, 1.5rem) / 1.3 var(--serif); overflow-wrap: anywhere; }
+  dd a { text-decoration: none; display: inline-flex; min-height: 40px; align-items: center; }
+  dd a:hover { text-decoration: underline; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .actions div { grid-template-columns: 1fr; gap: 2px; } }
+</style>

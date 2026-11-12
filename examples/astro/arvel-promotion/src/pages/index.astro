@@ -1,0 +1,90 @@
+---
+export const prerender = false;
+
+import Site from '../layouts/Site.astro';
+import Hero from '../components/Hero.astro';
+import ProgrammePanel from '../components/ProgrammePanel.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { primaryTeam, programmes as allProgrammes, sites } from '../lib/data';
+import { contentFor, HOME_HERO } from '../content/programmes';
+import { ABOUT } from '../content/about';
+import { deliveryText, plural, programmeUrl, PROGRAMMES_PATH } from '../lib/fr';
+import { organisationJsonLd, ogImage } from '../lib/seo';
+
+const [org, team, programmes] = await Promise.all([sites.organisation(), primaryTeam(), allProgrammes()]);
+const name = team?.name ?? org.name;
+const lead = programmes[0];
+const leadPhoto = lead ? (lead.photos[contentFor(lead.slug).hero ?? 0] ?? lead.photos[0]) : undefined;
+const cities = [...new Set(programmes.map((d) => d.address.city).filter(Boolean))];
+const cityList = cities.length > 1 ? `${cities.slice(0, -1).join(', ')} et ${cities.at(-1)}` : (cities[0] ?? '');
+const NUM = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix'];
+const count = (n: number) => NUM[n] ?? String(n);
+// One plain sentence per programme, from the data: where, how many homes, where it stands.
+const stage = (d: (typeof programmes)[number]) =>
+  d.status === 'delivered' ? `${deliveryText(d).toLowerCase()}${d.stats.available ? `, ${plural(d.stats.available, 'logement encore disponible', 'logements encore disponibles')}` : ''}`
+  : d.status === 'construction' ? `en travaux, ${deliveryText(d).toLowerCase()}`
+  : `en vente, ${deliveryText(d).toLowerCase()}`;
+const heroTitle = `Logements neufs à ${cityList}`;
+const sizes = programmes.map((d) => d.stats.units).filter((n) => n > 0);
+const heroLead = programmes.length
+  ? `${name} construit ${count(programmes.length)} ${programmes.length > 1 ? 'résidences' : 'résidence'}${sizes.length > 1 ? `, de ${Math.min(...sizes)} à ${Math.max(...sizes)} logements` : ''}.`
+  : '';
+const title = `${name} | Promoteur immobilier ${cities.slice(0, 2).join(' et ')}`;
+const description = `${name}, promoteur immobilier à ${cityList} : ${programmes.map((d) => `${d.title} (${d.address.city})`).join(', ')}. Plans, prix et logements disponibles.`;
+---
+<Site title={title} description={description} image={ogImage(leadPhoto?.url)} jsonLd={organisationJsonLd(org, team, Astro.site?.href ?? Astro.url.origin)} current="home">
+  <Hero slot="hero" local={HOME_HERO.local} alt={HOME_HERO.alt} title={heroTitle}>
+    {heroLead && <p class="hero-lead">{heroLead}</p>}
+    {programmes.length > 0 && (
+      <ul class="hero-list">
+        {programmes.map((d) => (
+          <li><a href={programmeUrl(d)}><span class="hl-t">{d.title}</span><span class="hl-m">{d.address.city} · {d.stats.units} logements · {stage(d)}</span></a></li>
+        ))}
+      </ul>
+    )}
+  </Hero>
+
+  <section class="section section--paper intro" aria-labelledby="h-intro">
+    <div class="wrap intro-grid">
+      <h2 id="h-intro" class="sr-only">Qui nous sommes</h2>
+      <p class="statement">{ABOUT.intro[0]}</p>
+      <div class="intro-side">
+        <p class="muted">{ABOUT.intro[1]}</p>
+        <a class="link" href="/a-propos">Qui nous sommes</a>
+      </div>
+    </div>
+  </section>
+
+  {programmes.length > 0 && (
+    <section class="programmes" aria-labelledby="h-programmes">
+      <div class="wrap head">
+        <h2 id="h-programmes" class="display">Les programmes</h2>
+        <a class="link" href={PROGRAMMES_PATH}>{programmes.length > 1 ? `Comparer les ${count(programmes.length)}` : 'Le détail'}</a>
+      </div>
+      {programmes.map((d, i) => <ProgrammePanel programme={d} index={i} />)}
+    </section>
+  )}
+
+  <ContactBand team={team} />
+</Site>
+
+<style>
+  .hero-lead { font-size: var(--fs-lead); font-weight: 300; line-height: 1.5; max-width: 52ch; margin: 22px 0 0; }
+  .hero-list { list-style: none; margin: 32px 0 0; padding: 0; max-width: 760px; border-top: 1px solid var(--line-strong); }
+  .hero-list a { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 4px 24px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line-strong); text-decoration: none; }
+  .hero-list a:hover .hl-t { text-decoration: underline; text-underline-offset: 0.18em; }
+  .hl-t { font: 500 1.5rem / 1.15 var(--serif); }
+  .hl-m { font-size: var(--fs-small); color: var(--text); opacity: 0.86; }
+  @media (max-width: 640px) { .hero-list a { grid-template-columns: 1fr; } }
+  .intro-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px clamp(24px, 3vw, 48px); align-items: start; }
+  .intro { padding-block: clamp(80px, 10vw, 150px); }
+  .statement { grid-column: 1 / span 8; font: 500 clamp(1.75rem, 3.2vw, 3rem) / 1.16 var(--serif); margin: 0; text-wrap: pretty; color: var(--on-paper); }
+  .intro-side { grid-column: 9 / -1; display: grid; gap: 20px; justify-items: start; padding-top: 10px; }
+  .intro .link { color: var(--on-paper); }
+  .intro-side p { margin: 0; }
+  .programmes { background: var(--ink-1); padding-top: clamp(72px, 9vw, 140px); }
+  .head { display: flex; align-items: end; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-bottom: clamp(40px, 6vw, 80px); }
+  @media (max-width: 900px) {
+    .statement, .intro-side { grid-column: 1 / -1; }
+      }
+</style>

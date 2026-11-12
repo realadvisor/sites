@@ -1,0 +1,10 @@
+/* From components/Collection.astro (scoped there). */
+  .coll { padding-block: clamp(64px, 7.5vw, 112px); }
+  .coll--tint { background: var(--surface); }
+  .coll-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: clamp(28px, 3vw, 44px); }
+  .coll-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); }
+  @media (max-width: 1023px) { .coll-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 639px) {
+    .coll-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .coll-head { flex-direction: column; align-items: start; gap: 12px; }
+  }

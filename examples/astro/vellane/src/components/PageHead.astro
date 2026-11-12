@@ -1,0 +1,20 @@
+---
+/** Page heading: optional back link, h1, one lede line and a slot for actions. */
+import Icon from './Icon.astro';
+interface Props { title: string; lede?: string; back?: { href: string; label: string } }
+const { title, lede, back } = Astro.props;
+---
+<header class="ph wrap">
+  {back && <a class="ph__back" href={back.href}><Icon name="back" size={18} />{back.label}</a>}
+  <h1 class="ph__h1">{title}</h1>
+  {lede && <p class="ph__lede">{lede}</p>}
+  <slot />
+</header>
+
+<style>
+  .ph { display: grid; gap: 14px; justify-items: start; padding-top: clamp(28px, 5vw, 64px); padding-bottom: clamp(24px, 3vw, 40px); }
+  .ph__back { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; text-decoration: none; font-weight: 550; margin-bottom: -4px; }
+  .ph__back:hover { text-decoration: underline; }
+  .ph__h1 { font-size: var(--step-4); letter-spacing: -0.035em; max-width: 22ch; }
+  .ph__lede { font-size: var(--step-1); color: var(--muted); max-width: 62ch; }
+</style>

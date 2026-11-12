@@ -1,0 +1,41 @@
+// Enquiry form in the browser (preview: never sent; the development form needs a unit) and without JavaScript (303 back with ?enquiry=).
+//   node scripts/enquiry-test.mjs [http://localhost:4522]
+import { chromium } from 'playwright';
+const base = process.argv[2] ?? 'http://localhost:4522';
+const ok = (c, m) => console.log(`${c ? 'PASS' : 'FAIL'} ${m}`);
+const b = await chromium.launch();
+const p = await b.newPage();
+const errs = [];
+p.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
+await p.goto(`${base}/neubau/dorenbachhof`, { waitUntil: 'networkidle' });
+await p.click('#enquiry button[type=submit]');
+await p.waitForTimeout(300);
+ok(await p.evaluate(() => ['name', 'email', 'lot'].every((f) => !document.getElementById(`enquiry-${f}-err`)?.hidden)), 'empty submit shows field errors (name, e-mail, unit)');
+await p.reload({ waitUntil: 'networkidle' });
+await p.fill('#enquiry-name', 'Test');
+await p.fill('#enquiry-email', 'test@example.com');
+await p.selectOption('#enquiry-lot', { index: 1 });
+await p.fill('#enquiry-message', 'Test');
+await p.click('#enquiry button[type=submit]');
+await p.waitForTimeout(2500);
+const status = await p.evaluate(() => [...document.querySelectorAll('#enquiry [data-status]')].find((e) => !e.hidden)?.textContent ?? '');
+ok(/vorschau|preview/i.test(status ?? ''), `preview status shown (${status?.trim().slice(0, 50)})`);
+await p.goto(`${base}/fr/contact`, { waitUntil: 'networkidle' });
+ok(await p.evaluate(() => document.querySelector('#enquiry input[name=locale]')?.value === 'fr-CH'), 'French page sends locale fr-CH');
+const dev = await p.evaluate(async (u) => (await (await fetch(u)).text()).match(/name="developmentId" value="([^"]+)"/)?.[1], `${base}/neubau/dorenbachhof`);
+const form = new URLSearchParams({ name: 'A', email: 'a@example.com', message: 'm', developmentId: dev, redirect: '/neubau/dorenbachhof#contact' });
+const missing = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, headers: { origin: base, accept: 'application/json' } });
+ok(missing.status === 400 && (await missing.json()).fields?.lotId === 'required', `development enquiry without a unit: ${missing.status} lotId required`);
+const html = await (await fetch(`${base}/neubau/dorenbachhof`)).text();
+form.set('lotId', html.match(/<select id="enquiry-lot"[\s\S]*?<option value="([0-9a-f-]{36})"/)[1]);
+const res = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, redirect: 'manual', headers: { origin: base } });
+ok(res.status === 303 && res.headers.get('location') === '/neubau/dorenbachhof?enquiry=preview#contact', `no-JS post: ${res.status} ${res.headers.get('location')}`);
+const cross = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, redirect: 'manual', headers: { origin: 'https://evil.example' } });
+ok(cross.status === 403, `cross-site form post refused (${cross.status})`);
+// Calculator recomputes on input.
+await p.goto(`${base}/`, { waitUntil: 'networkidle' });
+const before = await p.textContent('[data-out="monthly"]');
+await p.fill('#home-calc-income', '100000');
+ok((await p.textContent('[data-out="verdict"]')) !== null && before !== null && (await p.getAttribute('[data-out="verdict"]', 'data-state')) === 'no', 'calculator updates the verdict on input');
+ok(!errs.length, `no console errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
+await b.close();

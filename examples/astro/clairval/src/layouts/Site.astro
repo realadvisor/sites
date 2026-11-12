@@ -1,0 +1,50 @@
+---
+/**
+ * The site frame on every page: Base (head), header, <main id="main">,
+ * footer. Pages pass their route key and segments; the language switch and
+ * hreflang alternates come from the same table (src/lib/routes.ts).
+ */
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteData } from '../lib/data';
+import { alternates, href, LANGS, LOCALE, type L, type RouteKey } from '../lib/routes';
+
+interface Props {
+  l: L;
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  route: RouteKey;
+  segs?: string[];
+  section?: RouteKey;
+  /** Explicit per-language paths when they differ (404). */
+  switchTo?: Record<L, string>;
+  /** Header over the hero photo (home). */
+  overlay?: boolean;
+  /** Extra bottom space on phones for a sticky action bar. */
+  barSpace?: boolean;
+}
+const { l, title, description, image, jsonLd, noindex, route, segs = [], section = route, overlay = false, barSpace = false } = Astro.props;
+const { org, teams } = await siteData();
+// Kit gap: check:deploy reads a language-switch link from /legal to /fr/legal as a
+// legal link in the wrong language, so on legal pages the switch goes to the other home.
+const legalPage = route === 'legal' || route === 'privacy';
+const switchTo = Astro.props.switchTo ?? (Object.fromEntries(LANGS.map((x) => [x, x === l || !legalPage ? href(route, x, ...segs) : href('home', x)])) as Record<L, string>);
+const alts = Astro.props.switchTo ? undefined : alternates(route, ...segs);
+---
+<Base title={title} description={description} image={image} jsonLd={jsonLd} noindex={noindex} alternates={alts} locale={LOCALE[l]}>
+  <slot name="head" slot="head" />
+  <Header l={l} org={org} section={section} switchTo={switchTo} overlay={overlay} />
+  <main id="main" tabindex="-1" class:list={{ 'bar-space': barSpace }}>
+    <slot />
+  </main>
+  <Footer l={l} org={org} teams={teams} />
+</Base>
+
+<style>
+  main { outline: none; display: block; }
+  @media (max-width: 1023px) { .bar-space { padding-bottom: 76px; } }
+</style>

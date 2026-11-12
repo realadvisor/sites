@@ -1,0 +1,21 @@
+/* From layouts/Layout.astro (scoped there). */
+  main { display: block; outline: none; }
+  .ft { background: var(--accent); color: var(--on-accent); padding-top: clamp(64px, 7vw, 104px); }
+  .ft a { color: inherit; text-decoration: none; }
+  .ft a:hover { text-decoration: underline; }
+  .ft-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.8fr) repeat(3, minmax(0, 1fr)); gap: 40px var(--gap); }
+  .ft-mark { font: 500 1rem/1 var(--sans); letter-spacing: 0.42em; text-transform: uppercase; margin-bottom: 20px; }
+  .ft-about { font: 400 1.1875rem/1.5 var(--serif); color: var(--on-accent-muted); max-width: 34ch; }
+  .ft-h { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-accent-muted); margin-bottom: 16px; }
+  .ft address { font-style: normal; display: grid; margin-bottom: 8px; }
+  .ft-list { list-style: none; display: grid; }
+  .ft-list a { display: inline-flex; align-items: center; min-height: 36px; }
+  .ft-base {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; align-items: center;
+    margin-top: clamp(56px, 6vw, 88px); padding-block: 24px; border-top: 1px solid var(--line-on-accent);
+    font-size: var(--fs-small); color: var(--on-accent-muted);
+  }
+  .ft-legal { list-style: none; display: flex; gap: 24px; }
+  .ft-legal a { display: inline-flex; align-items: center; min-height: 44px; }
+  @media (max-width: 1023px) { .ft-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ft-brand { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .ft-grid { gap: 32px 20px; } .ft-contact { grid-column: 1 / -1; } }

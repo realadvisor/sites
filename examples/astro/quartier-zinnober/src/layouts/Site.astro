@@ -1,0 +1,28 @@
+---
+/** Every page: Base (head), skip link, header, main, footer. */
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Site } from '../lib/data';
+
+interface Props {
+  site: Site;
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+}
+const { site, ...head } = Astro.props;
+---
+<Base {...head}>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+  <Header available={site.dev.stats.available} />
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+  <Footer site={site} />
+</Base>
+<style>
+  main:focus { outline: none; }
+</style>

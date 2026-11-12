@@ -1,0 +1,33 @@
+// Enquiry form in the browser (preview: never sent), the unit rule (a development enquiry names a unit)
+// and without JavaScript (303 back with ?enquiry=).
+import { chromium } from 'playwright';
+const base = process.argv[2] ?? 'http://127.0.0.1:4515';
+const ok = (c, m) => console.log(`${c ? 'PASS' : 'FAIL'} ${m}`);
+const b = await chromium.launch();
+const p = await b.newPage();
+const errs = [];
+p.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
+await p.goto(`${base}/kontakt`, { waitUntil: 'networkidle' });
+await p.click('#kontakt-form button[type=submit]');
+ok(await p.isVisible('#kontakt-form-name-err'), 'empty submit shows field errors');
+ok(await p.isVisible('#kontakt-form-lot-err'), 'empty submit asks for a unit');
+await p.goto(`${base}/kontakt`, { waitUntil: 'networkidle' });
+await p.fill('#kontakt-form-name', 'Test');
+await p.fill('#kontakt-form-email', 'test@example.com');
+await p.selectOption('#kontakt-form-lot', { index: 1 });
+await p.click('#kontakt-form button[type=submit]');
+await p.waitForFunction(() => !document.querySelector('#kontakt-form [data-status]').hidden, null, { timeout: 10000 });
+ok((await p.textContent('#kontakt-form [data-status]'))?.includes('Vorschau'), `preview status shown (${(await p.textContent('#kontakt-form [data-status]'))?.slice(0, 50)})`);
+const unit = (await (await fetch(`${base}/sitemap.xml`)).text()).match(/\/wohnungen\/[^<]+/)[0];
+await p.goto(base + unit, { waitUntil: 'networkidle' });
+ok(await p.evaluate(() => !!document.querySelector('#bewerben-form input[name=lotId]')), 'unit page form carries the unit (lotId)');
+const dev = await p.evaluate(() => document.querySelector('#bewerben-form input[name=developmentId]').value);
+const noUnit = await fetch(`${base}/api/enquiry`, { method: 'POST', body: new URLSearchParams({ name: 'A', email: 'a@example.com', message: 'm', developmentId: dev }), headers: { origin: base, accept: 'application/json' } });
+ok(noUnit.status === 400 && (await noUnit.json()).fields?.lotId === 'required', `development enquiry without unit refused (${noUnit.status})`);
+const form = new URLSearchParams({ name: 'A', email: 'a@example.com', message: 'm', redirect: '/kontakt#kontakt-form' });
+const res = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, redirect: 'manual', headers: { origin: base } });
+const cross = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, redirect: 'manual', headers: { origin: 'https://evil.example' } });
+ok(cross.status === 403, `cross-site form post refused (${cross.status})`);
+ok(res.status === 303 && res.headers.get('location') === '/kontakt?enquiry=preview#kontakt-form', `no-JS post: ${res.status} ${res.headers.get('location')}`);
+ok(!errs.length, `no console errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
+await b.close();

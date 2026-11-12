@@ -1,0 +1,57 @@
+{
+  "updated": "2026-11-11",
+  "files": {
+    "it": [
+      {
+        "key": "brochure",
+        "href": "/documents/it/brochure-archi-del-bre.pdf",
+        "title": "Brochure",
+        "description": "Il progetto, le tipologie, chi costruisce e l’ufficio vendite.",
+        "pages": 4,
+        "bytes": 678758
+      },
+      {
+        "key": "prices",
+        "href": "/documents/it/listino-prezzi-archi-del-bre.pdf",
+        "title": "Listino prezzi",
+        "description": "Tutti gli appartamenti con superfici, piano, prezzo e disponibilità.",
+        "pages": 1,
+        "bytes": 76888
+      },
+      {
+        "key": "plans",
+        "href": "/documents/it/piante-archi-del-bre.pdf",
+        "title": "Piante",
+        "description": "Una pianta indicativa per tipologia, alla stessa scala.",
+        "pages": 8,
+        "bytes": 256391
+      }
+    ],
+    "de": [
+      {
+        "key": "brochure",
+        "href": "/documents/de/broschuere-archi-del-bre.pdf",
+        "title": "Broschüre",
+        "description": "Das Projekt, die Wohnungstypen, wer baut und das Verkaufsbüro.",
+        "pages": 4,
+        "bytes": 683290
+      },
+      {
+        "key": "prices",
+        "href": "/documents/de/preisliste-archi-del-bre.pdf",
+        "title": "Preisliste",
+        "description": "Alle Wohnungen mit Flächen, Etage, Preis und Verfügbarkeit.",
+        "pages": 1,
+        "bytes": 80767
+      },
+      {
+        "key": "plans",
+        "href": "/documents/de/grundrisse-archi-del-bre.pdf",
+        "title": "Grundrisse",
+        "description": "Ein indikativer Grundriss pro Wohnungstyp, im gleichen Massstab.",
+        "pages": 8,
+        "bytes": 258947
+      }
+    ]
+  }
+}

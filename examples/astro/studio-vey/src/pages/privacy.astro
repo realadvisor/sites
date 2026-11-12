@@ -1,0 +1,20 @@
+---
+// Privacy policy. Text from the kit (agency data only): restyled, never rewritten.
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import { agencyOf } from '@realadvisor/sites-kit/agency';
+import LegalPage from '../components/LegalPage.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { lang, t } from '@realadvisor/sites-kit/i18n';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import { site } from '../lib/data';
+
+const s = await site();
+const agency = agencyOf(s.org, s.team);
+const title = t('privacyPolicy');
+---
+<Layout title={`${title} | ${s.org.name}`} description={`${title} ${s.org.name}`}>
+  <LegalPage title={title}><LegalContent sections={privacyPolicy(agency, { analytics: !!analyticsId() }, lang())} /></LegalPage>
+</Layout>

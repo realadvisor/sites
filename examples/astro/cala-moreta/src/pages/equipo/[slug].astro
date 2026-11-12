@@ -1,0 +1,9 @@
+---
+export const prerender = false;
+import AgentPage from '../../views/AgentPage.astro';
+import { agentSlug, sites } from '../../lib/data';
+
+const agent = (await sites.agents()).find((a) => agentSlug(a) === Astro.params.slug);
+if (!agent) return Astro.rewrite('/404');
+---
+<AgentPage lang="es" agent={agent} />

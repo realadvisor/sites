@@ -1,0 +1,74 @@
+---
+/**
+ * Site shell: fonts, tokens, skip link, header, footer, phone action bar.
+ * Every page renders through it (Base writes the <head> SEO tags).
+ */
+import '@fontsource/instrument-serif/latin-400.css';
+import '@fontsource-variable/figtree/wght.css';
+import serif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import sans from '@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url';
+import '../styles/global.css';
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Site as SiteData } from '../lib/data';
+import { alternates as alts, href, LOCALE, type L, type RouteKey } from '../lib/routes';
+import { c } from '../lib/copy';
+
+interface Props {
+  site: SiteData;
+  l: L;
+  /** Route key: nav state and, without `alternates`, the language versions. */
+  route: RouteKey | 'unit' | '404';
+  alternates?: { lang: string; href: string }[];
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  /** Hide the phone action bar (pages with their own form). */
+  bar?: boolean;
+}
+const { site, l, route, title, description, image, jsonLd, noindex, bar = true } = Astro.props;
+const alternates = Astro.props.alternates ?? (route === 'unit' || route === '404' ? undefined : alts(route));
+// Kit gap: check:deploy fails a legal page that links the other language's legal page,
+// so there the language switch goes to the other language's home (hreflang stays in <head>).
+const switchTo = route === 'legal' || route === 'privacy' ? undefined : alternates;
+---
+<Base title={title} description={description} image={image} jsonLd={jsonLd} noindex={noindex} alternates={alternates} locale={LOCALE[l]}>
+  <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={serif} />
+  <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={sans} />
+  <meta slot="head" name="theme-color" content="#f6f1e8" />
+  <a class="skip" href="#main">{c('skip', l)}</a>
+  <Header site={site} l={l} route={route} alternates={switchTo} />
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+  <Footer site={site} l={l} alternates={switchTo} />
+  {bar && (
+    <nav class="phone-bar" aria-label={c('quick', l)}>
+      <a href={href('units', l)}>{c('units', l)}</a>
+      <a href={href('contact', l)} class="primary">{c('writeUs', l)}</a>
+    </nav>
+  )}
+</Base>
+
+<style>
+  main { display: block; outline: none; }
+  .phone-bar { display: none; }
+  @media (max-width: 760px) {
+    .phone-bar {
+      position: fixed; inset: auto 0 0 0; z-index: 30; display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: rgb(246 241 232 / 0.96); border-top: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .phone-bar a {
+      display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px;
+      font: 600 0.9375rem/1 var(--sans); text-decoration: none;
+      border: 1px solid var(--line-strong); color: var(--text); background: var(--surface);
+    }
+    .phone-bar a.primary { background: var(--text); border-color: var(--text); color: var(--bg); }
+    :global(body) { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
+  }
+</style>

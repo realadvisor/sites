@@ -1,0 +1,124 @@
+---
+/**
+ * One building as a stacking plan: one row per floor, top floor first; each
+ * unit a block whose width follows its living area. Status shows as fill and
+ * as text; free and reserved units show their net rent, let units none. Every block links to its unit page.
+ * Server-rendered (works without JS); data-* attributes feed the filter script.
+ */
+import type { BuildingInfo, Filters, Row } from '../lib/units';
+import { chf, floorShort, matches, netRent, rentShort, statusLabel, unitTitle, unitUrl, monthYear } from '../lib/units';
+
+interface Props {
+  building: BuildingInfo;
+  filters?: Filters;
+  /** Unit to mark (unit page). */
+  current?: string;
+  /** Compact: no rents, smaller blocks (unit page context). */
+  compact?: boolean;
+  headingLevel?: 2 | 3;
+}
+const { building: b, filters, current, compact = false, headingLevel = 2 } = Astro.props;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+const floorName = (f: number) => (f === 0 ? 'EG' : `${f}. OG`);
+const rowsOn = (f: number): Row[] => b.rows.filter((r) => (r.u.floor ?? 0) === f).sort((x, y) => (x.x.position ?? 0) - (y.x.position ?? 0));
+const SHORT = { available: 'frei', reserved: 'res.', sold: 'verm.' } as const;
+const tone = { A: 'a', B: 'b', C: 'c' }[b.key] ?? 'a';
+---
+<section class:list={['stack', `tone-${tone}`, { compact }]} data-building={b.key} aria-labelledby={`stack-${b.key}${compact ? '-c' : ''}`}>
+  <header class="stack-head">
+    <H class="stack-title" id={`stack-${b.key}${compact ? '-c' : ''}`}>{b.name}</H>
+    {!compact && (
+      <p class="stack-meta">
+        {b.moveIn && <span>Bezug ab {monthYear(b.moveIn)}</span>}
+        <span class="num" data-free>{b.available} von {b.rows.length} frei</span>
+      </p>
+    )}
+  </header>
+  <div class="roof" aria-hidden="true"></div>
+  <ol class="floors" aria-label={`${b.name}, Geschosse von oben nach unten`}>
+    {b.floors.map((f) => (
+      <li class="floor">
+        <span class="floor-label">{floorName(f)}</span>
+        <ul class="units">
+          {rowsOn(f).map((r) => {
+            const rent = netRent(r.u);
+            const dim = filters ? !matches(r, filters) : false;
+            const label = [unitTitle(r), r.x.number, statusLabel(r.u), rent ? `${chf(rent)} netto` : ''].filter(Boolean).join(', ');
+            return (
+              <li style={`flex-grow:${(r.u.living_surface ?? 60) + 25}`} class="unit-cell">
+                <a
+                  href={unitUrl(r.u)}
+                  class:list={['u', `u--${r.u.status}`, { 'is-dim': dim, 'is-current': current === r.u.id }]}
+                  aria-label={label}
+                  aria-current={current === r.u.id ? 'page' : undefined}
+                  data-unit
+                  data-status={r.u.status}
+                  data-rooms={r.u.rooms}
+                  data-rent={rent ?? ''}
+                  data-floor={r.u.floor ?? 0}
+                  data-movein={r.x.moveIn?.slice(0, 7) ?? ''}
+                  data-haus={r.x.building}
+                >
+                  {/* fixture only: unit number */}
+                  <span class="u-no">{r.x.number ?? floorShort(r.u)}</span>
+                  <span class="u-rooms">{String(r.u.rooms ?? '')}<span class="u-zi"> Zi.</span></span>
+                  {!compact && (
+                    <span class="u-rent num">
+                      <span class="long">{rent ? chf(rent) : statusLabel(r.u)}</span>
+                      <span class="short" aria-hidden="true">{rent ? rentShort(rent) : SHORT[r.u.status]}</span>
+                    </span>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </li>
+    ))}
+  </ol>
+  <div class="ground" aria-hidden="true"></div>
+</section>
+
+<style>
+  .stack { --c: var(--haus-a); display: grid; gap: 8px; min-width: 0; }
+  .tone-b { --c: var(--haus-b); }
+  .tone-c { --c: var(--haus-c); }
+  .stack-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: 6px; }
+  .stack-title { font-size: var(--step-3); }
+  .compact .stack-title { font-size: var(--step-1); }
+  .stack-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.9375rem; color: var(--muted); }
+  .stack-meta span + span::before { content: '·'; margin-right: 14px; }
+  .roof { margin-left: 52px; height: 14px; background: var(--c); border: 2px solid var(--ink); border-bottom: 0; border-radius: 10px 10px 0 0; }
+  .floors { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .floor { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: stretch; }
+  .floor-label { align-self: center; white-space: nowrap; font: 650 0.8125rem/1 var(--body); color: var(--muted); text-align: right; }
+  .units { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; min-width: 0; }
+  /* min-width keeps the narrowest (1.5-room) block wide enough for its rent: never an ellipsis on a price. */
+  .unit-cell { flex-basis: 0; min-width: 68px; display: flex; container-type: inline-size; }
+  .short { display: none; }
+  @container (max-width: 96px) { .long { display: none; } .short { display: inline; } .u-zi { display: none; } }
+  .u { flex: 1; min-width: 0; display: grid; align-content: space-between; gap: 6px; min-height: 76px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--ink); text-decoration: none; color: var(--ink); background: var(--c); transition: transform 0.12s ease, opacity 0.15s ease; }
+  .compact .u { min-height: 46px; padding: 6px 8px; gap: 2px; border-radius: 8px; }
+  .u:hover { transform: translateY(-2px); text-decoration: none; }
+  .u--reserved { background: repeating-linear-gradient(135deg, #fff 0 7px, color-mix(in oklab, var(--c) 36%, #fff) 7px 11px); }
+  .u--sold { background: #ebe6f0; border-color: #b9b1c9; color: #4a4566; }
+  .u.is-dim { opacity: 0.22; }
+  .u.is-current { outline: 4px solid var(--ink); outline-offset: 2px; }
+  .u-no { font: 700 0.8125rem/1 var(--body); letter-spacing: 0.02em; }
+  .u-rooms { font: 800 1.375rem/1 var(--display); letter-spacing: -0.02em; }
+  .compact .u-rooms { font-size: 1rem; }
+  .u-zi { font: 600 0.8125rem/1 var(--body); }
+  .u-rent { font: 650 0.8125rem/1.1 var(--body); white-space: nowrap; letter-spacing: -0.01em; }
+  .ground { margin-left: 52px; height: 8px; border-top: 2px solid var(--ink); background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 10px); opacity: 0.35; }
+  @media (max-width: 560px) {
+    .floor { grid-template-columns: 34px minmax(0, 1fr); }
+    .floor-label { font-size: 0.6875rem; }
+    .roof, .ground { margin-left: 42px; }
+    .u { padding: 6px 6px; min-height: 68px; border-radius: 8px; }
+    .u-rooms { font-size: 1.125rem; }
+    .u-zi { display: none; }
+    .u-rent { font-size: 0.75rem; }
+    .units { gap: 4px; }
+    .unit-cell { min-width: 54px; }
+  }
+</style>

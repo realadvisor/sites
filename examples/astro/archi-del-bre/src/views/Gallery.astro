@@ -1,0 +1,112 @@
+---
+/**
+ * Gallery: the development's photos as an editorial sequence (a wide photo,
+ * a pair, a tall one beside two), then the construction site (fixture only).
+ * Every photo opens whole in the lightbox; without JS the link opens it.
+ */
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { developmentExtra, loadSite } from '../lib/data';
+import type { L } from '../lib/routes';
+import { c } from '../lib/copy';
+import { deliveryLabel } from '../lib/units';
+import { photoAlt } from '../content/photo-alts';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const site = await loadSite();
+const { dev } = site;
+const photos = dev.photos;
+const build = developmentExtra(dev).construction_photos ?? []; // fixture only: construction photos
+const T = {
+  it: {
+    title: `Galleria | ${dev.title}`,
+    h1: 'Galleria',
+    intro: `${photos.length} foto della residenza e delle finiture, e lo stato del cantiere.`,
+    site: 'Il cantiere',
+    siteP: `Lavori in corso, consegna prevista ${deliveryLabel(dev, 'it')}.`,
+    siteAlt: (n: number) => `Cantiere della ${dev.title}, foto ${n}`,
+  },
+  de: {
+    title: `Galerie | ${dev.title}`,
+    h1: 'Galerie',
+    intro: `${photos.length} Fotos der Residenz und des Ausbaus, dazu der Stand der Baustelle.`,
+    site: 'Die Baustelle',
+    siteP: `Die Bauarbeiten laufen, Bezug geplant ${deliveryLabel(dev, 'de')}.`,
+    siteAlt: (n: number) => `Baustelle der ${dev.title}, Foto ${n}`,
+  },
+}[l];
+const alt = (i: number) => photoAlt(photos[i]!.url, l, `${dev.title}, ${c('photo', l)} ${i + 1}`);
+// Layout pattern, repeated: wide, pair, tall + two.
+const shapes = ['wide', 'half', 'half', 'tall', 'quarter', 'quarter'] as const;
+const dims = { wide: [1600, 860], half: [900, 680], tall: [800, 1040], quarter: [800, 600] } as const;
+const sizes = { wide: '(max-width: 760px) 100vw, 90vw', half: '(max-width: 760px) 50vw, 45vw', tall: '(max-width: 760px) 100vw, 45vw', quarter: '(max-width: 760px) 50vw, 45vw' };
+// End of the run: a tall photo needs two beside it, a half photo its pair; otherwise the last one goes wide.
+const shapeOf = (i: number) => {
+  const s = shapes[i % shapes.length]!;
+  const left = photos.length - i;
+  if (s === 'tall' && left < 3) return 'wide';
+  if (s === 'quarter' && i % shapes.length === 4 && left < 2) return 'wide';
+  if (s === 'half' && i % shapes.length === 1 && left < 2) return 'wide';
+  return s;
+};
+const lb = (url: string) => img(url, { w: 2000, fit: 'fit', quality: 78 });
+---
+<Site site={site} l={l} route="gallery" title={T.title} description={T.intro} image={photos[0] ? img(photos[0].url, { w: 1200, h: 630 }) : undefined}>
+  <div class="wrap head">
+    <h1 class="h1">{T.h1}</h1>
+    <p class="lede">{T.intro}</p>
+  </div>
+  <div class="wrap seq">
+    {photos.map((p, i) => {
+      const s = shapeOf(i);
+      const [w, h] = dims[s];
+      return (
+        <a class:list={['tile', s]} href={lb(p.url)} data-lightbox data-alt={alt(i)}>
+          <Photo src={p.url} alt={alt(i)} width={w} height={h} sizes={sizes[s]} priority={i === 0} />
+        </a>
+      );
+    })}
+  </div>
+  {build.length > 0 && (
+    <section class="wrap build" aria-labelledby="site-h">
+      <div class="b-head">
+        <h2 id="site-h" class="h2">{T.site}</h2>
+        <p class="muted">{T.siteP}</p>
+      </div>
+      <div class="b-grid">
+        {build.map((u, i) => (
+          <a class="tile" href={lb(u)} data-lightbox data-alt={T.siteAlt(i + 1)}>
+            <Photo src={u} alt={T.siteAlt(i + 1)} width={800} height={600} sizes="(max-width: 760px) 50vw, 25vw" />
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  <Lightbox l={l} />
+</Site>
+
+<style>
+  .head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 20px 64px; align-items: end; padding-block: clamp(40px, 6vw, 88px) 40px; }
+  .seq { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-bottom: var(--section); }
+  .tile { display: block; overflow: hidden; border-radius: 12px; background: var(--sand); }
+  .tile :global(picture) { height: 100%; }
+  .tile :global(img) { transition: transform 0.6s var(--ease); }
+  .tile:hover :global(img) { transform: scale(1.02); }
+  .wide { grid-column: 1 / -1; aspect-ratio: 1600 / 860; }
+  .half { aspect-ratio: 900 / 680; }
+  .tall { grid-row: span 2; }
+  .quarter { aspect-ratio: 4 / 3; }
+  .build { padding-bottom: var(--section); display: grid; gap: 28px; }
+  .b-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; padding-top: 40px; border-top: 1px solid var(--line); }
+  .b-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .b-grid .tile { aspect-ratio: 4 / 3; }
+  @media (max-width: 760px) {
+    .head { grid-template-columns: 1fr; }
+    .seq { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .tall { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+    .b-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+</style>

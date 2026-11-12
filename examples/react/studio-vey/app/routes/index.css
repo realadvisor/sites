@@ -1,0 +1,52 @@
+/* From pages/index.astro (scoped there). */
+  .hero { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); min-height: min(calc(100svh - var(--header-h)), 820px); }
+  .hero-media { position: relative; background: var(--surface); min-height: 420px; }
+  .hero-media a, .hero-media picture { display: contents; }
+  .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-panel { background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: clamp(40px, 5vw, 80px) clamp(28px, 4.5vw, 72px) clamp(32px, 3.5vw, 48px); }
+  .hero-text { display: grid; gap: 28px; align-content: center; flex: 1; }
+  .hero-text h1 { max-width: 13ch; }
+  .hero-links { list-style: none; display: grid; border-top: 1px solid var(--line-strong); max-width: 420px; }
+  .hero-links a {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; min-height: 52px;
+    border-bottom: 1px solid var(--line-strong); text-decoration: none; font: 400 1.375rem/1.2 var(--serif);
+  }
+  .hero-links a .muted { font: 400 var(--fs-small)/1 var(--sans); }
+  .hero-links a:hover span:first-child { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  .hero-caption { display: grid; gap: 4px; text-decoration: none; max-width: 420px; padding-top: 18px; border-top: 1px solid var(--line-strong); font-size: 0.9375rem; }
+  .hero-caption-title { font: 400 1.25rem/1.25 var(--serif); }
+  .hero-caption:hover .hero-caption-title { text-decoration: underline; text-decoration-thickness: 1px; }
+
+  .sec-head { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(28px, 3vw, 44px); }
+  .sell { background: var(--surface); }
+  .sell-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px clamp(40px, 6vw, 112px); align-items: start; }
+  .sell-text { display: grid; gap: 20px; justify-items: start; }
+  .sell-text .muted { max-width: 44ch; font-size: 1.0625rem; }
+  .sell-h { display: flex; justify-content: space-between; align-items: center; gap: 16px; font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .sell-h .more { min-height: 44px; color: var(--text); }
+  .places-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 40px var(--gap); }
+  .place { display: grid; gap: 8px; text-decoration: none; }
+  .place-media picture { display: contents; }
+  .place-media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--surface); margin-bottom: 10px; }
+  .place-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .place:hover .place-media img { transform: scale(1.03); }
+  .place-name { font: 400 var(--fs-h2)/1.1 var(--serif); }
+  .journal { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px clamp(40px, 6vw, 112px); align-items: start; }
+  .journal-side { display: grid; gap: 12px; justify-items: start; }
+  .journal-list { list-style: none; border-top: 1px solid var(--line-strong); }
+  .journal-list li { border-bottom: 1px solid var(--line); }
+  .journal-list a { display: grid; gap: 6px; padding: 24px 0; text-decoration: none; }
+  .journal-meta { font-size: var(--fs-small); }
+  .journal-title { font: 400 var(--fs-h3)/1.25 var(--serif); }
+  .journal-list a:hover .journal-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  .journal-excerpt { max-width: 60ch; }
+
+  @media (max-width: 1023px) {
+    .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+    .hero-media { aspect-ratio: 5 / 4; min-height: 0; }
+    .sell-in { grid-template-columns: minmax(0, 1fr); }
+    .journal { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 639px) {
+    .hero-panel { padding-inline: var(--gutter); }
+  }

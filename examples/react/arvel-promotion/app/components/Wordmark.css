@@ -1,0 +1,5 @@
+.wm { display: inline-grid; justify-items: center; line-height: 1; gap: 5px; }
+.wm .wm-a { font: 500 1.5rem / 0.9 var(--serif); letter-spacing: 0.34em; margin-right: -0.34em; text-transform: uppercase; }
+.wm .wm-b { font: 500 0.5625rem / 1 var(--sans); letter-spacing: 0.52em; margin-right: -0.52em; text-transform: uppercase; opacity: 0.85; }
+.wm--lg .wm-a { font-size: clamp(2.6rem, 6vw, 4.6rem); }
+.wm--lg .wm-b { font-size: clamp(0.6875rem, 1vw, 0.875rem); }

@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import View from '../../../../views/DevelopmentView.astro';
+import { sites } from '../../../../lib/data';
+const dev = await sites.development(Astro.params.slug!);
+if (!dev) return Astro.rewrite('/404');
+---
+<View l="fr" dev={dev} />

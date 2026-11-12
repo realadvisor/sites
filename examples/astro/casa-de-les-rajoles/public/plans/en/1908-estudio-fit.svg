@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="7.545 3.991 8.91 9.368" width="356" height="375" role="img" aria-label="Indicative plan: studio, 1908 building">
+<title>Indicative plan: studio, 1908 building</title>
+<defs>
+<pattern id="deck" width="0.3" height="0.3" patternUnits="userSpaceOnUse"><rect width="0.3" height="0.3" fill="#f3e3d6"/><path d="M0,0.3 h0.3" stroke="#e2c6b2" stroke-width="0.03"/></pattern>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#2b2420;text-anchor:middle}.n{font-size:0.374px;font-weight:600}.a{font-size:0.308px;fill:#6b6058}.o{font-size:0.352px;font-style:italic;fill:#8a4130}.s{font-size:0.308px;fill:#6b6058}.lv{font-size:0.396px;font-weight:600;letter-spacing:0.04em}.st{text-anchor:start}.en{text-anchor:end}.sm.n{font-size:0.275px}.sm.a{font-size:0.242px}</style>
+</defs>
+<rect x="7.545" y="3.991" width="8.91" height="9.368" fill="#ffffff"/>
+<rect x="9.286" y="11.059" width="2.143" height="0.7" fill="url(#deck)" stroke="#6b6058" stroke-width="0.04"/>
+<rect x="12.571" y="11.059" width="2.143" height="0.7" fill="url(#deck)" stroke="#6b6058" stroke-width="0.04"/>
+<text x="12" y="12.359" class="o">Balcony · 3 m²</text>
+<rect x="8.145" y="5.741" width="2.313" height="2.34" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="10.458" y="5.741" width="2.159" height="2.34" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="12.617" y="5.741" width="3.238" height="2.34" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="8.145" y="8.081" width="7.71" height="2.978" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="8.145" y="5.741" width="7.71" height="5.318" fill="none" stroke="#2b2420" stroke-width="0.28"/>
+<line x1="13.536" y1="5.741" x2="14.936" y2="5.741" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="13.536" y1="5.671" x2="14.936" y2="5.671" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="13.536" y1="5.811" x2="14.936" y2="5.811" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="15.855" y1="6.211" x2="15.855" y2="7.611" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="15.785" y1="6.211" x2="15.785" y2="7.611" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="15.925" y1="6.211" x2="15.925" y2="7.611" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="9.654" y1="11.059" x2="10.954" y2="11.059" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="9.654" y1="10.989" x2="10.954" y2="10.989" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="9.654" y1="11.129" x2="10.954" y2="11.129" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="13.046" y1="11.059" x2="14.346" y2="11.059" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="13.046" y1="10.989" x2="14.346" y2="10.989" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="13.046" y1="11.129" x2="14.346" y2="11.129" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="8.145" y1="8.87" x2="8.145" y2="10.27" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="8.075" y1="8.87" x2="8.075" y2="10.27" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="8.215" y1="8.87" x2="8.215" y2="10.27" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="15.855" y1="8.87" x2="15.855" y2="10.27" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="15.785" y1="8.87" x2="15.785" y2="10.27" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="15.925" y1="8.87" x2="15.925" y2="10.27" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="9.4" y1="8.081" x2="10.22" y2="8.081" stroke="#fffdf8" stroke-width="0.15000000000000002"/>
+<line x1="9.4" y1="8.081" x2="9.4" y2="7.261" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M9.4,7.261 A0.82,0.82 0 0 1 10.22,8.081" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="11.647" y1="8.081" x2="12.467" y2="8.081" stroke="#fffdf8" stroke-width="0.15000000000000002"/>
+<line x1="11.647" y1="8.081" x2="11.647" y2="7.261" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M11.647,7.261 A0.82,0.82 0 0 1 12.467,8.081" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.696" y1="5.741" x2="11.516" y2="5.741" stroke="#fffdf8" stroke-width="0.33"/>
+<line x1="10.696" y1="5.741" x2="10.696" y2="6.561" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M10.696,6.561 A0.82,0.82 0 0 0 11.516,5.741" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<text x="9.301" y="6.473" class="n">Bathroom</text>
+<text x="9.301" y="7.063" class="a">5.4 m²</text>
+<text x="11.537" y="6.473" class="n">Hall</text>
+<text x="11.537" y="7.063" class="a">5.1 m²</text>
+<text x="14.236" y="6.871" class="n">Kitchen</text>
+<text x="14.236" y="7.461" class="a">7.6 m²</text>
+<text x="12" y="9.53" class="n">Living</text>
+<text x="12" y="10.12" class="a">23 m²</text>
+<path d="M11.106,4.741 l0,0.55 m-0.22,-0.24 l0.22,0.24 l0.22,-0.24" fill="none" stroke="#2b2420" stroke-width="0.05"/>
+<text x="11.106" y="4.591" class="s">Entrance</text>
+<g transform="translate(15.755,4.941) scale(0.75)"><circle r="0.6" fill="none" stroke="#6b6058" stroke-width="0.04"/><path d="M0,-0.48 L0.23,0.3 L0,0.17 L-0.23,0.3 Z" fill="#2b2420"/><text y="-0.75" class="s">N</text></g>
+</svg>

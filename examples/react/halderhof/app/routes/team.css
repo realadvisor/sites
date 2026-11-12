@@ -1,0 +1,10 @@
+  .groups { display: grid; gap: clamp(56px, 6vw, 88px); }
+  .group { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 28px clamp(28px, 4vw, 64px); padding-top: 24px; border-top: 1px solid var(--line-strong); }
+  .group__head { display: grid; gap: 8px; align-content: start; }
+  .group__head h2 { color: var(--green-ink); }
+  .group__head h2 a { text-decoration: none; }
+  .group__head h2 a:hover { text-decoration: underline; }
+  .group__head a { color: var(--green); }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+  @media (max-width: 1000px) { .group { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 700px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; } }

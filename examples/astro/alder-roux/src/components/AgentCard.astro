@@ -1,0 +1,48 @@
+---
+/**
+ * One advisor in plain type: name, role and office, languages, phone and
+ * email. A real photo from the data is shown when there is one; no initials.
+ */
+import type { Agent, Team } from '@realadvisor/sites-sdk/types';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { href, type L } from '../lib/routes';
+import { cityName, langName, tx } from '../lib/copy';
+import { tel } from '../lib/format';
+
+interface Props {
+  agent: Agent;
+  slug: string;
+  team?: Team;
+  l: L;
+  as?: 'h2' | 'h3';
+}
+const { agent: a, slug, team, l, as: H = 'h3' } = Astro.props;
+const t = tx(l);
+const langs = (a.languages ?? []).map((x) => langName(x, l));
+---
+<article class:list={['ag', { 'ag--photo': a.photo?.url }]}>
+  {a.photo?.url && <RaImage class="ag__photo" src={a.photo} alt={`${a.first_name} ${a.last_name}`} width={160} height={200} sizes="80px" />}
+  <div class="ag__body">
+    <H class="ag__name"><a href={href('team', l, slug)}>{a.first_name} {a.last_name}</a></H>
+    {(a.title || team) && <p class="ag__role">{[a.title, team && t('officeOf', { city: cityName(team.address.city, l) || team.name })].filter(Boolean).join(' · ')}</p>}
+    {langs.length > 0 && <p class="ag__langs">{t('speaks', { langs: langs.join(', ') })}</p>}
+    <ul class="ag__contact">
+      {a.phone && <li><a class="num" href={tel(a.phone)}>{a.phone}</a></li>}
+      {a.email && <li><a href={`mailto:${a.email}`}>{a.email}</a></li>}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .ag { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; padding: 24px 0; border-top: 1px solid var(--line); height: 100%; }
+  .ag--photo { grid-template-columns: 80px minmax(0, 1fr); }
+  .ag :global(.ag__photo) { width: 80px; height: 100px; object-fit: cover; }
+  .ag__body { display: grid; gap: 4px; min-width: 0; }
+  .ag__name { font-size: 1.375rem; font-weight: 450; }
+  .ag__name a { text-decoration: none; }
+  .ag__name a:hover { text-decoration: underline; }
+  .ag__role { font-size: 0.9375rem; color: var(--text); }
+  .ag__langs { color: var(--muted); font-size: 0.9375rem; }
+  .ag__contact { list-style: none; display: grid; margin-top: 6px; font-size: 0.9375rem; }
+  .ag__contact a { color: var(--navy); min-height: 32px; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+</style>

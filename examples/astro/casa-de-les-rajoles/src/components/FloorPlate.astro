@@ -1,0 +1,113 @@
+---
+/**
+ * One floor of one wing drawn as a plate: a rectangle per unit, in its order
+ * on the floor (fixture only: position), its width following its living area
+ * on a scale shared by every floor of the wing, filled by status. The
+ * stairs sit after the first unit; what is left of the plate is common area.
+ * Each unit is a link to its page. A diagram, not a plan: the page says so.
+ */
+import type { Unit } from '@realadvisor/sites-sdk/types';
+import { href, tr, type Lang } from '../lib/i18n';
+import { kindOf, sortUnits, statusLabel, unitNumber, unitSlug, unitTitle, type Wing } from '../lib/units';
+
+interface Props {
+  units: Unit[];
+  lang: Lang;
+  wing: Wing;
+  /** Largest floor area of the wing (m²): the shared scale. */
+  scaleArea: number;
+  selected?: string;
+  /** Compact version (unit page): no street labels. */
+  compact?: boolean;
+  label: string;
+}
+const { units, lang, wing, scaleArea, selected, compact = false, label } = Astro.props;
+const t = tr(lang);
+const W = 1000;
+const X0 = 30;
+const Y0 = compact ? 16 : 52;
+const H = compact ? 150 : 300;
+const CORE = 64;
+const inner = W - 2 * X0 - CORE;
+const k = inner / scaleArea;
+const row = sortUnits(units);
+type Box = { u?: Unit; x: number; w: number; core?: boolean };
+const boxes: Box[] = [];
+let x = X0;
+row.forEach((u, i) => {
+  const w = Math.max(92, (u.living_surface ?? 40) * k);
+  boxes.push({ u, x, w });
+  x += w;
+  if (i === 0 && row.length > 1) { boxes.push({ x, w: CORE, core: true }); x += CORE; }
+});
+if (row.length <= 1) { boxes.push({ x, w: CORE, core: true }); x += CORE; }
+const end = W - X0;
+const common = end - x > 8 ? { x, w: end - x } : null;
+const short = (u: Unit) => {
+  const kd = kindOf(u);
+  if (kd === 'estudio') return lang === 'es' ? 'Estudio' : 'Studio';
+  const b = lang === 'es' ? `${u.bedrooms} dorm.` : `${u.bedrooms} bed`;
+  return kd === 'atico' ? `${t.kinds.atico[0]}, ${b}` : b;
+};
+const H2 = Y0 + H;
+const vbH = H2 + (compact ? 16 : 48);
+---
+<svg class:list={['plate', { compact }]} viewBox={`0 0 ${W} ${vbH}`} role="group" aria-label={label}>
+  <defs>
+    <pattern id={`hatch-${wing}-${compact ? 'c' : 'f'}-${row[0]?.floor ?? 0}`} width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#f2ece3" /><path d="M0 0v10" stroke="#ddd3c5" stroke-width="3" />
+    </pattern>
+  </defs>
+  {!compact && <text x={W / 2} y="30" class="side">{wing === '1908' ? t.courtyard : t.wings['1908']}</text>}
+  {!compact && <text x={W / 2} y={H2 + 34} class="side">{wing === '1908' ? t.street : t.courtyard}</text>}
+  <rect x={X0} y={Y0} width={end - X0} height={H} class="shell" />
+  {common && <rect x={common.x} y={Y0} width={common.w} height={H} fill={`url(#hatch-${wing}-${compact ? 'c' : 'f'}-${row[0]?.floor ?? 0})`} class="common" />}
+  {boxes.map((b) =>
+    b.core ? (
+      <g class="core">
+        <rect x={b.x} y={Y0} width={b.w} height={H} />
+        {Array.from({ length: 7 }, (_, i) => <line x1={b.x + 10} x2={b.x + b.w - 10} y1={Y0 + 20 + i * ((H - 40) / 6)} y2={Y0 + 20 + i * ((H - 40) / 6)} />)}
+        {!compact && <text x={b.x + b.w / 2} y={Y0 + H / 2} transform={`rotate(-90 ${b.x + b.w / 2} ${Y0 + H / 2})`} class="core-t">{t.core}</text>}
+      </g>
+    ) : (
+      <a href={href('units', lang, unitSlug(b.u!))} class:list={['u', b.u!.status, { sel: b.u!.id === selected }]} data-unit={b.u!.id}
+        aria-label={`${unitNumber(b.u!) ? `${t.unit} ${unitNumber(b.u!)}, ` : ''}${unitTitle(b.u!, lang)}, ${b.u!.living_surface ?? ''} m², ${statusLabel(b.u!, lang)}`}>
+        <rect x={b.x + 3} y={Y0 + 3} width={b.w - 6} height={H - 6} rx="2" />
+        <text x={b.x + 16} y={Y0 + (compact ? 40 : 66)} class="no">{unitNumber(b.u!)}</text>
+        {!compact && <text x={b.x + 16} y={Y0 + 104} class="kd">{short(b.u!)}</text>}
+        {!compact && <text x={b.x + 16} y={Y0 + 130} class="sz">{b.u!.living_surface} m²</text>}
+        <text x={b.x + 16} y={Y0 + H - (compact ? 18 : 22)} class="st">{statusLabel(b.u!, lang)}</text>
+      </a>
+    ),
+  )}
+  {common && !compact && common.w > 120 && <text x={common.x + common.w / 2} y={Y0 + H / 2 + 6} class="cm">{lang === 'es' ? 'Zonas comunes' : 'Common areas'}</text>}
+</svg>
+
+<style>
+  .plate { display: block; width: 100%; height: auto; font-family: var(--sans); }
+  .side { font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; fill: var(--muted); text-anchor: middle; font-weight: 600; }
+  .shell { fill: var(--paper); stroke: var(--ink); stroke-width: 5; }
+  .core rect { fill: #e9e1d4; stroke: var(--ink); stroke-width: 2; }
+  .core line { stroke: #b9ab97; stroke-width: 2; }
+  .core-t, .cm { font-size: 14px; fill: var(--muted); text-anchor: middle; letter-spacing: 0.08em; text-transform: uppercase; }
+  .u rect { stroke-width: 2; transition: stroke 0.12s, stroke-width 0.12s; }
+  .u.available rect { fill: var(--st-av); stroke: var(--st-av-line); }
+  .u.reserved rect { fill: var(--st-re); stroke: var(--st-re-line); }
+  .u.sold rect { fill: var(--st-so); stroke: var(--st-so-line); }
+  .u text { fill: var(--text); }
+  .u.sold text { fill: var(--muted); }
+  .no { font: 400 34px var(--serif); }
+  .compact .no { font-size: 30px; }
+  .kd { font-size: 19px; font-weight: 600; }
+  .sz { font-size: 18px; }
+  .st { font-size: 15px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .u:hover rect, .u.hl rect { stroke: var(--ink); stroke-width: 4; }
+  .u.sel rect { stroke: var(--accent); stroke-width: 7; }
+  .u:focus-visible { outline: none; }
+  @media (max-width: 760px) {
+    .plate:not(.compact) .kd, .plate:not(.compact) .sz, .plate:not(.compact) .st, .core-t, .cm { display: none; }
+    .plate:not(.compact) .no { font-size: 64px; }
+    .side { font-size: 30px; }
+  }
+  .u:focus-visible rect { stroke: var(--accent-strong); stroke-width: 7; }
+</style>

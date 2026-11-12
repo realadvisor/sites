@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6.976 3.949 10.049 8.453" width="402" height="338" role="img" aria-label="Indicative plan: 1 bedroom, 1908 building">
+<title>Indicative plan: 1 bedroom, 1908 building</title>
+<defs>
+<pattern id="deck" width="0.3" height="0.3" patternUnits="userSpaceOnUse"><rect width="0.3" height="0.3" fill="#f3e3d6"/><path d="M0,0.3 h0.3" stroke="#e2c6b2" stroke-width="0.03"/></pattern>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#2b2420;text-anchor:middle}.n{font-size:0.374px;font-weight:600}.a{font-size:0.308px;fill:#6b6058}.o{font-size:0.352px;font-style:italic;fill:#8a4130}.s{font-size:0.308px;fill:#6b6058}.lv{font-size:0.396px;font-weight:600;letter-spacing:0.04em}.st{text-anchor:start}.en{text-anchor:end}.sm.n{font-size:0.275px}.sm.a{font-size:0.242px}</style>
+</defs>
+<rect x="6.976" y="3.949" width="10.049" height="8.453" fill="#ffffff"/>
+<rect x="7.576" y="5.699" width="3.539" height="3.051" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="11.115" y="5.699" width="1.947" height="3.051" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="13.062" y="5.699" width="3.363" height="3.051" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="7.576" y="8.75" width="5.486" height="3.051" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="13.062" y="8.75" width="3.363" height="3.051" fill="#fffdf8" stroke="#2b2420" stroke-width="0.1"/>
+<rect x="7.576" y="5.699" width="8.849" height="6.103" fill="none" stroke="#2b2420" stroke-width="0.28"/>
+<line x1="8.284" y1="5.699" x2="10.407" y2="5.699" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="8.284" y1="5.629" x2="10.407" y2="5.629" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="8.284" y1="5.769" x2="10.407" y2="5.769" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="7.576" y1="6.524" x2="7.576" y2="7.924" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="7.506" y1="6.524" x2="7.506" y2="7.924" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="7.646" y1="6.524" x2="7.646" y2="7.924" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="16.424" y1="6.524" x2="16.424" y2="7.924" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="16.354" y1="6.524" x2="16.354" y2="7.924" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="16.494" y1="6.524" x2="16.494" y2="7.924" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="8.462" y1="11.801" x2="9.762" y2="11.801" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="8.462" y1="11.731" x2="9.762" y2="11.731" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="8.462" y1="11.871" x2="9.762" y2="11.871" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="10.876" y1="11.801" x2="12.176" y2="11.801" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="10.876" y1="11.731" x2="12.176" y2="11.731" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="10.876" y1="11.871" x2="12.176" y2="11.871" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="7.576" y1="9.576" x2="7.576" y2="10.976" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="7.506" y1="9.576" x2="7.506" y2="10.976" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="7.646" y1="9.576" x2="7.646" y2="10.976" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="14.043" y1="11.801" x2="15.443" y2="11.801" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="14.043" y1="11.731" x2="15.443" y2="11.731" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="14.043" y1="11.871" x2="15.443" y2="11.871" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="16.424" y1="9.576" x2="16.424" y2="10.976" stroke="#fffdf8" stroke-width="0.23000000000000004"/>
+<line x1="16.354" y1="9.576" x2="16.354" y2="10.976" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="16.494" y1="9.576" x2="16.494" y2="10.976" stroke="#2b2420" stroke-width="0.035"/>
+<line x1="11.115" y1="7.577" x2="11.115" y2="8.397" stroke="#fffdf8" stroke-width="0.15000000000000002"/>
+<line x1="11.115" y1="7.577" x2="10.295" y2="7.577" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M10.295,7.577 A0.82,0.82 0 0 0 11.115,8.397" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="11.678" y1="8.75" x2="12.498" y2="8.75" stroke="#fffdf8" stroke-width="0.15000000000000002"/>
+<line x1="11.678" y1="8.75" x2="11.678" y2="7.93" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M11.678,7.93 A0.82,0.82 0 0 1 12.498,8.75" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="13.661" y1="8.75" x2="14.481" y2="8.75" stroke="#fffdf8" stroke-width="0.15000000000000002"/>
+<line x1="13.661" y1="8.75" x2="13.661" y2="7.93" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M13.661,7.93 A0.82,0.82 0 0 1 14.481,8.75" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="14.501" y1="5.699" x2="15.321" y2="5.699" stroke="#fffdf8" stroke-width="0.33"/>
+<line x1="14.501" y1="5.699" x2="14.501" y2="6.519" stroke="#2b2420" stroke-width="0.05"/>
+<path d="M14.501,6.519 A0.82,0.82 0 0 0 15.321,5.699" fill="none" stroke="#6b6058" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<text x="9.345" y="7.184" class="n">Bedroom</text>
+<text x="9.345" y="7.774" class="a">10.8 m²</text>
+<text x="12.088" y="6.666" class="n sm">Bathroom</text>
+<text x="12.088" y="7.124" class="a sm">5.9 m²</text>
+<text x="14.743" y="6.666" class="n">Hall</text>
+<text x="14.743" y="7.256" class="a">10.3 m²</text>
+<text x="10.319" y="10.236" class="n">Living-dining</text>
+<text x="10.319" y="10.826" class="a">16.7 m²</text>
+<text x="14.743" y="10.236" class="n">Kitchen</text>
+<text x="14.743" y="10.826" class="a">10.3 m²</text>
+<path d="M14.911,4.699 l0,0.55 m-0.22,-0.24 l0.22,0.24 l0.22,-0.24" fill="none" stroke="#2b2420" stroke-width="0.05"/>
+<text x="14.911" y="4.549" class="s">Entrance</text>
+<g transform="translate(16.325,4.899) scale(0.75)"><circle r="0.6" fill="none" stroke="#6b6058" stroke-width="0.04"/><path d="M0,-0.48 L0.23,0.3 L0,0.17 L-0.23,0.3 Z" fill="#2b2420"/><text y="-0.75" class="s">N</text></g>
+</svg>

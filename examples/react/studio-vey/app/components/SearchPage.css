@@ -1,0 +1,12 @@
+/* From components/SearchPage.astro (scoped there). */
+  .sp { padding-bottom: var(--section); }
+  .sp-head { display: grid; gap: 18px; justify-items: start; padding-block: clamp(48px, 5vw, 80px) clamp(28px, 3vw, 44px); }
+  .sp-head .lede { max-width: 46ch; }
+  .sp .rs-form { padding-bottom: 8px; }
+  .sp .field-label { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .sp .rs-count { font: 400 1.375rem/1.2 var(--serif); }
+  .sp .rs-filters-btn, .sp .rs-views a, .sp .rs-status a { font-weight: 500; }
+  .sp .rs-bar { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 28px; }
+  .sp .rs-grid { row-gap: 56px; }
+  .sp .rs-empty-title { font-family: var(--serif); }
+  .sp .btn { font: 500 0.8125rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; }

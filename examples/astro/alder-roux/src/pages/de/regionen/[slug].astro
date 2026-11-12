@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import View from '../../../views/AreaView.astro';
+import { findArea } from '../../../lib/resolve';
+const area = await findArea(Astro.params.slug!);
+if (!area) return Astro.rewrite('/404');
+---
+<View l="de" slug={area.slug} />

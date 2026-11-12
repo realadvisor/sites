@@ -1,0 +1,61 @@
+---
+/** One agent: contacts, their homes (available, then sold), a form addressed to them. */
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import Site from '../layouts/Site.astro';
+import AgentBlock from '../components/AgentBlock.astro';
+import ListingCard from '../components/ListingCard.astro';
+import { agency, agentName, agentSlug, brandName, byNewest, firstPhoto, sites, type Agent } from '../lib/data';
+import { LOCALE_OF, UI, alternates, fill, type Lang } from '../lib/i18n';
+
+interface Props { lang: Lang; agent: Agent }
+const { lang, agent: a } = Astro.props;
+const ui = UI[lang];
+const [ag, all] = await Promise.all([agency(), sites.allListings()]);
+const mine = all.filter((l) => l.agent?.id === a.id).sort(byNewest);
+const live = mine.filter((l) => l.status === 'available');
+const sold = mine.filter((l) => l.status === 'sold');
+const name = agentName(a);
+const photo = a.photo ?? firstPhoto(live);
+---
+<Site lang={lang} current="team" title={`${name} | ${brandName(ag)}`}
+  description={[name, a.title, brandName(ag)].filter(Boolean).join(', ')}
+  image={photo && img(photo.url, { w: 1200, h: 630 })} alternates={alternates('team', agentSlug(a))}>
+  <header class="wrap phead head">
+    <AgentBlock agent={a} lang={lang} heading="h1" link={false} size="l" priority={!!a.photo} sizes="(min-width: 700px) 400px, 320px" />
+  </header>
+
+  <section class="wrap homes" aria-labelledby="homes-h">
+    <h2 id="homes-h" class="d-l">{fill(ui.agentHomes, { name: a.first_name })}</h2>
+    {live.length ? (
+      <div class="grid">{live.map((l, i) => <ListingCard listing={l} lang={lang} priority={!a.photo && i === 0} />)}</div>
+    ) : <p class="lead">{fill(ui.agentNone, { name: a.first_name })}</p>}
+    {sold.length > 0 && (
+      <>
+        <h3 class="d-m sold-h">{ui.nav.sold}</h3>
+        <div class="grid">{sold.map((l) => <ListingCard listing={l} lang={lang} showPrice={false} />)}</div>
+      </>
+    )}
+  </section>
+
+  <section class="form" aria-labelledby="form-h">
+    <div class="wrap form-in">
+      <h2 id="form-h" class="d-l">{fill(ui.writeTo, { name: a.first_name })}</h2>
+      <EnquiryForm agentId={a.id} agentName={a.first_name} contactReason="other" locale={LOCALE_OF[lang]} />
+    </div>
+  </section>
+</Site>
+
+<style>
+  .head :global(.agent-name) { font-size: var(--fs-xl); }
+  .head :global(.agent.has-photo) { grid-template-columns: minmax(0, 400px) 1fr; gap: clamp(24px, 4vw, 64px); align-items: end; }
+  .head :global(.agent-photo) { max-width: none; }
+  @media (max-width: 700px) { .head :global(.agent.has-photo) { grid-template-columns: 1fr; } .head :global(.agent-photo) { max-width: 320px; } }
+  .homes { display: grid; gap: clamp(24px, 3vw, 40px); border-top: 1px solid var(--text); padding-top: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 72px) clamp(24px, 3.5vw, 56px); }
+  .sold-h { margin-top: 24px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .form { background: var(--paper); margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); }
+  .form-in { display: grid; grid-template-columns: 1fr 1fr; gap: 40px clamp(40px, 6vw, 120px); }
+  @media (max-width: 900px) { .form-in { grid-template-columns: 1fr; } }
+</style>

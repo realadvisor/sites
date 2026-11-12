@@ -1,0 +1,115 @@
+/* Tokens and base styles. Components read only these tokens. */
+:root {
+  --bg: #f6f1e8;          /* ivory */
+  --paper: #fbf8f3;       /* lighter panels */
+  --surface: #fffdf9;
+  --sand: #ece3d3;        /* tinted bands */
+  --stone: #d9cfbf;
+  --text: #2a251f;
+  --muted: #675d51;       /* 5.5:1 on --bg */
+  --line: #ddd3c3;
+  --line-strong: #b9ac98;
+  --accent: #8a6a4a;      /* brand primary (organisation.brand) */
+  --accent-strong: #6d5236;
+  --danger: #a1361f;
+  --on-accent: #fff;
+
+  /* unit status (drawing + pills) */
+  --st-av: #cdd6b8; --st-av-edge: #7e8b62; --st-av-ink: #3d4a26;
+  --st-re: #ecd6a8; --st-re-edge: #b48a3e; --st-re-ink: #6a4a12;
+  --st-so: #e2ddd4; --st-so-edge: #b3aa9c; --st-so-ink: #5f574c;
+
+  --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Figtree Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.1vw, 2.25rem);
+  --step-3: clamp(2.1rem, 1.6rem + 2vw, 3.4rem);
+  --step-4: clamp(2.7rem, 1.8rem + 3.8vw, 5.6rem);
+
+  --max: 1320px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --section: clamp(72px, 9vw, 144px);
+  --radius-card: 14px;
+  --radius-frame: 22px;
+  --radius-btn: 999px;
+  --control-radius: 10px;
+}
+/* The kit's form.css sets --control-radius from --radius-btn (a pill here) on :root
+   after this file; this selector wins so fields and the textarea are not pills. */
+html:root {
+  --control-radius: 10px;
+  --control-h: 48px;
+  --header-h: 76px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 400 var(--step-0)/1.6 var(--sans); font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img, svg, picture { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -0.005em; text-wrap: balance; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--sand); }
+
+.wrap { width: 100%; max-width: calc(var(--max) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section); }
+.h1 { font-size: var(--step-4); }
+.h2 { font-size: var(--step-3); }
+.h3 { font-size: var(--step-2); }
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--text); max-width: 40ch; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.prose p + p { margin-top: 1em; }
+.prose { max-width: 62ch; }
+
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 12px 18px; background: var(--text); color: var(--bg); text-decoration: none; border-radius: 8px; }
+.skip:focus { top: 12px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 24px; border-radius: var(--radius-btn);
+  font: 600 0.9375rem/1 var(--sans); letter-spacing: 0.01em; text-decoration: none; white-space: nowrap;
+  border: 1px solid var(--text); background: var(--text); color: var(--bg); cursor: pointer;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+.btn.ghost { background: transparent; color: var(--text); border-color: var(--line-strong); }
+.btn.ghost:hover { border-color: var(--text); background: var(--paper); }
+.btn.light { background: var(--surface); color: var(--text); border-color: var(--surface); }
+.btn.light:hover { background: var(--sand); border-color: var(--sand); }
+.btn svg { flex: none; }
+.link { font-weight: 600; text-decoration: underline; text-decoration-color: var(--line-strong); }
+.link:hover { text-decoration-color: currentColor; }
+
+/* Status pill */
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font: 600 0.8125rem/1.4 var(--sans); white-space: nowrap; }
+.pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.available { background: var(--st-av); color: var(--st-av-ink); }
+.pill.reserved { background: var(--st-re); color: var(--st-re-ink); }
+.pill.sold { background: var(--st-so); color: var(--st-so-ink); }
+
+/* Photos */
+picture img, .photo img { width: 100%; height: 100%; object-fit: cover; }
+.arch { border-radius: 999px 999px var(--radius-card) var(--radius-card); overflow: hidden; }
+
+/* Enquiry form tokens (kit EnquiryForm) */
+.enquiry { --line: var(--line-strong); }
+.enquiry :is(input, textarea, select) { background: var(--surface); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

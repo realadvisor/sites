@@ -1,0 +1,14 @@
+---
+// Privacy policy: the kit's text from the organisation's data.
+export const prerender = false;
+import LegalPage from '../components/LegalPage.astro';
+import { privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { lang as kitLang, t } from '@realadvisor/sites-kit/i18n';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import { legalAgency, loadSite } from '../lib/data';
+import { LOCALE_OF } from '../lib/i18n';
+
+const site = await loadSite();
+const l = kitLang(LOCALE_OF.es);
+---
+<LegalPage site={site} lang="es" route="privacy" title={t('privacyPolicy', {}, l)} sections={privacyPolicy(legalAgency(site), { analytics: !!analyticsId() }, l)} />

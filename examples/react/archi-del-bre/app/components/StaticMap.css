@@ -1,0 +1,9 @@
+/* Scoped to the map (.map): the Astro component's <style>. */
+.map.map { margin: 0; }
+.map .frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--sand); border: 1px solid var(--line); border-radius: var(--radius-card); }
+.map .grid { position: absolute; width: calc(var(--cols) * 256px); height: calc(var(--rows) * 256px); left: 50%; top: 50%; display: grid; grid-template-columns: repeat(var(--cols), 256px); transform: translate(calc(-1 * var(--mx)), calc(-1 * var(--my))); }
+.map .grid img { width: 256px; height: 256px; max-width: none; filter: grayscale(0.85) sepia(0.18) contrast(0.95) brightness(1.03); }
+.map .pin { position: absolute; left: var(--mx); top: var(--my); width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px rgb(138 106 74 / 0.28), 0 0 0 1px #fff inset; }
+.map figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; font-size: 0.8125rem; color: var(--muted); }
+.map figcaption a { color: inherit; display: inline-block; padding-block: 8px; }
+@media (max-width: 640px) { .map .frame { aspect-ratio: 4 / 3; } }

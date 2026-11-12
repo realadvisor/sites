@@ -1,0 +1,235 @@
+---
+/**
+ * Unit page, plan first: the indicative plan (same scale as every other),
+ * the facts card with price and the two big area figures, the unit's place on
+ * its floor, photos, the CRM description, the enquiry form on this unit and
+ * other units of the same type. Sold units: noindex, no price, and the form
+ * asks about the units still for sale.
+ */
+import type { Unit } from '@realadvisor/sites-sdk/types';
+import { img } from '@realadvisor/sites-kit/image';
+import { sanitizeHtml } from '@realadvisor/sites-kit';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+import FloorPlate from '../components/FloorPlate.astro';
+import People from '../components/People.astro';
+import { client, listingExtra, type Site as SiteData } from '../lib/data';
+import { CONTENT_LANG, LANGS, LOCALE_OF, fill, href, tr, type Lang } from '../lib/i18n';
+import {
+  deliveryLabel, floorName, floorsOf, kindLabel, kindOf, m2, orientation, outdoor, outdoorLabel, planKey, planSrc, sortUnits, statusLabel,
+  unitNumber, unitOptions, unitPrice, unitShort, unitSlug, unitTitle, wingOf,
+} from '../lib/units';
+import { WING_ADDRESS } from '../content/site';
+import PLAN_SIZES from '../content/plans.json';
+
+interface Props { lang: Lang; site: SiteData; unit: Unit }
+const { lang, site, unit: u } = Astro.props;
+const t = tr(lang);
+const { dev } = site;
+const units = sortUnits(dev.units);
+const wing = wingOf(u);
+const o = outdoor(u);
+const key = planKey(u);
+const planDims = (PLAN_SIZES as Record<string, { full: number[]; fit: number[] }>)[key]?.fit ?? [960, 700];
+const listing = u.listing_slug ? await client.listing(u.listing_slug) : null;
+const energy = listing ? listingExtra(listing.id).energy_class : undefined; // fixture only: energy class
+const sameFloor = units.filter((x) => wingOf(x) === wing && x.floor === u.floor);
+const scale = Math.max(...floorsOf(units, wing).map((f) => units.filter((x) => wingOf(x) === wing && x.floor === f).reduce((s, x) => s + (x.living_surface ?? 0), 0)));
+const similar = units.filter((x) => x.id !== u.id && kindOf(x) === kindOf(u) && x.status !== 'sold').slice(0, 4);
+const photos = u.photos ?? [];
+const sold = u.status === 'sold';
+const name = unitTitle(u, lang);
+const number = unitNumber(u);
+const kind = kindOf(u) === 'atico' ? `${t.kinds.atico[0]}, ${u.bedrooms} ${t.bedroomsShort}` : kindLabel(kindOf(u), lang);
+const msg = fill(t.msgUnit, { u: number ? `${t.unit.toLowerCase()} ${number} (${name})` : name });
+const firstOther = similar[0]?.id ?? unitOptions(units, lang)[0]?.value;
+const facts: [string, string][] = [
+  number ? [t.number, number] : null,
+  [t.wing, `${t.wings[wing]}, ${WING_ADDRESS[wing]}`],
+  [t.floorLabel, floorName(u, lang)],
+  u.bedrooms != null ? [t.bedrooms, String(u.bedrooms)] : null,
+  u.bathrooms != null ? [t.bathrooms, String(u.bathrooms)] : null,
+  orientation(u, lang) ? [t.orientation, orientation(u, lang)] : null,
+  dev.delivery_date ? [t.delivery, deliveryLabel(dev, lang)] : null,
+  listing?.reference ? [t.ref, listing.reference] : null,
+].filter((x): x is [string, string] => !!x);
+const title = `${number ? `${unitShort(u, lang)}: ` : ''}${name} | ${dev.title}`;
+const description = [kind, floorName(u, lang), t.wings[wing], u.living_surface && m2(u.living_surface), o && `${outdoorLabel(o, lang).toLowerCase()} ${m2(o.m2)}`, u.status === 'available' ? unitPrice(u, lang) : statusLabel(u, lang)].filter(Boolean).join(' · ');
+const alts = LANGS.map((l) => ({ lang: LOCALE_OF[l], href: href('units', l, unitSlug(u)) }));
+const ENERGY = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const cover = photos[0] ?? dev.photos[0];
+---
+<Site site={site} lang={lang} route="units" title={title} description={`${dev.title}, Russafa. ${description}.`} image={cover && img(cover.url, { w: 1200, h: 630 })} alternates={alts} noindex={sold}>
+  <div class="wrap top">
+    <nav class="crumbs" aria-label={lang === 'es' ? 'Ruta' : 'Breadcrumb'}>
+      <a href={href('units', lang)}>{t.backUnits}</a>
+      <span aria-hidden="true">/</span>
+      <a href={`${href('units', lang)}?ala=${wing}#planta`}>{t.wings[wing]}</a>
+      <span aria-hidden="true">/</span>
+      <a href={`${href('units', lang)}?ala=${wing}&planta=${u.floor ?? 0}#planta`}>{floorName(u, lang)}</a>
+    </nav>
+    <h1>{number && <span class="no">{number}</span>}{name}</h1>
+  </div>
+
+  <div class="wrap main">
+    <section class="plan" aria-label={t.plansTitle}>
+      <figure>
+        <a href={planSrc(key, lang)} class="plan-link">
+          <img src={planSrc(key, lang, true)} alt={`${t.indicative} ${kind}, ${t.wings[wing]}`} width={planDims[0]} height={planDims[1]} />
+        </a>
+        <figcaption>{t.indicative} <a href={planSrc(key, lang)}>{lang === 'es' ? 'Plano a escala común' : 'Plan at the common scale'}</a></figcaption>
+      </figure>
+      <div class="pos">
+        <h2>{t.mapPosition}</h2>
+        <FloorPlate units={sameFloor} lang={lang} wing={wing} scaleArea={scale} selected={u.id} compact label={`${floorName(u, lang)}, ${t.wings[wing]}`} />
+      </div>
+    </section>
+
+    <aside class="card" aria-label={t.price}>
+      <p class="st"><span class:list={['pill', u.status]}>{statusLabel(u, lang)}</span></p>
+      <p class="price num">{u.status === 'available' ? unitPrice(u, lang) : ''}</p>
+      <div class="big">
+        <div><b class="num">{u.living_surface ?? '–'}<small>m²</small></b><span>{t.interior}</span></div>
+        <div><b class="num">{o ? o.m2 : '–'}{o && <small>m²</small>}</b><span>{outdoorLabel(o, lang).toLowerCase()}</span></div>
+      </div>
+      <dl>
+        {facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+      {energy && (
+        <div class="energy">
+          <p>{t.energy}</p>
+          <ol aria-label={`${t.energy}: ${energy}`}>
+            {ENERGY.map((c, i) => <li class:list={[`e${i}`, { on: c === energy }]}>{c === energy ? c : ''}</li>)}
+          </ol>
+        </div>
+      )}
+      <a class="cta coral" href="#consulta">{t.askUnit}</a>
+    </aside>
+  </div>
+
+  {photos.length > 0 && (
+    <section class="wrap photos" aria-labelledby="ph-h">
+      <h2 id="ph-h" class="visually-hidden">{t.photosTitle}</h2>
+      <div class:list={['ph-grid', `n${Math.min(photos.length, 3)}`]}>
+        {photos.slice(0, 3).map((p, i) => <Photo src={p.url} alt={p.alt} lang={CONTENT_LANG} width={i === 0 ? 1200 : 700} height={i === 0 ? 800 : 520} sizes={i === 0 ? '(min-width: 900px) 60vw, 100vw' : '(min-width: 900px) 30vw, 50vw'} />)}
+      </div>
+      <p class="muted small">{t.photoNote}</p>
+    </section>
+  )}
+
+  <section class="wrap about">
+    {u.description && (
+      <div>
+        <h2>{t.descriptionTitle}</h2>
+        <div class="prose" lang={CONTENT_LANG} set:html={sanitizeHtml(u.description)} />
+      </div>
+    )}
+    <div id="consulta" class="ask">
+      <h2>{t.askTitle}</h2>
+      {sold ? (
+        <>
+          <p class="muted">{t.askSold}</p>
+          <EnquiryForm id="consulta-form" developmentId={dev.id} units={unitOptions(units, lang)} selectedUnit={firstOther} agentName={dev.agents[0]?.first_name} locale={LOCALE_OF[lang]} message={fill(t.msgNotify, { k: kind.toLowerCase(), w: t.wings[wing] })} />
+        </>
+      ) : (
+        <EnquiryForm id="consulta-form" developmentId={dev.id} lotId={u.id} agentName={dev.agents[0]?.first_name} locale={LOCALE_OF[lang]} message={msg} />
+      )}
+      <People site={site} lang={lang} class="people-sm" />
+    </div>
+  </section>
+
+  {similar.length > 0 && (
+    <section class="wrap similar" aria-labelledby="s-h">
+      <h2 id="s-h">{fill(t.similar, { k: kindLabel(kindOf(u), lang, 2).toLowerCase() })}</h2>
+      <ul>
+        {similar.map((x) => {
+          const xo = outdoor(x);
+          return (
+            <li>
+              <a href={href('units', lang, unitSlug(x))}>
+                <span class="s-no">{unitNumber(x)}</span>
+                <span class="s-what"><b>{t.wings[wingOf(x)]} · {floorName(x, lang)}</b><span class="num">{x.living_surface && m2(x.living_surface)}{xo && ` · ${outdoorLabel(xo, lang).toLowerCase()} ${m2(xo.m2)}`}</span></span>
+                <span class="s-price num">{x.status === 'available' ? unitPrice(x, lang) : <span class:list={['pill', x.status]}>{statusLabel(x, lang)}</span>}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+</Site>
+
+<style>
+  .top { padding-block: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px); }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 0.875rem; color: var(--muted); margin-bottom: 18px; }
+  .crumbs a { color: var(--muted); display: inline-block; padding-block: 6px; }
+  h1 { font-size: clamp(2rem, 1.4rem + 2.4vw, 3.5rem); max-width: 24ch; }
+  h1 .no { display: block; font-size: 0.5em; color: var(--accent-strong); margin-bottom: 10px; letter-spacing: 0; }
+  .main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: clamp(24px, 4vw, 64px); align-items: start; }
+  .plan figure { margin: 0; background: #fff; border: 1px solid var(--line); padding: clamp(8px, 2vw, 24px); }
+  .plan img { width: 100%; height: auto; max-height: 640px; object-fit: contain; }
+  .plan-link { display: block; }
+  figcaption { margin-top: 12px; font-size: 0.875rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  figcaption a { color: var(--accent-strong); font-weight: 600; }
+  .pos { margin-top: 32px; }
+  .pos h2 { font: 600 0.8125rem/1.2 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .card { position: sticky; top: 24px; background: var(--paper); border: 1px solid var(--line); padding: 28px; display: grid; gap: 18px; }
+  .st { margin: 0; }
+  .price { font: 400 2.25rem/1 var(--serif); margin: 0 !important; }
+  .price:empty { display: none; }
+  .big { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--line); }
+  .big div { padding: 18px 0; display: grid; gap: 6px; }
+  .big div + div { border-left: 1px solid var(--line); padding-left: 20px; }
+  .big b { font: 400 3rem/1 var(--serif); }
+  .big small { font-size: 0.45em; margin-left: 4px; }
+  .big span { font-size: 0.875rem; color: var(--muted); }
+  dl { margin: 0; display: grid; gap: 0; }
+  dl div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 0.9375rem; }
+  dt { color: var(--muted); }
+  dd { margin: 0; text-align: right; font-weight: 600; }
+  .energy p { font-size: 0.875rem; color: var(--muted); margin-bottom: 8px; }
+  .energy ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .energy li { text-align: center; font: 600 0.8125rem/1 var(--sans); min-height: 29px; padding: 8px 0; color: #fff; opacity: 0.35; }
+  .energy li.on { opacity: 1; outline: 2px solid var(--ink); outline-offset: 1px; }
+  .e0 { background: #1f6b3a; } .e1 { background: #3d6e25; } .e2 { background: #56681a; } .e3 { background: #6e5f10; } .e4 { background: #8a4f0c; } .e5 { background: #933c15; } .e6 { background: #a3271b; }
+  .card .cta { width: 100%; }
+  .photos { margin-top: var(--space-section); }
+  .ph-grid { display: grid; gap: 12px; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; }
+  .ph-grid :global(picture:first-child) { grid-row: 1 / 3; }
+  .ph-grid :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .ph-grid.n1 { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .ph-grid.n2 { grid-template-rows: auto; }
+  .ph-grid.n2 :global(picture:first-child) { grid-row: auto; }
+  .photos p { margin-top: 12px; }
+  .about { margin-top: var(--space-section); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .about h2 { margin-bottom: 20px; font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem); }
+  .ask { background: var(--paper); border: 1px solid var(--line); padding: clamp(24px, 3vw, 40px); scroll-margin-top: 16px; }
+  .ask > p { margin-bottom: 16px; }
+  .ask :global(.people-sm) { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); grid-template-columns: 1fr; gap: 20px; }
+  .ask :global(.people-sm .nm) { font-size: 1.125rem; }
+  .ask :global(.people-sm li.has-photo) { grid-template-columns: 72px 1fr; gap: 14px; }
+  .ask :global(.people-sm .portrait img) { width: 72px; }
+  .similar { margin-top: var(--space-section); }
+  .similar h2 { margin-bottom: 20px; font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem); }
+  .similar ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .similar li { border-bottom: 1px solid var(--line); }
+  .similar a { display: grid; grid-template-columns: 52px 1fr auto; gap: 12px; align-items: baseline; padding: 16px 4px; text-decoration: none; color: var(--text); }
+  .similar a:hover { background: var(--paper); }
+  .s-no { font: 400 1.375rem/1 var(--serif); }
+  .s-what { display: grid; gap: 3px; }
+  .s-what span { font-size: 0.875rem; color: var(--muted); }
+  .s-price { font-weight: 600; }
+  @media (max-width: 1000px) {
+    .main, .about { grid-template-columns: 1fr; }
+    .card { position: static; }
+    .similar ul { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .card { padding: 20px; }
+    .big b { font-size: 2.5rem; }
+    .ph-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .ph-grid :global(picture:first-child) { grid-row: auto; grid-column: 1 / -1; }
+    .ask :global(.people-sm) { grid-template-columns: 1fr; }
+  }
+</style>

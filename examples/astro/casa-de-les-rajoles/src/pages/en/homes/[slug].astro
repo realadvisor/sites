@@ -1,0 +1,12 @@
+---
+// One unit. Unknown slug: the site's 404 (a real 404 status).
+export const prerender = false;
+import View from '../../../views/Unit.astro';
+import { loadSite } from '../../../lib/data';
+import { unitFromSlug } from '../../../lib/units';
+
+const site = await loadSite();
+const unit = unitFromSlug(site.dev, Astro.params.slug ?? '');
+if (!unit) return Astro.rewrite('/404');
+---
+<View lang="en" site={site} unit={unit} />

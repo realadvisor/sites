@@ -1,0 +1,42 @@
+/* From components/StackingPlan.astro (scoped there: every selector under .stack). */
+.stack { --c: var(--haus-a); display: grid; gap: 8px; min-width: 0; }
+.stack.tone-b { --c: var(--haus-b); }
+.stack.tone-c { --c: var(--haus-c); }
+.stack .stack-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: 6px; }
+.stack .stack-title { font-size: var(--step-3); }
+.stack.compact .stack-title { font-size: var(--step-1); }
+.stack .stack-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.9375rem; color: var(--muted); }
+.stack .stack-meta span + span::before { content: '·'; margin-right: 14px; }
+.stack .roof { margin-left: 52px; height: 14px; background: var(--c); border: 2px solid var(--ink); border-bottom: 0; border-radius: 10px 10px 0 0; }
+.stack .floors { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.stack .floor { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: stretch; }
+.stack .floor-label { align-self: center; white-space: nowrap; font: 650 0.8125rem/1 var(--body); color: var(--muted); text-align: right; }
+.stack .units { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; min-width: 0; }
+/* min-width keeps the narrowest (1.5-room) block wide enough for its rent: never an ellipsis on a price. */
+.stack .unit-cell { flex-basis: 0; min-width: 68px; display: flex; container-type: inline-size; }
+.stack .short { display: none; }
+@container (max-width: 96px) { .stack .long { display: none; } .stack .short { display: inline; } .stack .u-zi { display: none; } }
+.stack .u { flex: 1; min-width: 0; display: grid; align-content: space-between; gap: 6px; min-height: 76px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--ink); text-decoration: none; color: var(--ink); background: var(--c); transition: transform 0.12s ease, opacity 0.15s ease; }
+.stack.compact .u { min-height: 46px; padding: 6px 8px; gap: 2px; border-radius: 8px; }
+.stack .u:hover { transform: translateY(-2px); text-decoration: none; }
+.stack .u--reserved { background: repeating-linear-gradient(135deg, #fff 0 7px, color-mix(in oklab, var(--c) 36%, #fff) 7px 11px); }
+.stack .u--sold { background: #ebe6f0; border-color: #b9b1c9; color: #4a4566; }
+.stack .u.is-dim { opacity: 0.22; }
+.stack .u.is-current { outline: 4px solid var(--ink); outline-offset: 2px; }
+.stack .u-no { font: 700 0.8125rem/1 var(--body); letter-spacing: 0.02em; }
+.stack .u-rooms { font: 800 1.375rem/1 var(--display); letter-spacing: -0.02em; }
+.stack.compact .u-rooms { font-size: 1rem; }
+.stack .u-zi { font: 600 0.8125rem/1 var(--body); }
+.stack .u-rent { font: 650 0.8125rem/1.1 var(--body); white-space: nowrap; letter-spacing: -0.01em; }
+.stack .ground { margin-left: 52px; height: 8px; border-top: 2px solid var(--ink); background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 10px); opacity: 0.35; }
+@media (max-width: 560px) {
+  .stack .floor { grid-template-columns: 34px minmax(0, 1fr); }
+  .stack .floor-label { font-size: 0.6875rem; }
+  .stack .roof, .stack .ground { margin-left: 42px; }
+  .stack .u { padding: 6px 6px; min-height: 68px; border-radius: 8px; }
+  .stack .u-rooms { font-size: 1.125rem; }
+  .stack .u-zi { display: none; }
+  .stack .u-rent { font-size: 0.75rem; }
+  .stack .units { gap: 4px; }
+  .stack .unit-cell { min-width: 54px; }
+}

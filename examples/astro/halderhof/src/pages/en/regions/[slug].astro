@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import View from '../../../views/RegionView.astro';
+import { findRegion } from '../../../lib/resolve';
+const region = await findRegion(Astro.params.slug!);
+if (!region) return Astro.rewrite('/404');
+---
+<View l="en" region={region} />

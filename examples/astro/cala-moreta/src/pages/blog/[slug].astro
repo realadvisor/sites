@@ -1,0 +1,9 @@
+---
+export const prerender = false;
+import PostPage from '../../views/PostPage.astro';
+import { postsOf } from '../../lib/blog';
+
+const post = (await postsOf('es')).find((p) => p.data.path === Astro.params.slug);
+if (!post) return Astro.rewrite('/404');
+---
+<PostPage lang="es" post={post} />

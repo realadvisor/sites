@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 18" width="1000" height="720" role="img" aria-label="Plan indicatif, 6.5 pièces, attique">
+<title>Plan indicatif, 6.5 pièces, attique</title>
+<defs>
+<pattern id="deck" width="0.35" height="0.35" patternUnits="userSpaceOnUse"><rect width="0.35" height="0.35" fill="#e9e2d4"/><path d="M0,0.35 h0.35" stroke="#d6ccb9" stroke-width="0.03"/></pattern>
+<pattern id="garden" width="0.5" height="0.5" patternUnits="userSpaceOnUse"><rect width="0.5" height="0.5" fill="#e4e6d6"/><circle cx="0.25" cy="0.25" r="0.035" fill="#b9bea0"/></pattern>
+<style>text{font-family:Helvetica,Arial,sans-serif;fill:#2e2922;text-anchor:middle}.n{font-size:0.36px;font-weight:600;letter-spacing:0.01em}.a{font-size:0.3px;fill:#7a6f60}.o{font-size:0.36px;font-style:italic;fill:#7a6f60}.s{font-size:0.3px;fill:#7a6f60}.st{text-anchor:start}.en{text-anchor:end}.sm.n{font-size:0.27px}.sm.a{font-size:0.24px}</style>
+</defs>
+<rect x="0" y="0" width="25" height="18" fill="#ffffff"/>
+<rect x="2.5" y="12.75" width="20" height="3.2" fill="url(#deck)" stroke="#7a6f60" stroke-width="0.05" stroke-dasharray="0"/>
+<text x="12.5" y="14.51" class="o">Terrasse</text>
+<rect x="2.5" y="2.05" width="5" height="4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="7.5" y="2.05" width="2" height="4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="9.5" y="2.05" width="2.6" height="4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="12.1" y="2.05" width="2.8" height="4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="14.9" y="2.05" width="1.6" height="4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="16.5" y="2.05" width="6" height="4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="2.5" y="6.05" width="4" height="3.5" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="2.5" y="9.55" width="4" height="3.2" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="6.5" y="6.05" width="3.6" height="3.4" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="6.5" y="9.45" width="3.6" height="3.3" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="10.1" y="6.05" width="7.4" height="6.7" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="17.5" y="6.05" width="5" height="6.7" fill="#fbf9f5" stroke="#2e2922" stroke-width="0.12"/>
+<rect x="2.5" y="2.05" width="20" height="10.7" fill="none" stroke="#2e2922" stroke-width="0.28"/>
+<line x1="4.1" y1="2.05" x2="5.9" y2="2.05" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="4.1" y1="1.98" x2="5.9" y2="1.98" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="4.1" y1="2.12" x2="5.9" y2="2.12" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.5" y1="3.25" x2="2.5" y2="4.85" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="2.43" y1="3.25" x2="2.43" y2="4.85" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.57" y1="3.25" x2="2.57" y2="4.85" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.6" y1="2.05" x2="20.4" y2="2.05" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="18.6" y1="1.98" x2="20.4" y2="1.98" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.6" y1="2.12" x2="20.4" y2="2.12" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="22.5" y1="3.25" x2="22.5" y2="4.85" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="22.43" y1="3.25" x2="22.43" y2="4.85" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="22.57" y1="3.25" x2="22.57" y2="4.85" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.5" y1="7" x2="2.5" y2="8.6" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="2.43" y1="7" x2="2.43" y2="8.6" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.57" y1="7" x2="2.57" y2="8.6" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="3.6" y1="12.75" x2="5.4" y2="12.75" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="3.6" y1="12.68" x2="5.4" y2="12.68" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="3.6" y1="12.82" x2="5.4" y2="12.82" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.5" y1="10.35" x2="2.5" y2="11.95" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="2.43" y1="10.35" x2="2.43" y2="11.95" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="2.57" y1="10.35" x2="2.57" y2="11.95" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="11.025" y1="12.75" x2="16.575" y2="12.75" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="11.025" y1="12.68" x2="16.575" y2="12.68" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="11.025" y1="12.82" x2="16.575" y2="12.82" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.125" y1="12.75" x2="21.875" y2="12.75" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="18.125" y1="12.68" x2="21.875" y2="12.68" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="18.125" y1="12.82" x2="21.875" y2="12.82" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="22.5" y1="8.6" x2="22.5" y2="10.2" stroke="#fbf9f5" stroke-width="0.24000000000000002"/>
+<line x1="22.43" y1="8.6" x2="22.43" y2="10.2" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="22.57" y1="8.6" x2="22.57" y2="10.2" stroke="#2e2922" stroke-width="0.035"/>
+<line x1="6.4" y1="6.05" x2="7.25" y2="6.05" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="6.4" y1="6.05" x2="6.4" y2="5.2" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M6.4,5.2 A0.85,0.85 0 0 1 7.25,6.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="8.1" y1="6.05" x2="8.95" y2="6.05" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="8.1" y1="6.05" x2="8.1" y2="5.2" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M8.1,5.2 A0.85,0.85 0 0 1 8.95,6.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.4" y1="6.05" x2="11.25" y2="6.05" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="10.4" y1="6.05" x2="10.4" y2="5.2" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M10.4,5.2 A0.85,0.85 0 0 1 11.25,6.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="13.1" y1="6.05" x2="13.95" y2="6.05" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="13.1" y1="6.05" x2="13.1" y2="5.2" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M13.1,5.2 A0.85,0.85 0 0 1 13.95,6.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="13.1" y1="2.05" x2="13.95" y2="2.05" stroke="#fbf9f5" stroke-width="0.32"/>
+<line x1="13.1" y1="2.05" x2="13.1" y2="2.9" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M13.1,2.9 A0.85,0.85 0 0 0 13.95,2.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="15.3" y1="6.05" x2="16.15" y2="6.05" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="15.3" y1="6.05" x2="15.3" y2="5.2" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M15.3,5.2 A0.85,0.85 0 0 1 16.15,6.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="16.9" y1="6.05" x2="17.75" y2="6.05" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="16.9" y1="6.05" x2="16.9" y2="5.2" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M16.9,5.2 A0.85,0.85 0 0 1 17.75,6.05" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="6.5" y1="6.45" x2="6.5" y2="7.3" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="6.5" y1="6.45" x2="5.65" y2="6.45" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M5.65,6.45 A0.85,0.85 0 0 0 6.5,7.3" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="6.5" y1="9.85" x2="6.5" y2="10.7" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="6.5" y1="9.85" x2="5.65" y2="9.85" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M5.65,9.85 A0.85,0.85 0 0 0 6.5,10.7" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.1" y1="6.45" x2="10.1" y2="7.3" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="10.1" y1="6.45" x2="9.25" y2="6.45" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M9.25,6.45 A0.85,0.85 0 0 0 10.1,7.3" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<line x1="10.1" y1="9.75" x2="10.1" y2="10.6" stroke="#fbf9f5" stroke-width="0.16"/>
+<line x1="10.1" y1="9.75" x2="9.25" y2="9.75" stroke="#2e2922" stroke-width="0.05"/>
+<path d="M9.25,9.75 A0.85,0.85 0 0 0 10.1,10.6" fill="none" stroke="#7a6f60" stroke-width="0.03" stroke-dasharray="0.12 0.08"/>
+<path d="M13.525,1 l0,0.55 m-0.22,-0.24 l0.22,0.24 l0.22,-0.24" fill="none" stroke="#2e2922" stroke-width="0.05"/>
+<text x="13.525" y="0.85" class="s">Entrée</text>
+<text x="5" y="4" class="n">Suite</text>
+<text x="5" y="4.6" class="a">20 m²</text>
+<text x="8.5" y="4" class="n sm">Dressing</text>
+<text x="8.5" y="4.47" class="a sm">8 m²</text>
+<text x="10.8" y="4" class="n">Bains</text>
+<text x="10.8" y="4.6" class="a">10,4 m²</text>
+<text x="13.5" y="4" class="n">Hall</text>
+<text x="13.5" y="4.6" class="a">11,2 m²</text>
+<text x="15.7" y="4" class="n sm">Douche</text>
+<text x="15.7" y="4.47" class="a sm">6,4 m²</text>
+<text x="19.5" y="4" class="n">Chambre 2</text>
+<text x="19.5" y="4.6" class="a">24 m²</text>
+<text x="4.5" y="7.75" class="n">Chambre 3</text>
+<text x="4.5" y="8.35" class="a">14 m²</text>
+<text x="4.5" y="11.1" class="n">Chambre 4</text>
+<text x="4.5" y="11.7" class="a">12,8 m²</text>
+<text x="8.3" y="7.7" class="n">Chambre 5</text>
+<text x="8.3" y="8.3" class="a">12,2 m²</text>
+<text x="8.3" y="11.05" class="n">Buanderie</text>
+<text x="8.3" y="11.65" class="a">11,9 m²</text>
+<text x="13.8" y="9.35" class="n">Séjour</text>
+<text x="13.8" y="9.95" class="a">49,6 m²</text>
+<text x="20" y="9.35" class="n">Cuisine</text>
+<text x="20" y="9.95" class="a">33,5 m²</text>
+<g transform="translate(23.8,1.5)">
+<circle r="0.62" fill="none" stroke="#7a6f60" stroke-width="0.04"/><path d="M0,-0.5 L0.24,0.32 L0,0.18 L-0.24,0.32 Z" fill="#2e2922"/><text y="-0.78" class="s">N</text></g>
+<g><path d="M0.8,17.2 h5" stroke="#2e2922" stroke-width="0.06"/><path d="M0.8,17 v0.4" stroke="#2e2922" stroke-width="0.04"/><path d="M1.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M2.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M3.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M4.8,17.08 v0.24" stroke="#2e2922" stroke-width="0.04"/><path d="M5.8,17 v0.4" stroke="#2e2922" stroke-width="0.04"/><text x="0.8" y="17.8" class="s st">0</text><text x="5.8" y="17.8" class="s">5 m</text></g>
+<text x="24.2" y="17.8" class="s en">Plan indicatif, non contractuel</text>
+</svg>

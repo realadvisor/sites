@@ -1,0 +1,64 @@
+---
+/** Areas: one tile per city with 3+ listings, computed from the data. */
+import Site from '../layouts/Site.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { siteData, sites } from '../lib/data';
+import { href, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { areasOf, officeFor } from '../lib/areas';
+import { areaPlace, placeAlt } from '../content/places';
+import PlacePhoto from '../components/PlacePhoto.astro';
+
+interface Props { l: L }
+const { l } = Astro.props;
+const t = tx(l);
+const [{ org, teams }, all] = await Promise.all([siteData(), sites.allListings()]);
+const areas = areasOf(all);
+---
+<Site l={l} route="areas" title={`${t('areasPageTitle')} | ${org.name}`} description={t('areasLede')}>
+  <section class="band on-navy">
+    <div class="wrap band__inner">
+      <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, { label: t('navAreas') }]} />
+      <h1 class="h1">{t('areasPageTitle')}</h1>
+      <p class="lede">{t('areasLede')}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <ul class="plain-list tiles">
+        {areas.map((a, i) => {
+          const here = all.filter((x) => x.address.city === a.city);
+          const office = officeFor(a.city, here, teams);
+          const place = areaPlace(a.city, office?.address.city);
+          const buy = here.filter((x) => x.status === 'available' && x.offer_type === 'buy').length;
+          const rent = here.filter((x) => x.status === 'available' && x.offer_type === 'rent').length;
+          return (
+            <li>
+              <a class="tile" href={href('areas', l, a.slug)}>
+                <span class="tile__media">{place && <PlacePhoto place={place} alt={placeAlt(place, l)} width={900} height={600} priority={i === 0} sizes="(min-width: 900px) 46vw, 100vw" />}</span>
+                <span class="tile__body">
+                  {office && <span class="tile__office">{t('officeOf', { city: cityName(office.address.city, l) || office.name })}</span>}
+                  <h2 class="h3">{t('homesIn', { city: cityName(a.city, l) })}</h2>
+                  <span class="tile__n num">{[buy && `${t('areaForSale')} ${buy}`, rent && `${t('areaForRent')} ${rent}`].filter(Boolean).join(' · ')}</span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px); }
+  .tile { display: grid; gap: 20px; text-decoration: none; }
+  .tile__media { display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--paper-2); }
+  .tile__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .tile:hover :global(img) { transform: scale(1.03); }
+  .tile__body { display: grid; gap: 10px; }
+  .tile:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; }
+  .tile__n { color: var(--muted); }
+  .tile__office { font-size: 0.9375rem; color: var(--muted); }
+  @media (max-width: 760px) { .tiles { grid-template-columns: minmax(0, 1fr); } }
+</style>

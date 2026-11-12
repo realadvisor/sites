@@ -1,0 +1,68 @@
+---
+// Wiring example only. Replace the markup with the real design.
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { img } from '@realadvisor/sites-kit/image';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { formatPrice, formatSurface } from '@realadvisor/sites-kit/format';
+import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit/seo';
+import EnquiryForm from '@realadvisor/sites-kit/components/EnquiryForm.astro';
+import { featureLabel, offerTypeLabel, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit';
+
+const listing = await ra.listing(Astro.params.slug!);
+if (!listing) {
+  // Not found: the site's 404 page with a real 404 status. A slug that ends
+  // with a listing id was a listing of this site (sold, removed from the
+  // portal): 410 Gone with "no longer available", so search engines drop it.
+  const gone = !!listingIdFromSlug(Astro.params.slug!);
+  (Astro.locals as { listingGone?: boolean }).listingGone = gone;
+  const page = await Astro.rewrite('/404');
+  return gone ? new Response(page.body, { status: 410, headers: page.headers }) : page;
+}
+
+// Same-city listings: a reused title gets the reference (listingTitle).
+const sameCity = listing.address.city ? (await ra.listings({ city: listing.address.city, limit: 100 })).data : [];
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const plain = (listing.description ?? '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+---
+<Base
+  title={`${listingTitle(listing, sameCity)} | ${formatPrice(listing)}`}
+  description={plain.slice(0, 155) || listing.title}
+  image={listing.photos[0] && img(listing.photos[0].url, { w: 1200, h: 630 })}
+  jsonLd={listingJsonLd(listing, pageUrl)}
+>
+  <main>
+    <h1>{listing.title}</h1>
+    <p>{formatPrice(listing)}</p>
+    <dl>
+      {/* Labels, never raw codes: "À vendre" (not "buy" / "ACHETER"), "Attique" (not "apartment_penthouse" / "Bien"). */}
+      <dt>{t('offer')}</dt><dd>{offerTypeLabel(listing.offer_type)}</dd>
+      <dt>{t('propertyType')}</dt><dd>{propertyTypeLabel(listing.property_type)}</dd>
+      {listing.rooms != null && <><dt>{t('rooms')}</dt><dd>{listing.rooms}</dd></>}
+      {listing.living_surface != null && <><dt>{t('livingArea')}</dt><dd>{formatSurface(listing.living_surface)}</dd></>}
+    </dl>
+    {listing.agent && <p>{listing.agent.first_name} {listing.agent.last_name}</p>}
+    {listing.photos[0] && (
+      <RaImage src={listing.photos[0]} width={1200} height={800} sizes="(min-width: 1200px) 1200px, 100vw" style="max-width:100%;height:auto" priority alt={listing.photos[0].alt ?? listing.title} />
+    )}
+    <p>{t('reference')} {listingRef(listing)}</p>
+    {listing.description && <div class="prose" set:html={sanitizeHtml(listing.description)} />}
+    {listing.features?.length ? (
+      <>
+        <h2>{t('features')}</h2>
+        <ul>{listing.features.map((f) => <li>{featureLabel(f)}</li>)}</ul>
+      </>
+    ) : null}
+
+    <h2>Contact</h2>
+    <EnquiryForm
+      listingId={listing.id}
+      agentId={listing.agent?.id}
+      agentName={listing.agent?.first_name}
+      message={t('interested', { title: listing.title, ref: listingRef(listing) })}
+    />
+  </main>
+</Base>

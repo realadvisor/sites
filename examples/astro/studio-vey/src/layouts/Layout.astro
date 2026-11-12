@@ -1,0 +1,105 @@
+---
+/** Site layout: skip link, header, main, footer. Every page uses it. */
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import { t, legalPath, privacyPath } from '@realadvisor/sites-kit/i18n';
+import { areas, areaUrl, brandName, site } from '../lib/data';
+import { telHref } from '../lib/format';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
+}
+const props = Astro.props;
+const s = await site();
+const brand = brandName(s);
+const places = await areas();
+const left = [
+  { href: '/kaufen', label: 'Kaufen' },
+  { href: '/mieten', label: 'Mieten' },
+  { href: '/verkaufen', label: 'Verkaufen' },
+  { href: '/verkauft', label: 'Verkauft' },
+];
+const right = [
+  { href: '/team', label: 'Team' },
+  { href: '/ueber-uns', label: 'Über uns' },
+  { href: '/journal', label: 'Journal' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+const a = s.team.address;
+const year = new Date().getFullYear();
+---
+<Base {...props}>
+  <slot name="head" slot="head" />
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+  <Header brand={brand} left={left} right={right} phone={s.team.phone} />
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+  <footer class="ft on-accent">
+    <div class="wrap ft-grid">
+      <div class="ft-brand">
+        <p class="ft-mark">{brand}</p>
+        {s.team.description_text && <p class="ft-about">{s.team.description_text}</p>}
+      </div>
+      <div class="ft-contact">
+        <h2 class="ft-h">Kontakt</h2>
+        <address>
+          {a.street && <span>{a.street}</span>}
+          {(a.postcode || a.city) && <span>{[a.postcode, a.city].filter(Boolean).join(' ')}</span>}
+        </address>
+        <ul class="ft-list">
+          {s.team.phone && <li><a href={telHref(s.team.phone)}>{s.team.phone}</a></li>}
+          {s.team.email && <li><a href={`mailto:${s.team.email}`}>{s.team.email}</a></li>}
+        </ul>
+      </div>
+      <nav aria-label="Angebot">
+        <h2 class="ft-h">Angebot</h2>
+        <ul class="ft-list">{left.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2 class="ft-h">Studio</h2>
+        <ul class="ft-list">{right.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </nav>
+      {places.length > 0 && (
+        <nav aria-label="Orte">
+          <h2 class="ft-h">Orte</h2>
+          <ul class="ft-list">{places.map((p) => <li><a href={areaUrl(p.city)}>{p.city}</a></li>)}</ul>
+        </nav>
+      )}
+    </div>
+    <div class="wrap"><div class="ft-base">
+      <p>© {year} {s.org.name}</p>
+      <ul class="ft-legal">
+        <li><a href={legalPath()}>{t('legalNotice')}</a></li>
+        <li><a href={privacyPath()}>{t('privacyPolicy')}</a></li>
+      </ul>
+    </div></div>
+  </footer>
+</Base>
+
+<style>
+  main { display: block; outline: none; }
+  .ft { background: var(--accent); color: var(--on-accent); padding-top: clamp(64px, 7vw, 104px); }
+  .ft a { color: inherit; text-decoration: none; }
+  .ft a:hover { text-decoration: underline; }
+  .ft-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.8fr) repeat(3, minmax(0, 1fr)); gap: 40px var(--gap); }
+  .ft-mark { font: 500 1rem/1 var(--sans); letter-spacing: 0.42em; text-transform: uppercase; margin-bottom: 20px; }
+  .ft-about { font: 400 1.1875rem/1.5 var(--serif); color: var(--on-accent-muted); max-width: 34ch; }
+  .ft-h { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-accent-muted); margin-bottom: 16px; }
+  .ft address { font-style: normal; display: grid; margin-bottom: 8px; }
+  .ft-list { list-style: none; display: grid; }
+  .ft-list a { display: inline-flex; align-items: center; min-height: 36px; }
+  .ft-base {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; align-items: center;
+    margin-top: clamp(56px, 6vw, 88px); padding-block: 24px; border-top: 1px solid var(--line-on-accent);
+    font-size: var(--fs-small); color: var(--on-accent-muted);
+  }
+  .ft-legal { list-style: none; display: flex; gap: 24px; }
+  .ft-legal a { display: inline-flex; align-items: center; min-height: 44px; }
+  @media (max-width: 1023px) { .ft-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ft-brand { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .ft-grid { gap: 32px 20px; } .ft-contact { grid-column: 1 / -1; } }
+</style>

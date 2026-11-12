@@ -1,0 +1,18 @@
+.pg-docs .head { padding-block: clamp(48px, 6vw, 88px) clamp(28px, 3vw, 44px); display: grid; gap: 14px; }
+.pg-docs .docs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); }
+.pg-docs:not(._) .docs a { display: grid; gap: 10px; height: 100%; align-content: start; padding: clamp(24px, 2.6vw, 36px); background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); text-decoration: none; color: var(--text); }
+.pg-docs:not(._) .docs a:hover { border-color: var(--line-strong); border-top-color: var(--accent); background: #fff; }
+.pg-docs .t { font: 400 clamp(1.5rem, 1.2rem + 0.8vw, 2rem)/1.15 var(--serif); }
+.pg-docs .d { color: var(--muted); }
+.pg-docs .m { font-size: 0.875rem; color: var(--muted); }
+.pg-docs .go { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--accent-strong); margin-top: 8px; }
+.pg-docs .plans { margin-top: var(--space-section); }
+.pg-docs:not(._) .plans h2 { margin-bottom: 8px; }
+.pg-docs:not(._) .plans ul { list-style: none; margin: 24px 0 0; padding: 0; columns: 2; column-gap: 40px; border-top: 1px solid var(--line-strong); }
+.pg-docs:not(._) .plans li { break-inside: avoid; border-bottom: 1px solid var(--line); }
+.pg-docs:not(._) .plans a { display: block; padding: 13px 0; text-decoration: none; }
+.pg-docs:not(._) .plans a:hover { color: var(--accent-strong); text-decoration: underline; }
+@media (max-width: 900px) {
+  .pg-docs .docs { grid-template-columns: 1fr; }
+  .pg-docs:not(._) .plans ul { columns: 1; }
+}

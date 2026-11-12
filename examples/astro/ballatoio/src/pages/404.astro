@@ -1,0 +1,29 @@
+---
+// Not-found page, rendered on request so routes can rewrite to it. A listing
+// that left shows "no longer available" (the listing route answers 410).
+export const prerender = false;
+import { t } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import { UI, href, langOfPath } from '../lib/i18n';
+
+const lang = langOfPath(Astro.originPathname ?? Astro.url.pathname);
+const ui = UI[lang];
+const gone = (Astro.locals as { listingGone?: boolean }).listingGone === true;
+const title = gone ? t('listingGone', {}, lang) : t('notFound', {}, lang);
+if (!gone) Astro.response.status = 404;
+---
+<Site lang={lang} title={title} description={title} noindex>
+  <section class="wrap phead nf">
+    <h1 class="d-xl">{title}</h1>
+    <p class="lead">{gone ? t('listingGoneText', {}, lang) : t('notFoundText', {}, lang)}</p>
+    <p class="nf-links">
+      <a class="cta cta-solid" href={href('buy', lang)}>{ui.allSale}</a>
+      <a class="cta" href={href('home', lang)}>{ui.backHome}</a>
+    </p>
+  </section>
+</Site>
+<style>
+  .nf { min-height: 56svh; display: grid; align-content: center; gap: 24px; }
+  .nf h1 { max-width: 16ch; }
+  .nf-links { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>

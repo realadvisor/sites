@@ -1,0 +1,164 @@
+---
+/**
+ * Stacking plan and unit table of one development, server-rendered, zero
+ * JavaScript. One row per floor (top floor first), one block per unit whose
+ * width follows its living area; fill and label both say the status, only
+ * available units show a price. "Only available" is a checkbox that dims
+ * the others in CSS (:has). The table below is the accessible and phone
+ * view of the same units.
+ */
+import type { DevelopmentWithUnits, Unit } from '@realadvisor/sites-sdk/types';
+import { cityName, tx } from '../lib/copy';
+import { floor, floorShort, formatSurface, orientation, price, rooms } from '../lib/format';
+import type { L } from '../lib/routes';
+import { extraStr } from '../lib/data';
+import { outdoor, sortUnits, statusLabel, typeOf, unitHref, unitTitle, unitTypes } from '../lib/dev';
+
+interface Props {
+  dev: DevelopmentWithUnits;
+  l: L;
+}
+const { dev, l } = Astro.props;
+const t = tx(l);
+const units = sortUnits(dev.units);
+const types = unitTypes(dev.units);
+const floors = [...new Set(units.map((u) => u.floor ?? 0))].sort((a, b) => b - a);
+const unitPrice = (u: Unit) => (u.status === 'available' ? price({ ...u, status: 'available' }, l) : statusLabel(u.status, l));
+void cityName;
+---
+<div class="sp">
+  <div class="sp__head">
+    <p class="sp__count num"><b>{dev.stats.available}</b> {t('unitsAvailable', { n: '', t: dev.stats.units }).trim()}</p>
+    <ul class="sp__legend" aria-hidden="true">
+      <li class="lg lg--available">{t('available')}</li>
+      <li class="lg lg--reserved">{t('reserved')}</li>
+      <li class="lg lg--sold">{t('sold')}</li>
+    </ul>
+    <label class="sp__only"><input type="checkbox" class="sp__toggle" /> {t('onlyAvailable')}</label>
+  </div>
+
+  <div class="sp__plan" aria-hidden="true">
+    <div class="sp__roof"></div>
+    {floors.map((f) => {
+      const row = units.filter((u) => (u.floor ?? 0) === f);
+      return (
+        <div class="sp__floor">
+          <span class="sp__fl">{floorShort(f, l)}</span>
+          <div class="sp__row">
+            {row.map((u) => (
+              <a class:list={['u', `u--${u.status}`]} href={unitHref(dev, u, l)} tabindex="-1" style={`flex-grow:${u.living_surface ?? 100}`}>
+                <b>{extraStr('units', u.id, 'unit_number') /* fixture only: unit number */ ?? typeOf(types, u)?.letter}</b>
+                <span class="u__r">{rooms(u.rooms, l)} · {formatSurface(u.living_surface)}</span>
+                <span class="u__p num">{unitPrice(u)}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      );
+    })}
+    <div class="sp__ground"></div>
+  </div>
+
+  <div class="sp__table">
+    <table>
+      <caption class="sr-only">{t('table')}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t('unit')}</th>
+          <th scope="col">{t('floorRow')}</th>
+          <th scope="col">{t('rooms')}</th>
+          <th scope="col" class="r">{t('livingArea')}</th>
+          <th scope="col" class="r">{t('outdoor')}</th>
+          <th scope="col">{t('orientation')}</th>
+          <th scope="col" class="r">{t('price')}</th>
+          <th scope="col"><span class="sr-only">{t('status')}</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {units.map((u) => {
+          const out = outdoor(u);
+          // fixture only: orientation
+          const ori = orientation(extraStr('units', u.id, 'orientation'), l);
+          return (
+            <tr class:list={[`st-${u.status}`]}>
+              <th scope="row"><a href={unitHref(dev, u, l)}>{unitTitle(u, l)}</a><span class="t-type">{typeOf(types, u) && t('typeName', { k: typeOf(types, u)!.letter })}</span></th>
+              <td data-l={t('floorRow')}>{floor(u.floor, l)}</td>
+              <td data-l={t('rooms')}>{rooms(u.rooms, l)}</td>
+              <td class="r num" data-l={t('livingArea')}>{formatSurface(u.living_surface)}</td>
+              <td class="r num" data-l={t('outdoor')}>{out ? formatSurface(out) : '–'}</td>
+              <td data-l={t('orientation')}>{ori || '–'}</td>
+              <td class="r num t-price">{u.status === 'available' ? unitPrice(u) : '–'}</td>
+              <td class="t-st"><span class:list={['pill', `pill--${u.status}`]}>{statusLabel(u.status, l)}</span></td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .sp { display: grid; gap: 28px; }
+  .sp__head { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 32px; }
+  .sp__count { font: 400 1.5rem/1 var(--font-display); }
+  .sp__count b { font-weight: 500; color: var(--navy); }
+  .sp__legend { list-style: none; display: flex; gap: 18px; font-size: 0.875rem; color: var(--muted); }
+  .lg::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; }
+  .lg--available::before { background: var(--navy); }
+  .lg--reserved::before { background: var(--warn-bg); box-shadow: inset 0 0 0 1px #d9b874; }
+  .lg--sold::before { background: var(--paper-2); }
+  .sp__only { margin-left: auto; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 0.9375rem; cursor: pointer; }
+  .sp__only input { width: 20px; height: 20px; accent-color: var(--navy); }
+
+  .sp__plan { display: grid; gap: 6px; padding: 28px clamp(16px, 3vw, 40px) 24px; background: var(--paper); }
+  .sp__roof { margin-left: 64px; height: 14px; border: 2px solid var(--line-strong); border-bottom: 0; }
+  .sp__ground { margin-left: 64px; height: 8px; background: repeating-linear-gradient(90deg, var(--line-strong) 0 8px, transparent 8px 14px); }
+  .sp__floor { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 12px; align-items: stretch; }
+  .sp__fl { align-self: center; text-align: right; font: 600 0.75rem/1 var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .sp__row { display: flex; gap: 6px; }
+  .u { flex-basis: 0; min-width: 0; min-height: 84px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; font-size: 0.8125rem; line-height: 1.3; transition: opacity .2s, transform .2s; }
+  .u b { font: 500 1.125rem/1.1 var(--font-display); }
+  .u__r { opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .u__p { margin-top: auto; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .u--available { background: var(--navy); color: #fff; }
+  .u--available:hover { background: var(--navy-deep); }
+  .u--reserved { background: var(--warn-bg); color: var(--warn); box-shadow: inset 0 0 0 1px #d9b874; }
+  .u--sold { background: var(--paper-2); color: var(--muted); }
+  .sp:has(.sp__toggle:checked) .u:not(.u--available) { opacity: 0.18; }
+  .sp:has(.sp__toggle:checked) tr:not(.st-available) { display: none; }
+
+  .sp__table { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 14px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  thead th { font: 600 0.6875rem/1.2 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-top: 0; }
+  tbody th { font-weight: 600; }
+  tbody th a { color: var(--navy); }
+  .t-type { display: block; font-weight: 400; font-size: 0.8125rem; color: var(--muted); }
+  .r { text-align: right; }
+  .st-sold td, .st-sold th a { color: var(--muted); }
+  .t-price { font-weight: 600; }
+  .pill { display: inline-block; padding: 5px 10px; font: 600 0.6875rem/1 var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; }
+  .pill--available { background: var(--ok-bg); color: var(--ok); }
+  .pill--reserved { background: var(--warn-bg); color: var(--warn); }
+  .pill--sold { background: var(--paper-2); color: var(--muted); }
+
+  @media (max-width: 860px) {
+    .sp__plan { display: none; }
+    .sp__only { margin-left: 0; }
+    table, tbody, tr, td, th { display: block; }
+    thead { display: none; }
+    tbody { display: grid; gap: 10px; }
+    tr { border: 1px solid var(--line); padding: 14px 16px; display: grid !important; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; }
+    .sp:has(.sp__toggle:checked) tr:not(.st-available) { display: none !important; }
+    th, td { border: 0; padding: 0; white-space: normal; }
+    tbody th { grid-column: 1; }
+    .t-st { grid-column: 2; grid-row: 1; justify-self: end; }
+    td[data-l] { grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--muted); font-size: 0.875rem; }
+    td[data-l]::before { content: attr(data-l); }
+    td[data-l] { color: var(--text); }
+    td[data-l]::before { color: var(--muted); }
+    .r { text-align: right; }
+    .t-price { grid-column: 1 / -1; font-size: 1.0625rem; color: var(--navy); }
+    .st-sold .t-price, .st-reserved .t-price { display: none; }
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+/**
+ * Acheter and Louer: the kit's ListingsSearch (filters, chips, count, sort,
+ * list and split map view, pagination, empty states) over one offer type,
+ * themed through its tokens, with the site's card in its slot. Title, h1 and
+ * description follow every active filter. Filters live in the URL, and
+ * "Enregistrer la recherche" keeps that URL in the visitor's favourites.
+ */
+import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
+import { img } from '@realadvisor/sites-kit/image';
+import { count as kcount, t as kt } from '@realadvisor/sites-kit/i18n';
+import Site from '../layouts/Site.astro';
+import ListingCard from '../components/ListingCard.astro';
+import Icon from '../components/Icon.astro';
+import { siteData, sites } from '../lib/data';
+import { formatAmount, listingHref, price, R, searchUrl, typeLabel } from '../lib/site';
+
+interface Props { offer: 'buy' | 'rent' }
+const { offer } = Astro.props;
+const [{ org }, pool] = await Promise.all([siteData(), sites.allListings({ offer_type: offer, status: 'available' })]);
+const byId = new Map(pool.map((x) => [x.id, x]));
+// One offer type per page: no offer filter. Sold listings have their own page (/vendus).
+const params = { ...parseSearch(Astro.url.searchParams), offerType: undefined, status: 'available' as const };
+const result = runSearch(pool, params, { locale: 'fr-FR' });
+const base = offer === 'buy' ? R.buy : R.rent;
+const isMap = params.view === 'map';
+
+const lead = offer === 'buy' ? 'Biens à vendre' : 'Biens à louer';
+const parts = [
+  params.propertyType ? `${typeLabel(params.propertyType)}${offer === 'buy' ? ' à vendre' : ' à louer'}` : lead,
+  params.city && `à ${params.city}`,
+  params.minRooms && kt('roomsMin', { n: String(params.minRooms) }, 'fr'),
+  params.maxPrice && kt('priceMax', { price: formatAmount(params.maxPrice) }, 'fr'),
+  params.minPrice && kt('priceMin', { price: formatAmount(params.minPrice) }, 'fr'),
+].filter(Boolean) as string[];
+const heading = parts.join(' · ').replace(' · à ', ' à ');
+const suffix = `${isMap ? ' – carte' : ''}${result.page > 1 ? ` – page ${result.page}` : ''}`;
+const first = result.items.find((x) => x.photos[0])?.photos[0];
+const kitPrice = (x: { id: string }) => {
+  const s = byId.get(x.id);
+  return s ? price(s) : '';
+};
+---
+<Site nav={offer} title={`${heading}${suffix} | ${org.name.replace(/\s+SAS$/, '')}`}
+  description={`${kcount('listingsFound', result.total, 'fr')} – ${heading}. Annonces de nos agences de Lyon et Bordeaux, sur la carte ou en liste.`}
+  image={first && img(first.url, { w: 1200, h: 630 })}>
+  <div class:list={['sv', { 'sv--map': isMap }]}>
+    <div class="sv__head">
+      <nav class="sv__switch" aria-label="Acheter ou louer">
+        <a href={searchUrl('buy')} aria-current={offer === 'buy' ? 'page' : undefined}>Acheter</a>
+        <a href={searchUrl('rent')} aria-current={offer === 'rent' ? 'page' : undefined}>Louer</a>
+      </nav>
+      <h1 class="sv__h1" data-rs-sync="h1">{heading}{suffix}</h1>
+      <button type="button" class="sv__save" data-save-search hidden aria-pressed="false">
+        <Icon name="bookmark" size={18} /><span data-label>Enregistrer la recherche</span>
+      </button>
+    </div>
+    <ListingsSearch result={result} base={base} locale="fr-FR" sold={false}
+      filters={['propertyType', 'city', 'price', 'rooms']}
+      contactHref={R.contact} valuationHref={R.sell}
+      listingHref={(x) => listingHref(x)} price={kitPrice}>
+      {(x: (typeof result.items)[number], i: number) => {
+        const s = byId.get(x.id);
+        return s ? <ListingCard listing={s} priority={i === 0} as="h2" sizes={isMap ? '(min-width: 1280px) 300px, (min-width: 960px) 40vw, 100vw' : '(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw'} /> : null;
+      }}
+    </ListingsSearch>
+  </div>
+</Site>
+
+<style>
+  .sv { width: 100%; max-width: var(--max); margin-inline: auto; padding: 24px var(--gutter) 0; }
+  .sv--map { max-width: none; }
+  .sv__head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 20px; }
+  .sv__switch { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--surface); }
+  .sv__switch a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 600; color: var(--muted); }
+  .sv__switch a[aria-current] { background: var(--bg); color: var(--text); box-shadow: 0 1px 3px rgb(0 0 0 / 0.12); }
+  .sv__h1 { font-size: var(--step-2); letter-spacing: -0.025em; flex: 1 1 320px; }
+  .sv__save {
+    display: inline-flex; gap: 8px; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+    border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); font-weight: 600; font-size: 0.9375rem; cursor: pointer;
+  }
+  .sv__save:hover { border-color: var(--text); }
+  .sv__save[aria-pressed='true'] { border-color: var(--accent); color: var(--accent-strong); }
+  .sv__save[aria-pressed='true'] :global(svg) { fill: currentColor; }
+
+  /* ListingsSearch, through its hooks: rounded controls, pill filters, airy split view. */
+  .sv :global(.rs-form) { padding: 12px; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); background: var(--bg); }
+  .sv :global(.rs-bar) { margin: 16px 0 0; }
+  .sv :global(.rs-chips) { margin: 16px 0 0; }
+  .sv :global(.rs-region) { margin-top: 20px; }
+  .sv :global(.rs-status a), .sv :global(.rs-views a) { min-height: 42px; }
+  .sv :global(.rs-views), .sv :global(.rs-status) { border-radius: 999px; }
+  .sv :global(.rs-grid) { row-gap: 40px; }
+  /* 24 cards per page: render them all (the kit skips off-screen ones, which leaves blank gaps in captures). */
+  .sv :global(.rs-list > li) { content-visibility: visible; }
+  .sv :global(.rs-split .rs-map) { border-radius: var(--radius-card); overflow: hidden; }
+  .sv :global(.ra-map) { border-radius: var(--radius-card); }
+  @media (min-width: 960px) {
+    .sv--map :global(.rs-split) { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+  }
+  @media (max-width: 959px) {
+    .sv :global(.rs-form) { padding: 0; border: 0; box-shadow: none; }
+    .sv :global(.rs-filters-btn) { border-radius: 999px; }
+  }
+</style>

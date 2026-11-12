@@ -1,0 +1,140 @@
+---
+/**
+ * Two-row header: wordmark and utilities (sell, contact, language) on the
+ * first row, the property sections on a hairline row below, as on the
+ * luxury marketplaces. `overlay` lays it over the home hero in ivory type
+ * (the hero carries a scrim). Phone: wordmark and a 44px menu button that
+ * opens a full-screen sheet (native popover: Escape closes it; a small
+ * script closes it on link click and locks the page scroll).
+ */
+import type { Organisation } from '@realadvisor/sites-sdk/types';
+import { href, LANGS, type L, type RouteKey } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+interface Props {
+  l: L;
+  org: Organisation;
+  section?: RouteKey;
+  switchTo: Record<L, string>;
+  overlay?: boolean;
+}
+const { l, org, section, switchTo, overlay = false } = Astro.props;
+const t = tx(l);
+const nav: { key: RouteKey; label: string }[] = [
+  { key: 'buy', label: t('navBuy') },
+  { key: 'rent', label: t('navRent') },
+  { key: 'sold', label: t('navSold') },
+  { key: 'destinations', label: t('navDestinations') },
+  { key: 'offices', label: t('navOffices') },
+  { key: 'team', label: t('navTeam') },
+  { key: 'journal', label: t('navJournal') },
+  { key: 'about', label: t('navAbout') },
+];
+const name = org.name.replace(/\s+(SA|AG|Sàrl|GmbH|SAS|SARL|Ltd)\.?$/i, '');
+const [first, ...rest] = name.split(' ');
+---
+<a class="skip" href="#main">{t('skip')}</a>
+<header class:list={['hd', { 'hd--overlay': overlay }]}>
+  <div class="wrap hd__top">
+    <a class="mark" href={href('home', l)} aria-label={`${org.name}, ${t('home')}`}>
+      <span class="mark__name">{first}</span>{rest.length > 0 && <span class="mark__rest">{rest.join(' ')}</span>}
+    </a>
+    <div class="hd__utils">
+      <a class="hd__util" href={href('sell', l)} aria-current={section === 'sell' ? 'page' : undefined}>{t('navSell')}</a>
+      <a class="hd__util" href={href('contact', l)} aria-current={section === 'contact' ? 'page' : undefined}>{t('navContact')}</a>
+      <nav class="hd__langs" aria-label={t('language')}>
+        {LANGS.map((x) => <a href={switchTo[x]} hreflang={x} lang={x} aria-current={x === l ? 'true' : undefined}>{x.toUpperCase()}</a>)}
+      </nav>
+      <button class="hd__burger" type="button" popovertarget="menu" aria-controls="menu" aria-label={t('menu')}>
+        <svg aria-hidden="true" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h20M3 13h20M3 18h20" /></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="hd__nav" aria-label={t('mainNav')}>
+    <ul class="wrap plain">
+      {nav.map((n) => <li><a href={href(n.key, l)} aria-current={section === n.key ? 'page' : undefined}>{n.label}</a></li>)}
+    </ul>
+  </nav>
+  <div id="menu" class="sheet on-ink" popover data-menu>
+    <div class="sheet__top">
+      <a class="mark" href={href('home', l)} aria-label={`${org.name}, ${t('home')}`}>
+        <span class="mark__name">{first}</span>{rest.length > 0 && <span class="mark__rest">{rest.join(' ')}</span>}
+      </a>
+      <button class="sheet__close" type="button" popovertarget="menu" popovertargetaction="hide" aria-label={t('closeMenu')}>
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19" /></svg>
+      </button>
+    </div>
+    <nav aria-label={t('mainNav')}>
+      <ul class="sheet__nav plain">
+        {nav.map((n) => <li><a href={href(n.key, l)} aria-current={section === n.key ? 'page' : undefined}>{n.label}</a></li>)}
+        <li><a href={href('sell', l)} aria-current={section === 'sell' ? 'page' : undefined}>{t('navSell')}</a></li>
+        <li><a href={href('contact', l)} aria-current={section === 'contact' ? 'page' : undefined}>{t('navContact')}</a></li>
+      </ul>
+    </nav>
+    <div class="sheet__langs" role="group" aria-label={t('language')}>
+      {LANGS.map((x) => <a href={switchTo[x]} hreflang={x} lang={x} aria-current={x === l ? 'true' : undefined}>{x === 'en' ? 'English' : 'Français'}</a>)}
+    </div>
+  </div>
+</header>
+
+<script>
+  import '../scripts/menu';
+</script>
+
+<style>
+  .skip { position: absolute; left: 12px; top: -80px; z-index: 100; background: var(--ink); color: var(--on-ink); padding: 12px 18px; text-decoration: none; font-weight: 600; }
+  .skip:focus { top: 12px; }
+
+  .hd { position: relative; z-index: 30; background: var(--ivory); color: var(--ink); border-bottom: 1px solid var(--line); }
+  .hd--overlay { position: absolute; inset: 0 0 auto; background: transparent; color: var(--on-ink); border-bottom-color: rgb(246 243 237 / 0.2); }
+  .hd__top { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; }
+
+  .mark { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; color: inherit; min-height: 44px; align-items: center; }
+  .mark__name { font: 500 1.625rem/1 var(--font-display); letter-spacing: 0.2em; text-transform: uppercase; margin-right: -0.2em; }
+  .mark__rest { font: 500 0.6875rem/1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; padding-left: 12px; border-left: 1px solid currentColor; opacity: 0.85; }
+
+  .hd__utils { display: flex; align-items: center; gap: 28px; }
+  .hd__util { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.9375rem; text-decoration: none; }
+  .hd__util:hover, .hd__util[aria-current] { text-decoration: underline; text-decoration-color: var(--accent); }
+  .hd__langs { display: flex; gap: 2px; padding-left: 20px; border-left: 1px solid var(--line-strong); }
+  .hd--overlay .hd__langs { border-left-color: rgb(246 243 237 / 0.35); }
+  .hd__langs a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; font: 600 0.8125rem/1 var(--font-sans); letter-spacing: 0.1em; text-decoration: none; opacity: 0.75; }
+  .hd__langs a[aria-current] { opacity: 1; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 0.45em; }
+  .hd--overlay .hd__langs a[aria-current], .hd--overlay .hd__util:hover { text-decoration-color: var(--accent-on-ink); }
+  .hd__langs a:hover { opacity: 1; }
+
+  .hd__nav { border-top: 1px solid var(--line); }
+  .hd--overlay .hd__nav { border-top-color: rgb(246 243 237 / 0.2); }
+  .hd__nav ul { display: flex; gap: clamp(20px, 2.6vw, 40px); }
+  .hd__nav a { display: inline-flex; align-items: center; min-height: 50px; font-size: 0.9375rem; text-decoration: none; box-shadow: inset 0 -1px 0 transparent; }
+  .hd__nav a:hover { box-shadow: inset 0 -1px 0 currentColor; }
+  .hd__nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--accent); }
+  .hd--overlay .hd__nav a[aria-current='page'] { box-shadow: inset 0 -2px 0 var(--accent-on-ink); }
+
+  .hd__burger { display: none; width: 44px; height: 44px; margin-right: -9px; border: 0; background: none; color: inherit; align-items: center; justify-content: center; cursor: pointer; }
+
+  @media (max-width: 1023px) {
+    .hd__top { min-height: 64px; }
+    .hd__nav, .hd__util { display: none; }
+    .hd__burger { display: inline-flex; }
+    .hd__utils { gap: 8px; }
+    .hd__langs { border-left: 0; padding-left: 0; }
+    .mark__name { font-size: 1.375rem; }
+  }
+  @media (max-width: 420px) { .mark__rest { display: none; } }
+
+  .sheet {
+    position: fixed; inset: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0; border: 0;
+    padding: 10px var(--gutter) 32px; overflow-y: auto; display: none; flex-direction: column; gap: 28px;
+  }
+  .sheet:popover-open { display: flex; }
+  :global(body:has(#menu:popover-open)) { overflow: hidden; }
+  .sheet__top { display: flex; align-items: center; justify-content: space-between; min-height: 54px; }
+  .sheet__close { width: 44px; height: 44px; margin-right: -9px; border: 0; background: none; color: inherit; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  .sheet__nav { display: grid; border-top: 1px solid var(--line-on-ink); }
+  .sheet__nav a { display: flex; align-items: center; min-height: 58px; border-bottom: 1px solid var(--line-on-ink); text-decoration: none; font: 400 1.75rem/1.1 var(--font-display); }
+  .sheet__nav a[aria-current='page'] { color: var(--accent-on-ink); }
+  .sheet__langs { display: flex; gap: 8px; margin-top: auto; }
+  .sheet__langs a { flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border: 1px solid var(--line-on-ink); border-radius: 999px; text-decoration: none; font-weight: 600; }
+  .sheet__langs a[aria-current] { background: var(--ivory); color: var(--ink); }
+</style>

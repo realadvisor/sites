@@ -1,0 +1,18 @@
+---
+/** Green band under the header: breadcrumb, the page's h1, an optional lede and slot. */
+import Crumbs from './Crumbs.astro';
+import { href, type L } from '../lib/routes';
+import { tx } from '../lib/copy';
+
+interface Props { l: L; title: string; lede?: string; crumbs: { label: string; href?: string }[] }
+const { l, title, lede, crumbs } = Astro.props;
+const t = tx(l);
+---
+<section class="band on-green">
+  <div class="wrap band__inner">
+    <Crumbs label={t('breadcrumb')} items={[{ label: t('home'), href: href('home', l) }, ...crumbs]} />
+    <h1 class="h1">{title}</h1>
+    {lede && <p class="lede">{lede}</p>}
+    <slot />
+  </div>
+</section>

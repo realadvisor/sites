@@ -1,0 +1,36 @@
+---
+/** Legal notice and privacy policy: the kit's text from the organisation data, in the site frame. Never edited here. */
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { legalNotice, privacyPolicy } from '@realadvisor/sites-kit/legal';
+import { t as kt } from '@realadvisor/sites-kit/i18n';
+import { analyticsId } from '@realadvisor/sites-kit/env';
+import Site from '../layouts/Site.astro';
+import { siteData } from '../lib/data';
+
+interface Props { kind: 'legal' | 'privacy' }
+const { kind } = Astro.props;
+const { org, primary } = await siteData();
+const agency = { id: org.id, name: org.name, phone: primary?.phone, email: primary?.email, address: org.address, website: org.website };
+const title = kt(kind === 'legal' ? 'legalNotice' : 'privacyPolicy', {}, 'fr');
+const sections = kind === 'legal' ? legalNotice(agency, 'fr', 'FR') : privacyPolicy(agency, { analytics: !!analyticsId() }, 'fr', 'FR');
+---
+<Site title={`${title} | ${org.name}`} description={`${title} de ${org.name}.`}>
+  <div class="wrap legal">
+    <h1 class="h2">{title}</h1>
+    <LegalContent sections={sections} />
+  </div>
+</Site>
+
+<style>
+  .legal { max-width: 860px; padding-top: clamp(32px, 5vw, 64px); display: grid; gap: 32px; }
+  .legal :global(.legal) { display: grid; gap: 40px; }
+  .legal :global(h2) { font-size: var(--step-1); margin-bottom: 12px; }
+  .legal :global(dl) { display: grid; margin: 0; border-top: 1px solid var(--line); }
+  .legal :global(dl > div) { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .legal :global(dt) { color: var(--muted); }
+  .legal :global(dd) { margin: 0; }
+  .legal :global(dd a) { color: var(--accent-strong); overflow-wrap: anywhere; }
+  .legal :global(p) { max-width: 68ch; }
+  .legal :global(p + p) { margin-top: 12px; }
+  @media (max-width: 600px) { .legal :global(dl > div) { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+</style>

@@ -1,0 +1,12 @@
+/* From src/pages/legal.astro (scoped there: every selector under .p-legal). */
+.p-legal .legal-wrap { padding-block: clamp(40px, 6vw, 88px); }
+.p-legal .legal-wrap .legal-body { max-width: 760px; display: grid; gap: 40px; }
+.p-legal .legal-wrap h2 { font-size: var(--step-2); margin-bottom: 14px; }
+.p-legal .legal-wrap dl { margin: 0; border-top: 2px solid var(--ink); }
+.p-legal .legal-wrap dl > div { display: grid; grid-template-columns: 10rem 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.p-legal .legal-wrap dt { color: var(--muted); }
+.p-legal .legal-wrap dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.p-legal .legal-wrap p + p { margin-top: 0.8em; }
+@media (max-width: 560px) {
+  .p-legal .legal-wrap dl > div { grid-template-columns: 1fr; gap: 2px; }
+}

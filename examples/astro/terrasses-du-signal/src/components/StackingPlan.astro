@@ -1,0 +1,114 @@
+---
+/**
+ * The building as a stacking plan: one row per floor (top floor first), one
+ * block per unit, its width by living area, fill and label by status. Every
+ * block is a link to the unit page, so it works without JavaScript.
+ * Filters (rooms, only available) dim blocks via data attributes; the units
+ * page script updates them in place, the server renders them from the URL.
+ */
+import type { Unit } from '@realadvisor/sites-sdk/types';
+import { floorName, formatSurface, sortUnits, statusLabel, unitLabel, unitPath, unitPrice } from '../lib/units';
+import { unitExtra } from '../lib/data';
+
+interface Props {
+  units: Unit[];
+  /** Highlight one unit (unit page). */
+  current?: string;
+  /** Server-side filter state (?pieces=, ?dispo=1). */
+  rooms?: number | null;
+  onlyAvailable?: boolean;
+  compact?: boolean;
+  label?: string;
+}
+const { units, current, rooms = null, onlyAvailable = false, compact = false, label = 'Plan de l’immeuble par étage' } = Astro.props;
+const floors = [...new Set(units.map((u) => u.floor ?? 0))].sort((a, b) => b - a);
+const rows = floors.map((f) => {
+  const us = sortUnits(units.filter((u) => (u.floor ?? 0) === f));
+  return { floor: f, name: floorName(us[0]!), units: us, area: us.reduce((s, u) => s + (u.living_surface ?? 60), 0) };
+});
+const maxArea = Math.max(...rows.map((r) => r.area));
+const matches = (u: Unit) => (rooms == null || u.rooms === rooms) && (!onlyAvailable || u.status === 'available');
+const short = (f: number, name: string) => (f === 0 ? 'Rez' : name.replace(' étage', ''));
+---
+<figure class:list={['stack', { compact }]} aria-label={label}>
+  <div class="roof" aria-hidden="true"></div>
+  <ol class="floors">
+    {rows.map((r) => (
+      <li class="floor">
+        <span class="fl"><span class="fl-long">{r.name}</span><span class="fl-short" aria-hidden="true">{short(r.floor, r.name)}</span></span>
+        <div class="row" style={`--w:${((r.area / maxArea) * 100).toFixed(2)}%`}>
+          {r.units.map((u) => {
+            const no = unitExtra(u).unit_number; // fixture only: unit number
+            const isCurrent = current === u.id;
+            return (
+              <a
+                href={unitPath(u)}
+                class:list={['u', u.status, { dim: !matches(u) }]}
+                style={`flex-grow:${u.living_surface ?? 60}`}
+                data-unit
+                data-rooms={u.rooms}
+                data-status={u.status}
+                aria-current={isCurrent ? 'true' : undefined}
+              >
+                <span class="top">
+                  {no && <span class="no"><span class="sr-only">Lot </span>{no}</span>}
+                  <span class="r">{u.rooms != null ? <>{u.rooms}<span aria-hidden="true"> p.</span><span class="sr-only"> pièces, {floorName(u)}</span></> : ''}</span>
+                </span>
+                {!compact && <span class="m2 num">{formatSurface(u.living_surface)}</span>}
+                {!compact && <span class:list={['st', { price: u.status === 'available' }]}>{u.status === 'available' ? unitPrice(u) : statusLabel(u)}</span>}
+                {(compact || u.status === 'available') && <span class="sr-only">, {statusLabel(u)}{isCurrent ? ' (ce lot)' : ''}</span>}
+              </a>
+            );
+          })}
+        </div>
+      </li>
+    ))}
+  </ol>
+  <div class="ground" aria-hidden="true"></div>
+</figure>
+
+<style>
+  .stack { margin: 0; --fl: 116px; }
+  .floors { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .floor { display: grid; grid-template-columns: var(--fl) minmax(0, 1fr); align-items: stretch; gap: 16px; }
+  .fl { align-self: center; font: 600 0.6875rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-align: right; }
+  .fl-short { display: none; }
+  .row { display: flex; gap: 6px; width: var(--w); margin-inline: auto; min-width: 0; }
+  .u {
+    flex-basis: 0; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
+    min-height: 84px; padding: 12px 14px; text-decoration: none; position: relative;
+    border: 1px solid transparent; transition: opacity 0.5s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .u.available { background: var(--av-bg); color: var(--av-ink); }
+  .u.reserved { background: var(--re-bg); color: var(--re-ink); }
+  .u.sold { background: var(--so-bg); color: var(--so-ink); }
+  .u:hover { box-shadow: inset 0 0 0 1px currentColor; }
+  .u[aria-current] { box-shadow: inset 0 0 0 2px var(--text); background-image: repeating-linear-gradient(135deg, transparent 0 8px, rgb(0 0 0 / 0.04) 8px 9px); }
+  .u.dim { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line-strong); background-image: none; }
+  .u:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; opacity: 1; }
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .no { font: 600 0.6875rem/1 var(--sans); letter-spacing: 0.1em; }
+  .r { font: 500 1.375rem/1 var(--serif); white-space: nowrap; }
+  .m2 { font-size: 0.8125rem; }
+  .st { font: 600 0.6875rem/1.2 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .roof { margin-left: calc(var(--fl) + 16px); height: 14px; border: 1px solid var(--line-strong); border-bottom: 0; margin-bottom: 6px; width: auto; }
+  .ground { margin-left: calc(var(--fl) + 16px); height: 10px; margin-top: 8px; background: repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 10px); border-top: 1px solid var(--line-strong); }
+  .compact .u { min-height: 46px; padding: 8px 10px; }
+  .compact .r { font-size: 1.0625rem; }
+  .compact { --fl: 96px; }
+
+  @media (max-width: 760px) {
+    .stack { --fl: 34px; }
+    .floor { gap: 8px; }
+    .fl-long { display: none; }
+    .fl-short { display: inline; }
+    .fl { letter-spacing: 0.04em; }
+    .row { width: 100%; gap: 4px; }
+    .u { min-height: 70px; padding: 9px 8px; }
+    .r { font-size: 1.125rem; }
+    .m2 { font-size: 0.75rem; }
+    .st { font-size: 0.625rem; letter-spacing: 0.02em; }
+    .st.price { display: none; }
+    .roof, .ground { margin-left: calc(var(--fl) + 8px); }
+  }
+</style>

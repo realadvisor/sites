@@ -1,0 +1,90 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import { img } from '@realadvisor/sites-kit/image';
+import AgentCard from '../components/AgentCard.astro';
+import TalkBand from '../components/TalkBand.astro';
+import { areas, areaUrl, brandName, site, sites } from '../lib/data';
+import { languages } from '../lib/format';
+import { PHOTOS } from '../content/places';
+
+const s = await site();
+const brand = brandName(s);
+const [all, places] = await Promise.all([sites.allListings(), areas()]);
+// Figures computed from the data only.
+const available = all.filter((l) => l.status === 'available');
+const forSale = available.filter((l) => l.offer_type === 'buy').length;
+const forRent = available.filter((l) => l.offer_type === 'rent').length;
+const sold = all.filter((l) => l.status === 'sold').length;
+const cities = [...new Set(all.map((l) => l.address.city).filter(Boolean))].sort((a, b) => a!.localeCompare(b!, 'de')) as string[];
+const langs = languages([...new Set(s.agents.flatMap((a) => a.languages ?? []))]);
+const plural = (n: number, one: string, many: string) => (n === 1 ? `ein ${one}` : `${n} ${many}`);
+const photo = PHOTOS.lakeAlps;
+---
+<Layout title={`Über uns | ${brand}`} description={s.team.description_text ?? `Über ${brand}.`} image={img(photo.url, { w: 1200, h: 630 })}>
+  <section class="ab wrap">
+    <div class="ab-text">
+      <h1 class="h-display">Ein unabhängiges Maklerbüro im Seefeld.</h1>
+      {s.team.description_text && <p class="lede">{s.team.description_text}</p>}
+    </div>
+  </section>
+  <div class="ab-media"><RaImage src={photo.url} alt={photo.alt} width={1920} height={900} priority sizes="100vw" mobile={{ width: 800, height: 600 }} /></div>
+
+  <section class="wrap section ab-body flow" aria-labelledby="h-approach">
+    <h2 class="h3" id="h-approach">Wie wir arbeiten</h2>
+    <div class="prose ab-prose">
+      <p>Unser Büro liegt an der {s.team.address.street ?? 'Seefeldstrasse'} in {s.team.address.city}. Wir verkaufen und vermieten Wohnungen und Häuser am Zürichsee, in der Stadt und in Zug.{langs && <> Beraten wird auf {langs}.</>}</p>
+      <p>Im Moment betreuen wir {plural(forSale, 'Objekt', 'Objekte')} zum Kauf und {plural(forRent, 'Objekt', 'Objekte')} zur Miete{cities.length > 0 && <> in {cities.length === 1 ? cities[0] : `${cities.slice(0, -1).join(', ')} und ${cities.at(-1)}`}</>}.{sold > 0 && <> Zuletzt verkauft haben wir {plural(sold, 'Objekt', 'Objekte')}.</>}</p>
+      <p>Jede Besichtigung führt die Person durch, die das Mandat betreut. Zu jedem Objekt gibt es Grundbuchauszug, Pläne und Nebenkostenabrechnung, bevor es online geht. Wie ein Verkauf mit uns abläuft, steht auf der Seite <a href="/verkaufen">Verkaufen</a>.</p>
+    </div>
+  </section>
+
+  <section class="section people" aria-labelledby="h-team">
+    <div class="wrap">
+      <header class="sec sec--row"><h2 class="h2" id="h-team">Team</h2><a class="more" href="/team">Alle Profile</a></header>
+      <ul class="people-grid">{s.agents.map((a) => <li><AgentCard agent={a} /></li>)}</ul>
+    </div>
+  </section>
+
+  {cities.length > 0 && (
+    <section class="wrap section flow" aria-labelledby="h-cities">
+      <header class="sec"><h2 class="h2" id="h-cities">Wo unsere Objekte liegen</h2></header>
+      <ul class="cities">{cities.map((c) => {
+        const area = places.find((p) => p.city === c);
+        return <li>{area ? <a href={areaUrl(c)}>{c}</a> : <span>{c}</span>}</li>;
+      })}</ul>
+    </section>
+  )}
+
+  <TalkBand text="Wir treffen Sie im Büro oder bei Ihnen vor Ort." phone={s.team.phone} email={s.team.email} action={{ href: '/kontakt', label: 'Termin vereinbaren' }} />
+</Layout>
+
+<style>
+  .ab { padding-block: clamp(56px, 7vw, 112px) clamp(40px, 5vw, 72px); }
+  .ab-text { display: grid; gap: 26px; justify-items: start; max-width: 960px; }
+  .ab-text .lede { max-width: 48ch; color: var(--muted); }
+  .ab-media { aspect-ratio: 32 / 13; overflow: hidden; background: var(--surface); }
+  .ab-media :global(picture) { display: contents; }
+  .ab-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .ab-body { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 24px clamp(40px, 6vw, 112px); }
+  .ab-body h2 { padding-top: 8px; }
+  .ab-prose { font: 400 1.25rem/1.6 var(--serif); }
+  .sec { display: grid; gap: 18px; justify-items: start; margin-bottom: clamp(32px, 4vw, 56px); }
+  .sec--row { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+  .people { background: var(--surface); }
+  .people-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px var(--gap); }
+  .cities { list-style: none; display: flex; flex-wrap: wrap; gap: 0 28px; font: 400 var(--fs-h3)/1.3 var(--serif); }
+  .cities li { padding: 8px 0; }
+  .cities a { text-decoration-thickness: 1px; }
+  @media (max-width: 1023px) {
+    .ab-body { grid-template-columns: minmax(0, 1fr); }
+    .ab-media { aspect-ratio: 4 / 3; }
+    .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 559px) {
+    .people-grid { grid-template-columns: minmax(0, 1fr); }
+          .sec--row { flex-direction: column; align-items: start; gap: 12px; }
+  }
+</style>

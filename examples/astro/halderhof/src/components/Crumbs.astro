@@ -1,0 +1,21 @@
+---
+/** Breadcrumb trail; the last item is the current page. */
+interface Props { items: { label: string; href?: string }[]; label: string }
+const { items, label } = Astro.props;
+---
+<nav class="crumbs" aria-label={label}>
+  <ol>
+    {items.map((x, i) => <li>{x.href && i < items.length - 1 ? <a href={x.href}>{x.label}</a> : <span aria-current="page">{x.label}</span>}</li>)}
+  </ol>
+</nav>
+
+<style>
+  .crumbs { color: var(--muted); }
+  .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0 10px; font-size: 0.875rem; }
+  .crumbs li { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+  .crumbs li + li::before { content: '/'; color: var(--line-strong); }
+  .crumbs a { color: inherit; display: inline-flex; min-height: 32px; align-items: center; }
+  .crumbs span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 42ch; }
+  :global(.on-green) .crumbs { color: var(--on-green-muted); }
+  :global(.on-green) .crumbs li + li::before { color: rgb(255 255 255 / 0.35); }
+</style>

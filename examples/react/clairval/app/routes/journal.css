@@ -1,0 +1,9 @@
+.lead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 72px); align-items: center; text-decoration: none; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
+.lead img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.lead__text { display: grid; gap: 16px; }
+.lead:hover h2, .item:hover h2 { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; }
+.list { padding-bottom: var(--section); }
+.item { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 40px; align-items: center; padding-block: 40px; border-bottom: 1px solid var(--line); text-decoration: none; }
+.item img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.item__text { display: grid; gap: 10px; max-width: 64ch; }
+@media (max-width: 767px) { .lead, .item { grid-template-columns: minmax(0, 1fr); gap: 20px; } }

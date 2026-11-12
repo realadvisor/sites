@@ -1,0 +1,44 @@
+/* From src/pages/news.astro (scoped there: every selector under .p-news). */
+.p-news .line-band { background: var(--ink); color: #fff; padding-block: 8px clamp(48px, 6vw, 80px); overflow: hidden; }
+.p-news .line { position: relative; height: 130px; margin-inline: 12px; }
+.p-news .track { position: absolute; left: 0; right: 0; top: 54px; height: 6px; border-radius: 3px; background: rgb(255 255 255 / 0.25); }
+.p-news .fill { position: absolute; inset: 0 auto 0 0; width: var(--today); background: var(--zinnober); border-radius: 3px; }
+.p-news .today { position: absolute; left: var(--today); top: 0; height: 66px; border-left: 2px dashed var(--butter); }
+.p-news .today span { position: absolute; left: 8px; top: 0; white-space: nowrap; font-size: 0.8125rem; font-weight: 650; color: var(--butter); }
+.p-news .marks { list-style: none; margin: 0; padding: 0; }
+.p-news .marks li { position: absolute; top: 44px; transform: translateX(-13px); }
+.p-news .marks a { display: grid; justify-items: start; gap: 10px; text-decoration: none; color: #fff; }
+.p-news .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--zinnober); border: 3px solid #fff; }
+.p-news .planned .dot { background: var(--ink); border-style: dashed; }
+.p-news .lbl { display: grid; font-size: 0.8125rem; line-height: 1.25; width: 9.5em; }
+.p-news .lbl strong { font-size: 0.875rem; text-wrap: balance; }
+.p-news .lbl span { color: #d9d4ee; }
+.p-news .marks li:last-child { transform: translateX(-100%) translateX(13px); }
+.p-news .marks li:last-child a { justify-items: end; text-align: right; }
+.p-news .marks a:hover strong { text-decoration: underline; }
+.p-news .feed { padding-block: clamp(40px, 6vw, 88px); }
+.p-news .items { list-style: none; margin: 0; padding: 0; display: grid; }
+.p-news .item { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: clamp(16px, 3vw, 48px); padding-block: clamp(28px, 4vw, 48px); border-top: 2px solid var(--ink); }
+.p-news .when { display: grid; gap: 10px; align-content: start; }
+.p-news .when time { font: 750 var(--step-1)/1.1 var(--display); }
+.p-news .state { justify-self: start; padding: 4px 10px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.8125rem; font-weight: 650; }
+.p-news .state--planned { background: transparent; color: var(--ink); border: 2px dashed var(--ink); }
+.p-news .body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.p-news .planned .body { grid-template-columns: minmax(0, 1fr); }
+.p-news .txt { display: grid; gap: 14px; }
+.p-news .txt h2 { font-size: var(--step-3); }
+.p-news .houses { display: flex; gap: 6px; flex-wrap: wrap; }
+.p-news .h { padding: 4px 10px; border-radius: 8px; border: 2px solid var(--ink); font-size: 0.8125rem; font-weight: 700; }
+.p-news .h--a { background: var(--haus-a); }
+.p-news .h--b { background: var(--haus-b); }
+.p-news .h--c { background: var(--haus-c); }
+.p-news .pic { margin: 0; border-radius: var(--radius-card); overflow: hidden; border: 2px solid var(--ink); }
+.p-news .pic img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.p-news .end { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
+.p-news .end h2 { font-size: var(--step-3); max-width: 20ch; }
+@media (max-width: 900px) {
+  .p-news .line-band { display: none; }
+  .p-news .item { grid-template-columns: 1fr; }
+  .p-news .body { grid-template-columns: 1fr; }
+  .p-news .when { grid-auto-flow: column; justify-content: start; align-items: center; gap: 14px; }
+}

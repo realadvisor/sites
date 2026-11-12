@@ -1,0 +1,37 @@
+---
+/**
+ * Energy label scale A to G with the listing's class marked. Shown only
+ * when the data has a class; never invented.
+ */
+interface Props {
+  value: string;
+  label: string;
+  classLabel: string;
+}
+const { value, label, classLabel } = Astro.props;
+const CLASSES = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const COLORS = ['#1a7a46', '#4f9a3c', '#a5bf33', '#e8d22c', '#eaa52a', '#de6b26', '#c9302a'];
+const v = value.trim().toUpperCase();
+---
+{CLASSES.includes(v) && (
+  <figure class="es">
+    <figcaption class="sr-only">{label}</figcaption>
+    <ol aria-label={`${label}: ${classLabel}`}>
+      {CLASSES.map((c, i) => (
+        <li class:list={{ on: c === v }} style={`--c:${COLORS[i]}; --w:${44 + i * 8}%; --on:${i === 0 || i === 6 ? '#fff' : '#1b2430'}`} aria-current={c === v ? 'true' : undefined}>
+          <span>{c}</span>{c === v && <b>{classLabel}</b>}
+        </li>
+      ))}
+    </ol>
+  </figure>
+)}
+
+<style>
+  .es { margin: 0; display: grid; gap: 12px; }
+  .es figcaption { font: 600 0.75rem/1.2 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .es ol { list-style: none; display: grid; gap: 4px; }
+  .es li { display: flex; align-items: center; gap: 12px; }
+  .es li span { width: var(--w); background: color-mix(in srgb, var(--c) 30%, #fff); color: #1b2430; font: 700 0.8125rem/1 var(--font-sans); padding: 5px 10px; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%); }
+  .es li.on span { background: var(--c); color: var(--on, #fff); padding-block: 9px; font-size: 0.9375rem; }
+  .es li b { font-size: 0.875rem; color: var(--text); }
+</style>

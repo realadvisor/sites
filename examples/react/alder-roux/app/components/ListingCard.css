@@ -1,0 +1,20 @@
+.card { height: 100%; }
+.card__link { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
+.card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2); }
+.card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.card__link:hover .card__media img { transform: scale(1.03); }
+.card__nophoto { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 500 1rem var(--font-display); }
+.card__badge {
+  position: absolute; left: 0; top: 18px; padding: 7px 12px; background: var(--navy); color: #fff;
+  font: 600 0.6875rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase;
+}
+.card--sold .card__badge { background: #fff; color: var(--navy); }
+.card__body { display: grid; gap: 8px; padding-top: 18px; }
+.card__eyebrow { font-size: 0.875rem; line-height: 1.3; color: var(--muted); }
+.card__title { font-size: 1.375rem; line-height: 1.2; font-weight: 450; }
+.card__link:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.card__facts { display: flex; flex-wrap: wrap; gap: 4px 0; color: var(--muted); font-size: 0.9375rem; }
+.card__facts span + span::before { content: ''; display: inline-block; width: 1px; height: 0.85em; background: var(--line-strong); margin: 0 12px; vertical-align: -1px; }
+.card__price { font-weight: 600; font-size: 1.0625rem; color: var(--navy); white-space: nowrap; margin-top: 2px; }
+.card--sold .card__price { color: var(--muted); font-weight: 500; }
+.card--large .card__title { font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem); }

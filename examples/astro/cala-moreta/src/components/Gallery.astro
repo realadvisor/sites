@@ -1,0 +1,141 @@
+---
+/**
+ * Listing gallery: one large photo and a 2×2 grid (desktop), one photo with a
+ * counter (phone). "View all photos" opens a native popover (works without
+ * JS, Escape closes it) with every photo at its own ratio in a snap strip;
+ * a small script adds previous / next and arrow keys.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Photo } from '@realadvisor/sites-sdk/types';
+import { UI, fill, type Lang } from '../lib/i18n';
+
+interface Props { photos: Photo[]; alt: string; lang: Lang; empty: string }
+const { photos, alt, lang, empty } = Astro.props;
+const ui = UI[lang];
+const n = photos.length;
+const altOf = (p: Photo, i: number) => (p.alt && i === 0 ? p.alt : `${alt}, ${ui.photoOf.replace('{i}', String(i + 1)).replace('{n}', String(n)).toLowerCase()}`);
+const side = photos.slice(1, 5);
+---
+{n === 0 ? (
+  <div class="g-empty" aria-hidden="true">{empty}</div>
+) : (
+  <div class:list={['g', { 'g-one': side.length === 0 }]} data-gallery>
+    <div class="g-main">
+      <RaImage src={photos[0]} alt={altOf(photos[0]!, 0)} width={1200} height={800} priority sizes="(min-width: 1360px) 860px, (min-width: 900px) 62vw, 100vw" mobile={{ width: 800, height: 600 }} />
+      {n > 1 && <span class="g-count num" aria-hidden="true">1 / {n}</span>}
+    </div>
+    {side.length > 0 && (
+      <div class:list={['g-side', `g-side-${side.length}`]}>
+        {side.map((p, i) => (
+          <div class="g-tile">
+            <RaImage src={p} alt={altOf(p, i + 1)} width={600} height={400} sizes="(min-width: 1360px) 420px, 31vw" />
+          </div>
+        ))}
+      </div>
+    )}
+    {n > 1 && (
+      <button type="button" class="g-all" popovertarget="lightbox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>
+        {fill(ui.allPhotos, { n })}
+      </button>
+    )}
+  </div>
+)}
+{n > 1 && (
+  <div id="lightbox" class="lb" popover aria-label={alt} data-lightbox>
+    <div class="lb-bar">
+      <p class="lb-count num" aria-live="polite" data-lb-count>{fill(ui.photoOf, { i: 1, n })}</p>
+      <button type="button" class="lb-close" popovertarget="lightbox" popovertargetaction="hide" aria-label={ui.close}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" /></svg>
+      </button>
+    </div>
+    <ul class="lb-strip" tabindex="0" aria-label={alt} data-lb-strip data-label={ui.photoOf}>
+      {photos.map((p, i) => (
+        <li><RaImage src={p} alt={altOf(p, i)} width={1600} height={1067} fit="fit" widths={[800, 1200, 1600, 2000]} sizes="100vw" /></li>
+      ))}
+    </ul>
+    <button type="button" class="lb-nav lb-prev" aria-label={ui.prev} data-lb-prev hidden>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+    </button>
+    <button type="button" class="lb-nav lb-next" aria-label={ui.next} data-lb-next hidden>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+    </button>
+  </div>
+)}
+
+<script>
+  const lb = document.querySelector<HTMLElement>('[data-lightbox]');
+  const strip = lb?.querySelector<HTMLElement>('[data-lb-strip]');
+  if (lb && strip) {
+    const items = [...strip.children] as HTMLElement[];
+    const count = lb.querySelector<HTMLElement>('[data-lb-count]')!;
+    const prev = lb.querySelector<HTMLButtonElement>('[data-lb-prev]')!;
+    const next = lb.querySelector<HTMLButtonElement>('[data-lb-next]')!;
+    prev.hidden = next.hidden = false;
+    const current = () => Math.round(strip.scrollLeft / strip.clientWidth);
+    const go = (i: number) => strip.scrollTo({ left: Math.max(0, Math.min(items.length - 1, i)) * strip.clientWidth, behavior: 'smooth' });
+    const update = () => {
+      const i = current();
+      count.textContent = (strip.dataset.label ?? '').replace('{i}', String(i + 1)).replace('{n}', String(items.length));
+      prev.disabled = i === 0;
+      next.disabled = i === items.length - 1;
+    };
+    prev.addEventListener('click', () => go(current() - 1));
+    next.addEventListener('click', () => go(current() + 1));
+    strip.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    lb.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    });
+    lb.addEventListener('toggle', (e) => {
+      if ((e as ToggleEvent).newState === 'open') {
+        for (const img of strip.querySelectorAll('img')) img.loading = 'eager';
+        strip.focus();
+        update();
+      }
+    });
+  }
+</script>
+
+<style>
+  .g { position: relative; display: grid; grid-template-columns: 2fr 1fr; gap: 8px; align-items: stretch; }
+  .g > * { min-height: 0; }
+  .g-one { grid-template-columns: 1fr; }
+  .g-main { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--surface); }
+  .g-side { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 8px; min-height: 0; contain: size; }
+  .g-tile { overflow: hidden; background: var(--surface); min-height: 0; }
+  /* Fewer than four side photos: fill the column, never leave an empty cell. */
+  .g-side :global(picture) { display: block; height: 100%; }
+  .g-side-1 { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr); }
+  .g-side-2 { grid-template-columns: 1fr; }
+  .g-side-3 .g-tile:first-child { grid-column: span 2; }
+  .g-one .g-main { aspect-ratio: 16 / 9; }
+  .g :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .g-main :global(picture) { display: block; height: 100%; }
+  .g-count { display: none; position: absolute; left: 14px; bottom: 14px; background: rgb(20 18 15 / .65); color: #fff; padding: 6px 10px; font-size: .8125rem; }
+  .g-all { position: absolute; right: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border: 0; background: var(--paper); color: var(--text); cursor: pointer; font: 500 .75rem/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 6px 24px -10px rgb(0 0 0 / .4); }
+  .g-all:hover { background: var(--bg); }
+  .g-empty { aspect-ratio: 3 / 1; display: grid; place-items: center; background: var(--surface); color: var(--muted); font: 300 2rem var(--font-display); }
+  @media (max-width: 760px) {
+    .g { grid-template-columns: 1fr; margin-inline: calc(var(--gutter) * -1); }
+    .g-side { display: none; }
+    .g-main, .g-one .g-main { aspect-ratio: 4 / 3; }
+    .g-count { display: block; }
+    .g-all { right: var(--gutter); bottom: 14px; padding: 0 14px; }
+  }
+
+  .lb { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #12100e; color: #fff; overflow: hidden; }
+  .lb:popover-open { display: grid; grid-template-rows: auto 1fr; }
+  .lb::backdrop { background: #12100e; }
+  .lb-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px var(--gutter); }
+  .lb-count { font-size: .875rem; letter-spacing: .08em; }
+  .lb-close { width: 48px; height: 48px; display: grid; place-items: center; background: none; border: 0; color: #fff; cursor: pointer; }
+  .lb-strip { list-style: none; margin: 0; padding: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; min-height: 0; outline: none; }
+  .lb-strip::-webkit-scrollbar { display: none; }
+  .lb-strip li { flex: 0 0 100%; display: grid; place-items: center; scroll-snap-align: center; padding: 0 var(--gutter) 32px; min-height: 0; }
+  .lb-strip :global(img) { max-width: 100%; max-height: calc(100svh - 110px); width: auto; height: auto; object-fit: contain; }
+  .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 56px; height: 56px; display: grid; place-items: center; border: 1px solid rgb(255 255 255 / .35); border-radius: 50%; background: rgb(18 16 14 / .5); color: #fff; cursor: pointer; }
+  .lb-nav:disabled { opacity: .3; cursor: default; }
+  .lb-prev { left: 16px; } .lb-next { right: 16px; }
+  @media (max-width: 760px) { .lb-nav { display: none; } }
+</style>

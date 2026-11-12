@@ -1,0 +1,25 @@
+// Enquiry form in the browser (preview: never sent) and without JavaScript (303 back with ?enquiry=).
+import { chromium } from 'playwright';
+const base = process.argv[2] ?? 'http://127.0.0.1:4511';
+const ok = (c, m) => console.log(`${c ? 'PASS' : 'FAIL'} ${m}`);
+const b = await chromium.launch();
+const p = await b.newPage();
+const errs = [];
+p.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
+await p.goto(`${base}/kontakt`, { waitUntil: 'networkidle' });
+await p.click('#enquiry button[type=submit]');
+ok(await p.isVisible('#enquiry-name-err'), 'empty submit shows field errors');
+await p.goto(`${base}/kontakt`, { waitUntil: 'networkidle' });
+await p.fill('#enquiry-name', 'Test');
+await p.fill('#enquiry-email', 'test@example.com');
+await p.fill('#enquiry-message', 'Hallo');
+await p.click('#enquiry button[type=submit]');
+await p.waitForFunction(() => !document.querySelector('#enquiry [data-status]').hidden, null, { timeout: 10000 });
+ok((await p.textContent('#enquiry [data-status]'))?.includes('Vorschau'), `preview status shown (${(await p.textContent('#enquiry [data-status]'))?.slice(0, 50)})`);
+const form = new URLSearchParams({ name: 'A', email: 'a@example.com', message: 'm', redirect: '/kontakt#enquiry' });
+const res = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, redirect: 'manual', headers: { origin: base } });
+const cross = await fetch(`${base}/api/enquiry`, { method: 'POST', body: form, redirect: 'manual', headers: { origin: 'https://evil.example' } });
+ok(cross.status === 403, `cross-site form post refused (${cross.status})`);
+ok(res.status === 303 && res.headers.get('location') === '/kontakt?enquiry=preview#enquiry', `no-JS post: ${res.status} ${res.headers.get('location')}`);
+ok(!errs.length, `no console errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
+await b.close();

@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import View from '../../../../views/UnitView.astro';
+import { findUnit } from '../../../../lib/resolve';
+const found = await findUnit(Astro.params.slug!, Astro.params.unit!);
+if (!found) return Astro.rewrite('/404');
+---
+<View l="de" dev={found.dev} unit={found.unit} />

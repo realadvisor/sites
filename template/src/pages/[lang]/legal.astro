@@ -1,0 +1,24 @@
+---
+// Legal notice in the other languages of a multi-language site: /en/legal,
+// /de/legal, ... for every locale after the first in LOCALES (src/lib/i18n.ts).
+// A single-language site answers 404 here. Wrap it in the same layout as
+// src/pages/legal.astro; keep the content component as is.
+export const prerender = false;
+
+import Base from '../../layouts/Base.astro';
+import LegalContent from '@realadvisor/sites-kit/components/LegalContent.astro';
+import { ra } from '@realadvisor/sites-kit/ra';
+import { legalNotice } from '@realadvisor/sites-kit/legal';
+import { LOCALES, lang, legalPath, t } from '@realadvisor/sites-kit/i18n';
+
+const locale = LOCALES.slice(1).find((l) => lang(l) === Astro.params.lang);
+if (!locale) return Astro.rewrite('/404');
+const agency = await ra.agency();
+const title = t('legalNotice', {}, lang(locale));
+---
+<Base title={`${title} | ${agency.name}`} description={`${title} ${agency.name}`} locale={locale} alternates={LOCALES.map((l) => ({ lang: l, href: legalPath(l) }))}>
+  <main>
+    <h1>{title}</h1>
+    <LegalContent sections={legalNotice(agency, lang(locale))} />
+  </main>
+</Base>

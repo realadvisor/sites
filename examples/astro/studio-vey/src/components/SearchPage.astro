@@ -1,0 +1,83 @@
+---
+/**
+ * Kaufen / Mieten: the kit's ListingsSearch (filters, chips, list and map,
+ * pagination, empty states) over this offer type's available listings, with
+ * the site's own card. Title, h1 and description carry every active filter.
+ */
+import type { OfferType } from '@realadvisor/sites-sdk/types';
+import Layout from '../layouts/Layout.astro';
+import ListingsSearch from '@realadvisor/sites-kit/components/ListingsSearch.astro';
+import { parseSearch, runSearch } from '@realadvisor/sites-kit/search';
+import { formatAmount, LOCALE } from '@realadvisor/sites-kit/format';
+import { img } from '@realadvisor/sites-kit/image';
+import { count, propertyTypeLabel, t } from '@realadvisor/sites-kit/i18n';
+import ListingCard from './ListingCard.astro';
+import { brandName, listingUrl, site, sites } from '../lib/data';
+import { price } from '../lib/kit';
+
+interface Props { offer: OfferType }
+const { offer } = Astro.props;
+const base = offer === 'buy' ? '/kaufen' : '/mieten';
+const verb = offer === 'buy' ? 'Kaufen' : 'Mieten';
+
+const params = parseSearch(Astro.url.searchParams);
+const [s, pool] = await Promise.all([site(), sites.allListings({ offer_type: offer, status: 'available' })]);
+const byId = new Map(pool.map((l) => [l.id, l]));
+const result = runSearch(pool, { ...params, offerType: undefined, status: 'available' }, { locale: LOCALE });
+
+const parts = [
+  verb,
+  params.propertyType && propertyTypeLabel(params.propertyType),
+  params.city,
+  params.minRooms && t('roomsMin', { n: String(params.minRooms) }),
+  params.minPrice && t('priceMin', { price: formatAmount(params.minPrice) }),
+  params.maxPrice && t('priceMax', { price: formatAmount(params.maxPrice) }),
+].filter(Boolean);
+const heading = parts.join(' · ');
+const suffix = `${params.view === 'map' ? ` – ${t('viewMap')}` : ''}${result.page > 1 ? ` – ${t('page')} ${result.page}` : ''}`;
+const first = result.items.find((l) => l.photos[0])?.photos[0];
+const lede = offer === 'buy'
+  ? 'Wohnungen, Häuser und Villen am Zürichsee, in der Stadt und in Zug.'
+  : 'Wohnungen und Häuser zur Miete, möbliert und unmöbliert.';
+---
+<Layout
+  title={`${heading}${suffix} | ${brandName(s)}`}
+  description={`${count('listingsFound', result.total)} – ${heading} – ${brandName(s)}`}
+  image={first && img(first.url, { w: 1200, h: 630 })}
+>
+  <div class="sp wrap">
+    <header class="sp-head">
+      <h1 class="h1" data-rs-sync="h1">{heading}{suffix}</h1>
+      <p class="lede muted">{lede}</p>
+    </header>
+    <ListingsSearch
+      result={result}
+      base={base}
+      sold={false}
+      filters={['propertyType', 'city', 'price', 'rooms']}
+      contactHref="/kontakt"
+      valuationHref="/verkaufen#bewertung"
+      listingHref={(l) => listingUrl(l)}
+      price={(l) => price(byId.get(l.id) ?? { offer_type: offer })}
+    >
+      {(l: (typeof result.items)[number], i: number) => {
+        const listing = byId.get(l.id);
+        return listing ? <ListingCard listing={listing} priority={i === 0} as="h2" /> : null;
+      }}
+    </ListingsSearch>
+  </div>
+</Layout>
+
+<style>
+  .sp { padding-bottom: var(--section); }
+  .sp-head { display: grid; gap: 18px; justify-items: start; padding-block: clamp(48px, 5vw, 80px) clamp(28px, 3vw, 44px); }
+  .sp-head .lede { max-width: 46ch; }
+  .sp :global(.rs-form) { padding-bottom: 8px; }
+  .sp :global(.field-label) { font: 500 var(--fs-caps)/1.4 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .sp :global(.rs-count) { font: 400 1.375rem/1.2 var(--serif); }
+  .sp :global(.rs-filters-btn), .sp :global(.rs-views a), .sp :global(.rs-status a) { font-weight: 500; }
+  .sp :global(.rs-bar) { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 28px; }
+  .sp :global(.rs-grid) { row-gap: 56px; }
+  .sp :global(.rs-empty-title) { font-family: var(--serif); }
+  .sp :global(.btn) { font: 500 0.8125rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; }
+</style>

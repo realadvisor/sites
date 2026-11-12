@@ -1,0 +1,49 @@
+/* Studio Vey: editorial. Warm paper, ink, one deep green-grey (the brand colour #2F3A36) used sparingly. */
+:root {
+  --bg: #faf8f4;
+  --paper: #ffffff;
+  --surface: #f2eee7;
+  --tint: #e9e4da;
+  --text: #1d2220;
+  --muted: #595f5b;
+  --line: #d9d3c8;
+  --line-strong: #b9b2a6;
+  --accent: #2f3a36;
+  --accent-strong: #222a27;
+  --on-accent: #ffffff;
+  --on-accent-muted: rgb(255 255 255 / 0.76);
+  --line-on-accent: rgb(255 255 255 / 0.22);
+  --danger: #a3341f;
+
+  --serif: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  --radius-card: 0;
+  --radius-btn: 0;
+  --control-radius: 0;
+  --control-h: 48px;
+  --header-h: 76px;
+
+  --wrap: 1360px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --section: clamp(72px, 9vw, 136px);
+  --gap: clamp(20px, 2.4vw, 32px);
+
+  --fs-display: clamp(2.375rem, 1.5rem + 3.1vw, 4rem);
+  --fs-h1: clamp(2.125rem, 1.45rem + 2.4vw, 3.375rem);
+  --fs-h2: clamp(1.75rem, 1.35rem + 1.5vw, 2.625rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --fs-lede: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --fs-small: 0.875rem;
+  --fs-caps: 0.75rem;
+
+  /* Kit parts (ListingsSearch, forms) */
+  --rs-columns: 3;
+  --rs-gap: clamp(20px, 2.4vw, 32px);
+  --rs-active: var(--accent);
+  --rs-on-active: var(--on-accent);
+  --rs-pill-radius: 999px;
+  --rs-sheet-radius: 0;
+  --rs-heading-weight: 400;
+  --rs-card-h: 440px;
+}

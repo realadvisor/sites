@@ -1,0 +1,60 @@
+---
+/**
+ * Listing card: 4:3 photo with at most one badge (sold, for rent), place
+ * line, serif title, facts, price. Sold listings show no price. Used in the
+ * kit's ListingsSearch slot and in every grid.
+ */
+import RaImage from '@realadvisor/sites-kit/components/RaImage.astro';
+import type { Listing } from '@realadvisor/sites-sdk/types';
+import { listingHref, type L } from '../lib/routes';
+import { cityName, tx } from '../lib/copy';
+import { bedrooms, formatSurface, price, typeLabel } from '../lib/format';
+
+interface Props {
+  listing: Listing;
+  l: L;
+  priority?: boolean;
+  sizes?: string;
+  as?: 'h2' | 'h3';
+}
+const { listing: x, l, priority = false, sizes = '(min-width: 1440px) 420px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, calc(100vw - 32px)', as: H = 'h3' } = Astro.props;
+const t = tx(l);
+const photo = x.photos[0];
+const badge = x.status === 'sold' ? t('sold') : x.offer_type === 'rent' ? t('forRent') : undefined;
+const facts = [bedrooms(x.bedrooms, l), x.living_surface ? formatSurface(x.living_surface) : '', x.land_surface ? `${formatSurface(x.land_surface)} ${t('land')}` : ''].filter(Boolean);
+const place = [cityName(x.address.city, l), x.address.country === 'France' ? 'France' : x.address.country === 'Switzerland' ? (l === 'fr' ? 'Suisse' : 'Switzerland') : x.address.country].filter(Boolean).join(', ');
+---
+<article class:list={['card', { 'card--sold': x.status === 'sold' }]}>
+  <a class="card__link" href={listingHref(x, l)}>
+    <div class="card__media">
+      {photo
+        ? <RaImage src={photo} alt={photo.alt || x.title} width={800} height={600} sizes={sizes} priority={priority} widths={priority ? [480, 800, 1000] : undefined} />
+        : <span class="card__nophoto">{typeLabel(x.property_type, l)}</span>}
+      {badge && <span class="card__badge">{badge}</span>}
+    </div>
+    <div class="card__body">
+      {place && <p class="card__place">{place}</p>}
+      <H class="card__title">{x.title}</H>
+      {facts.length > 0 && <p class="card__facts">{facts.map((f) => <span class="num">{f}</span>)}</p>}
+      {x.status !== 'sold' && <p class="card__price num">{price(x, l)}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .card { height: 100%; }
+  .card__link { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
+  .card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--line); border-radius: var(--radius-card); }
+  .card__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+  .card__link:hover .card__media :global(img) { transform: scale(1.025); }
+  .card__nophoto { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 400 1.125rem var(--font-display); }
+  .card__badge { position: absolute; left: 14px; top: 14px; padding: 7px 12px; border-radius: 999px; background: var(--ivory); color: var(--ink); font: 600 0.75rem/1 var(--font-sans); letter-spacing: 0.04em; }
+  .card--sold .card__badge { background: var(--ink); color: var(--on-ink); }
+  .card__body { display: grid; gap: 6px; padding-top: 16px; }
+  .card__place { font-size: 0.875rem; color: var(--muted); }
+  .card__title { font-size: 1.3125rem; line-height: 1.25; }
+  .card__link:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+  .card__facts { display: flex; flex-wrap: wrap; gap: 2px 0; color: var(--muted); font-size: 0.9375rem; }
+  .card__facts span + span::before { content: '·'; margin: 0 8px; color: var(--line-strong); }
+  .card__price { margin-top: 4px; font-weight: 600; font-size: 1.0625rem; }
+</style>
