@@ -8,7 +8,12 @@ declare module 'virtual:sites-kit/site' {
 }
 declare module 'virtual:sites-kit-react/client' {
   /** The site's bundled browser script and its static imports. */
-  const client: { src: string; preload: string[] };
+  const client: {
+    src: string;
+    preload: string[];
+    /** Dev only: scripts the CRM preview adds (SITES_PREVIEW_BRIDGE). Empty in a build. */
+    dev?: string[];
+  };
   export default client;
 }
 declare module 'virtual:sites-kit-react/css' {

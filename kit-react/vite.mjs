@@ -29,7 +29,7 @@
  *
  * Plain JS on purpose: vite.config loads it natively.
  */
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readSiteConfig, SITE_CONFIG_FILE } from '@realadvisor/sites-kit-core/site-config';
@@ -38,6 +38,14 @@ import { securityHeaders } from '@realadvisor/sites-kit-core/security';
 const SITE_ID = 'virtual:sites-kit/site';
 const CLIENT_ID = 'virtual:sites-kit-react/client';
 const CSS_ID = 'virtual:sites-kit-react/css';
+/**
+ * Dev only: a browser script the CRM preview adds to every page (its
+ * bridge: path reporting, element picking). SITES_PREVIEW_BRIDGE is the
+ * path of that file, outside the site; `<KitScripts>` loads it with the
+ * request's nonce. Never in a build.
+ */
+const BRIDGE_ID = 'virtual:sites-kit-react/preview-bridge';
+const BRIDGE_ENV = 'SITES_PREVIEW_BRIDGE';
 const resolved = (id) => `\0${id}`;
 const KIT_PACKAGES = ['@realadvisor/sites-kit-core', '@realadvisor/sites-kit-react', '@realadvisor/sites-sdk'];
 
@@ -134,6 +142,7 @@ export default function sitesKit(opts = {}) {
     },
     resolveId(id, importer) {
       if (id === SITE_ID || id === CLIENT_ID || id === CSS_ID) return resolved(id);
+      if (id === BRIDGE_ID && command === 'serve') return resolved(id);
       // From JS only: an @import inside a stylesheet stays plain CSS.
       if (importer && !/\.(css|scss|sass|less)(\?|$)/.test(importer) && isKitCss(id.split('?')[0])) return KIT_CSS_ID;
       return undefined;
@@ -151,9 +160,16 @@ export default function sitesKit(opts = {}) {
         if (command === 'serve') {
           const file = resolve(root, clientEntry);
           const src = existsSync(file) ? `${base}${relative(root, file).split('\\').join('/')}` : '';
-          return `export default ${JSON.stringify({ src, preload: [] })};`;
+          const bridge = process.env[BRIDGE_ENV];
+          // Vite's URL of a virtual module (\0 becomes __x00__).
+          const dev = bridge && existsSync(bridge) ? [`${base}@id/__x00__${BRIDGE_ID}`] : [];
+          return `export default ${JSON.stringify({ src, preload: [], dev })};`;
         }
-        return `export default ${JSON.stringify(built)};`;
+        return `export default ${JSON.stringify({ ...built, dev: [] })};`;
+      }
+      if (id === resolved(BRIDGE_ID)) {
+        const bridge = process.env[BRIDGE_ENV];
+        return bridge && existsSync(bridge) ? readFileSync(bridge, 'utf8') : '';
       }
       return undefined;
     },

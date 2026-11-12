@@ -75,21 +75,25 @@ export function useHydrate(): boolean {
 export function KitScripts() {
   const nonce = useNonce();
   const hydrate = useHydrate();
+  // Dev only (the CRM preview's bridge): empty in a build.
+  const dev = (client.dev ?? []).map((src) => <script key={src} type="module" src={src} nonce={nonce} />);
   if (hydrate) {
     return (
       <>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
+        {dev}
       </>
     );
   }
-  if (!client.src) return null;
+  if (!client.src) return <>{dev}</>;
   return (
     <>
       {client.preload.map((href) => (
         <link key={href} rel="modulepreload" href={href} />
       ))}
       <script type="module" src={client.src} nonce={nonce} />
+      {dev}
     </>
   );
 }
