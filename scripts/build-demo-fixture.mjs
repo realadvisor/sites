@@ -331,6 +331,17 @@ const SPECS = [
   ['rent', 'indus_office', 'available', null, null, null, null, 220, null, 'lausanne', sofia, ['elevator'], 'Bureaux en centre-ville', 'Plateau de bureaux modulable, proche du métro. Loyer sur demande.'],
 ];
 
+// The CRM facts of each listing (SPECS order), as rest-api serves them. No rand(): the ids stay put.
+const FACTS = [
+  { floor: 3, building_floors: 5, orientation: ['south', 'west'], construction_year: 2016, energy_class: 'B', energy_certificate_version: 'CECB', heating: 'heat_pump', has_cellar: true, indoor_parkings: 1, charges: 380, available_from: '2027-01-01' },
+  { building_floors: 2, orientation: ['south', 'east'], construction_year: 1988, renovation_year: 2019, energy_class: 'D', energy_certificate_version: 'CECB', heating: 'oil', has_cellar: true, garden_surface: 650, terrace_surface: 35, indoor_parkings: 2, outdoor_parkings: 1 },
+  { building_floors: 4, construction_year: 1972, renovation_year: 2010, energy_class: 'E', heating: 'gas', has_cellar: true, outdoor_parkings: 6 },
+  { floor: 5, building_floors: 5, orientation: ['south'], construction_year: 2008, energy_class: 'C', minergie: 'minergie', heating: 'district', terrace_surface: 64, indoor_parkings: 2 },
+  { floor: 2, building_floors: 4, orientation: ['east'], construction_year: 1965, renovation_year: 2022, energy_class: 'D', heating: 'district', has_cellar: true, rent_extra: 220, available_from: '2026-12-01', pets_allowed: false },
+  { floor: 1, building_floors: 6, construction_year: 1994, energy_class: 'C', heating: 'gas', rent_extra: 90, furnished: true, available_from: '2026-12-15' },
+  { floor: 4, building_floors: 6, construction_year: 2001, heating: 'district', rent_extra: 600, indoor_parkings: 4, available_from: '2027-03-01' },
+];
+
 const listings = [];
 let ref = 0;
 const listingOf = ([offer_type, property_type, status, price, rooms, bedrooms, bathrooms, living_surface, land_surface, place, agent, features, title, intro], i, extra = {}) => {
@@ -357,6 +368,7 @@ const listingOf = ([offer_type, property_type, status, price, rooms, bedrooms, b
     features,
     published_at: new Date(Date.UTC(2026, 9, 28) - i * 3 * 86400000).toISOString(),
     reference: `DEMO-${String(++ref).padStart(4, '0')}`,
+    ...(FACTS[i] ?? {}),
     ...extra,
   };
   return { ...l, ...describe(l, intro) };
@@ -381,12 +393,23 @@ const UNITS = [
   [3.5, 2, 1, 72, 6, 3, 'sold'],
   [3.5, 2, 2, 102, 32, 4, 'available', 1495000],
 ];
+// The facts every unit of the building shares.
+const BUILDING = { building_floors: 5, construction_year: 2028, energy_class: 'A', minergie: 'minergie_p', heating: 'heat_pump', has_cellar: true, indoor_parkings: 1, available_from: '2028-07-01' };
+const ORIENTATION = [['south', 'west'], ['south', 'east'], ['north', 'west'], ['south']];
 const units = UNITS.map(([rooms, bedrooms, bathrooms, living_surface, balcony_surface, floor, status, price], i) => {
   const name = `${String(rooms).replace('.', ',')} pièces · ${FLOORS[floor]}`;
   const features = floor === 0 ? ['balcony', 'garden', 'parking'] : ['elevator', 'balcony', 'parking'];
+  const facts = {
+    ...BUILDING,
+    orientation: ORIENTATION[i % ORIENTATION.length],
+    ...(floor === 0 ? { garden_surface: 60 + i * 20 } : {}),
+    ...(floor === 4 ? { terrace_surface: 32 } : {}),
+    charges: Math.round(living_surface * 3.2),
+  };
   const unit = {
     id: uuid(),
     name,
+    reference: `A${floor}.${(i % 2) + 1}`,
     status,
     offer_type: 'buy',
     property_type: 'apartment',
@@ -400,6 +423,7 @@ const units = UNITS.map(([rooms, bedrooms, bathrooms, living_surface, balcony_su
     ...(price ? { price } : {}),
     currency: 'CHF',
     features,
+    ...facts,
   };
   if (!price) return unit;
   // Units for sale are public listings too: same text and photos.
@@ -408,7 +432,7 @@ const units = UNITS.map(([rooms, bedrooms, bathrooms, living_surface, balcony_su
       `${devTitle} – ${name}`,
       `Appartement neuf de la ${devTitle}, ${FLOORS[floor].toLowerCase()}, balcon de ${balcony_surface} m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.`],
     SPECS.length + i,
-    { address: devAddress, photos: photos(flats[1], i % 8, 6, name) },
+    { address: devAddress, photos: photos(flats[1], i % 8, 6, name), floor, balcony_surface, ...facts },
   );
   listings.push(listing);
   return { ...unit, listing_slug: listing.slug, description: listing.description, description_text: listing.description_text, photos: listing.photos };
@@ -429,6 +453,9 @@ const development = {
   delivery_date: '2028-06-30',
   address: devAddress,
   photos: devPhotos,
+  developer: { name: 'Exemple Promotion SA', website: 'https://www.example.com/promotion' },
+  architect: { name: 'Atelier Modèle' },
+  general_contractor: { name: 'Démo Construction SA' },
   stats: {
     units: units.length,
     available: units.filter((u) => u.status === 'available').length,

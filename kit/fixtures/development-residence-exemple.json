@@ -130,6 +130,22 @@
       ],
       "published_at": "2026-10-04T00:00:00.000Z",
       "reference": "DEMO-0008",
+      "floor": 0,
+      "balcony_surface": 19,
+      "building_floors": 5,
+      "construction_year": 2028,
+      "energy_class": "A",
+      "minergie": "minergie_p",
+      "heating": "heat_pump",
+      "has_cellar": true,
+      "indoor_parkings": 1,
+      "available_from": "2028-07-01",
+      "orientation": [
+        "south",
+        "east"
+      ],
+      "garden_surface": 80,
+      "charges": 314,
       "description": "<p><strong>Résidence Exemple – 4,5 pièces · Rez-de-jardin</strong></p><p>Appartement neuf de la Résidence Exemple, rez-de-jardin, balcon de 19 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>4,5 pièces</li><li>98 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Balcon</li><li>Jardin</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
       "description_text": "Résidence Exemple – 4,5 pièces · Rez-de-jardin\nAppartement neuf de la Résidence Exemple, rez-de-jardin, balcon de 19 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n4,5 pièces\n\n98 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nBalcon\n\nJardin\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
       "team_ids": [
@@ -207,6 +223,21 @@
       ],
       "published_at": "2026-09-25T00:00:00.000Z",
       "reference": "DEMO-0009",
+      "floor": 2,
+      "balcony_surface": 10,
+      "building_floors": 5,
+      "construction_year": 2028,
+      "energy_class": "A",
+      "minergie": "minergie_p",
+      "heating": "heat_pump",
+      "has_cellar": true,
+      "indoor_parkings": 1,
+      "available_from": "2028-07-01",
+      "orientation": [
+        "south",
+        "west"
+      ],
+      "charges": 346,
       "description": "<p><strong>Résidence Exemple – 4,5 pièces · 2e étage</strong></p><p>Appartement neuf de la Résidence Exemple, 2e étage, balcon de 10 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>4,5 pièces</li><li>108 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
       "description_text": "Résidence Exemple – 4,5 pièces · 2e étage\nAppartement neuf de la Résidence Exemple, 2e étage, balcon de 10 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n4,5 pièces\n\n108 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
       "team_ids": [
@@ -284,6 +315,21 @@
       ],
       "published_at": "2026-09-16T00:00:00.000Z",
       "reference": "DEMO-0010",
+      "floor": 4,
+      "balcony_surface": 32,
+      "building_floors": 5,
+      "construction_year": 2028,
+      "energy_class": "A",
+      "minergie": "minergie_p",
+      "heating": "heat_pump",
+      "has_cellar": true,
+      "indoor_parkings": 1,
+      "available_from": "2028-07-01",
+      "orientation": [
+        "south"
+      ],
+      "terrace_surface": 32,
+      "charges": 326,
       "description": "<p><strong>Résidence Exemple – 3,5 pièces · Attique</strong></p><p>Appartement neuf de la Résidence Exemple, attique, balcon de 32 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>3,5 pièces</li><li>102 m² habitables</li><li>2 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
       "description_text": "Résidence Exemple – 3,5 pièces · Attique\nAppartement neuf de la Résidence Exemple, attique, balcon de 32 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n3,5 pièces\n\n102 m² habitables\n\n2 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
       "team_ids": [
@@ -362,6 +408,16 @@
           "alt": "Résidence Exemple"
         }
       ],
+      "developer": {
+        "name": "Exemple Promotion SA",
+        "website": "https://www.example.com/promotion"
+      },
+      "architect": {
+        "name": "Atelier Modèle"
+      },
+      "general_contractor": {
+        "name": "Démo Construction SA"
+      },
       "stats": {
         "units": 8,
         "available": 2,
@@ -407,6 +463,7 @@
         {
           "id": "6e6d7643-5e1f-4401-bb3b-67e504867425",
           "name": "2,5 pièces · Rez-de-jardin",
+          "reference": "A0.1",
           "status": "sold",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -422,11 +479,26 @@
             "balcony",
             "garden",
             "parking"
-          ]
+          ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "south",
+            "west"
+          ],
+          "garden_surface": 60,
+          "charges": 176
         },
         {
           "id": "f75d483f-d2ed-413c-84fb-989ce49c5e6b",
           "name": "4,5 pièces · Rez-de-jardin",
+          "reference": "A0.2",
           "status": "reserved",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -444,6 +516,20 @@
             "garden",
             "parking"
           ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "south",
+            "east"
+          ],
+          "garden_surface": 80,
+          "charges": 314,
           "listing_slug": "residence-exemple-4-5-pieces-rez-de-jardin-3eaaf70d-5118-4983-b7ca-e4ad756f0b1a",
           "description": "<p><strong>Résidence Exemple – 4,5 pièces · Rez-de-jardin</strong></p><p>Appartement neuf de la Résidence Exemple, rez-de-jardin, balcon de 19 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>4,5 pièces</li><li>98 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Balcon</li><li>Jardin</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
           "description_text": "Résidence Exemple – 4,5 pièces · Rez-de-jardin\nAppartement neuf de la Résidence Exemple, rez-de-jardin, balcon de 19 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n4,5 pièces\n\n98 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nBalcon\n\nJardin\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
@@ -477,6 +563,7 @@
         {
           "id": "645ca84f-848c-46b1-a60b-0a34c18eb76f",
           "name": "1,5 pièces · 1er étage",
+          "reference": "A1.1",
           "status": "sold",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -492,11 +579,25 @@
             "elevator",
             "balcony",
             "parking"
-          ]
+          ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "north",
+            "west"
+          ],
+          "charges": 122
         },
         {
           "id": "c173187b-fde3-48cd-a32f-c502388ca430",
           "name": "3,5 pièces · 1er étage",
+          "reference": "A1.2",
           "status": "sold",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -512,11 +613,24 @@
             "elevator",
             "balcony",
             "parking"
-          ]
+          ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "south"
+          ],
+          "charges": 240
         },
         {
           "id": "4bc42fc5-02d2-408c-b793-3ffb66239e20",
           "name": "4,5 pièces · 2e étage",
+          "reference": "A2.1",
           "status": "available",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -534,6 +648,19 @@
             "balcony",
             "parking"
           ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "south",
+            "west"
+          ],
+          "charges": 346,
           "listing_slug": "residence-exemple-4-5-pieces-2e-etage-92527c6a-8804-4f60-a197-4a0b3e0cbf34",
           "description": "<p><strong>Résidence Exemple – 4,5 pièces · 2e étage</strong></p><p>Appartement neuf de la Résidence Exemple, 2e étage, balcon de 10 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>4,5 pièces</li><li>108 m² habitables</li><li>3 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
           "description_text": "Résidence Exemple – 4,5 pièces · 2e étage\nAppartement neuf de la Résidence Exemple, 2e étage, balcon de 10 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n4,5 pièces\n\n108 m² habitables\n\n3 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
@@ -567,6 +694,7 @@
         {
           "id": "42572190-ef3a-4b57-a290-72d188cfe487",
           "name": "2,5 pièces · 2e étage",
+          "reference": "A2.2",
           "status": "sold",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -582,11 +710,25 @@
             "elevator",
             "balcony",
             "parking"
-          ]
+          ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "south",
+            "east"
+          ],
+          "charges": 176
         },
         {
           "id": "233c0f93-9dc7-4ddd-8260-ca679ddedb41",
           "name": "3,5 pièces · 3e étage",
+          "reference": "A3.1",
           "status": "sold",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -602,11 +744,25 @@
             "elevator",
             "balcony",
             "parking"
-          ]
+          ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "north",
+            "west"
+          ],
+          "charges": 230
         },
         {
           "id": "bb02a82c-bd21-430b-a433-b92ad5326959",
           "name": "3,5 pièces · Attique",
+          "reference": "A4.2",
           "status": "available",
           "offer_type": "buy",
           "property_type": "apartment",
@@ -624,6 +780,19 @@
             "balcony",
             "parking"
           ],
+          "building_floors": 5,
+          "construction_year": 2028,
+          "energy_class": "A",
+          "minergie": "minergie_p",
+          "heating": "heat_pump",
+          "has_cellar": true,
+          "indoor_parkings": 1,
+          "available_from": "2028-07-01",
+          "orientation": [
+            "south"
+          ],
+          "terrace_surface": 32,
+          "charges": 326,
           "listing_slug": "residence-exemple-3-5-pieces-attique-e9f9212b-01cd-4ffb-b452-9966dafb4711",
           "description": "<p><strong>Résidence Exemple – 3,5 pièces · Attique</strong></p><p>Appartement neuf de la Résidence Exemple, attique, balcon de 32 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.</p><ul><li>3,5 pièces</li><li>102 m² habitables</li><li>2 chambres</li><li>2 salles d'eau</li><li>Ascenseur</li><li>Balcon</li><li>Place de parc</li></ul><p>Bien fictif de Demo Agency, publié à titre d'exemple.</p>",
           "description_text": "Résidence Exemple – 3,5 pièces · Attique\nAppartement neuf de la Résidence Exemple, attique, balcon de 32 m². Immeuble Minergie avec ascenseur, places de parc au sous-sol.\n\n3,5 pièces\n\n102 m² habitables\n\n2 chambres\n\n2 salles d'eau\n\nAscenseur\n\nBalcon\n\nPlace de parc\n\nBien fictif de Demo Agency, publié à titre d'exemple.",
