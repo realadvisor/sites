@@ -1,9 +1,13 @@
 name: Publish
 
-# Publishes @realadvisor/sites-sdk, @realadvisor/sites-kit and
-# @realadvisor/sites-kit-react to npm, one version for the three, when a
+# Publishes @realadvisor-sites/sdk, @realadvisor-sites/kit and
+# @realadvisor-sites/kit-react to npm, one version for the three, when a
 # v<x.y.z> tag is pushed. Set the version first (scripts/set-version.mjs),
 # merge, then tag the merge commit.
+#
+# Auth: npm trusted publishing (each package on npmjs.com trusts this repo and
+# this workflow file), so no npm token is stored. A NPM_TOKEN secret, if set,
+# is used instead.
 
 on:
   push:
@@ -11,7 +15,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # npm provenance
+  id-token: write # trusted publishing and provenance
 
 concurrency:
   group: publish
@@ -27,6 +31,8 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or later; Node 22 ships npm 10.
+      - run: npm install -g npm@11
       - name: Tag matches every package version
         run: node scripts/set-version.mjs --check "$GITHUB_REF_NAME"
       - run: pnpm test

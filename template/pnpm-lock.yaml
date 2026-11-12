@@ -13,10 +13,10 @@ importers:
         version: 12.6.13(@types/node@22.20.5)(astro@5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1))(yaml@2.9.1)
       '@realadvisor/sites-kit':
         specifier: file:../kit
-        version: file:../kit(@realadvisor/sites-sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)
+        version: '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)'
       '@realadvisor/sites-sdk':
         specifier: file:../sdk
-        version: file:../sdk
+        version: '@realadvisor-sites/sdk@file:../sdk'
       astro:
         specifier: 5.18.2
         version: 5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1)
@@ -1165,7 +1165,7 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@realadvisor/sites-kit@file:../kit':
+  '@realadvisor-sites/kit@file:../kit':
     resolution: {directory: ../kit, type: directory}
     hasBin: true
     peerDependencies:
@@ -1178,7 +1178,7 @@ packages:
       playwright:
         optional: true
 
-  '@realadvisor/sites-sdk@file:../sdk':
+  '@realadvisor-sites/sdk@file:../sdk':
     resolution: {directory: ../sdk, type: directory}
     engines: {node: '>=22.18'}
 
@@ -3481,14 +3481,14 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@realadvisor/sites-kit@file:../kit(@realadvisor/sites-sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)':
+  '@realadvisor-sites/kit@file:../kit(@realadvisor-sites/sdk@file:../sdk)(astro@5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1))(playwright@1.64.1)':
     dependencies:
-      '@realadvisor/sites-sdk': file:../sdk
+      '@realadvisor/sites-sdk': '@realadvisor-sites/sdk@file:../sdk'
     optionalDependencies:
       astro: 5.18.2(@types/node@22.20.5)(rollup@4.67.5)(typescript@5.9.3)(yaml@2.9.1)
       playwright: 1.64.1
 
-  '@realadvisor/sites-sdk@file:../sdk': {}
+  '@realadvisor-sites/sdk@file:../sdk': {}
 
   '@rollup/pluginutils@5.5.1(rollup@4.67.5)':
     dependencies:

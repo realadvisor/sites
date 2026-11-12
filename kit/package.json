@@ -1,5 +1,5 @@
 {
-  "name": "@realadvisor/sites-kit",
+  "name": "@realadvisor-sites/kit",
   "version": "0.3.0",
   "description": "Everything a RealAdvisor agency site is built from: the data client (`@realadvisor/sites-sdk`, a peer), the Astro integration, the listings components, the legal, enquiry and image parts, the deploy check and tools, and the rules the coding agent follows. Released with the SDK and the React kit, one version for the three; each site pins it.",
   "license": "MIT",

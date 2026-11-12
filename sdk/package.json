@@ -1,5 +1,5 @@
 {
-  "name": "@realadvisor/sites-sdk",
+  "name": "@realadvisor-sites/sdk",
   "version": "0.3.0",
   "description": "The data client of every RealAdvisor site: createClient, createFixtureClient, handleEnquiry, SitesApiError and the types. No dependencies, web standards only: it runs unchanged in Astro, React Router and plain Node.",
   "license": "MIT",

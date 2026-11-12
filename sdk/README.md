@@ -12,9 +12,10 @@ ready-made enquiry endpoint.
 - No dependencies, web standards only (`fetch`, `Request`, `Response`). It
   runs unchanged in Astro, React Router, a Cloudflare Worker and Node 22.
 - Server-side only. The key must never reach the browser.
-- Not on npm yet: sites depend on it by path (`file:../sdk`).
+- On npm as `@realadvisor-sites/sdk`, installed as `@realadvisor/sites-sdk`
+  (`"npm:@realadvisor-sites/sdk@^0.3.0"`), or by path (`file:../sdk`).
 - Both kits (`kit`, `kit-react`) take it as a peer and re-export
-  it; a site depends on it next to the kit (`file:../sdk`).
+  it; a site depends on it next to the kit, same version.
 
 ## Quick start
 
