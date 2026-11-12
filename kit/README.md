@@ -1,8 +1,9 @@
 # @realadvisor/sites-kit
 
 The platform core of a RealAdvisor agency site, plus the listings search.
-A site depends on it (`"@realadvisor/sites-kit": "file:../kit"`) and never
-copies it: the version a site runs is the one crm-chat-api ships. Every part
+A site depends on it and never copies it: a published version from npm
+(`"@realadvisor/sites-kit": "npm:@realadvisor-sites/kit@^0.3.0"`), or the
+version crm-chat-api ships (`"file:../kit"`). Every part
 except the core (data, middleware, security headers, deploy check) is an
 optional helper: the coding agent writes the rest of the site itself.
 

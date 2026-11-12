@@ -1,0 +1,54 @@
+name: Publish
+
+# Publishes @realadvisor-sites/sdk, @realadvisor-sites/kit and
+# @realadvisor-sites/kit-react to npm, one version for the three, when a
+# v<x.y.z> tag is pushed. Set the version first (scripts/set-version.mjs),
+# merge, then tag the merge commit.
+#
+# Auth: npm trusted publishing (each package on npmjs.com trusts this repo and
+# this workflow file), so no npm token is stored. A NPM_TOKEN secret, if set,
+# is used instead.
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+  id-token: write # trusted publishing and provenance
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or later; Node 22 ships npm 10.
+      - run: npm install -g npm@11
+      - name: Tag matches every package version
+        run: node scripts/set-version.mjs --check "$GITHUB_REF_NAME"
+      - run: pnpm test
+      - run: node scripts/check-pack.mjs
+      - run: pnpm check:template
+      # The SDK first: the kits name it as a peer.
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          for dir in sdk kit kit-react; do
+            name=$(node -p "require('./$dir/package.json').name")
+            version=$(node -p "require('./$dir/package.json').version")
+            if npm view "$name@$version" version >/dev/null 2>&1; then
+              echo "$name@$version is already on npm, skipping"
+            else
+              (cd "$dir" && npm publish)
+            fi
+          done
