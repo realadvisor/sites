@@ -341,10 +341,13 @@ minutes for a new site.
    ratio and resolution, controls, clicks blocked by an invisible overlay).
    Read `screenshots/contact-sheet.png` once; at most 3
    `screenshots/sheet-<route>.png` for detail.
-3. One fix round, then `pnpm check` and `pnpm screenshot -- <changed paths>`
+3. Judge the screenshots for taste with `TASTE.md` (next to this file):
+   the ten rubric lines against the chosen style's screenshots, and every
+   `taste:` line `pnpm screenshot` printed. Fix what scores under 2.
+4. One fix round, then `pnpm check` and `pnpm screenshot -- <changed paths>`
    once more.
-4. `pnpm check:deploy` once: a FAIL means the site cannot be published.
-5. Run `git diff --stat` and name the files you changed; never claim a fix
+5. `pnpm check:deploy` once: a FAIL means the site cannot be published.
+6. Run `git diff --stat` and name the files you changed; never claim a fix
    you did not make. Finish with a short summary: pages built, design
    direction, anything you could not do.
 

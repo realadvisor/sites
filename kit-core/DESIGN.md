@@ -48,6 +48,10 @@ only tokens in components. The kit parts read these (all have fallbacks):
 - Text contrast >= 4.5:1 (3:1 for text >= 24px), white text on `--accent`
   included.
 - Use `clamp()` for type between phone and desktop.
+- Colour restraint: mostly neutrals, one accent in small doses. A vivid
+  brand colour (an electric blue, a signal red) goes in small marks only;
+  bands, buttons and large fields take a deep or muted shade of it, the ink
+  colour or a neutral surface. TASTE.md is how the result is judged.
 
 ## 3. Fonts
 
@@ -76,9 +80,12 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
 
 - The `<img data-logo>` sets only its height (or only its width), the
   other side `auto`: no fixed box, no `object-fit: cover`, no
-  `aspect-ratio`. At 1440 at least 32px tall and 100px wide (140–180px wide
-  for a script or detailed logo); at 390 at least 28px tall.
-  `pnpm screenshot` flags a logo off its file's ratio or below these sizes.
+  `aspect-ratio`. Size it by its shape: a wide wordmark at 1440 at least
+  100px wide and 32px tall (140–180px wide for a script or detailed logo),
+  at most 72px tall; a tall or square mark (a monogram, 3³) 40–72px tall.
+  At 390 at least 28px tall. The header stays slim: at most 12% of the
+  screen. `pnpm screenshot` flags a logo off its file's ratio or outside
+  these sizes.
 - Sharp: request 2x the rendered width,
   `img(agency.logo.url, { w: 360, fit: 'fit', quality: 90 })` for a 180px
   logo; an SVG in `public/brand/` as is.

@@ -375,14 +375,77 @@ async function shoot({ path, vp, i }) {
         const drawnH = contain ? Math.min(r.height, r.width / nat) : r.height;
         return { name: (i.alt || i.currentSrc.split('/').pop() || '').slice(0, 40), fit, dev: (r.width / r.height) / nat, contain, drawnW, drawnH };
       })(),
+      // Taste (TASTE.md): proportions, colour restraint, reading comfort. Measured, never judged.
+      taste: (() => {
+        const vw = innerWidth, vh = innerHeight;
+        const rgb = (c) => (c.match(/[\d.]+/g) || []).map(Number);
+        const hsl = ([r, g, b]) => {
+          r /= 255; g /= 255; b /= 255;
+          const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+          const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+          let h = 0;
+          if (d) h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+          return { h: (h * 60 + 360) % 360, s: sat, l };
+        };
+        const vivid = (c) => { const v = rgb(c); if (v.length < 3 || (v.length > 3 && v[3] < 0.9)) return null; const x = hsl(v); return x.s >= 0.6 && x.l >= 0.3 && x.l <= 0.72 ? x : null; };
+        const header = document.querySelector('header, [role="banner"]');
+        const headerH = header ? header.getBoundingClientRect().height : 0;
+        // Large vivid fields: a full-bleed band or block in a saturated colour.
+        const fields = [];
+        const hues = new Map();
+        for (const n of document.querySelectorAll('body *')) {
+          const cs = getComputedStyle(n);
+          if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+          const r = n.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          const bg = vivid(cs.backgroundColor);
+          if (bg) {
+            const area = r.width * Math.min(r.height, vh);
+            const bucket = Math.round(bg.h / 30) * 30;
+            hues.set(bucket, (hues.get(bucket) || 0) + area);
+            if (area >= vw * vh * 0.2) fields.push(`${n.tagName.toLowerCase()}${n.className && typeof n.className === 'string' ? '.' + n.className.trim().split(/\s+/)[0] : ''} ${cs.backgroundColor} ${Math.round(r.width)}x${Math.round(r.height)}`);
+          }
+          const fg = vivid(cs.color);
+          if (fg && n.childNodes.length && [...n.childNodes].some((c) => c.nodeType === 3 && c.textContent.trim())) {
+            const bucket = Math.round(fg.h / 30) * 30;
+            hues.set(bucket, (hues.get(bucket) || 0) + r.width * r.height);
+          }
+        }
+        const accentHues = [...hues].filter(([, a]) => a >= 400).map(([h]) => h % 360);
+        // Reading comfort: body paragraphs.
+        let longLines = 0, smallBody = 0, paras = 0;
+        for (const p of document.querySelectorAll('main p, article p')) {
+          const cs = getComputedStyle(p), fs = parseFloat(cs.fontSize), lh = parseFloat(cs.lineHeight) || fs * 1.4;
+          const r = p.getBoundingClientRect(), text = p.textContent.trim();
+          if (!r.width || text.length < 120 || fs > 22) continue;
+          paras++;
+          const lines = Math.max(1, Math.round(r.height / lh));
+          if (lines >= 3 && text.length / lines > 90) longLines++;
+          if (fs < 15) smallBody++;
+        }
+        return { vw, vh, headerH, fields: [...new Set(fields)].slice(0, 3), accentHues: [...new Set(accentHues)], longLines, smallBody, paras };
+      })(),
     }));
     // Hero text legibility: text over the hero photo, contrast against the pixels behind it.
     for (const t of await heroContrast(page)) entry.problems.push(`[${vp.name}] hero text "${t.text}" contrast ${t.ratio.toFixed(1)}:1 on the photo (need ${t.need}:1): add a scrim (gradient >= 0.55 black at the text's top edge) or a panel`);
     const lg = checks.logo;
     if (lg) {
       if (!lg.contain && (lg.dev > 1.05 || lg.dev < 0.95)) entry.problems.push(`[${vp.name}] logo "${lg.name}" ${lg.fit === 'fill' ? 'stretched' : 'cropped'} (box ratio ${(lg.dev * 100 - 100).toFixed(0)}% off the file): set only height (width: auto), no fixed box, no object-fit: cover`);
-      if (vp.name === '1440' && (lg.drawnW < 100 || lg.drawnH < 32)) entry.problems.push(`[1440] logo "${lg.name}" drawn ${Math.round(lg.drawnW)}x${Math.round(lg.drawnH)}px: at least 100px wide and 32px tall (140–180px wide for a detailed logo)`);
+      // A wide wordmark is sized by width, a tall or square mark (3³, a monogram) by height.
+      const wide = lg.drawnW / lg.drawnH >= 1.3;
+      if (vp.name === '1440' && wide && (lg.drawnW < 100 || lg.drawnH < 32)) entry.problems.push(`[1440] logo "${lg.name}" drawn ${Math.round(lg.drawnW)}x${Math.round(lg.drawnH)}px: at least 100px wide and 32px tall (140–180px wide for a detailed logo)`);
+      if (vp.name === '1440' && !wide && (lg.drawnH < 40 || lg.drawnH > 72)) entry.problems.push(`[1440] logo "${lg.name}" (a tall or square mark) drawn ${Math.round(lg.drawnH)}px tall: 40–72px tall`);
+      if (vp.name === '1440' && wide && lg.drawnH > 72) entry.problems.push(`[1440] taste: logo "${lg.name}" drawn ${Math.round(lg.drawnH)}px tall: at most 72px, the header stays slim`);
       if (vp.name === '390' && lg.drawnH < 28) entry.problems.push(`[390] logo "${lg.name}" drawn ${Math.round(lg.drawnH)}px tall: at least 28px`);
+    }
+    const ts = checks.taste;
+    if (ts) {
+      const maxHeader = Math.round(ts.vh * 0.12);
+      if (ts.headerH > maxHeader) entry.problems.push(`[${vp.name}] taste: header ${Math.round(ts.headerH)}px tall, more than 12% of the screen (${maxHeader}px): slim it (logo 40–72px, one row)`);
+      for (const f of ts.fields) entry.problems.push(`[${vp.name}] taste: large field in a saturated colour (${f}): keep vivid brand colours for small accents; use a deep or muted shade, the ink colour or a neutral surface for bands`);
+      if (vp.name === '1440' && ts.accentHues.length > 2) entry.problems.push(`[1440] taste: ${ts.accentHues.length} saturated accent hues (${ts.accentHues.join(', ')}°): one accent, two at most`);
+      if (vp.name === '1440' && ts.longLines) entry.problems.push(`[1440] taste: ${ts.longLines} paragraph(s) over 90 characters a line: limit the measure (max-width about 65ch)`);
+      if (vp.name === '1440' && ts.smallBody) entry.problems.push(`[1440] taste: ${ts.smallBody} body paragraph(s) under 15px: body text 16–20px on desktop`);
     }
     for (const b of new Set(checks.blockers)) entry.problems.push(`[${vp.name}] invisible element blocks clicks: ${b} (closed overlays need visibility:hidden + pointer-events:none)`);
     // Click-through: a link below the fold must be the element under its own centre.
