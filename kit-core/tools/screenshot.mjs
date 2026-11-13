@@ -423,7 +423,83 @@ async function shoot({ path, vp, i }) {
           if (lines >= 3 && text.length / lines > 90) longLines++;
           if (fs < 15) smallBody++;
         }
-        return { vw, vh, headerH, fields: [...new Set(fields)].slice(0, 3), accentHues: [...new Set(accentHues)], longLines, smallBody, paras };
+        // Soft photos: the file actually loaded (its real pixels, not the srcset's claim; an
+        // image CDN never enlarges) against the box it fills x devicePixelRatio (capped at 1.5:
+        // a 1.5x file already looks sharp on a 2x phone). Decorative images are exempt unless
+        // they are the hero or a big photo (an aria-hidden hero link still counts).
+        const dpr = Math.min(devicePixelRatio || 1, 1.5);
+        const soft = [];
+        for (const i of document.images) {
+          const r = i.getBoundingClientRect();
+          const src = i.currentSrc || i.src;
+          const realW = Number(i.dataset.realW) || i.naturalWidth;
+          const realH = Number(i.dataset.realH) || i.naturalHeight;
+          if (r.width < 160 || r.height < 120 || !realW || !realH || /\.svg(\?|$)/i.test(src) || i.closest('header, [role="banner"]')) continue;
+          const cs = getComputedStyle(i);
+          if (cs.filter.includes('blur')) continue; // a blurred placeholder or backdrop
+          const big = r.width >= vw * 0.4;
+          const hero = i.getAttribute('fetchpriority') === 'high' || i.closest('[data-hero]');
+          if (i.getAttribute('alt') === '' && !hero && !big) continue;
+          const nat = realW / realH;
+          const cover = cs.objectFit !== 'contain' && cs.objectFit !== 'scale-down';
+          const fillW = cover ? Math.max(r.width, r.height * nat) : r.width;
+          const up = (fillW * dpr) / realW;
+          // An image CDN hides the file name in base64: name the original file.
+          let file = src.split('/').pop()?.split('?')[0] ?? '';
+          try { const o = atob(file.split('.')[0].replace(/-/g, '+').replace(/_/g, '/')); if (/^https?:\/\//.test(o)) file = o.split('/').pop(); } catch {}
+          if (up > 1.15) soft.push(`"${(i.alt || file || '').slice(0, 40)}" file ${realW}x${realH} fills ${Math.round(fillW)}px x ${dpr} dpr (upscaled ${Math.round(up * 100)}%)${hero ? ', the hero' : ''}`);
+        }
+        // Ledes: the first paragraph after a section heading (h1/h2, an eyebrow may sit
+        // between). One style for every lede: family, size, weight, italic, full or muted
+        // colour (contrast with the ground under it). Colour is relative, so white on ink
+        // and near-black on paper are the same style.
+        const ground = (n) => {
+          for (let e = n; e; e = e.parentElement) {
+            const c = rgb(getComputedStyle(e).backgroundColor);
+            if (c.length >= 3 && (c.length < 4 || c[3] > 0.5)) return c.slice(0, 3);
+          }
+          return [255, 255, 255];
+        };
+        const lin = (v) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+        const lum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+        const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+        const blend = (c, under) => (c.length > 3 && c[3] < 1 ? c.slice(0, 3).map((v, k) => v * c[3] + under[k] * (1 - c[3])) : c.slice(0, 3));
+        const family = (f) => f.split(',')[0].trim().replace(/^["']|["']$/g, '');
+        const ledes = new Map();
+        for (const h of document.querySelectorAll('main h1, main h2')) {
+          let p = h.nextElementSibling;
+          if (p && p.tagName !== 'P' && (p.textContent || '').trim().length < 40) p = p.nextElementSibling; // an eyebrow or rule after the heading
+          if (!p || p.tagName !== 'P') continue;
+          const cs = getComputedStyle(p), r = p.getBoundingClientRect(), text = p.textContent.trim();
+          if (!r.width || text.length < 40 || parseFloat(cs.fontSize) < 15 || p.closest('form, [data-enquiry]')) continue;
+          // A heading styled as an eyebrow (a small h2 over a statement or a big number) has no lede.
+          if (parseFloat(getComputedStyle(h).fontSize) < parseFloat(cs.fontSize) * 1.25) continue;
+          const g = ground(p);
+          const tone = contrast(blend(rgb(cs.color), g), g) >= 9 ? 'full' : 'muted';
+          const sig = `${family(cs.fontFamily)} ${Math.round(parseFloat(cs.fontSize))}px ${cs.fontWeight}${cs.fontStyle === 'italic' ? ' italic' : ''} ${tone}`;
+          if (!ledes.has(sig)) ledes.set(sig, []);
+          ledes.get(sig).push(`"${text.slice(0, 24)}…"`);
+        }
+        // Families in use, by characters drawn (a family under 3% of the text is a detail),
+        // and webfonts the CSS asks for that never loaded (a silent fallback to Georgia/Arial).
+        const chars = new Map();
+        let total = 0;
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        for (let t = walker.nextNode(); t; t = walker.nextNode()) {
+          const el = t.parentElement, n = t.textContent.trim().length;
+          if (!n || !el || el.closest('script, style, noscript, [hidden], .sr-only')) continue;
+          const r = el.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          const f = family(getComputedStyle(el).fontFamily);
+          chars.set(f, (chars.get(f) || 0) + n);
+          total += n;
+        }
+        const families = [...chars].filter(([, n]) => n / total >= 0.03).sort((a, b) => b[1] - a[1]).map(([f, n]) => `${f} ${Math.round((n / total) * 100)}%`);
+        const faces = [...document.fonts];
+        const declared = (f) => faces.filter((ff) => ff.family.replace(/["']/g, '') === f);
+        // Only families the page itself declares (@font-face): a missing local font is not a bug here.
+        const notLoaded = [...chars.keys()].filter((f) => chars.get(f) / total >= 0.03 && declared(f).length && !declared(f).some((ff) => ff.status === 'loaded'));
+        return { vw, vh, headerH, fields: [...new Set(fields)].slice(0, 3), accentHues: [...new Set(accentHues)], longLines, smallBody, paras, soft: soft.slice(0, 4), ledes: [...ledes].map(([s, l]) => `${s} (${l.slice(0, 3).join(', ')})`), families, notLoaded };
       })(),
     }));
     // Hero text legibility: text over the hero photo, contrast against the pixels behind it.
@@ -446,6 +522,10 @@ async function shoot({ path, vp, i }) {
       if (vp.name === '1440' && ts.accentHues.length > 2) entry.problems.push(`[1440] taste: ${ts.accentHues.length} saturated accent hues (${ts.accentHues.join(', ')}°): one accent, two at most`);
       if (vp.name === '1440' && ts.longLines) entry.problems.push(`[1440] taste: ${ts.longLines} paragraph(s) over 90 characters a line: limit the measure (max-width about 65ch)`);
       if (vp.name === '1440' && ts.smallBody) entry.problems.push(`[1440] taste: ${ts.smallBody} body paragraph(s) under 15px: body text 16–20px on desktop`);
+      for (const s of ts.soft) entry.problems.push(`[${vp.name}] taste: soft photo, ${s}: use a larger source or a smaller box (the file must cover the box x devicePixelRatio, up to 1.5x)`);
+      if (vp.name === '1440' && ts.ledes.length > 1) entry.problems.push(`[1440] taste: section ledes in ${ts.ledes.length} styles: ${ts.ledes.join(' | ')}: one lede style (one class) for every section`);
+      if (vp.name === '1440' && ts.families.length > 2) entry.problems.push(`[1440] taste: ${ts.families.length} font families in use (${ts.families.join(', ')}): two at most`);
+      for (const f of ts.notLoaded) entry.problems.push(`[${vp.name}] taste: font "${f}" is declared but never loaded: the text falls back to another font (check the @fontsource import and the family name)`);
     }
     for (const b of new Set(checks.blockers)) entry.problems.push(`[${vp.name}] invisible element blocks clicks: ${b} (closed overlays need visibility:hidden + pointer-events:none)`);
     // Click-through: a link below the fold must be the element under its own centre.

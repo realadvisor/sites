@@ -342,8 +342,11 @@ minutes for a new site.
    Read `screenshots/contact-sheet.png` once; at most 3
    `screenshots/sheet-<route>.png` for detail.
 3. Judge the screenshots for taste with `TASTE.md` (next to this file):
-   the ten rubric lines against the chosen style's screenshots, and every
-   `taste:` line `pnpm screenshot` printed. Fix what scores under 2.
+   the twelve rubric lines against the chosen style's screenshots, and every
+   `taste:` line `pnpm screenshot` printed. Fix what scores under 2. When
+   the run has a critic, `pnpm kit critic -- <path> --anchor <example url>`
+   writes its inputs (`critic-input/`, see `critic/CRITIC.md`); apply its
+   fixes, at most two rounds.
 4. One fix round, then `pnpm check` and `pnpm screenshot -- <changed paths>`
    once more.
 5. `pnpm check:deploy` once: a FAIL means the site cannot be published.

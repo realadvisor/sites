@@ -59,7 +59,15 @@ Self-hosted only, with `@fontsource/<family>` imported where the document
 shell is (React Router: `app/root.tsx`; Astro: the layout frontmatter; the
 CSP blocks Google Fonts links and font CDNs). At most 2 families and 2
 weights per family (a variable font counts as one), latin subset,
-`font-display: swap`, and the above-the-fold font preloaded:
+`font-display: swap`, and the above-the-fold font preloaded.
+
+Choose the pair against the logo, not only from the example: the type
+echoes the logo's character (weight, width, construction, mood) or
+contrasts with it on purpose, and DESIGN-NOTES.md names which (TASTE.md
+line 6). Swapping the example's fonts is expected when the logo is of
+another kind; any open font on @fontsource is allowed.
+
+Import and preload:
 
 ```tsx
 // app/root.tsx

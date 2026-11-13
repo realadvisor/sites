@@ -6,6 +6,7 @@
  *
  *   sites-kit fixture [name | file.json] [--if-empty]   sample data into src/data/ (React: app/data/fixture.json)
  *   sites-kit screenshot [paths...] [options]           screenshots (your eyes)
+ *   sites-kit critic [path] [--anchor url | --anchor-shots a.png,b.png]   inputs for the taste critic (TASTE.md)
  *   sites-kit check deploy [--no-build]                 the deploy gate (pnpm check:deploy)
  *   sites-kit test map [--url ...] [--path ...]         browser test of the listings map
  */
@@ -15,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 const TOOLS = {
   fixture: 'use-fixture.mjs',
   screenshot: 'screenshot.mjs',
+  critic: 'critic.mjs',
   'check deploy': 'check-deploy.mjs',
   'test map': 'search-map-test.mjs',
 };

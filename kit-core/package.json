@@ -26,6 +26,7 @@
     "bin",
     "client",
     "contract",
+    "critic",
     "fixtures",
     "lib",
     "styles",
