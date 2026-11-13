@@ -7,6 +7,7 @@
  *   pnpm screenshot -- --url http://localhost:4321 --max 40
  *   pnpm screenshot -- /listings /contact # only these paths
  *   pnpm screenshot -- --jobs 1           # one page at a time (default 4)
+ *   pnpm screenshot -- --inject fault.css # add a CSS file to every page (critic calibration)
  *
  * Output: screenshots/<route>@1440.png, screenshots/<route>@390.png and
  * screenshots/report.json. Exit code 1 if any page has console errors, failed
@@ -16,6 +17,7 @@
 import { chromium } from 'playwright';
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -34,6 +36,9 @@ const MAX = Number(opt('max', '30'));
 // timers), so 4 at a time is about 3x faster than one after the other, even on 4 vCPUs.
 const JOBS = Math.max(1, Number(opt('jobs', process.env.SCREENSHOT_JOBS ?? '4')));
 const OUT = opt('out', 'screenshots');
+// A CSS file added to every page after load (the critic's calibration cases put a fault back with it).
+const INJECT = opt('inject', '');
+const injectCss = INJECT ? readFileSync(INJECT, 'utf8') : '';
 const explicit = args.filter((a) => a.startsWith('/'));
 const WIDTHS = [
   { name: '1440', width: 1440, height: 900 },
@@ -243,6 +248,7 @@ async function shoot({ path, vp, i }) {
       return null;
     });
     await page.waitForLoadState('load', { timeout: 10000 }).catch(() => {});
+    if (injectCss) await page.addStyleTag({ content: injectCss }).catch(() => {});
     const status = res?.status() ?? 0;
     entry.status = Math.max(entry.status, status);
     if (status >= 400) entry.problems.push(`[${vp.name}] page HTTP ${status}`);
@@ -375,14 +381,205 @@ async function shoot({ path, vp, i }) {
         const drawnH = contain ? Math.min(r.height, r.width / nat) : r.height;
         return { name: (i.alt || i.currentSrc.split('/').pop() || '').slice(0, 40), fit, dev: (r.width / r.height) / nat, contain, drawnW, drawnH };
       })(),
+      // Taste (TASTE.md): proportions, colour restraint, reading comfort. Measured, never judged.
+      taste: (() => {
+        const vw = innerWidth, vh = innerHeight;
+        const rgb = (c) => (c.match(/[\d.]+/g) || []).map(Number);
+        const hsl = ([r, g, b]) => {
+          r /= 255; g /= 255; b /= 255;
+          const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+          const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+          let h = 0;
+          if (d) h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+          return { h: (h * 60 + 360) % 360, s: sat, l };
+        };
+        const vivid = (c) => { const v = rgb(c); if (v.length < 3 || (v.length > 3 && v[3] < 0.9)) return null; const x = hsl(v); return x.s >= 0.6 && x.l >= 0.3 && x.l <= 0.72 ? x : null; };
+        const header = document.querySelector('header, [role="banner"]');
+        const headerH = header ? header.getBoundingClientRect().height : 0;
+        // Large vivid fields: a full-bleed band or block in a saturated colour.
+        const fields = [];
+        const hues = new Map();
+        for (const n of document.querySelectorAll('body *')) {
+          const cs = getComputedStyle(n);
+          if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+          const r = n.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          const bg = vivid(cs.backgroundColor);
+          if (bg) {
+            const area = r.width * Math.min(r.height, vh);
+            const bucket = Math.round(bg.h / 30) * 30;
+            hues.set(bucket, (hues.get(bucket) || 0) + area);
+            if (area >= vw * vh * 0.2) fields.push(`${n.tagName.toLowerCase()}${n.className && typeof n.className === 'string' ? '.' + n.className.trim().split(/\s+/)[0] : ''} ${cs.backgroundColor} ${Math.round(r.width)}x${Math.round(r.height)}`);
+          }
+          const fg = vivid(cs.color);
+          if (fg && n.childNodes.length && [...n.childNodes].some((c) => c.nodeType === 3 && c.textContent.trim())) {
+            const bucket = Math.round(fg.h / 30) * 30;
+            hues.set(bucket, (hues.get(bucket) || 0) + r.width * r.height);
+          }
+        }
+        const accentHues = [...hues].filter(([, a]) => a >= 400).map(([h]) => h % 360);
+        // Reading comfort: body paragraphs.
+        let longLines = 0, smallBody = 0, paras = 0;
+        for (const p of document.querySelectorAll('main p, article p')) {
+          const cs = getComputedStyle(p), fs = parseFloat(cs.fontSize), lh = parseFloat(cs.lineHeight) || fs * 1.4;
+          const r = p.getBoundingClientRect(), text = p.textContent.trim();
+          if (!r.width || text.length < 120 || fs > 22) continue;
+          paras++;
+          const lines = Math.max(1, Math.round(r.height / lh));
+          if (lines >= 3 && text.length / lines > 90) longLines++;
+          if (fs < 15) smallBody++;
+        }
+        // Soft photos: the file actually loaded (its real pixels, not the srcset's claim; an
+        // image CDN never enlarges) against the box it fills x devicePixelRatio (capped at 1.5:
+        // a 1.5x file already looks sharp on a 2x phone). Decorative images are exempt unless
+        // they are the hero or a big photo (an aria-hidden hero link still counts).
+        const dpr = Math.min(devicePixelRatio || 1, 1.5);
+        const soft = [];
+        for (const i of document.images) {
+          const r = i.getBoundingClientRect();
+          const src = i.currentSrc || i.src;
+          const realW = Number(i.dataset.realW) || i.naturalWidth;
+          const realH = Number(i.dataset.realH) || i.naturalHeight;
+          if (r.width < 160 || r.height < 120 || !realW || !realH || /\.svg(\?|$)/i.test(src) || i.closest('header, [role="banner"]')) continue;
+          const cs = getComputedStyle(i);
+          if (cs.filter.includes('blur')) continue; // a blurred placeholder or backdrop
+          const big = r.width >= vw * 0.4;
+          const hero = i.getAttribute('fetchpriority') === 'high' || i.closest('[data-hero]');
+          if (i.getAttribute('alt') === '' && !hero && !big) continue;
+          const nat = realW / realH;
+          const cover = cs.objectFit !== 'contain' && cs.objectFit !== 'scale-down';
+          const fillW = cover ? Math.max(r.width, r.height * nat) : r.width;
+          const up = (fillW * dpr) / realW;
+          // An image CDN hides the file name in base64: name the original file.
+          let file = src.split('/').pop()?.split('?')[0] ?? '';
+          try { const o = atob(file.split('.')[0].replace(/-/g, '+').replace(/_/g, '/')); if (/^https?:\/\//.test(o)) file = o.split('/').pop(); } catch {}
+          if (up > 1.15) soft.push(`"${(i.alt || file || '').slice(0, 40)}" file ${realW}x${realH} fills ${Math.round(fillW)}px x ${dpr} dpr (upscaled ${Math.round(up * 100)}%)${hero ? ', the hero' : ''}`);
+        }
+        // Ledes: the first paragraph after a section heading (h1/h2, an eyebrow may sit
+        // between). One style for every lede: family, size, weight, italic, full or muted
+        // colour (contrast with the ground under it). Colour is relative, so white on ink
+        // and near-black on paper are the same style.
+        const ground = (n) => {
+          for (let e = n; e; e = e.parentElement) {
+            const c = rgb(getComputedStyle(e).backgroundColor);
+            if (c.length >= 3 && (c.length < 4 || c[3] > 0.5)) return c.slice(0, 3);
+          }
+          return [255, 255, 255];
+        };
+        const lin = (v) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+        const lum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+        const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+        const blend = (c, under) => (c.length > 3 && c[3] < 1 ? c.slice(0, 3).map((v, k) => v * c[3] + under[k] * (1 - c[3])) : c.slice(0, 3));
+        const family = (f) => f.split(',')[0].trim().replace(/^["']|["']$/g, '');
+        const ledes = new Map();
+        for (const h of document.querySelectorAll('main h1, main h2')) {
+          let p = h.nextElementSibling;
+          if (p && p.tagName !== 'P' && (p.textContent || '').trim().length < 40) p = p.nextElementSibling; // an eyebrow or rule after the heading
+          if (!p || p.tagName !== 'P') continue;
+          const cs = getComputedStyle(p), r = p.getBoundingClientRect(), text = p.textContent.trim();
+          if (!r.width || text.length < 40 || parseFloat(cs.fontSize) < 15 || p.closest('form, [data-enquiry]')) continue;
+          // A heading styled as an eyebrow (a small h2 over a statement or a big number) has no lede.
+          if (parseFloat(getComputedStyle(h).fontSize) < parseFloat(cs.fontSize) * 1.25) continue;
+          const g = ground(p);
+          const tone = contrast(blend(rgb(cs.color), g), g) >= 9 ? 'full' : 'muted';
+          const sig = `${family(cs.fontFamily)} ${Math.round(parseFloat(cs.fontSize))}px ${cs.fontWeight}${cs.fontStyle === 'italic' ? ' italic' : ''} ${tone}`;
+          if (!ledes.has(sig)) ledes.set(sig, []);
+          ledes.get(sig).push(`"${text.slice(0, 24)}…"`);
+        }
+        // Families in use, by characters drawn (a family under 3% of the text is a detail),
+        // and webfonts the CSS asks for that never loaded (a silent fallback to Georgia/Arial).
+        const chars = new Map();
+        let total = 0;
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        for (let t = walker.nextNode(); t; t = walker.nextNode()) {
+          const el = t.parentElement, n = t.textContent.trim().length;
+          if (!n || !el || el.closest('script, style, noscript, [hidden], .sr-only')) continue;
+          const r = el.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          const f = family(getComputedStyle(el).fontFamily);
+          chars.set(f, (chars.get(f) || 0) + n);
+          total += n;
+        }
+        const families = [...chars].filter(([, n]) => n / total >= 0.03).sort((a, b) => b[1] - a[1]).map(([f, n]) => `${f} ${Math.round((n / total) * 100)}%`);
+        const faces = [...document.fonts];
+        const declared = (f) => faces.filter((ff) => ff.family.replace(/["']/g, '') === f);
+        // Only families the page itself declares (@font-face): a missing local font is not a bug here.
+        const notLoaded = [...chars.keys()].filter((f) => chars.get(f) / total >= 0.03 && declared(f).length && !declared(f).some((ff) => ff.status === 'loaded'));
+        // Craft defaults (DESIGN.md section 10). Elements with their own text, shown.
+        const own = (el) => [...el.childNodes].filter((c) => c.nodeType === 3).map((c) => c.textContent).join('').trim();
+        const label = (el) => `${el.tagName.toLowerCase()}${typeof el.className === 'string' && el.className.trim() ? '.' + el.className.trim().split(/\s+/)[0] : ''} "${(el.innerText || '').trim().replace(/\s+/g, ' ').slice(0, 28)}"`;
+        const shown = [...document.querySelectorAll('body *')].filter((el) => {
+          if (el.closest('script, style, noscript, [hidden], .sr-only, [aria-hidden="true"]')) return false;
+          const r = el.getBoundingClientRect();
+          return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== 'hidden';
+        });
+        const texts = shown.filter((el) => own(el));
+        // Justified body text, caps on sentences, straight double quotes in text.
+        const justified = [...document.querySelectorAll('main p, article p')].filter((p) => shown.includes(p) && getComputedStyle(p).textAlign === 'justify' && p.textContent.trim().length >= 120).map(label);
+        const longCaps = texts.filter((el) => {
+          const t = own(el);
+          return t.length > 40 && (getComputedStyle(el).textTransform === 'uppercase' || (/[A-ZÄÖÜÉÈÀ]{2}/.test(t) && t === t.toUpperCase() && /[A-Z]/.test(t) && t.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 20));
+        }).map(label);
+        const quotes = texts.filter((el) => !el.closest('code, pre, kbd, samp, input, textarea') && /"/.test(own(el))).map(label);
+        // Off-grid: a block whose left and right edges match no edge the layout gives it:
+        // another block's edge, its parent's content edges, its parent's grid tracks or the
+        // page edge (±3px). Catches ad-hoc margins and nudges, not a deliberate second
+        // column. Centred blocks and blocks inside another block are skipped.
+        const BLOCK = 'h1, h2, h3, p, ul, ol, dl, figure, form, picture, img, blockquote, address, table, a.more, .button, .btn';
+        const blocks = [...document.querySelectorAll(`main :is(${BLOCK})`)].filter((el) => shown.includes(el) && !el.parentElement.closest(BLOCK) && el.getBoundingClientRect().width >= 24);
+        const box = blocks.map((el) => ({ el, r: el.getBoundingClientRect() }));
+        const near = (x, xs) => xs.some((v) => Math.abs(v - x) <= 3);
+        const offGrid = box.filter(({ el, r }) => {
+          const cs = getComputedStyle(el);
+          const parent = el.parentElement.getBoundingClientRect();
+          if (cs.textAlign === 'center' && Math.abs((r.left - parent.left) - (parent.right - r.right)) < 6) return false;
+          // Second item in a row (a link after a button): it follows its sibling.
+          const prev = el.previousElementSibling?.getBoundingClientRect();
+          if (prev && prev.width && prev.top < r.bottom && prev.bottom > r.top && r.left - prev.right >= 0 && r.left - prev.right <= 64) return false;
+          const others = box.filter((o) => o.el !== el).flatMap((o) => [o.r.left, o.r.right]);
+          others.push(0, vw);
+          const pcs = getComputedStyle(el.parentElement);
+          const cl = parent.left + parseFloat(pcs.borderLeftWidth) + parseFloat(pcs.paddingLeft);
+          const cr = parent.right - parseFloat(pcs.borderRightWidth) - parseFloat(pcs.paddingRight);
+          others.push(cl, cr);
+          if (pcs.display.includes('grid')) {
+            const gap = parseFloat(pcs.columnGap) || 0;
+            let x = cl;
+            for (const t of pcs.gridTemplateColumns.split(/\s+/).map(parseFloat).filter((n) => !Number.isNaN(n))) { others.push(x, x + t); x += t + gap; }
+          }
+          return !near(r.left, others) && !near(r.right, others);
+        }).map(({ el }) => label(el));
+        return { vw, vh, headerH, fields: [...new Set(fields)].slice(0, 3), accentHues: [...new Set(accentHues)], longLines, smallBody, paras, soft: soft.slice(0, 4), ledes: [...ledes].map(([s, l]) => `${s} (${l.slice(0, 3).join(', ')})`), families, notLoaded, justified, longCaps, quotes, offGrid };
+      })(),
     }));
     // Hero text legibility: text over the hero photo, contrast against the pixels behind it.
     for (const t of await heroContrast(page)) entry.problems.push(`[${vp.name}] hero text "${t.text}" contrast ${t.ratio.toFixed(1)}:1 on the photo (need ${t.need}:1): add a scrim (gradient >= 0.55 black at the text's top edge) or a panel`);
     const lg = checks.logo;
     if (lg) {
       if (!lg.contain && (lg.dev > 1.05 || lg.dev < 0.95)) entry.problems.push(`[${vp.name}] logo "${lg.name}" ${lg.fit === 'fill' ? 'stretched' : 'cropped'} (box ratio ${(lg.dev * 100 - 100).toFixed(0)}% off the file): set only height (width: auto), no fixed box, no object-fit: cover`);
-      if (vp.name === '1440' && (lg.drawnW < 100 || lg.drawnH < 32)) entry.problems.push(`[1440] logo "${lg.name}" drawn ${Math.round(lg.drawnW)}x${Math.round(lg.drawnH)}px: at least 100px wide and 32px tall (140–180px wide for a detailed logo)`);
+      // A wide wordmark is sized by width, a tall or square mark (3³, a monogram) by height.
+      const wide = lg.drawnW / lg.drawnH >= 1.3;
+      if (vp.name === '1440' && wide && (lg.drawnW < 100 || lg.drawnH < 32)) entry.problems.push(`[1440] logo "${lg.name}" drawn ${Math.round(lg.drawnW)}x${Math.round(lg.drawnH)}px: at least 100px wide and 32px tall (140–180px wide for a detailed logo)`);
+      if (vp.name === '1440' && !wide && (lg.drawnH < 40 || lg.drawnH > 72)) entry.problems.push(`[1440] logo "${lg.name}" (a tall or square mark) drawn ${Math.round(lg.drawnH)}px tall: 40–72px tall`);
+      if (vp.name === '1440' && wide && lg.drawnH > 72) entry.problems.push(`[1440] taste: logo "${lg.name}" drawn ${Math.round(lg.drawnH)}px tall: at most 72px, the header stays slim`);
       if (vp.name === '390' && lg.drawnH < 28) entry.problems.push(`[390] logo "${lg.name}" drawn ${Math.round(lg.drawnH)}px tall: at least 28px`);
+    }
+    const ts = checks.taste;
+    if (ts) {
+      const maxHeader = Math.round(ts.vh * 0.12);
+      if (ts.headerH > maxHeader) entry.problems.push(`[${vp.name}] taste: header ${Math.round(ts.headerH)}px tall, more than 12% of the screen (${maxHeader}px): slim it (logo 40–72px, one row)`);
+      for (const f of ts.fields) entry.problems.push(`[${vp.name}] taste: large field in a saturated colour (${f}): keep vivid brand colours for small accents; use a deep or muted shade, the ink colour or a neutral surface for bands`);
+      if (vp.name === '1440' && ts.accentHues.length > 2) entry.problems.push(`[1440] taste: ${ts.accentHues.length} saturated accent hues (${ts.accentHues.join(', ')}°): one accent, two at most`);
+      if (vp.name === '1440' && ts.longLines) entry.problems.push(`[1440] taste: ${ts.longLines} paragraph(s) over 90 characters a line: limit the measure (max-width about 65ch)`);
+      if (vp.name === '1440' && ts.smallBody) entry.problems.push(`[1440] taste: ${ts.smallBody} body paragraph(s) under 15px: body text 16–20px on desktop`);
+      for (const s of ts.soft) entry.problems.push(`[${vp.name}] taste: soft photo, ${s}: use a larger source or a smaller box (the file must cover the box x devicePixelRatio, up to 1.5x)`);
+      if (vp.name === '1440' && ts.ledes.length > 1) entry.problems.push(`[1440] taste: section ledes in ${ts.ledes.length} styles: ${ts.ledes.join(' | ')}: one lede style (one class) for every section`);
+      if (vp.name === '1440' && ts.families.length > 2) entry.problems.push(`[1440] taste: ${ts.families.length} font families in use (${ts.families.join(', ')}): two at most`);
+      if (vp.name === '1440' && ts.offGrid.length) entry.problems.push(`[1440] taste: off-grid, ${ts.offGrid.length} block(s) on no edge the layout gives them (other blocks, the parent's content box or grid tracks): ${ts.offGrid.slice(0, 3).join(', ')}: put them on the section's column edges`);
+      if (vp.name === '1440' && ts.justified.length) entry.problems.push(`[1440] taste: justified body text (${ts.justified.slice(0, 2).join(', ')}): left-align it, ragged right`);
+      if (vp.name === '1440' && ts.longCaps.length) entry.problems.push(`[1440] taste: caps on text over 40 characters (${ts.longCaps.slice(0, 2).join(', ')}): caps only for short labels`);
+      if (vp.name === '1440' && ts.quotes.length) entry.problems.push(`[1440] taste: straight " quotes in text (${ts.quotes.slice(0, 2).join(', ')}): use the language's marks („…“ de, « … » fr, «…» it/es, “…” en)`);
+      for (const f of ts.notLoaded) entry.problems.push(`[${vp.name}] taste: font "${f}" is declared but never loaded: the text falls back to another font (check the @fontsource import and the family name)`);
     }
     for (const b of new Set(checks.blockers)) entry.problems.push(`[${vp.name}] invisible element blocks clicks: ${b} (closed overlays need visibility:hidden + pointer-events:none)`);
     // Click-through: a link below the fold must be the element under its own centre.

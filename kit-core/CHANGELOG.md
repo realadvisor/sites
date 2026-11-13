@@ -11,6 +11,40 @@ the versions is enough.
 To upgrade a site, read every entry newer than the site's current version,
 oldest first, and apply each Upgrade step in order.
 
+## 0.5.0
+
+- React Router is the default: `template/` is now a React Router 7 starter,
+  the Astro starter moved to `template-astro/`.
+- The rules split in three: `kit-core/AGENTS.md` (every site),
+  `kit-react/AGENTS.md` and `kit-astro/AGENTS.md` (the framework).
+- Taste judge: `kit-core/TASTE.md` (13-line rubric against the chosen
+  example), `kit-core/critic/CRITIC.md` and `sites-kit critic` (inputs for a
+  separate critic), `sites-kit critic calibrate`, and `taste:` checks in
+  `pnpm screenshot` (header height, logo by shape, saturated fields, accent
+  hues, line length, body size, soft photos, lede styles, font families,
+  grid).
+- Logo size by shape: a tall or square mark is 40–72px tall; a wide
+  wordmark keeps the 100px minimum width, at most 72px tall.
+- kit-react: `RaImage` preloads with a hoisted `<link>` (no `react-dom`
+  import, which the dev server loaded as raw CommonJS); dev-only preview
+  bridge through `SITES_PREVIEW_BRIDGE`.
+- `sites-kit fixture` writes `app/data/fixture.json` on a React Router site.
+
+### Upgrade
+
+1. Astro site: in `CLAUDE.md`, after the line
+   `@node_modules/@realadvisor/sites-kit-core/AGENTS.md`, add
+   `@node_modules/@realadvisor/sites-kit-astro/AGENTS.md`; after
+   `@node_modules/@realadvisor/sites-kit-core/DESIGN.md`, add
+   `@node_modules/@realadvisor/sites-kit-core/TASTE.md`.
+2. React Router site: in `CLAUDE.md`, after the line
+   `@node_modules/@realadvisor/sites-kit-core/AGENTS.md`, add
+   `@node_modules/@realadvisor/sites-kit-react/AGENTS.md` (when missing);
+   after `@node_modules/@realadvisor/sites-kit-core/DESIGN.md`, add
+   `@node_modules/@realadvisor/sites-kit-core/TASTE.md`.
+3. Run `pnpm screenshot` and fix any new `taste:` line, or name the reason
+   to keep it in `DESIGN-NOTES.md`.
+
 ## 0.4.2
 
 - This changelog, shipped in kit-core.

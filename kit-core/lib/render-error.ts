@@ -21,6 +21,12 @@ const TEXT = {
   en: ['Page temporarily unavailable', 'Please try again in a few minutes.', 'Back to home'],
 } as const;
 
+/** Title, text and home-link label of the 500 page in a language (a framework's own error page uses them too). */
+export const serverErrorText = (l: keyof typeof TEXT = lang()) => {
+  const [title, body, home] = TEXT[l];
+  return { title, body, home };
+};
+
 export function renderFailed(path: string, err: unknown): Response {
   const e = err instanceof Error ? err : new Error(String(err));
   const msg = err instanceof SitesApiError && err.code === 'site_key' ? `page render failed: ${SITE_KEY_REJECTED}` : 'page render failed';

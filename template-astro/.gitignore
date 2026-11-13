@@ -1,0 +1,9 @@
+node_modules/
+/dist/
+.astro/
+.wrangler/
+screenshots/
+.dev.vars
+.env
+reference/
+captures/

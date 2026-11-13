@@ -32,7 +32,8 @@ No current website or BRAND.md says "CRM data only": use `agency.logo` and
 
 ## 2. Tokens
 
-Put colours, fonts, radii and spacing in `src/styles/tokens.css` and use
+Put colours, fonts, radii and spacing in one tokens file
+(`app/styles/tokens.css` on React Router, `src/styles/tokens.css` on Astro) and use
 only tokens in components. The kit parts read these (all have fallbacks):
 
 ```css
@@ -47,17 +48,39 @@ only tokens in components. The kit parts read these (all have fallbacks):
 - Text contrast >= 4.5:1 (3:1 for text >= 24px), white text on `--accent`
   included.
 - Use `clamp()` for type between phone and desktop.
+- Colour restraint: mostly neutrals, one accent in small doses. A vivid
+  brand colour (an electric blue, a signal red) goes in small marks only;
+  bands, buttons and large fields take a deep or muted shade of it, the ink
+  colour or a neutral surface. TASTE.md is how the result is judged.
 
 ## 3. Fonts
 
-Self-hosted only, with `@fontsource/<family>` imported in the layout
-frontmatter (the CSP blocks Google Fonts links and font CDNs). At most 2
-families and 2 weights per family (a variable font counts as one), latin
-subset, `font-display: swap`, and the above-the-fold font preloaded:
+Self-hosted only, with `@fontsource/<family>` imported where the document
+shell is (React Router: `app/root.tsx`; Astro: the layout frontmatter; the
+CSP blocks Google Fonts links and font CDNs). At most 2 families and 2
+weights per family (a variable font counts as one), latin subset,
+`font-display: swap`, and the above-the-fold font preloaded.
 
-```astro
+Choose the pair against the logo, not only from the example: the type
+echoes the logo's character (weight, width, construction, mood) or
+contrasts with it on purpose, and DESIGN-NOTES.md names which (TASTE.md
+line 6). Swapping the example's fonts is expected when the logo is of
+another kind; any open font on @fontsource is allowed.
+
+Import and preload:
+
+```tsx
+// app/root.tsx
 import '@fontsource/lato/latin-400.css';
 import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
+<link rel="preload" as="font" type="font/woff2" crossOrigin="" href={lato900} />  {/* in <head> */}
+```
+
+```astro
+---
+import '@fontsource/lato/latin-400.css';
+import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
+---
 <link slot="head" rel="preload" as="font" type="font/woff2" crossorigin href={lato900} />
 ```
 
@@ -65,9 +88,12 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
 
 - The `<img data-logo>` sets only its height (or only its width), the
   other side `auto`: no fixed box, no `object-fit: cover`, no
-  `aspect-ratio`. At 1440 at least 32px tall and 100px wide (140–180px wide
-  for a script or detailed logo); at 390 at least 28px tall.
-  `pnpm screenshot` flags a logo off its file's ratio or below these sizes.
+  `aspect-ratio`. Size it by its shape: a wide wordmark at 1440 at least
+  100px wide and 32px tall (140–180px wide for a script or detailed logo),
+  at most 72px tall; a tall or square mark (a monogram, 3³) 40–72px tall.
+  At 390 at least 28px tall. The header stays slim: at most 12% of the
+  screen. `pnpm screenshot` flags a logo off its file's ratio or outside
+  these sizes.
 - Sharp: request 2x the rendered width,
   `img(agency.logo.url, { w: 360, fit: 'fit', quality: 90 })` for a 180px
   logo; an SVG in `public/brand/` as is.
@@ -157,7 +183,42 @@ wrap.
   photo 2"); `alt=""` only for decoration.
 - No layout shift: every image has `width`/`height` or `aspect-ratio`.
 
-## 10. Never
+## 10. Craft defaults
+
+Defaults for everything the chosen example does not decide. Where the
+example does something else on purpose, the example wins (TASTE.md judges
+against it); `pnpm screenshot` measures the ones marked (measured).
+
+- **Scales, not values.** Spacing, type sizes, radii, borders and shadows
+  each come from one scale in the tokens file. No one-off `margin: 37px`.
+  A type scale has clear steps: two sizes of one family within 7% of each
+  other on the same page read as a mistake.
+- **One grid.** Lay sections out on CSS grid or the `.wrap` container with
+  the same gutters; every block starts or ends on an edge another block
+  uses. A block aligned to nothing (a link floating in an empty field) is a
+  mistake (measured).
+- **Text blocks.** Body text left-aligned with a ragged right edge, never
+  justified (measured). Caps only for labels of four words or fewer, never
+  for sentences (measured). Emphasis by one means at a time: weight or
+  colour or size.
+- **Near-black, not black.** Text and ink in a near-black with a slight
+  hue (`#141517`, `#1b1a17`); `#000` only inside the logo or a photo.
+- **Shadows mean raised.** A shadow only on something that floats or
+  responds (a menu sheet, a hovered card), one light direction, from the
+  shadow scale. Flat surfaces stay flat.
+- **Typographic details** in the page's language:
+  - quotation marks „…“ (de), « … » with a thin space (fr), «…» (it, es),
+    “…” (en): never straight `"` in text (measured);
+  - an en dash for ranges (2–4 Zimmer, 9–18 Uhr), with no spaces;
+  - a non-breaking space between a number and its unit or currency
+    (`CHF 1'100'000`, `257 m²`, `4.5 Zimmer`): the kit's `formatPrice()`
+    and `formatSurface()` already do it;
+  - tabular figures (`font-variant-numeric: tabular-nums`) for prices and
+    counts in lists, so columns of numbers line up.
+- **States.** Empty, loading and error states are designed like the rest
+  (AGENTS.md section 3): a sentence and a way on, never a blank box.
+
+## 11. Never
 
 - Invented content: lorem ipsum, testimonials, awards, statistics, agents,
   stock handshakes. No data, no section.

@@ -1,0 +1,6 @@
+# Makes this site its own pnpm root (it may sit inside another workspace).
+packages: []
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd

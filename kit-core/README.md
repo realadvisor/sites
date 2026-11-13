@@ -6,9 +6,9 @@ The framework-neutral core of a RealAdvisor site, shared by the Astro kit
 version, and never copies it:
 
 ```json
-"@realadvisor/sites-kit-core": "npm:@realadvisor-sites/kit-core@^0.4.0",
-"@realadvisor/sites-kit-astro": "npm:@realadvisor-sites/kit-astro@^0.4.0",
-"@realadvisor/sites-sdk": "npm:@realadvisor-sites/sdk@^0.4.0"
+"@realadvisor/sites-kit-core": "npm:@realadvisor-sites/kit-core@^0.5.0",
+"@realadvisor/sites-kit-astro": "npm:@realadvisor-sites/kit-astro@^0.5.0",
+"@realadvisor/sites-sdk": "npm:@realadvisor-sites/sdk@^0.5.0"
 ```
 
 In this repo the template and examples use paths instead (`file:../kit-core`).

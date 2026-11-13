@@ -4,8 +4,10 @@
  * site's package scripts). Every tool lives in the package, never in the
  * site: a site always runs the kit's current version.
  *
- *   sites-kit fixture [name | file.json] [--if-empty]   sample data into src/data/
+ *   sites-kit fixture [name | file.json] [--if-empty]   sample data into src/data/ (React: app/data/fixture.json)
  *   sites-kit screenshot [paths...] [options]           screenshots (your eyes)
+ *   sites-kit critic [path] [--anchor url | --anchor-shots a.png,b.png]   inputs for the taste critic (TASTE.md)
+ *   sites-kit critic calibrate prepare --url <example> | score   does the critic still catch known faults
  *   sites-kit check deploy [--no-build]                 the deploy gate (pnpm check:deploy)
  *   sites-kit test map [--url ...] [--path ...]         browser test of the listings map
  */
@@ -15,6 +17,8 @@ import { fileURLToPath } from 'node:url';
 const TOOLS = {
   fixture: 'use-fixture.mjs',
   screenshot: 'screenshot.mjs',
+  critic: 'critic.mjs',
+  'critic calibrate': 'critic-calibrate.mjs',
   'check deploy': 'check-deploy.mjs',
   'test map': 'search-map-test.mjs',
 };

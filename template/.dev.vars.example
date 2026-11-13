@@ -1,3 +1,3 @@
-# Copy to .dev.vars for live data locally. Without SITES_API_KEY the site uses src/data/*.json.
+# Copy to .dev.vars for live data locally. Without SITES_API_KEY the site uses app/data/fixture.json.
 SITES_API_URL=
 SITES_API_KEY=
