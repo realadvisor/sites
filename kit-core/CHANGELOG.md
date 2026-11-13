@@ -11,6 +11,14 @@ the versions is enough.
 To upgrade a site, read every entry newer than the site's current version,
 oldest first, and apply each Upgrade step in order.
 
+## 0.5.1
+
+- kit-react: the dev server can always be framed by the CRM preview, whatever
+  `SITE_MODE` says. The CRM sandbox runs dev with `SITE_MODE=production` (so
+  preview enquiries send), which made the React kit send
+  `X-Frame-Options: DENY` and the preview stayed blank. Published sites keep
+  their headers unchanged.
+
 ## 0.5.0
 
 - React Router is the default: `template/` is now a React Router 7 starter,

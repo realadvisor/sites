@@ -133,7 +133,10 @@ export function createSiteWorker(build: () => Promise<ServerBuild>) {
       // Only an HTML page carries inline scripts: the nonce goes in its CSP alone.
       const html = (res.headers.get('content-type') ?? '').includes('text/html');
       try {
-        const headers = siteHeaders(siteMode() === 'preview', html ? nonce : undefined);
+        // Dev (the CRM preview's sandbox) is always framable, whatever SITE_MODE says:
+        // the sandbox sets SITE_MODE=production so preview enquiries send.
+        const framable = siteMode() === 'preview' || import.meta.env.DEV === true;
+        const headers = siteHeaders(framable, html ? nonce : undefined);
         for (const [k, v] of Object.entries(headers)) {
           if (k === 'content-security-policy' || !res.headers.has(k)) res.headers.set(k, v);
         }
