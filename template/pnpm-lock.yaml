@@ -1171,15 +1171,15 @@ packages:
   '@realadvisor-sites/kit-astro@file:../kit-astro':
     resolution: {directory: ../kit-astro, type: directory}
     peerDependencies:
-      '@realadvisor/sites-kit-core': ^0.4.1
-      '@realadvisor/sites-sdk': ^0.4.1
+      '@realadvisor/sites-kit-core': ^0.4.2
+      '@realadvisor/sites-sdk': ^0.4.2
       astro: ^5.18.2
 
   '@realadvisor-sites/kit-core@file:../kit-core':
     resolution: {directory: ../kit-core, type: directory}
     hasBin: true
     peerDependencies:
-      '@realadvisor/sites-sdk': ^0.4.1
+      '@realadvisor/sites-sdk': ^0.4.2
       playwright: ^1.64.1
     peerDependenciesMeta:
       playwright:
