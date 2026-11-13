@@ -90,7 +90,7 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
   other side `auto`: no fixed box, no `object-fit: cover`, no
   `aspect-ratio`. Size it by its shape: a wide wordmark at 1440 at least
   100px wide and 32px tall (140–180px wide for a script or detailed logo),
-  at most 72px tall; a tall or square mark (a monogram, 3³) 40–72px tall.
+  at most 72px tall; a tall or square mark (a monogram, a stacked numeral) 40–72px tall.
   At 390 at least 28px tall. The header stays slim: at most 12% of the
   screen. `pnpm screenshot` flags a logo off its file's ratio or outside
   these sizes.

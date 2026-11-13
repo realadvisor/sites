@@ -557,7 +557,7 @@ async function shoot({ path, vp, i }) {
     const lg = checks.logo;
     if (lg) {
       if (!lg.contain && (lg.dev > 1.05 || lg.dev < 0.95)) entry.problems.push(`[${vp.name}] logo "${lg.name}" ${lg.fit === 'fill' ? 'stretched' : 'cropped'} (box ratio ${(lg.dev * 100 - 100).toFixed(0)}% off the file): set only height (width: auto), no fixed box, no object-fit: cover`);
-      // A wide wordmark is sized by width, a tall or square mark (3³, a monogram) by height.
+      // A wide wordmark is sized by width, a tall or square mark (a monogram, a stacked numeral) by height.
       const wide = lg.drawnW / lg.drawnH >= 1.3;
       if (vp.name === '1440' && wide && (lg.drawnW < 100 || lg.drawnH < 32)) entry.problems.push(`[1440] logo "${lg.name}" drawn ${Math.round(lg.drawnW)}x${Math.round(lg.drawnH)}px: at least 100px wide and 32px tall (140–180px wide for a detailed logo)`);
       if (vp.name === '1440' && !wide && (lg.drawnH < 40 || lg.drawnH > 72)) entry.problems.push(`[1440] logo "${lg.name}" (a tall or square mark) drawn ${Math.round(lg.drawnH)}px tall: 40–72px tall`);

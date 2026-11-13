@@ -31,7 +31,7 @@ and 2 before you look at any image.
    construction, mood) and each family's. Does the family that sets the
    labels, numbers and prices share at least two of the four, or does
    DESIGN-NOTES.md name a deliberate contrast? A user once had to point
-   out that a heavy, condensed, technical "3³" mark sat beside a warm
+   out that a heavy, condensed, technical numeral mark sat beside a warm
    editorial serif and a soft humanist sans: catch that kind of mismatch.
 6. Read `summary.json`: `taste` (problems measured by the screenshot tool:
    each one is a fact, never argue with it), `fontsByRole`, `families`,
