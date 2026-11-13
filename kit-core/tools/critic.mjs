@@ -40,6 +40,8 @@ const ANCHOR = opt('anchor', '')?.replace(/\/$/, '');
 const ANCHOR_PATH = opt('anchor-path', '/');
 const ANCHOR_SHOTS = opt('anchor-shots', '');
 const PREVIOUS = opt('previous', '');
+const INJECT = opt('inject', '');
+const injectCss = INJECT ? await readFile(INJECT, 'utf8') : '';
 const PATH = args.find((a) => a.startsWith('/')) ?? '/';
 const WIDTHS = [
   { name: '1440', width: 1440, height: 900 },
@@ -77,7 +79,7 @@ await mkdir(OUT, { recursive: true });
 
 // 1. The measured checks: the screenshot tool on this one path (its taste: lines and problems).
 const shotDir = join(OUT, '.screenshot');
-spawnSync(process.execPath, [here('./screenshot.mjs'), '--url', BASE, '--out', shotDir, PATH], { stdio: 'ignore' });
+spawnSync(process.execPath, [here('./screenshot.mjs'), '--url', BASE, '--out', shotDir, ...(INJECT ? ['--inject', INJECT] : []), PATH], { stdio: 'ignore' });
 let problems = [];
 try {
   problems = JSON.parse(await readFile(join(shotDir, 'report.json'), 'utf8'))[0]?.problems ?? [];
@@ -89,10 +91,11 @@ await rm(shotDir, { recursive: true, force: true });
 const browser = await chromium.launch().catch(() => chromium.launch({ channel: 'chrome' }));
 
 /** Load a page fully: lazy images scrolled in, fonts ready. */
-async function open(ctx, url) {
+async function open(ctx, url, css = '') {
   const page = await ctx.newPage();
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForLoadState('load', { timeout: 10000 }).catch(() => {});
+  if (css) await page.addStyleTag({ content: css }).catch(() => {});
   await page.evaluate(async () => {
     for (let y = 0; y < document.body.scrollHeight; y += 600) {
       window.scrollTo(0, y);
@@ -115,12 +118,12 @@ async function open(ctx, url) {
   return page;
 }
 
-async function shots(url, prefix) {
+async function shots(url, prefix, css = '') {
   const out = {};
   for (const vp of WIDTHS) {
     const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: vp.isMobile, hasTouch: vp.hasTouch, deviceScaleFactor: vp.deviceScaleFactor ?? 1 });
     try {
-      const page = await open(ctx, url);
+      const page = await open(ctx, url, css);
       const full = `${prefix}@${vp.name}.png`;
       const first = `${prefix}-first@${vp.name}.png`;
       const h = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -216,12 +219,18 @@ function measure() {
   for (const el of textEls) { const h = hex(getComputedStyle(el).color); inks.set(h, (inks.get(h) || 0) + ownText(el).length); }
   // Logo.
   const logoEl = document.querySelector('img[data-logo]') || document.querySelector('header img, [role="banner"] img') || document.querySelector('header svg');
+  // No logo file: the text wordmark (the home link in the header) stands for it.
+  const wordmark = !logoEl && document.querySelector('header a[href="/"], [role="banner"] a[href="/"]');
   let logo = null;
   if (logoEl) {
     const r = logoEl.getBoundingClientRect();
     logo = { tag: logoEl.tagName.toLowerCase(), src: logoEl.currentSrc || logoEl.src || null, original: fileName(logoEl.currentSrc || logoEl.src), alt: logoEl.getAttribute('alt'), drawn: [Math.round(r.width), Math.round(r.height)], file: logoEl.naturalWidth ? [logoEl.naturalWidth, logoEl.naturalHeight] : null, shareOfHeader: null };
     const header = logoEl.closest('header, [role="banner"]');
     if (header) logo.shareOfHeader = Math.round((r.height / header.getBoundingClientRect().height) * 100) / 100;
+  }
+  if (wordmark) {
+    const r = wordmark.getBoundingClientRect(), s = style(wordmark.querySelector('span') || wordmark);
+    logo = { tag: 'text wordmark', text: wordmark.innerText.trim().replace(/\s+/g, ' '), drawn: [Math.round(r.width), Math.round(r.height)], font: s };
   }
   const header = document.querySelector('header, [role="banner"]');
   // Images: file pixels against the box x devicePixelRatio (the photo-sharpness line).
@@ -249,8 +258,12 @@ function measure() {
       heading: heading ? heading.textContent.trim().slice(0, 50) : null,
     };
   });
+  // Type scale: every size with text, how often, in which family (the critic judges near-duplicates).
+  const steps = new Map();
+  for (const el of textEls) { const cs = getComputedStyle(el); const k = `${Math.round(parseFloat(cs.fontSize) * 2) / 2}px ${family(cs.fontFamily)} ${cs.fontWeight}`; steps.set(k, (steps.get(k) || 0) + 1); }
+  const typeScale = [...steps].sort((x, y) => parseFloat(x[0]) - parseFloat(y[0])).map(([k, n]) => `${k} x${n}`);
   return {
-    viewport: [vw, vh], dpr: devicePixelRatio, pageHeight: document.documentElement.scrollHeight, title: document.title,
+    viewport: [vw, vh], typeScale, dpr: devicePixelRatio, pageHeight: document.documentElement.scrollHeight, title: document.title,
     header: header ? { height: Math.round(header.getBoundingClientRect().height), share: Math.round((header.getBoundingClientRect().height / vh) * 100) / 100, position: getComputedStyle(header).position } : null,
     logo, families, fontsByRole: byRole,
     grounds: [...grounds].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([c, a]) => ({ color: c, share: Math.round((a / page) * 100) / 100 })),
@@ -266,7 +279,16 @@ async function typeVsLogo(page, families, logoSrc, name, file) {
     box.id = 'ra-specimen';
     box.style.cssText = 'position:absolute;left:0;top:0;width:100%;z-index:2147483647;background:#fff;color:#111;padding:40px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;overflow:hidden';
     const l = document.createElement('div');
+    const mark = !logoSrc && document.querySelector('header a[href="/"], [role="banner"] a[href="/"]');
     if (logoSrc) l.innerHTML = `<img src="${logoSrc}" style="height:220px;width:auto;display:block"><div style="font:12px system-ui;margin-top:8px;color:#666">logo at 220px tall</div>`;
+    else if (mark) {
+      // The text wordmark, cloned on the live page (its CSS applies), drawn three times larger.
+      const c = mark.cloneNode(true);
+      c.removeAttribute('href');
+      c.style.cssText = 'zoom:3;display:inline-flex;position:static;transform:none';
+      l.append(c);
+      l.insertAdjacentHTML('beforeend', '<div style="font:12px system-ui;margin-top:8px;color:#666">text wordmark at 3x</div>');
+    }
     const r = document.createElement('div');
     r.style.cssText = 'display:grid;gap:22px';
     for (const f of families) {
@@ -289,7 +311,7 @@ async function typeVsLogo(page, families, logoSrc, name, file) {
 const summary = { page: BASE + PATH, measuredProblems: problems, taste: problems.filter((p) => p.includes('taste:')), widths: {} };
 const files = [];
 try {
-  const site = await shots(BASE + PATH, 'page');
+  const site = await shots(BASE + PATH, 'page', injectCss);
   for (const [w, s] of Object.entries(site)) {
     summary.widths[w] = await s.page.evaluate(measure);
     files.push([s.first, `the page, first screen at ${w}`], [s.full, `the page, full at ${w}`]);
@@ -315,7 +337,7 @@ try {
       }
     } catch {}
   }
-  await typeVsLogo(site['1440'].page, d.families.filter((f) => f.share >= 0.02), d.logo?.src, (d.logo?.alt || 'Agency').replace(/\s+(AG|SA|GmbH|Sàrl|SARL|SRL|SL|SAS|Srl)$/i, ''), join(OUT, 'type-vs-logo.png'));
+  await typeVsLogo(site['1440'].page, d.families.filter((f) => f.share >= 0.02), d.logo?.src, (d.logo?.alt || d.logo?.text || 'Agency').replace(/\s+(AG|SA|GmbH|Sàrl|SARL|SRL|SL|SAS|Srl)$/i, ''), join(OUT, 'type-vs-logo.png'));
   files.push(['type-vs-logo.png', "the logo beside every font family in use: does the type echo the logo's character, or contrast with it on purpose?"]);
   for (const s of Object.values(site)) await s.ctx.close();
 

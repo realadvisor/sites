@@ -1,9 +1,13 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><title>Clean</title>
 <style>body{margin:0;font:18px/1.5 Georgia,serif;color:#141517;background:#faf8f4}main{padding:40px;max-width:60ch}h1{font:48px/1.1 Arial,sans-serif}h2{font:34px/1.1 Arial,sans-serif}
-.lede{font:400 20px/1.45 Georgia,serif}.ink{background:#111214;color:#fff;padding:24px}.photo img{display:block;width:240px;height:160px;object-fit:cover}</style>
-<!-- The control: one lede style, two families, a photo drawn smaller than its file. No taste: line. -->
+.lede{font:400 20px/1.45 Georgia,serif}.ink{background:#111214;color:#fff;padding:24px}.photo img{display:block;width:240px;height:160px;object-fit:cover}.two{display:grid;grid-template-columns:300px 1fr;column-gap:32px;align-items:start}.row{display:flex;gap:24px}.button,.more{display:inline-block;padding:8px 0}</style>
+<!-- The control: one lede style, two families, a photo drawn smaller than its file, a second
+     grid column, a link after a button, language quotes. No taste: line. -->
 <main>
 <section><h1>Main heading</h1><p class="lede">We sell houses and flats in the region, with a fee only on success, for owners and buyers.</p></section>
 <section class="ink"><h2>Sell with us</h2><p class="lede">Do you want to sell your home? You pay our fee only when your home is sold, nothing before.</p></section>
 <div class="photo"><img src="photo.png" alt="A test photo"></div>
+<section class="two"><h2>Two columns</h2><p class="lede">A second grid column starts on its own track, which is a deliberate edge.</p></section>
+<p class="row"><a class="button" href="#">Contact</a><a class="more" href="#">All listings</a></p>
+<p>„Die Formel“ in German marks, a range 2–4 rooms and 257&nbsp;m².</p>
 </main>

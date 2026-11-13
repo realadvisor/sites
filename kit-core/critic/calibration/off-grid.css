@@ -1,0 +1,4 @@
+/* Critic round 1 (agency site): blocks that line up with nothing. The sell
+   text is nudged 37px in and its button 22px further. */
+.sell-text { margin-left: 37px !important; }
+.sell-actions { margin-left: 22px !important; }

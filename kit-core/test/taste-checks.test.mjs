@@ -30,7 +30,7 @@ test('taste checks fire on their test pages and stay quiet on the control', { sk
   try {
     const url = `http://127.0.0.1:${server.address().port}`;
     // Async: the static server above runs in this process and must keep answering.
-    const run = await new Promise((done) => execFile(process.execPath, [tool, '--url', url, '--out', out, '--jobs', '2', '/soft-photo.html', '/ledes.html', '/fonts.html', '/clean.html'], { timeout: 90000 }, (_e, stdout) => done({ stdout })));
+    const run = await new Promise((done) => execFile(process.execPath, [tool, '--url', url, '--out', out, '--jobs', '2', '/soft-photo.html', '/ledes.html', '/fonts.html', '/craft.html', '/clean.html'], { timeout: 90000 }, (_e, stdout) => done({ stdout })));
     const report = JSON.parse(await readFile(join(out, 'report.json'), 'utf8'));
     const taste = (path) => report.find((r) => r.path === path).problems.filter((p) => p.includes('taste:'));
     assert.match(taste('/soft-photo.html').join('\n'), /\[1440\] taste: soft photo, "photo.png" file 400x300.*the hero/, run.stdout);
@@ -38,6 +38,11 @@ test('taste checks fire on their test pages and stay quiet on the control', { sk
     assert.match(taste('/ledes.html').join('\n'), /section ledes in 2 styles: Georgia 20px 400 full .* \| Arial 17px 400 muted/);
     assert.match(taste('/fonts.html').join('\n'), /4 font families in use/);
     assert.match(taste('/fonts.html').join('\n'), /font "Never Loaded" is declared but never loaded/);
+    const craft = taste('/craft.html').join('\n');
+    assert.match(craft, /justified body text \(p\.just/);
+    assert.match(craft, /caps on text over 40 characters \(p\.shout/);
+    assert.match(craft, /straight " quotes in text/);
+    assert.match(craft, /off-grid, 1 block\(s\).*p\.nudge/);
     assert.deepEqual(report.find((r) => r.path === '/clean.html').problems, []);
   } finally {
     server.close();

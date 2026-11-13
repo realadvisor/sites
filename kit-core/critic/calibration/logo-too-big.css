@@ -1,0 +1,4 @@
+/* User remark (agency site, round 1): "the logo is too big". The wordmark
+   gets a 136px masthead, as the first build did. */
+:root { --header-h: 136px !important; }
+.hd-mark { font-size: 3.25rem !important; letter-spacing: 0.3em !important; }

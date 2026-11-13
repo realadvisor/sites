@@ -22,22 +22,26 @@ and 2 before you look at any image.
    "120px between sections").
 3. Look at the page at the same widths, first screen then full. Compare
    with those three things.
-4. Open `type-vs-logo.png`: the logo at 220px beside every font family in
+4. Colour and grid. Judge each colour where it sits (against its
+   neighbouring band and the photo next to it), never as a swatch. Trace
+   the column edges of the first section down the page: which block sits
+   on no shared edge, and does it have a reason?
+5. Open `type-vs-logo.png`: the logo at 220px beside every font family in
    use. Name the logo's character in four words (weight, width,
    construction, mood) and each family's. Does the family that sets the
    labels, numbers and prices share at least two of the four, or does
    DESIGN-NOTES.md name a deliberate contrast? A user once had to point
    out that a heavy, condensed, technical "3³" mark sat beside a warm
    editorial serif and a soft humanist sans: catch that kind of mismatch.
-5. Read `summary.json`: `taste` (problems measured by the screenshot tool:
+6. Read `summary.json`: `taste` (problems measured by the screenshot tool:
    each one is a fact, never argue with it), `fontsByRole`, `families`,
    `grounds`, `logo` (drawn size, share of the header, SVG fills),
    `images` (`density` = file pixels per CSS pixel; under the width's `dpr`,
    capped at 1.5, the photo is upscaled), `sections` (padding and grounds
    in order, for the rhythm line).
-6. Score the twelve rubric lines of TASTE.md section 2, 0, 1 or 2, each
+7. Score the thirteen rubric lines of TASTE.md section 2, 0, 1 or 2, each
    with one sentence: what you saw, against the anchor.
-7. Give at most five fixes, the biggest first, for the lines under 2.
+8. Give at most five fixes, the biggest first, for the lines under 2.
 
 ## What a fix looks like
 
@@ -86,13 +90,14 @@ Plain Markdown, exactly these sections:
 5. Typography ...
 6. Type and logo ...: logo = <four words>; <family> = <four words>; ...
 7. Section rhythm ...
-8. Consistency ...
-9. Hero image ...
-10. Photo sharpness and tone ...
-11. Phone ...
-12. Brand fit ...: <the "could be any agency" test, answered>
+8. Grid and alignment ...
+9. Consistency ...
+10. Hero image ...
+11. Photo sharpness and tone ...
+12. Phone ...
+13. Brand fit ...: <the "could be any agency" test, answered>
 
-Total: <sum>/24
+Total: <sum>/26
 
 ## Fixes (biggest first)
 1. <line #>: <element>: <current> -> <new>

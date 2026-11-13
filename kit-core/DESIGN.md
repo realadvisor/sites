@@ -183,7 +183,42 @@ wrap.
   photo 2"); `alt=""` only for decoration.
 - No layout shift: every image has `width`/`height` or `aspect-ratio`.
 
-## 10. Never
+## 10. Craft defaults
+
+Defaults for everything the chosen example does not decide. Where the
+example does something else on purpose, the example wins (TASTE.md judges
+against it); `pnpm screenshot` measures the ones marked (measured).
+
+- **Scales, not values.** Spacing, type sizes, radii, borders and shadows
+  each come from one scale in the tokens file. No one-off `margin: 37px`.
+  A type scale has clear steps: two sizes of one family within 7% of each
+  other on the same page read as a mistake.
+- **One grid.** Lay sections out on CSS grid or the `.wrap` container with
+  the same gutters; every block starts or ends on an edge another block
+  uses. A block aligned to nothing (a link floating in an empty field) is a
+  mistake (measured).
+- **Text blocks.** Body text left-aligned with a ragged right edge, never
+  justified (measured). Caps only for labels of four words or fewer, never
+  for sentences (measured). Emphasis by one means at a time: weight or
+  colour or size.
+- **Near-black, not black.** Text and ink in a near-black with a slight
+  hue (`#141517`, `#1b1a17`); `#000` only inside the logo or a photo.
+- **Shadows mean raised.** A shadow only on something that floats or
+  responds (a menu sheet, a hovered card), one light direction, from the
+  shadow scale. Flat surfaces stay flat.
+- **Typographic details** in the page's language:
+  - quotation marks „…“ (de), « … » with a thin space (fr), «…» (it, es),
+    “…” (en): never straight `"` in text (measured);
+  - an en dash for ranges (2–4 Zimmer, 9–18 Uhr), with no spaces;
+  - a non-breaking space between a number and its unit or currency
+    (`CHF 1'100'000`, `257 m²`, `4.5 Zimmer`): the kit's `formatPrice()`
+    and `formatSurface()` already do it;
+  - tabular figures (`font-variant-numeric: tabular-nums`) for prices and
+    counts in lists, so columns of numbers line up.
+- **States.** Empty, loading and error states are designed like the rest
+  (AGENTS.md section 3): a sentence and a way on, never a blank box.
+
+## 11. Never
 
 - Invented content: lorem ipsum, testimonials, awards, statistics, agents,
   stock handshakes. No data, no section.

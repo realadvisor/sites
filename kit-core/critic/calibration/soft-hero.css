@@ -1,0 +1,4 @@
+/* Critic round 1 (agency site): a soft, upscaled hero photo. A blur makes
+   the hero look upscaled (the measured check skips blurred images on
+   purpose, so only the critic's eye can catch it). */
+.hero-media img { filter: blur(1.6px) !important; }

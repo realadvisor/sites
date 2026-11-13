@@ -7,6 +7,7 @@
  *   pnpm screenshot -- --url http://localhost:4321 --max 40
  *   pnpm screenshot -- /listings /contact # only these paths
  *   pnpm screenshot -- --jobs 1           # one page at a time (default 4)
+ *   pnpm screenshot -- --inject fault.css # add a CSS file to every page (critic calibration)
  *
  * Output: screenshots/<route>@1440.png, screenshots/<route>@390.png and
  * screenshots/report.json. Exit code 1 if any page has console errors, failed
@@ -16,6 +17,7 @@
 import { chromium } from 'playwright';
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -34,6 +36,9 @@ const MAX = Number(opt('max', '30'));
 // timers), so 4 at a time is about 3x faster than one after the other, even on 4 vCPUs.
 const JOBS = Math.max(1, Number(opt('jobs', process.env.SCREENSHOT_JOBS ?? '4')));
 const OUT = opt('out', 'screenshots');
+// A CSS file added to every page after load (the critic's calibration cases put a fault back with it).
+const INJECT = opt('inject', '');
+const injectCss = INJECT ? readFileSync(INJECT, 'utf8') : '';
 const explicit = args.filter((a) => a.startsWith('/'));
 const WIDTHS = [
   { name: '1440', width: 1440, height: 900 },
@@ -243,6 +248,7 @@ async function shoot({ path, vp, i }) {
       return null;
     });
     await page.waitForLoadState('load', { timeout: 10000 }).catch(() => {});
+    if (injectCss) await page.addStyleTag({ content: injectCss }).catch(() => {});
     const status = res?.status() ?? 0;
     entry.status = Math.max(entry.status, status);
     if (status >= 400) entry.problems.push(`[${vp.name}] page HTTP ${status}`);
@@ -499,7 +505,51 @@ async function shoot({ path, vp, i }) {
         const declared = (f) => faces.filter((ff) => ff.family.replace(/["']/g, '') === f);
         // Only families the page itself declares (@font-face): a missing local font is not a bug here.
         const notLoaded = [...chars.keys()].filter((f) => chars.get(f) / total >= 0.03 && declared(f).length && !declared(f).some((ff) => ff.status === 'loaded'));
-        return { vw, vh, headerH, fields: [...new Set(fields)].slice(0, 3), accentHues: [...new Set(accentHues)], longLines, smallBody, paras, soft: soft.slice(0, 4), ledes: [...ledes].map(([s, l]) => `${s} (${l.slice(0, 3).join(', ')})`), families, notLoaded };
+        // Craft defaults (DESIGN.md section 10). Elements with their own text, shown.
+        const own = (el) => [...el.childNodes].filter((c) => c.nodeType === 3).map((c) => c.textContent).join('').trim();
+        const label = (el) => `${el.tagName.toLowerCase()}${typeof el.className === 'string' && el.className.trim() ? '.' + el.className.trim().split(/\s+/)[0] : ''} "${(el.innerText || '').trim().replace(/\s+/g, ' ').slice(0, 28)}"`;
+        const shown = [...document.querySelectorAll('body *')].filter((el) => {
+          if (el.closest('script, style, noscript, [hidden], .sr-only, [aria-hidden="true"]')) return false;
+          const r = el.getBoundingClientRect();
+          return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== 'hidden';
+        });
+        const texts = shown.filter((el) => own(el));
+        // Justified body text, caps on sentences, straight double quotes in text.
+        const justified = [...document.querySelectorAll('main p, article p')].filter((p) => shown.includes(p) && getComputedStyle(p).textAlign === 'justify' && p.textContent.trim().length >= 120).map(label);
+        const longCaps = texts.filter((el) => {
+          const t = own(el);
+          return t.length > 40 && (getComputedStyle(el).textTransform === 'uppercase' || (/[A-ZÄÖÜÉÈÀ]{2}/.test(t) && t === t.toUpperCase() && /[A-Z]/.test(t) && t.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 20));
+        }).map(label);
+        const quotes = texts.filter((el) => !el.closest('code, pre, kbd, samp, input, textarea') && /"/.test(own(el))).map(label);
+        // Off-grid: a block whose left and right edges match no edge the layout gives it:
+        // another block's edge, its parent's content edges, its parent's grid tracks or the
+        // page edge (±3px). Catches ad-hoc margins and nudges, not a deliberate second
+        // column. Centred blocks and blocks inside another block are skipped.
+        const BLOCK = 'h1, h2, h3, p, ul, ol, dl, figure, form, picture, img, blockquote, address, table, a.more, .button, .btn';
+        const blocks = [...document.querySelectorAll(`main :is(${BLOCK})`)].filter((el) => shown.includes(el) && !el.parentElement.closest(BLOCK) && el.getBoundingClientRect().width >= 24);
+        const box = blocks.map((el) => ({ el, r: el.getBoundingClientRect() }));
+        const near = (x, xs) => xs.some((v) => Math.abs(v - x) <= 3);
+        const offGrid = box.filter(({ el, r }) => {
+          const cs = getComputedStyle(el);
+          const parent = el.parentElement.getBoundingClientRect();
+          if (cs.textAlign === 'center' && Math.abs((r.left - parent.left) - (parent.right - r.right)) < 6) return false;
+          // Second item in a row (a link after a button): it follows its sibling.
+          const prev = el.previousElementSibling?.getBoundingClientRect();
+          if (prev && prev.width && prev.top < r.bottom && prev.bottom > r.top && r.left - prev.right >= 0 && r.left - prev.right <= 64) return false;
+          const others = box.filter((o) => o.el !== el).flatMap((o) => [o.r.left, o.r.right]);
+          others.push(0, vw);
+          const pcs = getComputedStyle(el.parentElement);
+          const cl = parent.left + parseFloat(pcs.borderLeftWidth) + parseFloat(pcs.paddingLeft);
+          const cr = parent.right - parseFloat(pcs.borderRightWidth) - parseFloat(pcs.paddingRight);
+          others.push(cl, cr);
+          if (pcs.display.includes('grid')) {
+            const gap = parseFloat(pcs.columnGap) || 0;
+            let x = cl;
+            for (const t of pcs.gridTemplateColumns.split(/\s+/).map(parseFloat).filter((n) => !Number.isNaN(n))) { others.push(x, x + t); x += t + gap; }
+          }
+          return !near(r.left, others) && !near(r.right, others);
+        }).map(({ el }) => label(el));
+        return { vw, vh, headerH, fields: [...new Set(fields)].slice(0, 3), accentHues: [...new Set(accentHues)], longLines, smallBody, paras, soft: soft.slice(0, 4), ledes: [...ledes].map(([s, l]) => `${s} (${l.slice(0, 3).join(', ')})`), families, notLoaded, justified, longCaps, quotes, offGrid };
       })(),
     }));
     // Hero text legibility: text over the hero photo, contrast against the pixels behind it.
@@ -525,6 +575,10 @@ async function shoot({ path, vp, i }) {
       for (const s of ts.soft) entry.problems.push(`[${vp.name}] taste: soft photo, ${s}: use a larger source or a smaller box (the file must cover the box x devicePixelRatio, up to 1.5x)`);
       if (vp.name === '1440' && ts.ledes.length > 1) entry.problems.push(`[1440] taste: section ledes in ${ts.ledes.length} styles: ${ts.ledes.join(' | ')}: one lede style (one class) for every section`);
       if (vp.name === '1440' && ts.families.length > 2) entry.problems.push(`[1440] taste: ${ts.families.length} font families in use (${ts.families.join(', ')}): two at most`);
+      if (vp.name === '1440' && ts.offGrid.length) entry.problems.push(`[1440] taste: off-grid, ${ts.offGrid.length} block(s) on no edge the layout gives them (other blocks, the parent's content box or grid tracks): ${ts.offGrid.slice(0, 3).join(', ')}: put them on the section's column edges`);
+      if (vp.name === '1440' && ts.justified.length) entry.problems.push(`[1440] taste: justified body text (${ts.justified.slice(0, 2).join(', ')}): left-align it, ragged right`);
+      if (vp.name === '1440' && ts.longCaps.length) entry.problems.push(`[1440] taste: caps on text over 40 characters (${ts.longCaps.slice(0, 2).join(', ')}): caps only for short labels`);
+      if (vp.name === '1440' && ts.quotes.length) entry.problems.push(`[1440] taste: straight " quotes in text (${ts.quotes.slice(0, 2).join(', ')}): use the language's marks („…“ de, « … » fr, «…» it/es, “…” en)`);
       for (const f of ts.notLoaded) entry.problems.push(`[${vp.name}] taste: font "${f}" is declared but never loaded: the text falls back to another font (check the @fontsource import and the family name)`);
     }
     for (const b of new Set(checks.blockers)) entry.problems.push(`[${vp.name}] invisible element blocks clicks: ${b} (closed overlays need visibility:hidden + pointer-events:none)`);

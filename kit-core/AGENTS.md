@@ -342,7 +342,7 @@ minutes for a new site.
    Read `screenshots/contact-sheet.png` once; at most 3
    `screenshots/sheet-<route>.png` for detail.
 3. Judge the screenshots for taste with `TASTE.md` (next to this file):
-   the twelve rubric lines against the chosen style's screenshots, and every
+   the thirteen rubric lines against the chosen style's screenshots, and every
    `taste:` line `pnpm screenshot` printed. Fix what scores under 2. When
    the run has a critic, `pnpm kit critic -- <path> --anchor <example url>`
    writes its inputs (`critic-input/`, see `critic/CRITIC.md`); apply its

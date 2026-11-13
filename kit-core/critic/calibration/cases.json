@@ -1,0 +1,11 @@
+{
+  "about": "Calibration cases for the taste critic (TASTE.md section 5). Each case is a fictional kit example with one fault put back by a CSS file; the anchor is the same example without the fault. expect: rubric line number -> the highest (max) or lowest (min) score the critic may give. A case passes when every expectation holds.",
+  "cases": [
+    { "id": "clean", "example": "studio-vey", "path": "/", "inject": null, "fault": "none: the anchor judged against itself", "expect": { "all": { "min": 1 }, "total": { "min": 22 } } },
+    { "id": "logo-too-big", "example": "studio-vey", "path": "/", "inject": "logo-too-big.css", "fault": "a 136px masthead for the wordmark", "expect": { "3": { "max": 1 } } },
+    { "id": "vivid-band", "example": "studio-vey", "path": "/", "inject": "vivid-band.css", "fault": "a full-width band in an electric brand blue", "expect": { "4": { "max": 1 } } },
+    { "id": "type-vs-logo", "example": "studio-vey", "path": "/", "inject": "type-vs-logo.css", "fault": "a heavy condensed wordmark beside a warm serif and a soft sans", "expect": { "6": { "max": 1 } } },
+    { "id": "off-grid", "example": "studio-vey", "path": "/", "inject": "off-grid.css", "fault": "the sell text and button nudged off the column edges", "expect": { "8": { "max": 1 } } },
+    { "id": "soft-hero", "example": "studio-vey", "path": "/", "inject": "soft-hero.css", "fault": "a soft hero photo that no measured check catches", "expect": { "11": { "max": 1 } } }
+  ]
+}
