@@ -374,3 +374,10 @@ minutes for a new site.
   something is broken; touch the CRM preview's injected scripts.
 - Deploy, push, or call external services (RealAdvisor publishes), or leave
   wiring-example markup and placeholder labels.
+- Change the kit or SDK versions in `package.json` as part of another
+  request. Upgrade only when the customer asks, when RealAdvisor refuses the
+  kit as unsupported, or when a requested feature needs a newer kit, and say
+  so. To upgrade, bump all the kit packages and the SDK to one exact version,
+  install, then apply every `### Upgrade` step in the new kit's
+  `node_modules/@realadvisor/sites-kit-core/CHANGELOG.md` newer than the old
+  version, and run the self-check.

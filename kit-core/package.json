@@ -19,14 +19,13 @@
     "*.mjs",
     "*.mts",
     "AGENTS.md",
+    "CHANGELOG.md",
     "DESIGN.md",
-    "TASTE.md",
     "README.md",
     "LICENSE",
     "bin",
     "client",
     "contract",
-    "critic",
     "fixtures",
     "lib",
     "styles",
@@ -49,7 +48,7 @@
     "./*": "./lib/*.ts"
   },
   "bin": {
-    "sites-kit": "./bin/sites-kit.mjs"
+    "sites-kit": "bin/sites-kit.mjs"
   },
   "scripts": {
     "check": "pnpm test",

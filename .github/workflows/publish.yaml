@@ -6,8 +6,9 @@ name: Publish
 # merge, then tag the merge commit.
 #
 # Auth: npm trusted publishing (each package on npmjs.com trusts this repo and
-# this workflow file), so no npm token is stored. A NPM_TOKEN secret, if set,
-# is used instead.
+# this workflow file, allowed to stage only), so no npm token is stored. Each
+# version is staged, not published: a maintainer of @realadvisor-sites approves
+# it on npmjs.com (or `npm stage approve <id>`) with 2FA before it goes live.
 
 on:
   push:
@@ -49,6 +50,7 @@ jobs:
             if npm view "$name@$version" version >/dev/null 2>&1; then
               echo "$name@$version is already on npm, skipping"
             else
-              (cd "$dir" && npm publish)
+              # Staged: the version waits on npm until a maintainer approves it with 2FA.
+              (cd "$dir" && npm stage publish .)
             fi
           done

@@ -19,7 +19,6 @@
     "*.mts",
     "*.ts",
     "README.md",
-    "AGENTS.md",
     "LICENSE",
     "components",
     "lib",

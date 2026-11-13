@@ -14,7 +14,6 @@
     "*.mts",
     "env.d.ts",
     "README.md",
-    "AGENTS.md",
     "bin",
     "client",
     "components",
@@ -48,7 +47,7 @@
     "./env.d.ts": "./env.d.ts"
   },
   "bin": {
-    "sites-kit-react": "./bin/sites-kit-react.mjs"
+    "sites-kit-react": "bin/sites-kit-react.mjs"
   },
   "peerDependencies": {
     "@realadvisor/sites-kit-core": "^0.5.0",
