@@ -45,9 +45,13 @@ A React Router site takes `@realadvisor/sites-kit-react` instead of the Astro ki
 ## Release
 
 The four packages are published to npm together, one version for all four.
+Read [AGENTS.md](AGENTS.md) before changing them: every version needs an
+entry in [kit-core/CHANGELOG.md](kit-core/CHANGELOG.md), which sites read to
+upgrade.
 
 ```bash
 node scripts/set-version.mjs 0.4.0   # versions and the peer ranges between the packages
+# add "## 0.4.0" to kit-core/CHANGELOG.md, with Upgrade steps if sites must change
 node scripts/check-pack.mjs          # every export and bin is in the tarball, no tests
 ```
 

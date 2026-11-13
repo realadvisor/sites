@@ -1,6 +1,6 @@
 {
   "name": "@realadvisor-sites/kit-core",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The framework-neutral core of a RealAdvisor site, shared by the Astro kit and the React kit: data helpers over @realadvisor/sites-sdk (a peer), i18n, formatting, legal texts, SEO, search, images, security headers, the browser scripts (listing search and map, enquiry, consent), the sites-kit tools (fixture, screenshot, deploy check) and the rules the coding agent follows (AGENTS.md, DESIGN.md).",
   "license": "MIT",
   "repository": {
@@ -19,6 +19,7 @@
     "*.mjs",
     "*.mts",
     "AGENTS.md",
+    "CHANGELOG.md",
     "DESIGN.md",
     "README.md",
     "LICENSE",
@@ -54,7 +55,7 @@
     "test": "node --experimental-strip-types --no-warnings=ExperimentalWarning --test \"test/*.test.mjs\" \"test/*.test.ts\""
   },
   "peerDependencies": {
-    "@realadvisor/sites-sdk": "^0.4.1",
+    "@realadvisor/sites-sdk": "^0.4.2",
     "playwright": "^1.64.1"
   },
   "peerDependenciesMeta": {
