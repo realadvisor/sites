@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { checkCase, parseScores } from '../tools/critic-calibrate.mjs';
+import { checkCase, parseScores, stopProblems } from '../tools/critic-calibrate.mjs';
 
 const answer = `# Critic: /, round 1
 
@@ -27,8 +27,13 @@ const answer = `# Critic: /, round 1
 
 Total: 21/26
 
+## Overall: 7.5/10
+## Distinctiveness: 6.5/10
+Would it pass for the example it started from? Yes, with the colours swapped.
+
 ## Fixes (biggest first)
-1. 3: logo 136px -> 60px
+1. MUST 3: logo 136px -> 60px
+2. SHOULD 13: the region in the eyebrow
 `;
 
 test('parses the thirteen scores and the total', () => {
@@ -58,4 +63,21 @@ test('every calibration case has an existing inject file and an expectation', ()
     assert.ok(Object.keys(c.expect).length, c.id);
     if (c.inject) assert.ok(readFileSync(new URL(c.inject, dir), 'utf8').length > 20, c.inject);
   }
+});
+
+test('reads the overall and distinctiveness scores and the MUST fixes', () => {
+  const s = parseScores(answer);
+  assert.equal(s.overall, 7.5);
+  assert.equal(s.distinctiveness, 6.5);
+  assert.equal(s.must, 1);
+  assert.equal(s.lines[1], 2, 'the fixes are not scores');
+  assert.deepEqual(checkCase(s, { distinctiveness: { max: 7 } }), []);
+  assert.deepEqual(checkCase(s, { overall: { min: 8 } }), ['overall 7.5, expected at least 8']);
+});
+
+test('the stop rule: overall >= 8.5, distinctiveness >= 7.5, no MUST open', () => {
+  assert.deepEqual(stopProblems(parseScores(answer)), ['overall 7.5/10, needs 8.5', 'distinctiveness 6.5/10, needs 7.5', '1 MUST fix(es) open']);
+  const ready = answer.replace('7.5/10', '8.5/10').replace('6.5/10', '7.5/10').replace('1. MUST 3', '1. SHOULD 3');
+  assert.deepEqual(stopProblems(parseScores(ready)), []);
+  assert.deepEqual(stopProblems(parseScores('## Scores\n')), ['no "Overall: x/10" score', 'no "Distinctiveness: x/10" score']);
 });

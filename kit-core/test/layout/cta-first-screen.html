@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>CTA on the first screen</title>
+<style>body{margin:0;font:16px/1.5 Arial,sans-serif;color:#141517;background:#faf8f4}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:640px}.media{background:#c9c2b6}.copy{padding:64px 40px}
+.btn{display:inline-block;padding:14px 22px;background:#1d3557;color:#fff;text-decoration:none}
+.desk{display:inline-block}.phone{display:none}
+@media (max-width:900px){.hero{grid-template-columns:1fr;min-height:0}.media{height:220px}.copy{padding:32px 24px}.desk{display:none}.phone{display:inline-block}}</style>
+<!-- The control: the photo is short when stacked, so the button stays on the first screen at
+     every width. Two marked CTAs, one per layout: the hidden one does not count. -->
+<main>
+<section class="hero"><div class="media"></div><div class="copy"><h1>Sell with a local team</h1><p>A free valuation of your home within two days.</p><a class="btn desk" href="#v" data-primary-cta>Value my home</a><a class="btn phone" href="#v" data-primary-cta>Value my home</a></div></section>
+<div style="height:2000px"></div>
+</main>

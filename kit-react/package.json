@@ -13,6 +13,7 @@
     "*.mjs",
     "*.mts",
     "env.d.ts",
+    "AGENTS.md",
     "README.md",
     "bin",
     "client",

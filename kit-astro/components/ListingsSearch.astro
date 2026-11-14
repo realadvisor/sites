@@ -21,7 +21,7 @@
  * --surface, --line, --muted, --control-radius, --header-h (sticky offset),
  * --rs-columns (max grid columns, 3), --rs-gap, --map-h; selected states
  * --rs-active / --rs-on-active (default text / paper), --rs-pill-radius,
- * --rs-sheet-radius, --rs-heading-weight, --rs-card-h (card height, map list).
+ * --rs-sheet-radius, --rs-heading-weight.
  * Class hooks: rs-*.
  */
 import type { Listing } from '../lib/ra';
@@ -418,8 +418,10 @@ const cardSizes = isMap ? '(min-width: 1280px) 300px, (min-width: 960px) 40vw, 1
   .rs-grid > li { min-width: 0; }
   @media (min-width: 640px) { .rs-grid { --rs-cols: 2; } }
   @media (min-width: 1024px) { .rs-grid { --rs-cols: var(--rs-columns, 3); } }
-  /* Map view renders up to 300 cards: skip the off-screen ones' layout. */
-  .rs-list > li { content-visibility: auto; contain-intrinsic-size: auto var(--rs-card-h, 420px); }
+  /* No content-visibility on the cards: it implies paint containment, which clips any ink
+     outside the card (an italic price's last glyph, focus rings, shadows) and stops a card
+     using grid-template-rows: subgrid. A page holds at most 24 cards (paged), so skipping
+     their off-screen layout saved little. */
   .rs-grid > :global(li.is-map-hover), .rs-grid > :global(li.is-selected) { outline: 2px solid var(--rs-accent); outline-offset: 6px; border-radius: 2px; }
 
   .rs-map { --map-h: min(70svh, 560px); margin-bottom: 24px; }

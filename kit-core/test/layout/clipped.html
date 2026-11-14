@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Clipped</title>
+<style>body{margin:0;font:18px/1.5 Georgia,serif;color:#141517;background:#faf8f4}main{padding:40px}
+.tag{display:inline-block;overflow:hidden;font:italic 28px/1.2 Georgia,serif}
+.rs-list{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,300px);gap:24px}
+.rs-list>li{content-visibility:auto;contain-intrinsic-size:auto 200px;background:#fff}
+.card-price{margin:0;text-align:right;font:italic 26px/1.2 Georgia,serif}</style>
+<!-- An italic price whose advance box ends at the edge of a box that clips: inside
+     overflow: hidden (a shrink-to-fit tag) and inside content-visibility: auto (the kit's
+     old search cards). Both lose the overhang of their last glyph. -->
+<main>
+<h1>Clipped</h1>
+<p><span class="tag">CHF 1’250’000</span></p>
+<ul class="rs-list">
+  <li><h2>Flat</h2><p class="card-price">CHF 890’000</p></li>
+  <li><h2>House</h2><p class="card-price">CHF 1’450’000</p></li>
+  <li><h2>Loft</h2><p class="card-price">CHF 720’000</p></li>
+</ul>
+</main>

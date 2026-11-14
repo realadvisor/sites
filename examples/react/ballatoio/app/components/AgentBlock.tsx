@@ -43,7 +43,7 @@ export function AgentBlock({ agent: a, lang, heading: H = 'h3', link = true, not
         {langs && <p className="agent-langs muted">{ui.speaks} {langs}</p>}
         <p className="agent-contacts">
           {a.phone && <a className="num" href={telHref(a.phone)}>{a.phone}</a>}
-          {a.email && <a href={`mailto:${a.email}`} aria-label={fill(ui.writeTo, { name: a.first_name })}>{a.email}</a>}
+          {a.email && <a className="agent-mail" title={a.email} href={`mailto:${a.email}`} aria-label={fill(ui.writeTo, { name: a.first_name })}>{a.email}</a>}
         </p>
         {note && <p className="agent-note small">{note}</p>}
       </div>

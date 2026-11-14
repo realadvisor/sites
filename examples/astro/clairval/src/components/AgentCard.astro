@@ -42,7 +42,7 @@ const url = href('team', l, agentSlug(a, all));
     {langs && <p class="agent__langs"><span class="sr-only">{t('speaks')}: </span>{langs}</p>}
     <ul class="agent__contact plain">
       {a.phone && <li><a class="num" href={tel(a.phone)}>{a.phone}</a></li>}
-      {a.email && <li><a href={`mailto:${a.email}`}>{a.email}</a></li>}
+      {a.email && <li><a class="agent__email" href={`mailto:${a.email}`} title={a.email}>{a.email}</a></li>}
     </ul>
   </div>
 </article>
@@ -51,14 +51,16 @@ const url = href('team', l, agentSlug(a, all));
   .agent { display: grid; gap: 18px; align-content: start; }
   .agent__photo { display: block; overflow: hidden; background: var(--line); aspect-ratio: 4 / 5; }
   .agent__photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
-  .agent__body { display: grid; gap: 4px; min-width: 0; }
+  .agent__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; min-width: 0; }
   .agent__name { font-size: 1.375rem; }
   .agent__name a { text-decoration: none; }
   .agent__name a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
   .agent__role { color: var(--muted); font-size: 0.9375rem; }
   .agent__langs { font-size: 0.9375rem; }
-  .agent__contact { margin-top: 6px; display: grid; }
+  .agent__contact { margin-top: 6px; display: grid; grid-template-columns: minmax(0, 1fr); }
   .agent__contact a { display: inline-flex; align-items: center; min-height: 34px; font-size: 0.9375rem; overflow-wrap: anywhere; }
+  /* E-mail: one line; a long address ends in an ellipsis (full address in its title). */
+  .agent__contact .agent__email { display: block; max-width: 100%; line-height: 34px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .agent--compact { grid-template-columns: 88px minmax(0, 1fr); gap: 16px; align-items: center; }
   .agent--compact .agent__photo { aspect-ratio: 1; border-radius: 50%; }
   .agent--compact .agent__name { font-size: 1.25rem; }

@@ -37,6 +37,8 @@ import { sites, agency } from '../lib/data.server';                         // d
 import { RaImage } from '@realadvisor/sites-kit-react/components/RaImage';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
 import { ListingsSearch } from '@realadvisor/sites-kit-react/components/ListingsSearch';
+import { PhotoViewer } from '@realadvisor/sites-kit-react/components/PhotoViewer';
+import { ListingArea } from '@realadvisor/sites-kit-react/components/ListingArea';
 import { LegalContent } from '@realadvisor/sites-kit-react/components/LegalContent';
 import { SafeHtml, sanitized } from '@realadvisor/sites-kit-react/components/SafeHtml';
 import { Seo, JsonLd, useKit, usePageLocale, useGone } from '@realadvisor/sites-kit-react/components/Document';
@@ -96,6 +98,33 @@ export default function Page({ loaderData: { listing } }: Route.ComponentProps) 
   JSX drops the space between inline elements on two lines, so write
   `<strong>{n}</strong>{' '}<span>rooms</span>`.
 
+### A listing page's must-haves
+
+A listing page has PhotoViewer and ListingArea:
+
+```tsx
+<PhotoViewer photos={listing.photos} alt={`${typeLabel}, ${city}`} />        {/* layout="strip", locale, labels */}
+{listing.address.lat != null && listing.address.lng != null && (
+  <ListingArea lat={listing.address.lat} lng={listing.address.lng} />      /* zoom, radius, locale, labels */
+)}
+```
+
+- **PhotoViewer**: the gallery (`layout="1+4"` mosaic, a swipe strip on the
+  phone; or `"strip"`) and a full-screen viewer on a native `<dialog>`
+  (every photo whole, "3 / 13", prev / next, ← → Home End, Escape, swipe,
+  focus back to the tile, page scroll locked). Without JavaScript the
+  tiles link to a `<noscript>` photo list. `alt`: a string ("<alt>, Photo
+  3") or `(i) => string`; a photo's own `alt` wins. Theme it with
+  `--pv-ratio`, `--pv-gap`, `--pv-bg`, `--pv-tile-bg`.
+- **ListingArea**: the approximate area (a ~1.5 km circle at town zoom,
+  never a pin) on the kit's map, locked until the visitor taps «Activer la
+  carte», mounted when near the screen, a static tile map without
+  JavaScript, the © OpenStreetMap credit and an "Open in OpenStreetMap"
+  link. Height `--la-h`; circle `--la-fill`, `--la-line`.
+- Both take `locale` (default: the page's) and `labels` (any string
+  overridden); `kit()` loads their browser parts, `kit.css` has their CSS.
+  Do not write your own gallery, lightbox or location map.
+
 ## HTML from data
 
 ```tsx
@@ -150,10 +179,9 @@ routes, each with its own pool (`allListings({ offer_type: 'buy' })`) and
 Every route is server-rendered HTML plus **one** bundled browser script,
 `app/client.ts`, which `<KitScripts>` loads with the request's CSP nonce:
 
-- `kit()` loads each kit part (enquiry, consent, combobox, search, map)
-  only on a page that has it.
-- The site's own small behaviours (menu, tabs, gallery, lightbox,
-  accordions) are plain functions in `app/client.ts` that find their
+- `kit()` loads each kit part (enquiry, consent, combobox, search, map,
+  photo viewer, listing area) only on a page that has it.
+- The site's own small behaviours (menu, tabs, accordions) are plain functions in `app/client.ts` that find their
   elements by `data-*` attributes and run on every page (studio-vey: menu,
   offer tabs, gallery, about 5 KB). This is the default: **no React in the
   browser**, so `onClick`, `useState` and `useEffect` in a page do nothing.

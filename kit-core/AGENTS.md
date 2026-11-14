@@ -94,8 +94,51 @@ image                   img() / srcset(): resized photo URLs (for og:image, logo
 search                  parseSearch, searchHref: the state behind the listings search.
 seo                     canonicalUrl, safeJsonLd, agencyJsonLd, listingJsonLd, listingTitle, listingRef.
 developments            Unit labels, prices, status, options and URLs for development pages (section 9).
+title                   cleanTitle(title, locale, { places }): display title of a CRM listing title + its exclusivity flag.
+typo                    typo(text, locale), typoHtml(html, locale): curly apostrophes, the language's quotes, French spacing.
+photos                  pickPhoto(listing, 'card' | 'hero', { overrides }), lotPhotos(listings): photos without plans or labels, no repeats.
+market                  marketListings(listings, { currency, countries, sort }), sortByPrice, byCurrency: the agency's market.
 security                Allowed hosts and security headers. There is no way to add hosts.
 ```
+
+**Listing text and photos go through these four parts** (section 3 says
+when): the CRM's titles shout, its first photo is often a plan or a
+"Reserved" banner, and a selection mixes markets. Each is display only: the
+data keeps its original, words are never added and spelling never
+corrected.
+
+```ts
+import { cleanTitle } from '@realadvisor/sites-kit-core/title';
+import { typo, typoHtml } from '@realadvisor/sites-kit-core/typo';
+import { lotPhotos, pickPhoto } from '@realadvisor/sites-kit-core/photos';
+import { marketListings } from '@realadvisor/sites-kit-core/market';
+
+const home = marketListings(forSale, { currency: 'CHF', countries: ['CH'], sort: 'price-desc' }).slice(0, 6);
+const photos = lotPhotos(home);                                   // id -> photo
+const { title, exclusive } = cleanTitle(l.title, LOCALE, { places: [l.address.city] });
+// card: <RaImage photo={photos[l.id]} />, {exclusive && <span class="badge">…</span>}, <h3>{title}</h3>
+// hero: pickPhoto(best, 'hero', { overrides: { [best.id]: 3 } }) (undefined: pick another listing)
+```
+
+- `cleanTitle`: strips a leading "EN EXCLUSIVITÉ :"-style marker
+  (`exclusive: true` then: show it as the card's one badge), turns shouting
+  caps and Title Case into sentence case (acronyms, words with digits and
+  `places` kept; German keeps its case), `m2` → `m²`, ` - ` → ` – `, French
+  spacing, and a title over 70 characters (`max`) stops at its first strong
+  separator. Pass the city and the region names as `places`.
+- `typo` / `typoHtml`: „…“ de (de-CH «…»), « … » fr, “…” en, «…» it and es,
+  ’ for apostrophes, a narrow no-break space before `; : ! ?` in French.
+  For descriptions, bios, kit strings and legal text the site shows.
+- `pickPhoto` skips floor plans and photos whose URL or alt names a label
+  or banner (staging, réservé, reserved, off-market, plan, sold, vendu...);
+  a hero prefers an exterior and returns nothing rather than a labelled
+  photo. `overrides` (listing id → photo index or URL piece) is for labels
+  the file name does not show: look at the photos and list them.
+  `lotPhotos` gives each listing of a list its card photo, unless a card
+  before it already shows that image (lots sharing renders): then another.
+- `marketListings` keeps the agency's currency and countries and sorts by
+  price inside them; `sortByPrice` never compares two currencies. Prices
+  still go through `formatPrice`.
 
 Ready parts in both kits, same names, markup, classes and `data-*` hooks:
 `ListingsSearch` (with `ListingsMap`, `ListingsPager`), `EnquiryForm`,
@@ -178,6 +221,20 @@ Rules:
   (example.com emails, +41 00 000 00 0x), build on it as it is and say so.
 - **Never invent data**: no testimonials, awards, years, rankings, "#1",
   percentages, client counts or fake agents. Copy comes from the data.
+- **Brief truth: nothing without a source.** A headcount, a number of
+  offices, a founding year, a review count or a rating appears only when the
+  data or the agency's own site states it (BRIEF.md names the source); a
+  reviewer will ask where each number came from. Reference sites and
+  examples give patterns (layout, rhythm, sections), never facts or words.
+  Stock photos are captioned with their place and never presented as a
+  property, a client's home or the agency's office: a visitor takes a photo
+  next to a price for the property.
+- **Listing titles, texts and photos go through the kit** (section 2):
+  every listing title through `cleanTitle` (cards, listing page, map popups,
+  `<title>`), every CRM text the page shows through `typo` / `typoHtml`,
+  every card and hero photo through `pickPhoto` or `lotPhotos`, and a home
+  selection through `marketListings`. Raw CRM text and the first photo by
+  default are what made reference builds look like a template.
 
 ## 4. Rendering and errors
 
@@ -197,7 +254,28 @@ Every agency site has, linked from the header or footer: `/` (home),
 description, agent, enquiry form), `/team` (agents with `tel:` and
 `mailto:`), `/contact` (address, phone, email, enquiry form), `/legal`,
 `/privacy`, `/404`, and `/developments` + `/developments/[slug]` when
-`developments()` is not empty (no developments: do not link it).
+`developments()` is not empty (no developments: do not link it). A site
+that shows any stock photo also has `/credits` (linked from the footer):
+every stock photo with its author, source and licence.
+
+**Listing pages** have a photo viewer (every photo, opened from the
+gallery, arrows, Escape, focus back to the tile) and an approximate-area
+map (the API rounds coordinates: show an area, never a pin on a house).
+Use the kit's `PhotoViewer` and `ListingArea` components (kit-react and
+kit-astro; your kit's `AGENTS.md` shows them) rather than writing your own.
+
+**Seller-first agency sites.** Most agencies win business from sellers, so
+unless BRIEF.md says the site is for buyers or renters:
+
+- the valuation call to action is on the first screen of the home at
+  1440x900, 1024x768, 768x1024 and 390x844 (a stacked hero puts a tall
+  photo first on tablets and phones: keep it short there). Mark it
+  `data-primary-cta`: `pnpm screenshot` measures it at those four sizes and
+  prints `primary CTA not on the first screen` with the measured y;
+- the sell page has the valuation form (`EnquiryForm`,
+  `contactReason="valuation"`) in its hero, not at the bottom;
+- on the home the valuation band comes before the long sections (map,
+  index, team), around the first half of the page.
 
 **Legal: never write your own text.** No invented company numbers, VAT or
 register entries, disclaimers, cookie lists or terms. `/legal` and
@@ -338,7 +416,9 @@ minutes for a new site.
 1. `pnpm check` exits 0.
 2. `pnpm screenshot` once: fix every problem it prints (console errors,
    failed requests, broken images, HTTP errors, overflow at 390, image
-   ratio and resolution, controls, clicks blocked by an invisible overlay).
+   ratio and resolution, controls, clicks blocked by an invisible overlay,
+   clipped text, card rows out of line, repeated images, motifs over
+   photos, the primary CTA below the first screen).
    Read `screenshots/contact-sheet.png` once; at most 3
    `screenshots/sheet-<route>.png` for detail.
 3. Judge the screenshots for taste with `TASTE.md` (next to this file):

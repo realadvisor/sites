@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Repeated photos</title>
+<style>body{margin:0;font:16px/1.5 Arial,sans-serif;color:#141517;background:#faf8f4}main{padding:40px}
+.grid{list-style:none;margin:0 0 40px;padding:0;display:grid;grid-template-columns:repeat(3,300px);gap:24px}
+.card{background:#fff}.card img{display:block;width:300px;height:200px;object-fit:cover;background:#ddd}.card h2{margin:12px;font-size:20px}</style>
+<!-- The fault: lots of one development share one render, so the same image (in other sizes)
+     shows side by side, and four times in the second grid. -->
+<main>
+<h1>Lots</h1>
+<ul class="grid lots">
+  <li class="card"><img src="/img/dev/render.png?w=600" alt="Lot 1" width="300" height="200"><h2>Lot 1</h2></li>
+  <li class="card"><img src="/img/dev/render-1200x800.png" alt="Lot 2" width="300" height="200"><h2>Lot 2</h2></li>
+  <li class="card"><img src="/img/dev/other.png" alt="Lot 3" width="300" height="200"><h2>Lot 3</h2></li>
+</ul>
+<ul class="grid more">
+  <li class="card"><img src="/img/dev/facade.png" alt="Lot 4" width="300" height="200"><h2>Lot 4</h2></li>
+  <li class="card"><img src="/img/dev/garden.png" alt="Lot 5" width="300" height="200"><h2>Lot 5</h2></li>
+  <li class="card"><img src="/img/dev/facade.png?w=400" alt="Lot 6" width="300" height="200"><h2>Lot 6</h2></li>
+  <li class="card"><img src="/img/dev/garden.png?w=500" alt="Lot 7" width="300" height="200"><h2>Lot 7</h2></li>
+  <li class="card"><img src="/img/dev/facade.png?w=800" alt="Lot 8" width="300" height="200"><h2>Lot 8</h2></li>
+  <li class="card"><img src="/img/dev/attic.png" alt="Lot 9" width="300" height="200"><h2>Lot 9</h2></li>
+</ul>
+</main>

@@ -93,6 +93,19 @@ characters, straight `"` quotes in text (DESIGN.md section 10). A
 measured problem is fixed, or kept on purpose (a bold-colour direction may
 keep a vivid band) and named in DESIGN-NOTES.md.
 
+Layout checks run at every width (1440, 390, 1024, 1800) and on the
+listing search's map view, and print as plain problems, not `taste:`:
+`clipped text` (ink cut by a box that clips, such as an italic price's last
+glyph under `overflow: hidden` or `content-visibility: auto`), `cards in
+one row not aligned` (the heading, divider, price or last line of cards side
+by side more than 4px apart), `repeated image in a row` / `in a grid` (the
+same image, size parameters ignored, in two cards side by side or three
+cards of one grid) and `decorative line or motif over a photo` (an
+aria-hidden SVG or `[data-motif]` lying more than 20% on a photo, unless an
+opaque panel between them gives it a flat ground). On pages with
+`[data-primary-cta]`, `primary CTA not on the first screen` is measured at
+1440x900, 1024x768, 768x1024 and 390x844.
+
 Near-duplicate type sizes are not measured either: fluid `clamp()` sizes
 make 19px and 20px common in good examples, so the critic judges the scale
 from summary.json `typeScale`. Type against the logo is not measured: a logo is usually drawn paths, so
@@ -112,12 +125,32 @@ separate model with the folder `sites-kit critic` writes, and nothing else.
    screen), the anchor at the same widths, the logo file and
    `type-vs-logo.png`, and `summary.json` (the `taste:` lines, fonts by
    role, colours, logo size, image pixels vs boxes, sections).
-2. Output: the thirteen scores, each with what it saw against the anchor, and
-   for every line under 2 one concrete fix ("logo 136px tall: 60px, header
-   88px"). At most five fixes, the biggest first.
-3. The builder applies the fixes and re-shoots; at most two critic rounds,
-   then the user sees the page with anything left open named in the final
-   message.
+2. Output: the thirteen scores, each with what it saw against the anchor;
+   an **Overall** score /10 (against a top studio) and a
+   **Distinctiveness** score /10 (below); for every line under 2 one
+   concrete fix ("logo 136px tall: 60px, header 88px"), marked MUST or
+   SHOULD. At most five fixes, the biggest first.
+3. **Stop rule:** the page goes to the user when overall is 8.5 or more,
+   distinctiveness 7.5 or more and no MUST fix is open. Otherwise the
+   builder applies the fixes, re-shoots and asks again; at most two critic
+   rounds, then the user sees the page with anything left open named in the
+   final message.
+
+**Distinctiveness** asks two things. Would this pass for another agency's
+site, or for the example it started from (cover the logo and name: if the
+anchor survives with its colours swapped, it does)? Does the signature feel
+owned: drawn from this agency (their logo's voice, their region from real
+data, their own photos, their claims), intended at every width, never a
+motif laid over a photo? Rubric line 13 (brand fit) is the quick version;
+this score is the one the stop rule reads.
+
+The critic also walks a checklist of faults a user once had to point out
+(`critic/CRITIC.md`, "Checklist"): a motif drawn over photos, a crude
+hand-traced map, a generic stock dose (more than one stock break per page,
+stock without its place caption), the sellers-first order on the home (the
+valuation call to action on the first screen at every width, the valuation
+band early in the page), facts without a source, repeated photos, raw CRM
+titles, and a zoom into prices, ² and italics at every width.
 
 The critic never adds content, never invents facts, and never changes the
 brief. Taste fixes only.

@@ -27,6 +27,8 @@ ra                      THE data client.
 components/ListingsSearch.astro  /listings: filters, chips, count, sort, list/map, pagination, empty states.
 components/ListingsMap.astro, ListingsPager.astro  The listings map (no library) and pager; ListingsSearch wires both.
 components/EnquiryForm.astro  THE enquiry form.
+components/PhotoViewer.astro  A listing's photos: gallery and full-screen viewer.
+components/ListingArea.astro  A listing's approximate area on the kit's map.
 components/RaImage.astro  Photos: resized, srcset, sizes, lazy, `priority` for the LCP image.
 components/LegalContent.astro  Body of the legal pages.
 components/ConsentBanner.astro  Analytics consent; Base renders it when ANALYTICS_ID is set.
@@ -95,6 +97,33 @@ const result = runSearch(await allListings(), params, { locale: LOCALE });
 
 (`runSearch` from `@realadvisor/sites-kit-core/search`; the card is the
 default slot, `empty` a named slot.)
+
+## A listing page's must-haves
+
+A listing page has PhotoViewer and ListingArea:
+
+```astro
+<PhotoViewer photos={listing.photos} alt={`${typeLabel}, ${city}`} />   <!-- layout="strip", locale, labels -->
+{listing.address.lat != null && listing.address.lng != null && (
+  <ListingArea lat={listing.address.lat} lng={listing.address.lng} />   <!-- zoom, radius, locale, labels -->
+)}
+```
+
+- **PhotoViewer**: the gallery (`layout="1+4"` mosaic, a swipe strip on the
+  phone; or `"strip"`) and a full-screen viewer on a native `<dialog>`
+  (every photo whole, "3 / 13", prev / next, ← → Home End, Escape, swipe,
+  focus back to the tile, page scroll locked). Without JavaScript the
+  tiles link to a `<noscript>` photo list. `alt`: a string ("<alt>, Photo
+  3") or `(i) => string`; a photo's own `alt` wins. Theme it with
+  `--pv-ratio`, `--pv-gap`, `--pv-bg`, `--pv-tile-bg`.
+- **ListingArea**: the approximate area (a ~1.5 km circle at town zoom,
+  never a pin) on the kit's map, locked until the visitor taps «Activer la
+  carte», mounted when near the screen, a static tile map without
+  JavaScript, the © OpenStreetMap credit and an "Open in OpenStreetMap"
+  link. Height `--la-h`; circle `--la-fill`, `--la-line`.
+- Both take `locale` (default: the site's) and `labels` (any string
+  overridden), and bring their own script and CSS. Do not write your own
+  gallery, lightbox or location map.
 
 ## SEO and languages
 

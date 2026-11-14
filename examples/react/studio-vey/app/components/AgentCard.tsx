@@ -23,7 +23,7 @@ export function AgentCard({ agent, count, layout = 'stack', link = true, as: H =
         {langs && <p className="agent-langs muted">{langs}</p>}
         <ul className="agent-contact">
           {agent.phone && <li><a href={telHref(agent.phone)}>{agent.phone}</a></li>}
-          {agent.email && <li><a href={`mailto:${agent.email}`}>{agent.email}</a></li>}
+          {agent.email && <li><a href={`mailto:${agent.email}`} title={agent.email}>{agent.email}</a></li>}
         </ul>
         {link && count != null && count > 0 && <a className="more agent-more" href={agentUrl(agent)}>{count === 1 ? '1 Objekt' : `${count} Objekte`}</a>}
       </div>

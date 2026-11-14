@@ -43,7 +43,7 @@ export default function Team({ loaderData: { lang, name, town, agents, counts } 
                   {n > 0 && <p className="agent-meta">{houses(n)}</p>}
                   <p className="agent-contact">
                     {a.phone && <a className="num" href={telHref(a.phone)}>{a.phone}</a>}
-                    {a.email && <a href={`mailto:${a.email}`}>{a.email}</a>}
+                    {a.email && <a href={`mailto:${a.email}`} title={a.email}>{a.email}</a>}
                   </p>
                   <a className="link" href={url}>{ui.agentProfile} <span className="arrow" aria-hidden="true">→</span></a>
                 </div>

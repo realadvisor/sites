@@ -2,7 +2,8 @@
  * Every kit part's styles (from the Astro components, scoped there, plain
  * class selectors here: rs-*, ra-map-*, consent*, enquiry*, field-*,
  * control, btn; themed with the same tokens): the Astro kit's form.css, then
- * search.css, pager.css, map.css, consent.css.
+ * search.css, pager.css, map.css, consent.css, photo-viewer.css,
+ * listing-area.css.
  *
  * Import it once, in root.tsx, where the Astro layout imports the kit's
  * components (ConsentBanner): after the site's global CSS by default, so the
@@ -19,3 +20,5 @@
 @import './pager.css';
 @import './map.css';
 @import './consent.css';
+@import './photo-viewer.css';
+@import './listing-area.css';

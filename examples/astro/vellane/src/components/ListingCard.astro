@@ -39,8 +39,8 @@ const place = cityLine(l);
   <div class="card__body">
     <p class="card__price num">{price(l)}</p>
     <H class="card__title"><a href={href}>{l.title}</a></H>
-    {facts && <p class="card__facts">{facts}</p>}
-    {place && <p class="card__place">{typeLabel(l.property_type)} · {place}</p>}
+    {facts && <p class="card__facts" title={facts}>{facts}</p>}
+    {place && <p class="card__place" title={`${typeLabel(l.property_type)} · ${place}`}>{typeLabel(l.property_type)} · {place}</p>}
   </div>
 </article>
 
@@ -58,11 +58,12 @@ const place = cityLine(l);
   .card__body { display: grid; gap: 2px; }
   .card__price { font-weight: 650; font-size: 1.125rem; letter-spacing: -0.01em; }
   .is-sold .card__price { color: var(--muted); }
-  .card__title { font-size: 1rem; font-weight: 550; letter-spacing: -0.005em; line-height: 1.35; }
+  /* Fixed line counts so every card in a row ends at one height: title 2 lines, facts and place 1. */
+  .card__title { font-size: 1rem; font-weight: 550; letter-spacing: -0.005em; line-height: 1.35; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-height: 2.7em; }
   .card__title a { text-decoration: none; }
   .card__title a::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--radius-img); }
   .card__title a:focus-visible { outline: none; }
   .card__title a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 4px; }
-  .card__facts, .card__place { color: var(--muted); font-size: 0.9375rem; }
+  .card__facts, .card__place { color: var(--muted); font-size: 0.9375rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .card__facts { color: var(--text); }
 </style>

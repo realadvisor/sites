@@ -1,0 +1,39 @@
+/* ListingArea: part of kit.css (with map.css, whose .ra-map rules it reuses). */
+  .ra-la { display: grid; gap: 10px; }
+  .ra-la-frame { position: relative; height: var(--la-h, clamp(260px, 32vw, 380px)); overflow: hidden; background: #f2f0ec; border: 1px solid var(--line, #d6d3cf); }
+  .ra-la-static { position: absolute; inset: 0; overflow: hidden; }
+  .ra-la-tiles { position: absolute; left: 50%; top: 50%; }
+  /* The same look as the kit's map tiles. */
+  .ra-la-tiles img { position: absolute; width: 256px; height: 256px; max-width: none; filter: grayscale(1) sepia(.18) contrast(.92) brightness(1.06); }
+  /* The area, not a point: a soft circle (--la-r: the radius in px at the zoom shown). */
+  .ra-la-area, .ra-la-ring {
+    position: absolute; width: calc(2 * var(--la-r, 56px)); height: calc(2 * var(--la-r, 56px)); translate: -50% -50%; border-radius: 50%; pointer-events: none;
+    background: var(--la-fill, color-mix(in srgb, var(--accent, #134266) 18%, transparent));
+    border: 2px solid var(--la-line, color-mix(in srgb, var(--accent, #134266) 60%, transparent));
+  }
+  .ra-la-area { left: 50%; top: 50%; }
+  /* Over the live map, placed by the script from the map's tiles. */
+  .ra-la-ring { z-index: 2; left: var(--la-x, 50%); top: var(--la-y, 50%); visibility: hidden; }
+  .ra-la.is-live .ra-la-ring { visibility: visible; }
+  .ra-la-live { position: absolute; inset: 0; overflow: hidden; }
+  .ra-la-live:empty { display: none; }
+  .ra-la .ra-la-live .ra-map { --map-h: 100%; height: 100%; min-height: 0; }
+  /* No listings on this map: no count, no "show all"; one credit (ours, below). */
+  .ra-la-live .ra-map-status, .ra-la-live .ra-map-attr { display: none; }
+  /* Once the kit's map is drawn, the static tiles under it go. */
+  .ra-la:has(.ra-la-live .ra-map.is-ready) .ra-la-static { display: none; }
+  /* Locked: page scroll and swipes pass through until the visitor activates the map. */
+  .ra-la.is-locked .ra-la-live { pointer-events: none; }
+  .ra-la.is-locked .ra-map-zoom { display: none; }
+  .ra-la-unlock {
+    position: absolute; left: 50%; bottom: 16px; translate: -50% 0; z-index: 5; min-height: 44px; padding: 0 18px;
+    border: 0; border-radius: var(--radius-btn, 0); background: var(--accent, #134266); color: #fff;
+    font: 600 .8125rem/1 var(--font-sans, system-ui, sans-serif); letter-spacing: .06em; box-shadow: 0 2px 8px rgb(0 0 0 / .25); cursor: pointer;
+  }
+  .ra-la-unlock[hidden] { display: none; }
+  .ra-la-unlock:focus-visible { outline: 2px solid var(--text, #1c1b19); outline-offset: 2px; }
+  /* One credit, always clickable (the kit map's own would sit under the lock). */
+  .ra-la-credit { position: absolute; right: 0; bottom: 0; z-index: 5; margin: 0; padding: 2px 6px; font-size: 11px; color: #444; background: rgb(255 255 255 / .8); }
+  .ra-la-credit a { color: inherit; }
+  .ra-la-note { margin: 0; font-size: .875rem; color: var(--muted, #5c5a56); }
+  .ra-la-note a { color: var(--accent, #134266); display: inline-flex; min-height: 24px; align-items: center; }
