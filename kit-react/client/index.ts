@@ -7,7 +7,8 @@
  *
  * kit() loads each part only on a page that has it (one small module each,
  * the same files as the Astro kit): enquiry form, consent banner, combobox,
- * listing search (with its map) or a map alone.
+ * listing search (with its map) or a map alone, the listing's photo viewer
+ * and its area map.
  */
 export { islands } from './islands';
 
@@ -18,4 +19,6 @@ export function kit() {
   if (has('[data-combobox]')) void import('@realadvisor/sites-kit-core/client/combobox');
   if (has('[data-rs-root]')) void import('@realadvisor/sites-kit-core/client/listings-search');
   else if (has('[data-ra-map]')) void import('@realadvisor/sites-kit-core/client/listings-map');
+  if (has('[data-photo-viewer]')) void import('./photo-viewer');
+  if (has('[data-listing-area]')) void import('./listing-area');
 }

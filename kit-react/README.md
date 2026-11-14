@@ -20,9 +20,11 @@ apply) and adds only what React needs. Reference site:
 | `…/server/enquiry` | `enquiryAction(request, sites)`: the Astro `/api/enquiry` contract, sent through the SDK's `handleEnquiry`. |
 | `…/server/seo` | `sitemap(paths)`, `robots()`, `legalPaths()`, `notFound(gone?)`. |
 | `…/components/*` | `Document` (`KitProvider`, `KitScripts`, `Seo`, `JsonLd`, `NonceContext`, `usePageLocale`, `useGone`), `SafeHtml` (`sanitized()`), `RaImage`, `EnquiryForm`, `LegalContent`, `ConsentBanner`, `ListingsSearch`, `ListingsMap`, `ListingsPager`, `Island`, `LanguageSwitch`, `form/*`. Same markup, classes and `data-*` hooks as the Astro components. |
+| `…/components/PhotoViewer` | A listing's photos: the 1+4 mosaic (or a strip) and a full-screen `<dialog>` viewer (keys, swipe, focus, scroll lock, no-JS list). |
+| `…/components/ListingArea` | A listing's approximate area (~1.5 km circle) on the kit's map: locked until «Activer la carte», mounted lazily, static tiles without JS. |
 | `…/lib/*` | `records` (`agencyOf`, `price(l, locale)`, `listingRef`), `search` (`searchListings`), `image` (`imgUrl` with crop). |
 | `…/client` | `kit()` (loads each browser part only where the page has it), `islands({...})`. |
-| `…/styles/*` | `kit.css`: every kit part's CSS (the Astro kit's form.css, search, pager, map, consent), same tokens; or the parts one by one. Import order: see CSS order. |
+| `…/styles/*` | `kit.css`: every kit part's CSS (the Astro kit's form.css, search, pager, map, consent, photo-viewer, listing-area), same tokens; or the parts one by one. Import order: see CSS order. |
 | `sites-kit-react check deploy` | The deploy gate (`pnpm check:deploy`). |
 | `sites-kit-react preview --port N` | `pnpm preview`: build/ on `wrangler dev`, restarted when a new build lands (plain `wrangler dev --config build/server/wrangler.json` keeps serving the build it started with). |
 

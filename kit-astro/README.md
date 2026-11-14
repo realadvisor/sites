@@ -16,6 +16,8 @@ In this repo the template and examples use paths instead (`file:../kit-astro`).
 | `@realadvisor/sites-kit-astro` | `sitesKit()`, the Astro integration: middleware, security headers, data env, `site.json`, `virtual:sites-kit/site` and `virtual:sites-kit/fixtures`. |
 | `@realadvisor/sites-kit-astro/ra` | `ra`, the site's one data client: live with `SITES_API_URL` + `SITES_API_KEY`, else the fixture in `src/data/`. Server side only. |
 | `@realadvisor/sites-kit-astro/components/<Name>.astro` | `ListingsSearch`, `ListingsMap`, `ListingsPager`, `EnquiryForm`, `RaImage`, `LegalContent`, `ConsentBanner`, `form/*` (`Input`, `Select`, `Combobox`, `Button`). |
+| `…/components/PhotoViewer.astro` | A listing's photos: the 1+4 mosaic (or a strip) and a full-screen `<dialog>` viewer (keys, swipe, focus, scroll lock, no-JS list). |
+| `…/components/ListingArea.astro` | A listing's approximate area (~1.5 km circle) on the kit's map: locked until «Activer la carte», mounted lazily, static tiles without JS. |
 | `@realadvisor/sites-kit-astro/middleware` | Added by the integration; never imported by a site. |
 
 ```js

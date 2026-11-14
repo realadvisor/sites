@@ -62,14 +62,14 @@ const PRELOAD_ID = '\0vite/preload-helper.js';
 /**
  * KIT_CSS: `import '@realadvisor/sites-kit-react/styles/kit.css'` from a JS
  * module becomes one JS import per part (the Astro kit's form.css, then
- * search, pager, map, consent): no `@import` for the CSS bundler to hoist,
+ * search, pager, map, consent, photo-viewer, listing-area): no `@import` for the CSS bundler to hoist,
  * so the kit's rules sit exactly where root.tsx imports kit.css (Astro: where
  * the layout imports ConsentBanner), and a site that imports a part itself
  * gets it once.
  */
 const KIT_CSS_ID = '\0sites-kit-react/kit.css.js';
 const KIT_DIR = fileURLToPath(new URL('.', import.meta.url));
-const KIT_PARTS = ['search', 'pager', 'map', 'consent'].map((p) => join(KIT_DIR, 'styles', `${p}.css`));
+const KIT_PARTS = ['search', 'pager', 'map', 'consent', 'photo-viewer', 'listing-area'].map((p) => join(KIT_DIR, 'styles', `${p}.css`));
 const isKitCss = (id) => id === '@realadvisor/sites-kit-react/styles/kit.css' || resolve(id) === join(KIT_DIR, 'styles', 'kit.css');
 const preloadHelper = (base) => `const base = ${JSON.stringify(base)};
 export const __vitePreload = (load, deps) => {

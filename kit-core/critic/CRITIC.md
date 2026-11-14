@@ -41,11 +41,68 @@ and 2 before you look at any image.
    in order, for the rhythm line).
 7. Zoom into numbers, prices and italic text at every width you have (1440
    and 390, plus `screenshots/*@1024.png` and `*@1800.png` when they exist):
-   a last glyph cut off, a focus ring or shadow sliced by its card. Then compare each row of cards line by line: eyebrow, title,
-   divider, facts and price at the same height across the row.
-8. Score the thirteen rubric lines of TASTE.md section 2, 0, 1 or 2, each
-   with one sentence: what you saw, against the anchor.
-9. Give at most five fixes, the biggest first, for the lines under 2.
+   a last glyph cut off (an italic price needs `padding-inline-end`), a
+   detached ² in m², a focus ring or shadow sliced by its card. Then compare
+   each row of cards line by line: eyebrow, title, divider, facts and price at
+   the same height across the row, titles cut at a word and never ending on a
+   small word or a number.
+8. Walk the checklist (below) at every width you have.
+9. Score the thirteen rubric lines of TASTE.md section 2, 0, 1 or 2, each
+   with one sentence: what you saw, against the anchor. Then the two /10
+   scores: **Overall** (the page against a top studio's work, half points
+   allowed) and **Distinctiveness** (section "Distinctiveness" below).
+10. Give at most five fixes, the biggest first, for the lines under 2. Mark
+    each MUST (a rule broken, a fact without a source, something an agency
+    owner would point out at once) or SHOULD (polish).
+
+## Checklist
+
+Each item you find is a fix; a MUST unless marked otherwise.
+
+- **Motif over photos.** A decorative line, ridge, hatching or SVG drawn
+  across a photo reads as a rendering glitch: the photo moves under it at
+  every width. Motifs sit on flat grounds only (dividers, bands, the footer
+  edge). `pnpm screenshot` prints `decorative line or motif over a photo`.
+- **Crude maps.** A drawn map with hand-traced lakes, a rectangle for a
+  lake, labels crossed by outlines or dots without names looks like a
+  placeholder. Drawn maps come from open geodata (Natural Earth, swisstopo),
+  are credited, and label in the page's language.
+- **Generic stock dose.** Count the stock photos (landscapes, skylines) on
+  the page against the listing and agency photos. More than one stock break
+  per page, a stock photo without its place caption, or one presented as a
+  property or the agency's office: fix it. The three most-used views of a
+  region are the least distinctive images it has.
+- **Sellers first on the home.** On a seller-first agency site the valuation
+  call to action is on the first screen at every width (`pnpm screenshot`
+  prints `primary CTA not on the first screen`), and the valuation band comes
+  early, before the long sections (map, index, team), around the first half
+  of the page. Measure where the form sits on the full-page shot.
+- **Facts without a source.** A headcount, a number of offices, a founding
+  year, a review score or a rating that neither the data nor BRIEF.md states.
+- **Repeated photos.** The same image twice side by side, or three times in
+  one grid (lots of one development); `pnpm screenshot` prints `repeated
+  image`.
+- **Raw CRM titles** (SHOULD when isolated): shouting caps, Title Case,
+  "m2", " - ", a marketing prefix in the title. The kit's `cleanTitle`
+  fixes them.
+
+## Distinctiveness
+
+Score 0–10, half points allowed. Answer two questions with what you saw:
+
+1. **Would this pass for another agency's site, or for the example it
+   started from?** Cover the logo and the name on the first screen. If the
+   anchor's layout, sections and type survive with only the colours swapped,
+   or a neighbouring agency could use the page as it is, it is under 6.
+2. **Does the signature feel owned?** The one or two things the page does
+   that no other site does (a typographic voice from the logo, their region
+   drawn from real data, their own photos, their claims set large): do they
+   come from this agency and look intended at every width, or are they a
+   motif applied on top? A signature that reads as a glitch (a line over a
+   photo, a crude map) counts against the score.
+
+7.5 means: not the example, not any agency, and the signature holds at
+every width. 9 means a designer would remember it.
 
 ## What a fix looks like
 
@@ -75,6 +132,9 @@ Each fix keeps the page inside the kit's rules: at most two font families
 - Judge in the abstract ("this is not modern"): every verdict names what
   you saw and the anchor's counterpart.
 - Praise. A line at 2 gets one sentence of evidence, nothing more.
+- Accept a fact without a source: a headcount, years, offices, reviews or
+  ratings that neither the data nor BRIEF.md states are a MUST to remove,
+  never something to keep or reword.
 
 ## Your answer
 
@@ -103,15 +163,26 @@ Plain Markdown, exactly these sections:
 
 Total: <sum>/26
 
+## Overall: <0–10>/10
+<one sentence against a top studio>
+
+## Distinctiveness: <0–10>/10
+<the two questions of "Distinctiveness", answered with what you saw>
+
 ## Fixes (biggest first)
-1. <line #>: <element>: <current> -> <new>
+1. MUST <line #>: <element>: <current> -> <new>
+2. SHOULD <line #>: ...
 ...
 
 ## Verdict
 <Ship | Not yet>: <one sentence>
 ```
 
-Ship means every line is at 2, or at 1 with a reason DESIGN-NOTES.md
-already gives. The builder applies the fixes and asks you again at most
-once more (two rounds in all); in round 2, check each earlier fix first
-and say whether it landed.
+**The stop rule.** Ship means overall at 8.5 or more, distinctiveness at
+7.5 or more, and no MUST fix open; lines at 1 need a reason DESIGN-NOTES.md
+already gives. Anything less is "Not yet", and the builder runs another
+round. `sites-kit critic calibrate` reads these scores (`stopProblems` in
+`tools/critic-calibrate.mjs` is the rule as code). At most two rounds; in
+round 2, check each earlier fix first and say whether it landed. When round
+2 still fails the rule, the builder names what is open in its final
+message.

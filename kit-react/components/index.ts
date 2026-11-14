@@ -6,6 +6,8 @@ export { ConsentBanner } from './ConsentBanner';
 export { ListingsSearch, type ListingsSearchProps } from './ListingsSearch';
 export { ListingsMap } from './ListingsMap';
 export { ListingsPager } from './ListingsPager';
+export { PhotoViewer, type PhotoViewerProps } from './PhotoViewer';
+export { ListingArea, type ListingAreaProps } from './ListingArea';
 export { Island } from './Island';
 export { LanguageSwitch } from './LanguageSwitch';
 export { Input } from './form/Input';

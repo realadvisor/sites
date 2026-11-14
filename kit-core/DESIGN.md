@@ -114,6 +114,22 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
 - No CSS `background-image` for content photos. Photos under 1200px wide
   never go full-bleed.
 - No photo: a neutral tile with the property type, never a broken image.
+- Which photo: `pickPhoto` / `lotPhotos` (`@realadvisor/sites-kit-core/photos`,
+  AGENTS.md section 2), never `photos[0]` by default: the first photo is often
+  a floor plan or a "Reserved" banner, and lots of one development share their
+  renders. The same image never shows twice side by side (`pnpm screenshot`
+  prints `repeated image`).
+- **Weight.** Every photo has a responsive `srcset` (RaImage does it) sized
+  so the file is never more than about 2× the drawn width (a 400px card
+  takes 800w at most); below the fold `loading="lazy"`; the hero, and only
+  the hero, `priority` (eager, `fetchpriority="high"`). Site images in
+  `public/` get the same treatment: several widths in webp, never the
+  original camera file. Heavy pages are slow pages on a phone.
+- **Stock photos** (a landscape, the region): at most one break per page,
+  always captioned with the place (in the page's language), never presented
+  as a property or the agency's office, and listed on `/credits` with author,
+  source and licence. The agency's own photos (listings, team, office) come
+  first; the most-used views of a region are the least distinctive images.
 
 ## 6. Overlays and navigation
 
@@ -217,6 +233,19 @@ against it); `pnpm screenshot` measures the ones marked (measured).
     counts in lists, so columns of numbers line up.
 - **States.** Empty, loading and error states are designed like the rest
   (AGENTS.md section 3): a sentence and a way on, never a blank box.
+- **Cards.** Cards side by side keep their rows aligned, whatever the data:
+  - fixed line counts for the eyebrow (1 line) and the title (2 lines:
+    `-webkit-line-clamp: 2` plus `min-height: 2lh`), so a short title does
+    not lift its price; the title comes from `cleanTitle`, so it is cut at a
+    word or a separator, never ending on a small word ("de", "the") or a
+    number;
+  - the card is a grid with `grid-template-rows: subgrid` over the list's
+    rows, or a flex column with the price pinned to the bottom
+    (`margin-top: auto`);
+  - an italic number or price gets `padding-inline-end: 0.15em`: its last
+    glyph overhangs its box and a clipping card cuts it.
+  `pnpm screenshot` prints `cards in one row not aligned` and `clipped text`
+  at every width (1440, 1024, 390, 1800).
 
 ## 11. Never
 
@@ -225,3 +254,19 @@ against it); `pnpm screenshot` measures the ones marked (measured).
 - English UI strings on a non-English site, or placeholder labels.
 - Raw `<img>` for a photo, anything hotlinked, a Google Fonts link.
 - Auto-rotating hero carousels.
+
+## 12. Signature: motifs and maps
+
+- **Motifs and decorative lines** (a ridge, a hatching, a contour) are
+  drawn only on flat grounds: dividers, bands, the footer edge, an opaque
+  panel. Never over a photo: an `object-fit: cover` photo moves under the
+  line at every width, so it reads as a glitch. Mark them `aria-hidden` (or
+  `data-motif` for a CSS one); `pnpm screenshot` prints `decorative line or
+  motif over a photo`.
+- **Drawn maps** (the region, the localities) come from real open geodata:
+  Natural Earth (public domain) or swisstopo (open data, credit required),
+  converted once at build time into a small JSON or SVG in the site and
+  simplified, never hand-traced shapes. Credit the source on `/credits`.
+  Labels in the page's language, never crossed by an outline
+  (`paint-order: stroke`); dots are links with an accessible name. For a
+  listings map use `ListingsMap` (AGENTS.md section 7).
