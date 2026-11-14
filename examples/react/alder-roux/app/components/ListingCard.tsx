@@ -36,7 +36,7 @@ export function ListingCard({ listing: x, l, priority = false, sizes = '(min-wid
           {badge && <span className="card__badge">{badge}</span>}
         </div>
         <div className="card__body">
-          <p className="card__eyebrow">{typeLabel(x.property_type, l)}{place && <> · {place}</>}</p>
+          <p className="card__eyebrow" title={[typeLabel(x.property_type, l), place].filter(Boolean).join(' · ')}>{typeLabel(x.property_type, l)}{place && <> · {place}</>}</p>
           <H className="card__title">{x.title}</H>
           {facts.length > 0 && <p className="card__facts num">{facts.map((f, i) => <span key={i}>{f}</span>)}</p>}
           {x.status !== 'sold' && <p className="card__price num">{price(x, l)}</p>}

@@ -51,6 +51,12 @@ const vTitle = (v: (typeof variants)[number]) => (v.kind === 'atico' ? `${t.kind
   .head { padding-block: clamp(48px, 6vw, 88px) clamp(28px, 3vw, 44px); display: grid; gap: 14px; }
   .docs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); }
   .docs a { display: grid; gap: 10px; height: 100%; align-content: start; padding: clamp(24px, 2.6vw, 36px); background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); text-decoration: none; color: var(--text); }
+  .docs li { display: grid; }
+  /* Title, description, facts and download line on shared rows, so they line up across the cards. */
+  @supports (grid-template-rows: subgrid) {
+    .docs li { grid-row: span 4; grid-template-rows: subgrid; gap: 10px; }
+    .docs a { grid-row: span 4; grid-template-rows: subgrid; height: auto; }
+  }
   .docs a:hover { border-color: var(--line-strong); border-top-color: var(--accent); background: #fff; }
   .t { font: 400 clamp(1.5rem, 1.2rem + 0.8vw, 2rem)/1.15 var(--serif); }
   .d { color: var(--muted); }

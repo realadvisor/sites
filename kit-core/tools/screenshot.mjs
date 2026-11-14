@@ -290,7 +290,12 @@ function layoutChecks() {
       return parseFloat(cs.borderTopWidth) >= 1 && cs.borderTopStyle !== 'none' && cs.borderTopStyle !== 'hidden' && !/rgba\([^)]*,\s*0\)|transparent/.test(cs.borderTopColor) && e.getBoundingClientRect().width >= card.getBoundingClientRect().width * 0.5;
     });
     if (div) out.divider = div.getBoundingClientRect().top;
-    const price = all.find((e) => /(^|[-_\s])price/i.test(typeof e.className === 'string' ? e.className : '') && e.textContent.trim()) || all.find((e) => CURRENCY.test(own(e)));
+    // The card's price: an element named price, else its one currency text. A card with
+    // several currency texts and no named price (a stacking plan, a unit table) has no
+    // single price to compare.
+    const named = all.find((e) => /(^|[-_\s])price/i.test(typeof e.className === 'string' ? e.className : '') && e.textContent.trim());
+    const money = named ? [] : all.filter((e) => CURRENCY.test(own(e)));
+    const price = named || (money.length === 1 ? money[0] : null);
     if (price) out.price = price.getBoundingClientRect().top;
     // The last line drawn, with the element that draws it. Compared only when it is a
     // one-line element of the same kind in every card: a sold listing without a price, or
@@ -609,7 +614,8 @@ async function shootPage({ path, vp, i }) {
         return null;
       }).filter(Boolean),
       title: document.title,
-      links: [...document.querySelectorAll('a[href]')].map((a) => a.href),
+      // An SVG <a> has an SVGAnimatedString href: resolve the attribute instead.
+      links: [...document.querySelectorAll('a[href], a[*|href]')].map((a) => new URL(a.getAttribute('href') ?? a.getAttribute('xlink:href') ?? '', location.href).href),
       // Header logo: drawn size and ratio vs the file's real pixels.
       logo: (() => {
         const i = document.querySelector('img[data-logo]') || document.querySelector('header img, [role="banner"] img');

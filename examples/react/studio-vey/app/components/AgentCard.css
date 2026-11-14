@@ -4,14 +4,16 @@
   .agent-photo img, .agent-photo a { display: block; width: 100%; height: 100%; object-fit: cover; }
   .agent--row.agent--photo { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 20px; align-items: start; }
   .agent--row .agent-photo { margin-bottom: 0; }
-  .agent { display: grid; align-content: start; }
+  .agent { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; }
   .agent-name { font-size: 1.5rem; line-height: 1.15; }
   .agent-name a { text-decoration: none; }
   .agent-name a:hover { text-decoration: underline; }
   .agent-title { margin-top: 6px; }
   .agent-langs { margin-top: 4px; font-size: 0.9375rem; }
-  .agent-contact { list-style: none; margin-top: 12px; display: grid; font-size: 0.9375rem; }
+  .agent-contact { list-style: none; margin-top: 12px; display: grid; grid-template-columns: minmax(0, 1fr); font-size: 0.9375rem; }
   .agent-contact li + li { font-size: 0.875rem; } /* e-mail: long addresses stay on one line in a four-up grid */
   .agent-contact a { display: inline-flex; align-items: center; min-height: 32px; text-decoration: none; border-bottom: 1px solid var(--line-strong); width: fit-content; }
   .agent-contact a:hover { border-color: currentColor; }
+  /* E-mail: one line; a long address ends in an ellipsis (full address in its title). */
+  .agent-contact li + li a { display: block; max-width: 100%; line-height: 32px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .agent-more { margin-top: 8px; }

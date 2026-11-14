@@ -34,6 +34,18 @@ oldest first, and apply each Upgrade step in order.
   skipped) and `cards in one row not aligned` (heading, divider, price or last
   line more than 4px apart across cards side by side).
 
+- kit-react: the dev server now serves the kit's CSS. `import '…/styles/kit.css'`
+  in root.tsx reached no dev page (React Router collects a page's CSS without
+  loading modules, and the virtual module's imports were never found), so forms,
+  search, pager, map and consent were unstyled in every dev preview. The Vite
+  plugin now rewrites that import into the kit's CSS parts, in order.
+- `sites-kit screenshot`: a page with an SVG link no longer crashes the crawl,
+  and the card-row check compares a price only when a card has one (a named
+  price, or a single currency text), not in unit tables or stacking plans.
+- Examples: listing, agent, document and type cards in every example keep their
+  rows aligned (fixed line counts for eyebrow and title, subgrid where the
+  markup allows), and the stacking plans keep their unit labels whole on phones.
+
 ## 0.5.1
 
 - kit-react: the dev server can always be framed by the CRM preview, whatever

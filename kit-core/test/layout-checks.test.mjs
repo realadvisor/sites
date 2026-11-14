@@ -1,5 +1,5 @@
 // The layout checks of `sites-kit screenshot` (clipped text, card rows out of line), each
-// on a static page in test/layout/: two that break a rule and two controls that must stay
+// on a static page in test/layout/: two that break a rule and three controls that must stay
 // quiet. Needs Playwright (an optional peer): skipped where it is not installed.
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
@@ -28,7 +28,7 @@ test('layout checks flag clipped text and misaligned card rows, and stay quiet o
   const out = await mkdtemp(join(tmpdir(), 'layout-'));
   try {
     const url = `http://127.0.0.1:${server.address().port}`;
-    const pages = ['/clipped.html', '/cards-misaligned.html', '/cards-clean.html', '/clipped-on-purpose.html'];
+    const pages = ['/clipped.html', '/cards-misaligned.html', '/cards-clean.html', '/clipped-on-purpose.html', '/units-plan.html'];
     const run = await new Promise((done) => execFile(process.execPath, [tool, '--url', url, '--out', out, '--jobs', '4', ...pages], { timeout: 120000 }, (e, stdout) => done({ code: e?.code ?? 0, stdout })));
     const report = JSON.parse(await readFile(join(out, 'report.json'), 'utf8'));
     const layout = (path) => report.find((r) => r.path === path).problems.filter((p) => /clipped text|cards in one row/.test(p));
@@ -46,6 +46,7 @@ test('layout checks flag clipped text and misaligned card rows, and stay quiet o
 
     assert.deepEqual(layout('/cards-clean.html'), []);
     assert.deepEqual(layout('/clipped-on-purpose.html'), []);
+    assert.deepEqual(layout('/units-plan.html'), []);
     assert.equal(run.code, 1, 'layout problems fail the command');
   } finally {
     server.close();

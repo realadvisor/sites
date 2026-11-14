@@ -36,7 +36,7 @@ const place = cityName(x.address.city, l);
       {badge && <span class="card__badge">{badge}</span>}
     </div>
     <div class="card__body">
-      <p class="card__eyebrow">{typeLabel(x.property_type, l)}{place && <> · {place}</>}</p>
+      <p class="card__eyebrow" title={[typeLabel(x.property_type, l), place].filter(Boolean).join(' · ')}>{typeLabel(x.property_type, l)}{place && <> · {place}</>}</p>
       <H class="card__title">{x.title}</H>
       {facts.length > 0 && <p class="card__facts num">{facts.map((f) => <span>{f}</span>)}</p>}
       {x.status !== 'sold' && <p class="card__price num">{price(x, l)}</p>}
@@ -56,13 +56,15 @@ const place = cityName(x.address.city, l);
     font: 600 0.6875rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase;
   }
   .card--sold .card__badge { background: #fff; color: var(--navy); }
-  .card__body { display: grid; gap: 8px; padding-top: 18px; }
-  .card__eyebrow { font-size: 0.875rem; line-height: 1.3; color: var(--muted); }
-  .card__title { font-size: 1.375rem; line-height: 1.2; font-weight: 450; }
+  /* Cards side by side line up part by part: the eyebrow holds one line, the title two
+     (clamped, min-height two lines) and the price sits at the foot of the card. */
+  .card__body { display: flex; flex-direction: column; flex: 1; gap: 8px; padding-top: 18px; }
+  .card__eyebrow { font-size: 0.875rem; line-height: 1.3; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card__title { font-size: 1.375rem; line-height: 1.2; font-weight: 450; min-height: 2.4em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
   .card__link:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
   .card__facts { display: flex; flex-wrap: wrap; gap: 4px 0; color: var(--muted); font-size: 0.9375rem; }
   .card__facts span + span::before { content: ''; display: inline-block; width: 1px; height: 0.85em; background: var(--line-strong); margin: 0 12px; vertical-align: -1px; }
-  .card__price { font-weight: 600; font-size: 1.0625rem; color: var(--navy); white-space: nowrap; margin-top: 2px; }
+  .card__price { font-weight: 600; font-size: 1.0625rem; color: var(--navy); white-space: nowrap; margin-top: auto; padding-top: 2px; }
   .card--sold .card__price { color: var(--muted); font-weight: 500; }
   .card--large .card__title { font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem); }
 </style>

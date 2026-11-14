@@ -31,7 +31,8 @@
   .stack .sp-fl-long { display: none; }
   .stack .sp-fl-short { display: inline; }
   .stack .sp-fl { letter-spacing: 0.04em; }
-  .stack .sp-u { min-height: 60px; padding: 7px 6px; }
+  .stack .sp-row li { min-width: 2.25rem; }
+  .stack .sp-u, .stack.stack--compact .sp-u { min-height: 60px; padding: 7px 6px; }
   .stack .sp-ty { font-size: 1.05rem; }
   .stack .sp-m2, .stack .sp-n { display: none; }
   .stack .sp-pr { display: none; }

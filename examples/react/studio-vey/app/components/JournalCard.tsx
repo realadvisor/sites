@@ -13,7 +13,7 @@ export function JournalCard({ post: d, as: H = 'h3', large = false, priority = f
         <div className="jc-media">
           <RaImage src={d.cover} alt={d.coverAlt} priority={priority} width={large ? 1200 : 800} height={large ? 800 : 560} sizes={large ? '(min-width: 1024px) 58vw, 100vw' : '(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw'} />
         </div>
-        <p className="caps muted">{d.topic} · <time dateTime={d.date}>{formatDate(d.date)}</time></p>
+        <p className="jc-kicker caps muted" title={`${d.topic} · ${formatDate(d.date)}`}>{d.topic} · <time dateTime={d.date}>{formatDate(d.date)}</time></p>
         <H className="jc-title">{d.title}</H>
         {large && <p className="jc-excerpt">{d.excerpt}</p>}
       </a>

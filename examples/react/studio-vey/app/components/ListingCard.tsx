@@ -26,8 +26,8 @@ export function ListingCard({ listing: l, priority = false, sizes = '(min-width:
           )}
           {sold && <span className="card-tab caps">Verkauft</span>}
         </div>
-        <p className="card-kind caps">{kind(l)}</p>
-        <H className="card-title">{l.title}</H>
+        <p className="card-kind caps" title={kind(l)}>{kind(l)}</p>
+        <H className="card-title" title={l.title}>{l.title}</H>
         <p className="card-meta">
           {!sold && <span className="card-price num">{price(l)}</span>}
           {f && <span className="card-facts num">{f}</span>}

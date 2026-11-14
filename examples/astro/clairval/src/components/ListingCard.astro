@@ -33,8 +33,8 @@ const place = [cityName(x.address.city, l), x.address.country === 'France' ? 'Fr
       {badge && <span class="card__badge">{badge}</span>}
     </div>
     <div class="card__body">
-      {place && <p class="card__place">{place}</p>}
-      <H class="card__title">{x.title}</H>
+      {place && <p class="card__place" title={place}>{place}</p>}
+      <H class="card__title" title={x.title}>{x.title}</H>
       {facts.length > 0 && <p class="card__facts">{facts.map((f) => <span class="num">{f}</span>)}</p>}
       {x.status !== 'sold' && <p class="card__price num">{price(x, l)}</p>}
     </div>
@@ -42,7 +42,7 @@ const place = [cityName(x.address.city, l), x.address.country === 'France' ? 'Fr
 </article>
 
 <style>
-  .card { height: 100%; }
+  .card { height: 100%; container-type: inline-size; }
   .card__link { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
   .card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--line); border-radius: var(--radius-card); }
   .card__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
@@ -51,10 +51,13 @@ const place = [cityName(x.address.city, l), x.address.country === 'France' ? 'Fr
   .card__badge { position: absolute; left: 14px; top: 14px; padding: 7px 12px; border-radius: 999px; background: var(--ivory); color: var(--ink); font: 600 0.75rem/1 var(--font-sans); letter-spacing: 0.04em; }
   .card--sold .card__badge { background: var(--ink); color: var(--on-ink); }
   .card__body { display: grid; gap: 6px; padding-top: 16px; }
-  .card__place { font-size: 0.875rem; color: var(--muted); }
-  .card__title { font-size: 1.3125rem; line-height: 1.25; }
+  .card__place { font-size: 0.875rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Two lines, always: the facts and price line up across a row. */
+  .card__title { font-size: 1.3125rem; line-height: 1.25; min-height: 2.5em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
   .card__link:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
   .card__facts { display: flex; flex-wrap: wrap; gap: 2px 0; color: var(--muted); font-size: 0.9375rem; }
   .card__facts span + span::before { content: '·'; margin: 0 8px; color: var(--line-strong); }
+  /* Narrow cards (the map's list): the facts wrap in some cards, so every card keeps room for two lines. */
+  @container (max-width: 280px) { .card__facts { min-height: calc(2lh + 2px); align-content: flex-start; } }
   .card__price { margin-top: 4px; font-weight: 600; font-size: 1.0625rem; }
 </style>

@@ -37,9 +37,9 @@ export function TypeStrip({ types }: { types: UnitType[] }) {
               )}
               <span className="foot">
                 <span className="meta num">{t.surfaces}</span>
-                <span className="price">{t.available.length > 0 ? (
+                <span className="price"><span>{t.available.length > 0 ? (
                   <>{t.priceFrom && <><span className="num">Dès {t.priceFrom}</span> · </>}<span className="num">{t.available.length} {t.available.length > 1 ? 'disponibles' : 'disponible'}</span></>
-                ) : t.units.some((u) => u.status === 'reserved') ? 'Réservé' : 'Vendu'}</span>
+                ) : t.units.some((u) => u.status === 'reserved') ? 'Réservé' : 'Vendu'}</span></span>
                 <span className="go" aria-hidden="true"><Arrow /></span>
               </span>
             </a>

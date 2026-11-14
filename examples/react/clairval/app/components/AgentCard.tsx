@@ -44,7 +44,7 @@ export function AgentCard({ agent: a, all, teams, l, compact = false, as: H = 'h
         {langs && <p className="agent__langs"><span className="sr-only">{t('speaks')}: </span>{langs}</p>}
         <ul className="agent__contact plain">
           {a.phone && <li><a className="num" href={tel(a.phone)}>{a.phone}</a></li>}
-          {a.email && <li><a href={`mailto:${a.email}`}>{a.email}</a></li>}
+          {a.email && <li><a className="agent__email" href={`mailto:${a.email}`} title={a.email}>{a.email}</a></li>}
         </ul>
       </div>
     </article>

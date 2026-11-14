@@ -3,11 +3,15 @@
   .team-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); }
   .team-grid > li { padding: 40px var(--gap) 40px 0; border-bottom: 1px solid var(--line); }
   .team-grid > li + li { padding-left: var(--gap); border-left: 1px solid var(--line); }
+  /* The card with no left padding would get a wider, taller photo than its row: same size for all. */
+  .team-grid > li:first-child .agent-photo { max-width: min(248px, calc(100% - var(--gap))); }
   @media (max-width: 1023px) {
     .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .team-grid > li:nth-child(odd) { padding-left: 0; border-left: 0; }
+    .team-grid > li:nth-child(odd) .agent-photo { max-width: min(248px, calc(100% - var(--gap))); }
   }
   @media (max-width: 559px) {
     .team-grid { grid-template-columns: minmax(0, 1fr); }
     .team-grid > li, .team-grid > li + li { padding: 32px 0; border-left: 0; }
+    .team-grid > li:nth-child(n) .agent-photo { max-width: 320px; }
   }

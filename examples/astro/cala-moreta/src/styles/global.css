@@ -133,6 +133,14 @@ html:root {
 .grid3 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(36px, 4vw, 56px) clamp(20px, 2.6vw, 40px); }
 @media (max-width: 1000px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .grid3 { grid-template-columns: 1fr; } }
+/* Listing cards in a row share their rows (photo, place, title, spec), so the
+   spec tables start on one line. The row gap moves to the cards so the subgrid
+   rows inside a card stay tight. Fixed line counts on place and title are the fallback. */
+@supports (grid-template-rows: subgrid) {
+  .grid3:has(> li > .card) { --g3-row: clamp(36px, 4vw, 56px); row-gap: 0; margin-bottom: calc(-1 * var(--g3-row)); }
+  .grid3 > li:has(> .card) { display: grid; grid-row: span 4; grid-template-rows: subgrid; padding-bottom: var(--g3-row); }
+  .grid3 > li > .card { grid-row: span 4; grid-template-rows: subgrid; }
+}
 
 /* Page head on text pages */
 .phead { padding-block: clamp(56px, 7vw, 112px) clamp(32px, 4vw, 56px); display: grid; gap: 20px; }

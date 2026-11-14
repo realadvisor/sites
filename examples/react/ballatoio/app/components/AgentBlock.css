@@ -9,4 +9,7 @@
   .agent-name a:hover { text-decoration: underline; }
   .agent-contacts { display: grid; margin-top: 8px; }
   .agent-contacts a { display: inline-flex; align-items: center; min-height: 36px; overflow-wrap: anywhere; }
+  /* The e-mail keeps one line (cut with an ellipsis, in full in its title): agents side by
+     side keep their contacts at one height. */
+  .agent-contacts .agent-mail { display: block; line-height: 36px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .agent-note { margin-top: 4px; }
