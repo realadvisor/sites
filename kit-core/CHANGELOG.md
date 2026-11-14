@@ -19,6 +19,20 @@ oldest first, and apply each Upgrade step in order.
   `kit-astro/AGENTS.md`, all of which the starters' `CLAUDE.md` imports. A
   kit-core test now fails when a starter imports, or a kit tool reads, a file
   its package does not ship.
+- ListingsSearch (both kits): the result cards no longer set
+  `content-visibility: auto`. It implies paint containment, which clipped any
+  ink outside a card (an italic price's last glyph, focus rings, shadows) and
+  stopped cards from using `grid-template-rows: subgrid`. A page shows at most
+  24 cards, so little layout was saved. `--rs-card-h` is no longer used.
+- `sites-kit screenshot` also shoots 1024x768 and 1800x1100 (`@1024`,
+  `@1800`; 1440 and 390 unchanged) and, on a page with the listing search, its
+  map view at 1440 and 1800 (`@1440-map`, `@1800-map`). Two new checks run at
+  every width and on the map view, and fail the command like the others:
+  `clipped text` (text whose ink, italic overhang included, is cut by an
+  ancestor that clips: overflow, `contain: paint`, `content-visibility: auto`,
+  clip-path; line-clamp, ellipsis, visually hidden text and scrollers are
+  skipped) and `cards in one row not aligned` (heading, divider, price or last
+  line more than 4px apart across cards side by side).
 
 ## 0.5.1
 

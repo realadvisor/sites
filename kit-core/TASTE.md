@@ -93,6 +93,13 @@ characters, straight `"` quotes in text (DESIGN.md section 10). A
 measured problem is fixed, or kept on purpose (a bold-colour direction may
 keep a vivid band) and named in DESIGN-NOTES.md.
 
+Two layout checks run at every width (1440, 390, 1024, 1800) and on the
+listing search's map view, and print as plain problems, not `taste:`:
+`clipped text` (ink cut by a box that clips, such as an italic price's last
+glyph under `overflow: hidden` or `content-visibility: auto`) and `cards in
+one row not aligned` (the heading, divider, price or last line of cards side
+by side more than 4px apart).
+
 Near-duplicate type sizes are not measured either: fluid `clamp()` sizes
 make 19px and 20px common in good examples, so the critic judges the scale
 from summary.json `typeScale`. Type against the logo is not measured: a logo is usually drawn paths, so

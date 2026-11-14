@@ -39,9 +39,13 @@ and 2 before you look at any image.
    `images` (`density` = file pixels per CSS pixel; under the width's `dpr`,
    capped at 1.5, the photo is upscaled), `sections` (padding and grounds
    in order, for the rhythm line).
-7. Score the thirteen rubric lines of TASTE.md section 2, 0, 1 or 2, each
+7. Zoom into numbers, prices and italic text at every width you have (1440
+   and 390, plus `screenshots/*@1024.png` and `*@1800.png` when they exist):
+   a last glyph cut off, a focus ring or shadow sliced by its card. Then compare each row of cards line by line: eyebrow, title,
+   divider, facts and price at the same height across the row.
+8. Score the thirteen rubric lines of TASTE.md section 2, 0, 1 or 2, each
    with one sentence: what you saw, against the anchor.
-8. Give at most five fixes, the biggest first, for the lines under 2.
+9. Give at most five fixes, the biggest first, for the lines under 2.
 
 ## What a fix looks like
 

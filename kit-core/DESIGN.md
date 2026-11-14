@@ -134,7 +134,7 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
   (`--accent`, `--text`, `--paper`, `--surface`, `--line`, `--muted`,
   `--control-radius`, `--header-h`, `--map-h`, `--rs-columns`, `--rs-gap`,
   `--rs-active`, `--rs-on-active`, `--rs-pill-radius`, `--rs-sheet-radius`,
-  `--rs-heading-weight`, `--rs-card-h`) and your card in its slot.
+  `--rs-heading-weight`) and your card in its slot.
   `:global(.rs-…)` overrides are for spacing details, never to hide a
   part.
 - Forms: labels above the fields (never placeholder-only), required fields

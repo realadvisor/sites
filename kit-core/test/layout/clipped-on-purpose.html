@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Clipped on purpose</title>
+<style>body{margin:0;font:16px/1.5 Arial,sans-serif;color:#141517;background:#faf8f4}main{padding:40px}
+.title{width:240px;margin:0 0 24px;font:italic 22px/1.3 Georgia,serif;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.one{width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.fold{height:120px;overflow:hidden}.wordmark{margin:0;font:700 200px/1 Arial,sans-serif;color:#ddd}
+.scroller{display:flex;gap:16px;width:400px;overflow-x:auto}.scroller p{flex:0 0 220px;margin:0}</style>
+<!-- Clipping that is meant: a title clamped to two lines, a one-line ellipsis, visually
+     hidden text, a decorative wordmark cut by its band, a horizontal scroller. -->
+<main>
+<h1>Clipped on purpose</h1>
+<h2 class="title">A very long listing title that runs over three lines and is clamped to two of them on purpose</h2>
+<p class="one">A long line that ends in an ellipsis because it does not fit</p>
+<span class="sr-only">Only for screen readers, cut to one pixel</span>
+<div class="fold" aria-hidden="true"><p class="wordmark">Agency</p></div>
+<div class="scroller"><p>First slide text here</p><p>Second slide text here</p><p>Third slide text here</p></div>
+</main>

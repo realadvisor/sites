@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
  * Look at your own work. Crawls the site from "/", screenshots every route at
- * 1440px (desktop) and 390px (mobile), full page, and reports problems.
+ * 1440px (desktop), 390px (mobile), 1024px (small laptop) and 1800px (large
+ * screen), full page, and reports problems. A page with the listing search is
+ * also opened in its map view at 1440 and 1800.
  *
  *   pnpm screenshot                       # starts `pnpm dev` if nothing runs on :4321
  *   pnpm screenshot -- --url http://localhost:4321 --max 40
@@ -9,9 +11,10 @@
  *   pnpm screenshot -- --jobs 1           # one page at a time (default 4)
  *   pnpm screenshot -- --inject fault.css # add a CSS file to every page (critic calibration)
  *
- * Output: screenshots/<route>@1440.png, screenshots/<route>@390.png and
- * screenshots/report.json. Exit code 1 if any page has console errors, failed
- * requests, broken images, HTTP >= 400 or horizontal overflow on mobile.
+ * Output: screenshots/<route>@1440.png, @390, @1024, @1800 (and @1440-map,
+ * @1800-map) and screenshots/report.json. Exit code 1 if any page has console
+ * errors, failed requests, broken images, HTTP >= 400, horizontal overflow on
+ * mobile, clipped text or cards in one row out of line.
  * Then OPEN AND LOOK AT EVERY PNG. The report does not judge design.
  */
 import { chromium } from 'playwright';
@@ -40,10 +43,16 @@ const OUT = opt('out', 'screenshots');
 const INJECT = opt('inject', '');
 const injectCss = INJECT ? readFileSync(INJECT, 'utf8') : '';
 const explicit = args.filter((a) => a.startsWith('/'));
+// 1440 and 390 run every check; 1024 and 1800 (`extra`) run the layout checks
+// (clipped text, card rows) and page errors only.
 const WIDTHS = [
   { name: '1440', width: 1440, height: 900 },
   { name: '390', width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
+  { name: '1024', width: 1024, height: 768, extra: true },
+  { name: '1800', width: 1800, height: 1100, extra: true },
 ];
+// Widths at which the listing search is also opened in its map view.
+const MAP_WIDTHS = new Set(['1440', '1800']);
 const PER_PATTERN = 2; // e.g. only 2 /listings/<slug> pages
 
 async function up() {
@@ -151,6 +160,194 @@ async function heroContrast(page) {
   return results;
 }
 
+/**
+ * Layout checks, run in the page at every width (and on the search's map view):
+ *
+ * - clipped: text whose ink is cut by an ancestor that clips (overflow other than
+ *   visible, contain: paint/content/strict, content-visibility: auto, clip-path). Italic
+ *   and oblique text is widened on its trailing side by 0.12em: the glyphs overhang their
+ *   advance box. Clipping that is meant is skipped: line-clamp (vertical) and ellipsis
+ *   (horizontal), visually hidden text, scrollers, oversized aria-hidden decoration, and
+ *   boxes whose content is far larger than the box (a carousel track, a "read more" crop).
+ * - rows: repeated cards side by side (3+ siblings with one tag and class in a grid or
+ *   flex container, or the kit's .rs-list > li), grouped by visual row. In each row the
+ *   same part (first heading, first divider, price, last line) must sit at the same y.
+ *
+ * Self-contained: Playwright sends its source to the page.
+ */
+function layoutChecks() {
+  const cls = (el) => (typeof el.className === 'string' && el.className.trim() ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : '');
+  const desc = (el) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${cls(el)}`;
+  const short = (s, n = 40) => { s = s.replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
+  const hidden = (el) => el.closest('script, style, noscript, template, svg, [hidden], .sr-only, .visually-hidden, .visuallyhidden');
+
+  // --- Clipped text ---
+  const clipOf = (cs) => {
+    const ov = (v) => v !== 'visible';
+    const scroller = /auto|scroll/.test(cs.overflowX + cs.overflowY);
+    if (ov(cs.overflowX) || ov(cs.overflowY)) return { why: `overflow: ${cs.overflowX === cs.overflowY ? cs.overflowX : `${cs.overflowX} ${cs.overflowY}`}`, x: ov(cs.overflowX), y: ov(cs.overflowY), scroller };
+    if (cs.contentVisibility === 'auto') return { why: 'content-visibility: auto', x: true, y: true, contain: true };
+    if (/paint|content|strict/.test(cs.contain)) return { why: `contain: ${cs.contain}`, x: true, y: true, contain: true };
+    if (cs.clipPath && cs.clipPath !== 'none') return { why: 'clip-path', x: true, y: true, border: true };
+    return null;
+  };
+  const found = new Map();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let t = walker.nextNode(); t; t = walker.nextNode()) {
+    const text = t.textContent;
+    const start = text.search(/\S/);
+    if (start < 0) continue;
+    const el = t.parentElement;
+    if (!el || hidden(el)) continue;
+    const cs = getComputedStyle(el);
+    if (cs.visibility === 'hidden' || Number(cs.opacity) === 0) continue;
+    const range = document.createRange();
+    range.setStart(t, start);
+    range.setEnd(t, text.replace(/\s+$/, '').length);
+    const fs = parseFloat(cs.fontSize) || 16;
+    const italic = cs.fontStyle !== 'normal';
+    const rtl = cs.direction === 'rtl';
+    // Ink box per line: the em box vertically (a line's rect is the font's content area,
+    // taller than the ink with line-height: 1), the advance horizontally plus the overhang.
+    const lines = [...range.getClientRects()].filter((r) => r.width > 0.5 && r.height > 0.5).map((r) => {
+      const mid = r.top + r.height / 2, half = Math.min(r.height, fs) / 2;
+      return { left: r.left - (italic && rtl ? 0.12 * fs : 0), right: r.right + (italic && !rtl ? 0.12 * fs : 0), top: mid - half, bottom: mid + half };
+    });
+    if (!lines.length) continue;
+    // The nearest ancestor that clips this text. Out-of-flow boxes escape the overflow of
+    // ancestors that are not their containing block.
+    let abs = false, clipper = null, how = null, clampY = false, ellipsisX = false;
+    for (let a = el; a && a !== document.body && a !== document.documentElement; a = a.parentElement) {
+      const acs = getComputedStyle(a);
+      if (acs.webkitLineClamp && acs.webkitLineClamp !== 'none') clampY = true;
+      if (acs.textOverflow === 'ellipsis') ellipsisX = true;
+      const positioned = acs.position !== 'static' || acs.transform !== 'none';
+      const c = clipOf(acs);
+      if (c && (!abs || positioned || c.contain)) { clipper = a; how = c; break; }
+      if (acs.position === 'fixed') break;
+      if (acs.position === 'absolute') abs = true;
+      else if (positioned) abs = false;
+    }
+    if (!clipper || how.scroller) continue;
+    const r = clipper.getBoundingClientRect();
+    if (r.width <= 2 || r.height <= 2) continue; // visually hidden
+    const box = how.border ? r : { left: r.left + clipper.clientLeft, top: r.top + clipper.clientTop, right: r.left + clipper.clientLeft + clipper.clientWidth, bottom: r.top + clipper.clientTop + clipper.clientHeight };
+    const ink = { left: Math.min(...lines.map((l) => l.left)), right: Math.max(...lines.map((l) => l.right)), top: Math.min(...lines.map((l) => l.top)), bottom: Math.max(...lines.map((l) => l.bottom)) };
+    // Text wholly outside the box is hidden on purpose (a closed panel, an off-screen slide).
+    if (ink.right <= box.left || ink.left >= box.right || ink.bottom <= box.top || ink.top >= box.bottom) continue;
+    // Deliberately oversized decoration (a wordmark cut by the fold).
+    if (el.closest('[aria-hidden="true"]') && (fs >= 48 || ink.right - ink.left > box.right - box.left || ink.bottom - ink.top > box.bottom - box.top)) continue;
+    // Content far larger than the box: a track or a crop, clipped on purpose.
+    const lh = parseFloat(cs.lineHeight) || fs * 1.3;
+    const cropX = clipper.scrollWidth - clipper.clientWidth > Math.max(2 * fs, clipper.clientWidth * 0.25);
+    const cropY = clipper.scrollHeight - clipper.clientHeight > 2 * lh;
+    const cut = { right: ink.right - box.right, left: box.left - ink.left, bottom: ink.bottom - box.bottom, top: box.top - ink.top };
+    const side = Object.entries(cut).filter(([s, v]) => {
+      if (v <= 0.5) return false;
+      const x = s === 'left' || s === 'right';
+      if (x ? !how.x || ellipsisX || cropX : !how.y || clampY || cropY) return false;
+      return true;
+    }).sort((a, b) => b[1] - a[1])[0];
+    if (!side) continue;
+    const [where, px] = side;
+    const trailing = where === (rtl ? 'left' : 'right');
+    const fix = how.contain ? 'remove content-visibility/contain:paint' : italic && trailing && px <= 0.2 * fs ? 'italic needs padding-inline-end ≈0.15em' : 'widen the box';
+    const key = `${desc(el)}|${desc(clipper)}|${fix}`;
+    const prev = found.get(key);
+    if (prev) { prev.n++; prev.px = Math.max(prev.px, px); continue; }
+    found.set(key, { n: 1, px, msg: (n, p) => `clipped text "${short(text)}" in ${desc(el)}${italic ? ' (italic)' : ''}: cut ${p.toFixed(1)}px on the ${where} by ${desc(clipper)} (${how.why})${n > 1 ? `, ${n} times` : ''}: ${fix}` });
+  }
+  const clipped = [...found.values()].map((f) => f.msg(f.n, f.px));
+
+  // --- Card rows out of line ---
+  const shown = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== 'hidden'; };
+  const sets = new Set();
+  for (const ul of document.querySelectorAll('.rs-list')) sets.add([...ul.children].filter((c) => c.tagName === 'LI' && shown(c)));
+  for (const parent of document.querySelectorAll('body *')) {
+    if (parent.matches('.rs-list') || hidden(parent) || parent.closest('header, nav, footer, form, [role="banner"], [role="navigation"]')) continue;
+    const d = getComputedStyle(parent).display;
+    if (!/grid|flex/.test(d) || parent.children.length < 3) continue;
+    const groups = new Map();
+    for (const c of parent.children) {
+      if (!shown(c)) continue;
+      const k = c.tagName + '|' + (typeof c.className === 'string' ? c.className.trim().split(/\s+/).sort().join(' ') : '');
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(c);
+    }
+    // Cards, not a row of chips or fact spans.
+    for (const g of groups.values()) if (g.length >= 3 && g.every((c) => { const r = c.getBoundingClientRect(); return r.width >= 120 && r.height >= 60; })) sets.add(g);
+  }
+  const CURRENCY = /(?:CHF|EUR|USD|GBP|Fr\.|€|£|\$)\s?\d|\d[\d'’ .,  ]*\s?(?:CHF|EUR|€|£|\.[-–—])(?:\s|$)/;
+  const own = (el) => [...el.childNodes].filter((c) => c.nodeType === 3).map((c) => c.textContent).join('').trim();
+  const parts = (card) => {
+    const all = [...card.querySelectorAll('*')].filter((e) => !hidden(e) && shown(e));
+    const out = {};
+    const h = all.find((e) => /^H[2-4]$/.test(e.tagName));
+    if (h) out.heading = h.getBoundingClientRect().top;
+    const div = all.find((e) => {
+      if (e.tagName === 'HR') return true;
+      const cs = getComputedStyle(e);
+      return parseFloat(cs.borderTopWidth) >= 1 && cs.borderTopStyle !== 'none' && cs.borderTopStyle !== 'hidden' && !/rgba\([^)]*,\s*0\)|transparent/.test(cs.borderTopColor) && e.getBoundingClientRect().width >= card.getBoundingClientRect().width * 0.5;
+    });
+    if (div) out.divider = div.getBoundingClientRect().top;
+    const price = all.find((e) => /(^|[-_\s])price/i.test(typeof e.className === 'string' ? e.className : '') && e.textContent.trim()) || all.find((e) => CURRENCY.test(own(e)));
+    if (price) out.price = price.getBoundingClientRect().top;
+    // The last line drawn, with the element that draws it. Compared only when it is a
+    // one-line element of the same kind in every card: a sold listing without a price, or
+    // a bio paragraph of its own length, ends where its text ends.
+    const tw = document.createTreeWalker(card, NodeFilter.SHOW_TEXT);
+    let last = null;
+    for (let t = tw.nextNode(); t; t = tw.nextNode()) if (t.textContent.trim() && t.parentElement && !hidden(t.parentElement) && shown(t.parentElement)) last = t;
+    if (last) {
+      const rg = document.createRange();
+      rg.selectNodeContents(last);
+      const rs = [...rg.getClientRects()].filter((r) => r.height > 0);
+      const el = last.parentElement;
+      const lh = parseFloat(getComputedStyle(el).lineHeight) || parseFloat(getComputedStyle(el).fontSize) * 1.3;
+      if (rs.length && el.getBoundingClientRect().height < lh * 1.6) { out.last = rs[rs.length - 1].bottom; out.lastKind = desc(el); }
+    }
+    return out;
+  };
+  const rows = [];
+  const seen = new Set();
+  for (const set of sets) {
+    const cards = set.map((el) => ({ el, top: el.getBoundingClientRect().top }));
+    const vrows = [];
+    for (const c of cards) {
+      const row = vrows.find((rw) => Math.abs(rw[0].top - c.top) <= 2);
+      row ? row.push(c) : vrows.push([c]);
+    }
+    for (const row of vrows) {
+      if (row.length < 2) continue;
+      // Cards have a heading, a divider or a price; a row of stat tiles or text blocks is not compared.
+      const ps = row.map((c) => ({ c, p: parts(c.el) })).filter((x) => x.p.heading != null || x.p.divider != null || x.p.price != null);
+      if (ps.length < 2) continue;
+      // Compare the parts relative to each card's top (cards in a row share it within 2px).
+      const worst = [];
+      for (const part of ['heading', 'divider', 'price', 'last']) {
+        let have = ps.filter((x) => x.p[part] != null);
+        if (part === 'last' && have.length) {
+          const kind = have[0].p.lastKind;
+          have = have.filter((x) => x.p.lastKind === kind);
+        }
+        if (have.length < 2) continue;
+        const ys = have.map((x) => x.p[part] - x.c.top);
+        const diff = Math.max(...ys) - Math.min(...ys);
+        if (diff > 4) worst.push([part === 'last' ? 'last line' : part, diff]);
+      }
+      if (!worst.length) continue;
+      const parentDesc = desc(row[0].el.parentElement);
+      worst.sort((a, b) => b[1] - a[1]);
+      const [part, diff] = worst[0];
+      const key = `${parentDesc}|${part}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      rows.push(`cards in one row not aligned: ${part} differs by ${Math.round(diff)}px (${parentDesc}, "${short(row[0].el.innerText || '', 30)}"${worst.length > 1 ? `; also ${worst.slice(1).map(([p, d]) => `${p} ${Math.round(d)}px`).join(', ')}` : ''}): give the eyebrow and title fixed line counts (min-height in lines) or use grid-template-rows: subgrid`);
+    }
+  }
+  return { clipped: clipped.slice(0, 6), rows: rows.slice(0, 4) };
+}
+
 const browser = await launch();
 
 let server;
@@ -233,7 +430,16 @@ const addRoute = (path) => {
 };
 for (const p of explicit.length ? explicit : ['/']) if (!routes.has(p) && routes.size < MAX) addRoute(p);
 
-async function shoot({ path, vp, i }) {
+async function shoot(job) {
+  await shootPage(job);
+  const entry = routes.get(job.path);
+  if (--entry.left) return;
+  entry.problems = [...new Set(entry.problems)];
+  console.log(`${entry.problems.length ? '✗' : '✓'} ${job.path} (${entry.status})${entry.problems.map((p) => `\n    ${p}`).join('')}`);
+  await routeSheet(entry);
+}
+
+async function shootPage({ path, vp, i }) {
   const entry = routes.get(path);
   const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: vp.isMobile, hasTouch: vp.hasTouch, deviceScaleFactor: vp.deviceScaleFactor ?? 1 });
   try {
@@ -274,6 +480,44 @@ async function shoot({ path, vp, i }) {
         setTimeout(done, 5000);
       })));
     });
+    // Layout checks at every width, then the search's map view at 1440 and 1800.
+    const layout = await page.evaluate(layoutChecks);
+    for (const c of layout.clipped) entry.problems.push(`[${vp.name}] ${c}`);
+    for (const r of layout.rows) entry.problems.push(`[${vp.name}] ${r}`);
+    const mapHref = MAP_WIDTHS.has(vp.name) ? await page.evaluate(() => {
+      const root = document.querySelector('[data-rs-root]');
+      if (!root || root.getAttribute('data-rs-view') === 'map') return null;
+      const a = root.querySelector('a[data-rs-view="map"]');
+      if (a) return a.href;
+      const u = new URL(location.href);
+      u.searchParams.set('view', 'map');
+      return u.href;
+    }) : null;
+    if (mapHref) {
+      const mp = await ctx.newPage();
+      mp.on('pageerror', (e) => entry.problems.push(`[${vp.name} map] js error: ${e.message}`));
+      const mres = await mp.goto(mapHref, { waitUntil: 'domcontentloaded', timeout: 30000 }).catch((e) => {
+        entry.problems.push(`[${vp.name} map] navigation: ${e.message}`);
+        return null;
+      });
+      if (mres) {
+        await mp.waitForLoadState('load', { timeout: 10000 }).catch(() => {});
+        if (injectCss) await mp.addStyleTag({ content: injectCss }).catch(() => {});
+        await mp.waitForTimeout(500);
+        const ml = await mp.evaluate(layoutChecks);
+        for (const c of ml.clipped) entry.problems.push(`[${vp.name} map] ${c}`);
+        for (const r of ml.rows) entry.problems.push(`[${vp.name} map] ${r}`);
+        await mp.screenshot({ path: `${OUT}/${fileName(path)}@${vp.name}-map.png` }).catch(() => {});
+      }
+      await mp.close();
+    }
+    if (vp.extra) {
+      const fullH = await page.evaluate(() => document.documentElement.scrollHeight);
+      const file = `${OUT}/${fileName(path)}@${vp.name}.png`;
+      await page.screenshot(fullH > vp.height * 12 ? { path: file, fullPage: true, clip: { x: 0, y: 0, width: vp.width, height: vp.height * 12 } } : { path: file, fullPage: true });
+      entry.shots[i] = file;
+      return; // the extra widths stop here; 1440 and 390 run the full checks below
+    }
     const checks = await page.evaluate(() => ({
       overflow: document.documentElement.scrollWidth - window.innerWidth,
       broken: [...document.images].filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.currentSrc || i.src),
@@ -630,10 +874,6 @@ async function shoot({ path, vp, i }) {
   } finally {
     await ctx.close();
   }
-  if (--entry.left) return;
-  entry.problems = [...new Set(entry.problems)];
-  console.log(`${entry.problems.length ? '✗' : '✓'} ${path} (${entry.status})${entry.problems.map((p) => `\n    ${p}`).join('')}`);
-  await routeSheet(entry);
 }
 
 let running = 0;
@@ -671,6 +911,6 @@ try {
 
 await writeFile(`${OUT}/report.json`, JSON.stringify(report, null, 2));
 const bad = report.filter((r) => r.problems.length);
-console.log(`\n${report.length} routes, ${report.length * WIDTHS.length} screenshots in ${OUT}/ (${Math.round((Date.now() - t0) / 1000)} s), ${bad.length} with problems.`);
-console.log(`Read ${OUT}/contact-sheet.png (all routes, both widths). Open ${OUT}/sheet-<route>.png only to inspect a suspected issue.`);
+console.log(`\n${report.length} routes, ${report.length * WIDTHS.length}+ screenshots in ${OUT}/ (${Math.round((Date.now() - t0) / 1000)} s), ${bad.length} with problems.`);
+console.log(`Read ${OUT}/contact-sheet.png (all routes, 1440 and 390). Open ${OUT}/sheet-<route>.png only to inspect a suspected issue.`);
 process.exit(bad.length ? 1 : 0);
