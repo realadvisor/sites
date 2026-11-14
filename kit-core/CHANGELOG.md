@@ -11,6 +11,15 @@ the versions is enough.
 To upgrade a site, read every entry newer than the site's current version,
 oldest first, and apply each Upgrade step in order.
 
+## Unreleased
+
+- The packages now ship the rules and critic files the sites read. Sites
+  install the published kit, and until now it left out `kit-core/TASTE.md`,
+  `kit-core/critic/` (so `sites-kit critic` failed), `kit-react/AGENTS.md` and
+  `kit-astro/AGENTS.md`, all of which the starters' `CLAUDE.md` imports. A
+  kit-core test now fails when a starter imports, or a kit tool reads, a file
+  its package does not ship.
+
 ## 0.5.1
 
 - kit-react: the dev server can always be framed by the CRM preview, whatever

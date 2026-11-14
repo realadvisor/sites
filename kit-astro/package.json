@@ -18,6 +18,7 @@
     "*.mjs",
     "*.mts",
     "*.ts",
+    "AGENTS.md",
     "README.md",
     "LICENSE",
     "components",
