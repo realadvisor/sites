@@ -210,11 +210,11 @@ const message = chosen
   .types { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
   .type { min-width: 0; }
   .type a { grid-template-columns: minmax(0, 1fr); }
-  .type a { display: grid; gap: 6px; padding: 22px; border: 1px solid var(--line); text-decoration: none; height: 100%; transition: border-color .15s, box-shadow .15s; }
+  .type a { display: grid; align-content: start; gap: 6px; padding: 22px; border: 1px solid var(--line); text-decoration: none; height: 100%; transition: border-color .15s, box-shadow .15s; }
   .type a:hover { border-color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
   .type__k { font: 600 0.75rem/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass-ink); }
-  .type__plan { display: grid; place-items: center; aspect-ratio: 56 / 46; margin: 10px 0 8px; background: #fff; }
-  .type__plan img { width: 100%; height: 100%; object-fit: contain; }
+  .type__plan { display: grid; place-items: center; aspect-ratio: 56 / 46; margin: 10px 0 8px; background: #fff; position: relative; }
+  .type__plan img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; } /* the box keeps its ratio whatever the plan's own size */
   .type__noplan { color: var(--muted); }
   .type__name { font: 400 1.5rem/1.1 var(--font-display); }
   .type__m { color: var(--muted); }

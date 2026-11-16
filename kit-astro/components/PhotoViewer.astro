@@ -1,0 +1,180 @@
+---
+/**
+ * A listing's photos: a gallery ("1+4" mosaic, a swipe strip on the phone,
+ * or a strip everywhere) that opens a full-screen viewer, a native modal
+ * <dialog>: each photo whole, "3 / 13", prev and next buttons, ← → Home End,
+ * Escape, swipe on touch (a scroll-snap track), focus on the close button
+ * and back to the tile, page scroll locked while open. Browser side:
+ * ../client/photo-viewer.ts (bundled, no inline script). Without JavaScript
+ * the tiles link to the photo list in <noscript>.
+ *
+ *   <PhotoViewer photos={listing.photos} alt={`${type}, ${city}`} />
+ *   <PhotoViewer photos={photos} alt={(i) => captions[i]} layout="strip" locale="de-CH" />
+ *
+ * Theme: --pv-ratio (mosaic box, default 2.9 / 1), --pv-gap, --pv-bg (the
+ * viewer), --pv-tile-bg. Same markup and classes as the React kit's.
+ */
+import type { Photo } from '../lib/ra';
+import RaImage from './RaImage.astro';
+import { fill, photoViewerLabels, type PhotoViewerLabels } from '../lib/listing-labels';
+
+interface Props {
+  photos: Photo[];
+  /** Alt text of a photo without its own: a string ("<alt>, Photo 3") or one per photo. */
+  alt: string | ((i: number) => string);
+  /** "1+4": the mosaic (a strip on the phone). "strip": a swipe strip at every width. */
+  layout?: '1+4' | 'strip';
+  /** Page locale on a multi-language site (e.g. 'de-CH'). */
+  locale?: string;
+  labels?: Partial<PhotoViewerLabels>;
+  /** The first tile is the page's LCP image (default true). */
+  priority?: boolean;
+  /** Anchor prefix of the no-JS photo list (`#photos-3`); unique per page. */
+  id?: string;
+  class?: string;
+}
+const { photos, alt, layout = '1+4', locale, labels, priority = true, id = 'photos', class: cls } = Astro.props;
+const L = photoViewerLabels(locale, labels);
+const n = photos.length;
+const altOf = (i: number) => photos[i]?.alt || (typeof alt === 'function' ? alt(i) : `${alt}, ${fill(L.photo, i + 1)}`);
+const strip = layout === 'strip';
+// Mosaic: 1, 2, 3 or 5 tiles (4 photos show 3: a fourth tile would be a 2.3:1 crop).
+const shown = strip ? photos : photos.slice(0, n === 4 ? 3 : 5);
+const more = !strip && n > shown.length;
+/** Layout width of tile `i` in a mosaic of `count` tiles (phone: the 88% strip). */
+const mosaicSizes = (count: number, i: number) => {
+  const share = count === 1 ? 1 : count === 2 ? 0.5 : i === 0 ? (count === 3 ? 0.66 : 0.5) : count === 3 ? 0.33 : 0.25;
+  return `(min-width: 1360px) ${Math.round(1360 * share)}px, (min-width: 761px) ${Math.round(100 * share)}vw, 88vw`;
+};
+const STRIP_SIZES = '(min-width: 761px) 40vw, 88vw';
+---
+{n > 0 && (
+  <div class:list={['ra-pv', strip ? 'ra-pv--strip' : 'ra-pv--mosaic', cls]} data-photo-viewer>
+    <div class={`ra-pv-gal ra-pv-gal--${shown.length}`}>
+      {shown.map((p, i) => {
+        const big = !strip && i === 0;
+        return (
+          <a class="ra-pv-tile" href={`#${id}-${i + 1}`} data-pv-open={i} aria-label={`${altOf(i)}: ${L.open}`}>
+            <RaImage src={p} alt={altOf(i)} width={big ? 1200 : 600} height={big ? 800 : 400} priority={priority && i === 0}
+              sizes={strip ? STRIP_SIZES : mosaicSizes(shown.length, i)} />
+            {more && i === shown.length - 1 && <span class="ra-pv-more">{fill(L.all, n)}</span>}
+            <span class="ra-pv-n" aria-hidden="true">{i + 1} / {n}</span>
+          </a>
+        );
+      })}
+    </div>
+    {more && <a class="ra-pv-all" href={`#${id}-1`} data-pv-open="0">{fill(L.all, n)}</a>}
+
+    <dialog class="ra-pv-dialog" data-pv-dialog aria-label={L.photos}>
+      <div class="ra-pv-bar">
+        <p class="ra-pv-count" aria-live="polite"><span data-pv-index>1</span> / {n}</p>
+        <button type="button" class="ra-pv-btn" data-pv-close aria-label={L.close}>
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19" /></svg>
+        </button>
+      </div>
+      <ul class="ra-pv-track" data-pv-track>
+        {photos.map((p, i) => (
+          <li class="ra-pv-slide">
+            <RaImage src={p} alt={altOf(i)} width={1920} height={1280} fit="fit" widths={[960, 1440, 1920]} sizes="min(92vw, 1600px)" />
+          </li>
+        ))}
+      </ul>
+      {n > 1 && (
+        <>
+          <button type="button" class="ra-pv-btn ra-pv-step ra-pv-step--prev" data-pv-step="-1" aria-label={L.prev}>
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <button type="button" class="ra-pv-btn ra-pv-step ra-pv-step--next" data-pv-step="1" aria-label={L.next}>
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </>
+      )}
+    </dialog>
+
+    <noscript>
+      <ul class="ra-pv-list">
+        {photos.map((p, i) => (
+          <li id={`${id}-${i + 1}`}>
+            <RaImage src={p} alt={altOf(i)} width={1200} height={800} fit="fit" sizes="(min-width: 1025px) 45vw, 100vw" />
+          </li>
+        ))}
+      </ul>
+    </noscript>
+  </div>
+)}
+
+<script>
+  import '../client/photo-viewer';
+</script>
+
+<style is:global>
+  /* The React kit's styles/photo-viewer.css, the same rules. */
+  /* Mosaic: one large photo and four small ones (or 1, 2, 3); 2.9:1 keeps every tile near the photos' 3:2. */
+  .ra-pv { --pv-gap: 8px; }
+  .ra-pv-gal { display: grid; gap: var(--pv-gap); }
+  .ra-pv--mosaic .ra-pv-gal { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); aspect-ratio: var(--pv-ratio, 2.9 / 1); }
+  .ra-pv-tile { position: relative; display: block; overflow: hidden; background: var(--pv-tile-bg, var(--paper, #eeedeb)); cursor: zoom-in; }
+  .ra-pv-tile:focus-visible { outline: 2px solid var(--accent, #134266); outline-offset: 2px; }
+  .ra-pv-tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .ra-pv-tile:hover img { transform: scale(1.03); }
+  .ra-pv--mosaic .ra-pv-tile:first-child { grid-row: 1 / 3; }
+  .ra-pv--mosaic .ra-pv-gal--1 { grid-template-columns: 1fr; grid-template-rows: 1fr; aspect-ratio: var(--pv-ratio-1, 1.8 / 1); }
+  .ra-pv--mosaic .ra-pv-gal--2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+  .ra-pv--mosaic .ra-pv-gal--1 .ra-pv-tile:first-child, .ra-pv--mosaic .ra-pv-gal--2 .ra-pv-tile:first-child { grid-row: auto; }
+  /* Three: 2.25:1 keeps the large and both small tiles at 3:2. */
+  .ra-pv--mosaic .ra-pv-gal--3 { grid-template-columns: 2fr 1fr; aspect-ratio: var(--pv-ratio-3, 2.25 / 1); }
+  .ra-pv-more { position: absolute; inset: 0; display: grid; place-items: center; padding: 8px; background: rgb(0 0 0 / .5); color: #fff; font: 600 .8125rem/1.2 var(--font-sans, system-ui, sans-serif); letter-spacing: .12em; text-transform: uppercase; text-align: center; }
+  .ra-pv-n { display: none; }
+  .ra-pv-all { display: none; margin-top: 10px; min-height: 44px; align-items: center; color: inherit; }
+  /* Strip (every width, or the mosaic on a phone): swipe, one photo and a bit of the next. */
+  .ra-pv--strip .ra-pv-gal {
+    grid-auto-flow: column; grid-auto-columns: var(--pv-strip-w, minmax(280px, 40%)); overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; overscroll-behavior-x: contain;
+  }
+  .ra-pv--strip .ra-pv-gal::-webkit-scrollbar { display: none; }
+  .ra-pv--strip .ra-pv-tile { aspect-ratio: 3 / 2; scroll-snap-align: start; }
+  .ra-pv--strip .ra-pv-n { display: block; }
+  .ra-pv-n { position: absolute; right: 10px; bottom: 10px; padding: 4px 9px; background: rgb(0 0 0 / .65); color: #fff; font-size: .8125rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .ra-pv-list { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--pv-gap); }
+  .ra-pv-list li { scroll-margin-top: var(--header-h, 0px); }
+  .ra-pv-list img { display: block; width: 100%; height: auto; }
+
+  /* The viewer: a native modal dialog (not rendered while closed). */
+  .ra-pv-dialog { position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--pv-bg, #111); color: #fff; overflow: hidden; }
+  .ra-pv-dialog::backdrop { background: rgb(0 0 0 / .6); }
+  .ra-pv-dialog[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+  .ra-pv-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px var(--gutter, 16px); }
+  .ra-pv-count { margin: 0; font-size: .9375rem; color: rgb(255 255 255 / .75); font-variant-numeric: tabular-nums; }
+  .ra-pv-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: rgb(255 255 255 / .1); color: #fff; cursor: pointer; }
+  .ra-pv-btn:hover { background: rgb(255 255 255 / .2); }
+  .ra-pv-dialog :focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .ra-pv-track { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 100%; grid-template-rows: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+  .ra-pv-track::-webkit-scrollbar { display: none; }
+  .ra-pv-slide { display: grid; grid-template: 100% / 100%; place-items: center; box-sizing: border-box; min-width: 0; min-height: 0; padding: 0 clamp(16px, 5vw, 88px) clamp(16px, 4vh, 40px); scroll-snap-align: center; scroll-snap-stop: always; }
+  .ra-pv-slide img { display: block; max-width: min(100%, 1600px); max-height: 100%; min-width: 0; min-height: 0; width: auto; height: auto; object-fit: contain; }
+  .ra-pv-step { position: absolute; top: 50%; translate: 0 -50%; }
+  .ra-pv-step--prev { left: clamp(8px, 2vw, 24px); }
+  .ra-pv-step--next { right: clamp(8px, 2vw, 24px); }
+  /* The page behind does not scroll while the viewer is open. */
+  html.ra-pv-locked { overflow: hidden; scrollbar-gutter: stable; }
+
+  @media (max-width: 760px) {
+    .ra-pv--mosaic .ra-pv-gal {
+      grid-template: none; grid-auto-flow: column; grid-auto-columns: 88%; aspect-ratio: auto; overflow-x: auto; scroll-snap-type: x mandatory;
+      margin-inline: calc(-1 * var(--gutter, 16px)); padding-inline: var(--gutter, 16px); scroll-padding-inline: var(--gutter, 16px); scrollbar-width: none;
+    }
+    .ra-pv--mosaic .ra-pv-gal::-webkit-scrollbar { display: none; }
+    .ra-pv--mosaic .ra-pv-gal .ra-pv-tile { grid-row: auto; grid-column: auto; aspect-ratio: 4 / 3; scroll-snap-align: start; }
+    .ra-pv--mosaic .ra-pv-gal--1 { grid-auto-columns: 100%; margin-inline: 0; padding-inline: 0; }
+    .ra-pv--strip .ra-pv-gal { grid-auto-columns: 88%; }
+    .ra-pv-n { display: block; }
+    .ra-pv-more { display: none; }
+    .ra-pv-all { display: inline-flex; }
+    .ra-pv-step { display: none; }
+    .ra-pv-slide { padding-inline: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ra-pv-tile img { transition: none; }
+    .ra-pv-tile:hover img { transform: none; }
+  }
+</style>

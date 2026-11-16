@@ -18,8 +18,10 @@
     "*.mjs",
     "*.mts",
     "*.ts",
+    "AGENTS.md",
     "README.md",
     "LICENSE",
+    "client",
     "components",
     "lib",
     "tools"

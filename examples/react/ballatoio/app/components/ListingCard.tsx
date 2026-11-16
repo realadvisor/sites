@@ -42,7 +42,7 @@ export function ListingCard({ listing: l, lang, shape = 'land', priority = false
           : <span className="no-photo" aria-hidden="true">{kind}</span>}
       </div>
       <div className="card-text">
-        <p className="card-place">{placeOf(l)}</p>
+        <p className="card-place" title={placeOf(l)}>{placeOf(l)}</p>
         <H className="card-title d-s"><a href={listingHref(l, lang)} lang={textLang}>{l.title}</a></H>
         <p className="card-facts">
           {facts && <span className="num">{facts}</span>}

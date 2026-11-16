@@ -42,7 +42,7 @@ const langs = languageList(a.languages, lang);
     {langs && <p class="agent-langs muted">{ui.speaks} {langs}</p>}
     <p class="agent-contacts">
       {a.phone && <a class="num" href={telHref(a.phone)}>{a.phone}</a>}
-      {a.email && <a href={`mailto:${a.email}`} aria-label={fill(ui.writeTo, { name: a.first_name })}>{a.email}</a>}
+      {a.email && <a class="agent-mail" title={a.email} href={`mailto:${a.email}`} aria-label={fill(ui.writeTo, { name: a.first_name })}>{a.email}</a>}
     </p>
     {note && <p class="agent-note small">{note}</p>}
   </div>
@@ -60,5 +60,8 @@ const langs = languageList(a.languages, lang);
   .agent-name a:hover { text-decoration: underline; }
   .agent-contacts { display: grid; margin-top: 8px; }
   .agent-contacts a { display: inline-flex; align-items: center; min-height: 36px; overflow-wrap: anywhere; }
+  /* The e-mail keeps one line (cut with an ellipsis, in full in its title): agents side by
+     side keep their contacts at one height. */
+  .agent-contacts .agent-mail { display: block; line-height: 36px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .agent-note { margin-top: 4px; }
 </style>

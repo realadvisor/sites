@@ -6,9 +6,10 @@
   .card__nophoto { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 400 1.0625rem var(--font-display); }
   .card__badge { position: absolute; left: 12px; top: 12px; padding: 6px 10px; background: #fff; color: var(--green); font: 600 0.8125rem/1 var(--font-sans); }
   .card__body { display: grid; gap: 6px; padding-top: 16px; }
-  .card__meta { font-size: 0.875rem; color: var(--muted); }
-  .card__title { font-size: 1.3125rem; line-height: 1.22; color: var(--green-ink); }
+  /* Fixed line counts so the title, facts and price sit at one height across a row. */
+  .card__meta { font-size: 0.875rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card__title { font-size: 1.3125rem; line-height: 1.22; color: var(--green-ink); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-height: 2.44em; overflow-wrap: normal; }
   .card__link:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-  .card__facts { display: flex; flex-wrap: wrap; color: var(--muted); font-size: 0.9375rem; }
+  .card__facts { display: flex; flex-wrap: nowrap; white-space: nowrap; color: var(--muted); font-size: 0.9375rem; }
   .card__facts span + span::before { content: '·'; margin: 0 8px; }
   .card__price { font-weight: 600; font-size: 1.0625rem; color: var(--text); white-space: nowrap; margin-top: 4px; }

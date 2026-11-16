@@ -1,11 +1,14 @@
 /**
- * Listing page: title and price, 1 + 4 gallery (a swipe strip with counters
- * on the phone), facts, description, features, energy label, every photo,
- * approximate location; the advisor card with the enquiry form sticks
- * beside it. Unknown slug: the 404 page (410 for a listing that left).
+ * Listing page: title and price, the kit's PhotoViewer (1 + 4 gallery, a
+ * swipe strip on the phone, the full-screen viewer), facts, description,
+ * features, energy label, the kit's ListingArea (approximate location);
+ * the advisor card with the enquiry form sticks beside it. Unknown slug:
+ * the 404 page (410 for a listing that left).
  */
 import type { Route } from './+types/listing';
 import { EnquiryForm } from '@realadvisor/sites-kit-react/components/EnquiryForm';
+import { PhotoViewer } from '@realadvisor/sites-kit-react/components/PhotoViewer';
+import { ListingArea } from '@realadvisor/sites-kit-react/components/ListingArea';
 import { useKit } from '@realadvisor/sites-kit-react/components/Document';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { listingIdFromSlug, sanitizeHtml } from '@realadvisor/sites-kit-core';
@@ -15,7 +18,6 @@ import { listingJsonLd, listingRef, listingTitle } from '@realadvisor/sites-kit-
 import { Layout } from '../components/Layout';
 import { Crumbs } from '../components/Crumbs';
 import { ListingCard } from '../components/ListingCard';
-import { StaticMap } from '../components/StaticMap';
 import { EnergyScale } from '../components/EnergyScale';
 import { Img } from '../components/Img';
 import { siteData, sites } from '../lib/data.server';
@@ -99,16 +101,7 @@ export default function Page({ loaderData: { l, x, title, similar, agent, team }
 
       {photos.length > 0 ? (
         <div className="wrap">
-          <div className={`gal gal--${Math.min(photos.length, 5)}`}>
-            {photos.slice(0, 5).map((p, i) => (
-              <a key={i} className="gal__item" href={photos.length > 5 ? `#photo-${i + 1}` : undefined}>
-                <Img src={p} alt={alt(i)} width={i === 0 ? 1200 : 600} height={i === 0 ? 800 : 400} priority={i === 0}
-                  sizes={i === 0 ? '(min-width: 1360px) 760px, (min-width: 761px) 56vw, 88vw' : '(min-width: 1360px) 300px, (min-width: 761px) 22vw, 88vw'} />
-                {i === 4 && photos.length > 5 && <span className="gal__more">{t('allPhotos', { n: photos.length })}</span>}
-                <span className="gal__n num" aria-hidden="true">{i + 1} / {photos.length}</span>
-              </a>
-            ))}
-          </div>
+          <PhotoViewer photos={photos} alt={alt} locale={locale} labels={{ all: t('allPhotos', { n: '{n}' }) }} />
         </div>
       ) : (
         <div className="wrap"><div className="nophoto">{t('noPhoto')}</div></div>
@@ -142,21 +135,11 @@ export default function Page({ loaderData: { l, x, title, similar, agent, team }
               <EnergyScale value={energy} label={t('energy')} classLabel={t('energyClass', { c: energy })} />
             </section>
           )}
-          {photos.length > 5 && (
-            <section aria-labelledby="h-photos" className="allph">
-              <h2 id="h-photos" className="sec-h">{t('photos')} <span className="num">({photos.length})</span></h2>
-              <ul>
-                {photos.map((p, i) => (
-                  <li key={i} id={`photo-${i + 1}`}><Img src={p} alt={alt(i)} width={1200} height={800} fit="fit" sizes="(min-width: 1360px) 820px, (min-width: 900px) 60vw, 100vw" /></li>
-                ))}
-              </ul>
-            </section>
-          )}
           {x.address.lat != null && x.address.lng != null && (
             <section aria-labelledby="h-loc">
               <h2 id="h-loc" className="sec-h">{t('location')}</h2>
-              <p className="muted">{[city, t('approxLocation')].filter(Boolean).join(' · ')}</p>
-              <StaticMap lat={x.address.lat} lng={x.address.lng} zoom={14} area label={`${t('location')}: ${city}`} linkLabel={t('openMap')} />
+              <ListingArea lat={x.address.lat} lng={x.address.lng} locale={locale}
+                labels={{ approx: [city, t('approxLocation')].filter(Boolean).join(' · ') }} />
             </section>
           )}
         </div>

@@ -114,6 +114,26 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
 - No CSS `background-image` for content photos. Photos under 1200px wide
   never go full-bleed.
 - No photo: a neutral tile with the property type, never a broken image.
+- Which photo: `pickPhoto` / `lotPhotos` (`@realadvisor/sites-kit-core/photos`,
+  AGENTS.md section 2), never `photos[0]` by default: the first photo is often
+  a floor plan or a "Reserved" banner, and lots of one development share their
+  renders. The same image never shows twice side by side (`pnpm screenshot`
+  prints `repeated image`).
+- **Weight.** Every photo has a responsive `srcset` (RaImage does it) sized
+  so the file is never more than about 2× the drawn width (a 400px card
+  takes 800w at most); below the fold `loading="lazy"`; the hero, and only
+  the hero, `priority` (eager, `fetchpriority="high"`). Site images in
+  `public/` get the same treatment: several widths in webp, never the
+  original camera file. Heavy pages are slow pages on a phone.
+- **Stock photos** (a landscape, the region): a striking free-licence
+  photograph of the agency's real place may open the home page and break
+  sections when it is the strongest picture available; an ordinary one never
+  replaces the agency's own. Always the real place, captioned with it (in the
+  page's language), never presented as a property or the agency's office,
+  and listed on `/credits` with author, source and licence. Choose for light
+  and composition, not for the postcard view: the most-used views of a region
+  are the least distinctive images. At most two stock photographs on a page
+  besides the hero.
 
 ## 6. Overlays and navigation
 
@@ -134,7 +154,7 @@ import lato900 from '@fontsource/lato/files/lato-latin-900-normal.woff2?url';
   (`--accent`, `--text`, `--paper`, `--surface`, `--line`, `--muted`,
   `--control-radius`, `--header-h`, `--map-h`, `--rs-columns`, `--rs-gap`,
   `--rs-active`, `--rs-on-active`, `--rs-pill-radius`, `--rs-sheet-radius`,
-  `--rs-heading-weight`, `--rs-card-h`) and your card in its slot.
+  `--rs-heading-weight`) and your card in its slot.
   `:global(.rs-…)` overrides are for spacing details, never to hide a
   part.
 - Forms: labels above the fields (never placeholder-only), required fields
@@ -185,9 +205,9 @@ wrap.
 
 ## 10. Craft defaults
 
-Defaults for everything the chosen example does not decide. Where the
-example does something else on purpose, the example wins (TASTE.md judges
-against it); `pnpm screenshot` measures the ones marked (measured).
+Defaults for everything the direction in BRIEF.md does not decide. Where
+the direction does something else on purpose, the direction wins; an
+example is a measure of finish (TASTE.md section 1), not a layout to keep; `pnpm screenshot` measures the ones marked (measured).
 
 - **Scales, not values.** Spacing, type sizes, radii, borders and shadows
   each come from one scale in the tokens file. No one-off `margin: 37px`.
@@ -217,6 +237,19 @@ against it); `pnpm screenshot` measures the ones marked (measured).
     counts in lists, so columns of numbers line up.
 - **States.** Empty, loading and error states are designed like the rest
   (AGENTS.md section 3): a sentence and a way on, never a blank box.
+- **Cards.** Cards side by side keep their rows aligned, whatever the data:
+  - fixed line counts for the eyebrow (1 line) and the title (2 lines:
+    `-webkit-line-clamp: 2` plus `min-height: 2lh`), so a short title does
+    not lift its price; the title comes from `cleanTitle`, so it is cut at a
+    word or a separator, never ending on a small word ("de", "the") or a
+    number;
+  - the card is a grid with `grid-template-rows: subgrid` over the list's
+    rows, or a flex column with the price pinned to the bottom
+    (`margin-top: auto`);
+  - an italic number or price gets `padding-inline-end: 0.15em`: its last
+    glyph overhangs its box and a clipping card cuts it.
+  `pnpm screenshot` prints `cards in one row not aligned` and `clipped text`
+  at every width (1440, 1024, 390, 1800).
 
 ## 11. Never
 
@@ -225,3 +258,72 @@ against it); `pnpm screenshot` measures the ones marked (measured).
 - English UI strings on a non-English site, or placeholder labels.
 - Raw `<img>` for a photo, anything hotlinked, a Google Fonts link.
 - Auto-rotating hero carousels.
+
+## 12. Signature: motifs and maps
+
+- **Motifs and decorative lines** (a ridge, a hatching, a contour) are
+  drawn only on flat grounds: dividers, bands, the footer edge, an opaque
+  panel. Never over a photo: an `object-fit: cover` photo moves under the
+  line at every width, so it reads as a glitch. Mark them `aria-hidden` (or
+  `data-motif` for a CSS one); `pnpm screenshot` prints `decorative line or
+  motif over a photo`.
+- **Drawn maps** (the region, the localities) come from real open geodata:
+  Natural Earth (public domain) or swisstopo (open data, credit required),
+  converted once at build time into a small JSON or SVG in the site and
+  simplified, never hand-traced shapes. Credit the source on `/credits`.
+  Labels in the page's language, never crossed by an outline
+  (`paint-order: stroke`); dots are links with an accessible name. For a
+  listings map use `ListingsMap` (AGENTS.md section 7).
+- **A motif is not a signature.** A thin line used as a divider is the most
+  common "signature" there is. The signature is what the page does with its
+  layout: what carries the first screen, the order of the home page, and one
+  section only this agency could have (section 13). A motif may support it.
+
+## 13. Direction before code
+
+Left alone, a model builds the most common agency site: a split first
+screen with a photo on one half and a headline on the other, or a full-width
+landscape with a centred headline and a search bar; then three listing cards
+in a row, a stats strip and a thin decorative line. That is the average of
+the category, not a decision. Forbidding one common choice only brings the
+next most common one. So the direction is decided, in writing, before any
+code, from what this agency has.
+
+Write it in BRIEF.md under "Signature", in about 200 words:
+
+- **Owned material.** The one thing only this agency has that the site is
+  built on: its name set large, the shape in its logo, its place (from the
+  real locations in the data), its second profession, its method, a real
+  number. Found in their material, never invented for them.
+- **Idea.** One sentence. It would be false on a competitor's site.
+- **Layout.** Decided first and on its own: what carries the first screen
+  at 1440 and at 390, what is biggest, what the fold cuts, the order of the
+  home page. Draw the first screen as a small text wireframe. New colours on
+  an example's skeleton are not a direction.
+- **Own section.** One section on the home page that no other agency could
+  have, filled with real data.
+- **Type.** The voice against the logo (TASTE.md line 6) and one decision
+  that is not the default: a very large size, a very light weight, an italic
+  for prices.
+- **Colour.** The strategy before the hues: where the brand colour is a
+  large field, where a small mark, what the grounds are (section 2).
+- **Photos.** Which photo carries the first screen and why that one. The
+  first listing's first photo is never the answer by default.
+- **Refuses.** The conventions of agency sites this one drops.
+
+When several directions are possible, write five in one go, say for each
+how often you would produce it unprompted, and do not take the likeliest by
+default: the less likely ones are where an agency's own site is. Let
+something outside your preference choose among those that fit (a script, a
+second reader, the user).
+
+Then test the direction: swap in another agency's name. If it still fits,
+rewrite the line that let it. Build exactly what the direction says. Spend
+the boldness in one place, the first screen or the own section, and keep
+the rest calm; restraint in the details (sections 2 to 10) is what makes a
+bold layout look expensive instead of loud.
+
+The fixed points are not part of the direction and never give way to it:
+the agency's logo and brand colour (section 1), the valuation call to action
+on the first screen at every width, readable text on photos (section 5), and
+the kit's parts for search, forms, maps and the photo viewer.

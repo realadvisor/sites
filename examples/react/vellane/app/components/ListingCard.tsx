@@ -35,8 +35,8 @@ export function ListingCard({ listing: l, priority, as: H = 'h3', sizes = '(min-
       <div className="card__body">
         <p className="card__price num">{price(l)}</p>
         <H className="card__title"><a href={href}>{l.title}</a></H>
-        {facts && <p className="card__facts">{facts}</p>}
-        {place && <p className="card__place">{typeLabel(l.property_type)} · {place}</p>}
+        {facts && <p className="card__facts" title={facts}>{facts}</p>}
+        {place && <p className="card__place" title={`${typeLabel(l.property_type)} · ${place}`}>{typeLabel(l.property_type)} · {place}</p>}
       </div>
     </article>
   );

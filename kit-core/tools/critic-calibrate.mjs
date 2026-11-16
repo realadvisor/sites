@@ -16,14 +16,39 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-/** Scores from a critic answer: { lines: { 1: 2, ... }, total }. */
+/**
+ * Scores from a critic answer: { lines: { 1: 2, ... }, total, outOf, overall,
+ * distinctiveness, must }. `overall` and `distinctiveness` are the /10 scores
+ * ("Overall: 8.5/10", "Distinctiveness: 7/10"), null when absent; `must` counts
+ * the fixes marked MUST.
+ */
 export function parseScores(md) {
   const lines = {};
   const section = md.split(/^## Scores\s*$/m)[1]?.split(/^## /m)[0] ?? md;
   for (const m of section.matchAll(/^\s*(\d{1,2})\.\s+[^\n]*?\s([012])\s*:/gm)) lines[Number(m[1])] = Number(m[2]);
   const t = md.match(/Total:\s*(\d+)\s*\/\s*(\d+)/);
   const sum = Object.values(lines).reduce((a, b) => a + b, 0);
-  return { lines, total: t ? Number(t[1]) : sum, outOf: t ? Number(t[2]) : null };
+  const ten = (name) => {
+    const m = md.match(new RegExp(`^\\W*${name}\\W*:?\\s*(\\d+(?:[.,]\\d+)?)\\s*\\/\\s*10`, 'im'));
+    return m ? Number(m[1].replace(',', '.')) : null;
+  };
+  const fixes = md.split(/^## Fixes[^\n]*$/m)[1]?.split(/^## /m)[0] ?? '';
+  const must = [...fixes.matchAll(/^\s*\d+\.\s+(?:\*\*)?MUST\b/gm)].length;
+  return { lines, total: t ? Number(t[1]) : sum, outOf: t ? Number(t[2]) : null, overall: ten('Overall'), distinctiveness: ten('Distinctiveness'), must };
+}
+
+/** The pipeline's stop rule (critic/CRITIC.md): overall >= 8.5, distinctiveness >= 7.5, no MUST open. */
+export const STOP_RULE = { overall: 8.5, distinctiveness: 7.5 };
+
+/** Why the builder must run another round ([] = stop: the page is ready for the user). */
+export function stopProblems(scores) {
+  const out = [];
+  if (scores.overall == null) out.push('no "Overall: x/10" score');
+  else if (scores.overall < STOP_RULE.overall) out.push(`overall ${scores.overall}/10, needs ${STOP_RULE.overall}`);
+  if (scores.distinctiveness == null) out.push('no "Distinctiveness: x/10" score');
+  else if (scores.distinctiveness < STOP_RULE.distinctiveness) out.push(`distinctiveness ${scores.distinctiveness}/10, needs ${STOP_RULE.distinctiveness}`);
+  if (scores.must) out.push(`${scores.must} MUST fix(es) open`);
+  return out;
 }
 
 /** Problems of one case's scores against its expectations ([] = pass). */
@@ -35,7 +60,14 @@ export function checkCase(scores, expect) {
     if (e.max !== undefined && v > e.max) out.push(`line ${name}: ${v}, expected at most ${e.max}`);
   };
   for (const [k, e] of Object.entries(expect)) {
-    if (k === 'total') {
+    if (k === 'overall' || k === 'distinctiveness') {
+      const v = scores[k];
+      if (v == null) out.push(`${k}: no score found`);
+      else {
+        if (e.min !== undefined && v < e.min) out.push(`${k} ${v}, expected at least ${e.min}`);
+        if (e.max !== undefined && v > e.max) out.push(`${k} ${v}, expected at most ${e.max}`);
+      }
+    } else if (k === 'total') {
       if (e.min !== undefined && scores.total < e.min) out.push(`total ${scores.total}, expected at least ${e.min}`);
       if (e.max !== undefined && scores.total > e.max) out.push(`total ${scores.total}, expected at most ${e.max}`);
     } else if (k === 'all') {

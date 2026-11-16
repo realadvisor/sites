@@ -6,7 +6,9 @@
 .agent { display: grid; align-content: start; padding: 48px 32px 48px 0; border-bottom: 1px solid var(--line); }
 .agent + .agent { padding-left: 32px; border-left: 1px solid var(--line); }
 .agent { gap: 28px; }
-.agent-photo { display: block; max-width: 340px; }
+/* Every photo as wide as the narrowest column (the middle one, padded on both sides), so the names line up. */
+.agents { container-type: inline-size; }
+.agent-photo { display: block; max-width: 340px; width: min(100%, calc(100cqi / 3 - 64px)); }
 .agent-body { display: grid; gap: 8px; justify-items: start; }
 .agent-name { font: 300 clamp(1.75rem, 2.6vw, 2.5rem)/1.05 var(--font-display); margin-bottom: 6px; }
 .agent-name a { text-decoration: none; }
@@ -14,7 +16,9 @@
 .agent-contact { display: grid; gap: 2px; margin: 12px 0 16px; }
 .agent-contact a { text-decoration: none; overflow-wrap: anywhere; }
 .agent-contact a:hover { text-decoration: underline; }
+.agent-contact a[href^="mailto:"] { overflow-wrap: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 960px) {
   .agents { grid-template-columns: 1fr; }
   .agent, .agent + .agent { padding: 36px 0; border-left: 0; }
+  .agent-photo { width: auto; }
 }

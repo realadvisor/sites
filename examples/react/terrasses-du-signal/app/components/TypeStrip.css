@@ -11,6 +11,15 @@
 .types-strip .go { color: var(--accent); transition: transform 0.4s var(--ease); }
 .types-strip a:hover .go { transform: translateX(4px); }
 .types-note { margin-top: 18px; font-size: 0.8125rem; color: var(--muted); }
+/* Cards in one row share their rows (name, plan, foot) through subgrid, so the
+   dividers, prices and last lines line up when a price wraps in one card only. */
+@supports (grid-template-rows: subgrid) {
+  .types-strip li { display: grid; grid-row: span 3; grid-template-rows: subgrid; }
+  .types-strip a { grid-row: span 3; grid-template-rows: subgrid; }
+  .types-strip .foot { grid-row: 3; align-items: end; }
+  /* A price that wraps grows its card's foot only at the top: the last line stays where it was. */
+  .types-strip .price { align-self: stretch; display: grid; align-content: end; }
+}
 @media (max-width: 1000px) {
   .types-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .types-strip li { grid-column: span 1; }

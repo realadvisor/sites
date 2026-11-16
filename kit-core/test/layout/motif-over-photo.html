@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Motif over a photo</title>
+<style>body{margin:0;font:16px/1.5 Arial,sans-serif;color:#141517;background:#faf8f4}
+.hero{position:relative;height:560px}.hero img{display:block;width:100%;height:100%;object-fit:cover}
+.ridge{position:absolute;left:0;right:0;top:120px;width:100%;height:80px}
+.band{position:relative;height:300px;background:url(/img/landscape.png) center/cover}.band [data-motif]{position:absolute;inset:auto 0 40px 0;height:2px;background:#e5c89e}</style>
+<!-- The fault: a decorative ridge line drawn across the hero photo, and a [data-motif] rule
+     across a background-image photo band. -->
+<main>
+<section class="hero"><img src="/img/hero.png" alt="Houses by the lake" width="1600" height="900">
+  <svg class="ridge" aria-hidden="true" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 8 L20 3 L40 6 L60 1 L80 5 L100 2" fill="none" stroke="#fff" stroke-width=".3"/></svg>
+  <h1 style="position:absolute;left:40px;bottom:40px;margin:0;color:#fff">Homes by the lake</h1></section>
+<section class="band"><div data-motif></div></section>
+</main>

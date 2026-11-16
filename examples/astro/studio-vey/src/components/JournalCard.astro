@@ -11,7 +11,7 @@ const d = post.data;
 <article class:list={['jc', { 'jc--large': large }]}>
   <a href={`/journal/${post.id}`} class="jc-link">
     <div class="jc-media"><RaImage src={d.cover} alt={d.coverAlt} priority={priority} width={large ? 1200 : 800} height={large ? 800 : 560} sizes={large ? '(min-width: 1024px) 58vw, 100vw' : '(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw'} /></div>
-    <p class="caps muted">{d.topic} · <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time></p>
+    <p class="jc-kicker caps muted" title={`${d.topic} · ${formatDate(d.date)}`}>{d.topic} · <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time></p>
     <H class="jc-title">{d.title}</H>
     {large && <p class="jc-excerpt">{d.excerpt}</p>}
   </a>
@@ -19,8 +19,12 @@ const d = post.data;
 
 <style>
   .jc-link { display: grid; gap: 10px; text-decoration: none; }
+  /* One line for topic and date, so the titles start level across a row. */
+  .jc-kicker { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .jc-media { aspect-ratio: 10 / 7; overflow: hidden; background: var(--surface); margin-bottom: 8px; }
-  .jc--large .jc-media { aspect-ratio: 3 / 2; }
+  .jc--large /* One line for topic and date, so the titles start level across a row. */
+  .jc-kicker { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .jc-media { aspect-ratio: 3 / 2; }
   .jc-media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
   .jc-link:hover .jc-media :global(img) { transform: scale(1.03); }
   .jc-title { font-size: clamp(1.3125rem, 1.15rem + 0.45vw, 1.5625rem); line-height: 1.22; }

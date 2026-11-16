@@ -28,8 +28,8 @@ export function ListingCard({ listing: x, l, priority = false, sizes = '(min-wid
           {badge && <span className="card__badge">{badge}</span>}
         </div>
         <div className="card__body">
-          {place && <p className="card__place">{place}</p>}
-          <H className="card__title">{x.title}</H>
+          {place && <p className="card__place" title={place}>{place}</p>}
+          <H className="card__title" title={x.title}>{x.title}</H>
           {facts.length > 0 && <p className="card__facts">{facts.map((f, i) => <span key={i} className="num">{f}</span>)}</p>}
           {x.status !== 'sold' && <p className="card__price num">{price(x, l)}</p>}
         </div>

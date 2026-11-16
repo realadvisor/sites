@@ -45,7 +45,7 @@ export function ListingCard({ listing: l, lang, variant = 'spec', priority = fal
             : <span className="card-nophoto" aria-hidden="true">{kind}</span>}
           {badge && <span className="card-badge">{badge}</span>}
         </div>
-        <p className="card-kicker">{kicker}</p>
+        <p className="card-kicker" title={kicker}>{kicker}</p>
         <H className="card-title"><a href={url} lang={textLang}>{l.title}</a></H>
         <dl className="spec">
           {specRows(l, lang, { price: l.status !== 'sold' }).map(([k, v]) => (
@@ -62,7 +62,7 @@ export function ListingCard({ listing: l, lang, variant = 'spec', priority = fal
         : <span className="card-nophoto" aria-hidden="true">{kind}</span>}
       <div className="ocard-body">
         <div className="ocard-main">
-          <p className="ocard-kicker">{kicker}</p>
+          <p className="ocard-kicker" title={kicker}>{kicker}</p>
           <H className="ocard-title"><a href={url} lang={textLang}>{l.title}</a></H>
           <p className="ocard-price num">{price(l, lang)}</p>
         </div>

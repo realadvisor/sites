@@ -18,6 +18,7 @@ export function ListingCard({ listing: x, l, priority = false, sizes = '(min-wid
   const badge = x.status === 'sold' ? t('sold') : x.offer_type === 'rent' ? t('forRent') : undefined;
   const facts = [rooms(x.rooms, l), x.living_surface ? formatSurface(x.living_surface) : ''].filter(Boolean);
   const place = cityName(x.address.city, l);
+  const eyebrow = [typeLabel(x.property_type, l), place].filter(Boolean).join(' · ');
   return (
     <article className={['card', x.status === 'sold' && 'card--sold'].filter(Boolean).join(' ')} data-listing-id={x.id}>
       <a className="card__link" href={listingHref(x, l)}>
@@ -28,7 +29,7 @@ export function ListingCard({ listing: x, l, priority = false, sizes = '(min-wid
           {badge && <span className="card__badge">{badge}</span>}
         </div>
         <div className="card__body">
-          <p className="card__meta">{typeLabel(x.property_type, l)}{place && <> · {place}</>}</p>
+          <p className="card__meta" title={eyebrow}>{eyebrow}</p>
           <H className="card__title">{x.title}</H>
           {facts.length > 0 && <p className="card__facts num">{facts.map((f, i) => <span key={i}>{f}</span>)}</p>}
           {x.status !== 'sold' && <p className="card__price num">{price(x, l)}</p>}

@@ -62,14 +62,14 @@ const PRELOAD_ID = '\0vite/preload-helper.js';
 /**
  * KIT_CSS: `import '@realadvisor/sites-kit-react/styles/kit.css'` from a JS
  * module becomes one JS import per part (the Astro kit's form.css, then
- * search, pager, map, consent): no `@import` for the CSS bundler to hoist,
+ * search, pager, map, consent, photo-viewer, listing-area): no `@import` for the CSS bundler to hoist,
  * so the kit's rules sit exactly where root.tsx imports kit.css (Astro: where
  * the layout imports ConsentBanner), and a site that imports a part itself
  * gets it once.
  */
 const KIT_CSS_ID = '\0sites-kit-react/kit.css.js';
 const KIT_DIR = fileURLToPath(new URL('.', import.meta.url));
-const KIT_PARTS = ['search', 'pager', 'map', 'consent'].map((p) => join(KIT_DIR, 'styles', `${p}.css`));
+const KIT_PARTS = ['search', 'pager', 'map', 'consent', 'photo-viewer', 'listing-area'].map((p) => join(KIT_DIR, 'styles', `${p}.css`));
 const isKitCss = (id) => id === '@realadvisor/sites-kit-react/styles/kit.css' || resolve(id) === join(KIT_DIR, 'styles', 'kit.css');
 const preloadHelper = (base) => `const base = ${JSON.stringify(base)};
 export const __vitePreload = (load, deps) => {
@@ -139,6 +139,24 @@ export default function sitesKit(opts = {}) {
       if (!existsSync(file)) return;
       clientId = file;
       this.emitFile({ type: 'chunk', id: file, name: 'site' });
+    },
+    // KIT_CSS: the import statement itself becomes one import per part, so the parts are
+    // direct imports of root.tsx in the module graph. React Router's dev server collects a
+    // page's CSS (critical.css) by walking that graph without loading the modules, and these
+    // sites send no route JS to the browser: through the virtual module alone the kit's CSS
+    // never reached a page in dev.
+    async transform(code, id) {
+      if (!/\.[cm]?[jt]sx?(\?|$)/.test(id) || id.includes('/node_modules/') || !code.includes('styles/kit.css')) return undefined;
+      const re = /^import\s+(['"])([^'"]*styles\/kit\.css)\1;?[ \t]*$/gm;
+      let out = code;
+      for (const m of [...code.matchAll(re)]) {
+        const r = await this.resolve(m[2], id);
+        if (!isKitCss(m[2]) && !(r && isKitCss(r.id.split('?')[0]))) continue;
+        const form = await this.resolve('@realadvisor/sites-kit-core/styles/form.css', id);
+        const parts = [form?.id ?? '@realadvisor/sites-kit-core/styles/form.css', ...KIT_PARTS];
+        out = out.replace(m[0], parts.map((f) => `import ${JSON.stringify(f)};`).join(' '));
+      }
+      return out === code ? undefined : { code: out, map: null };
     },
     resolveId(id, importer) {
       if (id === SITE_ID || id === CLIENT_ID || id === CSS_ID) return resolved(id);

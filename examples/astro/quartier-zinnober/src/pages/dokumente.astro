@@ -76,6 +76,9 @@ const TONES = ['zinnober', 'lilac', 'butter'];
   .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
   .svg { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-weight: 650; font-size: 0.875rem; }
   .pl a:hover strong { text-decoration: underline; }
+  /* A narrow card puts the SVG link on its own line in every card, so the captions end level. */
+  .pl li { container-type: inline-size; }
+  @container (max-width: 250px) { .svg { flex-basis: 100%; justify-content: flex-end; } }
   .note { margin-top: 18px; font-size: 0.875rem; }
   @media (max-width: 960px) { .list { grid-template-columns: 1fr; } .pl { grid-template-columns: 1fr 1fr; } }
 </style>

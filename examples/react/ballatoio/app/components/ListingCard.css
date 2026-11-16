@@ -5,8 +5,10 @@
   .card-photo img { transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
   .card:hover .card-photo img { transform: scale(1.025); }
   .card-text { display: grid; gap: 8px; }
-  .card-place { font-size: 0.9375rem; color: var(--muted); }
-  .card-title { max-width: 24ch; }
+  /* Cards side by side line up part by part: the place holds one line, the title two
+     (clamped, min-height two lines), so dividers, facts and prices share a height. */
+  .card-place { font-size: 0.9375rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-title { max-width: 24ch; min-height: 2em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; padding-top: 0.08em; margin-top: -0.08em; }
   .card-wide .card-title { font-size: var(--fs-m); max-width: 22ch; }
   .card-title a { text-decoration: none; }
   .card-title a::after { content: ''; position: absolute; inset: 0; }

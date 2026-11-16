@@ -29,6 +29,7 @@ const textLang = lang === CONTENT_LANG ? undefined : CONTENT_LANG;
 const sizes = Astro.props.sizes ?? (variant === 'overlay' ? '(min-width: 1360px) 650px, (min-width: 760px) 48vw, 100vw' : '(min-width: 1360px) 430px, (min-width: 760px) 31vw, 100vw');
 const badge = l.status === 'sold' ? ui.sold : null;
 const alt = photo?.alt || `${kind}, ${l.address.city ?? ''}`;
+const kicker = [l.address.city, kind].filter(Boolean).join(' · ');
 const facts = [
   l.bedrooms ? `${l.bedrooms} ${lang === 'es' ? 'dorm.' : 'bed'}` : '',
   l.bathrooms ? `${l.bathrooms} ${lang === 'es' ? (l.bathrooms === 1 ? 'baño' : 'baños') : l.bathrooms === 1 ? 'bath' : 'baths'}` : '',
@@ -43,7 +44,7 @@ const facts = [
         : <span class="card-nophoto" aria-hidden="true">{kind}</span>}
       {badge && <span class="card-badge">{badge}</span>}
     </div>
-    <p class="card-kicker">{[l.address.city, kind].filter(Boolean).join(' · ')}</p>
+    <p class="card-kicker" title={kicker}>{kicker}</p>
     <H class="card-title"><a href={url} lang={textLang}>{l.title}</a></H>
     <dl class="spec">
       {specRows(l, lang, { price: l.status !== 'sold' }).map(([k, v]) => (
@@ -58,7 +59,7 @@ const facts = [
       : <span class="card-nophoto" aria-hidden="true">{kind}</span>}
     <div class="ocard-body">
       <div class="ocard-main">
-        <p class="ocard-kicker">{[l.address.city, kind].filter(Boolean).join(' · ')}</p>
+        <p class="ocard-kicker" title={kicker}>{kicker}</p>
         <H class="ocard-title"><a href={url} lang={textLang}>{l.title}</a></H>
         <p class="ocard-price num">{price(l, lang)}</p>
       </div>
@@ -76,8 +77,8 @@ const facts = [
   .card:hover .card-photo :global(img) { transform: scale(1.03); }
   .card-nophoto { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 4 / 3; background: var(--surface); color: var(--muted); font: 300 1.5rem var(--font-display); }
   .card-badge { position: absolute; left: 0; top: 18px; background: var(--paper); color: var(--text); padding: 8px 14px; font: 500 .6875rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; }
-  .card-kicker { font-size: .9375rem; color: var(--muted); margin-bottom: 6px; }
-  .card-title { font: 300 clamp(1.375rem, 1.8vw, 1.75rem)/1.15 var(--font-display); margin-bottom: 18px; }
+  .card-kicker { font-size: .9375rem; color: var(--muted); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-title { font: 300 clamp(1.375rem, 1.8vw, 1.75rem)/1.15 var(--font-display); margin-bottom: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-height: calc(2 * 1.15em); }
   .card-title a { text-decoration: none; }
   .card-title a::after { content: ''; position: absolute; inset: 0; }
   .card-title a:focus-visible { outline: none; }
@@ -95,8 +96,8 @@ const facts = [
   .ocard:hover > :global(img), .ocard:hover > :global(picture img) { transform: scale(1.03); }
   .ocard-body { position: absolute; inset: auto 0 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: clamp(18px, 2.4vw, 32px); text-shadow: 0 1px 12px rgb(0 0 0 / .3); }
   .ocard-main { min-width: 0; }
-  .ocard-kicker { font-size: .875rem; margin-bottom: 6px; }
-  .ocard-title { font: 300 clamp(1.375rem, 2.2vw, 2.125rem)/1.08 var(--font-display); margin-bottom: 10px; }
+  .ocard-kicker { font-size: .875rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ocard-title { font: 300 clamp(1.375rem, 2.2vw, 2.125rem)/1.08 var(--font-display); margin-bottom: 10px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-height: calc(2 * 1.08em); }
   .ocard-title a { text-decoration: none; }
   .ocard-title a::after { content: ''; position: absolute; inset: 0; }
   .ocard-title a:focus-visible { outline: none; }
