@@ -19,7 +19,9 @@ The shared kit (`DESIGN.md`, `fixtures/`, the sources) is in
 `node_modules/@realadvisor/sites-kit-core/`. Twelve finished example sites
 are in `/vercel/sandbox/examples`, each built twice, in `react/<name>` and
 `astro/<name>` (start with its `README.md`): read the version in your
-framework, adapt its code, never copy its data or text.
+framework and take its working parts (data wiring, components, checks),
+never its data, its text or its layout: the layout comes from the direction
+you write first (DESIGN.md section 13).
 
 The bar: the agency owner opens the site on desktop and phone and believes a
 good studio built it, with their real listings, real agents and a contact
@@ -225,7 +227,8 @@ Rules:
   offices, a founding year, a review count or a rating appears only when the
   data or the agency's own site states it (BRIEF.md names the source); a
   reviewer will ask where each number came from. Reference sites and
-  examples give patterns (layout, rhythm, sections), never facts or words.
+  examples give working parts and a measure of finish, never facts, words
+  or the layout of this site (DESIGN.md section 13).
   Stock photos are captioned with their place and never presented as a
   property, a client's home or the agency's office: a visitor takes a photo
   next to a price for the property.

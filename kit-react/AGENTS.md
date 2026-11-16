@@ -4,7 +4,8 @@ The framework half of the rules. The shared rules are in
 `node_modules/@realadvisor/sites-kit-core/AGENTS.md` (read it first), the
 design in `DESIGN.md` next to it. This file shows how a React Router 7 site
 (framework mode, SSR on a Cloudflare Worker) does what they ask. Reference
-sites: `examples/react/<name>` (studio-vey is the smallest complete one).
+sites: `examples/react/<name>` (studio-vey is the smallest complete one);
+they show working parts, not the layout to build.
 
 ## Files
 

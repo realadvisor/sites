@@ -10,16 +10,24 @@ the screenshot and the rule it breaks. "Looks great" is not a verdict.
 
 ## 1. The anchor
 
-Judge against the chosen style (the example or reference in BRIEF.md and
-DESIGN-NOTES.md), not against an abstract ideal. Put its screenshot next to
-the page's at the same width and ask: does the page keep the anchor's calm,
-proportions and restraint? What did the adaptation break? Brand colours,
-logos and real photos are where adaptations usually break it.
+Judge craft against a finished site (the example or reference in BRIEF.md
+and DESIGN-NOTES.md), not against an abstract ideal. Put its screenshot next
+to the page's at the same width and ask: is the page as calm, as well
+proportioned and as restrained in its details? Brand colours, logos and real
+photos are where a page usually loses that.
+
+The anchor is a measure of finish, never of layout. The page's composition,
+its first screen and its section order come from the direction in BRIEF.md
+("Signature"), not from the anchor. A page that is laid out differently from
+the anchor on purpose loses nothing for it; a page that is the anchor with
+the colours swapped fails distinctiveness (section 4). When the two pull
+apart, the direction wins on layout and the anchor wins on finish.
 
 ## 2. The rubric
 
 Score each line 0 (broken), 1 (acceptable), 2 (studio quality), always
-against the anchor at the same width: "the anchor does X, the page does Y".
+for finish against the anchor at the same width: "the anchor does X, the
+page does Y". No line scores the layout's likeness to the anchor.
 A page ships to the user at 2 on every line, or at 1 with the reason written
 in DESIGN-NOTES.md. Desktop 1440 and phone 390 both count.
 
@@ -71,7 +79,8 @@ How to judge the hard lines:
   `pnpm screenshot` prints blocks aligned to nothing as `taste: off-grid`.
 - **Section rhythm (7).** summary.json `sections` lists each band's top,
   height, ground and padding: compare the paddings, and read the grounds in
-  order (paper, tint, ink...). The anchor's sequence is the reference.
+  order (paper, tint, ink...). The reference is one consistent beat down
+  the page, as steady as the anchor's; the sequence itself is the page's own.
 - **Brand fit (13), the "could be any agency" test.** Cover the logo and
   the name on the first screen. If it could be the example or any other
   agency, score 1 at most and name what would make it theirs (their claim
@@ -146,7 +155,7 @@ this score is the one the stop rule reads.
 
 The critic also walks a checklist of faults a user once had to point out
 (`critic/CRITIC.md`, "Checklist"): a motif drawn over photos, a crude
-hand-traced map, a generic stock dose (more than one stock break per page,
+hand-traced map, a generic stock dose (more than two stock photos per page besides the hero,
 stock without its place caption), the sellers-first order on the home (the
 valuation call to action on the first screen at every width, the valuation
 band early in the page), facts without a source, repeated photos, raw CRM
