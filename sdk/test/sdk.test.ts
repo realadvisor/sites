@@ -1,5 +1,6 @@
 // node --test from sdk: Node strips the TypeScript types itself.
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync } from 'node:fs';
 import { afterEach, describe, it, mock } from 'node:test';
 
@@ -264,7 +265,7 @@ describe('errors', () => {
     await assert.rejects(ra.teams(), { code: 'unavailable' });
   });
 
-  it('gives up after 8 s with unavailable, and tries a GET once more', async () => {
+  it('a read gives up after 3 s with unavailable, and tries once more', async () => {
     mock.timers.enable({ apis: ['setTimeout'] });
     // A request that never answers: it ends only when the SDK aborts it.
     const { ra, seen } = client(
@@ -276,13 +277,13 @@ describe('errors', () => {
     const pending = assert.rejects(ra.teams(), (err: unknown) => {
       assert.ok(err instanceof SitesApiError);
       assert.equal(err.code, 'unavailable');
-      assert.match(err.message, /no answer in 8 s/);
+      assert.match(err.message, /no answer in 3 s/);
       return true;
     });
     for (let attempt = 1; attempt <= 2; attempt++) {
       while (seen.length < attempt) await new Promise(r => setImmediate(r));
-      mock.timers.tick(7999);
-      assert.equal(seen[attempt - 1]!.signal!.aborted, false, 'still waiting just before 8 s');
+      mock.timers.tick(2999);
+      assert.equal(seen[attempt - 1]!.signal!.aborted, false, 'still waiting just before 3 s');
       mock.timers.tick(1);
     }
     await pending;
@@ -309,6 +310,189 @@ describe('errors', () => {
     assert.equal(res.status, 502);
     assert.deepEqual(await res.json(), { code: 'unavailable' });
     assert.equal(seen.length, 1);
+  });
+});
+
+describe('cache', () => {
+  /** A Cache API stand-in: a Map by key URL. */
+  const memoryCache = () => {
+    const map = new Map<string, Response>();
+    return {
+      map,
+      match: async (k: string) => map.get(k)?.clone(),
+      put: async (k: string, res: Response) => void map.set(k, res),
+    };
+  };
+  const cached = (answer: Parameters<typeof fakeFetch>[0], extra: { waitUntil?: (p: Promise<unknown>) => void | boolean } = {}) => {
+    const f = fakeFetch(answer);
+    const store = memoryCache();
+    const ra = createClient({ url: URL_, key: KEY, fetch: f.fetch, cache: { store, ...extra } });
+    return { ra, seen: f.seen, store };
+  };
+  const ORG = { id: 'org-1', name: 'Agence du Lac' };
+  const MIN = 60_000;
+  const HOUR = 60 * MIN;
+  const at = (now: number, apis: Array<'Date' | 'setTimeout'> = ['Date']) => {
+    mock.timers.reset();
+    mock.timers.enable({ apis, now });
+  };
+  const hang = (req: Seen) =>
+    new Promise<Response>((_, reject) => req.signal!.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError'))));
+
+  it('is off by default: every read calls the API', async () => {
+    const store = memoryCache();
+    const original = (globalThis as { caches?: unknown }).caches;
+    (globalThis as { caches?: unknown }).caches = { default: store };
+    try {
+      const { ra, seen } = client(() => json(200, ORG));
+      await ra.organisation();
+      await ra.organisation();
+      assert.equal(seen.length, 2);
+      assert.equal(store.map.size, 0);
+    } finally {
+      (globalThis as { caches?: unknown }).caches = original;
+    }
+  });
+
+  it('cache: true uses caches.default; a second identical read within 60 s makes no request', async () => {
+    const store = memoryCache();
+    const original = (globalThis as { caches?: unknown }).caches;
+    (globalThis as { caches?: unknown }).caches = { default: store };
+    try {
+      const f = fakeFetch(() => json(200, ORG));
+      const ra = createClient({ url: URL_, key: KEY, fetch: f.fetch, cache: true });
+      at(1_000_000);
+      assert.deepEqual(await ra.organisation(), ORG);
+      at(1_000_000 + MIN - 1);
+      assert.deepEqual(await ra.organisation(), ORG);
+      assert.equal(f.seen.length, 1);
+      assert.equal(store.map.size, 1);
+    } finally {
+      (globalThis as { caches?: unknown }).caches = original;
+    }
+  });
+
+  it('a fresh copy answers a new client too (another isolate of the colo)', async () => {
+    const { ra, store, seen } = cached(() => json(200, page([{ id: ID }])));
+    const f = fakeFetch(() => json(200, page()));
+    const second = createClient({ url: URL_, key: KEY, fetch: f.fetch, cache: { store } });
+    await ra.allListings();
+    assert.deepEqual(await second.allListings(), [{ id: ID }]);
+    assert.equal(seen.length, 1);
+    assert.equal(f.seen.length, 0);
+  });
+
+  it('keys by the URL and the SHA-256 of the key, never the key itself', async () => {
+    const { ra, store } = cached(() => json(200, ORG));
+    await ra.organisation();
+    const sha = createHash('sha256').update(KEY).digest('hex');
+    assert.deepEqual([...store.map.keys()], [`https://gw.test/v3/public/organisation?sdk_key=${sha}`]);
+    for (const [k, res] of store.map) {
+      assert.ok(!k.includes(KEY));
+      for (const [, v] of res.headers) assert.ok(!v.includes(KEY));
+    }
+    // Another key never reads this key's copy.
+    const f = fakeFetch(() => json(200, { id: 'org-2' }));
+    const other = createClient({ url: URL_, key: 'ra_site_other', fetch: f.fetch, cache: { store } });
+    assert.deepEqual(await other.organisation(), { id: 'org-2' });
+    assert.equal(f.seen.length, 1);
+  });
+
+  it('serves a stale copy at once and refreshes it in the background (waitUntil)', async () => {
+    let n = 0;
+    const later: Promise<unknown>[] = [];
+    const { ra, seen } = cached(() => json(200, { ...ORG, n: ++n }), { waitUntil: p => void later.push(p) });
+    at(0);
+    assert.equal((await ra.organisation()).n, 1);
+    at(MIN + 1);
+    assert.equal((await ra.organisation()).n, 1, 'the stale copy answers');
+    assert.equal(later.length, 1, 'the refresh runs after the answer');
+    await Promise.all(later);
+    assert.equal((await ra.organisation()).n, 2, 'the refreshed copy');
+    assert.equal(seen.length, 2);
+  });
+
+  it('without waitUntil, a stale read waits for the refresh', async () => {
+    let n = 0;
+    const { ra, seen } = cached(() => json(200, { ...ORG, n: ++n }));
+    at(0);
+    await ra.organisation();
+    at(MIN + 1);
+    assert.equal((await ra.organisation()).n, 2);
+    assert.equal(seen.length, 2);
+  });
+
+  it('a copy older than 24 h is never served', async () => {
+    let n = 0;
+    const { ra } = cached(() => (++n === 1 ? json(200, ORG) : json(503, {})));
+    at(0);
+    await ra.organisation();
+    at(24 * HOUR + 1);
+    await assert.rejects(ra.organisation(), { code: 'unavailable' });
+  });
+
+  it('on a timeout the stale copy answers', async () => {
+    let n = 0;
+    const { ra, seen } = cached(req => (++n === 1 ? json(200, ORG) : hang(req)));
+    at(0);
+    await ra.organisation();
+    at(HOUR, ['Date', 'setTimeout']);
+    const pending = ra.organisation();
+    while (seen.length < 2) await new Promise(r => setImmediate(r));
+    mock.timers.tick(3000);
+    assert.deepEqual(await pending, ORG);
+    assert.equal(seen.length, 2, 'no second try when a copy can answer');
+  });
+
+  it('on a 5xx the stale copy answers', async () => {
+    let n = 0;
+    const { ra } = cached(() => (++n === 1 ? json(200, ORG) : json(502, {})));
+    at(0);
+    await ra.organisation();
+    at(HOUR);
+    assert.deepEqual(await ra.organisation(), ORG);
+  });
+
+  it('keeps a 404 for 60 s', async () => {
+    const { ra, seen } = cached(() => json(404, { title: 'Listing not found' }));
+    at(0);
+    assert.equal(await ra.listing(ID), null);
+    assert.equal(await ra.listing(ID), null);
+    assert.equal(seen.length, 1);
+    at(MIN);
+    assert.equal(await ra.listing(ID), null);
+    assert.equal(seen.length, 2);
+  });
+
+  it('never keeps a 401, and its error is unchanged', async () => {
+    const { ra, seen, store } = cached(() => json(401, { error: 'unauthorized' }));
+    for (let i = 0; i < 2; i++) {
+      await assert.rejects(ra.organisation(), (err: unknown) => {
+        assert.ok(err instanceof SitesApiError);
+        assert.equal(err.code, 'site_key');
+        assert.equal(err.status, 401);
+        assert.equal(err.message, 'GET /v3/public/organisation: 401 unauthorized');
+        return true;
+      });
+    }
+    assert.equal(seen.length, 2);
+    assert.equal(store.map.size, 0);
+  });
+
+  it('a 401 on refresh is thrown, never hidden behind the stale copy', async () => {
+    let n = 0;
+    const { ra } = cached(() => (++n === 1 ? json(200, ORG) : json(401, {})));
+    at(0);
+    await ra.organisation();
+    at(HOUR);
+    await assert.rejects(ra.organisation(), { code: 'site_key' });
+  });
+
+  it('never caches the verification key or an enquiry', async () => {
+    const { ra, store } = cached(req => json(200, req.method === 'POST' ? { id: 'e1' } : { site_key: '0x4AAA' }));
+    await ra.turnstileSiteKey();
+    await handleEnquiry(enquiryRequest({ json: FORM }), ra);
+    assert.equal(store.map.size, 0);
   });
 });
 

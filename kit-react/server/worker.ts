@@ -23,7 +23,7 @@
 import { createRequestHandler, type ServerBuild } from 'react-router';
 import site from 'virtual:sites-kit/site';
 import inlineStyles from 'virtual:sites-kit-react/css';
-import { setRuntimeEnv, siteMode, type SiteEnv } from '@realadvisor/sites-kit-core/env';
+import { setRuntimeEnv, siteMode, withRequestContext, type SiteEnv } from '@realadvisor/sites-kit-core/env';
 import { notFoundPage, renderFailed } from '@realadvisor/sites-kit-core/render-error';
 import { logSiteError } from '@realadvisor/sites-kit-core/site-error';
 import { localeOfPath } from '@realadvisor/sites-kit-core/i18n';
@@ -117,7 +117,8 @@ export function createSiteWorker(build: () => Promise<ServerBuild>) {
       let res: Response;
       try {
         // The page locale (pageLocale(request)): siteClient reads texts in it.
-        res = await withPageLocale(localeOfPath(path), () => handle(request, loadContext));
+        // The request's ctx: the data cache refreshes stale copies through its waitUntil.
+        res = await withRequestContext(ctx, () => withPageLocale(localeOfPath(path), () => handle(request, loadContext)));
         if ((res.headers.get('content-type') ?? '').includes('text/html') && res.body) {
           const raw = await res.text(); // throws when rendering fails mid-stream
           if (res.status === 200 && !raw.replace(/<!doctype html>/i, '').trim()) throw new Error('page rendered an empty body');

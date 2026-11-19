@@ -258,7 +258,7 @@ Every failure is a `SitesApiError` with one `code`:
 | `site_key` | 401, 403 | The key was revoked or rotated, or may not read this. |
 | `verification_required` | 403 | No valid Turnstile token. |
 | `rate_limited` | 429 | Too many enquiries from this visitor. |
-| `unavailable` | any other, or none | The API failed or did not answer in 8 s, or no data access is configured. Also a 409: an enquiry with the same `idempotency_key` is still being created. |
+| `unavailable` | any other, or none | The API failed, a read got no answer in 3 s or an enquiry none in 8 s, or no data access is configured. Also a 409: an enquiry with the same `idempotency_key` is still being created. |
 
 ```ts
 import { SitesApiError } from '@realadvisor/sites-sdk';
@@ -278,9 +278,30 @@ enquiry is never retried.
 
 ## Caching
 
-The API caches reads for 60 seconds per key. A change in the CRM shows on the
-site within a minute. Do not add a cache of your own on top. Enquiries and the
-verification route are never cached.
+The API caches reads for 60 seconds per key. The SDK can also keep them in the
+Cloudflare Cache API of the colo (`caches.default`), so a page served again
+makes no request at all. It is off by default. Both kits turn it on for a
+published production site (`SITE_MODE=production`). Previews and dev read live.
+
+```ts
+const ra = createClient({ cache: { waitUntil: (p) => ctx.waitUntil(p) } });
+```
+
+- A 200 is fresh for 60 seconds. A change in the CRM shows within about two
+  minutes.
+- After 60 seconds the stale copy answers at once and refreshes after the
+  answer, through `waitUntil`. Without `waitUntil` the read waits for the
+  refresh. A copy older than 24 hours is never served.
+- A 404 of `listing()` or `development()` is kept 60 seconds.
+- When the API times out (3 s) or answers a 5xx, the stale copy answers.
+- Errors are never kept: a rejected key (401, 403) fails every time.
+- The cache key is the request URL plus the SHA-256 of the site key. The key
+  itself is never stored.
+- `cache: true` takes `caches.default` with no `waitUntil`. Where there is no
+  Cache API (Node), there is no cache.
+- Enquiries and the verification route are never cached.
+
+The kits already wire this. Do not add another cache on top.
 
 ## Fixtures
 

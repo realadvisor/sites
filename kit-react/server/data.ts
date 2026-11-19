@@ -7,7 +7,8 @@
  *   export const sites = siteClient({ fixture });
  *
  * - SITES_API_URL + SITES_API_KEY set (publish, CRM preview, .dev.vars):
- *   the SDK's `createClient`, live data (the API caches 60 s).
+ *   the SDK's `createClient`, live data (the API caches 60 s; a production
+ *   site also keeps reads in the colo's Cache API, fresh 60 s, stale 24 h).
  * - Otherwise: the fixture (`pnpm dev`, the build, check:deploy), with the
  *   same filters as the API, so a page runs unchanged on both.
  *
@@ -19,7 +20,7 @@
  */
 import { createClient, createFixtureClient } from '@realadvisor/sites-sdk';
 import type { Portals, SitesClient } from '@realadvisor/sites-sdk/types';
-import { previewApi } from '@realadvisor/sites-kit-core/env';
+import { dataCache, previewApi } from '@realadvisor/sites-kit-core/env';
 import { withTextLocale } from '@realadvisor/sites-kit-core/page-locale';
 import type { Fixture } from './fixture-client';
 
@@ -39,11 +40,12 @@ export function liveClient(portals?: Portals): SitesClient | null {
   const { url, token } = previewApi();
   if (!url || !token) return null;
   // The SDK reads process.env; a Worker's env reaches it through setRuntimeEnv + this url/key.
-  const key = `${url}\0${token}\0${JSON.stringify(portals ?? null)}`;
+  const cache = dataCache(import.meta.env.PROD);
+  const key = `${url}\0${token}\0${JSON.stringify(portals ?? null)}\0${!!cache}`;
   let live = clients.get(key);
   if (!live) {
     if (clients.size > 8) clients.clear();
-    live = createClient({ portals, url, key: token });
+    live = createClient({ portals, url, key: token, cache });
     clients.set(key, live);
   }
   return live;

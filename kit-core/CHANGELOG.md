@@ -11,6 +11,21 @@ the versions is enough.
 To upgrade a site, read every entry newer than the site's current version,
 oldest first, and apply each Upgrade step in order.
 
+## 0.5.3
+
+- A published production site (`SITE_MODE=production`) keeps its data reads
+  in the colo's Cache API. A page served again makes no request to the data
+  API for 60 seconds. After that the stale copy answers at once and refreshes
+  in the background, for up to 24 hours. A listing or development not found
+  is kept 60 seconds. Previews and dev read live.
+- When the data API times out or answers a 5xx, the stale copy answers
+  instead of the 500 page.
+- A data read gives up after 3 seconds, down from 8. An enquiry keeps 8.
+- SDK: `createClient({ cache })` turns the cache on (`true`, or
+  `{ waitUntil, store }`). It is off by default.
+- kit-core: `withRequestContext(ctx, fn)` and `dataCache(prodBuild)` in
+  `env`. The Astro middleware and the React Worker call the first.
+
 ## 0.5.2
 
 - Every page that fails to render, and every enquiry refused for its site

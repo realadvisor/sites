@@ -13,6 +13,9 @@
  * process.env at build time. Never read the API key from a prerendered page.
  */
 
+import { AsyncLocalStorage } from 'node:async_hooks';
+import type { CacheOptions } from '@realadvisor/sites-sdk/types';
+
 export type SiteEnv = {
   SITE_MODE?: string;
   ANALYTICS_ID?: string;
@@ -54,6 +57,32 @@ export const siteIdentity = () => ({
   site: read('SITE_SLUG') ?? null,
   worker: read('SITE_WORKER') ?? null,
 });
+/** The part of a Worker's ExecutionContext the data cache needs. */
+export type WaitUntil = { waitUntil(p: Promise<unknown>): void };
+
+const request = new AsyncLocalStorage<WaitUntil | undefined>();
+
+/** Runs `fn` with this request's ExecutionContext: the data cache refreshes a stale copy through its waitUntil. */
+export const withRequestContext = <T>(ctx: WaitUntil | undefined, fn: () => T): T => request.run(ctx, fn);
+
+/**
+ * The SDK's `cache` option: on for a published production site (SITE_MODE
+ * production and a production build), off for previews and dev, so they
+ * show each CRM change at once. A stale copy refreshes after the answer
+ * (the request's waitUntil), or before it outside a request.
+ */
+export const dataCache = (prodBuild: boolean): CacheOptions | false =>
+  prodBuild && siteMode() === 'production'
+    ? {
+        waitUntil: (p) => {
+          const ctx = request.getStore();
+          if (!ctx) return false;
+          ctx.waitUntil(p);
+          return true;
+        },
+      }
+    : false;
+
 export const previewApi = () => ({
   url: read('SITES_API_URL'),
   token: read('SITES_API_KEY'),
