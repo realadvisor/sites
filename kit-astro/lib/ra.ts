@@ -6,7 +6,9 @@
  * - Production and published previews: SITES_API_URL (var, the rest-api
  *   origin) + SITES_API_KEY (Worker secret, the site's api_site key), both set
  *   at publish. The Worker calls rest-api /v3/public directly; rest-api caches
- *   reads for 60 s. The listings are those of the site's own portal.
+ *   reads for 60 s. With SITE_MODE=production the SDK also keeps them in the
+ *   colo's Cache API (fresh 60 s, stale up to 24 h while it refreshes);
+ *   previews read live. The listings are those of the site's own portal.
  * - Sandbox preview: the same two, set by the runtime in .dev.vars. The key is
  *   a placeholder the sandbox firewall fills in. Real data; enquiries are
  *   answered by the firewall, never sent.
@@ -30,7 +32,7 @@ import { createClient, createFixtureClient } from '@realadvisor/sites-sdk';
 import type { DevelopmentWithUnits, SitesClient } from '@realadvisor/sites-sdk/types';
 import { SITES_API_KEY, SITES_API_URL, SITES_FIXTURE } from 'astro:env/server';
 import fixtures from 'virtual:sites-kit/fixtures';
-import { previewApi } from '@realadvisor/sites-kit-core/env';
+import { dataCache, previewApi } from '@realadvisor/sites-kit-core/env';
 import { agencyOf, type Agency, type SiteFixture } from '@realadvisor/sites-kit-core/agency';
 import { withTextLocale } from '@realadvisor/sites-kit-core/page-locale';
 
@@ -84,8 +86,9 @@ let fixture: { data: SiteFixture; client: SitesClient } | undefined;
 function liveClient(): SitesClient | null {
   const a = access();
   if (!a) return null;
-  const id = `${a.url}\0${a.key}`;
-  if (live?.id !== id) live = { id, client: createClient({ url: a.url, key: a.key }) };
+  const cache = dataCache(import.meta.env.PROD);
+  const id = `${a.url}\0${a.key}\0${!!cache}`;
+  if (live?.id !== id) live = { id, client: createClient({ url: a.url, key: a.key, cache }) };
   return live.client;
 }
 

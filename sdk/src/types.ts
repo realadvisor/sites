@@ -271,6 +271,32 @@ export type ClientOptions = {
   key?: string;
   /** Tests only: else globalThis.fetch. */
   fetch?: typeof fetch;
+  /**
+   * Keep reads in the Cache API (`caches.default`, per Cloudflare colo). Off
+   * by default; the kits turn it on for published production sites. A 200 is
+   * fresh 60 s, then served stale up to 24 h while it refreshes; a 404 of
+   * `listing()` / `development()` is kept 60 s; errors are never kept. On a
+   * timeout or a 5xx the stale copy answers. Keyed by URL and the SHA-256 of
+   * the key. No Cache API (Node): no cache.
+   */
+  cache?: boolean | CacheOptions;
+};
+
+/** The two methods of a Cache (Cache API) the SDK uses. */
+export type CacheStore = {
+  match(request: string): Promise<Response | undefined>;
+  put(request: string, response: Response): Promise<void>;
+};
+
+export type CacheOptions = {
+  /** Else `caches.default`. */
+  store?: CacheStore;
+  /**
+   * Runs the refresh of a stale copy after the answer (the Worker's
+   * `ctx.waitUntil`). Without it, or when it returns false, the read waits
+   * for the refresh (the stale copy answers if that times out or fails with a 5xx).
+   */
+  waitUntil?: (p: Promise<unknown>) => void | boolean;
 };
 
 export type SitesClient = {

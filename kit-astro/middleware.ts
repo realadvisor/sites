@@ -1,5 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
-import { setRuntimeEnv, siteMode, type SiteEnv } from '@realadvisor/sites-kit-core/env';
+import { setRuntimeEnv, siteMode, withRequestContext, type SiteEnv, type WaitUntil } from '@realadvisor/sites-kit-core/env';
 import site from 'virtual:sites-kit/site';
 import { securityHeaders } from '@realadvisor/sites-kit-core/security';
 import { notFoundPage, renderFailed } from '@realadvisor/sites-kit-core/render-error';
@@ -50,7 +50,11 @@ function redirectFor(url: URL): string | null {
 }
 
 // Every request renders with its page locale (lib/page-locale.ts): the data helpers read texts in it.
-export const onRequest = defineMiddleware((context, next) => withPageLocale(localeOfPath(context.url.pathname), () => handle(context, next)));
+// The request's ExecutionContext: the data cache refreshes stale copies through its waitUntil.
+export const onRequest = defineMiddleware((context, next) => {
+  const ctx = (context.locals as { runtime?: { ctx?: WaitUntil } }).runtime?.ctx;
+  return withRequestContext(ctx, () => withPageLocale(localeOfPath(context.url.pathname), () => handle(context, next)));
+});
 
 const handle: Parameters<typeof defineMiddleware>[0] = async (context, next) => {
   const locals = context.locals as { runtime?: { env?: SiteEnv } };

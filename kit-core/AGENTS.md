@@ -134,7 +134,7 @@ Field reference (the API's snake_case): `node_modules/@realadvisor/sites-sdk/src
 
 Where data comes from (you never configure it): production uses
 `SITES_API_URL` + `SITES_API_KEY`, set at publish (live, cached 60 s by the
-RealAdvisor API); the CRM preview uses the same two from `.dev.vars` (a
+RealAdvisor API and 60 s in the colo by the kit; add no cache of your own); the CRM preview uses the same two from `.dev.vars` (a
 placeholder key: never print, log or send it anywhere else); everything
 else reads the fixture (`pnpm dev`, `pnpm check` copy the CRM's data or the
 kit's Demo Agency there when it is empty): `app/data/fixture.json` on

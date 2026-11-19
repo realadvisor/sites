@@ -8,6 +8,7 @@ import type {
   Agent,
   Fixture,
   FixtureTranslations,
+  CacheStore,
   ClientOptions,
   Development,
   DevelopmentWithUnits,
@@ -24,7 +25,15 @@ import type {
 
 export type * from './types.ts';
 
-const TIMEOUT_MS = 8000;
+/** A read gives up after 3 s (a cached copy, if any, answers instead); an enquiry after 8 s. */
+const READ_TIMEOUT_MS = 3000;
+const SEND_TIMEOUT_MS = 8000;
+/** `cache`: a 200 is fresh 60 s, then served stale up to 24 h while it refreshes; a 404 is kept 60 s. */
+const FRESH_MS = 60_000;
+const STALE_MS = 24 * 60 * 60_000;
+const NOT_FOUND_MS = 60_000;
+const STORED_AT = 'x-sites-sdk-stored-at';
+const STORED_404 = 'x-sites-sdk-not-found';
 const PAGE = 200;
 /** How long turnstileSiteKey() keeps a key (30 s when there is none). */
 const TURNSTILE_TTL_MS = 5 * 60 * 1000;
@@ -106,8 +115,9 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
   const once = async (method: string, path: string, body?: unknown, headers: Record<string, string> = {}) => {
     const { root, key } = access();
     const doFetch = opts.fetch ?? globalThis.fetch.bind(globalThis);
+    const timeoutMs = method === 'GET' ? READ_TIMEOUT_MS : SEND_TIMEOUT_MS;
     const abort = new AbortController();
-    const timer = setTimeout(() => abort.abort(), TIMEOUT_MS);
+    const timer = setTimeout(() => abort.abort(), timeoutMs);
     let res: Response;
     try {
       res = await doFetch(`${root}${path}`, {
@@ -123,7 +133,7 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
       });
     } catch (err) {
       const timedOut = abort.signal.aborted;
-      throw new SitesApiError('unavailable', `${method} ${path}: ${timedOut ? `no answer in ${TIMEOUT_MS / 1000} s` : (err as Error).message}`);
+      throw new SitesApiError('unavailable', `${method} ${path}: ${timedOut ? `no answer in ${timeoutMs / 1000} s` : (err as Error).message}`);
     } finally {
       clearTimeout(timer);
     }
@@ -131,7 +141,11 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
   };
 
   /** One API call: JSON, or null on 404 when `orNull`. A GET that finds the API unavailable is tried once more. */
-  const call = async <T>(method: 'GET' | 'POST', path: string, init: { body?: unknown; headers?: Record<string, string>; orNull?: boolean } = {}): Promise<T> => {
+  const call = async <T>(
+    method: 'GET' | 'POST',
+    path: string,
+    init: { body?: unknown; headers?: Record<string, string>; orNull?: boolean; retry?: boolean } = {},
+  ): Promise<T> => {
     for (let attempt = 0; ; attempt++) {
       try {
         const res = await once(method, path, init.body, init.headers);
@@ -144,9 +158,77 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
           fields: err.fields,
         });
       } catch (err) {
-        const retry = method === 'GET' && attempt === 0 && err instanceof SitesApiError && err.code === 'unavailable' && err.message !== NO_ACCESS;
+        const retry = method === 'GET' && init.retry !== false && attempt === 0 && err instanceof SitesApiError && err.code === 'unavailable' && err.message !== NO_ACCESS;
         if (!retry) throw err;
       }
+    }
+  };
+
+  const cacheOpts = typeof opts.cache === 'object' ? opts.cache : {};
+  const cacheStore = (): CacheStore | undefined =>
+    opts.cache ? (cacheOpts.store ?? (globalThis as { caches?: { default?: CacheStore } }).caches?.default) : undefined;
+  const keyHashes = new Map<string, Promise<string>>();
+  /** SHA-256 of the API key, hex: the cache tells keys apart without ever holding one. */
+  const keyHash = (key: string) => {
+    let h = keyHashes.get(key);
+    if (!h) {
+      h = crypto.subtle
+        .digest('SHA-256', new TextEncoder().encode(key))
+        .then(buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join(''));
+      keyHashes.set(key, h);
+    }
+    return h;
+  };
+  const refreshing = new Map<string, Promise<unknown>>();
+
+  /**
+   * A GET through the cache when `cache` is on (else straight to `call`):
+   * fresh copy at once; stale copy at once while it refreshes in the
+   * background (waitUntil), or after a refresh that timed out or met a 5xx.
+   * Only 200s and the 404s of `orNull` are stored; every error stays uncached.
+   */
+  const read = async <T>(path: string, orNull = false): Promise<T> => {
+    const cache = cacheStore();
+    if (!cache) return call<T>('GET', path, { orNull });
+    const { root, key } = access();
+    const url = `${root}${path}`;
+    const cacheKey = `${url}${url.includes('?') ? '&' : '?'}sdk_key=${await keyHash(key)}`;
+    const hit = await cache.match(cacheKey).catch(() => undefined);
+    const age = hit ? Date.now() - Number(hit.headers.get(STORED_AT)) : NaN;
+    const notFound = hit?.headers.get(STORED_404) === '1';
+    const copy = async () => (notFound ? null : await hit!.json()) as T;
+    if (age >= 0 && age < (notFound ? NOT_FOUND_MS : FRESH_MS)) return copy();
+    const stale = !notFound && age >= 0 && age < STALE_MS;
+
+    const refresh = (retry: boolean): Promise<T> => {
+      let p = refreshing.get(cacheKey) as Promise<T> | undefined;
+      if (!p) {
+        p = call<T>('GET', path, { orNull, retry })
+          .then(async data => {
+            const gone = data === null;
+            const headers: Record<string, string> = {
+              'content-type': 'application/json',
+              'cache-control': `max-age=${(gone ? NOT_FOUND_MS : STALE_MS) / 1000}`,
+              [STORED_AT]: String(Date.now()),
+            };
+            if (gone) headers[STORED_404] = '1';
+            await cache.put(cacheKey, new Response(gone ? null : JSON.stringify(data), { headers })).catch(() => {});
+            return data;
+          })
+          .finally(() => refreshing.delete(cacheKey));
+        refreshing.set(cacheKey, p);
+      }
+      return p;
+    };
+    if (!stale) return refresh(true);
+    const background = refresh(!!cacheOpts.waitUntil);
+    const logged = background.catch((err: unknown) => console.error(`[sites-sdk] refresh of GET ${path} failed: ${(err as Error).message}`));
+    if (cacheOpts.waitUntil && cacheOpts.waitUntil(logged) !== false) return copy();
+    try {
+      return await background;
+    } catch (err) {
+      if (err instanceof SitesApiError && err.code === 'unavailable') return copy();
+      throw err;
     }
   };
 
@@ -186,7 +268,7 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
 
   const listings = async ({ portal, limit, ...q }: ListingsQuery = {}) => {
     const n = Math.min(Math.max(Math.trunc(limit ?? 24), 1), PAGE);
-    return call<Page<Listing>>('GET', `/v3/public/listings${query({ ...q, portal_ids: portalId(portal), limit: n })}`);
+    return read<Page<Listing>>(`/v3/public/listings${query({ ...q, portal_ids: portalId(portal), limit: n })}`);
   };
 
   /**
@@ -201,10 +283,10 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
     return [first, ...rest].flatMap(p => p.data);
   };
   const list = <T>(path: string, q: Record<string, unknown> = {}) =>
-    all((limit, offset) => call<Page<T>>('GET', `${path}${query({ ...q, limit, offset })}`));
+    all((limit, offset) => read<Page<T>>(`${path}${query({ ...q, limit, offset })}`));
 
   const client: SitesClient & { [SEND]: Send } = {
-    organisation: () => call<Organisation>('GET', '/v3/public/organisation'),
+    organisation: () => read<Organisation>('/v3/public/organisation'),
     teams: () => list<Team>('/v3/public/teams'),
     agents: (q = {}) => list<Agent>('/v3/public/agents', q),
     listings,
@@ -212,14 +294,13 @@ export const createClient = (opts: ClientOptions = {}): SitesClient => {
     listing: async (slugOrId, q = {}) => {
       const id = slugOrId.match(UUID_RE)?.[0].toLowerCase();
       if (!id) return null;
-      return call<Listing | null>('GET', `/v3/public/listings/${id}${query({ portal_ids: allPortals(), locale: q.locale })}`, { orNull: true });
+      return read<Listing | null>(`/v3/public/listings/${id}${query({ portal_ids: allPortals(), locale: q.locale })}`, true);
     },
     developments: (q = {}) => list<Development>('/v3/public/developments', { ...q, portal_ids: allPortals() }),
     development: (slugOrId, q = {}) =>
-      call<DevelopmentWithUnits | null>(
-        'GET',
+      read<DevelopmentWithUnits | null>(
         `/v3/public/developments/${encodeURIComponent(slugOrId)}${query({ portal_ids: allPortals(), locale: q.locale })}`,
-        { orNull: true },
+        true,
       ),
     turnstileSiteKey,
     [SEND]: (body, clientIp) =>
