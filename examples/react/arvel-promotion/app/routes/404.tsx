@@ -4,6 +4,7 @@
  */
 import { useRouteLoaderData } from 'react-router';
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import type { RootData } from '../root';
 import { Layout } from '../components/Layout';
@@ -38,10 +39,11 @@ export default function NotFound() {
 }
 
 export function ServerError() {
+  const { title, body } = serverErrorText();
   return (
-    <Layout title="Page temporairement indisponible" description="Page temporairement indisponible" noindex>
-      <PageHead title="Page temporairement indisponible">
-        <p className="lead nf-lead">Merci de réessayer dans quelques minutes.</p>
+    <Layout title={title} description={title} noindex>
+      <PageHead title={title}>
+        <p className="lead nf-lead">{body}</p>
       </PageHead>
       <section className="section section--tight"><div className="wrap"><p className="nf-links"><a className="link" href="/">{t('home')}</a></p></div></section>
     </Layout>

@@ -9,13 +9,32 @@
  * inline script a page adds. Always waits for the whole page (allReady):
  * the Worker answers complete pages only (a render error is a 500, never a
  * cut 200), crawlers and Lighthouse see the final HTML.
+ *
+ * `handleError` logs a loader, action or render error as one `site_error`
+ * line (kit-core lib/site-error.ts: a rejected site key has `code:
+ * 'site_key'`). A site re-exports it with the rest:
+ *
+ *   export { default, handleError, streamTimeout } from '@realadvisor/sites-kit-react/entry.server';
  */
-import type { AppLoadContext, EntryContext } from 'react-router';
+import type { AppLoadContext, EntryContext, HandleErrorFunction } from 'react-router';
+import { isRouteErrorResponse } from 'react-router';
+import { logSiteError } from '@realadvisor/sites-kit-core/site-error';
 import { ServerRouter } from 'react-router';
 import { renderToReadableStream } from 'react-dom/server';
 import { NonceContext } from '../components/Document';
 
 export const streamTimeout = 8000;
+
+export const handleError: HandleErrorFunction = (error, { request, context }) => {
+  // A cancelled request is not a failure; a thrown 404/410 is the not-found page.
+  if (request.signal.aborted) return;
+  if (isRouteErrorResponse(error) && error.status < 500) return;
+  const status = (error as { status?: unknown } | null)?.status;
+  if (status === 404 || status === 410) return;
+  const url = new URL(request.url);
+  logSiteError('page', error, { status: 500, path: url.pathname, host: url.host });
+  if (context && typeof context === 'object') (context as { errorLogged?: boolean }).errorLogged = true;
+};
 
 export default async function handleRequest(
   request: Request,

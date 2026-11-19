@@ -5,6 +5,7 @@
  */
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Layout } from '../components/Layout';
 import './404.css';
@@ -36,11 +37,12 @@ export default function NotFound(props: { gone?: boolean }) {
 }
 
 export function ServerError() {
+  const { title, body } = serverErrorText();
   return (
-    <Layout title="Seite vorübergehend nicht verfügbar" description="Seite vorübergehend nicht verfügbar" noindex>
+    <Layout title={title} description={title} noindex>
       <section className="nf wrap">
-        <h1 className="h1">Seite vorübergehend nicht verfügbar</h1>
-        <p className="lede muted">Bitte versuchen Sie es in einigen Minuten erneut.</p>
+        <h1 className="h1">{title}</h1>
+        <p className="lede muted">{body}</p>
         <ul className="nf-links"><li><a className="more" href="/">{t('home')}</a></li></ul>
       </section>
     </Layout>

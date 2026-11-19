@@ -76,11 +76,11 @@ const handle: Parameters<typeof defineMiddleware>[0] = async (context, next) => 
     } else if ((res.status === 404 || res.status === 410) && !res.body) {
       res = notFoundPage(path, res.status);
     } else if (res.status >= 500 && !res.body) {
-      res = renderFailed(path, new Error(`HTTP ${res.status} with no body`));
+      res = renderFailed(path, new Error(`HTTP ${res.status} with no body`), context.url.host);
     }
   } catch (err) {
     const status = (err as { status?: unknown } | null)?.status;
-    res = status === 404 || status === 410 ? notFoundPage(path, status) : renderFailed(path, err);
+    res = status === 404 || status === 410 ? notFoundPage(path, status) : renderFailed(path, err, context.url.host);
   }
   try {
     for (const [k, v] of Object.entries(securityHeaders(siteMode() === 'preview'))) {

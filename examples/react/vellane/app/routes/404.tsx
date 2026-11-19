@@ -4,6 +4,7 @@
  * the site: "no longer available"), keeping the status. Also the splat route.
  */
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Layout } from '../components/Layout';
 import { PageHead } from '../components/PageHead';
@@ -32,11 +33,11 @@ export default function NotFound() {
 }
 
 export function ServerError() {
-  const title = 'Page momentanément indisponible';
+  const { title, body, home } = serverErrorText();
   return (
     <Layout title={title} description={title} noindex>
-      <PageHead title={title} lede="Merci de réessayer dans quelques minutes.">
-        <p className="nf"><a className="vb vb--ghost" href={R.home}>Accueil</a></p>
+      <PageHead title={title} lede={body}>
+        <p className="nf"><a className="vb vb--ghost" href={R.home}>{home}</a></p>
       </PageHead>
     </Layout>
   );

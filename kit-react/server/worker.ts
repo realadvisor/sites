@@ -25,6 +25,7 @@ import site from 'virtual:sites-kit/site';
 import inlineStyles from 'virtual:sites-kit-react/css';
 import { setRuntimeEnv, siteMode, type SiteEnv } from '@realadvisor/sites-kit-core/env';
 import { notFoundPage, renderFailed } from '@realadvisor/sites-kit-core/render-error';
+import { logSiteError } from '@realadvisor/sites-kit-core/site-error';
 import { localeOfPath } from '@realadvisor/sites-kit-core/i18n';
 import { withPageLocale } from '@realadvisor/sites-kit-core/page-locale';
 import { createNonce, siteHeaders } from './security';
@@ -36,6 +37,8 @@ export type SiteLoadContext = {
   cloudflare: { env: SiteEnv & Record<string, unknown>; ctx: ExecutionContext };
   /** This request's CSP nonce. */
   nonce: string;
+  /** Set by the kit's handleError (entry.server) once it logged this request's error. */
+  errorLogged?: boolean;
 };
 
 declare module 'react-router' {
@@ -79,7 +82,7 @@ export function inlineCss(html: string, styles: Record<string, string> = inlineS
 function exposeEnv(env: Record<string, unknown>) {
   const proc = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process;
   if (!proc?.env) return;
-  for (const k of ['SITE_MODE', 'SITES_API_URL', 'SITES_API_KEY', 'ANALYTICS_ID', 'SITE_URL']) {
+  for (const k of ['SITE_MODE', 'SITES_API_URL', 'SITES_API_KEY', 'ANALYTICS_ID', 'SITE_URL', 'SITE_SLUG', 'SITE_WORKER']) {
     if (typeof env[k] === 'string' && env[k] && proc.env[k] !== env[k]) proc.env[k] = env[k] as string;
   }
 }
@@ -110,10 +113,11 @@ export function createSiteWorker(build: () => Promise<ServerBuild>) {
 
       const nonce = createNonce();
       const path = url.pathname;
+      const loadContext: SiteLoadContext = { cloudflare: { env, ctx }, nonce };
       let res: Response;
       try {
         // The page locale (pageLocale(request)): siteClient reads texts in it.
-        res = await withPageLocale(localeOfPath(path), () => handle(request, { cloudflare: { env, ctx }, nonce }));
+        res = await withPageLocale(localeOfPath(path), () => handle(request, loadContext));
         if ((res.headers.get('content-type') ?? '').includes('text/html') && res.body) {
           const raw = await res.text(); // throws when rendering fails mid-stream
           if (res.status === 200 && !raw.replace(/<!doctype html>/i, '').trim()) throw new Error('page rendered an empty body');
@@ -124,11 +128,18 @@ export function createSiteWorker(build: () => Promise<ServerBuild>) {
         } else if ((res.status === 404 || res.status === 410) && !res.body) {
           res = notFoundPage(path, res.status);
         } else if (res.status >= 500 && !res.body) {
-          res = renderFailed(path, new Error(`HTTP ${res.status} with no body`));
+          res = renderFailed(path, new Error(`HTTP ${res.status} with no body`), url.host);
+          loadContext.errorLogged = true;
+        }
+        // The site's ServerError page (a loader threw, e.g. a rejected site
+        // key): logged by handleError when the site's entry.server exports
+        // the kit's; else one line here, so every 500 has its line.
+        if (res.status >= 500 && !loadContext.errorLogged) {
+          logSiteError('page', new Error(`HTTP ${res.status}`), { status: res.status, path, host: url.host });
         }
       } catch (err) {
         const status = (err as { status?: unknown } | null)?.status;
-        res = status === 404 || status === 410 ? notFoundPage(path, status) : renderFailed(path, err);
+        res = status === 404 || status === 410 ? notFoundPage(path, status) : renderFailed(path, err, url.host);
       }
       // Only an HTML page carries inline scripts: the nonce goes in its CSP alone.
       const html = (res.headers.get('content-type') ?? '').includes('text/html');

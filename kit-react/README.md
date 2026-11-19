@@ -14,7 +14,7 @@ apply) and adds only what React needs. Reference site:
 | --- | --- |
 | `@realadvisor/sites-kit-react/vite` | `sitesKit({ inlineCss? })`: `virtual:sites-kit/site` (site.json), the site's bundled browser script, `build/client/_headers`, build settings. `inlineCss: true` (opt-in): the Worker inlines each page's built stylesheets as `<style>` (no render-blocking CSS request; style-src already allows it). |
 | `…/worker` | `createSiteWorker(build)`: env, 301s, cross-site form check, per-request CSP nonce, full render before answering (500 never a cut 200), 404/410, security headers. |
-| `…/entry.server` | `renderToReadableStream` with the nonce, waits for `allReady`. |
+| `…/entry.server` | `renderToReadableStream` with the nonce, waits for `allReady`; `handleError` logs a failed loader or render as one `site_error` line. |
 | `…/server/data` | `siteClient({ fixture })`: one `SitesClient` (SDK interface), live with SITES_API_URL + SITES_API_KEY, else the fixture. |
 | `…/server/kit` | `kitData()` for the root loader (mode, analytics id, Turnstile key, SITE_URL), `canonical(request)`, `pageLocale(request)`. |
 | `…/server/enquiry` | `enquiryAction(request, sites)`: the Astro `/api/enquiry` contract, sent through the SDK's `handleEnquiry`. |
@@ -65,7 +65,7 @@ Approved for React Router sites only (2026-11-11): a per-request nonce in
 ```
 site.json, wrangler.jsonc (main: workers/app.ts), vite.config.ts, react-router.config.ts
 workers/app.ts           createSiteWorker(() => import('virtual:react-router/server-build'))
-app/entry.server.tsx     export { default, streamTimeout } from '@realadvisor/sites-kit-react/entry.server'
+app/entry.server.tsx     export { default, handleError, streamTimeout } from '@realadvisor/sites-kit-react/entry.server'
 app/root.tsx             loader { kit: await kitData() }, <KitProvider>, <ConsentBanner>, <KitScripts>, ErrorBoundary -> 404/410 page
 app/client.ts            kit(); islands({...}); site behaviours
 app/lib/data.server.ts   export const sites = siteClient({ fixture })
