@@ -5,6 +5,7 @@
  */
 import { useLocation, useRouteLoaderData } from 'react-router';
 import { lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Site } from '../components/Site';
 import { href, langOfPath, LOCALE } from '../lib/routes';
@@ -51,7 +52,7 @@ export default function NotFound() {
 /** Anything else than a 404 or 410: a short page in the frame, no data needed. */
 export function ServerError() {
   const l = langOfPath(useLocation().pathname);
-  const title = { de: 'Seite vorübergehend nicht verfügbar', fr: 'Page temporairement indisponible', en: 'Page temporarily unavailable' }[l];
+  const { title } = serverErrorText(l);
   const t = tx(l);
   return (
     <Site l={l} route="home" switchTo={HOMES} title={title} description={title} noindex>

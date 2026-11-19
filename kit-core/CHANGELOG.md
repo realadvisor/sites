@@ -11,6 +11,31 @@ the versions is enough.
 To upgrade a site, read every entry newer than the site's current version,
 oldest first, and apply each Upgrade step in order.
 
+## 0.5.2
+
+- Every page that fails to render, and every enquiry refused for its site
+  key, writes one JSON line to the Worker logs with `"event": "site_error"`,
+  `source` (`page` or `enquiry`), `code` (`site_key` when the data API refused
+  the key, else the API's code or `render`), `status`, `api_status`, `site`
+  and `worker` (from `SITE_SLUG` and `SITE_WORKER` when the publish sets
+  them), `host` and `path`. A monitor matches `event`. The site key never
+  appears in it.
+- The kit's 500 page answers in the language of the path (`/en/...` on a
+  multilingual site), else the site's (`site.json` `locale`), else English.
+- kit-react: `handleError` in `entry.server` logs a failed loader or render
+  as that line. Without it, the Worker still logs each 500 answer, with less
+  detail.
+- The examples' `ServerError` pages take their text from `serverErrorText()`
+  instead of copy written in one language.
+
+### Upgrade
+
+- React Router site: in `app/entry.server.tsx`, export `handleError` too:
+  `export { default, handleError, streamTimeout } from '@realadvisor/sites-kit-react/entry.server';`
+- React Router site: if `ServerError` in `app/routes/404.tsx` has its text
+  written out, take it from
+  `serverErrorText(lang(usePageLocale()))` (`@realadvisor/sites-kit-core/render-error`).
+
 ## 0.5.1
 
 - kit-react: the dev server can always be framed by the CRM preview, whatever

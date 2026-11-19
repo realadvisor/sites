@@ -5,6 +5,7 @@
  */
 import { useLocation, useRouteLoaderData } from 'react-router';
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import type { RootData } from '../root';
 import { Layout } from '../components/Layout';
@@ -33,12 +34,12 @@ export default function NotFound() {
 
 export function ServerError() {
   const l = langOf(useLocation().pathname);
-  const title = l === 'de' ? 'Seite vorübergehend nicht verfügbar' : 'Pagina temporaneamente non disponibile';
+  const { title, body } = serverErrorText(l);
   return (
     <Layout l={l} route="404" scope="v-404" title={title} description={title} noindex>
       <div className="wrap nf">
         <h1 className="h1">{title}</h1>
-        <p className="lede">{l === 'de' ? 'Bitte versuchen Sie es in einigen Minuten erneut.' : 'Riprova tra qualche minuto.'}</p>
+        <p className="lede">{body}</p>
         <p className="actions"><a className="link" href={href('home', l)}>{t('home', {}, l)}</a></p>
       </div>
     </Layout>

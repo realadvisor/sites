@@ -6,6 +6,8 @@
  *   site falls back to fixtures (`pnpm dev`, build time).
  * - `SITE_MODE`: `production` or `preview`, set at publish. Preview sites never send enquiries.
  * - `ANALYTICS_ID`: GA4 measurement id. The consent banner shows only when set.
+ * - `SITE_SLUG`, `SITE_WORKER`: the site's slug and Worker name, when the
+ *   publish sets them. Error log lines carry them (lib/site-error.ts).
  *
  * Prerendered pages are built without a request, so they see only
  * process.env at build time. Never read the API key from a prerendered page.
@@ -21,6 +23,8 @@ export type SiteEnv = {
    */
   SITES_API_URL?: string;
   SITES_API_KEY?: string;
+  SITE_SLUG?: string;
+  SITE_WORKER?: string;
 };
 
 let runtime: SiteEnv = {};
@@ -45,6 +49,11 @@ const read = (name: keyof SiteEnv): string | undefined =>
 export const siteMode = (): 'production' | 'preview' =>
   read('SITE_MODE') === 'production' ? 'production' : 'preview';
 export const analyticsId = () => read('ANALYTICS_ID');
+/** Who the site is, for log lines: slug and Worker name, null when the publish did not set them. */
+export const siteIdentity = () => ({
+  site: read('SITE_SLUG') ?? null,
+  worker: read('SITE_WORKER') ?? null,
+});
 export const previewApi = () => ({
   url: read('SITES_API_URL'),
   token: read('SITES_API_KEY'),

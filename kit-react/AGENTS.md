@@ -14,7 +14,7 @@ vite.config.ts            cloudflare() + reactRouter() + sitesKit(). Keep sitesK
 react-router.config.ts    ssr: true. Keep it.
 wrangler.jsonc            Worker config (main: workers/app.ts). No secrets here.
 workers/app.ts            createSiteWorker(): env, 301s, CSP nonce, security headers. Keep it.
-app/entry.server.tsx      The kit's renderer (nonce, whole page before answering). Keep it.
+app/entry.server.tsx      The kit's renderer and error log (nonce, whole page before answering, handleError). Keep it.
 app/entry.client.tsx      Hydration, for routes that ask for it (Scripts below). Keep it.
 app/root.tsx              Document shell: <head>, kit settings, ConsentBanner, KitScripts, ErrorBoundary (404/410 page).
 app/routes.ts             Every URL: one route() per page. Add each new page here.
@@ -88,7 +88,11 @@ export default function Page({ loaderData: { listing } }: Route.ComponentProps) 
   (React Router drops the props of a route's default export). The splat
   route (`route('*', 'routes/404.tsx')`) answers every unknown path.
 - A loader that throws anything else gives the short 500 page
-  (`ServerError` in 404.tsx); the Worker logs it.
+  (`ServerError` in 404.tsx); the Worker logs it as one `site_error` line
+  (`handleError`, re-exported from `app/entry.server.tsx`). Its text comes
+  from `serverErrorText(lang(usePageLocale()))`
+  (`@realadvisor/sites-kit-core/render-error`), never written in the page:
+  it is then in the site's language, whatever example it was copied from.
 - Every page renders `<Layout>` (title, description, image, jsonLd,
   noindex, alternates). The layout renders `<Seo>` with the canonical URL;
   `<JsonLd>` for any other JSON-LD. React 19 hoists the tags into `<head>`.

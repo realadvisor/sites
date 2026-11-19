@@ -28,7 +28,7 @@ import type { SitesClient } from '@realadvisor/sites-sdk/types';
 import { siteMode } from './env';
 import { lang, t } from './i18n';
 import { LOCALE } from './format';
-import { SITE_KEY_REJECTED } from './render-error';
+import { logSiteError } from './site-error';
 
 /** What the endpoint reads: the site's client (`ra`, or the React kit's `sites`). */
 export type EnquiryClient = Pick<SitesClient, 'development'> & { live(): SitesClient | null };
@@ -153,7 +153,11 @@ export async function enquiryAction(request: Request, sites: EnquiryClient): Pro
     case 'rate_limited':
       return respond(429, { error: 'rate_limited' }, 'error');
     case 'site_key':
-      console.error(JSON.stringify({ level: 'error', msg: `[enquiry] ${SITE_KEY_REJECTED}` }));
+      logSiteError('enquiry', Object.assign(new Error('the data API refused the site key'), { name: 'SitesApiError', code: 'site_key' }), {
+        status: 503,
+        path: new URL(request.url).pathname,
+        host: new URL(request.url).host,
+      });
       return respond(503, { error: 'unavailable', reason: 'site_key' }, 'error');
     default:
       return respond(502, { error: 'unavailable' }, 'error');

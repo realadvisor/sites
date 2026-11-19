@@ -4,6 +4,7 @@
  */
 import { useRouteLoaderData } from 'react-router';
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useGone } from '@realadvisor/sites-kit-react/components/Document';
 import type { RootData } from '../root';
@@ -40,14 +41,15 @@ export default function NotFound() {
 }
 
 export function ServerError() {
+  const { title, body, home } = serverErrorText();
   return (
-    <Layout page="404" title="Seite vorübergehend nicht verfügbar" description="Seite vorübergehend nicht verfügbar" noindex>
+    <Layout page="404" title={title} description={title} noindex>
       <section className="nf">
         <div className="wrap nf-in">
           <div className="txt">
-            <h1>Seite vorübergehend nicht verfügbar</h1>
-            <p className="lead">Bitte versuchen Sie es in einigen Minuten erneut.</p>
-            <div className="acts"><a className="cta cta--ghost" href="/">Zur Startseite</a></div>
+            <h1>{title}</h1>
+            <p className="lead">{body}</p>
+            <div className="acts"><a className="cta cta--ghost" href="/">{home}</a></div>
           </div>
         </div>
       </section>

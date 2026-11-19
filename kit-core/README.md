@@ -16,7 +16,7 @@ In this repo the template and examples use paths instead (`file:../kit-core`).
 | Import | What |
 | --- | --- |
 | `@realadvisor/sites-kit-core` | The data SDK re-exported (`@realadvisor/sites-sdk`, a peer: `createClient`, `createFixtureClient`, `handleEnquiry`, the snake_case types), `Agency`, `SiteFixture`, `sanitizeHtml` and the other HTML helpers (`lib/html.ts`), `listingIdFromSlug`. |
-| `@realadvisor/sites-kit-core/<module>` | `agency`, `enquiry`, `fixture`, `env`, `format`, `i18n`, `image`, `legal`, `search`, `seo`, `developments`, `page-locale`, `render-error`, `security` (`lib/`). |
+| `@realadvisor/sites-kit-core/<module>` | `agency`, `enquiry`, `fixture`, `env`, `format`, `i18n`, `image`, `legal`, `search`, `seo`, `developments`, `page-locale`, `render-error`, `site-error`, `security` (`lib/`). |
 | `@realadvisor/sites-kit-core/client/<name>` | Browser scripts behind the listing search and map, the enquiry form, consent and the combobox. |
 | `@realadvisor/sites-kit-core/styles/form.css` | The form controls' shared look. |
 | `@realadvisor/sites-kit-core/site-config` | `site.json`: read and validate. |

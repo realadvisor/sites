@@ -5,6 +5,7 @@
  */
 import { useLocation } from 'react-router';
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useGone } from '@realadvisor/sites-kit-react/components/Document';
 import { Site } from '../components/Site';
@@ -38,7 +39,7 @@ export default function NotFound() {
 /** Anything but a 404/410: a short page, never a cut 200. */
 export function ServerError() {
   const lang = langOfPath(useLocation().pathname);
-  const title = lang === 'en' ? 'Page temporarily unavailable' : 'Pagina momentaneamente non disponibile';
+  const { title } = serverErrorText(lang);
   return (
     <Site lang={lang} title={title} description={title} noindex>
       <section className="wrap phead nf">

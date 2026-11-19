@@ -1,17 +1,18 @@
 /**
  * The answer when a page fails to render (the kit middleware): the error goes
- * to the Worker logs (observability), the visitor gets a short 500 page in
- * the site language that no cache keeps. Never an empty 200.
+ * to the Worker logs as one `site_error` line (lib/site-error.ts), the
+ * visitor gets a short 500 page that no cache keeps, never an empty 200. The
+ * page is in the language of the path (`/en/...` on a multilingual site),
+ * else the site's (site.json `locale`), else English.
  * `notFoundPage` is the last-resort 404/410 when even the site's /404 page
  * cannot render: a missing page is never reported as a 500.
- * A rejected site key (`site_key`: the key was
- * revoked or replaced) is logged as such: only a republish fixes it.
+ * A rejected site key (`code: 'site_key'`: the key was revoked or replaced)
+ * is logged as such: only a republish fixes it.
  */
-import { SitesApiError } from '@realadvisor/sites-sdk';
 import { lang, localeOfPath, t } from './i18n';
+import { logSiteError } from './site-error';
 
-/** What a `site_key` error means for a site: its key was revoked or replaced. Only a republish mints a new one. */
-export const SITE_KEY_REJECTED = 'site key rejected (401): republish the site to mint a new key';
+export { SITE_ERROR_EVENT, SITE_KEY_REJECTED } from './site-error';
 
 const TEXT = {
   de: ['Seite vorübergehend nicht verfügbar', 'Bitte versuchen Sie es in einigen Minuten erneut.', 'Zur Startseite'],
@@ -27,11 +28,13 @@ export const serverErrorText = (l: keyof typeof TEXT = lang()) => {
   return { title, body, home };
 };
 
-export function renderFailed(path: string, err: unknown): Response {
-  const e = err instanceof Error ? err : new Error(String(err));
-  const msg = err instanceof SitesApiError && err.code === 'site_key' ? `page render failed: ${SITE_KEY_REJECTED}` : 'page render failed';
-  console.error(JSON.stringify({ level: 'error', msg, path, error: e.message, stack: e.stack?.slice(0, 2000) }));
-  const l = lang();
+/**
+ * Logs the failure and answers the 500 page. `host`: the request's host, for
+ * the log line.
+ */
+export function renderFailed(path: string, err: unknown, host?: string): Response {
+  logSiteError('page', err, { status: 500, path, host });
+  const l = lang(localeOfPath(path));
   const [title, body, home] = TEXT[l];
   return new Response(page(l, title, body, home), {
     status: 500,

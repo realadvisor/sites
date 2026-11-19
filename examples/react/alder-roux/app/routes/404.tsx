@@ -5,6 +5,7 @@
  */
 import { useLocation, useRouteLoaderData } from 'react-router';
 import { lang as klang, t as kt } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { useGone } from '@realadvisor/sites-kit-react/components/Document';
 import { Layout } from '../components/Layout';
@@ -47,13 +48,13 @@ export default function NotFound() {
 /** Anything but 404/410: a short page in the path's language (the Worker answers 500). */
 export function ServerError() {
   const l = langOf(useLocation().pathname);
-  const title = l === 'de' ? 'Seite vorübergehend nicht verfügbar' : 'Page momentanément indisponible';
+  const { title, body } = serverErrorText(l);
   return (
     <Layout l={l} route="home" switchTo={{ fr: '/', de: '/de' }} title={title} description={title} noindex>
       <section className="band on-navy nf">
         <div className="wrap band__inner">
           <h1 className="h1">{title}</h1>
-          <p className="lede">{l === 'de' ? 'Bitte versuchen Sie es in einigen Minuten erneut.' : 'Merci de réessayer dans quelques minutes.'}</p>
+          <p className="lede">{body}</p>
         </div>
       </section>
     </Layout>

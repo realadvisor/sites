@@ -5,6 +5,7 @@
  */
 import { isRouteErrorResponse, useLocation, useRouteError } from 'react-router';
 import { t } from '@realadvisor/sites-kit-core/i18n';
+import { serverErrorText } from '@realadvisor/sites-kit-core/render-error';
 import { notFound } from '@realadvisor/sites-kit-react/server/seo';
 import { Site } from '../components/Site';
 import { UI, href, langOfPath } from '../lib/i18n';
@@ -38,7 +39,7 @@ export default function NotFound(props: { gone?: boolean }) {
 
 export function ServerError() {
   const lang = langOfPath(useLocation().pathname);
-  const title = lang === 'en' ? 'Page temporarily unavailable' : 'Página no disponible temporalmente';
+  const { title } = serverErrorText(lang);
   return (
     <Site lang={lang} title={title} description={title} noindex>
       <section className="wrap nf">
