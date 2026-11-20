@@ -1,6 +1,7 @@
 export { NonceContext, useNonce, KitProvider, useKit, useHydrate, usePageLocale, useErrorStatus, useGone, KitScripts, JsonLd, Seo, type KitData, type SeoProps } from './Document';
 export { RaImage, type RaImageProps } from './RaImage';
 export { EnquiryForm, type EnquiryFormProps } from './EnquiryForm';
+export { ValuationWidget, type ValuationWidgetProps } from './ValuationWidget';
 export { LegalContent } from './LegalContent';
 export { ConsentBanner } from './ConsentBanner';
 export { ListingsSearch, type ListingsSearchProps } from './ListingsSearch';

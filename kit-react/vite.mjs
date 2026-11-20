@@ -69,7 +69,7 @@ const PRELOAD_ID = '\0vite/preload-helper.js';
  */
 const KIT_CSS_ID = '\0sites-kit-react/kit.css.js';
 const KIT_DIR = fileURLToPath(new URL('.', import.meta.url));
-const KIT_PARTS = ['search', 'pager', 'map', 'consent'].map((p) => join(KIT_DIR, 'styles', `${p}.css`));
+const KIT_PARTS = ['search', 'pager', 'map', 'consent', 'valuation'].map((p) => join(KIT_DIR, 'styles', `${p}.css`));
 const isKitCss = (id) => id === '@realadvisor/sites-kit-react/styles/kit.css' || resolve(id) === join(KIT_DIR, 'styles', 'kit.css');
 const preloadHelper = (base) => `const base = ${JSON.stringify(base)};
 export const __vitePreload = (load, deps) => {

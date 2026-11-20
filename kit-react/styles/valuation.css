@@ -1,0 +1,150 @@
+/*
+ * ValuationWidget (@realadvisor-sites/kit-react).
+ * Styled purely from the site's CSS tokens (kit-core/styles/form.css + site
+ * tokens.css) — zero hardcoded brand colors so every agency theme inherits
+ * its own typography, surface, radius, and accent automatically.
+ */
+.vw {
+  display: grid;
+  gap: 16px;
+  color: var(--control-text);
+}
+
+.vw--card {
+  padding: clamp(20px, 3vw, 32px);
+  background: var(--surface, var(--control-bg));
+  border: 1px solid var(--control-border);
+  border-radius: calc(var(--control-radius) + 4px);
+}
+
+.vw--hero {
+  padding: 16px;
+  background: color-mix(in oklab, var(--surface, var(--control-bg)) 94%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in oklab, var(--control-border) 75%, transparent);
+  border-radius: calc(var(--control-radius) + 4px);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 0.14);
+}
+
+.vw--inline {
+  padding: 0;
+}
+
+.vw-head {
+  display: grid;
+  gap: 6px;
+}
+
+.vw-eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--control-muted);
+}
+
+.vw-title {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--control-text);
+}
+
+.vw-form {
+  display: grid;
+  gap: 14px;
+}
+
+.vw--hero .vw-form {
+  gap: 12px;
+}
+
+.vw-types {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  margin: 0;
+  border: 1px solid var(--control-border);
+  border-radius: var(--control-radius);
+  background: color-mix(in oklab, var(--control-border) 28%, var(--control-bg));
+  width: fit-content;
+  min-width: min(100%, 260px);
+}
+
+.vw-type {
+  position: relative;
+}
+
+.vw-type input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.vw-type label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: calc(var(--control-radius) - 2px);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--control-muted);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.vw-type input:checked + label {
+  background: var(--control-bg);
+  color: var(--control-text);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+}
+
+.vw-type input:focus-visible + label {
+  outline: 3px solid color-mix(in oklab, var(--control-focus) 35%, transparent);
+  outline-offset: 1px;
+}
+
+.vw-row {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .vw-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+}
+
+.vw-note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--control-muted);
+}
+
+.vw-frame-wrap {
+  width: 100%;
+  border-radius: var(--control-radius);
+  overflow: hidden;
+  border: 1px solid var(--control-border);
+  background: var(--control-bg);
+}
+
+.vw-frame-wrap[hidden] {
+  display: none;
+}
+
+.vw-frame {
+  display: block;
+  width: 100%;
+  min-height: 540px;
+  border: 0;
+}

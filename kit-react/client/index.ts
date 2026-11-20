@@ -14,6 +14,7 @@ export { islands } from './islands';
 export function kit() {
   const has = (sel: string) => !!document.querySelector(sel);
   if (has('[data-enquiry]')) void import('@realadvisor/sites-kit-core/client/enquiry');
+  if (has('[data-valuation-widget]')) void import('@realadvisor/sites-kit-core/client/valuation');
   if (has('[data-consent]')) void import('@realadvisor/sites-kit-core/client/consent');
   if (has('[data-combobox]')) void import('@realadvisor/sites-kit-core/client/combobox');
   if (has('[data-rs-root]')) void import('@realadvisor/sites-kit-core/client/listings-search');
